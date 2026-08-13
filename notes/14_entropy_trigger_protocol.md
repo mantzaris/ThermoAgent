@@ -91,6 +91,12 @@ and projected compute will be appended before protocol freeze.
 7. The primary holdout test retains the 2% relative non-inferiority margin. No
    application-specific replacement is currently justified because v1 fixed
    losses are nonzero and stable.
+8. The frozen mechanistic analysis recovers every learned method's coordination-
+   option counts from the immutable episode artifacts. Because DOET can change
+   the number and timing of decision epochs, the matched DOET-RL versus learned-
+   non-entropic contrast uses within-episode option proportions and reports a
+   total-variation distance for each common scenario panel. It is descriptive
+   and cannot select or exclude a checkpoint.
 
 ## H4 evaluability correction frozen before validation outcomes
 

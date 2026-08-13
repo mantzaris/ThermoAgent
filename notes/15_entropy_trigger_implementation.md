@@ -114,7 +114,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 143/143 passing. New tests cover trigger
+The current complete suite is 144/144 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -122,6 +122,10 @@ topology connectivity, balanced five-seed assignment, paired/hierarchical
 analysis, multi-cost frontier behavior, filtered provenance, and deterministic
 replay. A dedicated control test verifies that a zero-rate random gate still
 performs quiet local planning without activating communication.
+The locked analysis also writes episode-level RL option distributions and
+matched DOET-RL-minus-non-entropic proportion differences, including the
+per-panel total-variation distance. A synthetic test fixes the expected value
+at 0.5 for a known two-option contrast.
 Published episode reuse now additionally requires exact agreement with the
 current frozen execution contract (source checksum, complete scenario,
 application/method/seeds/topology, model revision, protocol checksum, and
@@ -191,7 +195,7 @@ validation remains on its immutable source. Training now resolves the selected
 normalizer key fail-closed, checks that embedded and referenced calibration
 values agree exactly, records the calibration path and checksum in each
 checkpoint, and has positive, mismatch, and missing-file tests. The full suite
-passes 143/143. This correction changes only the not-yet-run training stage, so the
+passes 144/144. This correction changes only the not-yet-run training stage, so the
 validation-to-holdout simulator-equivalence gate remains applicable.
 
 ## Filtered remote execution sequence

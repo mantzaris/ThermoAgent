@@ -18,6 +18,7 @@ from scipy import stats
 import yaml
 
 from .events import sha256_file
+from .types import CoordinationOption
 
 
 PRIMARY_METHOD = "doet_rule"
@@ -801,6 +802,128 @@ def _mechanistic(
     return rows, message_rows, cases
 
 
+def _rl_option_selection(
+    results_root: Path,
+    frame: pd.DataFrame,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Recover option distributions and matched learned-policy differences.
+
+    Decision schedules can differ after a DOET activation, so raw action counts
+    are not directly comparable. The primary mechanistic contrast uses
+    within-episode option proportions and reports the total-variation distance
+    between DOET-RL and learned non-entropic coordination on each common panel.
+    This analysis is descriptive and never selects a checkpoint.
+    """
+
+    learned_methods = {
+        "learned_no_entropy", "thermoagent", "doet_rl",
+    }
+    episode_lookup = {
+        path.parent.name: path
+        for path in (results_root / "raw" / "holdout_locked").glob(
+            "*/episode.json"
+        )
+    }
+    rows: List[Dict[str, Any]] = []
+    selected = frame[frame["method"].isin(learned_methods)]
+    for _, summary in selected.iterrows():
+        run_id = str(summary["run_id"])
+        episode_path = episode_lookup.get(run_id)
+        if episode_path is None:
+            raise FileNotFoundError(
+                "complete learned episode lacks raw output: %s" % run_id
+            )
+        episode = json.loads(episode_path.read_text(encoding="utf-8"))
+        raw_counts = episode.get("agent_metrics", {}).get("option_counts", {})
+        counts = {
+            int(option): int(count) for option, count in raw_counts.items()
+        }
+        unexpected = set(counts) - set(range(len(CoordinationOption)))
+        if unexpected:
+            raise ValueError(
+                "episode %s contains unknown coordination options %s"
+                % (run_id, sorted(unexpected))
+            )
+        total = int(sum(counts.values()))
+        if total <= 0:
+            raise ValueError(
+                "episode %s has no recorded coordination options" % run_id
+            )
+        for option in CoordinationOption:
+            count = int(counts.get(int(option), 0))
+            rows.append({
+                "run_id": run_id,
+                "application": str(summary["application"]),
+                "scenario_name": str(summary["scenario_name"]),
+                "seed": int(summary["seed"]),
+                "n_agents": int(summary["n_agents"]),
+                "method": str(summary["method"]),
+                "rl_training_seed": int(summary["rl_training_seed"]),
+                "option": int(option),
+                "option_name": option.name.lower(),
+                "option_count": count,
+                "decision_count": total,
+                "option_proportion": count / total,
+            })
+    option_rows = pd.DataFrame(rows)
+    difference_columns = [
+        "application", "scenario_name", "seed", "n_agents", "option",
+        "option_name", "option_proportion_difference_doet_minus_nonentropy",
+        "doet_rl_option_proportion", "learned_no_entropy_option_proportion",
+        "doet_rl_decision_count", "learned_no_entropy_decision_count",
+        "doet_rl_training_seed", "learned_no_entropy_training_seed",
+        "panel_option_total_variation_distance",
+    ]
+    if option_rows.empty:
+        return option_rows, pd.DataFrame(columns=difference_columns)
+
+    keys = [
+        "application", "scenario_name", "seed", "n_agents", "option",
+        "option_name",
+    ]
+    left = option_rows[option_rows["method"] == "doet_rl"][
+        keys + ["option_proportion", "decision_count", "rl_training_seed"]
+    ]
+    right = option_rows[option_rows["method"] == "learned_no_entropy"][
+        keys + ["option_proportion", "decision_count", "rl_training_seed"]
+    ]
+    paired = left.merge(
+        right,
+        on=keys,
+        suffixes=("_doet_rl", "_learned_no_entropy"),
+        validate="one_to_one",
+    )
+    if paired.empty:
+        return option_rows, pd.DataFrame(columns=difference_columns)
+    paired["option_proportion_difference_doet_minus_nonentropy"] = (
+        paired["option_proportion_doet_rl"]
+        - paired["option_proportion_learned_no_entropy"]
+    )
+    panel_keys = ["application", "scenario_name", "seed", "n_agents"]
+    variation = paired.groupby(panel_keys)[
+        "option_proportion_difference_doet_minus_nonentropy"
+    ].apply(lambda values: 0.5 * float(np.abs(values).sum())).rename(
+        "panel_option_total_variation_distance"
+    ).reset_index()
+    paired = paired.merge(
+        variation, on=panel_keys, validate="many_to_one"
+    ).rename(columns={
+        "option_proportion_doet_rl": "doet_rl_option_proportion",
+        "option_proportion_learned_no_entropy": (
+            "learned_no_entropy_option_proportion"
+        ),
+        "decision_count_doet_rl": "doet_rl_decision_count",
+        "decision_count_learned_no_entropy": (
+            "learned_no_entropy_decision_count"
+        ),
+        "rl_training_seed_doet_rl": "doet_rl_training_seed",
+        "rl_training_seed_learned_no_entropy": (
+            "learned_no_entropy_training_seed"
+        ),
+    })
+    return option_rows, paired[difference_columns]
+
+
 def _write_latex(path: Path, frame: pd.DataFrame, caption: str) -> None:
     path.write_text(
         frame.to_latex(index=False, escape=True, caption=caption, float_format="%.4g"),
@@ -957,6 +1080,25 @@ def run(results_root: Path) -> Dict[str, Any]:
     mechanistic_rows, message_rows, cases = _mechanistic(results_root, completed)
     mechanistic = pd.DataFrame(mechanistic_rows)
     message_types = pd.DataFrame(message_rows)
+    rl_options, rl_option_differences = _rl_option_selection(
+        results_root, completed
+    )
+    if len(rl_options):
+        rl_option_summary = rl_options.groupby(
+            ["application", "method", "option", "option_name"],
+            dropna=False,
+        ).agg(
+            episodes=("run_id", "nunique"),
+            rl_training_seeds=("rl_training_seed", "nunique"),
+            mean_option_proportion=("option_proportion", "mean"),
+            mean_decisions_per_episode=("decision_count", "mean"),
+        ).reset_index()
+    else:
+        rl_option_summary = pd.DataFrame(columns=[
+            "application", "method", "option", "option_name", "episodes",
+            "rl_training_seeds", "mean_option_proportion",
+            "mean_decisions_per_episode",
+        ])
     partition_consensus = pd.DataFrame(
         _partition_consensus_rows(completed, comparisons)
     )
@@ -1135,11 +1277,15 @@ def run(results_root: Path) -> Dict[str, Any]:
         processed / "holdout_results.csv": completed,
         processed / "mechanistic_events.csv": mechanistic,
         processed / "message_type_counts.csv": message_types,
+        processed / "rl_option_selection.csv": rl_options,
         statistics / "main_paired_comparisons.csv": comparisons,
         statistics / "pareto_points.csv": pareto,
         statistics / "pareto_frontier_hypervolume.csv": frontier,
         statistics / "training_seed_variability.csv": training_variability,
         statistics / "partition_consensus_relationship.csv": partition_consensus,
+        statistics / "rl_option_selection_differences.csv": (
+            rl_option_differences
+        ),
         tables / "experimental_design.csv": design_summary,
         tables / "trigger_parameters.csv": trigger_parameters,
         tables / "communication_budgets.csv": communication_budgets,
@@ -1163,6 +1309,7 @@ def run(results_root: Path) -> Dict[str, Any]:
         ],
         tables / "pareto_operating_points.csv": pareto,
         tables / "rl_training_seed_results.csv": training_variability,
+        tables / "rl_option_selection.csv": rl_option_summary,
         tables / "failed_runs.csv": failed,
         tables / "hypothesis_outcomes.csv": hypotheses,
     }

@@ -1,8 +1,10 @@
 from dataclasses import asdict
+import json
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from thermoagent.analysis import (
     all_method_paired_statistics,
@@ -25,6 +27,8 @@ from thermoagent.experiments import (
     verify_protocol,
 )
 from thermoagent.environment import ScenarioConfig
+from thermoagent.doet_analysis import _rl_option_selection
+from thermoagent.types import CoordinationOption
 
 
 def test_holm_adjust_is_monotone_in_sorted_p_values():
@@ -296,6 +300,48 @@ def test_resumed_manifest_must_match_the_frozen_execution_contract():
     assert not _resumed_manifest_matches_execution(
         manifest, "source", scenario, "doet_rule", 0, run_config
     )
+
+
+def test_rl_option_selection_reports_matched_total_variation(tmp_path: Path):
+    root = tmp_path / "results"
+    raw = root / "raw" / "holdout_locked"
+    summaries = []
+    for method, counts, rl_seed in (
+        ("learned_no_entropy", {"0": 2, "1": 0}, 7301),
+        ("doet_rl", {"0": 1, "1": 1}, 7302),
+    ):
+        run_id = "run-" + method
+        output = raw / run_id
+        output.mkdir(parents=True)
+        (output / "episode.json").write_text(
+            json.dumps({"agent_metrics": {"option_counts": counts}}),
+            encoding="utf-8",
+        )
+        summaries.append({
+            "run_id": run_id,
+            "application": "commercial",
+            "scenario_name": "isolated",
+            "seed": 8101,
+            "n_agents": 10,
+            "method": method,
+            "rl_training_seed": rl_seed,
+        })
+    options, differences = _rl_option_selection(
+        root, pd.DataFrame(summaries)
+    )
+    assert len(options) == 2 * len(CoordinationOption)
+    assert differences[
+        "panel_option_total_variation_distance"
+    ].nunique() == 1
+    assert differences[
+        "panel_option_total_variation_distance"
+    ].iloc[0] == pytest.approx(0.5)
+    request = differences[
+        differences["option_name"] == "request_info"
+    ].iloc[0]
+    assert request[
+        "option_proportion_difference_doet_minus_nonentropy"
+    ] == pytest.approx(0.5)
 
 
 def test_protocol_verification_fails_closed_after_frozen_file_changes(tmp_path: Path):

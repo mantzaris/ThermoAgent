@@ -102,6 +102,13 @@ paired non-inferiority forest. This rule was implemented before the locked
 holdout and prevents unequal seed composition from masquerading as a method
 effect.
 
+During the active real-Qwen validation, a detached `doet-training-watcher` was
+started at `2026-08-13T18:56Z`. It checks only the validation job's exit code;
+it starts the fixed-budget fifteen-checkpoint training command after exit zero
+and otherwise writes a skip record. It does not inspect or select on validation
+outcomes. This makes the CPU-bound training handoff robust to SSH loss without
+broadening the authorized experiment.
+
 ## Filtered remote execution sequence
 
 The source checksum includes `thermoagent/`, `configs/`, `scripts/`, `tests/`,

@@ -2,8 +2,9 @@
 
 Status: Phase A retrospective diagnostics, monitoring validation, DOET
 implementation, nominal/development calibration, deterministic preflight, and
-the real-Qwen throughput profile are complete. No v2 validation efficacy claim
-or new holdout result exists yet.
+the real-Qwen throughput profile are complete. The 144-episode real-Qwen
+validation is active; no partial efficacy outcome has been inspected and no new
+holdout result exists yet.
 
 This namespace preserves strict separation from the frozen v1 result tree. It
 contains only derived v1 diagnostics and future v2 development, validation,
@@ -66,15 +67,19 @@ independent 192-episode training runs (seeds 7301--7305), with the final-budget
 checkpoint retained regardless of outcome.
 
 After measured throughput and precision checks, the holdout generator proposes
-144 genuinely new matched panels and 696 method episodes: 16 seeds per
+144 genuinely new matched panels and preferably 696 method episodes: 16 seeds per
 application for each of four non-nominal regimes, eight nominal seeds per
 application, the four compute-priority methods on all panels, and five
-secondary comparators on the same fixed 24-panel non-nominal subset. It uses
+secondary comparators on the same common non-nominal subset. Before any
+validation outcome was available, a runtime-only ladder was frozen: use three,
+two, or one shared secondary environment seeds, producing 696, 656, or 616
+episodes, while preserving every priority panel and all five RL seeds. It uses
 LLM seed 9101, a 16-period horizon, and unseen topology
 `tri_region_bridge_v2`. The generator fails closed if the measured real-Qwen
 profile/model smoke and validation/training time, a 0.1-hour unmeasured setup
 reserve, and projected holdout resource time exceed 35
-single-GPU hours. Its fixed 20,000-replicate stratified Monte Carlo precision
+single-GPU hours. If even the 616-episode design does not fit, generation fails
+closed. Its fixed 20,000-replicate stratified Monte Carlo precision
 analysis draws the planned 16 panels per non-nominal regime from validation
 paired-degradation distributions. CPU-bound PPO time is counted because the
 paid Pod remains reserved.
@@ -125,5 +130,6 @@ The stale direct alias at `213.173.109.33:19465` refused all three attempts,
 but the supplied RunPod proxy connected successfully with forced PTY using the
 configured RSA key. Read-only inspection confirmed the existing RTX 4090 Pod,
 CUDA 12.8 execution stack and intact v1 freeze/checksum/counts. No replacement
-Pod was created. The completed setup/model-smoke/profile interval is retained
-in the v2 compute ledger; no validation or holdout run has begun.
+Pod was created. The completed setup/model-smoke/profile interval and active
+validation are retained in the v2 compute ledger; the locked holdout has not
+begun.

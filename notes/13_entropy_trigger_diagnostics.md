@@ -25,6 +25,13 @@ viewing a favorable metric.
 
 Complete. No new simulator episode or LLM call was required.
 
+The derived diagnostic, monitoring, and monitor-only calibration artifacts were
+generated locally under Python 3.8.10 with NumPy 1.22.1, SciPy 1.7.3, pandas
+1.3.4, scikit-learn 1.0, Matplotlib 3.1.2, and CPU PyTorch 1.10.1 where used.
+These exact analysis versions are now recorded in their manifests. The v2
+RunPod execution environment is separate and pinned in
+`requirements-runpod.txt`; no v1 raw artifact was regenerated.
+
 ## Exact holdout-tie diagnosis
 
 - All 16 matched ThermoAgent/no-entropy primary outcomes are equal at the raw

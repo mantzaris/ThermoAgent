@@ -121,7 +121,7 @@ def source_checksum(root: Path) -> str:
 
 @lru_cache(maxsize=1)
 def dependency_versions() -> Dict[str, str]:
-    names = ["numpy", "scipy", "pandas", "matplotlib", "networkx", "pydantic", "torch", "transformers", "accelerate", "bitsandbytes", "pymupdf"]
+    names = ["numpy", "scipy", "pandas", "sklearn", "matplotlib", "networkx", "pydantic", "torch", "transformers", "accelerate", "bitsandbytes", "pymupdf"]
     versions: Dict[str, str] = {}
     for name in names:
         try:
@@ -227,10 +227,50 @@ def capture_reproducibility(root: Path, results_root: Path) -> Dict[str, Any]:
 def git_provenance(root: Path) -> Dict[str, Any]:
     root = root.resolve()
     if not (root / ".git").exists():
-        return {"commit": "not-present-on-execution-copy", "dirty": None}
+        return {
+            "commit": "not-present-on-execution-copy",
+            "branch": "not-present-on-execution-copy",
+            "dirty": None,
+        }
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(root), capture_output=True, text=True, check=False).stdout.strip()
+    branch = subprocess.run(
+        ["git", "branch", "--show-current"],
+        cwd=str(root), capture_output=True, text=True, check=False,
+    ).stdout.strip()
     status = subprocess.run(["git", "status", "--porcelain"], cwd=str(root), capture_output=True, text=True, check=False).stdout
-    return {"commit": commit or "unknown", "dirty": bool(status.strip())}
+    return {
+        "commit": commit or "unknown",
+        "branch": branch or "detached-or-unknown",
+        "dirty": bool(status.strip()),
+    }
+
+
+def capture_source_provenance(root: Path, output: Path) -> Dict[str, Any]:
+    """Capture non-secret local Git/source identity for a filtered deployment.
+
+    The normal RunPod synchronization deliberately excludes ``.git``.  This
+    small record lets the execution copy report the exact originating branch
+    and commit without copying Git metadata or credentials.  The independent
+    source checksum remains the authoritative byte-level identity.
+    """
+
+    root = root.resolve()
+    record = {
+        **git_provenance(root),
+        "source_checksum": source_checksum(root),
+        "captured_at": utc_now(),
+        "deployment": "filtered rsync; Git metadata and credentials excluded",
+        "security_note": (
+            "No environment variables, remotes, credentials, SSH configuration, "
+            "or tokens were read."
+        ),
+    }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps(record, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return record
 
 
 def expand_matrix(config: Mapping[str, Any]) -> List[Tuple[str, int, int, str, Dict[str, Any]]]:
@@ -478,6 +518,27 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
     sweep_started_at = utc_now()
     sweep_started = time.perf_counter()
     config = load_yaml(config_path)
+    provenance_value = config.get("source_provenance_path")
+    if provenance_value:
+        provenance_path = Path(str(provenance_value))
+        if not provenance_path.is_absolute():
+            provenance_path = root / provenance_path
+        if not provenance_path.is_file():
+            raise FileNotFoundError(
+                "filtered-deployment source provenance is missing: %s"
+                % provenance_path
+            )
+        provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+        if provenance.get("source_checksum") != source_checksum(root):
+            raise RuntimeError(
+                "execution source differs from captured deployment provenance"
+            )
+        config["source_provenance"] = {
+            "commit": provenance.get("commit", "unknown"),
+            "branch": provenance.get("branch", "unknown"),
+            "dirty": provenance.get("dirty"),
+            "deployment_provenance_checksum": sha256_file(provenance_path),
+        }
     freeze_value = config.get("protocol_freeze_path")
     if freeze_value:
         freeze_path = Path(str(freeze_value))
@@ -509,6 +570,7 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
             max_new_tokens=int(model_config.get("max_new_tokens", 128)),
             max_input_tokens=int(model_config.get("max_input_tokens", 2560)),
             load_in_4bit=bool(model_config.get("load_in_4bit", True)),
+            seed=int(config.get("llm_seed", 0)),
         )
     summaries: List[Dict[str, Any]] = []
     policy_cache: Dict[str, CoordinationPolicy] = {}
@@ -837,7 +899,9 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
             shutil.copy2(str(summary_path), str(history_path))
     keys = sorted({key for row in summaries for key in row})
     with summary_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=keys)
+        writer = csv.DictWriter(
+            handle, fieldnames=keys, lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(summaries)
     jsonl_path = summary_dir / "episodes.jsonl"
@@ -856,6 +920,11 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
         "start_timestamp": sweep_started_at,
         "end_timestamp": utc_now(),
         "wall_clock_seconds_including_model_load": time.perf_counter() - sweep_started,
+        "cumulative_episode_single_gpu_hours": sum(
+            float(row.get("wall_clock_seconds", 0.0) or 0.0) / 3600.0
+            for row in summaries
+            if int(row.get("llm_calls", 0) or 0) > 0
+        ),
         "episodes_planned": len(matrix),
         "episodes_complete": sum(row.get("status") == "complete" for row in summaries),
         "episodes_failed": sum(row.get("status") == "failed" for row in summaries),

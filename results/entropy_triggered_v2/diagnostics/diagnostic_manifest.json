@@ -1,5 +1,14 @@
 {
   "analysis_scope": "retrospective frozen-v1 holdout diagnostics only",
+  "analysis_environment": {
+    "matplotlib": "3.1.2",
+    "numpy": "1.22.1",
+    "pandas": "1.3.4",
+    "python": "3.8.10",
+    "scikit_learn": "1.0",
+    "scipy": "1.7.3",
+    "torch": "1.10.1+cpu"
+  },
   "exact_primary_ties": 16,
   "outputs": {
     "diagnostics/README.md": "015c387a35ac9b4a304104458e4fb4ff4144781cc4c3672ec5db4d0608d598fa",

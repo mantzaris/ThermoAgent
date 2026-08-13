@@ -13,6 +13,8 @@ import gzip
 import hashlib
 import json
 import math
+import platform
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
 
@@ -51,6 +53,21 @@ RESTRICTED_LOCAL_KPI_FEATURES = [
     "local_commitment_strain",
     "local_communication_reliability",
 ]
+
+
+def _analysis_environment() -> Dict[str, str]:
+    packages = (
+        "numpy", "scipy", "pandas", "scikit-learn", "matplotlib",
+    )
+    values = {"python": platform.python_version()}
+    for package in packages:
+        try:
+            values[package.replace("-", "_")] = version(package)
+        except PackageNotFoundError:
+            values[package.replace("-", "_")] = "not-installed"
+    return values
+
+
 DIRECT_DETECTORS = {
     "backlog_threshold": "backlog_ratio",
     "service_level_threshold": "service_loss",
@@ -1057,6 +1074,7 @@ def run(results_root: Path, output_root: Path) -> Dict[str, Any]:
     ]
     manifest = {
         "status": "complete",
+        "analysis_environment": _analysis_environment(),
         "scope": "frozen v1 main out-of-seed and seen holdout diagnostic monitoring validation",
         "trajectory_method": "scripted_independent only",
         "main_environment_seeds": sorted(int(value) for value in frame.loc[frame["stage"] == "main", "seed"].unique()),

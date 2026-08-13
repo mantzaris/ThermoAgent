@@ -1017,10 +1017,16 @@ def build_index(results_root: Path) -> int:
             "checksum": sha256_file(path),
         })
     with index_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]) if rows else [
-            "artifact_path", "artifact_type", "experiment_stage", "application", "method", "scenario", "seed",
-            "short_description", "generated_timestamp", "generating_command", "checksum",
-        ])
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(rows[0]) if rows else [
+                "artifact_path", "artifact_type", "experiment_stage",
+                "application", "method", "scenario", "seed",
+                "short_description", "generated_timestamp",
+                "generating_command", "checksum",
+            ],
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
     return len(rows)

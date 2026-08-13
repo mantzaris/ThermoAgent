@@ -1,4 +1,5 @@
 stage: validation
+source_provenance_path: results/entropy_triggered_v2/reproducibility/execution_source.json
 prompt_template_revision: planner-json-v7-route-affordances
 agentic_metric_revision: agentic-metrics-v2-two-party-joined-coalition
 llm_seed: 7101

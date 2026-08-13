@@ -17,6 +17,16 @@ The monitor-only episodes set activation thresholds to unreachable values and
 therefore cannot be used to infer treatment performance. Their only purposes
 are nominal normalization and the prospectively declared direction diagnosis.
 
+The final pre-validation fairness audit found that an earlier draft matched
+random and periodic controls by active-state fraction and inadvertently made
+inactive controls silent planners. No real validation outcome had been run.
+Before validation, the design was corrected prospectively: inactive controls
+plan locally every eight periods, intensive activation is evaluated on a
+two-period opportunity grid, and validation converts DOET's fully counted
+messages (including sketches) into matched random/periodic rates using the
+fixed control's observed messages per active decision. The final analysis also
+reports achieved budget mismatch.
+
 The low-direction development leader and its weak transferred recall are
 recorded in `notes/14_entropy_trigger_protocol.md`; all alternative direction
 rows remain in `results/entropy_triggered_v2/calibration/direction_diagnostics.csv`.
@@ -29,3 +39,9 @@ Pending when the same Pod becomes reachable:
 4. apply the fixed selection rule without manual choice;
 5. train five independent seeds for each learned method;
 6. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
+
+The restartable commands and outcome-seal boundary are now implemented. The
+SSH endpoint `213.173.109.33:19465` returned `Connection refused` on all three
+attempts on 2026-08-13, most recently at
+`2026-08-13T13:26:50-04:00`. No GPU process or v2 real-model call was started
+and no new paid resource was created.

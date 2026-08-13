@@ -19,23 +19,42 @@ the cost of entropy sketches?
 - The seen v1 holdout is never used for v2 selection or confirmation.
 - The new holdout is outcome-sealed until every planned job completes and every
   ledger passes engineering/replay gates.
-- No failed or unstable training seed is removed.
+- No failed or unstable training seed is removed. Any failed locked-holdout
+  episode is retained and prevents a confirmatory-supported classification;
+  complete matched pairs may still be summarized without imputation.
 - The additional compute cap is 35 single-GPU hours; exceeding it requires user
   approval.
 
 ## Preregistered primary hypotheses
 
+`DOET-rule` is the primary confirmatory method because it isolates the event
+trigger contribution transparently. `DOET-RL` is the preregistered learned
+secondary method and receives the same descriptive and non-inferiority
+analyses, but it does not replace the primary family after outcomes are seen.
+
 - **H1 non-inferiority:** normalized DOET performance degradation versus
   `fixed_always_on` has an upper 95% confidence bound below 2% in each application.
 - **H2 communication superiority:** total counted communication is reduced with
   a confidence interval excluding zero and a practical target of at least 20%.
+  Fully counted messages are the frozen primary communication unit; bytes,
+  prompt/generated tokens, calls, and latency are required accounting outputs
+  but cannot substitute for a failed message test.
 - **H3 Pareto superiority:** DOET improves the frozen performance/communication
   frontier relative to periodic, random budget-matched, learned non-entropic,
-  and KPI-triggered communication.
-- **H4 timely activation:** DOET activates after disruption and before severe
-  service collapse with fewer unnecessary active epochs than always-on control.
+  and KPI-triggered communication. Operationally, DOET-rule must be
+  loss-message nondominated and must strictly increase normalized two-objective
+  hypervolume for messages, prompt tokens, LLM calls, and inference latency in
+  each application. Normalization is application-wise min-max on the frozen
+  comparator set with reference point `(1.05, 1.05)`.
+- **H4 timely activation:** at least 75% of non-nominal DOET-rule episodes
+  activate before the prospectively defined service-collapse threshold and no
+  more than 10% of nominal episodes contain any false activation.
 - **H5 distributed robustness:** degradation under delay/noise/partition follows
-  consensus error while retaining useful trigger behavior.
+  consensus error while retaining useful trigger behavior. The primary
+  partition criterion is non-inferiority in both partition families and both
+  applications, plus a positive consensus-RMSE/degradation slope and Pearson
+  `r >= 0.20` in each application. Noise/delay extensions remain secondary and
+  run only inside the 35-hour cap.
 - **H6 cross-application generality:** both applications support H1 and H2. This
   claim is not made if only one application succeeds.
 
@@ -61,7 +80,8 @@ and projected compute will be appended before protocol freeze.
    active epochs. If none qualify, select the smallest worst-case degradation
    and label validation failure before holdout.
 6. Budget-matched random, periodic, and local-KPI controls take their activation
-   rates only from validation DOET rates.
+   rates only from validation DOET traffic. Matching uses total counted DOET
+   messages—including entropy sketches—not an unpriced active-state fraction.
 7. The primary holdout test retains the 2% relative non-inferiority margin. No
    application-specific replacement is currently justified because v1 fixed
    losses are nonzero and stable.
@@ -107,7 +127,19 @@ on fixed communication and the private-local-KPI CUSUM. Selection is exactly:
    validation failure before any holdout run.
 
 Budget-matched random and periodic rates are computed only from the selected
-validation active-agent-step fraction. The primary comparator is the new
+validation traffic. The selected DOET total counted messages per episode,
+including sketches, are converted to an intensive-decision target using the
+fixed control's validation messages per active decision. Random activation is
+sampled at two-period opportunities; the periodic interval from 2 through 24
+that most closely matches the target is selected. Both controls retain quiet
+local planning every eight periods when intensive communication is inactive,
+so matching communication does not disable local autonomy. Predicted and
+achieved message-count mismatches are retained in the protocol and final
+tables. The private-KPI CUSUM retains its independently calibrated KPI
+normalizers and validation-fixed parameters; its local residual is multiplied
+by the selected DOET/KPI validation message ratio, clipped to `[0.25, 4]`.
+Because trajectory feedback makes this only an approximate rate match, its
+actual mismatch is reported and no holdout retuning is allowed. The primary comparator is the new
 `fixed_always_on` method, which sends explicit coarse three-dimensional status
 packets to up to three active neighbors at every scheduled epoch, in addition
 to autonomous negotiation. This replaces the weak alternating v1 fixed method
@@ -126,10 +158,37 @@ and five completed checkpoints per learned method. It will create:
   KPI CUSUM, DOET-rule, and DOET-RL;
 - five independent RL seeds (`7301`--`7305`) assigned round-robin to every
   learned method, 28 or 29 matched panels per seed;
-- deterministic Qwen decoding with a new recorded LLM seed `9101`;
+- deterministic Qwen decoding with a new recorded and applied LLM seed `9101`;
 - the unseen `tri_region_bridge_v2` topology, distinct from training and the
   seen v1 holdout topology.
 
 A measured validation throughput estimate and simulation/precision analysis
-must confirm that validation plus holdout stays below 35 additional GPU-hours.
-If it does not, the generator fails closed before freezing or launching.
+must confirm that the measured real-Qwen profile and model smoke, validation,
+full five-seed training, a 0.1-hour unmeasured setup reserve, and holdout stay
+below 35 additional single-GPU hours. The precision
+calculation uses 20,000 fixed-seed stratified Monte Carlo draws from validation
+paired degradation, with 16 panels in each of four planned non-nominal regimes.
+CPU-bound PPO time still counts because the paid GPU Pod is reserved. If the
+total does not fit, the generator fails closed before freezing or launching.
+
+## Freeze and outcome-seal procedure
+
+The filtered deployment does not copy `.git`. Before each source sync,
+`capture-source-provenance` records the originating branch, commit, dirty flag,
+and byte-level source checksum without reading remotes, environment variables,
+SSH configuration, or credentials. `run_matrix` refuses execution if that
+checksum differs from the deployed source.
+
+After real validation and training, the v2 namespace is fetched locally, the
+holdout matrix is generated, and all source/configuration changes are committed.
+The provenance record is recaptured and the resume controls are synchronized.
+`freeze-doet-holdout.sh` then requires exactly 15 checksum-valid learned
+checkpoints, runs the full tests, and writes a non-overwritable freeze over the
+selected trigger, budget matches, calibration, validation inputs, design,
+precision analysis, checkpoints, protocol note, and source checksum.
+
+During the holdout, `doet-job-status.sh` reports only job/process health and
+counts of manifests/published directories. It intentionally displays no
+partial loss, communication, or hypothesis values. The outcome seal lifts only
+after all planned rows finish and causal ledger replay completes. Failed
+manifests are retained without selective rerun.

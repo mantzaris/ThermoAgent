@@ -54,6 +54,9 @@ ROLE_INDEX = {
     )
 }
 
+BUDGET_MATCH_ACTIVATION_INTERVAL = 2
+QUIET_BASELINE_DECISION_INTERVAL = 8
+
 
 DOET_TRIGGER_METHODS = {
     Method.DOET_RULE,
@@ -553,7 +556,7 @@ class EpisodeRunner:
         self.random_active_agents = set()
         if (
             self.method == Method.RANDOM_BUDGET_MATCHED
-            and self.env.step_index % max(1, self.config.decision_interval) == 0
+            and self.env.step_index % BUDGET_MATCH_ACTIVATION_INTERVAL == 0
         ):
             for agent_id, agent in self.env.agents.items():
                 if agent.rng.rand() < self.config.random_gate_probability:
@@ -622,6 +625,10 @@ class EpisodeRunner:
                 local_summary = distributed[agent_id]
                 if self.method in (Method.DOET_RULE, Method.DOET_RL):
                     signal = float(local_summary.local_entropy)
+                    if self.trigger.config.signal_noise_std > 0:
+                        signal += float(self.monitor_noise_rng.normal(
+                            0.0, self.trigger.config.signal_noise_std
+                        ))
                     surprisal = float(local_summary.local_surprisal)
                     disagreement = float(local_summary.consensus_error)
                     signal_source = "distributed_operational_entropy"
@@ -799,7 +806,10 @@ class EpisodeRunner:
                 CoordinationOption.PROPOSE_COALITION,
             ):
                 mask[int(option)] = False
-        if self.method in DOET_TRIGGER_METHODS:
+        if self.method in DOET_TRIGGER_METHODS | {
+            Method.PERIODIC_COMMUNICATION,
+            Method.RANDOM_BUDGET_MATCHED,
+        }:
             mode = self._communication_mode(agent_id)
             if mode == CommunicationMode.QUIET:
                 for option in (
@@ -954,10 +964,17 @@ class EpisodeRunner:
             action = int(CoordinationOption.DISCLOSE_SUMMARY if epoch % 2 == 0 else CoordinationOption.CONTINUE)
         elif self.method in (
             Method.FIXED_ALWAYS_ON,
+        ):
+            action = self._intensive_option(agent_id)
+        elif self.method in (
             Method.PERIODIC_COMMUNICATION,
             Method.RANDOM_BUDGET_MATCHED,
         ):
-            action = self._intensive_option(agent_id)
+            action = (
+                self._intensive_option(agent_id)
+                if self._communication_mode(agent_id) > CommunicationMode.QUIET
+                else self._heuristic_option(agent_id)
+            )
         elif self.method == Method.RANDOM_GATE:
             pending = any(
                 commitment.status == "proposed" and commitment.partner == agent_id
@@ -1502,9 +1519,14 @@ class EpisodeRunner:
         if self.method == Method.PERIODIC_COMMUNICATION:
             return (
                 list(self.env.agent_ids)
-                if step % self.periodic_interval == 0 else []
+                if (
+                    step % self.periodic_interval == 0
+                    or step % QUIET_BASELINE_DECISION_INTERVAL == 0
+                ) else []
             )
         if self.method == Method.RANDOM_BUDGET_MATCHED:
+            if step % QUIET_BASELINE_DECISION_INTERVAL == 0:
+                return list(self.env.agent_ids)
             return sorted(self.random_active_agents)
         if self.method in DOET_TRIGGER_METHODS:
             selected = []

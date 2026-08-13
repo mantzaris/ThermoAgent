@@ -4,10 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
-import math
 from datetime import datetime, timezone
 from pathlib import Path
-from statistics import NormalDist
 from typing import Any, Dict, List, Mapping, Sequence
 
 import numpy as np
@@ -77,51 +75,121 @@ def _checkpoint_maps(results_root: Path) -> Dict[str, Dict[str, str]]:
 def _precision_analysis(
     validation_pairs: pd.DataFrame,
     validation_sweep: Mapping[str, Any],
+    training_manifest: Mapping[str, Any],
+    profile_sweep: Mapping[str, Any],
+    model_smoke: Mapping[str, Any],
     episode_count: int,
 ) -> Dict[str, Any]:
     non_nominal = validation_pairs[
         validation_pairs["scenario_name"] != "nominal"
     ]
     applications: Dict[str, Any] = {}
-    normal = NormalDist()
+    simulation_replicates = 20_000
+    simulation_seed = 20260814
+    # The validation set has no standalone partition cell. Its prospectively
+    # defined compound-partition cell is the conservative variance proxy for
+    # both partitioned holdout families.
+    holdout_to_validation = {
+        "isolated": "isolated",
+        "communication_partition": "compound_partition",
+        "correlated": "correlated",
+        "compound_ood": "compound_partition",
+    }
     for application, values in non_nominal.groupby("application"):
-        degradation = values["relative_degradation"].to_numpy(dtype=float)
-        standard_deviation = float(np.std(degradation, ddof=1))
-        standard_error = standard_deviation / math.sqrt(16)
-        expected_mean = float(np.mean(degradation))
-        upper_bound = expected_mean + 1.645 * standard_error
-        if standard_error > 0:
-            power = normal.cdf(
-                (0.02 - expected_mean) / standard_error - 1.645
-            )
-        else:
-            power = float(expected_mean < 0.02)
+        rng = np.random.RandomState(simulation_seed + (
+            0 if str(application) == "commercial" else 1
+        ))
+        draws = []
+        source_counts: Dict[str, int] = {}
+        for planned_regime, source_regime in holdout_to_validation.items():
+            degradation = values[
+                values["scenario_name"] == source_regime
+            ]["relative_degradation"].to_numpy(dtype=float)
+            if not len(degradation):
+                raise ValueError(
+                    "precision simulation missing %s validation values for %s"
+                    % (source_regime, application)
+                )
+            source_counts[planned_regime] = int(len(degradation))
+            draws.append(degradation[rng.randint(
+                0, len(degradation), size=(simulation_replicates, 16)
+            )])
+        simulated_means = np.concatenate(draws, axis=1).mean(axis=1)
+        expected_mean = float(np.mean(simulated_means))
+        standard_error = float(np.std(simulated_means, ddof=1))
+        centered_upper = float(np.quantile(
+            simulated_means - expected_mean, 0.95
+        ))
+        upper_bound = expected_mean + centered_upper
+        probability_noninferior = float(np.mean(
+            simulated_means + centered_upper < 0.02
+        ))
         applications[str(application)] = {
             "validation_mean_relative_degradation": expected_mean,
-            "validation_pair_standard_deviation": standard_deviation,
             "planned_pairs_per_regime": 16,
-            "approximate_standard_error_per_regime": standard_error,
+            "planned_non_nominal_pairs": 64,
+            "validation_proxy_mapping": holdout_to_validation,
+            "validation_rows_available_by_planned_regime": source_counts,
+            "simulated_standard_error_of_application_mean": standard_error,
+            "simulated_mean_quantile_2_5": float(np.quantile(simulated_means, 0.025)),
+            "simulated_mean_quantile_97_5": float(np.quantile(simulated_means, 0.975)),
             "expected_one_sided_95_upper_bound": upper_bound,
-            "approximate_probability_of_noninferiority_if_validation_effect_repeats": float(power),
+            "simulated_probability_of_noninferiority_if_validation_effect_repeats": probability_noninferior,
         }
     validation_wall = float(
         validation_sweep["wall_clock_seconds_including_model_load"]
     )
+    validation_gpu_hours = max(
+        validation_wall / 3600.0,
+        float(validation_sweep.get(
+            "cumulative_episode_single_gpu_hours", 0.0
+        )),
+    )
     validation_episodes = int(validation_sweep["episodes_complete"])
-    seconds_per_episode = validation_wall / max(validation_episodes, 1)
+    seconds_per_episode = (
+        validation_gpu_hours * 3600.0 / max(validation_episodes, 1)
+    )
     projected_hours = seconds_per_episode * episode_count / 3600.0 * 1.15
+    training_hours = float(training_manifest.get(
+        "single_gpu_hours_reserved",
+        float(training_manifest.get("wall_clock_seconds", 0.0) or 0.0)
+        / 3600.0,
+    ))
+    profile_hours = max(
+        float(profile_sweep.get(
+            "wall_clock_seconds_including_model_load", 0.0
+        )) / 3600.0,
+        float(profile_sweep.get(
+            "cumulative_episode_single_gpu_hours", 0.0
+        )),
+    )
+    model_smoke_hours = (
+        float(model_smoke.get("load_seconds", 0.0) or 0.0)
+        + float(model_smoke.get("batched_inference_seconds", 0.0) or 0.0)
+    ) / 3600.0
+    unmeasured_setup_reserve_hours = 0.1
     return {
         "method": (
-            "normal approximation using validation paired degradation variance; "
-            "confirmatory inference will use hierarchical paired bootstrap"
+            "20,000-replicate stratified Monte Carlo resampling of validation "
+            "paired degradation, drawing 16 panels for each of four planned "
+            "non-nominal regimes; confirmatory inference uses hierarchical "
+            "paired bootstrap"
         ),
+        "simulation_replicates": simulation_replicates,
+        "simulation_seed": simulation_seed,
         "applications": applications,
         "validation_seconds_per_episode": seconds_per_episode,
         "holdout_episode_count": episode_count,
         "projected_holdout_single_gpu_hours_with_15_percent_buffer": projected_hours,
-        "validation_single_gpu_hours": validation_wall / 3600.0,
-        "projected_additional_gpu_hours_validation_plus_holdout": (
-            validation_wall / 3600.0 + projected_hours
+        "validation_single_gpu_hours": validation_gpu_hours,
+        "training_single_gpu_hours_reserved": training_hours,
+        "profile_single_gpu_hours": profile_hours,
+        "model_smoke_single_gpu_hours": model_smoke_hours,
+        "unmeasured_setup_gpu_hour_reserve": unmeasured_setup_reserve_hours,
+        "projected_additional_gpu_hours_all_required_stages": (
+            validation_gpu_hours + training_hours + projected_hours
+            + profile_hours + model_smoke_hours
+            + unmeasured_setup_reserve_hours
         ),
         "budget_limit_single_gpu_hours": 35.0,
     }
@@ -132,16 +200,37 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     controls_path = results_root / "validation" / "budget_matched_controls.json"
     pairs_path = results_root / "validation" / "selected_trigger_pairs.csv"
     validation_sweep_path = results_root / "manifests" / "validation_sweep.json"
+    training_manifest_path = results_root / "training" / "training_manifest.json"
+    profile_sweep_path = results_root / "manifests" / "profile_v2_sweep.json"
+    model_smoke_path = results_root / "logs" / "setup" / "model_smoke.json"
     for path in (
         selection_path, controls_path, pairs_path, validation_sweep_path,
+        training_manifest_path, profile_sweep_path, model_smoke_path,
     ):
         if not path.exists():
             raise FileNotFoundError(path)
     selection = json.loads(selection_path.read_text(encoding="utf-8"))
     controls = json.loads(controls_path.read_text(encoding="utf-8"))
+    if "kpi_trigger" not in controls:
+        raise ValueError(
+            "validation controls lack the frozen budget-matched KPI trigger"
+        )
     validation_sweep = json.loads(
         validation_sweep_path.read_text(encoding="utf-8")
     )
+    training_manifest = json.loads(
+        training_manifest_path.read_text(encoding="utf-8")
+    )
+    profile_sweep = json.loads(
+        profile_sweep_path.read_text(encoding="utf-8")
+    )
+    model_smoke = json.loads(model_smoke_path.read_text(encoding="utf-8"))
+    if profile_sweep.get("planner_backend") != "transformers":
+        raise ValueError("holdout design requires a real-LLM throughput profile")
+    if int(profile_sweep.get("episodes_failed", 1)) != 0:
+        raise ValueError("throughput profile contains failed episodes")
+    if model_smoke.get("status") != "complete":
+        raise ValueError("CUDA/model smoke did not complete")
     if validation_sweep.get("planner_backend") != "transformers":
         raise ValueError("holdout design requires real-LLM validation throughput")
     if int(validation_sweep.get("episodes_failed", 1)) != 0:
@@ -151,6 +240,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     checkpoints = _checkpoint_maps(results_root)
     config: Dict[str, Any] = {
         "stage": "holdout_locked",
+        "source_provenance_path": "results/entropy_triggered_v2/reproducibility/execution_source.json",
         "protocol_freeze_path": "results/entropy_triggered_v2/protocol/holdout_freeze.json",
         "prompt_template_revision": "planner-json-v7-route-affordances",
         "agentic_metric_revision": "agentic-metrics-v2-two-party-joined-coalition",
@@ -162,6 +252,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         "fixed_broadcast_fanout": 3,
         "periodic_interval": int(controls["periodic_interval"]),
         "random_gate_probability": float(controls["random_gate_probability"]),
+        "budget_match_calibration": controls,
         "calibration": "results/reproducibility/macrostate_calibration.json",
         "checkpoints": checkpoints,
         "model": {
@@ -187,6 +278,12 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             "humanitarian": {"n_agents": 10},
         },
         "methods": list(CORE_METHODS),
+        "method_variants": {
+            "kpi_cusum_trigger": [{
+                "name": "budget_matched",
+                "trigger": controls["kpi_trigger"],
+            }],
+        },
         "seeds": list(NON_NOMINAL_SEEDS),
         "scenarios": {
             "nominal": {
@@ -256,13 +353,18 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     ):
         raise ValueError("balanced RL assignment failed: %s" % learned_counts)
     precision = _precision_analysis(
-        pd.read_csv(pairs_path), validation_sweep, episode_count
+        pd.read_csv(pairs_path), validation_sweep, training_manifest,
+        profile_sweep, model_smoke, episode_count
     )
-    if precision["projected_additional_gpu_hours_validation_plus_holdout"] > 35.0:
+    projected_total = precision[
+        "projected_additional_gpu_hours_all_required_stages"
+    ]
+    if projected_total > 35.0:
         raise RuntimeError(
-            "projected validation + holdout compute %.2f GPU-hours exceeds 35; "
+            "projected validation + training + holdout resource use %.2f "
+            "single-GPU hours exceeds 35; "
             "do not freeze or launch without a reduced design or user approval"
-            % precision["projected_additional_gpu_hours_validation_plus_holdout"]
+            % projected_total
         )
     config_path.parent.mkdir(parents=True, exist_ok=True)
     config_path.write_text(

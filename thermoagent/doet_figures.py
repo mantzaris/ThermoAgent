@@ -181,7 +181,7 @@ def trigger_dynamics(root: Path) -> str:
 
 def performance_communication_pareto(root: Path) -> str:
     frame = pd.read_csv(root / "statistics" / "pareto_points.csv")
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.45))
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.15))
     for ax, application in zip(axes, ("commercial", "humanitarian")):
         app = frame[frame["application"] == application]
         for _, row in app.iterrows():
@@ -196,9 +196,12 @@ def performance_communication_pareto(root: Path) -> str:
         ax.set_title(application.capitalize())
     methods = [method for method in METHOD_STYLE if method in set(frame["method"])]
     handles = [Line2D([0], [0], color=METHOD_STYLE[method][0], marker=METHOD_STYLE[method][1], linestyle="none", label=_label(method)) for method in methods]
-    fig.legend(handles=handles, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.15), frameon=False)
+    fig.legend(
+        handles=handles, loc="lower center", ncol=3,
+        bbox_to_anchor=(0.5, 0.015), frameon=False,
+    )
     fig.suptitle("Locked-holdout performance–communication frontier")
-    fig.tight_layout(rect=(0, 0.16, 1, 0.94))
+    fig.tight_layout(rect=(0, 0.25, 1, 0.94))
     return _save(fig, "performance_communication_pareto", root)
 
 
@@ -420,10 +423,35 @@ def network_snapshots(root: Path) -> str:
     events = _events(run_dir / "events.jsonl.gz")
     topology = next(event["payload"] for event in events if event["kind"] == "topology_snapshot")
     disruption = int(case["disruption_step"].iloc[0])
+    active_rows = case[case.get("trigger_active_agents", 0) > 0]
+    targeted_rows = case[
+        case.get("trigger_active_agents", 0)
+        > case.get("trigger_crisis_agents", 0)
+    ]
+    crisis_rows = case[case.get("trigger_crisis_agents", 0) > 0]
     activation_values = case["first_activation_step"].dropna()
-    activation = int(activation_values.iloc[0]) if len(activation_values) else disruption + 1
-    steps = [0, max(0, disruption - 1), activation, min(int(case["step"].max()), activation + 2), int(case["step"].max())]
-    titles = ["Quiet", "Entropy deviation", "Targeted communication", "Crisis coalition", "Recovery"]
+    activation = (
+        int(activation_values.iloc[0])
+        if len(activation_values) else
+        int(active_rows["step"].iloc[0]) if len(active_rows) else disruption + 1
+    )
+    targeted_step = (
+        int(targeted_rows["step"].iloc[0])
+        if len(targeted_rows) else activation
+    )
+    crisis_step = (
+        int(crisis_rows["step"].iloc[0])
+        if len(crisis_rows) else min(int(case["step"].max()), activation + 2)
+    )
+    steps = [
+        max(0, disruption - 2), max(0, disruption - 1), targeted_step,
+        crisis_step, int(case["step"].max()),
+    ]
+    titles = [
+        "Quiet", "Entropy deviation", "Targeted communication",
+        "Crisis coalition" if len(crisis_rows) else "No crisis activation",
+        "Recovery",
+    ]
     identities = topology["agents"]
     pos = {agent_id: tuple(row["location"]) for agent_id, row in identities.items()}
     physical_initial = {tuple(edge) for edge in topology["physical_edges"]}
@@ -431,12 +459,13 @@ def network_snapshots(root: Path) -> str:
     role_shapes = {"retailer": "s", "supplier": "o", "manufacturer": "^", "carrier": "D", "warehouse": "h"}
     fig, axes = plt.subplots(3, 2, figsize=(7.2, 9.5))
     for ax, step, title in zip(axes.flat[:5], steps, titles):
+        available_communication = set(communication_initial)
         observations: Dict[str, Mapping[str, Any]] = {}
         trigger: Dict[str, Mapping[str, Any]] = {}
         closed = set()
         active_messages = []
         commitment_edges = set()
-        coalition_groups: List[set] = []
+        coalition_groups: Dict[str, set] = {}
         for event in events:
             if int(event["step"]) > step:
                 continue
@@ -446,19 +475,56 @@ def network_snapshots(root: Path) -> str:
                 trigger[str(event["actor"])] = event["payload"]
             elif event["kind"] == "disruption":
                 closed.update(tuple(edge) for edge in event["payload"].get("route_closures", []))
+                coordinator = event["payload"].get("coordinator_loss")
+                if coordinator:
+                    available_communication = {
+                        edge for edge in available_communication
+                        if coordinator not in edge
+                    }
             elif event["kind"] == "message" and int(event["step"]) in (step, step - 1):
                 active_messages.append((str(event["actor"]), str(event["payload"]["recipient"]), str(event["payload"].get("kind"))))
             elif event["kind"] == "commitment" and event["payload"].get("status") == "accepted":
                 commitment_edges.add((str(event["payload"]["proposer"]), str(event["payload"]["partner"])))
-            elif event["kind"] == "coalition_event" and event["payload"].get("action") == "propose":
-                coalition_groups.append(set(event["payload"].get("members", [])))
+            elif event["kind"] == "coalition_event":
+                payload = event["payload"]
+                coalition_id = str(payload.get("coalition_id", ""))
+                if payload.get("action") == "propose":
+                    coalition_groups[coalition_id] = set(
+                        payload.get("members", [])
+                    )
+                elif (
+                    payload.get("action") == "join_coalition"
+                    and payload.get("ok")
+                ):
+                    coalition_groups.setdefault(coalition_id, set()).add(
+                        str(event["actor"])
+                    )
         graph = nx.DiGraph()
         graph.add_nodes_from(identities)
         physical = physical_initial - closed
+        if (
+            topology.get("communication_regime") == "partition"
+            and step >= disruption
+        ):
+            ordered_nodes = sorted(identities)
+            midpoint = len(ordered_nodes) // 2
+            left_partition = set(ordered_nodes[:midpoint])
+            available_communication = {
+                edge for edge in available_communication
+                if (edge[0] in left_partition) == (edge[1] in left_partition)
+            }
         nx.draw_networkx_edges(graph, pos, edgelist=list(physical), ax=ax, edge_color="#BBBBBB", width=1.0, arrows=True, arrowsize=6)
-        nx.draw_networkx_edges(graph, pos, edgelist=list(communication_initial), ax=ax, edge_color=PALETTE["gray"], style="dashed", width=0.55, arrows=False, alpha=0.55)
+        nx.draw_networkx_edges(graph, pos, edgelist=list(available_communication), ax=ax, edge_color=PALETTE["gray"], style="dashed", width=0.55, arrows=False, alpha=0.55)
         values = [float(trigger.get(node, {}).get("local_surprisal", 0.0)) for node in identities]
-        sizes = [80 + 18 * float(observations.get(node, {}).get("backlog", 0.0)) for node in identities]
+        sizes = [
+            min(
+                520.0,
+                80.0 + 18.0 * float(
+                    observations.get(node, {}).get("backlog", 0.0)
+                ),
+            )
+            for node in identities
+        ]
         for role, shape in role_shapes.items():
             nodes = [node for node, row in identities.items() if row["role"] == role]
             if not nodes:
@@ -469,6 +535,21 @@ def network_snapshots(root: Path) -> str:
             color = PALETTE["red"] if kind == "entropy_alert" else PALETTE["orange"]
             nx.draw_networkx_edges(graph, pos, edgelist=[(sender, recipient)], ax=ax, edge_color=color, width=1.5, arrows=True, arrowsize=8, connectionstyle="arc3,rad=0.12")
         nx.draw_networkx_edges(graph, pos, edgelist=list(commitment_edges), ax=ax, edge_color=PALETTE["green"], width=2.2, arrows=True, arrowsize=8)
+        for members in coalition_groups.values():
+            member_positions = [pos[node] for node in members if node in pos]
+            if len(member_positions) < 2:
+                continue
+            x_values = [value[0] for value in member_positions]
+            y_values = [value[1] for value in member_positions]
+            outline = patches.Ellipse(
+                ((min(x_values) + max(x_values)) / 2.0,
+                 (min(y_values) + max(y_values)) / 2.0),
+                max(max(x_values) - min(x_values) + 0.35, 0.55),
+                max(max(y_values) - min(y_values) + 0.35, 0.55),
+                fill=False, edgecolor=PALETTE["purple"], linestyle="-.",
+                linewidth=1.2, alpha=0.8,
+            )
+            ax.add_patch(outline)
         nx.draw_networkx_labels(graph, pos, labels={node: node.split("_")[0][:3] + node[-2:] for node in identities}, font_size=6.5, ax=ax)
         ax.set_title("%s (period %d)" % (title, step))
         ax.set_axis_off()
@@ -480,6 +561,7 @@ def network_snapshots(root: Path) -> str:
         Line2D([0], [0], color=PALETTE["red"], linewidth=1.5, label="Entropy alert"),
         Line2D([0], [0], color=PALETTE["orange"], linewidth=1.5, label="Negotiation message"),
         Line2D([0], [0], color=PALETTE["green"], linewidth=2.2, label="Accepted commitment"),
+        Line2D([0], [0], color=PALETTE["purple"], linestyle="-.", linewidth=1.2, label="Coalition membership"),
         Line2D([0], [0], marker="o", color="none", markerfacecolor=PALETTE["blue"], markeredgecolor=PALETTE["black"], markersize=7, label="Node color: local surprisal"),
     ], loc="center", frameon=False)
     fig.suptitle("Network evolution under distributed entropy triggering")

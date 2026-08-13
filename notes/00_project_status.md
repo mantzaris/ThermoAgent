@@ -11,20 +11,24 @@ Last updated: 2026-08-13 America/New_York
 - **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
   monitoring comparison; nominal/development calibration; DOET-rule/DOET-RL;
   strong communication controls; five-seed training runner; validation and
-  holdout generators; locked analysis; 120 passing tests; 8/8 v2 preflight
-  replays.
-- **Active work:** publication figure/QA and documentation machinery. No real-
-  LLM v2 treatment outcome has begun, so no v2 performance claim exists.
+  1,296-episode holdout generators; hierarchical locked analysis; filtered
+  deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
+  128 passing tests; 8/8 v2 preflight replays.
+- **Active work:** final local Git preparation and another reachability check of
+  the existing Pod. No real-LLM v2 treatment outcome has begun, so no v2
+  performance claim exists.
 - **Active jobs:** none.
 - **Blocker:** the existing RunPod endpoint currently refuses SSH on port 19465. Retry after starting the same Pod with `./scripts/runpod-smoke-test.sh`. No replacement Pod will be created.
 - **Next actions:** after the same Pod is started, retry
-  `./scripts/runpod-smoke-test.sh`, synchronize, run the 288-episode validation,
-  train all 15 checkpoints, perform measured precision/budget analysis, freeze,
-  and run the 1,296-episode locked holdout.
+  `./scripts/runpod-smoke-test.sh`, run the filtered source and v2-control sync,
+  execute the 288-episode validation, train all 15 checkpoints, fetch and commit
+  the validation-selected protocol, perform measured precision/budget analysis,
+  freeze, and run the 1,296-episode outcome-sealed locked holdout.
 - **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
 - **Compute used by v2:** 0 GPU-hours. The SSH endpoint at
-  `213.173.109.33:19465` returned `Connection refused` on both connection
-  attempts; no replacement resource was created.
+  `213.173.109.33:19465` returned `Connection refused` on all three connection
+  attempts, most recently at `2026-08-13T13:26:50-04:00`; no replacement
+  resource was created.
 - **Latest valid v2 evidence:** full evaluator KPIs make entropy redundant for
   disruption rank, whereas distributed entropy adds about 0.097--0.098 AP and
   0.169--0.171 AUC to private local KPIs on original-main diagnostics. The new

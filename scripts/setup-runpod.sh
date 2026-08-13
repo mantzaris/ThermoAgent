@@ -40,6 +40,7 @@ packages = [
     "thermoagent", "transformers", "accelerate", "bitsandbytes",
     "huggingface-hub", "safetensors", "pydantic", "pytest", "scipy",
     "pandas", "matplotlib", "networkx", "PyYAML",
+    "scikit-learn",
 ]
 record = {
     "python": platform.python_version(),
@@ -53,4 +54,4 @@ Path("results/reproducibility/environment.json").write_text(json.dumps(record, i
 print(json.dumps(record, sort_keys=True))
 PY
 
-.venv/bin/pytest | tee results/logs/setup/tests-after-install.log
+.venv/bin/pytest 2>&1 | tee results/logs/setup/tests-after-install.log

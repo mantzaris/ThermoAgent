@@ -11,7 +11,9 @@ import collections
 import gzip
 import hashlib
 import json
+import platform
 from dataclasses import dataclass
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Sequence, Tuple
 
@@ -47,6 +49,21 @@ FEATURE_NAMES = [
     "role_index",
     "previous_tool_failed",
 ]
+
+
+def _analysis_environment() -> Dict[str, str]:
+    packages = (
+        "numpy", "scipy", "pandas", "scikit-learn", "matplotlib", "torch",
+    )
+    values = {"python": platform.python_version()}
+    for package in packages:
+        try:
+            values[package.replace("-", "_")] = version(package)
+        except PackageNotFoundError:
+            values[package.replace("-", "_")] = "not-installed"
+    return values
+
+
 ENTROPY_FEATURES = tuple(range(16, 22))
 MATERIAL_TOOLS = {
     "schedule_shipment",
@@ -781,6 +798,7 @@ def run(results_root: Path, output_root: Path) -> Dict[str, Any]:
     write_readme(diagnostics / "README.md", ties, actions, communication, features)
     record = {
         "status": "complete",
+        "analysis_environment": _analysis_environment(),
         "analysis_scope": "retrospective frozen-v1 holdout diagnostics only",
         "pairs": len(ties),
         "exact_primary_ties": int(ties["raw_float_exactly_equal"].sum()),

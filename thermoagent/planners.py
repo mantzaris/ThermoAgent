@@ -640,6 +640,7 @@ class TransformersPlanner:
         max_new_tokens: int = 128,
         max_input_tokens: int = 2560,
         load_in_4bit: bool = True,
+        seed: int = 0,
     ) -> None:
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -648,10 +649,11 @@ class TransformersPlanner:
         self.revision = revision
         self.max_new_tokens = int(max_new_tokens)
         self.max_input_tokens = int(max_input_tokens)
+        self.seed = int(seed)
         self.registry = ToolRegistry()
         self.mock = MockPlanner()
-        torch.manual_seed(0)
-        torch.cuda.manual_seed_all(0)
+        torch.manual_seed(self.seed)
+        torch.cuda.manual_seed_all(self.seed)
         quantization = None
         if load_in_4bit:
             quantization = BitsAndBytesConfig(

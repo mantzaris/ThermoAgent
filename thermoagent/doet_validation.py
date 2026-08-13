@@ -119,7 +119,9 @@ def _candidate_summary(variant: str, paired: pd.DataFrame) -> Dict[str, Any]:
 def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     fields = sorted({key for row in rows for key in row})
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(
+            handle, fieldnames=fields, lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -187,17 +189,112 @@ def run(results_root: Path) -> Dict[str, Any]:
     manifest = json.loads(manifest_paths[0].read_text(encoding="utf-8"))
     trigger = manifest["experiment_configuration"]["resolved_trigger"]
     active_fraction = float(selected["mean_active_agent_step_fraction"])
-    random_probability = min(1.0, max(0.0, active_fraction))
-    periodic_interval = max(4, int(round(4.0 / max(active_fraction, 1e-6))))
+    selected_pairs = paired_frames[selected_variant]
+    target_messages = float(
+        selected_pairs["total_communication_messages_doet"].mean()
+    )
+    kpi_rows = frame[frame["method"] == "kpi_cusum_trigger"].copy()
+    if kpi_rows.empty or kpi_rows["method_variant"].nunique() != 1:
+        raise ValueError(
+            "validation requires exactly one private-local-KPI trigger variant"
+        )
+    kpi_reference_messages = float(
+        kpi_rows["total_communication_messages"].mean()
+    )
+    # Freeze a transparent validation-only rate adjustment. It changes only
+    # the local KPI residual magnitude, never the true label or global state.
+    # The relationship to resulting traffic is approximate, so achieved
+    # mismatch remains a required holdout table.
+    kpi_signal_scale_unclipped = (
+        target_messages / max(kpi_reference_messages, 1e-9)
+    )
+    kpi_signal_scale = min(4.0, max(0.25, kpi_signal_scale_unclipped))
+    kpi_manifest_paths = sorted((results_root / "manifests").glob(
+        "validation-*-kpi_cusum_trigger-*.json"
+    ))
+    if not kpi_manifest_paths:
+        raise FileNotFoundError("no KPI-trigger validation manifest found")
+    kpi_manifest = json.loads(
+        kpi_manifest_paths[0].read_text(encoding="utf-8")
+    )
+    resolved_kpi = kpi_manifest["experiment_configuration"][
+        "resolved_trigger"
+    ]
+    kpi_parameters = dict(resolved_kpi["parameters"])
+    kpi_parameters["signal_scale"] = kpi_signal_scale
+    kpi_trigger = {
+        "normalizers_path": resolved_kpi["normalizers_path"],
+        "normalizers_key": resolved_kpi["normalizers_key"],
+        "parameters": kpi_parameters,
+    }
+    fixed_messages_total = float(
+        selected_pairs["total_communication_messages_fixed"].sum()
+    )
+    fixed_active_total = float(
+        selected_pairs["communication_active_decision_epochs_fixed"].sum()
+    )
+    fixed_messages_per_active_decision = (
+        fixed_messages_total / max(fixed_active_total, 1.0)
+    )
+    target_intensive_decisions = (
+        target_messages / max(fixed_messages_per_active_decision, 1e-9)
+    )
+    validation_horizon = 24
+    activation_interval = 2
+    mean_agents = float(selected_pairs["n_agents"].mean())
+    activation_opportunities = mean_agents * math.ceil(
+        validation_horizon / activation_interval
+    )
+    random_probability = min(
+        1.0, max(0.0, target_intensive_decisions / activation_opportunities)
+    )
+    periodic_candidates = range(2, validation_horizon + 1)
+    periodic_interval = min(
+        periodic_candidates,
+        key=lambda interval: (
+            abs(
+                mean_agents * math.ceil(validation_horizon / interval)
+                - target_intensive_decisions
+            ),
+            interval,
+        ),
+    )
+    predicted_periodic_decisions = mean_agents * math.ceil(
+        validation_horizon / periodic_interval
+    )
+    predicted_periodic_messages = (
+        predicted_periodic_decisions * fixed_messages_per_active_decision
+    )
+    predicted_random_messages = (
+        activation_opportunities * random_probability
+        * fixed_messages_per_active_decision
+    )
     controls = {
         "source": "validation only",
         "selected_method_variant": selected_variant,
         "target_active_agent_step_fraction": active_fraction,
+        "target_counted_messages_per_episode": target_messages,
+        "fixed_messages_per_active_decision": fixed_messages_per_active_decision,
+        "target_intensive_decisions_per_episode": target_intensive_decisions,
+        "activation_opportunity_interval": activation_interval,
+        "quiet_local_planning_interval": 8,
         "random_gate_probability": random_probability,
         "periodic_interval": periodic_interval,
+        "predicted_random_messages_per_episode": predicted_random_messages,
+        "predicted_periodic_messages_per_episode": predicted_periodic_messages,
+        "kpi_reference_messages_per_episode": kpi_reference_messages,
+        "kpi_signal_scale_unclipped": kpi_signal_scale_unclipped,
+        "kpi_signal_scale": kpi_signal_scale,
+        "kpi_trigger": kpi_trigger,
         "rule": (
-            "random probability equals selected DOET active-agent-step fraction; "
-            "periodic interval is nearest integer cadence to the same rate"
+            "validation DOET total counted messages (including sketches) are "
+            "converted to intensive decisions using fixed-control messages per "
+            "active decision; random probability and periodic cadence minimize "
+            "the resulting expected message-count mismatch. Inactive controls "
+            "retain quiet local planning every eight periods. The private-KPI "
+            "CUSUM residual is multiplied by the clipped DOET/KPI validation "
+            "message ratio; achieved KPI mismatch is reported because this is "
+            "an approximate, trajectory-dependent rate match."
         ),
     }
     comparison_path = validation_dir / "trigger_candidate_comparison.csv"

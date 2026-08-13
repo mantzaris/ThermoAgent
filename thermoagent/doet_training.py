@@ -10,7 +10,11 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
 
 from .events import sha256_file
-from .experiments import dependency_versions, hardware_summary, train_policy
+from .experiments import (
+    dependency_versions,
+    hardware_summary,
+    train_policy,
+)
 from .policy import checkpoint_metadata
 
 
@@ -25,7 +29,9 @@ def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = sorted({key for row in rows for key in row})
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(
+            handle, fieldnames=fields, lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -94,6 +100,13 @@ def run(
     checkpoint_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
     manifest_path = training_root / "seed_manifest.csv"
+    provenance_path = results_root / "reproducibility" / "execution_source.json"
+    if not provenance_path.is_file():
+        raise FileNotFoundError(
+            "multi-seed training requires captured execution provenance: %s"
+            % provenance_path
+        )
+    provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
     prior_rows: Dict[tuple, Dict[str, Any]] = {}
     if manifest_path.exists():
         with manifest_path.open(encoding="utf-8", newline="") as handle:
@@ -120,6 +133,19 @@ def run(
                     "final checkpoint after the identical fixed episode budget; "
                     "no outcome-based seed or checkpoint selection"
                 ),
+                "source_commit": provenance.get("commit", "unknown"),
+                "source_branch": provenance.get("branch", "unknown"),
+                "source_dirty": provenance.get("dirty"),
+                "source_checksum": provenance.get("source_checksum"),
+                "protocol_checksum": sha256_file(trigger_config_path),
+                "environment_seed_rule": (
+                    "independent RandomState(training seed); fixed 192-episode "
+                    "distribution when defaults are used"
+                ),
+                "llm_calls": 0,
+                "prompt_tokens": 0,
+                "generated_tokens": 0,
+                "planner": "deterministic mock planner during staged PPO",
             }
             try:
                 if checkpoint.exists():
@@ -145,6 +171,13 @@ def run(
                     "ended_at": _utc_now(),
                     "checkpoint_sha256": sha256_file(checkpoint),
                     "wall_clock_seconds": metadata.get("wall_clock_seconds"),
+                    # PPO is CPU-bound in this implementation, but it runs on
+                    # the paid single-GPU Pod. Count the reserved Pod interval
+                    # against the user's additional single-GPU-hour cap.
+                    "single_gpu_hours_reserved": (
+                        float(metadata.get("wall_clock_seconds", 0.0) or 0.0)
+                        / 3600.0
+                    ),
                     "final_window_primary_mean": metadata.get(
                         "final_window_primary_mean"
                     ),
@@ -180,6 +213,10 @@ def run(
     _write_csv(selection_path, selection_rows)
     complete = [row for row in rows if row["status"] == "complete"]
     failed = [row for row in rows if row["status"] == "failed"]
+    training_wall_clock_seconds = float(sum(
+        float(row.get("wall_clock_seconds", 0.0) or 0.0)
+        for row in rows
+    ))
     record = {
         "status": "complete" if not failed else "completed_with_failures",
         "generated_at": _utc_now(),
@@ -202,6 +239,23 @@ def run(
         "calibration_sha256": sha256_file(calibration_path),
         "trigger_config_path": str(trigger_config_path),
         "trigger_config_sha256": sha256_file(trigger_config_path),
+        "source_provenance": provenance,
+        "source_provenance_sha256": sha256_file(provenance_path),
+        "model_identifier_during_training": "none; frozen LLM coupled only in validation/holdout evaluation",
+        "evaluation_model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+        "evaluation_model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "prompt_revision_during_training": "deterministic-mock-v2",
+        "environment_steps_per_seed": int(episodes * 16),
+        "llm_calls": 0,
+        "prompt_tokens": 0,
+        "generated_tokens": 0,
+        "wall_clock_seconds": training_wall_clock_seconds,
+        "single_gpu_hours_reserved": training_wall_clock_seconds / 3600.0,
+        "compute_accounting_note": (
+            "coordination PPO is CPU-bound but the existing single-GPU Pod is "
+            "reserved during training, so elapsed training time counts against "
+            "the 35-hour additional resource cap"
+        ),
         "dependencies": dependency_versions(),
         "hardware": hardware_summary(),
         "outputs": {

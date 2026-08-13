@@ -7,8 +7,8 @@
       "rendered": "reproducibility/pdf_qa/doet_architecture-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected original-resolution renders; typography, labels, legends, and panel spacing are readable with no clipping or overlap that obscures data.",
-      "visual_reviewer": "Codex visual inspection"
+      "visual_inspection_note": "Inspected all four current rendered previews at original resolution on 2026-08-13; text, labels, legends, panels, and axes are readable with no clipping or overlap requiring revision. Twelve outcome-dependent figures remain intentionally absent pending real locked evidence.",
+      "visual_reviewer": "codex"
     },
     {
       "fonts_detected": true,
@@ -17,8 +17,8 @@
       "rendered": "reproducibility/pdf_qa/entropy_incremental_value-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected original-resolution renders; typography, labels, legends, and panel spacing are readable with no clipping or overlap that obscures data.",
-      "visual_reviewer": "Codex visual inspection"
+      "visual_inspection_note": "Inspected all four current rendered previews at original resolution on 2026-08-13; text, labels, legends, panels, and axes are readable with no clipping or overlap requiring revision. Twelve outcome-dependent figures remain intentionally absent pending real locked evidence.",
+      "visual_reviewer": "codex"
     },
     {
       "fonts_detected": true,
@@ -27,8 +27,8 @@
       "rendered": "reproducibility/pdf_qa/monitoring_baseline_comparison-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected original-resolution renders; typography, labels, legends, and panel spacing are readable with no clipping or overlap that obscures data.",
-      "visual_reviewer": "Codex visual inspection"
+      "visual_inspection_note": "Inspected all four current rendered previews at original resolution on 2026-08-13; text, labels, legends, panels, and axes are readable with no clipping or overlap requiring revision. Twelve outcome-dependent figures remain intentionally absent pending real locked evidence.",
+      "visual_reviewer": "codex"
     },
     {
       "fonts_detected": true,
@@ -37,8 +37,8 @@
       "rendered": "reproducibility/pdf_qa/original_holdout_tie_diagnostics-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected original-resolution renders; typography, labels, legends, and panel spacing are readable with no clipping or overlap that obscures data.",
-      "visual_reviewer": "Codex visual inspection"
+      "visual_inspection_note": "Inspected all four current rendered previews at original resolution on 2026-08-13; text, labels, legends, panels, and axes are readable with no clipping or overlap requiring revision. Twelve outcome-dependent figures remain intentionally absent pending real locked evidence.",
+      "visual_reviewer": "codex"
     }
   ],
   "pymupdf_available": false,

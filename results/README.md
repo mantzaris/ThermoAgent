@@ -1,5 +1,21 @@
 # ThermoAgent experimental results
 
+## Study namespaces
+
+- **Frozen first study (this README and the existing sibling directories):**
+  complete at commit `d555ac04927968ad577707b5c7e9e7b1162069e6` and preserved by
+  the annotated local tag `thermoagent-v1-frozen`. Its raw data, numerical
+  findings, figures, and mixed/negative interpretation are unchanged below.
+- **Entropy-triggered communication study (v2):**
+  [`entropy_triggered_v2/README.md`](entropy_triggered_v2/README.md). This is a
+  strictly separate namespace for Distributed Operational Entropy Triggering.
+  Diagnostics, monitoring validation, implementation, and deterministic
+  preflight are complete; no v2 real-LLM comparative or locked-holdout claim
+  exists while the original RunPod is unreachable.
+
+The top-level `INDEX.csv` indexes both namespaces when rebuilt. No v2 derived
+artifact replaces a frozen-v1 source artifact.
+
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed
 mechanical and manual visual QA. No final seed failed or was selectively rerun.

@@ -14,3 +14,4 @@ matplotlib==3.10.5
 networkx==3.5
 PyYAML==6.0.2
 PyMuPDF==1.28.2
+scikit-learn==1.5.2

@@ -58,6 +58,8 @@ class TriggerConfig:
     crisis_decision_interval: int = 2
     propagation: str = "local"
     disable_gossip: bool = False
+    signal_noise_std: float = 0.0
+    signal_scale: float = 1.0
 
     def __post_init__(self) -> None:
         if self.trigger_type not in ("cusum", "hysteresis"):
@@ -80,6 +82,10 @@ class TriggerConfig:
             raise ValueError("alert parameters must be non-negative")
         if self.propagation not in ("local", "neighbor"):
             raise ValueError("propagation must be local or neighbor")
+        if self.signal_noise_std < 0 or not math.isfinite(self.signal_noise_std):
+            raise ValueError("signal_noise_std must be finite and non-negative")
+        if self.signal_scale <= 0 or not math.isfinite(self.signal_scale):
+            raise ValueError("signal_scale must be finite and positive")
         for value in (
             self.quiet_gossip_rounds,
             self.targeted_gossip_rounds,
@@ -238,7 +244,7 @@ class DistributedEntropyTrigger:
 
         standardized = self._standardized(agent_id, float(entropy))
         change = 0.0 if state.last_entropy is None else float(entropy) - state.last_entropy
-        base_residual = self._residual(standardized, change)
+        base_residual = self._residual(standardized, change) * self.config.signal_scale
         alert_evidence = self.config.alert_weight * min(int(delivered_alerts), 1)
         # Poor consensus reduces confidence in a level alarm.  It never creates
         # evidence and never suppresses explicit neighbour evidence entirely.

@@ -6,8 +6,10 @@ import csv
 import hashlib
 import json
 import math
+import platform
 from dataclasses import asdict
 from datetime import datetime, timezone
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Tuple
 
@@ -28,6 +30,19 @@ DEVELOPMENT_REGIMES = (
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _analysis_environment() -> Dict[str, str]:
+    packages = (
+        "numpy", "scipy", "pandas", "scikit-learn", "matplotlib", "torch",
+    )
+    values = {"python": platform.python_version()}
+    for package in packages:
+        try:
+            values[package.replace("-", "_")] = version(package)
+        except PackageNotFoundError:
+            values[package.replace("-", "_")] = "not-installed"
+    return values
 
 
 def _sha256(path: Path) -> str:
@@ -261,7 +276,9 @@ def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = sorted({key for row in rows for key in row})
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(
+            handle, fieldnames=fields, lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -365,6 +382,7 @@ def run(
     _write_csv(runs_path, run_records)
     manifest = {
         "status": "complete",
+        "analysis_environment": _analysis_environment(),
         "generated_at": _utc_now(),
         "nominal_episodes": len(APPLICATION_SIZES) * len(nominal_seeds),
         "development_episodes": (

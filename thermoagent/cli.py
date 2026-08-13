@@ -87,6 +87,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("results/entropy_triggered_v2"),
     )
 
+    report_doet = subparsers.add_parser(
+        "report-doet",
+        help="write evidence-bound v2 README and paper-oriented summary",
+    )
+    report_doet.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+
     doet_figures = subparsers.add_parser(
         "doet-figures",
         help="generate vector figures for the entropy-triggered v2 study",
@@ -99,6 +108,21 @@ def build_parser() -> argparse.ArgumentParser:
     design_holdout.add_argument(
         "--config", type=Path,
         default=Path("configs/entropy_trigger_holdout_locked.yaml"),
+    )
+
+    design_ablations = subparsers.add_parser(
+        "design-doet-ablations",
+        help="design the secondary signal/oracle sweep if measured budget permits",
+    )
+    design_ablations.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+    design_ablations.add_argument(
+        "--config", type=Path,
+        default=Path(
+            "results/entropy_triggered_v2/protocol/extended_ablation_config.yaml"
+        ),
     )
 
     analyze = subparsers.add_parser("analyze", help="aggregate episodes and run episode-level statistics")
@@ -121,6 +145,13 @@ def build_parser() -> argparse.ArgumentParser:
     capture = subparsers.add_parser("capture-env", help="capture non-secret dependency, hardware, and source provenance")
     capture.add_argument("--results", type=Path, default=Path("results"))
     capture.add_argument("--root", type=Path, default=Path("."))
+
+    source = subparsers.add_parser(
+        "capture-source-provenance",
+        help="capture non-secret Git/source identity for filtered remote deployment",
+    )
+    source.add_argument("--root", type=Path, default=Path("."))
+    source.add_argument("--output", type=Path, required=True)
 
     replay = subparsers.add_parser("replay", help="replay quantitative state from recorded tool-call ledgers")
     replay.add_argument("--results", type=Path, default=Path("results"))
@@ -215,10 +246,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         from .doet_holdout import run as design_doet_holdout
 
         value = design_doet_holdout(args.results, args.config)
+    elif args.command == "design-doet-ablations":
+        from .doet_ablations import run as design_doet_ablations
+
+        value = design_doet_ablations(args.results, args.config)
     elif args.command == "analyze-doet":
         from .doet_analysis import run as analyze_doet
 
         value = analyze_doet(args.results)
+    elif args.command == "report-doet":
+        from .doet_reporting import run as report_doet
+
+        value = report_doet(args.results)
     elif args.command == "doet-figures":
         from .doet_figures import generate as generate_doet_figures
 
@@ -250,6 +289,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         from .experiments import capture_reproducibility
 
         value = capture_reproducibility(args.root.resolve(), args.results)
+    elif args.command == "capture-source-provenance":
+        from .experiments import capture_source_provenance
+
+        value = capture_source_provenance(
+            args.root.resolve(), args.output
+        )
     elif args.command == "replay":
         from .replay import replay_results
 

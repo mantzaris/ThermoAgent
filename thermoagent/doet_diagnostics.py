@@ -597,7 +597,7 @@ def write_figure(
         "font.size": 9.5,
         "axes.titlesize": 11,
         "axes.labelsize": 10,
-        "legend.fontsize": 8.5,
+        "legend.fontsize": 9,
         "pdf.fonttype": 42,
         "ps.fonttype": 42,
     })
@@ -681,7 +681,12 @@ def write_figure(
 
     figure.suptitle("Why the frozen v1 holdout produced exact primary-outcome ties", fontsize=12)
     output.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(output, format="pdf", bbox_inches="tight")
+    figure.savefig(
+        output,
+        format="pdf",
+        bbox_inches="tight",
+        metadata={"CreationDate": None, "ModDate": None},
+    )
     plt.close(figure)
 
 

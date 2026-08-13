@@ -1,5 +1,4 @@
 {
-  "analysis_scope": "retrospective frozen-v1 holdout diagnostics only",
   "analysis_environment": {
     "matplotlib": "3.1.2",
     "numpy": "1.22.1",
@@ -9,6 +8,7 @@
     "scipy": "1.7.3",
     "torch": "1.10.1+cpu"
   },
+  "analysis_scope": "retrospective frozen-v1 holdout diagnostics only",
   "exact_primary_ties": 16,
   "outputs": {
     "diagnostics/README.md": "015c387a35ac9b4a304104458e4fb4ff4144781cc4c3672ec5db4d0608d598fa",
@@ -16,7 +16,7 @@
     "diagnostics/communication_divergence.csv": "5703efa2dfe82280beb8c3898d3b847eebf66b62f8cb01d9e5ac1678ceb8b00d",
     "diagnostics/feature_usage.csv": "cf312c181ecd986eefb43016b5d3f4d2049bcdad2e5dc150d1ccd581c93c9341",
     "diagnostics/holdout_tie_analysis.csv": "46902c566113f239166877ac04e38cce944e4df879baae57d657633f4af73b98",
-    "figures/pdf/original_holdout_tie_diagnostics.pdf": "2cd3aacefd693a6a9d63bbb354f3897110015ad3c87ed35c06c6ce4c977719ab"
+    "figures/pdf/original_holdout_tie_diagnostics.pdf": "74b3187aa4280d3048f317c3ab21c65b42232b6f6b4c0a9b8801e49622d723d4"
   },
   "pairs": 16,
   "status": "complete",

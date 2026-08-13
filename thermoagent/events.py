@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import gzip
+import io
 import json
 from dataclasses import asdict, dataclass, is_dataclass
 from pathlib import Path
@@ -97,10 +98,26 @@ class EventLedger:
 
     def write_jsonl(self, path: Path) -> str:
         path.parent.mkdir(parents=True, exist_ok=True)
-        opener = gzip.open if path.suffix == ".gz" else open
-        with opener(path, "wt", encoding="utf-8") as handle:
-            for event in self._events:
-                handle.write(json.dumps(event.as_dict(), sort_keys=True) + "\n")
+        if path.suffix == ".gz":
+            # gzip's default wall-clock timestamp makes identical ledgers have
+            # different bytes. A blank embedded filename and mtime=0 make run
+            # checksums reproducible without changing the JSONL content.
+            with path.open("wb") as raw:
+                with gzip.GzipFile(
+                    filename="", fileobj=raw, mode="wb", mtime=0
+                ) as compressed:
+                    with io.TextIOWrapper(
+                        compressed, encoding="utf-8", newline=""
+                    ) as handle:
+                        for event in self._events:
+                            handle.write(
+                                json.dumps(event.as_dict(), sort_keys=True)
+                                + "\n"
+                            )
+        else:
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                for event in self._events:
+                    handle.write(json.dumps(event.as_dict(), sort_keys=True) + "\n")
         return sha256_file(path)
 
     @classmethod

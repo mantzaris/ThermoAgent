@@ -1,7 +1,7 @@
 # DOET implementation record
 
-Status: local implementation and deterministic preflight complete; real-LLM
-validation pending RunPod availability.
+Status: local implementation and deterministic preflight complete; the
+144-episode real-LLM validation is active on the existing RunPod Pod.
 
 Planned implementations are `DOET-rule` (transparent stateful trigger and fixed
 mode rules) and `DOET-RL` (the trigger gates expanded options while an independent
@@ -80,7 +80,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 129/129 passing. New tests cover trigger
+The current complete suite is 131/131 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -92,6 +92,26 @@ performs quiet local planning without activating communication.
 The eight-episode mock preflight completed with zero failures and maximum
 absolute material residual below `1.14e-13`; all eight ledgers replayed exactly.
 It is an engineering check only and supplies no research claim.
+
+## Deterministic artifact audit
+
+Before the locked holdout, the v2 artifact writers were audited for byte-level
+rebuild stability. Gzip event ledgers and the derived monitoring time-point
+archive now use a blank embedded filename and a fixed gzip modification time;
+the environment round-trip test writes the same ledger twice and requires both
+the compressed bytes and SHA-256 checksums to match. Paper-facing PDFs omit
+volatile creation/modification metadata. Two consecutive rebuilds produced
+identical hashes for the architecture, tie-diagnostic, monitoring-comparison,
+and incremental-value PDFs and for the compressed monitoring table. The four
+current previews were inspected at original resolution after increasing small
+labels and untangling the architecture arrows.
+
+These changes affect serialization and presentation only, not simulator
+dynamics, trigger selection, prompts, or treatment outcomes. The already-active
+validation was launched from its recorded source checksum before this audit and
+retains that serializer in its own manifests. The later locked holdout will use
+the newly frozen checksum and deterministic writer; no validation artifact will
+be rewritten merely to match it.
 
 The compute-capped locked design gives secondary comparators fewer panels than
 the four priority methods. Statistical Pareto summaries, communication-budget

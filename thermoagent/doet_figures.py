@@ -57,7 +57,7 @@ def configure_style() -> None:
         "axes.titlesize": 11,
         "xtick.labelsize": 9,
         "ytick.labelsize": 9,
-        "legend.fontsize": 8.5,
+        "legend.fontsize": 9,
         "figure.titlesize": 12,
         "axes.spines.top": False,
         "axes.spines.right": False,
@@ -77,7 +77,11 @@ def _save(fig: Any, name: str, root: Path) -> str:
     preview_dir.mkdir(parents=True, exist_ok=True)
     pdf = pdf_dir / (name + ".pdf")
     png = preview_dir / (name + ".png")
-    fig.savefig(pdf, format="pdf")
+    fig.savefig(
+        pdf,
+        format="pdf",
+        metadata={"CreationDate": None, "ModDate": None},
+    )
     fig.savefig(png, format="png", dpi=220)
     plt.close(fig)
     return pdf.name
@@ -116,7 +120,7 @@ def architecture(root: Path) -> str:
     ax.set_ylim(0, 9)
     ax.axis("off")
     boxes = [
-        (0.1, 6.1, 3.1, 1.55, "Private agent\nidentity + utility\nobservation + memory", PALETTE["blue"]),
+        (0.1, 6.1, 3.1, 1.55, "Independent agent\nprivate state + utility\nmemory, LLM + RL", PALETTE["blue"]),
         (4.45, 6.1, 3.1, 1.55, "Distributed monitor\ncoarse sketch gossip\n$\widehat{S}_i$, change, confidence", PALETTE["purple"]),
         (8.8, 6.1, 3.1, 1.55, "Stateful trigger\nCUSUM + hysteresis\nlocal confidence", PALETTE["red"]),
         (0.1, 2.75, 3.1, 1.55, "Quiet mode\nlocal plan\nsparse gossip", PALETTE["gray"]),
@@ -132,21 +136,25 @@ def architecture(root: Path) -> str:
             linewidth=1.5,
         )
         ax.add_patch(box)
-        ax.text(x + width / 2, y + height / 2, text, ha="center", va="center", weight="semibold", fontsize=8.9, linespacing=1.2)
+        ax.text(x + width / 2, y + height / 2, text, ha="center", va="center", weight="semibold", fontsize=9.1, linespacing=1.2)
     arrows = [
         ((3.2, 6.88), (4.45, 6.88), "local macrostate"),
         ((7.55, 6.88), (8.8, 6.88), "local statistic"),
     ]
     for start, end, text in arrows:
         ax.annotate("", xy=end, xytext=start, arrowprops={"arrowstyle": "->", "lw": 1.15, "color": PALETTE["black"]})
-        ax.text((start[0] + end[0]) / 2, 7.92, text, ha="center", va="center", fontsize=7.8, backgroundcolor="white")
+        ax.text((start[0] + end[0]) / 2, 7.92, text, ha="center", va="center", fontsize=9, backgroundcolor="white")
+    # A single branch makes the trigger-to-mode relationship legible without
+    # three crossing diagonal arrows.
+    ax.plot([10.35, 10.35], [6.1, 5.05], color=PALETTE["black"], linewidth=1.05)
+    ax.plot([1.65, 10.35], [5.05, 5.05], color=PALETTE["black"], linewidth=1.05)
     for end_x in (1.65, 6.0, 10.35):
-        ax.annotate("", xy=(end_x, 4.3), xytext=(10.35, 6.1), arrowprops={"arrowstyle": "->", "lw": 1.05, "color": PALETTE["black"]})
-    ax.text(6.0, 4.88, "local mode eligibility", ha="center", fontsize=8.2, backgroundcolor="white")
+        ax.annotate("", xy=(end_x, 4.3), xytext=(end_x, 5.05), arrowprops={"arrowstyle": "->", "lw": 1.05, "color": PALETTE["black"]})
+    ax.text(6.0, 5.22, "local mode eligibility", ha="center", fontsize=9, backgroundcolor="white")
     ax.annotate("", xy=(10.8, 1.55), xytext=(1.2, 1.55), arrowprops={"arrowstyle": "<->", "linestyle": "--", "color": PALETTE["gray"], "lw": 1.2})
-    ax.text(6, 1.82, "Explicit counted messages, alerts, sketches, offers, and coalition contracts", ha="center", color=PALETTE["gray"], fontsize=8.8)
+    ax.text(6, 1.82, "Explicit counted messages, alerts, sketches, offers, and coalition contracts", ha="center", color=PALETTE["gray"], fontsize=9)
     ax.text(6, 0.72, "Independent authority remains local: each agent can accept, counter, refuse, or withdraw", ha="center", weight="semibold")
-    ax.text(6, 0.25, "Exact global entropy and true disruption labels are evaluator-only oracle ablations", ha="center", color=PALETTE["gray"], fontsize=8.5)
+    ax.text(6, 0.25, "Exact global entropy and true disruption labels are evaluator-only oracle ablations", ha="center", color=PALETTE["gray"], fontsize=9)
     fig.suptitle("Distributed Operational Entropy Triggering (DOET)", y=0.985)
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     return _save(fig, "doet_architecture", root)
@@ -557,7 +565,7 @@ def network_snapshots(root: Path) -> str:
                 linewidth=1.2, alpha=0.8,
             )
             ax.add_patch(outline)
-        nx.draw_networkx_labels(graph, pos, labels={node: node.split("_")[0][:3] + node[-2:] for node in identities}, font_size=6.5, ax=ax)
+        nx.draw_networkx_labels(graph, pos, labels={node: node.split("_")[0][:3] + node[-2:] for node in identities}, font_size=9, ax=ax)
         ax.set_title("%s (period %d)" % (title, step))
         ax.set_axis_off()
     legend_ax = axes.flat[5]

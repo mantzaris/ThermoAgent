@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import io
 import hashlib
 import json
 import math
@@ -871,7 +872,7 @@ def write_figures(monitoring: pd.DataFrame, incremental: pd.DataFrame, output_ro
         "font.size": 9.5,
         "axes.titlesize": 11,
         "axes.labelsize": 10,
-        "legend.fontsize": 8.5,
+        "legend.fontsize": 9,
         "pdf.fonttype": 42,
         "ps.fonttype": 42,
     })
@@ -917,7 +918,7 @@ def write_figures(monitoring: pd.DataFrame, incremental: pd.DataFrame, output_ro
                 min(prevalence + 0.025, 0.96),
                 "positive prevalence",
                 transform=ax.get_yaxis_transform(),
-                fontsize=8,
+                fontsize=9,
                 bbox={"facecolor": "white", "edgecolor": "none", "alpha": 0.85, "pad": 1.5},
             )
             ax.set_xticks(np.arange(len(selected)))
@@ -927,7 +928,11 @@ def write_figures(monitoring: pd.DataFrame, incremental: pd.DataFrame, output_ro
             ax.set_title("%s — %s" % (application.title(), "main OOF" if column == 0 else "seen holdout diagnostic"))
     figure.suptitle("Disruption monitoring: distributed entropy versus ordinary KPI baselines", fontsize=12)
     comparison = pdf_dir / "monitoring_baseline_comparison.pdf"
-    figure.savefig(comparison, bbox_inches="tight")
+    figure.savefig(
+        comparison,
+        bbox_inches="tight",
+        metadata={"CreationDate": None, "ModDate": None},
+    )
     plt.close(figure)
 
     differences = incremental[incremental["analysis"].str.endswith("incremental_entropy")].copy()
@@ -966,7 +971,11 @@ def write_figures(monitoring: pd.DataFrame, incremental: pd.DataFrame, output_ro
             ax.text(0.5, 0.62, "No AP increment", transform=ax.transAxes, ha="center")
     figure.suptitle("Incremental value of distributed operational entropy", fontsize=12)
     incremental_pdf = pdf_dir / "entropy_incremental_value.pdf"
-    figure.savefig(incremental_pdf, bbox_inches="tight")
+    figure.savefig(
+        incremental_pdf,
+        bbox_inches="tight",
+        metadata={"CreationDate": None, "ModDate": None},
+    )
     plt.close(figure)
     return [comparison, incremental_pdf]
 
@@ -1060,7 +1069,15 @@ def run(results_root: Path, output_root: Path) -> Dict[str, Any]:
     incremental.to_csv(directory / "incremental_value.csv", index=False)
     detections.to_csv(directory / "detection_lead_time.csv", index=False)
     localization.to_csv(directory / "localization.csv", index=False)
-    scores.to_csv(directory / "scored_timepoints.csv.gz", index=False, compression="gzip")
+    scored_path = directory / "scored_timepoints.csv.gz"
+    with scored_path.open("wb") as raw:
+        with gzip.GzipFile(
+            filename="", fileobj=raw, mode="wb", mtime=0
+        ) as compressed:
+            with io.TextIOWrapper(
+                compressed, encoding="utf-8", newline=""
+            ) as handle:
+                scores.to_csv(handle, index=False)
     pdfs = write_figures(monitoring, incremental, output_root)
     write_readme(output_root, monitoring, incremental)
     outputs = [

@@ -190,8 +190,11 @@ def test_compressed_event_ledger_roundtrip(tmp_path: Path):
     ledger = EventLedger()
     ledger.append(0, "message", "agent_a", {"recipient": "agent_b"}, private_to="agent_b")
     path = tmp_path / "events.jsonl.gz"
-    ledger.write_jsonl(path)
+    checksum = ledger.write_jsonl(path)
     assert EventLedger.read_jsonl(path).digest() == ledger.digest()
+    second = tmp_path / "events-copy.jsonl.gz"
+    assert ledger.write_jsonl(second) == checksum
+    assert second.read_bytes() == path.read_bytes()
 
 
 def test_environment_never_invents_domain_action():

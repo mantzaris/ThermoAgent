@@ -15,7 +15,8 @@ Last updated: 2026-08-13 America/New_York
   strong communication controls; five-seed training runner; validation and
   compute-capped holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
-  131 passing tests; 8/8 v2 preflight replays.
+  131 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
+  writers and full-resolution QA of the existing v2 diagnostic figures.
 - **Active work:** the documented 144-episode real-Qwen validation is running
   in detached `tmux` on the exact checksum-matched source.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.

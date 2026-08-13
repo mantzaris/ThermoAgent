@@ -1,0 +1,17 @@
+{
+  "config_checksum": "ced3450d152c6739a513cd6c9e6426daf15c25f41e84b618f8c2b66ec21c2788",
+  "config_path": "configs/entropy_trigger_preflight_mock.yaml",
+  "end_timestamp": "2026-08-13T16:15:13.910861+00:00",
+  "episodes_complete": 8,
+  "episodes_failed": 0,
+  "episodes_planned": 8,
+  "generated_tokens": 0,
+  "llm_calls": 0,
+  "model_loaded": false,
+  "planner_backend": "mock",
+  "prompt_tokens": 0,
+  "source_checksum": "2efcdd153ad220bcee477a6bdc9cefb3b6e2199e7222762c8cdeeea54e7e99d8",
+  "stage": "preflight_v2",
+  "start_timestamp": "2026-08-13T16:15:11.271647+00:00",
+  "wall_clock_seconds_including_model_load": 2.639209335000487
+}

@@ -17,6 +17,11 @@ from .consensus import (
     local_consensus_residuals,
     one_hot_sketch,
 )
+from .doet import (
+    CommunicationMode,
+    DistributedEntropyTrigger,
+    TriggerConfig,
+)
 from .environment import (
     DEMAND_ROLES,
     SOURCE_ROLES,
@@ -47,6 +52,30 @@ ROLE_INDEX = {
     for index, role in enumerate(
         ["supplier", "manufacturer", "carrier", "warehouse", "retailer", "ngo", "agency", "transport", "depot", "clinic", "community"]
     )
+}
+
+
+DOET_TRIGGER_METHODS = {
+    Method.DOET_RULE,
+    Method.DOET_RL,
+    Method.KPI_CUSUM_TRIGGER,
+    Method.GLOBAL_ENTROPY_TRIGGER_ORACLE,
+    Method.DISRUPTION_LABEL_ORACLE,
+}
+
+DISTRIBUTED_ENTROPY_METHODS = {
+    Method.THERMO,
+    Method.ENTROPY_LLM_ONLY,
+    Method.NO_EPISODIC_MEMORY,
+    Method.SHUFFLED_ENTROPY,
+    Method.DOET_RULE,
+    Method.DOET_RL,
+}
+
+V2_COMMUNICATION_METHODS = DOET_TRIGGER_METHODS | {
+    Method.FIXED_ALWAYS_ON,
+    Method.PERIODIC_COMMUNICATION,
+    Method.RANDOM_BUDGET_MATCHED,
 }
 
 
@@ -102,6 +131,10 @@ class EpisodeRunner:
         gossip_rounds: int = 3,
         monitor_window: int = 3,
         monitor_formulation: str = "pooled",
+        trigger_config: Optional[Mapping[str, Any]] = None,
+        trigger_normalizers: Optional[Mapping[str, Mapping[str, float]]] = None,
+        periodic_interval: Optional[int] = None,
+        fixed_broadcast_fanout: int = 3,
     ) -> None:
         self.config = config
         self.method = Method(method)
@@ -110,6 +143,14 @@ class EpisodeRunner:
         self.calibration = calibration or default_calibration()
         self.deterministic_policy = deterministic_policy
         self.gossip_rounds = gossip_rounds
+        self.periodic_interval = int(
+            periodic_interval or max(config.decision_interval, 1) * 2
+        )
+        if self.periodic_interval < 1:
+            raise ValueError("periodic_interval must be positive")
+        self.fixed_broadcast_fanout = int(fixed_broadcast_fanout)
+        if self.fixed_broadcast_fanout < 1:
+            raise ValueError("fixed_broadcast_fanout must be positive")
         self.registry = ToolRegistry()
         self.env = LogisticsEnvironment(config)
         self.monitor = RollingMacrostateMonitor(
@@ -154,6 +195,44 @@ class EpisodeRunner:
         self.central_history: List[Dict[str, Any]] = []
         self.option_counts: Dict[int, int] = {index: 0 for index in range(9)}
         self.macro_features: List[List[float]] = []
+        self.trigger: Optional[DistributedEntropyTrigger] = None
+        self.latest_trigger_decisions: Dict[str, Dict[str, Any]] = {}
+        self.processed_alert_ids: set[str] = set()
+        self.trigger_alert_attempts = 0
+        self.trigger_alert_successes = 0
+        self.communication_active_decision_epochs = 0
+        self.mode_step_counts: Dict[int, int] = {
+            int(CommunicationMode.QUIET): 0,
+            int(CommunicationMode.TARGETED): 0,
+            int(CommunicationMode.CRISIS): 0,
+        }
+        self.random_active_agents: set[str] = set()
+        self.previous_distributed_entropy: Dict[str, float] = {
+            agent_id: 0.0 for agent_id in self.env.agent_ids
+        }
+        if self.method in DOET_TRIGGER_METHODS:
+            parsed = TriggerConfig.from_mapping(trigger_config)
+            normalizers: Dict[str, Mapping[str, float]] = {}
+            supplied = dict(trigger_normalizers or {})
+            application_values = dict(
+                supplied.get("applications", {}).get(
+                    self.config.application, {}
+                )
+            )
+            default_normalizer = application_values.get(
+                "default", supplied.get("default")
+            )
+            role_normalizers = dict(supplied.get("roles", {}))
+            role_normalizers.update(application_values.get("roles", {}))
+            for agent_id, agent in self.env.agents.items():
+                selected = role_normalizers.get(agent.identity.role, default_normalizer)
+                if selected is not None:
+                    normalizers[agent_id] = selected
+            self.trigger = DistributedEntropyTrigger(
+                self.env.agent_ids,
+                parsed,
+                normalizers=normalizers,
+            )
 
     def _gossip_round_edges(self) -> List[set[Tuple[str, str]]]:
         """Sample the sketch channel from its own paired RNG stream."""
@@ -171,13 +250,56 @@ class EpisodeRunner:
             )
         else:
             probability = 0.80
-        return [
-            {
-                edge for edge in base_edges
-                if self.monitor_link_rng.rand() <= probability
+        if self.trigger is None or self.method not in (
+            Method.DOET_RULE,
+            Method.DOET_RL,
+        ):
+            desired_rounds = {
+                agent_id: self.gossip_rounds for agent_id in self.env.agent_ids
             }
-            for _ in range(self.gossip_rounds)
-        ]
+            maximum_rounds = max(desired_rounds.values())
+            return [
+                {
+                    edge for edge in base_edges
+                    if self.monitor_link_rng.rand() <= probability
+                }
+                for _ in range(maximum_rounds)
+            ]
+        if self.trigger.config.disable_gossip:
+            return []
+        due_agents = {
+            agent_id for agent_id in self.env.agent_ids
+            if self.env.step_index % self.trigger.gossip_period(agent_id) == 0
+        }
+        if not due_agents:
+            return []
+        desired_rounds = {
+            agent_id: (
+                self.trigger.gossip_rounds(agent_id)
+                if agent_id in due_agents else 0
+            )
+            for agent_id in self.env.agent_ids
+        }
+        maximum_rounds = max(desired_rounds.values())
+        sampled: List[set[Tuple[str, str]]] = []
+        for round_index in range(maximum_rounds):
+            candidates = [
+                edge for edge in base_edges
+                if max(desired_rounds[edge[0]], desired_rounds[edge[1]]) > round_index
+            ]
+            if candidates:
+                offset = (self.env.step_index + round_index) % len(candidates)
+                candidates = candidates[offset:] + candidates[:offset]
+            used = set()
+            matching: set[Tuple[str, str]] = set()
+            for edge in candidates:
+                if edge[0] in used or edge[1] in used:
+                    continue
+                used.update(edge)
+                if self.monitor_link_rng.rand() <= probability:
+                    matching.add(edge)
+            sampled.append(matching)
+        return sampled
 
     def _local_interaction_entropy(self, agent_id: str) -> float:
         """Entropy of only the messages this agent sent or received."""
@@ -198,20 +320,36 @@ class EpisodeRunner:
             self.macro_features.append(features)
             states[agent_id] = self.calibration.encode(features)
         exact = self.monitor.update(states, roles)
-        sketches = {
+        local_sketches = {
             agent_id: one_hot_sketch(state, alpha=self.calibration.alpha, population_size=len(states))
             for agent_id, state in states.items()
         }
+        if self.method in (Method.DOET_RULE, Method.DOET_RL):
+            # Between sparse exchanges, every agent refreshes its own sketch
+            # locally and retains the distributed estimate from prior gossip.
+            # This is a compressed temporal consensus filter, not a free global
+            # recomputation.
+            sketches = {
+                agent_id: (
+                    0.75 * self.previous_gossip_estimates[agent_id]
+                    + 0.25 * local_sketches[agent_id]
+                )
+                for agent_id in states
+            }
+        else:
+            sketches = local_sketches
         edges_by_round = self._gossip_round_edges()
-        estimates, gossip_trace = gossip_distributions_with_trace(
-            sketches, edges_by_round
-        )
-        if self.method in (
-            Method.THERMO,
-            Method.ENTROPY_LLM_ONLY,
-            Method.NO_EPISODIC_MEMORY,
-            Method.SHUFFLED_ENTROPY,
-        ):
+        if edges_by_round:
+            estimates, gossip_trace = gossip_distributions_with_trace(
+                sketches, edges_by_round
+            )
+        else:
+            estimates = {
+                agent_id: estimate.copy()
+                for agent_id, estimate in sketches.items()
+            }
+            gossip_trace = []
+        if self.method in DISTRIBUTED_ENTROPY_METHODS:
             # Gossip uses a low-bandwidth monitoring channel separate from the
             # bounded negotiation budget, but it is not free: count every
             # directed edge-round transmission and its deterministic compact
@@ -254,6 +392,25 @@ class EpisodeRunner:
                         "neighbors": sorted(neighbors[agent_id]),
                         "distribution": np.round(
                             round_estimates[agent_id], 8
+                        ).tolist(),
+                    },
+                    private_to=agent_id,
+                )
+        if not edges_by_round and self.method in (
+            Method.DOET_RULE,
+            Method.DOET_RL,
+        ):
+            for agent_id in sorted(self.env.agent_ids):
+                self.env.ledger.append(
+                    self.env.step_index,
+                    "macrostate_sketch",
+                    agent_id,
+                    {
+                        "round": 0,
+                        "neighbors": [],
+                        "local_update_only": True,
+                        "distribution": np.round(
+                            estimates[agent_id], 8
                         ).tolist(),
                     },
                     private_to=agent_id,
@@ -314,9 +471,17 @@ class EpisodeRunner:
                 Method.LEARNED_NO_ENTROPY,
                 Method.SCRIPTED,
                 Method.RANDOM_GATE,
+                Method.FIXED_ALWAYS_ON,
+                Method.PERIODIC_COMMUNICATION,
+                Method.RANDOM_BUDGET_MATCHED,
+                Method.KPI_CUSUM_TRIGGER,
+                Method.DISRUPTION_LABEL_ORACLE,
             ):
                 agent.entropy = EntropySummary()
-            elif self.method == Method.GLOBAL_ORACLE:
+            elif self.method in (
+                Method.GLOBAL_ORACLE,
+                Method.GLOBAL_ENTROPY_TRIGGER_ORACLE,
+            ):
                 agent.entropy = EntropySummary(
                     local_entropy=float(exact["entropy"]),
                     local_free_energy=float(exact["free_energy"]),
@@ -338,6 +503,10 @@ class EpisodeRunner:
                 agent.entropy = distributed_summaries[agent_id]
             self.previous_free_energy[agent_id] = agent.entropy.local_free_energy
         self.shuffled_monitor_history = next_shuffled_history
+        trigger_metrics = self._update_coordination_triggers(
+            distributed_summaries,
+            exact,
+        )
         evaluator_sensitivity: Dict[str, float] = {}
         exact_distribution = np.asarray(exact["p"], dtype=float)
         for name, weights in ENERGY_WEIGHT_SENSITIVITY.items():
@@ -374,7 +543,175 @@ class EpisodeRunner:
             "max_surprisal_agent": surprisal_ranking[0],
             "surprisal_ranked_agents": ";".join(surprisal_ranking),
             "max_surprisal": float(max(exact["surprisal"].values())),
+            **trigger_metrics,
             **evaluator_sensitivity,
+        }
+
+    def _prepare_step_modes(self) -> None:
+        """Sample paired random-baseline activation once per simulator step."""
+
+        self.random_active_agents = set()
+        if (
+            self.method == Method.RANDOM_BUDGET_MATCHED
+            and self.env.step_index % max(1, self.config.decision_interval) == 0
+        ):
+            for agent_id, agent in self.env.agents.items():
+                if agent.rng.rand() < self.config.random_gate_probability:
+                    self.random_active_agents.add(agent_id)
+
+    def _communication_mode(self, agent_id: str) -> CommunicationMode:
+        if self.trigger is not None:
+            return self.trigger.mode(agent_id)
+        if self.method == Method.FIXED_ALWAYS_ON:
+            return CommunicationMode.CRISIS
+        if self.method == Method.PERIODIC_COMMUNICATION:
+            return (
+                CommunicationMode.CRISIS
+                if self.env.step_index % self.periodic_interval == 0
+                else CommunicationMode.QUIET
+            )
+        if self.method == Method.RANDOM_BUDGET_MATCHED:
+            return (
+                CommunicationMode.CRISIS
+                if agent_id in self.random_active_agents
+                else CommunicationMode.QUIET
+            )
+        return CommunicationMode.QUIET
+
+    def _new_delivered_alerts(self, agent_id: str) -> int:
+        count = 0
+        for message in self.env.agents[agent_id].inbox:
+            if (
+                message.kind == "entropy_alert"
+                and message.message_id not in self.processed_alert_ids
+            ):
+                self.processed_alert_ids.add(message.message_id)
+                count += 1
+        return count
+
+    def _alert_neighbors(self, agent_id: str) -> List[str]:
+        if self.trigger is None:
+            return []
+        guidance = self._material_action_guidance(agent_id)
+        direct = list(guidance["direct_message_ids"])
+        material = set(guidance["known_outbound_material_ids"]) | set(
+            guidance["known_inbound_material_ids"]
+        )
+        agent = self.env.agents[agent_id]
+        ranked = sorted(
+            direct,
+            key=lambda target: (
+                target not in material,
+                -float(agent.partner_trust.get(target, 0.5)),
+                target,
+            ),
+        )
+        return ranked[: self.trigger.config.max_alert_neighbors]
+
+    def _update_coordination_triggers(
+        self,
+        distributed: Mapping[str, EntropySummary],
+        exact: Mapping[str, Any],
+    ) -> Dict[str, Any]:
+        """Update local trigger state and emit only explicit bounded alerts."""
+
+        activated: List[str] = []
+        if self.trigger is not None:
+            for agent_id in sorted(self.env.agent_ids):
+                observation = self.env.agents[agent_id].vault.observation(agent_id)
+                local_summary = distributed[agent_id]
+                if self.method in (Method.DOET_RULE, Method.DOET_RL):
+                    signal = float(local_summary.local_entropy)
+                    surprisal = float(local_summary.local_surprisal)
+                    disagreement = float(local_summary.consensus_error)
+                    signal_source = "distributed_operational_entropy"
+                elif self.method == Method.KPI_CUSUM_TRIGGER:
+                    pressure, impairment, strain = observation.macro_features()
+                    signal = float(max(pressure, impairment, strain))
+                    surprisal = 0.0
+                    disagreement = 0.0
+                    signal_source = "private_local_kpi_composite"
+                elif self.method == Method.GLOBAL_ENTROPY_TRIGGER_ORACLE:
+                    signal = float(exact["entropy"])
+                    surprisal = float(exact["surprisal"][agent_id])
+                    disagreement = 0.0
+                    signal_source = "evaluator_global_entropy_oracle"
+                else:
+                    signal = float(self.env._disruption_applied)
+                    surprisal = 0.0
+                    disagreement = 0.0
+                    signal_source = "evaluator_disruption_label_oracle"
+                delivered_alerts = (
+                    self._new_delivered_alerts(agent_id)
+                    if self.trigger.config.propagation == "neighbor"
+                    else 0
+                )
+                decision = self.trigger.update(
+                    agent_id=agent_id,
+                    step=self.env.step_index,
+                    entropy=signal,
+                    local_surprisal=surprisal,
+                    consensus_disagreement=disagreement,
+                    communication_availability=float(
+                        observation.communication_reliability
+                    ),
+                    delivered_alerts=delivered_alerts,
+                )
+                row = {"signal_source": signal_source, "signal": signal, **decision.as_dict()}
+                self.latest_trigger_decisions[agent_id] = row
+                self.env.ledger.append(
+                    self.env.step_index,
+                    "coordination_trigger",
+                    agent_id,
+                    row,
+                    private_to=agent_id,
+                )
+                if decision.activated:
+                    activated.append(agent_id)
+
+            if self.trigger.config.propagation == "neighbor":
+                for agent_id in activated:
+                    mode = int(self.trigger.mode(agent_id))
+                    level = "severe" if mode == int(CommunicationMode.CRISIS) else "elevated"
+                    for recipient in self._alert_neighbors(agent_id):
+                        self.trigger_alert_attempts += 1
+                        result = self.env.send_entropy_alert(
+                            agent_id, recipient, mode, level
+                        )
+                        self.trigger_alert_successes += int(result.ok)
+                        self.env.ledger.append(
+                            self.env.step_index,
+                            "trigger_alert_result",
+                            agent_id,
+                            {
+                                "recipient": recipient,
+                                "mode": mode,
+                                **result.as_dict(),
+                            },
+                            private_to=agent_id,
+                        )
+
+        modes = [
+            int(self._communication_mode(agent_id))
+            for agent_id in self.env.agent_ids
+        ]
+        for mode in modes:
+            self.mode_step_counts[mode] += 1
+        statistics = (
+            [state.cumulative_statistic for state in self.trigger.states.values()]
+            if self.trigger is not None else [0.0]
+        )
+        activations = (
+            sum(state.activation_count for state in self.trigger.states.values())
+            if self.trigger is not None else 0
+        )
+        return {
+            "trigger_active_agents": sum(mode > 0 for mode in modes),
+            "trigger_crisis_agents": sum(mode == int(CommunicationMode.CRISIS) for mode in modes),
+            "mean_trigger_statistic": float(np.mean(statistics)),
+            "cumulative_trigger_activations": int(activations),
+            "trigger_alert_attempts": self.trigger_alert_attempts,
+            "trigger_alert_successes": self.trigger_alert_successes,
         }
 
     def _heuristic_option(self, agent_id: str) -> int:
@@ -394,12 +731,12 @@ class EpisodeRunner:
         ]
         if pending:
             return int(CoordinationOption.RESPOND_OFFER)
-        if unresolved_coalitions:
-            return int(CoordinationOption.PROPOSE_COALITION)
         if accepted_to_honor:
             if not agent.last_tool_ok and agent.communication_budget > 0:
                 return int(CoordinationOption.PROPOSE_COALITION)
             return int(CoordinationOption.CONTINUE)
+        if unresolved_coalitions:
+            return int(CoordinationOption.PROPOSE_COALITION)
         own_pending = [
             commitment for commitment in agent.commitments.values()
             if commitment.status == "proposed"
@@ -462,9 +799,121 @@ class EpisodeRunner:
                 CoordinationOption.PROPOSE_COALITION,
             ):
                 mask[int(option)] = False
+        if self.method in DOET_TRIGGER_METHODS:
+            mode = self._communication_mode(agent_id)
+            if mode == CommunicationMode.QUIET:
+                for option in (
+                    CoordinationOption.REQUEST_INFO,
+                    CoordinationOption.DISCLOSE_SUMMARY,
+                    CoordinationOption.NEGOTIATE,
+                ):
+                    mask[int(option)] = False
+                mask[int(CoordinationOption.PROPOSE_COALITION)] = delivered_coalition
+            elif mode == CommunicationMode.TARGETED:
+                # Bilateral information and negotiation are available, while
+                # multi-party coalition formation remains a crisis privilege.
+                mask[int(CoordinationOption.PROPOSE_COALITION)] = delivered_coalition
         mask[int(CoordinationOption.CONTINUE)] = True
         mask[int(CoordinationOption.SILENT)] = True
         return mask
+
+    def _intensive_option(self, agent_id: str) -> int:
+        """Communication-rich rule used by strong always-on controls."""
+
+        heuristic = self._heuristic_option(agent_id)
+        agent = self.env.agents[agent_id]
+        has_execution_obligation = any(
+            commitment.status in ("accepted", "breached", "proposed")
+            and (commitment.resource_owner or commitment.proposer) == agent_id
+            for commitment in agent.commitments.values()
+        )
+        if has_execution_obligation:
+            return heuristic
+        if heuristic not in (
+            int(CoordinationOption.CONTINUE),
+            int(CoordinationOption.SILENT),
+        ):
+            return heuristic
+        observation = agent.vault.observation(agent_id)
+        guidance = self._material_action_guidance(agent_id)
+        epoch = self.env.step_index // max(1, self.config.decision_interval)
+        if (
+            agent.identity.role in SOURCE_ROLES
+            and observation.inventory > 0
+            and guidance["eligible_offer_target_ids"]
+        ):
+            return int(
+                CoordinationOption.NEGOTIATE
+                if epoch % 2 == 0 else CoordinationOption.DISCLOSE_SUMMARY
+            )
+        if agent.identity.role in DEMAND_ROLES:
+            return int(
+                CoordinationOption.REQUEST_INFO
+                if epoch % 2 == 0 else CoordinationOption.DISCLOSE_SUMMARY
+            )
+        if guidance["direct_message_ids"]:
+            return int(
+                CoordinationOption.DISCLOSE_SUMMARY
+                if epoch % 2 == 0 else CoordinationOption.REQUEST_INFO
+            )
+        return int(CoordinationOption.CONTINUE)
+
+    def _material_action_guidance(self, agent_id: str) -> Dict[str, Any]:
+        """Return auditable route affordances from locally legal information.
+
+        Physical and communication topology is public infrastructure.  Closed
+        routes remain in the initially advertised physical set so an unseen
+        disruption can still produce a failed tool result and genuine
+        replanning.  Temporary coalition reachability is added only when the
+        agent's own ledger or delivered messages reveal the partner.
+        """
+
+        active_edges = self.env.active_communication_edges()
+        direct = sorted({
+            right if left == agent_id else left
+            for left, right in active_edges
+            if agent_id in (left, right)
+        })
+        outbound = {
+            target for source, target in self.env.initial_physical_edges
+            if source == agent_id
+        }
+        inbound = {
+            source for source, target in self.env.initial_physical_edges
+            if target == agent_id
+        }
+        agent = self.env.agents[agent_id]
+        active_coalitions = {
+            coalition_id
+            for coalition_id, state in agent.coalition_ledger.items()
+            if state.get("status") == "member"
+            and int(state.get("expires_step", -1)) >= self.env.step_index
+        }
+        coalition_partners = set()
+        for coalition_id in active_coalitions:
+            state = agent.coalition_ledger[coalition_id]
+            proposer = str(state.get("proposer", ""))
+            if proposer and proposer != agent_id:
+                coalition_partners.add(proposer)
+        for message in agent.inbox:
+            coalition_id = str(message.payload.get("coalition_id", ""))
+            if coalition_id not in active_coalitions:
+                continue
+            if message.kind in ("coalition_joined", "coalition_proposal"):
+                coalition_partners.add(message.sender)
+        outbound.update(coalition_partners)
+        direct_set = set(direct)
+        return {
+            "information_boundary": (
+                "public initial routes, locally active communication links, "
+                "and own delivered coalition state"
+            ),
+            "direct_message_ids": direct,
+            "known_outbound_material_ids": sorted(outbound),
+            "known_inbound_material_ids": sorted(inbound),
+            "eligible_quote_source_ids": sorted(inbound & direct_set),
+            "eligible_offer_target_ids": sorted(outbound & direct_set),
+        }
 
     def _option(self, agent_id: str) -> Tuple[int, float, float, np.ndarray, np.ndarray]:
         agent = self.env.agents[agent_id]
@@ -476,6 +925,11 @@ class EpisodeRunner:
             Method.FIXED_COMM,
             Method.SCRIPTED,
             Method.RANDOM_GATE,
+            Method.FIXED_ALWAYS_ON,
+            Method.PERIODIC_COMMUNICATION,
+            Method.RANDOM_BUDGET_MATCHED,
+            Method.KPI_CUSUM_TRIGGER,
+            Method.DISRUPTION_LABEL_ORACLE,
         )
         observation = agent.observation_vector(ROLE_INDEX[agent.identity.role], include_entropy=include_entropy)
         action_mask = self._local_option_mask(agent_id)
@@ -485,6 +939,7 @@ class EpisodeRunner:
             Method.NO_EPISODIC_MEMORY,
             Method.GLOBAL_ORACLE,
             Method.SHUFFLED_ENTROPY,
+            Method.DOET_RL,
         ):
             if self.policy is None:
                 raise ValueError("learned method requires a coordination policy")
@@ -497,6 +952,12 @@ class EpisodeRunner:
         elif self.method == Method.FIXED_COMM:
             epoch = self.env.step_index // max(1, self.config.decision_interval)
             action = int(CoordinationOption.DISCLOSE_SUMMARY if epoch % 2 == 0 else CoordinationOption.CONTINUE)
+        elif self.method in (
+            Method.FIXED_ALWAYS_ON,
+            Method.PERIODIC_COMMUNICATION,
+            Method.RANDOM_BUDGET_MATCHED,
+        ):
+            action = self._intensive_option(agent_id)
         elif self.method == Method.RANDOM_GATE:
             pending = any(
                 commitment.status == "proposed" and commitment.partner == agent_id
@@ -526,6 +987,8 @@ class EpisodeRunner:
                 ]))
             else:
                 action = int(CoordinationOption.SILENT)
+        elif self.method in DOET_TRIGGER_METHODS:
+            action = self._heuristic_option(agent_id)
         else:
             action = self._heuristic_option(agent_id)
         if not action_mask[action]:
@@ -806,6 +1269,37 @@ class EpisodeRunner:
             else:
                 self.successful_tool_proposals += 1
 
+    def _fixed_status_broadcast(self, agent_id: str) -> None:
+        """Run the declared coarse always-on communication protocol."""
+
+        observation = self.env.agents[agent_id].vault.observation(agent_id)
+        pressure_value = max(
+            observation.backlog / max(observation.local_forecast, 1.0),
+            observation.service_shortfall,
+        )
+        pressure = (
+            "high" if pressure_value > 0.55
+            else "nominal" if pressure_value > 0.20 else "low"
+        )
+        capacity = (
+            "high_impairment" if observation.impairment > 0.50
+            else "impaired" if observation.impairment > 0.15 else "available"
+        )
+        strain = (
+            "high" if observation.commitment_strain > 0.55
+            else "nominal" if observation.commitment_strain > 0.20 else "low"
+        )
+        for recipient in self._material_action_guidance(agent_id)[
+            "direct_message_ids"
+        ][: self.fixed_broadcast_fanout]:
+            self.env.send_fixed_status_summary(
+                agent_id,
+                recipient,
+                pressure,
+                capacity,
+                strain,
+            )
+
     def _decision_epoch(self, agent_ids: Optional[Sequence[str]] = None) -> None:
         if self.method == Method.CENTRALIZED:
             self._centralized_actions()
@@ -829,6 +1323,15 @@ class EpisodeRunner:
         selected = list(agent_ids) if agent_ids is not None else list(self.env.agent_ids)
         for agent_id in selected:
             agent = self.env.agents[agent_id]
+            if (
+                self.method in (
+                    Method.FIXED_ALWAYS_ON,
+                    Method.PERIODIC_COMMUNICATION,
+                    Method.RANDOM_BUDGET_MATCHED,
+                )
+                and self._communication_mode(agent_id) > CommunicationMode.QUIET
+            ):
+                self._fixed_status_broadcast(agent_id)
             option, logp, value, observation, action_mask = self._option(agent_id)
             self.option_counts[option] += 1
             context = agent.retrieve_context(
@@ -836,10 +1339,30 @@ class EpisodeRunner:
                 self.env.ledger,
                 include_episodic_memory=self.method != Method.NO_EPISODIC_MEMORY,
             )
+            context["material_action_guidance"] = self._material_action_guidance(
+                agent_id
+            )
+            mode = int(self._communication_mode(agent_id))
+            context["communication_mode"] = {
+                "value": mode,
+                "name": CommunicationMode(mode).name.lower(),
+            }
+            context["trigger_state"] = self.latest_trigger_decisions.get(agent_id)
+            self.communication_active_decision_epochs += int(mode > 0)
             request = PlannerRequest(agent_id, agent.identity.role, self.config.application, option, context, identities)
             requests.append(request)
             metadata.append((agent_id, option, logp, value, observation, action_mask))
-            self.env.ledger.append(self.env.step_index, "llm_request", agent_id, {"option": option, "planner_revision": getattr(self.planner, "revision", "unknown")}, private_to=agent_id)
+            self.env.ledger.append(
+                self.env.step_index,
+                "llm_request",
+                agent_id,
+                {
+                    "option": option,
+                    "communication_mode": mode,
+                    "planner_revision": getattr(self.planner, "revision", "unknown"),
+                },
+                private_to=agent_id,
+            )
         responses: List[PlannerResponse] = self.planner.plan_batch(requests)
         if len(responses) != len(requests):
             raise RuntimeError("planner batch response count mismatch")
@@ -966,6 +1489,40 @@ class EpisodeRunner:
             "mean_time_to_agreement": float(np.mean(agreement_delays)) if agreement_delays else None,
         }
 
+    def _scheduled_agent_ids(self, step: int) -> List[str]:
+        """Select locally scheduled planners without using a true disruption label."""
+
+        if self.method == Method.CENTRALIZED:
+            return list(self.env.agent_ids)
+        if self.method == Method.FIXED_ALWAYS_ON:
+            return (
+                list(self.env.agent_ids)
+                if step % max(1, self.config.decision_interval) == 0 else []
+            )
+        if self.method == Method.PERIODIC_COMMUNICATION:
+            return (
+                list(self.env.agent_ids)
+                if step % self.periodic_interval == 0 else []
+            )
+        if self.method == Method.RANDOM_BUDGET_MATCHED:
+            return sorted(self.random_active_agents)
+        if self.method in DOET_TRIGGER_METHODS:
+            selected = []
+            for agent_id in self.env.agent_ids:
+                interval = self.trigger.decision_interval(agent_id) if self.trigger else self.config.decision_interval
+                transition = self.latest_trigger_decisions.get(agent_id, {})
+                activated_now = bool(
+                    transition.get("activated")
+                    and int(transition.get("step", -1)) == step
+                )
+                if step % max(1, interval) == 0 or activated_now:
+                    selected.append(agent_id)
+            return selected
+        return (
+            list(self.env.agent_ids)
+            if step % max(1, self.config.decision_interval) == 0 else []
+        )
+
     def run(self, run_id: Optional[str] = None) -> EpisodeResult:
         started = time.perf_counter()
         run_id = run_id or "%s-%s-s%03d" % (self.config.application, self.method.value, self.config.seed)
@@ -979,6 +1536,7 @@ class EpisodeRunner:
                 new_events = self.env.ledger.events[event_cursor:]
                 event_cursor = len(self.env.ledger.events)
                 self.env.deliver_observations()
+                self._prepare_step_modes()
                 monitor = self._update_monitor()
                 metrics = self.env.public_metrics()
                 row = {**metrics, **monitor, "disruption_active": self.env._disruption_applied}
@@ -990,30 +1548,28 @@ class EpisodeRunner:
                 disruption_trigger = (
                     self.env._disruption_applied
                     and step == max(2, self.config.horizon // 3)
+                    and self.method not in V2_COMMUNICATION_METHODS
                 )
                 # The full-information controller is explicitly an oracle-like
                 # upper bound and replans every period. All deployable methods
                 # retain the same periodic/event-triggered schedule.
-                scheduled = (
-                    self.method == Method.CENTRALIZED
-                    or step % self.config.decision_interval == 0
-                )
-                if scheduled or disruption_trigger:
-                    self._decision_epoch()
-                else:
-                    triggered_agents = set(requested_replans)
-                    for event in new_events:
-                        if event.kind != "message_delivery":
-                            continue
-                        if event.payload.get("kind") in (
-                            "offer", "counteroffer", "offer_accepted",
-                            "offer_rejected", "coalition_proposal",
-                            "coalition_joined", "coalition_refused",
-                            "commitment_breach", "late_delivery",
-                        ):
-                            triggered_agents.add(str(event.payload["recipient"]))
-                    if triggered_agents:
-                        self._decision_epoch(sorted(triggered_agents))
+                scheduled_agents = self._scheduled_agent_ids(step)
+                if disruption_trigger:
+                    scheduled_agents = list(self.env.agent_ids)
+                triggered_agents = set(requested_replans)
+                for event in new_events:
+                    if event.kind != "message_delivery":
+                        continue
+                    if event.payload.get("kind") in (
+                        "offer", "counteroffer", "offer_accepted",
+                        "offer_rejected", "coalition_proposal",
+                        "coalition_joined", "coalition_refused",
+                        "commitment_breach", "late_delivery",
+                    ):
+                        triggered_agents.add(str(event.payload["recipient"]))
+                selected_agents = sorted(set(scheduled_agents) | triggered_agents)
+                if selected_agents:
+                    self._decision_epoch(selected_agents)
                 requested_replans = {
                     agent_id for agent_id, agent in self.env.agents.items()
                     if not agent.last_tool_ok
@@ -1047,6 +1603,7 @@ class EpisodeRunner:
         recovered = [row["step"] for row in time_series if row["step"] > disruption_step and row["service_loss"] < 0.2]
         recovery_time = float(recovered[0] - disruption_step) if recovered else float(self.config.horizon - disruption_step)
         final = time_series[-1]
+        total_agent_steps = max(1, self.config.horizon * len(self.env.agent_ids))
         evaluator_agent_metrics = self._agent_evaluator_metrics()
         coalition_proposal_steps = [
             event.step for event in self.env.ledger.events
@@ -1094,6 +1651,16 @@ class EpisodeRunner:
             "total_communication_bytes": (
                 final["message_bytes"] + self.monitor_sketch_bytes
             ),
+            "communication_active_decision_epochs": self.communication_active_decision_epochs,
+            "quiet_mode_fraction": self.mode_step_counts[int(CommunicationMode.QUIET)] / total_agent_steps,
+            "targeted_mode_fraction": self.mode_step_counts[int(CommunicationMode.TARGETED)] / total_agent_steps,
+            "crisis_mode_fraction": self.mode_step_counts[int(CommunicationMode.CRISIS)] / total_agent_steps,
+            "trigger_activations": (
+                sum(state.activation_count for state in self.trigger.states.values())
+                if self.trigger is not None else 0
+            ),
+            "trigger_alert_attempts": self.trigger_alert_attempts,
+            "trigger_alert_successes": self.trigger_alert_successes,
             "information_disclosures": final["information_disclosures"],
             "tool_calls": final["tool_calls"],
             "coalitions": final["coalitions"],

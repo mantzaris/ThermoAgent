@@ -22,6 +22,8 @@ EVENT_KINDS = {
     "message_delivery",
     "public_signal",
     "macrostate_sketch",
+    "coordination_trigger",
+    "trigger_alert_result",
     "offer",
     "counteroffer",
     "commitment",

@@ -41,6 +41,23 @@ MODEL_REQUIRED_METHODS = {
     Method.NO_EPISODIC_MEMORY.value,
     Method.GLOBAL_ORACLE.value,
     Method.SHUFFLED_ENTROPY.value,
+    Method.FIXED_ALWAYS_ON.value,
+    Method.PERIODIC_COMMUNICATION.value,
+    Method.RANDOM_BUDGET_MATCHED.value,
+    Method.KPI_CUSUM_TRIGGER.value,
+    Method.DOET_RULE.value,
+    Method.DOET_RL.value,
+    Method.GLOBAL_ENTROPY_TRIGGER_ORACLE.value,
+    Method.DISRUPTION_LABEL_ORACLE.value,
+}
+
+LEARNED_METHODS = {
+    Method.LEARNED_NO_ENTROPY.value,
+    Method.THERMO.value,
+    Method.NO_EPISODIC_MEMORY.value,
+    Method.GLOBAL_ORACLE.value,
+    Method.SHUFFLED_ENTROPY.value,
+    Method.DOET_RL.value,
 }
 
 
@@ -53,6 +70,33 @@ def load_yaml(path: Path) -> Dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError("configuration must contain a mapping")
     return value
+
+
+def _resolved_trigger_settings(
+    config: Mapping[str, Any],
+    scenario_values: Mapping[str, Any],
+    root: Path,
+) -> Dict[str, Any]:
+    base = dict(config.get("trigger", {}))
+    override = dict(scenario_values.get("trigger", {}))
+    parameters = dict(base.get("parameters", {}))
+    parameters.update(override.get("parameters", {}))
+    settings = {**base, **override, "parameters": parameters}
+    normalizers = settings.get("normalizers")
+    normalizers_path = settings.get("normalizers_path")
+    if normalizers is None and normalizers_path:
+        path = Path(str(normalizers_path))
+        if not path.is_absolute():
+            path = root / path
+        record = load_yaml(path)
+        key = str(settings.get("normalizers_key", "normalizers"))
+        if key not in record:
+            raise ValueError(
+                "trigger calibration %s has no %s field" % (path, key)
+            )
+        normalizers = record[key]
+    settings["normalizers"] = normalizers
+    return settings
 
 
 @lru_cache(maxsize=8)
@@ -191,6 +235,7 @@ def git_provenance(root: Path) -> Dict[str, Any]:
 
 def expand_matrix(config: Mapping[str, Any]) -> List[Tuple[str, int, int, str, Dict[str, Any]]]:
     matrix: List[Tuple[str, int, int, str, Dict[str, Any]]] = []
+    balanced_counters: Dict[Tuple[str, str], int] = {}
     applications = config["applications"]
     for app_name, app_values in applications.items():
         sizes = app_values["agent_counts"] if "agent_counts" in app_values else [app_values["n_agents"]]
@@ -204,8 +249,43 @@ def expand_matrix(config: Mapping[str, Any]) -> List[Tuple[str, int, int, str, D
                     continue
                 scenario_methods = scenario.get("methods", config["methods"])
                 for method in scenario_methods:
-                    for seed in config["seeds"]:
-                        matrix.append((app_name, int(n_agents), int(seed), str(method), {"name": scenario_name, **scenario}))
+                    method_variants = config.get("method_variants", {}).get(
+                        str(method), [{"name": "base"}]
+                    )
+                    rl_seeds = (
+                        config.get("rl_seeds", [config.get("rl_seed", 0)])
+                        if str(method) in LEARNED_METHODS else [0]
+                    )
+                    for variant in method_variants:
+                        variant_name = str(variant.get("name", "base"))
+                        for seed in scenario.get("seeds", config["seeds"]):
+                            panel_rl_seeds = list(rl_seeds)
+                            if (
+                                str(method) in LEARNED_METHODS
+                                and bool(config.get("balanced_rl_assignment", False))
+                            ):
+                                counter_key = (str(method), variant_name)
+                                index = balanced_counters.get(counter_key, 0)
+                                balanced_counters[counter_key] = index + 1
+                                index %= len(panel_rl_seeds)
+                                panel_rl_seeds = [panel_rl_seeds[index]]
+                            for rl_seed in panel_rl_seeds:
+                                matrix.append((
+                                    app_name,
+                                    int(n_agents),
+                                    int(seed),
+                                    str(method),
+                                    {
+                                        "name": scenario_name,
+                                        "_rl_seed": int(rl_seed),
+                                        "_method_variant": variant_name,
+                                        **scenario,
+                                        **{
+                                            key: value for key, value in variant.items()
+                                            if key != "name"
+                                        },
+                                    },
+                                ))
     return matrix
 
 
@@ -213,28 +293,56 @@ def _policy_for_method(
     method: str,
     checkpoints: Mapping[str, str],
     cache: Optional[Dict[str, CoordinationPolicy]] = None,
+    rl_seed: int = 0,
 ) -> Optional[CoordinationPolicy]:
-    if method not in (
-        Method.LEARNED_NO_ENTROPY.value,
-        Method.THERMO.value,
-        Method.NO_EPISODIC_MEMORY.value,
-        Method.GLOBAL_ORACLE.value,
-        Method.SHUFFLED_ENTROPY.value,
-    ):
+    if method not in LEARNED_METHODS:
         return None
-    key = "no_entropy" if method == Method.LEARNED_NO_ENTROPY.value else "thermo"
+    if method == Method.LEARNED_NO_ENTROPY.value:
+        key = "no_entropy"
+    elif method == Method.DOET_RL.value:
+        key = "doet_rl"
+    else:
+        key = "thermo"
     if key not in checkpoints:
         raise ValueError("method %s requires checkpoints.%s" % (method, key))
-    if cache is not None and key in cache:
-        return cache[key]
-    policy = CoordinationPolicy.load(Path(checkpoints[key]))
+    configured = checkpoints[key]
+    if isinstance(configured, Mapping):
+        seed_key = str(int(rl_seed))
+        if seed_key not in configured and int(rl_seed) not in configured:
+            raise ValueError(
+                "method %s has no checkpoint for RL seed %s" % (method, rl_seed)
+            )
+        configured = configured.get(seed_key, configured.get(int(rl_seed)))
+    cache_key = "%s:%s:%s" % (key, rl_seed, configured)
+    if cache is not None and cache_key in cache:
+        return cache[cache_key]
+    policy = CoordinationPolicy.load(Path(str(configured)))
     if cache is not None:
-        cache[key] = policy
+        cache[cache_key] = policy
     return policy
 
 
 def _planner_for_method(method: str, shared_planner: Optional[Any]) -> Any:
     return shared_planner if method in MODEL_REQUIRED_METHODS and shared_planner is not None else MockPlanner()
+
+
+def _checkpoint_for_method(
+    method: str,
+    checkpoints: Mapping[str, Any],
+    rl_seed: int,
+) -> Optional[str]:
+    if method not in LEARNED_METHODS:
+        return None
+    if method == Method.LEARNED_NO_ENTROPY.value:
+        key = "no_entropy"
+    elif method == Method.DOET_RL.value:
+        key = "doet_rl"
+    else:
+        key = "thermo"
+    configured = checkpoints.get(key)
+    if isinstance(configured, Mapping):
+        configured = configured.get(str(int(rl_seed)), configured.get(int(rl_seed)))
+    return str(configured) if configured is not None else None
 
 
 def _recover_published_staging(
@@ -272,20 +380,14 @@ def _episode_manifest(
     started_at: str,
     ended_at: str,
     topology_checksum: Optional[str] = None,
+    rl_seed: int = 0,
 ) -> Dict[str, Any]:
     model = dict(config.get("model", {}))
     uses_model = result.method in MODEL_REQUIRED_METHODS
-    checkpoint: Optional[str] = None
     configured_checkpoints = dict(config.get("checkpoints", {}))
-    if result.method == Method.LEARNED_NO_ENTROPY.value:
-        checkpoint = configured_checkpoints.get("no_entropy")
-    elif result.method in (
-        Method.THERMO.value,
-        Method.NO_EPISODIC_MEMORY.value,
-        Method.GLOBAL_ORACLE.value,
-        Method.SHUFFLED_ENTROPY.value,
-    ):
-        checkpoint = configured_checkpoints.get("thermo")
+    checkpoint = _checkpoint_for_method(
+        result.method, configured_checkpoints, rl_seed
+    )
     return {
         "run_id": result.run_id,
         "source": {
@@ -323,7 +425,7 @@ def _episode_manifest(
         },
         "agent_rng_rule": "environment_seed * 100 + stable agent index",
         "llm_seed": int(config.get("llm_seed", 0)),
-        "rl_seed": int(config.get("rl_seed", 0)),
+        "rl_seed": int(rl_seed),
         "topology_identifier": scenario.topology,
         "topology_checksum": topology_checksum or hashlib.sha256((scenario.topology + ":" + str(scenario.n_agents)).encode()).hexdigest(),
         "dependencies": dependency_versions(),
@@ -331,12 +433,37 @@ def _episode_manifest(
         "start_timestamp": started_at,
         "end_timestamp": ended_at,
         "wall_clock_seconds": result.wall_clock_seconds,
+        "single_gpu_hours": (
+            result.wall_clock_seconds / 3600.0
+            if uses_model and result.planner_metrics["llm_calls"] > 0 else 0.0
+        ),
+        "approximate_gpu_cost_usd": (
+            result.wall_clock_seconds / 3600.0
+            * float(config.get("hourly_gpu_rate_usd", 0.34))
+            if uses_model and result.planner_metrics["llm_calls"] > 0 else 0.0
+        ),
         "environment_steps": scenario.horizon,
         "llm_calls": result.planner_metrics["llm_calls"],
         "prompt_tokens": result.planner_metrics["prompt_tokens"],
         "generated_tokens": result.planner_metrics["generated_tokens"],
         "tool_calls": result.metrics["tool_calls"],
-        "messages": result.metrics["messages"],
+        "messages": result.metrics["total_communication_messages"],
+        "operational_messages": result.metrics["messages"],
+        "entropy_sketch_messages": result.metrics["monitor_sketch_messages"],
+        "structured_bytes": result.metrics["total_communication_bytes"],
+        "operational_message_bytes": result.metrics["message_bytes"],
+        "entropy_sketch_bytes": result.metrics["monitor_sketch_bytes"],
+        "communication_active_decision_epochs": result.metrics.get(
+            "communication_active_decision_epochs", 0
+        ),
+        "trigger_type": config.get("resolved_trigger", {}).get(
+            "parameters", {}
+        ).get("trigger_type"),
+        "trigger_parameters": config.get("resolved_trigger", {}).get(
+            "parameters"
+        ),
+        "communication_mode": result.method,
+        "protocol_checksum": config.get("protocol_checksum"),
         "checkpoint_selection": checkpoint,
         "checkpoint_sha256": (
             sha256_file(Path(checkpoint))
@@ -351,6 +478,13 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
     sweep_started_at = utc_now()
     sweep_started = time.perf_counter()
     config = load_yaml(config_path)
+    freeze_value = config.get("protocol_freeze_path")
+    if freeze_value:
+        freeze_path = Path(str(freeze_value))
+        if not freeze_path.is_absolute():
+            freeze_path = root / freeze_path
+        verify_protocol(root, freeze_path)
+        config["protocol_checksum"] = sha256_file(freeze_path)
     stage = str(config["stage"])
     calibration_path = Path(config["calibration"]) if config.get("calibration") else None
     calibration = calibration_from_json(calibration_path)
@@ -389,9 +523,15 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
     manifest_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
     for index, (application, n_agents, seed, method, scenario_values) in enumerate(matrix):
+        rl_seed = int(scenario_values.get("_rl_seed", config.get("rl_seed", 0)))
         run_id = "%s-%s-%s-n%02d-s%03d" % (stage, application, method, n_agents, seed)
         if len(config["scenarios"]) > 1:
             run_id = "%s-%s" % (run_id, scenario_values["name"])
+        if method in LEARNED_METHODS:
+            run_id = "%s-r%04d" % (run_id, rl_seed)
+        method_variant = str(scenario_values.get("_method_variant", "base"))
+        if method_variant != "base":
+            run_id = "%s-v%s" % (run_id, method_variant)
         output_dir = raw_root / run_id
         episode_path = output_dir / "episode.json"
         existing_manifest_path = manifest_root / (run_id + ".json")
@@ -409,8 +549,10 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                     "run_id": run_id,
                     "application": application,
                     "method": method,
+                    "method_variant": method_variant,
                     "scenario_name": scenario_values["name"],
                     "seed": seed,
+                    "rl_training_seed": rl_seed,
                     "n_agents": n_agents,
                     "status": "failed",
                     "error": existing_manifest.get("error", "recorded failure"),
@@ -423,8 +565,10 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                     "run_id": run_id,
                     "application": application,
                     "method": method,
+                    "method_variant": method_variant,
                     "scenario_name": scenario_values["name"],
                     "seed": seed,
+                    "rl_training_seed": rl_seed,
                     "n_agents": n_agents,
                     "status": "failed",
                     "error": "complete manifest lacks one checksum-matching staged output; retained without rerun",
@@ -443,8 +587,10 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                     "run_id": run_id,
                     "application": application,
                     "method": method,
+                    "method_variant": method_variant,
                     "scenario_name": scenario_values["name"],
                     "seed": seed,
+                    "rl_training_seed": rl_seed,
                     "n_agents": n_agents,
                     "status": "failed",
                     "error": "complete episode lacks its required manifest; retained without rerun",
@@ -457,9 +603,11 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                     "run_id": run_id,
                     "application": application,
                     "method": method,
+                    "method_variant": method_variant,
                     "scenario": existing["scenario"],
                     "scenario_name": scenario_values["name"],
                     "seed": seed,
+                    "rl_training_seed": rl_seed,
                     "n_agents": n_agents,
                     **existing["metrics"],
                     **existing.get("agent_metrics", {}),
@@ -484,13 +632,32 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
             random_gate_probability=float(scenario_values.get("random_gate_probability", config.get("random_gate_probability", 0.5))),
             topology=str(scenario_values.get("topology", "ring_plus_hubs")),
         )
-        policy = _policy_for_method(method, checkpoints, policy_cache)
+        policy = _policy_for_method(
+            method, checkpoints, policy_cache, rl_seed=rl_seed
+        )
         episode_planner = _planner_for_method(method, planner)
+        trigger_settings = _resolved_trigger_settings(
+            config, scenario_values, root
+        )
+        run_config = {
+            **config,
+            "resolved_scenario_name": scenario_values["name"],
+            "resolved_trigger": trigger_settings,
+            "resolved_rl_seed": rl_seed,
+        }
         runner = EpisodeRunner(
             scenario, method, planner=episode_planner, policy=policy,
             calibration=calibration,
             monitor_window=int(monitor_settings["window"]),
             monitor_formulation=str(monitor_settings["formulation"]),
+            trigger_config=dict(trigger_settings.get("parameters", {})) or None,
+            trigger_normalizers=trigger_settings.get("normalizers"),
+            periodic_interval=scenario_values.get(
+                "periodic_interval", config.get("periodic_interval")
+            ),
+            fixed_broadcast_fanout=int(scenario_values.get(
+                "fixed_broadcast_fanout", config.get("fixed_broadcast_fanout", 3)
+            )),
         )
         started_at = utc_now()
         log_path = log_root / (run_id + ".json")
@@ -515,8 +682,9 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
             }, sort_keys=True, separators=(",", ":"))
             topology_checksum = hashlib.sha256(topology_payload.encode("utf-8")).hexdigest()
             manifest = _episode_manifest(
-                root, result, scenario, config, checksums, started_at, ended_at,
+                root, result, scenario, run_config, checksums, started_at, ended_at,
                 topology_checksum=topology_checksum,
+                rl_seed=rl_seed,
             )
             manifest_path = manifest_root / (run_id + ".json")
             manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -527,8 +695,10 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 )
             staging_dir.replace(output_dir)
             row = {
-                "run_id": run_id, "application": application, "method": method, "scenario": result.scenario,
-                "scenario_name": scenario_values["name"], "seed": seed, "n_agents": n_agents,
+                "run_id": run_id, "application": application, "method": method,
+                "method_variant": method_variant, "scenario": result.scenario,
+                "scenario_name": scenario_values["name"], "seed": seed,
+                "rl_training_seed": rl_seed, "n_agents": n_agents,
                 **result.metrics, **result.agent_metrics, **result.planner_metrics,
                 "wall_clock_seconds": result.wall_clock_seconds, "status": result.completion_status,
                 "manifest": str(manifest_path.relative_to(results_root)),
@@ -537,19 +707,11 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
             log_path.write_text(json.dumps({"status": "complete", "index": index, "total": len(matrix), "run_id": run_id, "ended_at": ended_at}) + "\n", encoding="utf-8")
         except Exception as error:
             ended_at = utc_now()
-            row = {"run_id": run_id, "application": application, "method": method, "scenario_name": scenario_values["name"], "seed": seed, "n_agents": n_agents, "status": "failed", "error": "%s: %s" % (type(error).__name__, str(error)), "wall_clock_seconds": time.perf_counter() - episode_started}
+            row = {"run_id": run_id, "application": application, "method": method, "method_variant": method_variant, "scenario_name": scenario_values["name"], "seed": seed, "rl_training_seed": rl_seed, "n_agents": n_agents, "status": "failed", "error": "%s: %s" % (type(error).__name__, str(error)), "wall_clock_seconds": time.perf_counter() - episode_started}
             summaries.append(row)
             log_path.write_text(json.dumps({**row, "ended_at": ended_at}) + "\n", encoding="utf-8")
-            checkpoint_selection = (
-                checkpoints.get("no_entropy")
-                if method == Method.LEARNED_NO_ENTROPY.value
-                else checkpoints.get("thermo")
-                if method in (
-                    Method.THERMO.value,
-                    Method.NO_EPISODIC_MEMORY.value,
-                    Method.GLOBAL_ORACLE.value,
-                    Method.SHUFFLED_ENTROPY.value,
-                ) else None
+            checkpoint_selection = _checkpoint_for_method(
+                method, checkpoints, rl_seed
             )
             topology_payload = json.dumps({
                 "physical_edges": sorted([
@@ -564,7 +726,7 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 "run_id": run_id,
                 "source": {**git_provenance(root), **dict(config.get("source_provenance", {})), "checksum": source_checksum(root)},
                 "configuration": asdict(scenario),
-                "experiment_configuration": dict(config),
+                "experiment_configuration": dict(run_config),
                 "application": application,
                 "method": method,
                 "method_uses_language_model": uses_model,
@@ -607,7 +769,7 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 },
                 "agent_rng_rule": "environment_seed * 100 + stable agent index",
                 "llm_seed": int(config.get("llm_seed", 0)),
-                "rl_seed": int(config.get("rl_seed", 0)),
+                "rl_seed": int(rl_seed),
                 "topology_identifier": scenario.topology,
                 "topology_checksum": hashlib.sha256(
                     topology_payload.encode("utf-8")
@@ -617,6 +779,15 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 "start_timestamp": started_at,
                 "end_timestamp": ended_at,
                 "wall_clock_seconds": row["wall_clock_seconds"],
+                "single_gpu_hours": (
+                    row["wall_clock_seconds"] / 3600.0
+                    if uses_model and runner.llm_calls > 0 else 0.0
+                ),
+                "approximate_gpu_cost_usd": (
+                    row["wall_clock_seconds"] / 3600.0
+                    * float(config.get("hourly_gpu_rate_usd", 0.34))
+                    if uses_model and runner.llm_calls > 0 else 0.0
+                ),
                 "environment_steps": int(
                     len(runner.macro_features) / max(len(runner.env.agent_ids), 1)
                 ),
@@ -624,7 +795,25 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 "prompt_tokens": runner.prompt_tokens,
                 "generated_tokens": runner.generated_tokens,
                 "tool_calls": runner.env.tool_calls,
-                "messages": runner.env.message_attempts,
+                "messages": (
+                    runner.env.message_attempts + runner.monitor_sketch_messages
+                ),
+                "operational_messages": runner.env.message_attempts,
+                "entropy_sketch_messages": runner.monitor_sketch_messages,
+                "structured_bytes": (
+                    runner.env.message_bytes + runner.monitor_sketch_bytes
+                ),
+                "operational_message_bytes": runner.env.message_bytes,
+                "entropy_sketch_bytes": runner.monitor_sketch_bytes,
+                "communication_active_decision_epochs": (
+                    runner.communication_active_decision_epochs
+                ),
+                "trigger_type": trigger_settings.get(
+                    "parameters", {}
+                ).get("trigger_type"),
+                "trigger_parameters": trigger_settings.get("parameters"),
+                "communication_mode": method,
+                "protocol_checksum": run_config.get("protocol_checksum"),
                 "completion_status": "failed",
                 "error": row["error"],
                 "checkpoint_selection": checkpoint_selection,
@@ -852,9 +1041,10 @@ def train_policy(
     seed: int,
     calibration_path: Optional[Path],
     log_path: Path,
+    trigger_config_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
-    if variant not in ("thermo", "no_entropy"):
-        raise ValueError("variant must be thermo or no_entropy")
+    if variant not in ("thermo", "no_entropy", "doet_rl"):
+        raise ValueError("variant must be thermo, no_entropy, or doet_rl")
     calibration = calibration_from_json(calibration_path)
     monitor_settings = {"formulation": "pooled", "window": 3}
     if calibration_path is not None:
@@ -865,7 +1055,18 @@ def train_policy(
     rng = np.random.RandomState(seed)
     pending: List[Dict[str, Any]] = []
     history: List[Dict[str, Any]] = []
-    method = Method.THERMO.value if variant == "thermo" else Method.LEARNED_NO_ENTROPY.value
+    method = {
+        "thermo": Method.THERMO.value,
+        "no_entropy": Method.LEARNED_NO_ENTROPY.value,
+        "doet_rl": Method.DOET_RL.value,
+    }[variant]
+    trigger_record: Dict[str, Any] = {}
+    if trigger_config_path is not None:
+        trigger_record = load_yaml(trigger_config_path)
+        if "trigger" in trigger_record and "parameters" not in trigger_record:
+            trigger_record = dict(trigger_record["trigger"])
+    trigger_parameters = dict(trigger_record.get("parameters", {}))
+    trigger_normalizers = trigger_record.get("normalizers")
     scenarios = [
         ("nominal", "reliable", 0.0, 0.0),
         ("moderate", "reliable", 0.5, 0.5),
@@ -933,6 +1134,8 @@ def train_policy(
             calibration=calibration, deterministic_policy=False,
             monitor_window=int(monitor_settings["window"]),
             monitor_formulation=str(monitor_settings["formulation"]),
+            trigger_config=trigger_parameters or None,
+            trigger_normalizers=trigger_normalizers,
         )
         result = runner.run("train-%s-%05d" % (variant, episode))
         for trajectory_row in result.trajectory:
@@ -943,7 +1146,10 @@ def train_policy(
         row: Dict[str, Any] = {
             "episode": episode, "application": application, "scenario": result.scenario,
             "primary_outcome": result.metrics["primary_outcome"], "reward_sum": sum(t["reward"] for t in result.trajectory),
-            "messages": result.metrics["messages"], "failed_actions": result.agent_metrics["failed_actions"],
+            "messages": result.metrics["messages"],
+            "total_communication_messages": result.metrics["total_communication_messages"],
+            "trigger_activations": result.metrics.get("trigger_activations", 0),
+            "failed_actions": result.agent_metrics["failed_actions"],
         }
         if len(pending) >= 512 or episode == episodes - 1:
             losses = policy.update(pending)
@@ -964,6 +1170,7 @@ def train_policy(
         "episodes": episodes,
         "planner": "deterministic mock-v2",
         "training_method": "PPO, staged planner training",
+        "trigger_configuration": trigger_record if variant == "doet_rl" else None,
         "offline_initialization": {
             "method": "behavior cloning from scripted local-observation trajectories",
             "demonstration_episodes": demonstration_episodes,
@@ -977,7 +1184,7 @@ def train_policy(
         },
         "execution_features": (
             "24 local features; distributed entropy/free-energy fields present"
-            if variant == "thermo" else
+            if variant in ("thermo", "doet_rl") else
             "24 local features; entropy/free-energy fields zeroed"
         ),
         "wall_clock_seconds": time.perf_counter() - started,

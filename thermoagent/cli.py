@@ -22,19 +22,84 @@ def build_parser() -> argparse.ArgumentParser:
     monitor.add_argument("--seeds", default="501,502,503")
     monitor.add_argument("--horizon", type=int, default=18)
 
+    doet_calibrate = subparsers.add_parser(
+        "calibrate-doet",
+        help="fit nominal distributed entropy and diagnose trigger direction",
+    )
+    doet_calibrate.add_argument("--output", type=Path, required=True)
+    doet_calibrate.add_argument("--nominal-seeds", default="5101,5102,5103,5104,5105,5106")
+    doet_calibrate.add_argument("--development-seeds", default="5201,5202,5203")
+    doet_calibrate.add_argument("--horizon", type=int, default=24)
+
     train = subparsers.add_parser("train-policy", help="train the PPO coordination metapolicy")
     train.add_argument("--output", type=Path, required=True)
-    train.add_argument("--variant", choices=("thermo", "no_entropy"), required=True)
+    train.add_argument("--variant", choices=("thermo", "no_entropy", "doet_rl"), required=True)
     train.add_argument("--episodes", type=int, default=96)
     train.add_argument("--seed", type=int, default=3001)
     train.add_argument("--calibration", type=Path)
     train.add_argument("--log", type=Path, required=True)
+    train.add_argument("--trigger-config", type=Path)
+
+    train_many = subparsers.add_parser(
+        "train-doet-multiseed",
+        help="train all learned v2 methods across independent RL seeds",
+    )
+    train_many.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+    train_many.add_argument("--seeds", default="7301,7302,7303,7304,7305")
+    train_many.add_argument("--episodes", type=int, default=192)
+    train_many.add_argument("--calibration", type=Path, required=True)
+    train_many.add_argument("--trigger-config", type=Path, required=True)
 
     sweep = subparsers.add_parser("sweep", help="run a restartable configured experiment matrix")
     sweep.add_argument("--config", type=Path, required=True)
     sweep.add_argument("--results", type=Path, default=Path("results"))
     sweep.add_argument("--root", type=Path, default=Path("."))
     sweep.add_argument("--limit", type=int)
+
+    select_trigger = subparsers.add_parser(
+        "select-doet-trigger",
+        help="apply the frozen validation criterion to DOET candidates",
+    )
+    select_trigger.add_argument(
+        "--results",
+        type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+
+    design_holdout = subparsers.add_parser(
+        "design-doet-holdout",
+        help="generate the unseen balanced v2 holdout from frozen validation choices",
+    )
+    design_holdout.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+
+    analyze_doet = subparsers.add_parser(
+        "analyze-doet",
+        help="run the locked episode-level DOET statistical analysis",
+    )
+    analyze_doet.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+
+    doet_figures = subparsers.add_parser(
+        "doet-figures",
+        help="generate vector figures for the entropy-triggered v2 study",
+    )
+    doet_figures.add_argument(
+        "--results", type=Path,
+        default=Path("results/entropy_triggered_v2"),
+    )
+    doet_figures.add_argument("--architecture-only", action="store_true")
+    design_holdout.add_argument(
+        "--config", type=Path,
+        default=Path("configs/entropy_trigger_holdout_locked.yaml"),
+    )
 
     analyze = subparsers.add_parser("analyze", help="aggregate episodes and run episode-level statistics")
     analyze.add_argument("--results", type=Path, default=Path("results"))
@@ -103,15 +168,64 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
         seeds = [int(value) for value in args.seeds.split(",") if value]
         value = select_monitor_formulation(args.calibration, args.output, seeds, args.horizon)
+    elif args.command == "calibrate-doet":
+        from .doet_calibration import run as calibrate_doet
+
+        nominal_seeds = [int(value) for value in args.nominal_seeds.split(",") if value]
+        development_seeds = [int(value) for value in args.development_seeds.split(",") if value]
+        value = calibrate_doet(
+            args.output,
+            nominal_seeds=nominal_seeds,
+            development_seeds=development_seeds,
+            horizon=args.horizon,
+        )
     elif args.command == "train-policy":
         from .experiments import train_policy
 
-        value = train_policy(args.output, args.variant, args.episodes, args.seed, args.calibration, args.log)
+        value = train_policy(
+            args.output,
+            args.variant,
+            args.episodes,
+            args.seed,
+            args.calibration,
+            args.log,
+            trigger_config_path=args.trigger_config,
+        )
+    elif args.command == "train-doet-multiseed":
+        from .doet_training import run as train_doet_multiseed
+
+        seeds = [int(value) for value in args.seeds.split(",") if value]
+        value = train_doet_multiseed(
+            results_root=args.results,
+            seeds=seeds,
+            episodes=args.episodes,
+            calibration_path=args.calibration,
+            trigger_config_path=args.trigger_config,
+        )
     elif args.command == "sweep":
         from .experiments import run_matrix
 
         rows = run_matrix(args.config, args.root.resolve(), args.results, args.limit)
         value = {"episodes": len(rows), "complete": sum(row.get("status") == "complete" for row in rows), "failed": sum(row.get("status") == "failed" for row in rows)}
+    elif args.command == "select-doet-trigger":
+        from .doet_validation import run as select_doet_trigger
+
+        value = select_doet_trigger(args.results)
+    elif args.command == "design-doet-holdout":
+        from .doet_holdout import run as design_doet_holdout
+
+        value = design_doet_holdout(args.results, args.config)
+    elif args.command == "analyze-doet":
+        from .doet_analysis import run as analyze_doet
+
+        value = analyze_doet(args.results)
+    elif args.command == "doet-figures":
+        from .doet_figures import generate as generate_doet_figures
+
+        figures = generate_doet_figures(
+            args.results, architecture_only=args.architecture_only
+        )
+        value = {"figures": figures, "count": len(figures)}
     elif args.command == "analyze":
         from .analysis import write_analysis
 

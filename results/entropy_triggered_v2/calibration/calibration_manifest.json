@@ -1,0 +1,32 @@
+{
+  "development_episodes": 18,
+  "generated_at": "2026-08-13T16:11:35.108835+00:00",
+  "maximum_absolute_conservation_error": 6.821210263296962e-13,
+  "monitor_only_trigger_parameters": {
+    "cooldown": 0,
+    "crisis_surprisal": 1000000.0,
+    "direction": "absolute",
+    "kappa": 0.0,
+    "minimum_dwell": 2,
+    "nominal_center": 0.5,
+    "nominal_scale": 1.0,
+    "propagation": "local",
+    "quiet_decision_interval": 24,
+    "quiet_gossip_period": 8,
+    "quiet_gossip_rounds": 1,
+    "rho": 0.0,
+    "tau_crisis": 2000000.0,
+    "tau_off": 999999.0,
+    "tau_on": 1000000.0,
+    "trigger_type": "cusum"
+  },
+  "nominal_episodes": 12,
+  "outputs": {
+    "calibration_runs.csv": "4be593b9e18f3f23336574fda0f0ebf71bf8ea3f231925141af33de95d5e99a6",
+    "development_distributed_entropy.csv": "bc9af91210b39dfe7f21af4793c305c2117f64c47f92172f9da52e78c9d918ed",
+    "direction_diagnostics.csv": "bcec5e914810f60c3226a4c8cdc6bace6d92aa8655d696bcbd01bac2757c0953",
+    "nominal_distributed_entropy.csv": "15862c6cce5a9b81d678d3973340461da2ecd3dac421c7a55554e72c5833e803",
+    "trigger_nominal_calibration.json": "d8b98337186dee1eab5de3e0b37fd87ca6cb3fc969760fc12d763bbd6312bf93"
+  },
+  "status": "complete"
+}

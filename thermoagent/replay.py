@@ -54,8 +54,20 @@ def replay_episode(episode_path: Path, manifest_path: Path) -> Dict[str, Any]:
     recorded = EventLedger.read_jsonl(event_paths[0])
     pairs = _tool_pairs(recorded.events)
     pairs_by_step: Dict[int, List[Tuple[Event, Event]]] = {}
+    result_by_call_id = {
+        pair[0].event_id: pair[1] for pair in pairs
+    }
     for pair in pairs:
         pairs_by_step.setdefault(pair[0].step, []).append(pair)
+    replay_actions: Dict[int, List[Tuple[str, Event]]] = {}
+    for event in recorded.events:
+        if event.kind == "tool_call":
+            replay_actions.setdefault(event.step, []).append(("tool", event))
+        elif (
+            event.kind == "message"
+            and event.payload.get("kind") in ("fixed_status", "entropy_alert")
+        ):
+            replay_actions.setdefault(event.step, []).append(("protocol", event))
 
     env = LogisticsEnvironment(scenario)
     metric_mismatches: List[str] = []
@@ -69,17 +81,49 @@ def replay_episode(episode_path: Path, manifest_path: Path) -> Dict[str, Any]:
             "step %d: %s" % (env.step_index, mismatch)
             for mismatch in _compare_public_metrics(expected, env.public_metrics())
         )
-        for call, expected_result in pairs_by_step.get(env.step_index, []):
-            payload = call.payload
-            result = env.execute_tool(call.actor, str(payload["tool"]), dict(payload["arguments"]))
-            recorded_result = expected_result.payload
-            if result.ok != bool(recorded_result.get("ok")) or result.code != recorded_result.get("code"):
-                tool_mismatches.append(
-                    "event %s: expected %s/%s, replayed %s/%s" % (
-                        call.event_id,
-                        recorded_result.get("ok"), recorded_result.get("code"),
-                        result.ok, result.code,
+        for action_kind, event in replay_actions.get(env.step_index, []):
+            if action_kind == "tool":
+                payload = event.payload
+                result = env.execute_tool(
+                    event.actor,
+                    str(payload["tool"]),
+                    dict(payload["arguments"]),
+                )
+                recorded_result = result_by_call_id[event.event_id].payload
+                if (
+                    result.ok != bool(recorded_result.get("ok"))
+                    or result.code != recorded_result.get("code")
+                ):
+                    tool_mismatches.append(
+                        "event %s: expected %s/%s, replayed %s/%s" % (
+                            event.event_id,
+                            recorded_result.get("ok"), recorded_result.get("code"),
+                            result.ok, result.code,
+                        )
                     )
+                continue
+            payload = event.payload
+            message_payload = payload.get("payload", {})
+            if payload.get("kind") == "fixed_status":
+                result = env.send_fixed_status_summary(
+                    event.actor,
+                    str(payload["recipient"]),
+                    str(message_payload["pressure"]),
+                    str(message_payload["capacity"]),
+                    str(message_payload["commitment_strain"]),
+                )
+            else:
+                result = env.send_entropy_alert(
+                    event.actor,
+                    str(payload["recipient"]),
+                    int(message_payload["recommended_mode"]),
+                    str(message_payload["anomaly_level"]),
+                )
+            expected_code = "packet_dropped" if payload.get("dropped") else "sent"
+            if not result.ok or result.code != expected_code:
+                tool_mismatches.append(
+                    "event %s protocol message expected %s, replayed %s/%s"
+                    % (event.event_id, expected_code, result.ok, result.code)
                 )
         env.advance()
     return {

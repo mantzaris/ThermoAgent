@@ -25,6 +25,16 @@ class Method(str, Enum):
     NO_EPISODIC_MEMORY = "no_episodic_memory"
     GLOBAL_ORACLE = "global_entropy_oracle"
     SHUFFLED_ENTROPY = "shuffled_entropy"
+    # Entropy-triggered v2 study. The v1 method identifiers above remain
+    # unchanged so frozen results and manifests retain their original meaning.
+    FIXED_ALWAYS_ON = "fixed_always_on"
+    PERIODIC_COMMUNICATION = "periodic_communication"
+    RANDOM_BUDGET_MATCHED = "random_budget_matched"
+    KPI_CUSUM_TRIGGER = "kpi_cusum_trigger"
+    DOET_RULE = "doet_rule"
+    DOET_RL = "doet_rl"
+    GLOBAL_ENTROPY_TRIGGER_ORACLE = "global_entropy_trigger_oracle"
+    DISRUPTION_LABEL_ORACLE = "disruption_label_oracle"
 
 
 class CoordinationOption(IntEnum):

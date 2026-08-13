@@ -1,5 +1,38 @@
 # ThermoAgent project status
 
+## Entropy-triggered communication study (v2)
+
+Last updated: 2026-08-13 America/New_York
+
+- **Current phase:** Local DOET implementation and development calibration are
+  complete; real-LLM validation is blocked on the stopped existing Pod.
+- **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
+- **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
+- **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
+  monitoring comparison; nominal/development calibration; DOET-rule/DOET-RL;
+  strong communication controls; five-seed training runner; validation and
+  holdout generators; locked analysis; 120 passing tests; 8/8 v2 preflight
+  replays.
+- **Active work:** publication figure/QA and documentation machinery. No real-
+  LLM v2 treatment outcome has begun, so no v2 performance claim exists.
+- **Active jobs:** none.
+- **Blocker:** the existing RunPod endpoint currently refuses SSH on port 19465. Retry after starting the same Pod with `./scripts/runpod-smoke-test.sh`. No replacement Pod will be created.
+- **Next actions:** after the same Pod is started, retry
+  `./scripts/runpod-smoke-test.sh`, synchronize, run the 288-episode validation,
+  train all 15 checkpoints, perform measured precision/budget analysis, freeze,
+  and run the 1,296-episode locked holdout.
+- **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
+- **Compute used by v2:** 0 GPU-hours. The SSH endpoint at
+  `213.173.109.33:19465` returned `Connection refused` on both connection
+  attempts; no replacement resource was created.
+- **Latest valid v2 evidence:** full evaluator KPIs make entropy redundant for
+  disruption rank, whereas distributed entropy adds about 0.097--0.098 AP and
+  0.169--0.171 AUC to private local KPIs on original-main diagnostics. The new
+  development leader is low-direction distributed entropy (AP 0.622 commercial,
+  0.562 humanitarian), but threshold recall is weak and not confirmatory.
+
+---
+
 Last updated: 2026-08-13 00:02 America/New_York
 
 ## Current phase

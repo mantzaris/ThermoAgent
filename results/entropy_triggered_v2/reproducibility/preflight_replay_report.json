@@ -1,0 +1,90 @@
+{
+  "episodes_checked": 8,
+  "episodes_passed": 8,
+  "records": [
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-commercial-doet_rule-n08-s6099-vcusum_local/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-commercial-doet_rule-n08-s6099-vcusum_local.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 16,
+      "replay_passed": true,
+      "run_id": "preflight_v2-commercial-doet_rule-n08-s6099-vcusum_local",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-commercial-doet_rule-n08-s6099-vhysteresis_neighbor/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-commercial-doet_rule-n08-s6099-vhysteresis_neighbor.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 16,
+      "replay_passed": true,
+      "run_id": "preflight_v2-commercial-doet_rule-n08-s6099-vhysteresis_neighbor",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-commercial-fixed_always_on-n08-s6099/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-commercial-fixed_always_on-n08-s6099.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "preflight_v2-commercial-fixed_always_on-n08-s6099",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-commercial-kpi_cusum_trigger-n08-s6099-vkpi/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-commercial-kpi_cusum_trigger-n08-s6099-vkpi.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 23,
+      "replay_passed": true,
+      "run_id": "preflight_v2-commercial-kpi_cusum_trigger-n08-s6099-vkpi",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-humanitarian-doet_rule-n08-s6099-vcusum_local/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-humanitarian-doet_rule-n08-s6099-vcusum_local.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 16,
+      "replay_passed": true,
+      "run_id": "preflight_v2-humanitarian-doet_rule-n08-s6099-vcusum_local",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-humanitarian-doet_rule-n08-s6099-vhysteresis_neighbor/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-humanitarian-doet_rule-n08-s6099-vhysteresis_neighbor.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 16,
+      "replay_passed": true,
+      "run_id": "preflight_v2-humanitarian-doet_rule-n08-s6099-vhysteresis_neighbor",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-humanitarian-fixed_always_on-n08-s6099/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-humanitarian-fixed_always_on-n08-s6099.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 30,
+      "replay_passed": true,
+      "run_id": "preflight_v2-humanitarian-fixed_always_on-n08-s6099",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/entropy_triggered_v2/raw/preflight_v2/preflight_v2-humanitarian-kpi_cusum_trigger-n08-s6099-vkpi/episode.json",
+      "manifest_path": "results/entropy_triggered_v2/manifests/preflight_v2-humanitarian-kpi_cusum_trigger-n08-s6099-vkpi.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 23,
+      "replay_passed": true,
+      "run_id": "preflight_v2-humanitarian-kpi_cusum_trigger-n08-s6099-vkpi",
+      "tool_result_mismatches": []
+    }
+  ],
+  "run_id_contains": [],
+  "stages": [
+    "preflight_v2"
+  ]
+}

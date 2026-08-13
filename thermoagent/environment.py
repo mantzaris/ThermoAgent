@@ -261,6 +261,19 @@ class LogisticsEnvironment:
                 for left, right in zip(region[:-1], region[1:]):
                     self.communication_edges.add(tuple(sorted((left, right))))
             self.communication_edges.add(tuple(sorted((ids[midpoint - 1], ids[midpoint]))))
+        elif self.config.topology == "tri_region_bridge_v2":
+            # V2 locked-holdout topology: three sparse regional chains joined
+            # by two explicit bridges. It is structurally distinct from both
+            # the hub-ring training graph and the prior dual-region holdout.
+            regions = [ids[offset::3] for offset in range(3)]
+            for region in regions:
+                for left, right in zip(region[:-1], region[1:]):
+                    self.communication_edges.add(tuple(sorted((left, right))))
+            for left_region, right_region in zip(regions[:-1], regions[1:]):
+                if left_region and right_region:
+                    self.communication_edges.add(tuple(sorted((
+                        left_region[-1], right_region[0]
+                    ))))
         else:
             raise ValueError("unknown topology: %s" % self.config.topology)
         sources = [a for a, agent in self.agents.items() if agent.identity.role in SOURCE_ROLES]
@@ -275,7 +288,11 @@ class LogisticsEnvironment:
             for demand_index, target in enumerate(demands):
                 degree = min(2, len(sources))
                 for offset in range(degree):
-                    source = sources[(2 * demand_index + offset) % len(sources)]
+                    stride = (
+                        3 if self.config.topology == "tri_region_bridge_v2"
+                        else 2
+                    )
+                    source = sources[(stride * demand_index + offset) % len(sources)]
                     self.physical_edges.add((source, target))
 
     @property
@@ -374,6 +391,69 @@ class LogisticsEnvironment:
         if not dropped:
             self.pending_messages.append(message)
         return ToolResult(True, "sent" if not dropped else "packet_dropped", "message processed", {"message_id": message.message_id, "dropped": dropped})
+
+    def send_entropy_alert(
+        self,
+        sender: str,
+        recipient: str,
+        mode: int,
+        anomaly_level: str,
+    ) -> ToolResult:
+        """Send one bounded, explicit DOET neighbour alert.
+
+        This protocol message never carries an exact entropy value, private
+        observation, or evaluator disruption label. It uses the same lossy
+        channel, budget, byte accounting, and event log as operational traffic.
+        """
+
+        if mode not in (1, 2):
+            return ToolResult(False, "invalid_alert_mode", "alert mode must be targeted or crisis")
+        if anomaly_level not in ("elevated", "severe"):
+            return ToolResult(False, "invalid_alert_level", "unknown coarse anomaly level")
+        if tuple(sorted((sender, recipient))) not in self.active_communication_edges():
+            return ToolResult(False, "inactive_alert_link", "recipient is not a currently reachable neighbour")
+        return self._send(
+            sender,
+            recipient,
+            "entropy_alert",
+            {
+                "recommended_mode": int(mode),
+                "anomaly_level": anomaly_level,
+                "protocol": "doet-alert-v1",
+            },
+        )
+
+    def send_fixed_status_summary(
+        self,
+        sender: str,
+        recipient: str,
+        pressure: str,
+        capacity: str,
+        commitment_strain: str,
+    ) -> ToolResult:
+        """Transmit the always-on baseline's fixed coarse status packet."""
+
+        if sender not in self.states:
+            return ToolResult(False, "invalid_sender", "status sender does not exist")
+        if tuple(sorted((sender, recipient))) not in self.active_communication_edges():
+            return ToolResult(False, "inactive_status_link", "recipient is not a currently reachable neighbour")
+        if pressure not in ("low", "nominal", "high"):
+            return ToolResult(False, "invalid_status_pressure", "invalid pressure bin")
+        if capacity not in ("available", "impaired", "high_impairment"):
+            return ToolResult(False, "invalid_status_capacity", "invalid capacity bin")
+        if commitment_strain not in ("low", "nominal", "high"):
+            return ToolResult(False, "invalid_status_strain", "invalid strain bin")
+        payload = {
+            "pressure": pressure,
+            "capacity": capacity,
+            "commitment_strain": commitment_strain,
+            "protocol": "fixed-status-v1",
+        }
+        result = self._send(sender, recipient, "fixed_status", payload, public=True)
+        if result.ok:
+            self.information_disclosures += 1
+            self.disclosures_by_agent[sender] += 1
+        return result
 
     def _deliver_messages(self) -> None:
         remaining: List[Message] = []

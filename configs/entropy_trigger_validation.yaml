@@ -1,0 +1,179 @@
+stage: validation
+prompt_template_revision: planner-json-v7-route-affordances
+agentic_metric_revision: agentic-metrics-v2-two-party-joined-coalition
+llm_seed: 7101
+rl_seed: 0
+decision_interval: 4
+communication_budget: 300
+fixed_broadcast_fanout: 3
+periodic_interval: 8
+calibration: results/reproducibility/macrostate_calibration.json
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  precision: bitsandbytes NF4, bfloat16 compute, double quantization
+  load_in_4bit: true
+  max_input_tokens: 2560
+  max_new_tokens: 160
+  decoding:
+    do_sample: false
+    temperature: 0.0
+    top_p: 1.0
+trigger:
+  normalizers_path: results/entropy_triggered_v2/calibration/trigger_nominal_calibration.json
+  normalizers_key: normalizers
+  parameters:
+    direction: low
+    quiet_gossip_rounds: 1
+    targeted_gossip_rounds: 1
+    crisis_gossip_rounds: 1
+    quiet_gossip_period: 8
+    targeted_gossip_period: 4
+    crisis_gossip_period: 2
+    quiet_decision_interval: 8
+    targeted_decision_interval: 4
+    crisis_decision_interval: 2
+    max_alert_neighbors: 2
+applications:
+  commercial:
+    n_agents: 11
+  humanitarian:
+    n_agents: 10
+methods:
+  - fixed_always_on
+  - doet_rule
+  - kpi_cusum_trigger
+seeds: [6101, 6102, 6103, 6104]
+method_variants:
+  doet_rule:
+    - name: cusum_low_balanced_local
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: low
+          rho: 0.80
+          kappa: 0.15
+          tau_on: 1.50
+          tau_off: 0.50
+          tau_crisis: 3.00
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: local
+    - name: cusum_low_balanced_neighbor
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: low
+          rho: 0.80
+          kappa: 0.15
+          tau_on: 1.50
+          tau_off: 0.50
+          tau_crisis: 3.00
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: neighbor
+    - name: cusum_low_sensitive
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: low
+          rho: 0.75
+          kappa: 0.10
+          tau_on: 1.00
+          tau_off: 0.30
+          tau_crisis: 2.50
+          minimum_dwell: 2
+          cooldown: 1
+          propagation: neighbor
+    - name: cusum_low_conservative
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: low
+          rho: 0.90
+          kappa: 0.25
+          tau_on: 2.00
+          tau_off: 0.75
+          tau_crisis: 4.00
+          minimum_dwell: 3
+          cooldown: 3
+          propagation: local
+    - name: hysteresis_low
+      trigger:
+        parameters:
+          trigger_type: hysteresis
+          direction: low
+          rho: 0.60
+          kappa: 0.00
+          tau_on: 1.20
+          tau_off: 0.40
+          tau_crisis: 2.80
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: neighbor
+    - name: cusum_absolute
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: absolute
+          rho: 0.80
+          kappa: 0.15
+          tau_on: 1.50
+          tau_off: 0.50
+          tau_crisis: 3.00
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: neighbor
+    - name: cusum_change
+      trigger:
+        parameters:
+          trigger_type: cusum
+          direction: change
+          rho: 0.80
+          kappa: 0.15
+          tau_on: 1.50
+          tau_off: 0.50
+          tau_crisis: 3.00
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: neighbor
+  kpi_cusum_trigger:
+    - name: kpi_high_balanced
+      trigger:
+        normalizers_key: kpi_normalizers
+        parameters:
+          trigger_type: cusum
+          direction: high
+          rho: 0.80
+          kappa: 0.15
+          tau_on: 1.50
+          tau_off: 0.50
+          tau_crisis: 3.00
+          minimum_dwell: 2
+          cooldown: 2
+          propagation: local
+scenarios:
+  nominal:
+    horizon: 24
+    private_information: 0.8
+    objective_misalignment: 0.8
+    communication: reliable
+    disruption: nominal
+  isolated:
+    horizon: 24
+    private_information: 0.8
+    objective_misalignment: 0.8
+    communication: reliable
+    disruption: moderate
+  correlated:
+    horizon: 24
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: intermittent
+    disruption: correlated
+  compound_partition:
+    horizon: 24
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: partition
+    disruption: compound

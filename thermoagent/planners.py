@@ -13,7 +13,7 @@ from .tools import OPTION_TOOLS, ToolRegistry
 from .types import CoordinationOption, PlanOutput, ToolResult
 
 
-PLANNER_PROMPT_REVISION = "planner-json-v6"
+PLANNER_PROMPT_REVISION = "planner-json-v7-route-affordances"
 
 
 @dataclass
@@ -50,6 +50,11 @@ def request_affordances(request: PlannerRequest) -> Tuple[set[str], Dict[str, An
 
     tools = set(OPTION_TOOLS[int(request.option)])
     guidance: Dict[str, Any] = {}
+    action_guidance = request.context.get("material_action_guidance", {})
+    if action_guidance:
+        # This contains public topology plus this agent's own locally known
+        # coalition memberships. It contains no other organization's state.
+        guidance["material_action"] = dict(action_guidance)
     messages = request.context.get("messages", [])
     commitments = request.context.get("commitments", [])
     if int(request.option) == int(CoordinationOption.RESPOND_OFFER):
@@ -172,11 +177,16 @@ def request_affordances(request: PlannerRequest) -> Tuple[set[str], Dict[str, An
             }
         else:
             tools &= {"propose_coalition"}
+            direct_neighbors = set(action_guidance.get("direct_message_ids", []))
             eligible_invitees = sorted({
                 str(candidate.get("agent_id"))
                 for candidate in request.candidate_agents
                 if candidate.get("agent_id")
                 and str(candidate.get("agent_id")) != request.agent_id
+                and (
+                    not action_guidance
+                    or str(candidate.get("agent_id")) in direct_neighbors
+                )
             })
             guidance["coalition_state"] = {
                 "instruction": (
@@ -196,6 +206,22 @@ def request_affordances(request: PlannerRequest) -> Tuple[set[str], Dict[str, An
     # roles that cannot execute any tool attached to an option.
     role_tools = set(ToolRegistry().allowed(request.role))
     tools &= role_tools
+    if action_guidance:
+        target_requirements = {
+            "request_info": "direct_message_ids",
+            "disclose_summary": "direct_message_ids",
+            "report_local_need": "direct_message_ids",
+            "request_priority": "direct_message_ids",
+            "challenge_allocation": "direct_message_ids",
+            "request_quote": "eligible_quote_source_ids",
+            "submit_offer": "eligible_offer_target_ids",
+            "pledge_resource": "eligible_offer_target_ids",
+            "schedule_shipment": "known_outbound_material_ids",
+            "transfer_resource": "known_outbound_material_ids",
+        }
+        for tool, target_group in target_requirements.items():
+            if tool in tools and not action_guidance.get(target_group):
+                tools.remove(tool)
     if not tools:
         tools = {"no_op"}
     return tools, guidance
@@ -212,6 +238,32 @@ def validate_request_plan(request: PlannerRequest, plan: PlanOutput) -> Optional
             "tool is not available for the selected option and delivered state",
             {"allowed_tools": sorted(tools)},
         )
+    material_rule = guidance.get("material_action", {})
+    target_requirements = {
+        "request_info": "direct_message_ids",
+        "disclose_summary": "direct_message_ids",
+        "report_local_need": "direct_message_ids",
+        "request_priority": "direct_message_ids",
+        "challenge_allocation": "direct_message_ids",
+        "request_quote": "eligible_quote_source_ids",
+        "submit_offer": "eligible_offer_target_ids",
+        "pledge_resource": "eligible_offer_target_ids",
+        "schedule_shipment": "known_outbound_material_ids",
+        "transfer_resource": "known_outbound_material_ids",
+    }
+    target_group = target_requirements.get(plan.tool)
+    if material_rule and target_group:
+        allowed_targets = set(material_rule.get(target_group, []))
+        if str(plan.arguments.get("target")) not in allowed_targets:
+            return ToolResult(
+                False,
+                "target_outside_local_affordance",
+                "target is not reachable through the agent's public topology or local coalition state",
+                {
+                    "target_group": target_group,
+                    "allowed_targets": sorted(allowed_targets),
+                },
+            )
     offer_rule = guidance.get("private_offer_rule")
     if offer_rule and plan.tool != offer_rule["required_tool"]:
         return ToolResult(
@@ -278,10 +330,41 @@ class MockPlanner:
                 return candidate["agent_id"]
         return request.agent_id
 
+    @staticmethod
+    def _guided_target(
+        request: PlannerRequest,
+        key: str,
+        preferred_roles: Sequence[str],
+    ) -> str:
+        action_guidance = request.context.get("material_action_guidance")
+        if not action_guidance:
+            return MockPlanner._target(request, preferred_roles)
+        allowed = set(action_guidance.get(key, []))
+        for candidate in request.candidate_agents:
+            if (
+                candidate.get("agent_id") in allowed
+                and candidate.get("role") in preferred_roles
+            ):
+                return str(candidate["agent_id"])
+        return sorted(allowed)[0] if allowed else request.agent_id
+
     def plan_batch(self, requests: Sequence[PlannerRequest]) -> List[PlannerResponse]:
         return [PlannerResponse(self.plan(request), True) for request in requests]
 
     def plan(self, request: PlannerRequest) -> PlanOutput:
+        plan = self._plan_unchecked(request)
+        allowed, _ = request_affordances(request)
+        if plan.tool not in allowed and "no_op" in allowed:
+            return PlanOutput(
+                "Pause outside local affordance.",
+                "no_op",
+                {},
+                "No reachable validated target is locally known.",
+                0.9,
+            )
+        return plan
+
+    def _plan_unchecked(self, request: PlannerRequest) -> PlanOutput:
         obs = request.context["observation"]
         option = int(request.option)
         role = request.role
@@ -295,11 +378,30 @@ class MockPlanner:
             "supplier", "manufacturer", "carrier", "warehouse",
             "ngo", "agency", "transport", "depot",
         )
-        target_source = self._target(request, source_roles)
-        target_demand = self._target(request, demand_roles)
+        target_source = self._guided_target(
+            request, "eligible_quote_source_ids", source_roles
+        )
+        target_demand = self._guided_target(
+            request, "eligible_offer_target_ids", demand_roles
+        )
+        if target_source == request.agent_id:
+            target_source = self._guided_target(
+                request, "direct_message_ids", source_roles
+            )
+        if target_demand == request.agent_id:
+            target_demand = self._guided_target(
+                request, "direct_message_ids", demand_roles
+            )
         need_messages = [m for m in inbox if m.get("kind") in ("need", "quote_request")]
         if need_messages:
-            target_demand = need_messages[-1]["sender"]
+            reported_target = str(need_messages[-1]["sender"])
+            locally_reachable = set(
+                request.context.get("material_action_guidance", {}).get(
+                    "known_outbound_material_ids", []
+                )
+            )
+            if reported_target in locally_reachable:
+                target_demand = reported_target
 
         if option == 8:
             return PlanOutput("Conserve communication.", "no_op", {}, "Silence option selected.", 0.9)
@@ -605,6 +707,8 @@ class TransformersPlanner:
             "last_tool_ok": request.context.get("last_tool_ok"),
             "private_memories": request.context.get("memories", [])[-2:],
             "coordinator_assignment": request.context.get("coordinator_assignment"),
+            "communication_mode": request.context.get("communication_mode"),
+            "trigger_state": request.context.get("trigger_state"),
             "candidate_agents_public_identity": [
                 candidate for candidate in request.candidate_agents
                 if candidate.get("agent_id") != request.agent_id
@@ -628,6 +732,12 @@ class TransformersPlanner:
             "whose exact name appears in allowed_tools and include exactly its listed arguments, with no extra keys. "
             "Use the explicit integer values in time_bounds instead of reusing dates from memory or earlier plans."
         )
+        if private_guidance.get("material_action"):
+            system += (
+                " Targets for messages, offers, and material actions must come from the corresponding ID lists "
+                "in private_action_guidance.material_action. These lists are public topology and your own known "
+                "coalition affordances; they do not reveal another agent's private state."
+            )
         if "propose_coalition" in tools:
             system += (
                 " For propose_coalition, members is an invitee-only list: the proposer is already a member. "

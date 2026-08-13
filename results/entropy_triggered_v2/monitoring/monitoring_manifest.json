@@ -1,0 +1,35 @@
+{
+  "episodes": 160,
+  "holdout_environment_seeds": [
+    4101,
+    4102,
+    4103,
+    4104
+  ],
+  "main_environment_seeds": [
+    2101,
+    2102,
+    2103,
+    2104,
+    2105,
+    2106,
+    2107,
+    2108
+  ],
+  "outputs": {
+    "figures/pdf/entropy_incremental_value.pdf": "be2d7be22912c802e043831da1d68b5abd30e8b84e613de1d91edce2a6edcfb2",
+    "figures/pdf/monitoring_baseline_comparison.pdf": "2e65fa175e8dd2f03b630cb56b1802b9bbcb9bbc04c3163fe26555a09875918f",
+    "monitoring/README.md": "c7f28121034623652412eddd37a3c7588b76dbe564aea43a8f1e972e31d870ac",
+    "monitoring/detection_lead_time.csv": "b647142017613c3a2792aa1dd880cbbd827df9f9e70e7ee74857d0f04e6531fc",
+    "monitoring/incremental_value.csv": "d0c72c2ea20fbeb148743f6dcf9ba4a9bf2508c67a364acf84adf051412db5d3",
+    "monitoring/localization.csv": "f814e1a7935068bda17d5d5871203842976eb283f731f1d5329e9125d27fe25d",
+    "monitoring/monitoring_baselines.csv": "020a12646af52a418b9939c82c04d439ab5a70ed6b7a5d38ef5a23c8f691e525",
+    "monitoring/scored_timepoints.csv.gz": "c169067a585599f12b6f9e0986dcdbac6640e961e1f997c0bdfdbd317485a355"
+  },
+  "restricted_local_agent_timepoints": 32608,
+  "scope": "frozen v1 main out-of-seed and seen holdout diagnostic monitoring validation",
+  "source_time_series_sha256": "a3614fe873d70ee34f9151b06fff95ee743545b2afc53b9e09dea16c5443a5ba",
+  "status": "complete",
+  "timepoints": 3232,
+  "trajectory_method": "scripted_independent only"
+}

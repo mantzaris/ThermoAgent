@@ -33,6 +33,7 @@ required=(
   results/entropy_triggered_v2/training/checkpoint_selection.csv
   results/entropy_triggered_v2/training/training_manifest.json
   results/entropy_triggered_v2/reproducibility/execution_source.json
+  results/entropy_triggered_v2/reproducibility/source_transition_equivalence.json
 )
 for path in "${required[@]}"; do
   [[ -f "$path" ]] || {
@@ -60,6 +61,30 @@ observed = source_checksum(Path.cwd())
 if record.get("source_checksum") != observed:
     raise SystemExit(
         "Cannot freeze: deployed source differs from execution provenance"
+    )
+PY
+"$python_bin" - \
+  results/entropy_triggered_v2/reproducibility/execution_source.json \
+  results/entropy_triggered_v2/reproducibility/source_transition_equivalence.json \
+  results/entropy_triggered_v2/manifests/validation_sweep.json <<'PY'
+import json
+import sys
+from pathlib import Path
+
+provenance = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+transition = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+validation = json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
+if transition.get("status") != "passed":
+    raise SystemExit("Cannot freeze: source-transition equivalence did not pass")
+if transition.get("current_source", {}).get("source_checksum") != provenance.get(
+    "source_checksum"
+):
+    raise SystemExit("Cannot freeze: source-transition report is stale")
+if transition.get("validation_source", {}).get("source_checksum") != validation.get(
+    "source_checksum"
+):
+    raise SystemExit(
+        "Cannot freeze: source-transition report does not match validation source"
     )
 PY
 mapfile -t checkpoints < <(

@@ -74,6 +74,15 @@ be included in accounting.
 - Filtered-deployment provenance with exact source checksum and originating
   branch/commit, plus v2-only control synchronization and retrieval so remote
   work cannot replace frozen-v1 result paths.
+- The holdout freeze now requires a machine-generated source-transition parity
+  report. `scripts/verify-doet-source-transition.py` runs five deterministic
+  method cases in isolated interpreters rooted at the validation commit and
+  proposed holdout source. It compares metrics, agent/planner metrics, complete
+  time series, PPO trajectories, and causal events. Only the two newly added
+  private audit event kinds and their shifted ordinal IDs are excluded. The
+  exact deployed validation archive independently reproduced its recorded
+  source checksum `46d5ff37...f255f`, and the initial audit matched all six
+  sections for all five methods.
 - The experiment-level `llm_seed` now initializes both PyTorch and CUDA in the
   real Transformers planner. Decoding remains frozen and deterministic, but the
   manifest seed is therefore the seed actually applied at model load.
@@ -193,6 +202,16 @@ verify a clean tree. Then recapture and deploy that exact committed snapshot:
 
 ```bash
 git status --short
+git archive --format=tar --output=/tmp/thermoagent-validation-source.tar \
+  2a459e3be425c5c0e51df76fc2318bbe446c2948
+# Extract the archive into a new temporary directory, then run:
+python3 scripts/verify-doet-source-transition.py \
+  --validation-source /tmp/thermoagent-validation-source \
+  --current-source . \
+  --calibration results/reproducibility/macrostate_calibration.json \
+  --normalizers results/entropy_triggered_v2/calibration/trigger_nominal_calibration.json \
+  --expected-validation-checksum 46d5ff37b87d047d7dbdb1aa21d6b1ea5838ade472369a45d3d282ebdb9f255f \
+  --output results/entropy_triggered_v2/reproducibility/source_transition_equivalence.json
 ./scripts/runpod-sync.sh
 ./scripts/runpod-sync-v2-controls.sh resume
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/freeze-doet-holdout.sh'

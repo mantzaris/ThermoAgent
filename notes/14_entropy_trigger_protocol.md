@@ -49,11 +49,12 @@ analyses, but it does not replace the primary family after outcomes are seen.
 - **H4 timely activation:** at least 75% of non-nominal DOET-rule episodes have
   a first post-disruption activation strictly before visible collapse, no more
   than 10% activate falsely before the disruption, and no more than 10% of
-  nominal episodes contain any activation. Visible collapse is the first
-  post-disruption period whose normalized service loss exceeds that episode's
-  pre-disruption mean by more than 0.10; activation in the collapse period does
-  not count as lead time. A pre-disruption false alarm can never satisfy the
-  timely-activation condition.
+  nominal episodes contain any activation. Sustained severe collapse is
+  confirmed at the third consecutive post-disruption period with normalized
+  service loss at least 0.90 (at most 10% cumulative fulfillment); activation
+  in that third period does not count as lead time. An episode without a
+  confirmed severe collapse receives no before-collapse success credit. A
+  pre-disruption false alarm can never satisfy the timely-activation condition.
 - **H5 distributed robustness:** degradation under delay/noise/partition follows
   consensus error while retaining useful trigger behavior. The primary
   partition criterion is non-inferiority in both partition families and both
@@ -90,6 +91,27 @@ and projected compute will be appended before protocol freeze.
 7. The primary holdout test retains the 2% relative non-inferiority margin. No
    application-specific replacement is currently justified because v1 fixed
    losses are nonzero and stable.
+
+## H4 evaluability correction frozen before validation outcomes
+
+The first timing implementation defined visible collapse as service loss more
+than 0.10 above an episode's pre-disruption mean. A development-only audit of
+eight deterministic mock preflight episodes and four real-Qwen throughput-
+profile episodes found a zero-period strict lead window in all 12: ordinary
+logistics lead-time warm-up makes cumulative service loss rise before the shock,
+so the rule labeled the disruption period itself as collapse. The criterion
+was structurally impossible rather than merely difficult.
+
+Before any validation outcome was opened, the collapse rule was replaced with
+the sustained severe criterion in H4 above. It gives a positive strict lead
+window in all 12 audited engineering episodes (four periods in preflight and
+two in the real profile). The six primary-DOET engineering episodes contained
+zero trigger activations, so the correction could not have been chosen to turn
+a development trigger success into a favorable result. Exact source paths,
+checksums, steps, and activation counts are frozen in
+`results/entropy_triggered_v2/protocol/h4_evaluability_audit.json`. Trigger
+selection, thresholds, prompts, simulator dynamics, and validation trajectories
+are unchanged.
 
 ## Development calibration fixed before validation
 

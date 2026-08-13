@@ -4,7 +4,7 @@
 
 Last updated: 2026-08-13 America/New_York
 
-- **Current phase:** The isolated RunPod setup, 137-test prevalidation verification, and
+- **Current phase:** The isolated RunPod setup, 138-test prevalidation verification, and
   eight-episode real-Qwen profile are complete. The measured rate ruled out the
   preferred design; the prospectively reduced 144-episode validation and
   696/656/616-episode runtime-capped locked-holdout ladder are being verified.
@@ -15,8 +15,9 @@ Last updated: 2026-08-13 America/New_York
   strong communication controls; five-seed training runner; validation and
   compute-capped holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
-  137 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
-  writers and full-resolution QA of the existing v2 diagnostic figures.
+  138 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
+  writers and full-resolution QA of the existing v2 diagnostic figures; and a
+  development-only correction of a structurally impossible H4 lead-time rule.
 - **Active work:** the documented 144-episode real-Qwen validation is running
   in detached `tmux` on the exact checksum-matched source.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.

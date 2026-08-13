@@ -5,6 +5,20 @@ is reachable and the committed v2 source was deployed by a filtered archive
 with an exact source-checksum match. This file treats the completed throughput
 profile as development engineering evidence, not an efficacy result.
 
+## Pre-outcome H4 evaluability audit
+
+Before inspecting the active validation results, the timing-analysis code was
+tested against the existing mock preflight and real-Qwen throughput-profile
+episodes. The initial `pre-disruption mean + 0.10` service-loss rule classified
+the disruption period itself as collapse in 12/12 non-nominal engineering
+episodes, leaving no strict lead-time window. This was a structural measurement
+failure. The rule is now a sustained severe threshold: service loss at least
+0.90 for three consecutive post-disruption periods, with collapse timestamped
+at the third period. It creates a two- or four-period window in all 12 audit
+episodes. The primary DOET cases had zero activations, so the definition was not
+selected to reward an observed trigger. The complete audit is
+`results/entropy_triggered_v2/protocol/h4_evaluability_audit.json`.
+
 Completed local work:
 
 - 12 nominal monitor-only calibration episodes, seeds `5101`--`5106`;

@@ -23,6 +23,8 @@ from .events import sha256_file
 PRIMARY_METHOD = "doet_rule"
 FIXED_METHOD = "fixed_always_on"
 PRIMARY_MARGIN = 0.02
+SEVERE_SERVICE_LOSS_THRESHOLD = 0.90
+SEVERE_SERVICE_LOSS_PERSISTENCE = 3
 BOOTSTRAP_REPLICATES = 10_000
 BOOTSTRAP_SEED = 20260813
 COMMUNICATION_METRICS = (
@@ -524,7 +526,8 @@ def _activation_timing(
         )
     timely = bool(
         first_post is not None
-        and (collapse_step is None or first_post < int(collapse_step))
+        and collapse_step is not None
+        and first_post < int(collapse_step)
     )
     return {
         "first_activation_step": first_any,
@@ -536,6 +539,44 @@ def _activation_timing(
             if first_post is not None and disruption_step is not None else None
         ),
     }
+
+
+def _severe_service_collapse_step(
+    series: pd.DataFrame,
+    disruption_step: Optional[int],
+    threshold: float = SEVERE_SERVICE_LOSS_THRESHOLD,
+    persistence: int = SEVERE_SERVICE_LOSS_PERSISTENCE,
+) -> Optional[int]:
+    """Return when severe loss is first confirmed for consecutive periods.
+
+    Development/preflight auditing showed that the earlier pre-period-mean
+    rule labeled the disruption period itself as collapse in every inspected
+    non-nominal engineering episode because ordinary lead-time warm-up already
+    raises cumulative service loss.  A normalized loss of 0.90 means at most
+    10% cumulative fulfillment. Requiring three consecutive post-disruption
+    periods distinguishes a sustained severe collapse from a one-period level
+    crossing and leaves a genuine, conservative detection window. The constants
+    are frozen before validation outcomes or holdout data are inspected.
+    """
+
+    if disruption_step is None:
+        return None
+    if not 0.0 <= float(threshold) <= 1.0:
+        raise ValueError("severe service-loss threshold must be in [0, 1]")
+    if int(persistence) < 1:
+        raise ValueError("severe service-loss persistence must be positive")
+    consecutive = 0
+    for _, row in series.sort_values("step").iterrows():
+        step = int(row["step"])
+        if step < int(disruption_step):
+            continue
+        if float(row["service_loss"]) >= float(threshold):
+            consecutive += 1
+        else:
+            consecutive = 0
+        if consecutive >= int(persistence):
+            return step
+    return None
 
 
 def _mechanistic(
@@ -566,21 +607,9 @@ def _mechanistic(
             event for event in triggers if event["payload"].get("deactivated")
         ]
         series = pd.DataFrame(episode["time_series"])
-        pre = (
-            series[series["step"] < disruption_step]["service_loss"]
-            if disruption_step is not None else series["service_loss"]
+        collapse_step = _severe_service_collapse_step(
+            series, disruption_step
         )
-        collapse_threshold = (
-            float(pre.mean() + 0.10) if len(pre) else float("inf")
-        )
-        collapse_steps = (
-            series[
-                (series["step"] >= disruption_step)
-                & (series["service_loss"] > collapse_threshold)
-            ]["step"]
-            if disruption_step is not None else series.iloc[0:0]["step"]
-        )
-        collapse_step = int(collapse_steps.iloc[0]) if len(collapse_steps) else None
         timing = _activation_timing(
             [int(event["step"]) for event in activations],
             disruption_step,
@@ -674,6 +703,9 @@ def _mechanistic(
             **timing,
             "first_deactivation_step": first_deactivation,
             "service_collapse_step": collapse_step,
+            "severe_service_loss_threshold": SEVERE_SERVICE_LOSS_THRESHOLD,
+            "severe_service_loss_persistence": SEVERE_SERVICE_LOSS_PERSISTENCE,
+            "severe_collapse_observed": collapse_step is not None,
             "nominal_false_activation": bool(
                 summary["scenario_name"] == "nominal"
                 and timing["first_activation_step"] is not None
@@ -978,6 +1010,7 @@ def run(results_root: Path) -> Dict[str, Any]:
         confirmatory_complete
         and
         len(non_nominal_mechanistic)
+        and non_nominal_mechanistic["severe_collapse_observed"].all()
         and non_nominal_mechanistic["activation_before_collapse"].mean() >= 0.75
         and non_nominal_mechanistic[
             "pre_disruption_false_activation"
@@ -1010,7 +1043,7 @@ def run(results_root: Path) -> Dict[str, Any]:
         {"hypothesis": "H1", "outcome": "supported" if h1 else "unsupported", "criterion": "DOET-rule non-inferior to fixed in both applications after Holm correction"},
         {"hypothesis": "H2", "outcome": "supported" if h2 else "unsupported", "criterion": "message reduction CI excludes zero and mean reduction >=20% in both applications after Holm correction"},
         {"hypothesis": "H3", "outcome": "supported" if h3 else "unsupported", "criterion": "DOET-rule is loss-message nondominated and strictly increases the frozen normalized frontier hypervolume for messages, prompt tokens, calls, and latency in both applications"},
-        {"hypothesis": "H4", "outcome": "supported" if h4 else "unsupported", "criterion": ">=75% first post-disruption activation before collapse, <=10% pre-disruption false activation, and <=10% nominal episode false activation"},
+        {"hypothesis": "H4", "outcome": "supported" if h4 else "unsupported", "criterion": ">=75% first post-disruption activation before sustained severe collapse (service loss >=0.90 for three consecutive periods), severe collapse observed in every non-nominal episode, <=10% pre-disruption false activation, and <=10% nominal episode false activation"},
         {"hypothesis": "H5", "outcome": "supported" if h5 else "unsupported", "criterion": "non-inferior in partition and compound-partition regimes in both applications, with positive consensus-RMSE/degradation slope and Pearson r >=0.20 in each application"},
         {"hypothesis": "H6", "outcome": "supported" if h6 else "unsupported", "criterion": "H1 and H2 supported in both applications"},
     ])

@@ -28,6 +28,7 @@ required=(
   results/entropy_triggered_v2/protocol/power_precision_analysis.json
   results/entropy_triggered_v2/protocol/LOCKED_PROTOCOL.md
   results/entropy_triggered_v2/protocol/runtime_budget_fallback_preregistration.json
+  results/entropy_triggered_v2/protocol/h4_evaluability_audit.json
   results/entropy_triggered_v2/training/seed_manifest.csv
   results/entropy_triggered_v2/training/training_attempts.csv
   results/entropy_triggered_v2/training/checkpoint_selection.csv

@@ -19,11 +19,14 @@ reduction; other costs remain required outputs. H3 requires message
 nondominance and strict normalized hypervolume gains for messages, prompt
 tokens, calls, and latency in both applications. H4 requires at least 75% of
 non-nominal episodes to first activate at or after disruption and before
-service collapse, at most 10% of non-nominal episodes to activate before the
-disruption, and at most 10% of nominal episodes to activate falsely. Visible
-collapse is the first post-disruption period whose normalized service loss is
-more than 0.10 above that episode's pre-disruption mean; activation at the same
-period is not counted as leading collapse. H5 requires non-inferiority in both
+sustained severe service collapse, at most 10% of non-nominal episodes to
+activate before the disruption, and at most 10% of nominal episodes to activate
+falsely. Sustained severe collapse is confirmed at the third consecutive
+post-disruption period with normalized service loss at least 0.90; activation
+at that third period is not counted as leading collapse, and an episode without
+confirmed collapse receives no before-collapse success credit. The development-
+only evaluability audit and its input checksums are frozen in
+`protocol/h4_evaluability_audit.json`. H5 requires non-inferiority in both
 partition families and both applications, a positive consensus-error/
 degradation slope, and Pearson `r >= 0.20` in each application. Failed runs and
 all five RL seeds are retained; any failed locked episode prevents a supported

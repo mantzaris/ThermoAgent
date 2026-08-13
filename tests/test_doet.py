@@ -30,6 +30,7 @@ from thermoagent.doet_analysis import (
     _common_panel_subset,
     _comparison_rows,
     _frontier_rows,
+    _severe_service_collapse_step,
 )
 from thermoagent.doet_ablations import run as design_doet_ablations
 from thermoagent.doet_holdout import run as design_doet_holdout
@@ -197,6 +198,30 @@ def test_timely_activation_never_credits_a_pre_disruption_false_alarm():
     assert false_only["pre_disruption_false_activation"]
     assert not false_only["activation_before_collapse"]
     assert false_only["first_post_disruption_activation_step"] is None
+
+    no_collapse = _activation_timing(
+        [8], disruption_step=6, collapse_step=None
+    )
+    assert not no_collapse["activation_before_collapse"]
+
+
+def test_severe_collapse_requires_three_consecutive_post_disruption_periods():
+    series = pd.DataFrame({
+        "step": [0, 1, 2, 3, 4, 5, 6, 7],
+        "service_loss": [0.2, 0.6, 0.8, 0.89, 0.91, 0.88, 0.92, 0.93],
+    })
+    assert _severe_service_collapse_step(series, 3) is None
+    series.loc[len(series)] = {"step": 8, "service_loss": 0.94}
+    assert _severe_service_collapse_step(series, 3) == 8
+
+    immediate = pd.DataFrame({
+        "step": [4, 5, 6], "service_loss": [0.91, 0.92, 0.93]
+    })
+    assert _severe_service_collapse_step(immediate, 4) == 6
+    with pytest.raises(ValueError, match="threshold"):
+        _severe_service_collapse_step(immediate, 4, threshold=1.1)
+    with pytest.raises(ValueError, match="persistence"):
+        _severe_service_collapse_step(immediate, 4, persistence=0)
 
 
 def test_public_route_affordance_prevents_arbitrary_material_target():

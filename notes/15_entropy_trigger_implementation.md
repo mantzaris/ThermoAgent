@@ -97,14 +97,18 @@ be included in accounting.
   still allowing explicitly incomplete matched-pair summaries.
 - A prospectively tested H4 timing classifier separates pre-disruption false
   alarms from the first post-disruption activation. Only a post-disruption
-  activation strictly before the fixed service-collapse threshold receives
-  timely-detection credit.
+  activation strictly before three consecutive periods at or above 0.90
+  normalized service loss receives timely-detection credit. A development-only
+  audit replaced the earlier structurally impossible warm-up-sensitive rule
+  before validation outcomes were opened; all 12 old windows were zero, all 12
+  revised windows were positive, and the six DOET audit episodes had no trigger
+  activation that could have favored the correction.
 - Fail-closed reproduction commands for design, freeze, holdout, replay,
   analysis, vector figures, PDF validation, reporting, and indexing.
 
 ## Verification
 
-The current complete suite is 137/137 passing. New tests cover trigger
+The current complete suite is 138/138 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen

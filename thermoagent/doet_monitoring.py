@@ -27,6 +27,12 @@ from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_s
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+from .doet_analysis import (
+    SEVERE_SERVICE_LOSS_PERSISTENCE,
+    SEVERE_SERVICE_LOSS_THRESHOLD,
+    _severe_service_collapse_step,
+)
+
 
 KPI_FEATURES = [
     "backlog_ratio",
@@ -490,13 +496,7 @@ def detection_lead_table(scores: pd.DataFrame) -> pd.DataFrame:
         active = group[group["disruption_label"] == 1]
         onset = int(active["step"].min()) if not active.empty else None
         pre = group if onset is None else group[group["step"] < onset]
-        baseline = float(pre["service_loss"].mean()) if not pre.empty else float(group.iloc[0]["service_loss"])
-        collapse = (
-            group[(group["step"] >= onset) & (group["service_loss"] > baseline + 0.10)]
-            if onset is not None
-            else group.iloc[0:0]
-        )
-        collapse_step = int(collapse["step"].min()) if not collapse.empty else None
+        collapse_step = _severe_service_collapse_step(group, onset)
         post_detection = (
             group[(group["step"] >= onset) & group["activated"].astype(bool)]
             if onset is not None
@@ -518,8 +518,12 @@ def detection_lead_table(scores: pd.DataFrame) -> pd.DataFrame:
             "detection_step": detection,
             "detection_delay": detection - onset if detection is not None and onset is not None else None,
             "visible_collapse_step": collapse_step,
+            "severe_service_loss_threshold": SEVERE_SERVICE_LOSS_THRESHOLD,
+            "severe_service_loss_persistence": SEVERE_SERVICE_LOSS_PERSISTENCE,
             "detection_lead_before_collapse": lead,
-            "detected_before_or_at_collapse": bool(lead is not None and lead >= 0),
+            "detected_strictly_before_collapse": bool(
+                lead is not None and lead > 0
+            ),
             "false_activations_before_disruption_or_during_nominal": false_activations,
             "pre_disruption_or_nominal_timepoints": len(pre),
         })
@@ -531,7 +535,9 @@ def detection_lead_table(scores: pd.DataFrame) -> pd.DataFrame:
         disrupted = group[group["disruption_step"].notna()]
         detected = disrupted["detection_step"].notna()
         visible = disrupted["visible_collapse_step"].notna()
-        before = disrupted.loc[visible, "detected_before_or_at_collapse"].astype(bool)
+        before = disrupted.loc[
+            visible, "detected_strictly_before_collapse"
+        ].astype(bool)
         summaries.append({
             "row_type": "summary",
             "evaluation_stage": stage,
@@ -545,8 +551,10 @@ def detection_lead_table(scores: pd.DataFrame) -> pd.DataFrame:
             "detection_step": None,
             "detection_delay": float(pd.to_numeric(disrupted.loc[detected, "detection_delay"]).mean()) if detected.any() else None,
             "visible_collapse_step": None,
+            "severe_service_loss_threshold": SEVERE_SERVICE_LOSS_THRESHOLD,
+            "severe_service_loss_persistence": SEVERE_SERVICE_LOSS_PERSISTENCE,
             "detection_lead_before_collapse": float(pd.to_numeric(disrupted.loc[detected & visible, "detection_lead_before_collapse"]).mean()) if (detected & visible).any() else None,
-            "detected_before_or_at_collapse": float(before.mean()) if len(before) else None,
+            "detected_strictly_before_collapse": float(before.mean()) if len(before) else None,
             "false_activations_before_disruption_or_during_nominal": int(group["false_activations_before_disruption_or_during_nominal"].sum()),
             "pre_disruption_or_nominal_timepoints": int(group["pre_disruption_or_nominal_timepoints"].sum()),
             "n_episodes": len(group),
@@ -1041,6 +1049,7 @@ def write_readme(output_root: Path, monitoring: pd.DataFrame, incremental: pd.Da
         "Rows prefixed `restricted_local_` compare each independent agent's private local KPI vector with the same vector plus that agent's final-round distributed entropy estimate. They test entropy as a privacy-preserving compressed system statistic after the full evaluator-KPI model has already shown no classification increment.",
         "",
         "Results are reported separately by connected, degraded, and partitioned communication and by isolated, correlated, compound, and nominal regimes in `monitoring_baselines.csv`. Episode-level detection timing is in `detection_lead_time.csv`; entropy-surprisal and ordinary-impairment localization are in `localization.csv`.",
+        "The timing table uses the same pre-holdout evaluability correction as H4: sustained severe collapse is the third consecutive post-disruption period with normalized service loss at least 0.90, and same-period detections receive no lead-time credit. The earlier warm-up-sensitive rule and its 12-episode development audit remain in `../protocol/h4_evaluability_audit.json`.",
         "",
         "## Reproduction",
         "",

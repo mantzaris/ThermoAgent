@@ -70,6 +70,7 @@ The full evaluator-KPI classifier is already perfect on both stages, so entropy 
 Rows prefixed `restricted_local_` compare each independent agent's private local KPI vector with the same vector plus that agent's final-round distributed entropy estimate. They test entropy as a privacy-preserving compressed system statistic after the full evaluator-KPI model has already shown no classification increment.
 
 Results are reported separately by connected, degraded, and partitioned communication and by isolated, correlated, compound, and nominal regimes in `monitoring_baselines.csv`. Episode-level detection timing is in `detection_lead_time.csv`; entropy-surprisal and ordinary-impairment localization are in `localization.csv`.
+The timing table uses the same pre-holdout evaluability correction as H4: sustained severe collapse is the third consecutive post-disruption period with normalized service loss at least 0.90, and same-period detections receive no lead-time credit. The earlier warm-up-sensitive rule and its 12-episode development audit remain in `../protocol/h4_evaluability_audit.json`.
 
 ## Reproduction
 

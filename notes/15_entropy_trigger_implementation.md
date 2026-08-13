@@ -108,7 +108,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 138/138 passing. New tests cover trigger
+The current complete suite is 139/139 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen

@@ -87,6 +87,16 @@ seen original holdout remains diagnostic only.
   and 0.0197.
 - Restricted entropy modestly improved future-loss prediction on original main
   but worsened holdout RMSE/R-squared. This predictive result is mixed.
+- After the pre-outcome severe-collapse evaluability correction, the low-
+  direction entropy detector activated in 0.375 of disrupted commercial and
+  0.250 of disrupted humanitarian original-main episodes. Among episodes with
+  confirmed sustained collapse, its strict before-collapse proportions were
+  0.733 and 0.317, with false-activation rates 0.156 and 0.213. Absolute-
+  deviation entropy detected more collapses but false-alarmed at roughly 0.24;
+  private KPI CUSUM false-alarmed at 0.026 but was especially late in
+  humanitarian logistics. On the seen holdout, low entropy led every confirmed
+  collapse but false-alarmed on every negative timepoint. Timing is therefore
+  potentially useful but poorly calibrated, not a standalone positive claim.
 - At disruption onset, ordinary impairment localized the true source perfectly.
   Local surprisal top-1 was perfect commercially but only 0.125 humanitarian in
   original main; top-3 was perfect. Localization value is therefore role- and

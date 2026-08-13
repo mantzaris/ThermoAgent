@@ -28,12 +28,14 @@ def _utc_now() -> str:
 def _write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = sorted({key for row in rows for key in row})
-    with path.open("w", encoding="utf-8", newline="") as handle:
+    temporary = path.with_name(path.name + ".tmp")
+    with temporary.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
             handle, fieldnames=fields, lineterminator="\n"
         )
         writer.writeheader()
         writer.writerows(rows)
+    temporary.replace(path)
 
 
 def _existing_valid(
@@ -100,6 +102,7 @@ def run(
     checkpoint_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
     manifest_path = training_root / "seed_manifest.csv"
+    attempts_path = training_root / "training_attempts.csv"
     provenance_path = results_root / "reproducibility" / "execution_source.json"
     if not provenance_path.is_file():
         raise FileNotFoundError(
@@ -110,16 +113,51 @@ def run(
     prior_rows: Dict[tuple, Dict[str, Any]] = {}
     if manifest_path.exists():
         with manifest_path.open(encoding="utf-8", newline="") as handle:
-            for row in csv.DictReader(handle):
-                prior_rows[(row["variant"], int(row["rl_training_seed"]))] = row
+            for prior in csv.DictReader(handle):
+                prior_rows[(
+                    prior["variant"], int(prior["rl_training_seed"])
+                )] = dict(prior)
+    # ``seed_manifest.csv`` is a current-state view used by checkpoint
+    # selection. Keep a separate append-only attempt ledger so a failed or
+    # interrupted attempt cannot disappear when the restartable command is
+    # invoked again.
+    attempt_rows: List[Dict[str, Any]] = []
+    if attempts_path.exists():
+        with attempts_path.open(encoding="utf-8", newline="") as handle:
+            attempt_rows.extend(dict(row) for row in csv.DictReader(handle))
+    elif prior_rows:
+        # Migrate manifests produced before the attempt ledger existed without
+        # erasing their original execution-source fields. The imported record
+        # is terminal-only because no synthetic start event should be invented.
+        for key in sorted(prior_rows):
+            prior = dict(prior_rows[key])
+            prior.update({
+                "attempt_number": 1,
+                "attempt_id": "%s-seed%d-attempt1" % key,
+                "attempt_event": "terminal",
+                "attempt_imported_from_seed_manifest": True,
+            })
+            attempt_rows.append(prior)
+        _write_csv(attempts_path, attempt_rows)
+    attempt_counts: Dict[tuple, int] = {}
+    for prior in attempt_rows:
+        key = (prior.get("variant"), int(prior.get("rl_training_seed", -1)))
+        attempt_counts[key] = max(
+            attempt_counts.get(key, 0), int(prior.get("attempt_number", 0))
+        )
     rows: List[Dict[str, Any]] = []
     for variant in VARIANTS:
         for seed in seeds:
+            attempt_key = (variant, seed)
+            attempt_number = attempt_counts.get(attempt_key, 0) + 1
+            attempt_counts[attempt_key] = attempt_number
             checkpoint = checkpoint_root / (
                 "coordination_%s_seed%d.pt" % (variant, seed)
             )
             log_path = log_root / ("%s_seed%d.jsonl" % (variant, seed))
             started = _utc_now()
+            prior = prior_rows.get(attempt_key, {})
+            existing_checkpoint = checkpoint.exists()
             row: Dict[str, Any] = {
                 "variant": variant,
                 "rl_training_seed": seed,
@@ -137,6 +175,21 @@ def run(
                 "source_branch": provenance.get("branch", "unknown"),
                 "source_dirty": provenance.get("dirty"),
                 "source_checksum": provenance.get("source_checksum"),
+                "checkpoint_origin_source_commit": (
+                    prior.get("checkpoint_origin_source_commit")
+                    or prior.get("source_commit")
+                    if existing_checkpoint else provenance.get("commit", "unknown")
+                ),
+                "checkpoint_origin_source_branch": (
+                    prior.get("checkpoint_origin_source_branch")
+                    or prior.get("source_branch")
+                    if existing_checkpoint else provenance.get("branch", "unknown")
+                ),
+                "checkpoint_origin_source_checksum": (
+                    prior.get("checkpoint_origin_source_checksum")
+                    or prior.get("source_checksum")
+                    if existing_checkpoint else provenance.get("source_checksum")
+                ),
                 "protocol_checksum": sha256_file(trigger_config_path),
                 "environment_seed_rule": (
                     "independent RandomState(training seed); fixed 192-episode "
@@ -146,7 +199,13 @@ def run(
                 "prompt_tokens": 0,
                 "generated_tokens": 0,
                 "planner": "deterministic mock planner during staged PPO",
+                "attempt_number": attempt_number,
+                "attempt_id": "%s-seed%d-attempt%d" % (
+                    variant, seed, attempt_number
+                ),
             }
+            attempt_rows.append({**row, "attempt_event": "started"})
+            _write_csv(attempts_path, attempt_rows)
             try:
                 if checkpoint.exists():
                     metadata = _existing_valid(
@@ -183,6 +242,7 @@ def run(
                     ),
                     "planner": metadata.get("planner"),
                     "training_method": metadata.get("training_method"),
+                    "checkpoint_generated_at": metadata.get("generated_at"),
                 })
             except Exception as error:
                 row.update({
@@ -195,6 +255,8 @@ def run(
                         traceback.format_exc().encode("utf-8")
                     ).hexdigest(),
                 })
+            attempt_rows.append({**row, "attempt_event": "terminal"})
+            _write_csv(attempts_path, attempt_rows)
             rows.append(row)
             _write_csv(manifest_path, rows)
 
@@ -235,6 +297,14 @@ def run(
             }
             for row in failed
         ],
+        "training_attempt_events": len(attempt_rows),
+        "nonterminal_attempts_retained": len({
+            row.get("attempt_id") for row in attempt_rows
+            if row.get("attempt_event") == "started"
+        } - {
+            row.get("attempt_id") for row in attempt_rows
+            if row.get("attempt_event") == "terminal"
+        }),
         "calibration_path": str(calibration_path),
         "calibration_sha256": sha256_file(calibration_path),
         "trigger_config_path": str(trigger_config_path),
@@ -260,6 +330,7 @@ def run(
         "hardware": hardware_summary(),
         "outputs": {
             "seed_manifest.csv": sha256_file(manifest_path),
+            "training_attempts.csv": sha256_file(attempts_path),
             "checkpoint_selection.csv": sha256_file(selection_path),
             "learning_curves.csv": sha256_file(curves_path),
         },

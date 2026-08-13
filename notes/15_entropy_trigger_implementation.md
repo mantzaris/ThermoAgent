@@ -59,6 +59,12 @@ be included in accounting.
   identical 192-episode budget; final checkpoints are selected by fixed budget,
   never outcome. Although this staged PPO is CPU-bound, its elapsed time on the
   reserved Pod is charged to the 35-hour resource budget and reported as such.
+- Training restart bookkeeping now has a semantically append-only, atomically
+  published attempt ledger. A start and terminal event are retained for every
+  seed attempt; interruptions therefore remain visible after a resume. Legacy
+  seed manifests are imported without inventing a start event, and current
+  rows separately retain the source checksum that originally created an
+  existing checkpoint.
 - Fail-closed holdout generation and protocol verification before every locked
   sweep; the generator checks checkpoint hashes, validation status, exact
   balance, new seed separation, episode count, a fixed 20,000-replicate
@@ -89,7 +95,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 133/133 passing. New tests cover trigger
+The current complete suite is 134/134 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -97,6 +103,9 @@ topology connectivity, balanced five-seed assignment, paired/hierarchical
 analysis, multi-cost frontier behavior, filtered provenance, and deterministic
 replay. A dedicated control test verifies that a zero-rate random gate still
 performs quiet local planning without activating communication.
+The restart test also forces one PPO seed attempt to fail, resumes all fifteen
+slots, and verifies that both the failed and successful terminal records remain
+in the attempt ledger.
 
 The eight-episode mock preflight completed with zero failures and maximum
 absolute material residual below `1.14e-13`; all eight ledgers replayed exactly.

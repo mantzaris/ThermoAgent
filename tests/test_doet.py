@@ -9,6 +9,8 @@ import pandas as pd
 import pytest
 import yaml
 
+import thermoagent.doet_training as doet_training
+
 from thermoagent.doet import (
     CommunicationMode,
     DistributedEntropyTrigger,
@@ -645,6 +647,90 @@ def test_transformers_planner_applies_declared_llm_seed(monkeypatch):
     )
     assert planner.seed == 9101
     assert calls == [("torch", 9101), ("cuda", 9101)]
+
+
+def test_multiseed_training_retains_failed_attempts_across_restart(
+    tmp_path, monkeypatch
+):
+    results_root = tmp_path / "results"
+    reproducibility = results_root / "reproducibility"
+    reproducibility.mkdir(parents=True)
+    (reproducibility / "execution_source.json").write_text(
+        json.dumps({
+            "commit": "test", "branch": "entropy-triggered-communication",
+            "dirty": False, "source_checksum": "source",
+        }),
+        encoding="utf-8",
+    )
+    calibration = tmp_path / "calibration.json"
+    trigger = tmp_path / "trigger.json"
+    calibration.write_text("{}\n", encoding="utf-8")
+    trigger.write_text("{}\n", encoding="utf-8")
+    failed_once = {("no_entropy", 1): False}
+
+    def fake_train_policy(
+        output_path, variant, episodes, seed, calibration_path, log_path,
+        trigger_config_path=None,
+    ):
+        key = (variant, seed)
+        if key == ("no_entropy", 1) and not failed_once[key]:
+            failed_once[key] = True
+            raise RuntimeError("retained failure")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_bytes(("%s:%d" % key).encode("utf-8"))
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        log_path.write_text(
+            json.dumps({"episode": 0, "primary_outcome": 1.0}) + "\n",
+            encoding="utf-8",
+        )
+        return {
+            "variant": variant, "training_seed": seed,
+            "episodes": episodes, "wall_clock_seconds": 1.0,
+            "final_window_primary_mean": 1.0,
+            "planner": "deterministic mock-v2",
+            "training_method": "test",
+        }
+
+    def fake_checkpoint_metadata(path):
+        stem = path.stem
+        if stem.startswith("coordination_"):
+            stem = stem[len("coordination_"):]
+        variant, seed_text = stem.rsplit("_seed", 1)
+        return {
+            "variant": variant, "training_seed": int(seed_text),
+            "episodes": 1, "wall_clock_seconds": 1.0,
+            "final_window_primary_mean": 1.0,
+            "planner": "deterministic mock-v2",
+            "training_method": "test",
+        }
+
+    monkeypatch.setattr(doet_training, "train_policy", fake_train_policy)
+    monkeypatch.setattr(
+        doet_training, "checkpoint_metadata", fake_checkpoint_metadata
+    )
+    monkeypatch.setattr(doet_training, "dependency_versions", lambda: {})
+    monkeypatch.setattr(doet_training, "hardware_summary", lambda: {})
+
+    first = doet_training.run(
+        results_root, range(1, 6), 1, calibration, trigger
+    )
+    assert first["status"] == "completed_with_failures"
+    second = doet_training.run(
+        results_root, range(1, 6), 1, calibration, trigger
+    )
+    assert second["status"] == "complete"
+
+    attempts = pd.read_csv(
+        results_root / "training" / "training_attempts.csv"
+    )
+    retained = attempts[
+        (attempts["variant"] == "no_entropy")
+        & (attempts["rl_training_seed"] == 1)
+        & (attempts["attempt_event"] == "terminal")
+    ]
+    assert list(retained["status"]) == ["failed", "complete"]
+    assert "retained failure" in retained.iloc[0]["failure_reason"]
+    assert second["nonterminal_attempts_retained"] == 0
 
 
 def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_path):

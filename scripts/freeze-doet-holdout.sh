@@ -29,6 +29,7 @@ required=(
   results/entropy_triggered_v2/protocol/LOCKED_PROTOCOL.md
   results/entropy_triggered_v2/protocol/runtime_budget_fallback_preregistration.json
   results/entropy_triggered_v2/training/seed_manifest.csv
+  results/entropy_triggered_v2/training/training_attempts.csv
   results/entropy_triggered_v2/training/checkpoint_selection.csv
   results/entropy_triggered_v2/training/training_manifest.json
   results/entropy_triggered_v2/reproducibility/execution_source.json

@@ -1,0 +1,18 @@
+{
+  "config_checksum": "2aa17c14ec7bf643fdfe35cc414036df1c392009e30a90200454653a955801df",
+  "config_path": "configs/entropy_trigger_validation.yaml",
+  "cumulative_episode_single_gpu_hours": 4.251606598544038,
+  "end_timestamp": "2026-08-13T22:42:53.326484+00:00",
+  "episodes_complete": 144,
+  "episodes_failed": 0,
+  "episodes_planned": 144,
+  "generated_tokens": 974801,
+  "llm_calls": 13031,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 26706959,
+  "source_checksum": "46d5ff37b87d047d7dbdb1aa21d6b1ea5838ade472369a45d3d282ebdb9f255f",
+  "stage": "validation",
+  "start_timestamp": "2026-08-13T18:24:33.964977+00:00",
+  "wall_clock_seconds_including_model_load": 15499.361493840814
+}

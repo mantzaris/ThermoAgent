@@ -2,12 +2,12 @@
 
 ## Entropy-triggered communication study (v2)
 
-Last updated: 2026-08-13 America/New_York
+Last updated: 2026-08-13 18:47 America/New_York
 
-- **Current phase:** The isolated RunPod setup, 144-test pretraining verification, and
-  eight-episode real-Qwen profile are complete. The measured rate ruled out the
-  preferred design; the prospectively reduced 144-episode validation and
-  696/656/616-episode runtime-capped locked-holdout ladder are being verified.
+- **Current phase:** The isolated RunPod setup, eight-episode real-Qwen profile,
+  144-episode real-Qwen validation, and exact 144/144 validation replay are
+  complete. The frozen validation selector chose `hysteresis_low`. Fifteen
+  independently initialized PPO training runs are the next compute stage.
 - **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
 - **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
 - **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
@@ -18,35 +18,40 @@ Last updated: 2026-08-13 America/New_York
   144 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
   writers and full-resolution QA of the existing v2 diagnostic figures; and a
   development-only correction of a structurally impossible H4 lead-time rule.
-- **Active work:** the documented 144-episode real-Qwen validation is running
-  in detached `tmux` on the exact checksum-matched source.
-  No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.
-- **Active jobs:** `doet-validation` only. The automatic training watcher was
-  deliberately stopped before validation finished after a code audit found
-  that staged DOET-RL training did not resolve the validation-selected role/
-  application nominal-normalizer file. Validation itself was not stopped or
-  inspected. Retained `doet-setup` exited 2 before
+- **Active work:** commit and deploy the retrieved validation evidence and the
+  tested normalizer-resolution correction, then train five independent seeds
+  for each of the three learned methods. No new locked-holdout outcome exists.
+- **Active jobs:** none. `doet-validation` exited 0 after 144/144 episodes;
+  the automatic training watcher had been deliberately stopped before
+  validation finished after a code audit found that staged DOET-RL training did
+  not resolve the validation-selected role/application nominal-normalizer file.
+  Validation itself was not stopped or inspected. Retained `doet-setup` exited 2 before
   testing or model inference; `doet-setup-v2`, `doet-profile`, and the corrected
   prevalidation test job exited 0. A malformed quoted test launcher exited 127
   without starting an experiment and remains in the audit log.
 - **Blockers:** none. The stale direct alias still refuses port 19465, but the
   user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
   locally configured RSA key. The requested Ed25519 path was absent.
-- **Next actions:** complete and fetch the 144-episode validation, deploy the
-  tested normalizer-resolution correction, train all 15 checkpoints, and commit
-  the validation-selected protocol, perform measured precision/budget analysis,
-  freeze, and run the largest preregistered outcome-sealed holdout that remains
-  within the 35-hour cap.
+- **Next actions:** deploy the tested normalizer-resolution correction, train
+  all 15 checkpoints without seed removal, perform measured precision/budget
+  analysis, freeze the selected protocol and source, and run the largest
+  preregistered outcome-sealed holdout that remains within the 35-hour cap.
 - **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
 - **Compute used by v2:** profile sweep 0.1984 single-GPU hours including model
-  load, plus 0.0216 hours for model smoke. The setup interval is retained
-  separately. The proxy remains connected to Pod `o4figaziv32yyd`; no
-  replacement resource was created.
+  load, 0.0216 hours for model smoke, and 4.3054 wall-clock Pod hours for
+  validation (4.2516 summed episode GPU-hours). Validation used 13,031 LLM
+  calls, 26,706,959 prompt tokens, and 974,801 generated tokens. The setup
+  interval is retained separately. The proxy remains connected to Pod
+  `o4figaziv32yyd`; no replacement resource was created.
 - **Latest valid v2 evidence:** full evaluator KPIs make entropy redundant for
   disruption rank, whereas distributed entropy adds about 0.097--0.098 AP and
-  0.169--0.171 AUC to private local KPIs on original-main diagnostics. The new
-  development leader is low-direction distributed entropy (AP 0.622 commercial,
-  0.562 humanitarian), but threshold recall is weak and not confirmatory.
+  0.169--0.171 AUC to private local KPIs on original-main diagnostics. On new
+  validation, selected `hysteresis_low` degraded commercial primary loss by
+  0.792% on average and tied humanitarian loss, while reducing counted messages
+  by 70.7%. Crucially, all four entropy candidates had zero trigger activations:
+  the savings arose from quiet-mode scheduling, not demonstrated event-triggered
+  coordination. This mixed/negative mechanism result is frozen and will not be
+  tuned away.
 
 ---
 

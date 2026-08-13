@@ -1,9 +1,8 @@
 # DOET development and validation log
 
-No real-LLM validation result has yet been produced. The current RunPod proxy
-is reachable and the committed v2 source was deployed by a filtered archive
-with an exact source-checksum match. This file treats the completed throughput
-profile as development engineering evidence, not an efficacy result.
+The real-LLM validation completed 144/144 episodes and replayed 144/144 exactly.
+The outcome seal was lifted only after completion and replay. The current
+RunPod proxy remains reachable, and the launch source checksum is retained.
 
 ## Pre-outcome H4 evaluability audit
 
@@ -48,11 +47,11 @@ rows remain in `results/entropy_triggered_v2/calibration/direction_diagnostics.c
 
 Next stages on the connected Pod:
 
-1. deploy the measured-budget protocol revision;
-2. run the 144-episode real-LLM validation matrix;
-3. apply the fixed selection rule without manual choice;
-4. train five independent seeds for each learned method;
-5. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
+1. deploy the post-validation, source-equivalent training revision;
+2. train five independent seeds for each learned method without seed removal;
+3. generate the measured-runtime holdout design;
+4. checksum-freeze source, protocol, thresholds, checkpoints, and analysis;
+5. launch the genuinely unseen outcome-sealed holdout.
 
 The automatic training handoff was stopped before validation completion after
 a pre-training audit found that the DOET-RL trainer did not resolve the
@@ -60,6 +59,31 @@ validation-selected nominal-normalizer file. No training attempt existed and
 no validation outcome was inspected. The active validation was left untouched.
 The correction is covered by two fail-closed tests and will be deployed only
 after validation artifacts are complete and retrieved.
+
+## Completed real-LLM validation
+
+The frozen selector chose `hysteresis_low`. Across 18 non-nominal paired panels,
+commercial primary loss was 0.792% worse than fixed communication and
+humanitarian primary loss tied exactly. The worst application/regime mean
+degradation was 1.074%, under the frozen 2% cell limit. Fully counted message
+reduction was 70.7%; byte, prompt-token, generated-token, LLM-call, and latency
+reductions were 63.4%, 25.4%, 24.9%, 25.8%, and 25.3% respectively.
+
+This is not yet evidence that entropy triggered useful coordination. Every one
+of the four entropy candidates recorded zero trigger activations and zero active
+agent-step fraction. The selected candidate won the fixed lexicographic screen
+through the quiet-mode cadence and its slightly lower message use. The result is
+therefore simultaneously eligible for the preregistered holdout and a negative
+mechanistic result for event triggering. No threshold, direction, dwell,
+cooldown, selection rule, or H4 definition will be changed in response.
+
+The fixed control denominators were stable: commercial non-nominal loss ranged
+from 13.041 to 14.358 and humanitarian loss from 3,708.64 to 7,379.59. The
+default 2% relative non-inferiority margin remains frozen. Validation consumed
+4.3054 reserved-Pod hours, 13,031 calls, 26,706,959 prompt tokens, and 974,801
+generated tokens. All artifacts are in
+`results/entropy_triggered_v2/validation/`, and the two replay reports each pass
+144/144 episodes.
 
 The restartable commands and outcome-seal boundary are now implemented. The
 stale direct endpoint `213.173.109.33:19465` returned `Connection refused` on

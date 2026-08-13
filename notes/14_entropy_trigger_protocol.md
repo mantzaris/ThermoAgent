@@ -276,3 +276,50 @@ counts of manifests/published directories. It intentionally displays no
 partial loss, communication, or hypothesis values. The outcome seal lifts only
 after all planned rows finish and causal ledger replay completes. Failed
 manifests are retained without selective rerun.
+
+## Validation selection frozen before training
+
+The prospective 144-episode real-Qwen validation finished on 2026-08-13 with
+exit status 0. All 144 event ledgers replayed exactly under both the immutable
+launch source and the current source. The launch source checksum was
+`46d5ff37b87d047d7dbdb1aa21d6b1ea5838ade472369a45d3d282ebdb9f255f`.
+The fixed selector retained `hysteresis_low`, with the following parameters:
+
+- low-direction simple hysteresis, `tau_on=1.2`, `tau_off=0.4`;
+- `rho=0.6`, `kappa=0.0`, `tau_crisis=2.8`;
+- two-period minimum dwell and cooldown;
+- neighbor-propagated alerts, at most two neighbors;
+- decision intervals 8/4/2 and gossip periods 8/4/2 in quiet/targeted/crisis
+  modes, with one gossip round.
+
+The selection checksum is
+`bb2ecf927dc2fd22cd4050bede6dd6f4460ff9462d84faee99653bd9fb0f9f13`.
+Its paired mean primary-loss degradation was 0.792% commercial and exactly 0%
+humanitarian. The worst application/regime mean was 1.074% (commercial,
+correlated), so the preregistered validation eligibility screen passed and the
+default 2% relative non-inferiority margin remains numerically stable. Fixed
+primary losses were bounded away from zero in both applications.
+
+The selected point reduced fully counted messages by 70.7%, bytes by 63.4%,
+prompt tokens by 25.4%, generated tokens by 24.9%, LLM calls by 25.8%, and
+measured inference latency by 25.3%. These figures are validation estimates,
+not confirmatory results. More importantly, the mean trigger count and active
+agent-step fraction were both exactly zero for every entropy candidate. The
+selector therefore rewarded the least expensive quiet-mode schedule; it did
+not demonstrate entropy-responsive activation. This mechanism failure is
+retained without modifying the frozen selection rule or thresholds. The locked
+holdout will test the selected point as specified and H4 may fail.
+
+Budget-matched controls were derived only after validation. Their frozen values
+are random activation probability `0.363986839461523`, periodic interval 6,
+quiet planning interval 8, target 119.167 total messages per episode, and KPI
+residual scale `0.8865468071915686`. The target intensive-decision count is
+nonzero because fully counted quiet entropy sketches are converted using the
+fixed control's observed messages per intensive decision; achieved mismatches
+must be reported.
+
+Validation consumed 15,499.36 seconds (4.3054 reserved-Pod hours), 13,031 LLM
+calls, 26,706,959 prompt tokens, and 974,801 generated tokens. The summed
+per-episode GPU duration was 4.2516 hours. These measured values, plus actual
+fifteen-run training time, control the preregistered 696/656/616 holdout ladder;
+no outcome statistic enters that runtime choice.

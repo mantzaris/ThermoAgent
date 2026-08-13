@@ -16,6 +16,11 @@ runs/
 results/checkpoints/*.optimizer.pt
 results/logs/**/*.raw.log
 results/networks/animations/*.mp4
+results/**/checkpoints/*.optimizer.pt
+results/**/logs/**/*.raw.log
+results/**/networks/animations/*.mp4
+results/**/.staging/
+results/**/*.safetensors
 results/**/*.tmp
 results/.staging/
 

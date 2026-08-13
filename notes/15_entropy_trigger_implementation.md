@@ -75,12 +75,16 @@ be included in accounting.
   README/paper-summary generation. Failed locked episodes remain public, are
   never imputed, and fail the confirmatory hypothesis classification while
   still allowing explicitly incomplete matched-pair summaries.
+- A prospectively tested H4 timing classifier separates pre-disruption false
+  alarms from the first post-disruption activation. Only a post-disruption
+  activation strictly before the fixed service-collapse threshold receives
+  timely-detection credit.
 - Fail-closed reproduction commands for design, freeze, holdout, replay,
   analysis, vector figures, PDF validation, reporting, and indexing.
 
 ## Verification
 
-The current complete suite is 131/131 passing. New tests cover trigger
+The current complete suite is 132/132 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen

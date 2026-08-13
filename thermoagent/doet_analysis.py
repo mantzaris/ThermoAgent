@@ -497,6 +497,47 @@ def _read_events(path: Path) -> List[Dict[str, Any]]:
         return [json.loads(line) for line in handle if line.strip()]
 
 
+def _activation_timing(
+    activation_steps: Sequence[int],
+    disruption_step: Optional[int],
+    collapse_step: Optional[int],
+) -> Dict[str, Any]:
+    """Classify trigger timing without crediting anticipatory false alarms.
+
+    The confirmatory timely-activation event must occur at or after the
+    evaluator-recorded disruption and strictly before visible service collapse.
+    An earlier activation remains a false alarm even when a later activation is
+    timely.  This rule is frozen before the locked holdout.
+    """
+
+    ordered = sorted(int(step) for step in activation_steps)
+    first_any = ordered[0] if ordered else None
+    if disruption_step is None:
+        first_post = None
+        pre_disruption_false = False
+    else:
+        first_post = next(
+            (step for step in ordered if step >= int(disruption_step)), None
+        )
+        pre_disruption_false = any(
+            step < int(disruption_step) for step in ordered
+        )
+    timely = bool(
+        first_post is not None
+        and (collapse_step is None or first_post < int(collapse_step))
+    )
+    return {
+        "first_activation_step": first_any,
+        "first_post_disruption_activation_step": first_post,
+        "pre_disruption_false_activation": pre_disruption_false,
+        "activation_before_collapse": timely,
+        "activation_delay_from_disruption": (
+            first_post - int(disruption_step)
+            if first_post is not None and disruption_step is not None else None
+        ),
+    }
+
+
 def _mechanistic(
     results_root: Path,
     frame: pd.DataFrame,
@@ -524,17 +565,6 @@ def _mechanistic(
         deactivations = [
             event for event in triggers if event["payload"].get("deactivated")
         ]
-        first_activation = min(
-            (int(event["step"]) for event in activations), default=None
-        )
-        first_deactivation = min(
-            (
-                int(event["step"]) for event in deactivations
-                if first_activation is not None
-                and int(event["step"]) >= first_activation
-            ),
-            default=None,
-        )
         series = pd.DataFrame(episode["time_series"])
         pre = (
             series[series["step"] < disruption_step]["service_loss"]
@@ -551,6 +581,24 @@ def _mechanistic(
             if disruption_step is not None else series.iloc[0:0]["step"]
         )
         collapse_step = int(collapse_steps.iloc[0]) if len(collapse_steps) else None
+        timing = _activation_timing(
+            [int(event["step"]) for event in activations],
+            disruption_step,
+            collapse_step,
+        )
+        coordination_activation = (
+            timing["first_post_disruption_activation_step"]
+            if disruption_step is not None
+            else timing["first_activation_step"]
+        )
+        first_deactivation = min(
+            (
+                int(event["step"]) for event in deactivations
+                if coordination_activation is not None
+                and int(event["step"]) >= coordination_activation
+            ),
+            default=None,
+        )
         messages = [event for event in events if event["kind"] == "message"]
         kinds = Counter(str(event["payload"].get("kind")) for event in messages)
         for kind, count in sorted(kinds.items()):
@@ -584,7 +632,10 @@ def _mechanistic(
                 affected_agents.add(str(coordinator))
             for edge in payload.get("route_closures", []):
                 affected_agents.update(str(value) for value in edge)
-        contact_start = first_activation if first_activation is not None else disruption_step
+        contact_start = (
+            coordination_activation
+            if coordination_activation is not None else disruption_step
+        )
         contact_end = contact_start + 4 if contact_start is not None else None
         coordination_kinds = {
             "information_request", "disclosure", "offer", "counteroffer",
@@ -599,8 +650,8 @@ def _mechanistic(
         }
         trigger_at_activation = [
             event for event in triggers
-            if first_activation is not None
-            and int(event["step"]) == first_activation
+            if coordination_activation is not None
+            and int(event["step"]) == coordination_activation
         ]
         high_surprisal = {
             str(event["actor"])
@@ -620,20 +671,12 @@ def _mechanistic(
             "environment_seed": int(summary["seed"]),
             "rl_training_seed": int(summary["rl_training_seed"]),
             "disruption_step": disruption_step,
-            "first_activation_step": first_activation,
+            **timing,
             "first_deactivation_step": first_deactivation,
-            "activation_delay_from_disruption": (
-                first_activation - disruption_step
-                if first_activation is not None and disruption_step is not None
-                else None
-            ),
             "service_collapse_step": collapse_step,
-            "activation_before_collapse": bool(
-                first_activation is not None
-                and (collapse_step is None or first_activation < collapse_step)
-            ),
             "nominal_false_activation": bool(
-                summary["scenario_name"] == "nominal" and first_activation is not None
+                summary["scenario_name"] == "nominal"
+                and timing["first_activation_step"] is not None
             ),
             "trigger_activations": int(summary["trigger_activations"]),
             "quiet_mode_fraction": float(summary["quiet_mode_fraction"]),
@@ -707,7 +750,7 @@ def _mechanistic(
                 .astype(int)
             )
             case["disruption_step"] = disruption_step
-            case["first_activation_step"] = first_activation
+            case["first_activation_step"] = coordination_activation
             case["run_id"] = summary["run_id"]
             case_candidates[str(summary["application"])].append((
                 abs(float(summary["primary_outcome"]) - float(
@@ -936,6 +979,9 @@ def run(results_root: Path) -> Dict[str, Any]:
         and
         len(non_nominal_mechanistic)
         and non_nominal_mechanistic["activation_before_collapse"].mean() >= 0.75
+        and non_nominal_mechanistic[
+            "pre_disruption_false_activation"
+        ].mean() <= 0.10
         and len(nominal_mechanistic)
         and nominal_mechanistic["nominal_false_activation"].mean() <= 0.10
     )
@@ -964,7 +1010,7 @@ def run(results_root: Path) -> Dict[str, Any]:
         {"hypothesis": "H1", "outcome": "supported" if h1 else "unsupported", "criterion": "DOET-rule non-inferior to fixed in both applications after Holm correction"},
         {"hypothesis": "H2", "outcome": "supported" if h2 else "unsupported", "criterion": "message reduction CI excludes zero and mean reduction >=20% in both applications after Holm correction"},
         {"hypothesis": "H3", "outcome": "supported" if h3 else "unsupported", "criterion": "DOET-rule is loss-message nondominated and strictly increases the frozen normalized frontier hypervolume for messages, prompt tokens, calls, and latency in both applications"},
-        {"hypothesis": "H4", "outcome": "supported" if h4 else "unsupported", "criterion": ">=75% activation before collapse and <=10% nominal episode false activation"},
+        {"hypothesis": "H4", "outcome": "supported" if h4 else "unsupported", "criterion": ">=75% first post-disruption activation before collapse, <=10% pre-disruption false activation, and <=10% nominal episode false activation"},
         {"hypothesis": "H5", "outcome": "supported" if h5 else "unsupported", "criterion": "non-inferior in partition and compound-partition regimes in both applications, with positive consensus-RMSE/degradation slope and Pearson r >=0.20 in each application"},
         {"hypothesis": "H6", "outcome": "supported" if h6 else "unsupported", "criterion": "H1 and H2 supported in both applications"},
     ])

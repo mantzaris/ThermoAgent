@@ -46,9 +46,14 @@ analyses, but it does not replace the primary family after outcomes are seen.
   hypervolume for messages, prompt tokens, LLM calls, and inference latency in
   each application. Normalization is application-wise min-max on the frozen
   comparator set with reference point `(1.05, 1.05)`.
-- **H4 timely activation:** at least 75% of non-nominal DOET-rule episodes
-  activate before the prospectively defined service-collapse threshold and no
-  more than 10% of nominal episodes contain any false activation.
+- **H4 timely activation:** at least 75% of non-nominal DOET-rule episodes have
+  a first post-disruption activation strictly before visible collapse, no more
+  than 10% activate falsely before the disruption, and no more than 10% of
+  nominal episodes contain any activation. Visible collapse is the first
+  post-disruption period whose normalized service loss exceeds that episode's
+  pre-disruption mean by more than 0.10; activation in the collapse period does
+  not count as lead time. A pre-disruption false alarm can never satisfy the
+  timely-activation condition.
 - **H5 distributed robustness:** degradation under delay/noise/partition follows
   consensus error while retaining useful trigger behavior. The primary
   partition criterion is non-inferiority in both partition families and both

@@ -24,6 +24,7 @@ from thermoagent.planners import (
 from thermoagent.runner import EpisodeRunner
 from thermoagent.policy import CoordinationPolicy
 from thermoagent.doet_analysis import (
+    _activation_timing,
     _common_panel_subset,
     _comparison_rows,
     _frontier_rows,
@@ -156,6 +157,20 @@ def test_trigger_replay_is_deterministic_and_steps_are_monotonic():
     trigger.update("a", 0, 0.5, 0.0, 0.0, 1.0)
     with pytest.raises(ValueError, match="increase monotonically"):
         trigger.update("a", 0, 0.5, 0.0, 0.0, 1.0)
+
+
+def test_timely_activation_never_credits_a_pre_disruption_false_alarm():
+    timing = _activation_timing([2, 8], disruption_step=6, collapse_step=10)
+    assert timing["first_activation_step"] == 2
+    assert timing["first_post_disruption_activation_step"] == 8
+    assert timing["pre_disruption_false_activation"]
+    assert timing["activation_before_collapse"]
+    assert timing["activation_delay_from_disruption"] == 2
+
+    false_only = _activation_timing([2], disruption_step=6, collapse_step=10)
+    assert false_only["pre_disruption_false_activation"]
+    assert not false_only["activation_before_collapse"]
+    assert false_only["first_post_disruption_activation_step"] is None
 
 
 def test_public_route_affordance_prevents_arbitrary_material_target():

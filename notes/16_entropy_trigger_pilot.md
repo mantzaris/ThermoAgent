@@ -70,7 +70,10 @@ Agent-period scaling with a 15% buffer projected at least 92.57 hours for the
 preferred 288-validation/1,296-holdout design before PPO training, so that
 design was prospectively rejected under the 35-hour limit. No validation had
 started. The authorized compute-priority reduction is 144 validation episodes
-and a 696-episode holdout, both at 16 periods. Its profile-based buffered
+and a preferred 696-episode holdout, both at 16 periods. Its profile-based buffered
 validation plus holdout estimate is 32.60 hours; profile/smoke and the setup
-reserve bring the pre-training estimate to 32.92 hours. Actual validation and
-all fifteen training times must still pass the fail-closed design gate.
+reserve bring the pre-training estimate to 32.92 hours. Before validation
+outcomes, a deterministic runtime fallback was added: preserve all 576
+priority-method episodes and all five RL seeds, then reduce only the common
+secondary subset to produce 656 or 616 episodes if required. Actual validation
+and all fifteen training times must still pass the fail-closed design gate.

@@ -132,12 +132,18 @@ counting PPO training. It therefore cannot be launched under the user's hard
 
 The prospectively reduced design follows the authorized priority order rather
 than selecting methods by outcome: validation is reduced to 144 episodes at a
-16-period horizon, and the locked holdout to 696 episodes at the same horizon.
+16-period horizon, and the preferred locked holdout to 696 episodes at the same
+horizon.
 The profile extrapolation with a 15% buffer is 5.82 validation hours and 26.79
 holdout hours. Including measured profile/smoke and the 0.1-hour setup reserve
-totals 32.92 hours before CPU-bound PPO time. The holdout generator still fails
-closed unless measured validation plus all fifteen actual training runs and the
-buffered holdout projection remain below 35 hours.
+totals 32.92 hours before CPU-bound PPO time. Before any validation outcome was
+available, a runtime-only fallback ladder was frozen: keep all 576 priority-
+method episodes and all five RL seeds, but reduce the identical secondary-
+comparator subset from three environment seeds to two, then one, if needed.
+That yields 696, 656, or 616 total episodes. The generator chooses the largest
+fitting design using measured runtime only and fails closed unless validation,
+all fifteen actual training runs, and the buffered holdout remain below 35
+hours.
 
 ## Validation matrix and frozen selection rule
 
@@ -182,17 +188,19 @@ and five completed checkpoints per learned method. It will create:
 - 16 unseen seeds per application for each of isolated, communication-
   partition, correlated, and compound-OOD disruption;
 - 8 unseen nominal seeds per application;
-- 144 base matched panels and 696 total method episodes, all with a 16-period
-  horizon;
+- 144 base matched panels and a preferred 696 total method episodes, all with a
+  16-period horizon;
 - fixed always-on, learned non-entropic, DOET-rule, and DOET-RL on every panel,
   because these are the preregistered compute-priority methods;
 - no communication, periodic, random budget-matched, ThermoAgent v1, and local-
-  KPI CUSUM on the same prospectively fixed 24-panel non-nominal subset (seeds
-  `8101`, `8106`, and `8111` in every application/regime cell); Pareto analyses
-  restrict every method to these exact common panels;
+  KPI CUSUM on the same prospectively fixed non-nominal subset. The preferred
+  24-panel subset uses seeds `8101`, `8106`, and `8111`; runtime-only fallbacks
+  use `[8101, 8111]` (16 panels) and then `[8106]` (8 panels). Pareto analyses
+  restrict every method to the exact selected common panels;
 - five independent RL seeds (`7301`--`7305`) assigned round-robin without
   removal or outcome selection; full-panel learned methods receive 28 or 29
-  panels per seed and the secondary ThermoAgent comparator receives 4 or 5;
+  panels per seed and the secondary ThermoAgent comparator remains balanced
+  across every seed represented by the selected common subset;
 - deterministic Qwen decoding with a new recorded and applied LLM seed `9101`;
 - the unseen `tri_region_bridge_v2` topology, distinct from training and the
   seen v1 holdout topology.
@@ -203,8 +211,10 @@ full five-seed training, a 0.1-hour unmeasured setup reserve, and holdout stay
 below 35 additional single-GPU hours. The precision
 calculation uses 20,000 fixed-seed stratified Monte Carlo draws from validation
 paired degradation, with 16 panels in each of four planned non-nominal regimes.
-CPU-bound PPO time still counts because the paid GPU Pod is reserved. If the
-total does not fit, the generator fails closed before freezing or launching.
+CPU-bound PPO time still counts because the paid GPU Pod is reserved. The
+runtime fallback never reads validation performance values. If the minimum
+616-episode design does not fit, the generator fails closed before freezing or
+launching.
 
 ## Freeze and outcome-seal procedure
 

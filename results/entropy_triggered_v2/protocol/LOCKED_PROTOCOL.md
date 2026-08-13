@@ -29,17 +29,22 @@ The new holdout uses environment seeds 8101–8116 for four non-nominal regimes,
 8201–8208 for nominal false-activation panels, LLM seed 9101, a 16-period
 horizon, and the unseen `tri_region_bridge_v2` topology. Fixed always-on,
 learned non-entropic, DOET-rule, and DOET-RL run on all 144 panels. Five
-secondary methods run on the preregistered common non-nominal subset using
-seeds 8101, 8106, and 8111 in every application/regime cell; all Pareto
-comparisons restrict every method to these identical panels. This
-compute-capped allocation was selected from measured throughput before
-validation outcomes. It is not run until the freeze record exists and verifies.
+secondary methods run on the same preregistered common non-nominal subset; all
+Pareto comparisons restrict every method to these identical panels. The
+preferred subset uses seeds 8101, 8106, and 8111. If measured validation plus
+five-seed training makes that design exceed 35 single-GPU hours, the generator
+uses the first fitting runtime-only fallback in this frozen order:
+`[8101, 8111]`, then `[8106]`. Priority-method panels and RL-seed replication
+are never reduced by this rule. This compute-capped allocation was selected
+from measured throughput before validation outcomes. It is not run until the
+freeze record exists and verifies.
 Thresholds, budget-matched controls, and operating points come only from the
 separate validation set.
 
 Before freeze, a 20,000-replicate fixed-seed stratified Monte Carlo precision
 analysis and measured throughput must show that validation, all fifteen
 training runs, the measured real-Qwen profile and model smoke, a 0.1-hour
-unmeasured setup reserve, and the projected 696-episode holdout fit within 35
-additional single-GPU hours. CPU-bound training time on the reserved Pod is
-included.
+unmeasured setup reserve, and the projected runtime-selected holdout fit within
+35 additional single-GPU hours. The projection includes a 15% buffer. If even
+the 616-episode minimum preregistered design does not fit, the generator fails
+closed before freeze. CPU-bound training time on the reserved Pod is included.

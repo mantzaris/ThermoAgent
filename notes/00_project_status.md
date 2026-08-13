@@ -7,7 +7,7 @@ Last updated: 2026-08-13 America/New_York
 - **Current phase:** The isolated RunPod setup, 129-test CUDA verification, and
   eight-episode real-Qwen profile are complete. The measured rate ruled out the
   preferred design; the prospectively reduced 144-episode validation and
-  696-episode locked-holdout design are being verified before validation.
+  696/656/616-episode runtime-capped locked-holdout ladder are being verified.
 - **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
 - **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
 - **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
@@ -29,7 +29,8 @@ Last updated: 2026-08-13 America/New_York
 - **Next actions:** execute the 144-episode validation, train all 15
   checkpoints, fetch and commit
   the validation-selected protocol, perform measured precision/budget analysis,
-  freeze, and run the 696-episode outcome-sealed locked holdout.
+  freeze, and run the largest preregistered outcome-sealed holdout that remains
+  within the 35-hour cap.
 - **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
 - **Compute used by v2:** profile sweep 0.1984 single-GPU hours including model
   load, plus 0.0216 hours for model smoke. The setup interval is retained

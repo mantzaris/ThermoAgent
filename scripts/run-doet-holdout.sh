@@ -16,8 +16,8 @@ export THERMO_CACHE="${THERMO_CACHE:-/workspace/.cache/thermoagent}"
 export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/thermoagent-pycache}"
 
 # The sweep emits only completion counts. Do not inspect episode outcomes until
-# all 696 planned rows finish. Existing completed/failed manifests are
-# retained and resumed without selective reruns.
+# every checksum-frozen design row finishes. Existing completed/failed
+# manifests are retained and resumed without selective reruns.
 "$python_bin" -m thermoagent sweep \
   --config configs/entropy_trigger_holdout_locked.yaml \
   --results results/entropy_triggered_v2 --root "$repo_dir"

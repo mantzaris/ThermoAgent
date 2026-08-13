@@ -1,0 +1,28 @@
+{
+  "budget_limit_single_gpu_hours": 35.0,
+  "decision_basis": "measured validation, training, profile, and smoke runtime only; no validation outcome values",
+  "minimum_design_if_fit": {
+    "episode_count": 616,
+    "secondary_environment_seeds": [
+      8106
+    ]
+  },
+  "priority_episode_count": 576,
+  "priority_rule": "preserve every panel for fixed_always_on, learned_no_entropy, doet_rule, and doet_rl; preserve all five RL training seeds",
+  "secondary_seed_ladder": [
+    [
+      8101,
+      8106,
+      8111
+    ],
+    [
+      8101,
+      8111
+    ],
+    [
+      8106
+    ]
+  ],
+  "status": "preregistered during active validation before any partial outcome inspection",
+  "timestamp_utc": "2026-08-13T18:52:13Z"
+}

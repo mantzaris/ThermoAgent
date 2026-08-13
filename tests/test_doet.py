@@ -707,6 +707,35 @@ def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_pat
     for counts in record["learned_assignment_counts"].values():
         assert set(counts) == {7301, 7302, 7303, 7304, 7305}
         assert max(counts.values()) - min(counts.values()) <= 1
+
+    # Runtime—not outcome—selects the largest fitting preregistered fallback.
+    validation_manifest = root / "manifests" / "validation_sweep.json"
+    validation_record = json.loads(validation_manifest.read_text())
+    validation_record["wall_clock_seconds_including_model_load"] = 5.5 * 3600
+    validation_record["cumulative_episode_single_gpu_hours"] = 5.5
+    validation_manifest.write_text(json.dumps(validation_record), encoding="utf-8")
+    fallback = design_doet_holdout(root, tmp_path / "holdout-fallback.yaml")
+    assert fallback["episode_count"] == 616
+    assert fallback["secondary_subset_environment_seeds"] == [8106]
+    assert all(
+        fallback["method_evaluation_counts"][method] == 8
+        for method in (
+            "autonomous_no_comm", "periodic_communication",
+            "random_budget_matched", "thermoagent", "kpi_cusum_trigger",
+        )
+    )
+    assert len(fallback["secondary_subset_budget_candidates"]) == 3
+
+    validation_record["wall_clock_seconds_including_model_load"] = 6 * 3600
+    validation_record["cumulative_episode_single_gpu_hours"] = 6.0
+    validation_manifest.write_text(json.dumps(validation_record), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="minimum secondary subset"):
+        design_doet_holdout(root, tmp_path / "holdout-over-budget.yaml")
+
+    # Restore the fast fixture for the separate optional-ablation budget test.
+    validation_record["wall_clock_seconds_including_model_load"] = 3600.0
+    validation_record["cumulative_episode_single_gpu_hours"] = 1.0
+    validation_manifest.write_text(json.dumps(validation_record), encoding="utf-8")
     (root / "manifests" / "holdout_locked_sweep.json").write_text(
         json.dumps({
             "wall_clock_seconds_including_model_load": 7200.0,

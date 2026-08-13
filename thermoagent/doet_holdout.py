@@ -20,6 +20,14 @@ RL_SEEDS = (7301, 7302, 7303, 7304, 7305)
 NON_NOMINAL_SEEDS = tuple(range(8101, 8117))
 NOMINAL_SEEDS = tuple(range(8201, 8209))
 SECONDARY_SUBSET_SEEDS = (8101, 8106, 8111)
+# Prospectively ordered, nested compute fallbacks. Selection uses measured Pod
+# time only, never validation outcome values: retain every priority-method panel
+# and every RL seed, then reduce the shared secondary-comparator panel subset.
+SECONDARY_SEED_LADDER = (
+    SECONDARY_SUBSET_SEEDS,
+    (8101, 8111),
+    (8106,),
+)
 PRIMARY_FULL_METHODS = (
     "fixed_always_on",
     "learned_no_entropy",
@@ -261,6 +269,55 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     selected_trigger = dict(selection["selected_trigger"])
     trigger_parameters = dict(selected_trigger["parameters"])
     checkpoints = _checkpoint_maps(results_root)
+
+    # Select the largest prospectively defined common secondary subset whose
+    # conservative projection fits the hard 35-hour cap. Four priority methods
+    # always retain all 144 panels (576 episodes total), and all five independent
+    # RL seeds remain represented. Each secondary seed adds one panel in every
+    # application/regime cell for all five secondary methods: 40 episodes.
+    budget_candidates: List[Dict[str, Any]] = []
+    selected_secondary_seeds: Sequence[int] | None = None
+    precision: Dict[str, Any] | None = None
+    for secondary_seeds in SECONDARY_SEED_LADDER:
+        candidate_episode_count = (
+            len(PRIMARY_FULL_METHODS) * 144
+            + len(SECONDARY_SUBSET_METHODS) * 8 * len(secondary_seeds)
+        )
+        candidate_precision = _precision_analysis(
+            pd.read_csv(pairs_path), validation_sweep, training_manifest,
+            profile_sweep, model_smoke, candidate_episode_count
+        )
+        candidate_total = float(candidate_precision[
+            "projected_additional_gpu_hours_all_required_stages"
+        ])
+        budget_candidates.append({
+            "secondary_environment_seeds": list(secondary_seeds),
+            "episode_count": candidate_episode_count,
+            "projected_additional_single_gpu_hours": candidate_total,
+            "within_35_hour_cap": candidate_total <= 35.0,
+        })
+        if candidate_total <= 35.0:
+            selected_secondary_seeds = secondary_seeds
+            precision = candidate_precision
+            break
+    if selected_secondary_seeds is None or precision is None:
+        minimum = budget_candidates[-1]
+        raise RuntimeError(
+            "even the preregistered minimum secondary subset projects %.2f "
+            "single-GPU hours; do not freeze or launch without user approval "
+            "or a newly documented design"
+            % minimum["projected_additional_single_gpu_hours"]
+        )
+    precision["secondary_subset_budget_candidates"] = budget_candidates
+    precision["secondary_subset_selection_rule"] = (
+        "choose the largest preregistered common secondary seed subset that "
+        "keeps validation + five-seed training + buffered holdout + measured "
+        "model setup/profile below 35 single-GPU hours; selection uses runtime "
+        "only and never validation outcomes"
+    )
+    precision["selected_secondary_environment_seeds"] = list(
+        selected_secondary_seeds
+    )
     config: Dict[str, Any] = {
         "stage": "holdout_locked",
         "source_provenance_path": "results/entropy_triggered_v2/reproducibility/execution_source.json",
@@ -321,7 +378,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             },
             "isolated": {
                 "method_seeds": _method_seed_map(
-                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                    NON_NOMINAL_SEEDS, selected_secondary_seeds
                 ),
                 "horizon": 16,
                 "private_information": 0.8,
@@ -332,7 +389,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             },
             "communication_partition": {
                 "method_seeds": _method_seed_map(
-                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                    NON_NOMINAL_SEEDS, selected_secondary_seeds
                 ),
                 "horizon": 16,
                 "private_information": 0.8,
@@ -343,7 +400,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             },
             "correlated": {
                 "method_seeds": _method_seed_map(
-                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                    NON_NOMINAL_SEEDS, selected_secondary_seeds
                 ),
                 "horizon": 16,
                 "private_information": 1.0,
@@ -354,7 +411,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             },
             "compound_ood": {
                 "method_seeds": _method_seed_map(
-                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                    NON_NOMINAL_SEEDS, selected_secondary_seeds
                 ),
                 "horizon": 16,
                 "private_information": 1.0,
@@ -367,7 +424,11 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     }
     matrix = expand_matrix(config)
     episode_count = len(matrix)
-    expected_count = 696
+    expected_count = (
+        len(PRIMARY_FULL_METHODS) * 144
+        + len(SECONDARY_SUBSET_METHODS) * 8
+        * len(selected_secondary_seeds)
+    )
     if episode_count != expected_count:
         raise ValueError(
             "locked design expected %d episodes, got %d"
@@ -383,7 +444,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         )
     expected_method_counts = {
         **{method: 144 for method in PRIMARY_FULL_METHODS},
-        **{method: 24 for method in SECONDARY_SUBSET_METHODS},
+        **{
+            method: 8 * len(selected_secondary_seeds)
+            for method in SECONDARY_SUBSET_METHODS
+        },
     }
     if method_evaluation_counts != expected_method_counts:
         raise ValueError(
@@ -403,10 +467,6 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         for counts in learned_counts.values()
     ):
         raise ValueError("balanced RL assignment failed: %s" % learned_counts)
-    precision = _precision_analysis(
-        pd.read_csv(pairs_path), validation_sweep, training_manifest,
-        profile_sweep, model_smoke, episode_count
-    )
     projected_total = precision[
         "projected_additional_gpu_hours_all_required_stages"
     ]
@@ -459,7 +519,11 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         "methods": list(CORE_METHODS),
         "primary_full_panel_methods": list(PRIMARY_FULL_METHODS),
         "secondary_subset_methods": list(SECONDARY_SUBSET_METHODS),
-        "secondary_subset_environment_seeds": list(SECONDARY_SUBSET_SEEDS),
+        "secondary_subset_environment_seeds": list(selected_secondary_seeds),
+        "secondary_subset_selection_rule": precision[
+            "secondary_subset_selection_rule"
+        ],
+        "secondary_subset_budget_candidates": budget_candidates,
         "method_evaluation_counts": method_evaluation_counts,
         "rl_training_seeds": list(RL_SEEDS),
         "learned_assignment_counts": learned_counts,

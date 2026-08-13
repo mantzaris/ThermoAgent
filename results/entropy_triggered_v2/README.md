@@ -1,8 +1,9 @@
 # Distributed Operational Entropy Triggering study
 
 Status: Phase A retrospective diagnostics, monitoring validation, DOET
-implementation, nominal/development calibration, and deterministic preflight
-complete. No v2 real-LLM performance claim or new holdout result exists yet.
+implementation, nominal/development calibration, deterministic preflight, and
+the real-Qwen throughput profile are complete. No v2 validation efficacy claim
+or new holdout result exists yet.
 
 This namespace preserves strict separation from the frozen v1 result tree. It
 contains only derived v1 diagnostics and future v2 development, validation,
@@ -40,16 +41,21 @@ KPIs. This boundary is now an explicit design constraint. See
   statistic, not claiming universal predictive superiority.
 - Low-direction distributed entropy led the new development comparison, but
   its nominal-threshold recall was only 0.178 commercial and 0.155
-  humanitarian. Seven trigger candidates remain prospectively registered for
-  real validation.
+  humanitarian. Four compute-capped low-direction trigger candidates remain
+  prospectively registered for real validation.
 - Eight mock-planner preflight episodes completed and replayed exactly with a
   maximum absolute material residual below `1.14e-13`. Mock results are
   engineering evidence only.
+- The eight-episode real-Qwen profile completed without failure and replayed
+  8/8 ledgers exactly. It used 480 calls, 934,041 prompt tokens, 35,378
+  generated tokens, and 714.10 seconds including model load. Its measured rate
+  ruled out the original preferred design before validation.
 
 ## Frozen prospective design
 
-Real validation uses four new seeds in both applications across nominal,
-isolated, correlated, and compound-partition regimes (288 episodes). A fixed
+Real validation uses three new seeds in both applications across nominal,
+isolated, correlated, and compound-partition regimes (144 episodes at a
+16-period horizon). A fixed
 lexicographic rule selects the trigger and derives random/periodic budget
 matches from fully counted validation traffic without holdout access. Inactive
 budget controls retain quiet local planning, and achieved message mismatch is
@@ -60,9 +66,11 @@ independent 192-episode training runs (seeds 7301--7305), with the final-budget
 checkpoint retained regardless of outcome.
 
 After measured throughput and precision checks, the holdout generator proposes
-144 genuinely new matched panels and 1,296 method episodes: 16 seeds per
+144 genuinely new matched panels and 696 method episodes: 16 seeds per
 application for each of four non-nominal regimes, eight nominal seeds per
-application, nine core methods, LLM seed 9101, and unseen topology
+application, the four compute-priority methods on all panels, and five
+secondary comparators on the same fixed 24-panel non-nominal subset. It uses
+LLM seed 9101, a 16-period horizon, and unseen topology
 `tri_region_bridge_v2`. The generator fails closed if the measured real-Qwen
 profile/model smoke and validation/training time, a 0.1-hour unmeasured setup
 reserve, and projected holdout resource time exceed 35
@@ -116,6 +124,6 @@ the seed is a reproducibility field rather than an extra stochastic replicate.
 The stale direct alias at `213.173.109.33:19465` refused all three attempts,
 but the supplied RunPod proxy connected successfully with forced PTY using the
 configured RSA key. Read-only inspection confirmed the existing RTX 4090 Pod,
-CUDA 12.8 execution stack, intact v1 freeze/checksum/counts, and an empty v2
-remote namespace. No replacement Pod was created. Additional v2 GPU use remains
-zero until the preregistered profile starts.
+CUDA 12.8 execution stack and intact v1 freeze/checksum/counts. No replacement
+Pod was created. The completed setup/model-smoke/profile interval is retained
+in the v2 compute ledger; no validation or holdout run has begun.

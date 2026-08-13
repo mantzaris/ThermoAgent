@@ -1,0 +1,36 @@
+{
+  "decision": "reject preferred design and use the preregistered compute-priority reduction",
+  "decision_time_boundary": "after real-Qwen profile and before any validation outcome",
+  "hard_cap_single_gpu_hours": 35.0,
+  "measured_profile": {
+    "episodes": 8,
+    "episodes_failed": 0,
+    "episodes_replayed_exactly": 8,
+    "generated_tokens": 35378,
+    "llm_calls": 480,
+    "mean_episode_seconds": 72.26553876837716,
+    "profile_hours_including_model_load": 0.1983606909763896,
+    "prompt_tokens": 934041,
+    "source_manifest": "../manifests/profile_v2_sweep.json"
+  },
+  "model_smoke_hours": 0.021553346844803957,
+  "projection_method": "scale measured mean episode seconds by agent-period ratio; apply 15 percent buffer to validation and holdout; include profile, model smoke, and 0.1-hour setup reserve; add measured PPO reserved-Pod time at final design gate",
+  "preferred_design_rejected": {
+    "holdout_buffered_hours": 74.79483262527035,
+    "holdout_episodes": 1296,
+    "minimum_total_before_training_hours": 92.56687427565461,
+    "validation_buffered_hours": 17.45212761256308,
+    "validation_episodes": 288
+  },
+  "reduced_design_selected": {
+    "holdout_buffered_hours": 26.778396865837535,
+    "holdout_episodes": 696,
+    "pretraining_total_hours": 32.915686774513084,
+    "remaining_hours_for_training_and_estimation_error": 2.084313225486916,
+    "validation_buffered_hours": 5.817375870854361,
+    "validation_episodes": 144
+  },
+  "setup_reserve_hours": 0.1,
+  "training_gate": "all 15 actual training runs are retained and their reserved-Pod wall time must keep the final projection below 35 hours",
+  "validation_or_holdout_outcomes_seen_before_decision": false
+}

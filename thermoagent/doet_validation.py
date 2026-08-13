@@ -239,7 +239,11 @@ def run(results_root: Path) -> Dict[str, Any]:
     target_intensive_decisions = (
         target_messages / max(fixed_messages_per_active_decision, 1e-9)
     )
-    validation_horizon = 24
+    experiment_config = manifest["experiment_configuration"]
+    resolved_scenario = experiment_config["resolved_scenario_name"]
+    validation_horizon = int(
+        experiment_config["scenarios"][resolved_scenario]["horizon"]
+    )
     activation_interval = 2
     mean_agents = float(selected_pairs["n_agents"].mean())
     activation_opportunities = mean_agents * math.ceil(

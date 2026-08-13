@@ -1,9 +1,9 @@
 # DOET development and validation log
 
-No real-LLM outcome pilot or validation result has yet been produced. The
-current RunPod proxy is reachable and the committed v2 source was deployed by
-a filtered archive with an exact source-checksum match. This file intentionally
-contains no inferred or synthetic treatment result.
+No real-LLM validation result has yet been produced. The current RunPod proxy
+is reachable and the committed v2 source was deployed by a filtered archive
+with an exact source-checksum match. This file treats the completed throughput
+profile as development engineering evidence, not an efficacy result.
 
 Completed local work:
 
@@ -32,14 +32,13 @@ The low-direction development leader and its weak transferred recall are
 recorded in `notes/14_entropy_trigger_protocol.md`; all alternative direction
 rows remain in `results/entropy_triggered_v2/calibration/direction_diagnostics.csv`.
 
-Pending when the same Pod becomes reachable:
+Next stages on the connected Pod:
 
-1. synchronize the filtered branch snapshot;
-2. run CUDA/model smoke and measure real Qwen throughput;
-3. run the 288-episode real-LLM validation matrix;
-4. apply the fixed selection rule without manual choice;
-5. train five independent seeds for each learned method;
-6. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
+1. deploy the measured-budget protocol revision;
+2. run the 144-episode real-LLM validation matrix;
+3. apply the fixed selection rule without manual choice;
+4. train five independent seeds for each learned method;
+5. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
 
 The restartable commands and outcome-seal boundary are now implemented. The
 stale direct endpoint `213.173.109.33:19465` returned `Connection refused` on
@@ -59,3 +58,19 @@ before tests because `setup-doet-runpod.sh` passed the unsupported
 inference ran. The failed status and log are retained; the setup script and the
 health-only status script were corrected locally and reverified against all
 129 tests before a separately named rerun.
+
+The separately named `doet-setup-v2` rerun exited 0 after the CUDA invariant
+and all 129 tests passed. The real-Qwen profile then completed 8/8 episodes and
+replayed 8/8 exactly, with maximum absolute conservation residual
+`1.14e-13`. Its sweep totals were 480 calls, 934,041 prompt tokens, 35,378
+generated tokens, 0.1606 summed episode GPU-hours, and 714.10 seconds including
+model load. The model smoke was 100% JSON/tool valid and added 77.59 seconds.
+
+Agent-period scaling with a 15% buffer projected at least 92.57 hours for the
+preferred 288-validation/1,296-holdout design before PPO training, so that
+design was prospectively rejected under the 35-hour limit. No validation had
+started. The authorized compute-priority reduction is 144 validation episodes
+and a 696-episode holdout, both at 16 periods. Its profile-based buffered
+validation plus holdout estimate is 32.60 hours; profile/smoke and the setup
+reserve bring the pre-training estimate to 32.92 hours. Actual validation and
+all fifteen training times must still pass the fail-closed design gate.

@@ -294,6 +294,10 @@ def expand_matrix(config: Mapping[str, Any]) -> List[Tuple[str, int, int, str, D
                     continue
                 scenario_methods = scenario.get("methods", config["methods"])
                 for method in scenario_methods:
+                    method_seeds = scenario.get("method_seeds", {})
+                    evaluation_seeds = method_seeds.get(
+                        str(method), scenario.get("seeds", config["seeds"])
+                    )
                     method_variants = config.get("method_variants", {}).get(
                         str(method), [{"name": "base"}]
                     )
@@ -303,7 +307,7 @@ def expand_matrix(config: Mapping[str, Any]) -> List[Tuple[str, int, int, str, D
                     )
                     for variant in method_variants:
                         variant_name = str(variant.get("name", "base"))
-                        for seed in scenario.get("seeds", config["seeds"]):
+                        for seed in evaluation_seeds:
                             panel_rl_seeds = list(rl_seeds)
                             if (
                                 str(method) in LEARNED_METHODS

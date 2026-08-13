@@ -107,17 +107,46 @@ ranking:
 
 This is not yet a positive trigger result. At a nominal 95th-percentile
 threshold, recall was only 0.1780 commercial and 0.1549 humanitarian. The
-validation matrix therefore retains low-direction CUSUM, low-direction simple
-hysteresis, absolute-deviation CUSUM, and change CUSUM candidates. Direction
+preregistered development direction criterion therefore froze the low
+direction before treatment validation. The compute-capped validation matrix
+retains balanced local and neighbor-propagated low-direction CUSUM, a more
+sensitive low-direction CUSUM, and low-direction simple hysteresis. Direction
 will not be reconsidered after validation.
+
+## Measured real-Qwen profile and prospective budget reduction
+
+The real-Qwen profile completed 8/8 episodes with zero failures and exact 8/8
+ledger replay. The sweep used 480 LLM calls, 934,041 prompt tokens, 35,378
+generated tokens, 0.1606 summed episode GPU-hours, and 714.10 seconds including
+one model load. The separate CUDA/model smoke loaded in 73.79 seconds, completed
+its two-request batch in 3.80 seconds, and achieved 100% JSON and tool validity.
+The profile's mean episode time was 72.27 seconds for eight agents over twelve
+periods.
+
+Scaling that measured mean by agent-periods and adding a 15% buffer projected
+17.45 hours for the original 288-episode validation and 74.80 hours for the
+original 1,296-episode holdout. Together with profile/smoke and the setup
+reserve, the preferred design required at least 92.57 single-GPU hours before
+counting PPO training. It therefore cannot be launched under the user's hard
+35-hour cap.
+
+The prospectively reduced design follows the authorized priority order rather
+than selecting methods by outcome: validation is reduced to 144 episodes at a
+16-period horizon, and the locked holdout to 696 episodes at the same horizon.
+The profile extrapolation with a 15% buffer is 5.82 validation hours and 26.79
+holdout hours. Including measured profile/smoke and the 0.1-hour setup reserve
+totals 32.92 hours before CPU-bound PPO time. The holdout generator still fails
+closed unless measured validation plus all fifteen actual training runs and the
+buffered holdout projection remain below 35 hours.
 
 ## Validation matrix and frozen selection rule
 
 The real-LLM validation configuration is
-`configs/entropy_trigger_validation.yaml`. It has four completely new seeds
-(`6101`--`6104`), both applications, and nominal, isolated, correlated, and
-compound-partition regimes. It compares seven entropy candidates with always-
-on fixed communication and the private-local-KPI CUSUM. Selection is exactly:
+`configs/entropy_trigger_validation.yaml`. It has three completely new seeds
+(`6101`--`6103`), both applications, and nominal, isolated, correlated, and
+compound-partition regimes at a 16-period horizon. It compares four
+low-direction entropy candidates with always-on fixed communication and the
+private-local-KPI CUSUM, for 144 prospective episodes. Selection is exactly:
 
 1. retain candidates whose paired mean degradation is at most 1% in both
    applications and at most 2% in every application/regime cell;
@@ -130,7 +159,7 @@ Budget-matched random and periodic rates are computed only from the selected
 validation traffic. The selected DOET total counted messages per episode,
 including sketches, are converted to an intensive-decision target using the
 fixed control's validation messages per active decision. Random activation is
-sampled at two-period opportunities; the periodic interval from 2 through 24
+sampled at two-period opportunities; the periodic interval from 2 through 16
 that most closely matches the target is selected. Both controls retain quiet
 local planning every eight periods when intensive communication is inactive,
 so matching communication does not disable local autonomy. Predicted and
@@ -153,11 +182,17 @@ and five completed checkpoints per learned method. It will create:
 - 16 unseen seeds per application for each of isolated, communication-
   partition, correlated, and compound-OOD disruption;
 - 8 unseen nominal seeds per application;
-- 144 base matched panels and 1,296 total method episodes;
-- nine core methods, including fixed, periodic, random budget-matched, local-
-  KPI CUSUM, DOET-rule, and DOET-RL;
-- five independent RL seeds (`7301`--`7305`) assigned round-robin to every
-  learned method, 28 or 29 matched panels per seed;
+- 144 base matched panels and 696 total method episodes, all with a 16-period
+  horizon;
+- fixed always-on, learned non-entropic, DOET-rule, and DOET-RL on every panel,
+  because these are the preregistered compute-priority methods;
+- no communication, periodic, random budget-matched, ThermoAgent v1, and local-
+  KPI CUSUM on the same prospectively fixed 24-panel non-nominal subset (seeds
+  `8101`, `8106`, and `8111` in every application/regime cell); Pareto analyses
+  restrict every method to these exact common panels;
+- five independent RL seeds (`7301`--`7305`) assigned round-robin without
+  removal or outcome selection; full-panel learned methods receive 28 or 29
+  panels per seed and the secondary ThermoAgent comparator receives 4 or 5;
 - deterministic Qwen decoding with a new recorded and applied LLM seed `9101`;
 - the unseen `tri_region_bridge_v2` topology, distinct from training and the
   seen v1 holdout topology.

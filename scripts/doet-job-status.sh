@@ -19,6 +19,6 @@ holdout_outputs=$(
   { find "$root/raw/holdout_locked" -mindepth 1 -maxdepth 1 \
       -type d 2>/dev/null || true; } | wc -l
 )
-printf 'manifests=%s published_episode_directories=%s expected=1296\n' \
+printf 'manifests=%s published_episode_directories=%s expected=696\n' \
   "$holdout_manifests" "$holdout_outputs"
 echo "No partial outcome values are displayed by this command."

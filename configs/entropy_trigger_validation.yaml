@@ -44,7 +44,7 @@ methods:
   - fixed_always_on
   - doet_rule
   - kpi_cusum_trigger
-seeds: [6101, 6102, 6103, 6104]
+seeds: [6101, 6102, 6103]
 method_variants:
   doet_rule:
     - name: cusum_low_balanced_local
@@ -86,19 +86,6 @@ method_variants:
           minimum_dwell: 2
           cooldown: 1
           propagation: neighbor
-    - name: cusum_low_conservative
-      trigger:
-        parameters:
-          trigger_type: cusum
-          direction: low
-          rho: 0.90
-          kappa: 0.25
-          tau_on: 2.00
-          tau_off: 0.75
-          tau_crisis: 4.00
-          minimum_dwell: 3
-          cooldown: 3
-          propagation: local
     - name: hysteresis_low
       trigger:
         parameters:
@@ -109,32 +96,6 @@ method_variants:
           tau_on: 1.20
           tau_off: 0.40
           tau_crisis: 2.80
-          minimum_dwell: 2
-          cooldown: 2
-          propagation: neighbor
-    - name: cusum_absolute
-      trigger:
-        parameters:
-          trigger_type: cusum
-          direction: absolute
-          rho: 0.80
-          kappa: 0.15
-          tau_on: 1.50
-          tau_off: 0.50
-          tau_crisis: 3.00
-          minimum_dwell: 2
-          cooldown: 2
-          propagation: neighbor
-    - name: cusum_change
-      trigger:
-        parameters:
-          trigger_type: cusum
-          direction: change
-          rho: 0.80
-          kappa: 0.15
-          tau_on: 1.50
-          tau_off: 0.50
-          tau_crisis: 3.00
           minimum_dwell: 2
           cooldown: 2
           propagation: neighbor
@@ -155,25 +116,25 @@ method_variants:
           propagation: local
 scenarios:
   nominal:
-    horizon: 24
+    horizon: 16
     private_information: 0.8
     objective_misalignment: 0.8
     communication: reliable
     disruption: nominal
   isolated:
-    horizon: 24
+    horizon: 16
     private_information: 0.8
     objective_misalignment: 0.8
     communication: reliable
     disruption: moderate
   correlated:
-    horizon: 24
+    horizon: 16
     private_information: 1.0
     objective_misalignment: 1.0
     communication: intermittent
     disruption: correlated
   compound_partition:
-    horizon: 24
+    horizon: 16
     private_information: 1.0
     objective_misalignment: 1.0
     communication: partition

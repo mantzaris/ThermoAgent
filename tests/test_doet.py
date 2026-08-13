@@ -23,7 +23,11 @@ from thermoagent.planners import (
 )
 from thermoagent.runner import EpisodeRunner
 from thermoagent.policy import CoordinationPolicy
-from thermoagent.doet_analysis import _comparison_rows, _frontier_rows
+from thermoagent.doet_analysis import (
+    _common_panel_subset,
+    _comparison_rows,
+    _frontier_rows,
+)
 from thermoagent.doet_ablations import run as design_doet_ablations
 from thermoagent.doet_holdout import run as design_doet_holdout
 from thermoagent.experiments import (
@@ -444,6 +448,32 @@ def test_locked_analysis_uses_paired_panels_and_all_frontier_costs(monkeypatch):
     assert all(row["doet_improves_frontier"] for row in frontiers)
 
 
+def test_compute_capped_frontier_restricts_methods_to_common_panels():
+    frame = _analysis_fixture_frame()
+    secondary = {
+        "periodic_communication", "random_budget_matched",
+        "kpi_cusum_trigger",
+    }
+    frame = frame[
+        ~(
+            frame["method"].isin(secondary)
+            & frame["seed"].isin([3, 4, 5])
+        )
+    ].copy()
+    methods = secondary | {"doet_rule"}
+    matched = _common_panel_subset(
+        frame[
+            (frame["application"] == "commercial")
+            & (frame["scenario_name"] != "nominal")
+        ],
+        methods,
+    )
+    assert set(matched["seed"]) == {1, 2}
+    assert matched.groupby("method").size().to_dict() == {
+        method: 8 for method in methods
+    }
+
+
 def test_locked_analysis_retains_failed_pair_count_without_imputation(monkeypatch):
     monkeypatch.setattr("thermoagent.doet_analysis.BOOTSTRAP_REPLICATES", 50)
     frame = _analysis_fixture_frame()
@@ -507,6 +537,30 @@ def test_real_llm_profile_is_small_and_seed_separated():
     assert {row[3] for row in matrix} == {
         "fixed_always_on", "doet_rule",
     }
+
+
+def test_expand_matrix_supports_preregistered_method_specific_panel_subsets():
+    config = {
+        "applications": {"commercial": {"n_agents": 8}},
+        "methods": ["fixed_always_on", "periodic_communication"],
+        "seeds": [1, 2, 3],
+        "rl_seed": 0,
+        "scenarios": {
+            "isolated": {
+                "method_seeds": {
+                    "fixed_always_on": [1, 2, 3],
+                    "periodic_communication": [2],
+                }
+            }
+        },
+    }
+    matrix = expand_matrix(config)
+    fixed = [row[2] for row in matrix if row[3] == "fixed_always_on"]
+    periodic = [
+        row[2] for row in matrix if row[3] == "periodic_communication"
+    ]
+    assert fixed == [1, 2, 3]
+    assert periodic == [2]
 
 
 def test_transformers_planner_applies_declared_llm_seed(monkeypatch):
@@ -591,7 +645,7 @@ def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_pat
     (root / "manifests" / "validation_sweep.json").write_text(
         json.dumps({
             "planner_backend": "transformers", "episodes_failed": 0,
-            "episodes_complete": 288,
+            "episodes_complete": 144,
             "wall_clock_seconds_including_model_load": 3600.0,
             "cumulative_episode_single_gpu_hours": 1.0,
         }), encoding="utf-8",
@@ -637,8 +691,19 @@ def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_pat
     )
     config_path = tmp_path / "holdout.yaml"
     record = design_doet_holdout(root, config_path)
-    assert record["episode_count"] == 1296
+    assert record["episode_count"] == 696
     assert record["base_scenario_panels"] == 144
+    assert record["method_evaluation_counts"] == {
+        "fixed_always_on": 144,
+        "learned_no_entropy": 144,
+        "doet_rule": 144,
+        "doet_rl": 144,
+        "autonomous_no_comm": 24,
+        "periodic_communication": 24,
+        "random_budget_matched": 24,
+        "thermoagent": 24,
+        "kpi_cusum_trigger": 24,
+    }
     for counts in record["learned_assignment_counts"].values():
         assert set(counts) == {7301, 7302, 7303, 7304, 7305}
         assert max(counts.values()) - min(counts.values()) <= 1

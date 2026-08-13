@@ -342,6 +342,44 @@ def _nondominated(grouped: pd.DataFrame, cost: str) -> Dict[str, List[str]]:
     return output
 
 
+def _common_panel_subset(
+    frame: pd.DataFrame,
+    methods: set[str],
+) -> pd.DataFrame:
+    """Restrict unequal compute-capped methods to identical scenario panels."""
+
+    keys = ["scenario_name", "seed", "n_agents"]
+    available = set(frame["method"].astype(str))
+    if not methods.issubset(available):
+        raise ValueError(
+            "matched-panel comparison is missing methods: %s"
+            % sorted(methods - available)
+        )
+    panel_sets = []
+    for method in sorted(methods):
+        values = frame[frame["method"] == method]
+        panel_sets.append(set(map(tuple, values[keys].itertuples(
+            index=False, name=None
+        ))))
+    common = set.intersection(*panel_sets)
+    if not common:
+        raise ValueError("matched-panel comparison has no common panels")
+    selected = frame[frame["method"].isin(methods)].copy()
+    mask = [
+        tuple(value) in common
+        for value in selected[keys].itertuples(index=False, name=None)
+    ]
+    selected = selected.loc[mask]
+    expected = len(common)
+    counts = selected.groupby("method").size().to_dict()
+    if any(int(counts.get(method, 0)) != expected for method in methods):
+        raise ValueError(
+            "matched-panel comparison contains duplicate or missing rows: %s"
+            % counts
+        )
+    return selected
+
+
 def _pareto_rows(frame: pd.DataFrame) -> List[Dict[str, Any]]:
     non_nominal = frame[frame["scenario_name"] != "nominal"].copy()
     metrics = [
@@ -351,7 +389,9 @@ def _pareto_rows(frame: pd.DataFrame) -> List[Dict[str, Any]]:
     ]
     rows: List[Dict[str, Any]] = []
     for application, app in non_nominal.groupby("application"):
-        grouped = app.groupby("method")[metrics].mean().reset_index()
+        methods = set(app["method"].astype(str))
+        matched = _common_panel_subset(app, methods)
+        grouped = matched.groupby("method")[metrics].mean().reset_index()
         dominance = {
             cost: _nondominated(grouped, cost)
             for cost in (
@@ -404,7 +444,10 @@ def _frontier_rows(frame: pd.DataFrame) -> List[Dict[str, Any]]:
     non_nominal = frame[frame["scenario_name"] != "nominal"]
     rows: List[Dict[str, Any]] = []
     for application, app in non_nominal.groupby("application"):
-        grouped = app.groupby("method").agg(
+        matched = _common_panel_subset(
+            app, comparators | {PRIMARY_METHOD}
+        )
+        grouped = matched.groupby("method").agg(
             primary_outcome=("primary_outcome", "mean"),
             total_communication_messages=("total_communication_messages", "mean"),
             prompt_tokens=("prompt_tokens", "mean"),
@@ -956,9 +999,19 @@ def run(results_root: Path) -> Dict[str, Any]:
         llm_calls_mean=("llm_calls", "mean"),
         latency_seconds_mean=("llm_latency_seconds", "mean"),
     ).reset_index()
-    non_nominal_budget = completed[
+    budget_methods = {
+        "periodic_communication", "random_budget_matched",
+        "kpi_cusum_trigger", PRIMARY_METHOD,
+    }
+    matched_budget_parts = []
+    for _, app in completed[
         completed["scenario_name"] != "nominal"
-    ].groupby(["application", "method"], dropna=False).agg(
+    ].groupby("application"):
+        matched_budget_parts.append(_common_panel_subset(app, budget_methods))
+    matched_budget = pd.concat(matched_budget_parts, ignore_index=True)
+    non_nominal_budget = matched_budget.groupby(
+        ["application", "method"], dropna=False
+    ).agg(
         mean_counted_messages=("total_communication_messages", "mean"),
         mean_counted_bytes=("total_communication_bytes", "mean"),
         mean_prompt_tokens=("prompt_tokens", "mean"),
@@ -970,10 +1023,7 @@ def run(results_root: Path) -> Dict[str, Any]:
         columns={"mean_counted_messages": "doet_target_messages"}
     )
     achieved_budget_match = non_nominal_budget[
-        non_nominal_budget["method"].isin([
-            "periodic_communication", "random_budget_matched",
-            "kpi_cusum_trigger", PRIMARY_METHOD,
-        ])
+        non_nominal_budget["method"].isin(budget_methods)
     ].merge(budget_target, on="application", validate="many_to_one")
     achieved_budget_match["message_budget_relative_mismatch"] = (
         achieved_budget_match["mean_counted_messages"]

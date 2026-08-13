@@ -19,17 +19,40 @@ from .experiments import expand_matrix
 RL_SEEDS = (7301, 7302, 7303, 7304, 7305)
 NON_NOMINAL_SEEDS = tuple(range(8101, 8117))
 NOMINAL_SEEDS = tuple(range(8201, 8209))
-CORE_METHODS = (
-    "autonomous_no_comm",
+SECONDARY_SUBSET_SEEDS = (8101, 8106, 8111)
+PRIMARY_FULL_METHODS = (
     "fixed_always_on",
-    "periodic_communication",
-    "random_budget_matched",
     "learned_no_entropy",
-    "thermoagent",
     "doet_rule",
     "doet_rl",
+)
+SECONDARY_SUBSET_METHODS = (
+    "autonomous_no_comm",
+    "periodic_communication",
+    "random_budget_matched",
+    "thermoagent",
     "kpi_cusum_trigger",
 )
+CORE_METHODS = (
+    *PRIMARY_FULL_METHODS,
+    *SECONDARY_SUBSET_METHODS,
+)
+
+
+def _method_seed_map(
+    primary_seeds: Sequence[int],
+    secondary_seeds: Sequence[int],
+) -> Dict[str, List[int]]:
+    return {
+        **{
+            method: [int(seed) for seed in primary_seeds]
+            for method in PRIMARY_FULL_METHODS
+        },
+        **{
+            method: [int(seed) for seed in secondary_seeds]
+            for method in SECONDARY_SUBSET_METHODS
+        },
+    }
 
 
 def _utc_now() -> str:
@@ -288,7 +311,8 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         "scenarios": {
             "nominal": {
                 "seeds": list(NOMINAL_SEEDS),
-                "horizon": 24,
+                "method_seeds": _method_seed_map(NOMINAL_SEEDS, ()),
+                "horizon": 16,
                 "private_information": 0.8,
                 "objective_misalignment": 0.8,
                 "communication": "reliable",
@@ -296,7 +320,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
                 "topology": "tri_region_bridge_v2",
             },
             "isolated": {
-                "horizon": 24,
+                "method_seeds": _method_seed_map(
+                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                ),
+                "horizon": 16,
                 "private_information": 0.8,
                 "objective_misalignment": 0.8,
                 "communication": "reliable",
@@ -304,7 +331,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
                 "topology": "tri_region_bridge_v2",
             },
             "communication_partition": {
-                "horizon": 24,
+                "method_seeds": _method_seed_map(
+                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                ),
+                "horizon": 16,
                 "private_information": 0.8,
                 "objective_misalignment": 0.8,
                 "communication": "partition",
@@ -312,7 +342,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
                 "topology": "tri_region_bridge_v2",
             },
             "correlated": {
-                "horizon": 24,
+                "method_seeds": _method_seed_map(
+                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                ),
+                "horizon": 16,
                 "private_information": 1.0,
                 "objective_misalignment": 1.0,
                 "communication": "intermittent",
@@ -320,7 +353,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
                 "topology": "tri_region_bridge_v2",
             },
             "compound_ood": {
-                "horizon": 24,
+                "method_seeds": _method_seed_map(
+                    NON_NOMINAL_SEEDS, SECONDARY_SUBSET_SEEDS
+                ),
+                "horizon": 16,
                 "private_information": 1.0,
                 "objective_misalignment": 1.0,
                 "communication": "partition",
@@ -331,14 +367,29 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
     }
     matrix = expand_matrix(config)
     episode_count = len(matrix)
-    expected_count = 1296
+    expected_count = 696
     if episode_count != expected_count:
         raise ValueError(
             "locked design expected %d episodes, got %d"
             % (expected_count, episode_count)
         )
-    # Verify exact balance: 144 panels/method and either 28 or 29 panels per
-    # training seed for every learned method.
+    # The compute-capped design keeps the four preregistered priority methods
+    # on all 144 panels and evaluates every secondary comparator on the same
+    # 24 stratified non-nominal panels. Learned checkpoints remain balanced.
+    method_evaluation_counts: Dict[str, int] = {}
+    for _, _, _, method, _ in matrix:
+        method_evaluation_counts[method] = (
+            method_evaluation_counts.get(method, 0) + 1
+        )
+    expected_method_counts = {
+        **{method: 144 for method in PRIMARY_FULL_METHODS},
+        **{method: 24 for method in SECONDARY_SUBSET_METHODS},
+    }
+    if method_evaluation_counts != expected_method_counts:
+        raise ValueError(
+            "compute-capped method balance failed: %s"
+            % method_evaluation_counts
+        )
     learned_counts: Dict[str, Dict[int, int]] = {}
     for _, _, _, method, scenario in matrix:
         if method not in ("learned_no_entropy", "thermoagent", "doet_rl"):
@@ -406,6 +457,10 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         "nominal_base_panels": 16,
         "episode_count": episode_count,
         "methods": list(CORE_METHODS),
+        "primary_full_panel_methods": list(PRIMARY_FULL_METHODS),
+        "secondary_subset_methods": list(SECONDARY_SUBSET_METHODS),
+        "secondary_subset_environment_seeds": list(SECONDARY_SUBSET_SEEDS),
+        "method_evaluation_counts": method_evaluation_counts,
         "rl_training_seeds": list(RL_SEEDS),
         "learned_assignment_counts": learned_counts,
         "selected_trigger_variant": selection["selected_method_variant"],

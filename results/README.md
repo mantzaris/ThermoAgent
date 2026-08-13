@@ -9,9 +9,10 @@
 - **Entropy-triggered communication study (v2):**
   [`entropy_triggered_v2/README.md`](entropy_triggered_v2/README.md). This is a
   strictly separate namespace for Distributed Operational Entropy Triggering.
-  Diagnostics, monitoring validation, implementation, and deterministic
-  preflight are complete; no v2 real-LLM comparative or locked-holdout claim
-  exists while the original RunPod is unreachable.
+  Diagnostics, monitoring validation, implementation, deterministic preflight,
+  and the real-Qwen throughput profile are complete. The compute-capped v2
+  validation is active on the reconnected original RunPod; no locked-holdout
+  claim exists yet.
 
 The top-level `INDEX.csv` indexes both namespaces when rebuilt. No v2 derived
 artifact replaces a frozen-v1 source artifact.

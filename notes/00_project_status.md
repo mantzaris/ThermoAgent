@@ -16,11 +16,13 @@ Last updated: 2026-08-13 America/New_York
   compute-capped holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
   129 passing tests; 8/8 v2 preflight replays.
-- **Active work:** verify and deploy the documented compute-capped design, then
-  launch the 144-episode real-Qwen validation.
+- **Active work:** the documented 144-episode real-Qwen validation is running
+  in detached `tmux` on the exact checksum-matched source.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.
-- **Active jobs:** none. Retained `doet-setup` exited 2 before testing or model
-  inference; `doet-setup-v2` and `doet-profile` exited 0.
+- **Active jobs:** `doet-validation`. Retained `doet-setup` exited 2 before
+  testing or model inference; `doet-setup-v2`, `doet-profile`, and the corrected
+  prevalidation test job exited 0. A malformed quoted test launcher exited 127
+  without starting an experiment and remains in the audit log.
 - **Blockers:** none. The stale direct alias still refuses port 19465, but the
   user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
   locally configured RSA key. The requested Ed25519 path was absent.

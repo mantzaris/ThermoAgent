@@ -93,6 +93,15 @@ The eight-episode mock preflight completed with zero failures and maximum
 absolute material residual below `1.14e-13`; all eight ledgers replayed exactly.
 It is an engineering check only and supplies no research claim.
 
+The compute-capped locked design gives secondary comparators fewer panels than
+the four priority methods. Statistical Pareto summaries, communication-budget
+comparisons, and the paper-facing primary-results figure therefore restrict all
+displayed methods to the exact intersection of application, regime, scenario
+seed, and system size. Full-panel DOET-versus-fixed evidence remains in the
+paired non-inferiority forest. This rule was implemented before the locked
+holdout and prevents unequal seed composition from masquerading as a method
+effect.
+
 ## Filtered remote execution sequence
 
 The source checksum includes `thermoagent/`, `configs/`, `scripts/`, `tests/`,

@@ -19,6 +19,8 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 
+from .doet_analysis import _common_panel_subset
+
 
 PALETTE = {
     "blue": "#0072B2",
@@ -316,6 +318,11 @@ def holdout_primary_results(root: Path) -> str:
     for row_index, application in enumerate(("commercial", "humanitarian")):
         ax = axes[row_index, 0]
         app = frame[(frame["application"] == application) & (frame["scenario_name"] != "nominal")]
+        # Secondary controls use a preregistered compute-capped subset. Keep
+        # the visual comparison on the exact panel intersection so method
+        # means cannot be shifted by unequal scenario seeds. The full primary
+        # sample remains in the non-inferiority forest.
+        app = _common_panel_subset(app, set(methods))
         for index, method in enumerate(methods):
             values = app[app["method"] == method]["primary_outcome"].to_numpy(dtype=float)
             mean, low, high = _ci(values)
@@ -327,7 +334,7 @@ def holdout_primary_results(root: Path) -> str:
         ax.set_xticklabels([_label(method) for method in methods], rotation=24, ha="right")
         ax.set_ylabel("Service-loss AUC" if application == "commercial" else "Cumulative unmet weighted need")
         ax.set_title(application.capitalize())
-    fig.suptitle("Locked-holdout primary results (points are complete episodes)")
+    fig.suptitle("Locked-holdout primary results (common matched panels)")
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     return _save(fig, "holdout_primary_results", root)
 

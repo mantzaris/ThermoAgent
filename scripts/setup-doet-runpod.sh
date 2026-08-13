@@ -31,6 +31,6 @@ print("preserved torch runtime", torch.__version__, torch.version.cuda)
 PY
 
 .venv/bin/python -m thermoagent capture-env \
-  --output "$v2_root/reproducibility/environment.json"
+  --results "$v2_root"
 .venv/bin/python -m pytest -q 2>&1 \
   | tee "$v2_root/logs/setup/tests-after-install.log"

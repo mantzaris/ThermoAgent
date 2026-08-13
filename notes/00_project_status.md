@@ -5,8 +5,9 @@
 Last updated: 2026-08-13 America/New_York
 
 - **Current phase:** Local DOET implementation and development calibration are
-  complete; the existing Pod is connected through its current RunPod SSH proxy
-  and awaits the filtered v2 deployment/profile.
+  complete; the exact committed v2 source is deployed on the connected Pod.
+  A setup CLI mismatch was corrected after a retained failed setup attempt;
+  the separately named setup rerun and real-Qwen profile are next.
 - **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
 - **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
 - **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
@@ -15,15 +16,16 @@ Last updated: 2026-08-13 America/New_York
   1,296-episode holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
   129 passing tests; 8/8 v2 preflight replays.
-- **Active work:** deploy the clean committed branch without touching frozen-v1
-  results, run v2-only setup, and launch the eight-episode real-Qwen profile.
+- **Active work:** deploy the two-script setup correction, rerun v2-only setup,
+  and launch the eight-episode real-Qwen profile.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.
-- **Active jobs:** none.
+- **Active jobs:** none. Retained `doet-setup` exited 2 before testing or model
+  inference; its audit log and status file remain on the Pod.
 - **Blockers:** none. The stale direct alias still refuses port 19465, but the
   user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
   locally configured RSA key. The requested Ed25519 path was absent.
-- **Next actions:** deploy through a temporary clean GitHub branch clone, run
-  the v2-only setup/profile, execute the 288-episode validation, train all 15 checkpoints, fetch and commit
+- **Next actions:** complete the v2-only setup/profile, execute the 288-episode
+  validation, train all 15 checkpoints, fetch and commit
   the validation-selected protocol, perform measured precision/budget analysis,
   freeze, and run the 1,296-episode outcome-sealed locked holdout.
 - **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.

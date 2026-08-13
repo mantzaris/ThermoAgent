@@ -1,7 +1,8 @@
 # DOET development and validation log
 
-No real-LLM outcome pilot or validation result has been produced because the
-existing RunPod endpoint is stopped/unreachable. This file intentionally
+No real-LLM outcome pilot or validation result has yet been produced. The
+current RunPod proxy is reachable and the committed v2 source was deployed by
+a filtered archive with an exact source-checksum match. This file intentionally
 contains no inferred or synthetic treatment result.
 
 Completed local work:
@@ -50,3 +51,11 @@ CUDA-enabled PyTorch 2.8.0+cu128, 124 GiB RAM, and intact frozen-v1 counts
 (944 main, 72 ablation, 80 holdout manifests and ten PDFs). The v1 freeze hash
 remained `25141d7f9281320182af7256ea34815f3fe3b3a0b13d4589464b2224e7aa979e`.
 No GPU process or v2 real-model call had started at this inspection point.
+
+The first detached v2 setup job (`doet-setup`) retained exit status 2 after
+dependency installation and the CUDA invariant check succeeded. It failed
+before tests because `setup-doet-runpod.sh` passed the unsupported
+`capture-env --output` option instead of `--results`. No experiment or model
+inference ran. The failed status and log are retained; the setup script and the
+health-only status script were corrected locally and reverified against all
+129 tests before a separately named rerun.

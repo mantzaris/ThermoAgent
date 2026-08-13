@@ -75,14 +75,15 @@ be included in accounting.
   branch/commit, plus v2-only control synchronization and retrieval so remote
   work cannot replace frozen-v1 result paths.
 - The holdout freeze now requires a machine-generated source-transition parity
-  report. `scripts/verify-doet-source-transition.py` runs five deterministic
-  method cases in isolated interpreters rooted at the validation commit and
+  report. `scripts/verify-doet-source-transition.py` runs ten deterministic
+  application-method cases in isolated interpreters rooted at the validation commit and
   proposed holdout source. It compares metrics, agent/planner metrics, complete
   time series, PPO trajectories, and causal events. Only the two newly added
   private audit event kinds and their shifted ordinal IDs are excluded. The
   exact deployed validation archive independently reproduced its recorded
-  source checksum `46d5ff37...f255f`, and the initial audit matched all six
-  sections for all five methods.
+  source checksum `46d5ff37...f255f`; the initial commercial audit matched all
+  six sections for all five methods, and the freeze artifact expands this gate
+  to both logistics applications.
 - The experiment-level `llm_seed` now initializes both PyTorch and CUDA in the
   real Transformers planner. Decoding remains frozen and deterministic, but the
   manifest seed is therefore the seed actually applied at model load.

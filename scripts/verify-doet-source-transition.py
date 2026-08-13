@@ -30,6 +30,7 @@ METHODS = (
     "learned_no_entropy",
     "doet_rl",
 )
+APPLICATIONS = ("commercial", "humanitarian")
 
 
 WORKER = r'''
@@ -70,62 +71,65 @@ trigger_parameters = {
     "crisis_decision_interval": 2,
     "max_alert_neighbors": 2,
 }
-configuration = ScenarioConfig(
-    application="commercial",
-    seed=424242,
-    horizon=8,
-    n_agents=10,
-    private_information=1.0,
-    objective_misalignment=1.0,
-    communication="intermittent",
-    disruption="correlated",
-    decision_interval=4,
-    communication_budget=300,
-    topology="tri_region_bridge_v2",
-)
 output = {"source_checksum": source_checksum(Path.cwd()), "cases": {}}
-for method in request["methods"]:
-    policy = None
-    if method in ("learned_no_entropy", "doet_rl"):
-        policy = CoordinationPolicy(PPOConfig(), seed=1701)
-    normalizers = None
-    if method in ("doet_rule", "doet_rl"):
-        normalizers = normalizer_record["normalizers"]
-    elif method == "kpi_cusum_trigger":
-        normalizers = normalizer_record["kpi_normalizers"]
-    runner = EpisodeRunner(
-        configuration,
-        method,
-        planner=MockPlanner(),
-        policy=policy,
-        calibration=calibration,
-        deterministic_policy=True,
-        monitor_window=1,
-        monitor_formulation="pooled",
-        trigger_config=(
-            trigger_parameters if method in (
-                "doet_rule", "doet_rl", "kpi_cusum_trigger"
-            ) else None
-        ),
-        trigger_normalizers=normalizers,
-        fixed_broadcast_fanout=3,
+for application in request["applications"]:
+    configuration = ScenarioConfig(
+        application=application,
+        seed=424242,
+        horizon=8,
+        n_agents=10,
+        private_information=1.0,
+        objective_misalignment=1.0,
+        communication="intermittent",
+        disruption="correlated",
+        decision_interval=4,
+        communication_budget=300,
+        topology="tri_region_bridge_v2",
     )
-    result = runner.run("source-transition-" + method)
-    events = []
-    for event in runner.env.ledger.events:
-        if event.kind in request["excluded_event_kinds"]:
-            continue
-        row = event.as_dict()
-        row.pop("event_id", None)
-        events.append(row)
-    output["cases"][method] = {
-        "metrics": result.metrics,
-        "agent_metrics": result.agent_metrics,
-        "planner_metrics": result.planner_metrics,
-        "time_series": result.time_series,
-        "trajectory": result.trajectory,
-        "causal_events_excluding_new_private_audit_rows": events,
-    }
+    for method in request["methods"]:
+        policy = None
+        if method in ("learned_no_entropy", "doet_rl"):
+            policy = CoordinationPolicy(PPOConfig(), seed=1701)
+        normalizers = None
+        if method in ("doet_rule", "doet_rl"):
+            normalizers = normalizer_record["normalizers"]
+        elif method == "kpi_cusum_trigger":
+            normalizers = normalizer_record["kpi_normalizers"]
+        runner = EpisodeRunner(
+            configuration,
+            method,
+            planner=MockPlanner(),
+            policy=policy,
+            calibration=calibration,
+            deterministic_policy=True,
+            monitor_window=1,
+            monitor_formulation="pooled",
+            trigger_config=(
+                trigger_parameters if method in (
+                    "doet_rule", "doet_rl", "kpi_cusum_trigger"
+                ) else None
+            ),
+            trigger_normalizers=normalizers,
+            fixed_broadcast_fanout=3,
+        )
+        result = runner.run(
+            "source-transition-" + application + "-" + method
+        )
+        events = []
+        for event in runner.env.ledger.events:
+            if event.kind in request["excluded_event_kinds"]:
+                continue
+            row = event.as_dict()
+            row.pop("event_id", None)
+            events.append(row)
+        output["cases"][application + "|" + method] = {
+            "metrics": result.metrics,
+            "agent_metrics": result.agent_metrics,
+            "planner_metrics": result.planner_metrics,
+            "time_series": result.time_series,
+            "trajectory": result.trajectory,
+            "causal_events_excluding_new_private_audit_rows": events,
+        }
 print(json.dumps(output, sort_keys=True, separators=(",", ":")))
 '''
 
@@ -204,6 +208,7 @@ def main() -> int:
     request = {
         "calibration_path": str(calibration),
         "normalizers_path": str(normalizers),
+        "applications": list(APPLICATIONS),
         "methods": list(METHODS),
         "excluded_event_kinds": list(EXCLUDED_AUDIT_EVENTS),
     }
@@ -211,26 +216,33 @@ def main() -> int:
     current = _run_worker(current_source, request)
     checks = []
     all_equal = True
-    for method in METHODS:
-        section_rows = []
-        for section in sorted(validation["cases"][method]):
-            before_hash = _canonical_hash(
-                validation["cases"][method][section]
-            )
-            after_hash = _canonical_hash(current["cases"][method][section])
-            equal = before_hash == after_hash
-            all_equal = all_equal and equal
-            section_rows.append({
-                "section": section,
-                "validation_sha256": before_hash,
-                "current_sha256": after_hash,
-                "equal": equal,
+    for application in APPLICATIONS:
+        for method in METHODS:
+            case_key = application + "|" + method
+            section_rows = []
+            for section in sorted(validation["cases"][case_key]):
+                before_hash = _canonical_hash(
+                    validation["cases"][case_key][section]
+                )
+                after_hash = _canonical_hash(
+                    current["cases"][case_key][section]
+                )
+                equal = before_hash == after_hash
+                all_equal = all_equal and equal
+                section_rows.append({
+                    "section": section,
+                    "validation_sha256": before_hash,
+                    "current_sha256": after_hash,
+                    "equal": equal,
+                })
+            checks.append({
+                "application": application,
+                "method": method,
+                "all_sections_equal": all(
+                    row["equal"] for row in section_rows
+                ),
+                "sections": section_rows,
             })
-        checks.append({
-            "method": method,
-            "all_sections_equal": all(row["equal"] for row in section_rows),
-            "sections": section_rows,
-        })
     expected_ok = True
     if arguments.expected_validation_checksum:
         expected_ok = expected_ok and (
@@ -258,7 +270,7 @@ def main() -> int:
         "calibration_sha256": _sha256_file(calibration),
         "normalizers_sha256": _sha256_file(normalizers),
         "scenario": {
-            "application": "commercial",
+            "applications": list(APPLICATIONS),
             "environment_seed": 424242,
             "horizon": 8,
             "agents": 10,

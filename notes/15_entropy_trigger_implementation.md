@@ -104,7 +104,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 134/134 passing. New tests cover trigger
+The current complete suite is 137/137 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -115,6 +115,10 @@ performs quiet local planning without activating communication.
 The restart test also forces one PPO seed attempt to fail, resumes all fifteen
 slots, and verifies that both the failed and successful terminal records remain
 in the attempt ledger.
+Three evidence-bound reporting tests prevent the journal-readiness classifier
+from treating cost savings alone as publishable when performance is inferior,
+retain a genuinely joint one-application boundary as narrower evidence, and
+reserve the strong classification for the full preregistered hypothesis family.
 
 The eight-episode mock preflight completed with zero failures and maximum
 absolute material residual below `1.14e-13`; all eight ledgers replayed exactly.

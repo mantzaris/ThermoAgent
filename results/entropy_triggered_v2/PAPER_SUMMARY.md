@@ -7,7 +7,7 @@ No abstract claiming a positive performance result is justified yet. Verified
 contributions currently comprise the exact original-tie mechanism, the
 global-versus-private-KPI monitoring boundary, a decentralized three-mode DOET
 implementation with fully counted sketch traffic, five-seed training and
-locked-holdout infrastructure, 134 engineering tests, and exact deterministic
+locked-holdout infrastructure, 137 engineering tests, and exact deterministic
 preflight replay.
 
 The compute-capped 696-episode holdout has not been generated, frozen, or run

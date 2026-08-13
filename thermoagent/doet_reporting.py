@@ -40,9 +40,19 @@ def _readiness(hypotheses: pd.DataFrame, primary: pd.DataFrame) -> str:
     outcomes = dict(zip(hypotheses["hypothesis"], hypotheses["outcome"]))
     if all(outcomes.get(name) == "supported" for name in ("H1", "H2", "H3", "H5", "H6")):
         return "strong AIJ direction"
-    supported_apps = int(primary["noninferior"].map(_truth).sum())
-    savings_apps = int(primary["communication_target_20_percent"].map(_truth).sum())
-    if supported_apps or savings_apps:
+    jointly_useful_apps = int((
+        primary["noninferior"].map(_truth)
+        & primary["communication_target_20_percent"].map(_truth)
+    ).sum())
+    # A cheaper but materially inferior trigger is not, by itself, the
+    # narrower publishable boundary contemplated in the protocol. Require at
+    # least one jointly useful application, or a confirmed frontier/partition
+    # boundary, before returning the intermediate classification.
+    if (
+        jointly_useful_apps >= 1
+        or outcomes.get("H3") == "supported"
+        or outcomes.get("H5") == "supported"
+    ):
         return "narrower but potentially publishable direction"
     return "insufficient for an AIJ submission"
 

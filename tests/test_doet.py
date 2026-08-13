@@ -33,6 +33,7 @@ from thermoagent.doet_analysis import (
 )
 from thermoagent.doet_ablations import run as design_doet_ablations
 from thermoagent.doet_holdout import run as design_doet_holdout
+from thermoagent.doet_reporting import _readiness
 from thermoagent.experiments import (
     capture_source_provenance,
     expand_matrix,
@@ -731,6 +732,55 @@ def test_multiseed_training_retains_failed_attempts_across_restart(
     assert list(retained["status"]) == ["failed", "complete"]
     assert "retained failure" in retained.iloc[0]["failure_reason"]
     assert second["nonterminal_attempts_retained"] == 0
+
+
+def test_readiness_does_not_reward_savings_with_inferior_performance():
+    hypotheses = pd.DataFrame([
+        {"hypothesis": name, "outcome": "unsupported"}
+        for name in ("H1", "H2", "H3", "H4", "H5", "H6")
+    ])
+    primary = pd.DataFrame([
+        {"application": "commercial", "noninferior": False,
+         "communication_target_20_percent": True},
+        {"application": "humanitarian", "noninferior": False,
+         "communication_target_20_percent": True},
+    ])
+    assert _readiness(hypotheses, primary) == "insufficient for an AIJ submission"
+
+
+def test_readiness_retains_one_application_boundary_as_narrower():
+    hypotheses = pd.DataFrame([
+        {"hypothesis": name, "outcome": "unsupported"}
+        for name in ("H1", "H2", "H3", "H4", "H5", "H6")
+    ])
+    primary = pd.DataFrame([
+        {"application": "commercial", "noninferior": True,
+         "communication_target_20_percent": True},
+        {"application": "humanitarian", "noninferior": False,
+         "communication_target_20_percent": True},
+    ])
+    assert _readiness(hypotheses, primary) == (
+        "narrower but potentially publishable direction"
+    )
+
+
+def test_readiness_requires_the_full_preregistered_family_for_strong_aij():
+    hypotheses = pd.DataFrame([
+        {
+            "hypothesis": name,
+            "outcome": (
+                "supported" if name in ("H1", "H2", "H3", "H5", "H6")
+                else "unsupported"
+            ),
+        }
+        for name in ("H1", "H2", "H3", "H4", "H5", "H6")
+    ])
+    primary = pd.DataFrame([
+        {"application": application, "noninferior": True,
+         "communication_target_20_percent": True}
+        for application in ("commercial", "humanitarian")
+    ])
+    assert _readiness(hypotheses, primary) == "strong AIJ direction"
 
 
 def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_path):

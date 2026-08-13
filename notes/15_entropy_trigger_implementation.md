@@ -103,6 +103,7 @@ result data and credentials. Run these first on the local clean branch:
 ./scripts/runpod-smoke-test.sh
 ./scripts/runpod-sync.sh
 ./scripts/runpod-sync-v2-controls.sh bootstrap
+ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/setup-doet-runpod.sh'
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/start-doet-job.sh doet-profile ./scripts/run-doet-profile.sh'
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/doet-job-status.sh'
 ./scripts/runpod-fetch-v2-results.sh
@@ -115,6 +116,11 @@ methods) must be used to append measured calls, tokens, disk, wall time, and
 the projected validation/holdout cost to `notes/14_entropy_trigger_protocol.md`
 before validation begins. After validation exits successfully, train every seed
 without filtering:
+
+`setup-doet-runpod.sh` is deliberately separate from the frozen-v1 setup
+script: it writes the dependency snapshot and test log only under the v2
+namespace and cannot overwrite `results/reproducibility/environment.json` or
+`results/logs/setup/` from the original study.
 
 ```bash
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/start-doet-job.sh doet-training ./scripts/train-doet-multiseed.sh'

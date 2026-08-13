@@ -41,7 +41,12 @@ Pending when the same Pod becomes reachable:
 6. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
 
 The restartable commands and outcome-seal boundary are now implemented. The
-SSH endpoint `213.173.109.33:19465` returned `Connection refused` on all three
-attempts on 2026-08-13, most recently at
-`2026-08-13T13:26:50-04:00`. No GPU process or v2 real-model call was started
-and no new paid resource was created.
+stale direct endpoint `213.173.109.33:19465` returned `Connection refused` on
+all three attempts on 2026-08-13. The user-supplied `ssh.runpod.io` proxy then
+connected successfully with forced PTY and the locally configured RSA key; the
+requested `~/.ssh/id_ed25519` path did not exist. Read-only inspection found
+the expected Pod, `/workspace/ThermoAgent`, RTX 4090 with 24,564 MiB VRAM,
+CUDA-enabled PyTorch 2.8.0+cu128, 124 GiB RAM, and intact frozen-v1 counts
+(944 main, 72 ablation, 80 holdout manifests and ten PDFs). The v1 freeze hash
+remained `25141d7f9281320182af7256ea34815f3fe3b3a0b13d4589464b2224e7aa979e`.
+No GPU process or v2 real-model call had started at this inspection point.

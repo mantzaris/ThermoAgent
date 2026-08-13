@@ -78,6 +78,7 @@ paid Pod remains reserved.
 ./scripts/runpod-smoke-test.sh
 ./scripts/runpod-sync.sh
 ./scripts/runpod-sync-v2-controls.sh bootstrap
+ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/setup-doet-runpod.sh'
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/start-doet-job.sh doet-profile ./scripts/run-doet-profile.sh'
 ./scripts/runpod-fetch-v2-results.sh
 ssh runpod-thermo 'cd /workspace/ThermoAgent && ./scripts/start-doet-job.sh doet-validation ./scripts/run-doet-validation.sh'
@@ -110,8 +111,11 @@ The declared experiment `llm_seed` is applied to PyTorch and CUDA when loading
 the real planner. Qwen decoding remains deterministic (`do_sample=false`), so
 the seed is a reproducibility field rather than an extra stochastic replicate.
 
-## Current blocker
+## Current connection status
 
-The existing endpoint at `213.173.109.33:19465` refused all three SSH attempts. No
-replacement Pod or paid resource was created. Once the same Pod is started,
-retry `./scripts/runpod-smoke-test.sh`. Additional v2 GPU use remains zero.
+The stale direct alias at `213.173.109.33:19465` refused all three attempts,
+but the supplied RunPod proxy connected successfully with forced PTY using the
+configured RSA key. Read-only inspection confirmed the existing RTX 4090 Pod,
+CUDA 12.8 execution stack, intact v1 freeze/checksum/counts, and an empty v2
+remote namespace. No replacement Pod was created. Additional v2 GPU use remains
+zero until the preregistered profile starts.

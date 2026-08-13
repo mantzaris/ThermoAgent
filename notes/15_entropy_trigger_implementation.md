@@ -1,7 +1,8 @@
 # DOET implementation record
 
-Status: local implementation and deterministic preflight complete; the
-144-episode real-LLM validation is active on the existing RunPod Pod.
+Status: implementation, deterministic preflight, real-Qwen validation, and all
+fifteen fixed-budget PPO runs are complete. The 696-episode holdout has been
+designed but has not yet been frozen or run.
 
 Planned implementations are `DOET-rule` (transparent stateful trigger and fixed
 mode rules) and `DOET-RL` (the trigger gates expanded options while an independent
@@ -114,7 +115,8 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 144/144 passing. New tests cover trigger
+The current complete suite is 144/144 passing locally and on the final training
+deployment. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -197,6 +199,14 @@ values agree exactly, records the calibration path and checksum in each
 checkpoint, and has positive, mismatch, and missing-file tests. The full suite
 passes 144/144. This correction changes only the not-yet-run training stage, so the
 validation-to-holdout simulator-equivalence gate remains applicable.
+
+The corrected training completed 15/15 runs with no failed or nonterminal
+attempt. All checkpoint and DOET normalizer hashes match. The selected entropy
+trigger activated in zero DOET-RL training episodes, just as every validation
+candidate activated zero times. Consequently DOET-RL has substantially fewer
+trajectory rows and PPO updates under its quiet decision cadence. This is
+retained as a scientific limitation; neither thresholds nor episode budgets
+were changed after validation.
 
 ## Filtered remote execution sequence
 

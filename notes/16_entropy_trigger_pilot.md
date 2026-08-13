@@ -85,6 +85,29 @@ generated tokens. All artifacts are in
 `results/entropy_triggered_v2/validation/`, and the two replay reports each pass
 144/144 episodes.
 
+## Multiple-seed training and design gate
+
+Training finished 15/15 without failure: five independent seeds for each of
+the three learned variants, all at the identical 192-episode budget and with
+fixed final-checkpoint selection. Checkpoint hashes are valid, all DOET-RL
+normalizer hashes equal the validation-selected calibration hash, and the
+attempt ledger contains 15 starts plus 15 terminal records with no unfinished
+attempt. No seed was filtered. Final-window primary means vary across seeds,
+with approximately 10--11% coefficients of variation, so evaluation retains
+training-seed identity explicitly.
+
+DOET-RL activated the entropy trigger zero times during training. Its 960
+episodes yielded 16,620 PPO rows and 35 policy updates, compared with 54,401
+rows/102 updates for learned non-entropic coordination and 57,530/109 for
+ThermoAgent. This reflects quiet-mode eligibility and is not being repaired or
+retuned after validation.
+
+Measured training use was 0.07052 reserved-Pod hours. The runtime-only design
+gate therefore selected the preferred 696-episode holdout at a projected
+28.6265 total additional single-GPU hours including all prior v2 GPU stages, a
+15% holdout buffer, and the explicit reserve. The holdout has not been run or
+inspected.
+
 The restartable commands and outcome-seal boundary are now implemented. The
 stale direct endpoint `213.173.109.33:19465` returned `Connection refused` on
 all three attempts on 2026-08-13. The user-supplied `ssh.runpod.io` proxy then

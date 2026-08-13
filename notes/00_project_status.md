@@ -5,9 +5,10 @@
 Last updated: 2026-08-13 18:47 America/New_York
 
 - **Current phase:** The isolated RunPod setup, eight-episode real-Qwen profile,
-  144-episode real-Qwen validation, and exact 144/144 validation replay are
-  complete. The frozen validation selector chose `hysteresis_low`. Fifteen
-  independently initialized PPO training runs are the next compute stage.
+  144-episode real-Qwen validation, exact 144/144 validation replay, and all 15
+  independently initialized PPO training runs are complete. The runtime-only
+  gate selected the full 696-episode holdout. Final checksum freeze and sealed
+  launch are next.
 - **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
 - **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
 - **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
@@ -18,10 +19,12 @@ Last updated: 2026-08-13 18:47 America/New_York
   144 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
   writers and full-resolution QA of the existing v2 diagnostic figures; and a
   development-only correction of a structurally impossible H4 lead-time rule.
-- **Active work:** commit and deploy the retrieved validation evidence and the
-  tested normalizer-resolution correction, then train five independent seeds
-  for each of the three learned methods. No new locked-holdout outcome exists.
-- **Active jobs:** none. `doet-validation` exited 0 after 144/144 episodes;
+- **Active work:** finalize and commit the generated holdout design, training
+  evidence, protocol, source-transition proof, and execution provenance; then
+  deploy, freeze, and launch the outcome-sealed holdout. No new locked-holdout
+  outcome exists.
+- **Active jobs:** none. `doet-validation` exited 0 after 144/144 episodes and
+  `doet-training-v2` exited 0 after 15/15 fixed-budget runs;
   the automatic training watcher had been deliberately stopped before
   validation finished after a code audit found that staged DOET-RL training did
   not resolve the validation-selected role/application nominal-normalizer file.
@@ -32,14 +35,15 @@ Last updated: 2026-08-13 18:47 America/New_York
 - **Blockers:** none. The stale direct alias still refuses port 19465, but the
   user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
   locally configured RSA key. The requested Ed25519 path was absent.
-- **Next actions:** deploy the tested normalizer-resolution correction, train
-  all 15 checkpoints without seed removal, perform measured precision/budget
-  analysis, freeze the selected protocol and source, and run the largest
-  preregistered outcome-sealed holdout that remains within the 35-hour cap.
+- **Next actions:** recapture final clean source provenance, rerun the two-
+  application source-transition gate, deploy the 696-row design and all 15
+  checkpoints, freeze the selected protocol and source, then run the
+  preregistered outcome-sealed holdout.
 - **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
 - **Compute used by v2:** profile sweep 0.1984 single-GPU hours including model
-  load, 0.0216 hours for model smoke, and 4.3054 wall-clock Pod hours for
-  validation (4.2516 summed episode GPU-hours). Validation used 13,031 LLM
+  load, 0.0216 hours for model smoke, 4.3054 wall-clock Pod hours for
+  validation (4.2516 summed episode GPU-hours), and 0.0705 reserved-Pod hours
+  for training. Validation used 13,031 LLM
   calls, 26,706,959 prompt tokens, and 974,801 generated tokens. The setup
   interval is retained separately. The proxy remains connected to Pod
   `o4figaziv32yyd`; no replacement resource was created.
@@ -52,6 +56,12 @@ Last updated: 2026-08-13 18:47 America/New_York
   the savings arose from quiet-mode scheduling, not demonstrated event-triggered
   coordination. This mixed/negative mechanism result is frozen and will not be
   tuned away.
+- **Locked design:** 696 method episodes over 144 base panels: 128
+  non-nominal panels (16 seeds for each of four regimes in each application)
+  and 16 nominal panels (8 seeds/application). Fixed, learned non-entropic,
+  DOET-rule, and DOET-RL use every panel; five secondary methods share 24
+  prospectively fixed non-nominal panels. Projected total additional use is
+  28.6265 single-GPU hours including a 15% holdout buffer and reserve.
 
 ---
 

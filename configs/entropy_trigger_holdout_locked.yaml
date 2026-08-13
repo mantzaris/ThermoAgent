@@ -1,0 +1,600 @@
+stage: holdout_locked
+source_provenance_path: results/entropy_triggered_v2/reproducibility/execution_source.json
+protocol_freeze_path: results/entropy_triggered_v2/protocol/holdout_freeze.json
+prompt_template_revision: planner-json-v7-route-affordances
+agentic_metric_revision: agentic-metrics-v2-two-party-joined-coalition
+llm_seed: 9101
+rl_seeds:
+- 7301
+- 7302
+- 7303
+- 7304
+- 7305
+balanced_rl_assignment: true
+decision_interval: 4
+communication_budget: 300
+fixed_broadcast_fanout: 3
+periodic_interval: 6
+random_gate_probability: 0.363986839461523
+budget_match_calibration:
+  activation_opportunity_interval: 2
+  fixed_messages_per_active_decision: 3.8975332068311195
+  kpi_reference_messages_per_episode: 134.41666666666666
+  kpi_signal_scale: 0.8865468071915686
+  kpi_signal_scale_unclipped: 0.8865468071915686
+  kpi_trigger: &id001
+    normalizers_key: kpi_normalizers
+    normalizers_path: results/entropy_triggered_v2/calibration/trigger_nominal_calibration.json
+    parameters:
+      cooldown: 2
+      crisis_decision_interval: 2
+      crisis_gossip_period: 2
+      crisis_gossip_rounds: 1
+      direction: high
+      kappa: 0.15
+      max_alert_neighbors: 2
+      minimum_dwell: 2
+      propagation: local
+      quiet_decision_interval: 8
+      quiet_gossip_period: 8
+      quiet_gossip_rounds: 1
+      rho: 0.8
+      signal_scale: 0.8865468071915686
+      targeted_decision_interval: 4
+      targeted_gossip_period: 4
+      targeted_gossip_rounds: 1
+      tau_crisis: 3.0
+      tau_off: 0.5
+      tau_on: 1.5
+      trigger_type: cusum
+  periodic_interval: 6
+  predicted_periodic_messages_per_episode: 122.77229601518026
+  predicted_random_messages_per_episode: 119.16666666666666
+  quiet_local_planning_interval: 8
+  random_gate_probability: 0.363986839461523
+  rule: validation DOET total counted messages (including sketches) are converted
+    to intensive decisions using fixed-control messages per active decision; random
+    probability and periodic cadence minimize the resulting expected message-count
+    mismatch. Inactive controls retain quiet local planning every eight periods. The
+    private-KPI CUSUM residual is multiplied by the clipped DOET/KPI validation message
+    ratio; achieved KPI mismatch is reported because this is an approximate, trajectory-dependent
+    rate match.
+  selected_method_variant: hysteresis_low
+  source: validation only
+  target_active_agent_step_fraction: 0.0
+  target_counted_messages_per_episode: 119.16666666666667
+  target_intensive_decisions_per_episode: 30.574894514767934
+calibration: results/reproducibility/macrostate_calibration.json
+checkpoints:
+  no_entropy:
+    '7301': results/entropy_triggered_v2/checkpoints/coordination_no_entropy_seed7301.pt
+    '7302': results/entropy_triggered_v2/checkpoints/coordination_no_entropy_seed7302.pt
+    '7303': results/entropy_triggered_v2/checkpoints/coordination_no_entropy_seed7303.pt
+    '7304': results/entropy_triggered_v2/checkpoints/coordination_no_entropy_seed7304.pt
+    '7305': results/entropy_triggered_v2/checkpoints/coordination_no_entropy_seed7305.pt
+  thermo:
+    '7301': results/entropy_triggered_v2/checkpoints/coordination_thermo_seed7301.pt
+    '7302': results/entropy_triggered_v2/checkpoints/coordination_thermo_seed7302.pt
+    '7303': results/entropy_triggered_v2/checkpoints/coordination_thermo_seed7303.pt
+    '7304': results/entropy_triggered_v2/checkpoints/coordination_thermo_seed7304.pt
+    '7305': results/entropy_triggered_v2/checkpoints/coordination_thermo_seed7305.pt
+  doet_rl:
+    '7301': results/entropy_triggered_v2/checkpoints/coordination_doet_rl_seed7301.pt
+    '7302': results/entropy_triggered_v2/checkpoints/coordination_doet_rl_seed7302.pt
+    '7303': results/entropy_triggered_v2/checkpoints/coordination_doet_rl_seed7303.pt
+    '7304': results/entropy_triggered_v2/checkpoints/coordination_doet_rl_seed7304.pt
+    '7305': results/entropy_triggered_v2/checkpoints/coordination_doet_rl_seed7305.pt
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  precision: bitsandbytes NF4, bfloat16 compute, double quantization
+  load_in_4bit: true
+  max_input_tokens: 2560
+  max_new_tokens: 160
+  decoding:
+    do_sample: false
+    temperature: 0.0
+    top_p: 1.0
+trigger:
+  normalizers_path: results/entropy_triggered_v2/calibration/trigger_nominal_calibration.json
+  normalizers_key: normalizers
+  parameters:
+    cooldown: 2
+    crisis_decision_interval: 2
+    crisis_gossip_period: 2
+    crisis_gossip_rounds: 1
+    direction: low
+    kappa: 0.0
+    max_alert_neighbors: 2
+    minimum_dwell: 2
+    propagation: neighbor
+    quiet_decision_interval: 8
+    quiet_gossip_period: 8
+    quiet_gossip_rounds: 1
+    rho: 0.6
+    targeted_decision_interval: 4
+    targeted_gossip_period: 4
+    targeted_gossip_rounds: 1
+    tau_crisis: 2.8
+    tau_off: 0.4
+    tau_on: 1.2
+    trigger_type: hysteresis
+applications:
+  commercial:
+    n_agents: 10
+  humanitarian:
+    n_agents: 10
+methods:
+- fixed_always_on
+- learned_no_entropy
+- doet_rule
+- doet_rl
+- autonomous_no_comm
+- periodic_communication
+- random_budget_matched
+- thermoagent
+- kpi_cusum_trigger
+method_variants:
+  kpi_cusum_trigger:
+  - name: budget_matched
+    trigger: *id001
+seeds:
+- 8101
+- 8102
+- 8103
+- 8104
+- 8105
+- 8106
+- 8107
+- 8108
+- 8109
+- 8110
+- 8111
+- 8112
+- 8113
+- 8114
+- 8115
+- 8116
+scenarios:
+  nominal:
+    seeds:
+    - 8201
+    - 8202
+    - 8203
+    - 8204
+    - 8205
+    - 8206
+    - 8207
+    - 8208
+    method_seeds:
+      fixed_always_on:
+      - 8201
+      - 8202
+      - 8203
+      - 8204
+      - 8205
+      - 8206
+      - 8207
+      - 8208
+      learned_no_entropy:
+      - 8201
+      - 8202
+      - 8203
+      - 8204
+      - 8205
+      - 8206
+      - 8207
+      - 8208
+      doet_rule:
+      - 8201
+      - 8202
+      - 8203
+      - 8204
+      - 8205
+      - 8206
+      - 8207
+      - 8208
+      doet_rl:
+      - 8201
+      - 8202
+      - 8203
+      - 8204
+      - 8205
+      - 8206
+      - 8207
+      - 8208
+      autonomous_no_comm: []
+      periodic_communication: []
+      random_budget_matched: []
+      thermoagent: []
+      kpi_cusum_trigger: []
+    horizon: 16
+    private_information: 0.8
+    objective_misalignment: 0.8
+    communication: reliable
+    disruption: nominal
+    topology: tri_region_bridge_v2
+  isolated:
+    method_seeds:
+      fixed_always_on:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      learned_no_entropy:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rule:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rl:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      autonomous_no_comm:
+      - 8101
+      - 8106
+      - 8111
+      periodic_communication:
+      - 8101
+      - 8106
+      - 8111
+      random_budget_matched:
+      - 8101
+      - 8106
+      - 8111
+      thermoagent:
+      - 8101
+      - 8106
+      - 8111
+      kpi_cusum_trigger:
+      - 8101
+      - 8106
+      - 8111
+    horizon: 16
+    private_information: 0.8
+    objective_misalignment: 0.8
+    communication: reliable
+    disruption: moderate
+    topology: tri_region_bridge_v2
+  communication_partition:
+    method_seeds:
+      fixed_always_on:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      learned_no_entropy:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rule:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rl:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      autonomous_no_comm:
+      - 8101
+      - 8106
+      - 8111
+      periodic_communication:
+      - 8101
+      - 8106
+      - 8111
+      random_budget_matched:
+      - 8101
+      - 8106
+      - 8111
+      thermoagent:
+      - 8101
+      - 8106
+      - 8111
+      kpi_cusum_trigger:
+      - 8101
+      - 8106
+      - 8111
+    horizon: 16
+    private_information: 0.8
+    objective_misalignment: 0.8
+    communication: partition
+    disruption: moderate
+    topology: tri_region_bridge_v2
+  correlated:
+    method_seeds:
+      fixed_always_on:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      learned_no_entropy:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rule:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rl:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      autonomous_no_comm:
+      - 8101
+      - 8106
+      - 8111
+      periodic_communication:
+      - 8101
+      - 8106
+      - 8111
+      random_budget_matched:
+      - 8101
+      - 8106
+      - 8111
+      thermoagent:
+      - 8101
+      - 8106
+      - 8111
+      kpi_cusum_trigger:
+      - 8101
+      - 8106
+      - 8111
+    horizon: 16
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: intermittent
+    disruption: correlated
+    topology: tri_region_bridge_v2
+  compound_ood:
+    method_seeds:
+      fixed_always_on:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      learned_no_entropy:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rule:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      doet_rl:
+      - 8101
+      - 8102
+      - 8103
+      - 8104
+      - 8105
+      - 8106
+      - 8107
+      - 8108
+      - 8109
+      - 8110
+      - 8111
+      - 8112
+      - 8113
+      - 8114
+      - 8115
+      - 8116
+      autonomous_no_comm:
+      - 8101
+      - 8106
+      - 8111
+      periodic_communication:
+      - 8101
+      - 8106
+      - 8111
+      random_budget_matched:
+      - 8101
+      - 8106
+      - 8111
+      thermoagent:
+      - 8101
+      - 8106
+      - 8111
+      kpi_cusum_trigger:
+      - 8101
+      - 8106
+      - 8111
+    horizon: 16
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: partition
+    disruption: compound
+    topology: tri_region_bridge_v2

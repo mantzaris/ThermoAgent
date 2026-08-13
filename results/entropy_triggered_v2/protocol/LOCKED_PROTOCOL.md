@@ -48,6 +48,18 @@ freeze record exists and verifies.
 Thresholds, budget-matched controls, and operating points come only from the
 separate validation set.
 
+The completed validation selector chose `hysteresis_low`: low-direction simple
+hysteresis with `tau_on=1.2`, `tau_off=0.4`, `tau_crisis=2.8`, `rho=0.6`,
+`kappa=0`, two-period dwell/cooldown, and neighbor propagation. All four entropy
+candidates had zero validation activations. The selected point passed the
+prospective performance/communication screen through quiet-mode scheduling,
+not demonstrated event-triggered response. No trigger parameter was changed.
+
+All fifteen training runs completed without failure. The measured runtime gate
+selected the full 696-episode allocation (secondary seeds 8101, 8106, and 8111)
+at a projected 28.6265 additional single-GPU hours including the preregistered
+15% holdout buffer and reserve. This allocation is now fixed.
+
 Freeze requires all 144 validation episodes to complete without failure and
 all 144 event ledgers to replay exactly. It also requires all fifteen fixed-
 budget training runs and rejects any DOET-RL checkpoint whose recorded nominal-

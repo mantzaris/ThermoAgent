@@ -323,3 +323,41 @@ calls, 26,706,959 prompt tokens, and 974,801 generated tokens. The summed
 per-episode GPU duration was 4.2516 hours. These measured values, plus actual
 fifteen-run training time, control the preregistered 696/656/616 holdout ladder;
 no outcome statistic enters that runtime choice.
+
+## Measured training and final holdout allocation
+
+All fifteen staged PPO runs completed: five independent seeds (`7301`--`7305`)
+for learned non-entropic coordination, ThermoAgent v1-style coordination, and
+DOET-RL. Every run used 192 episodes and the fixed final-checkpoint rule. There
+were zero failures, zero unfinished attempt records, and no seed removal. Every
+checkpoint checksum matches its manifest. All five DOET-RL checkpoints record
+the selected normalizer hash
+`d8b98337186dee1eab5de3e0b37fd87ca6cb3fc969760fc12d763bbd6312bf93`.
+Training occupied 253.88 seconds summed across runs, charged as 0.07052
+reserved-Pod hours.
+
+The DOET-RL trigger activated in zero of its 960 training episodes. It therefore
+received 16,620 PPO trajectory rows and 35 updates, versus 54,401/102 for the
+learned non-entropic policy and 57,530/109 for ThermoAgent. This is a direct
+consequence of the validation-selected quiet schedule, not a failed seed. It
+limits any claim that DOET-RL learned crisis-option behavior and is frozen as a
+mechanistic limitation rather than repaired after selection. Final-ten-episode
+primary-loss coefficients of variation across training seeds were 10.3%, 9.9%,
+and 11.4% for DOET-RL, no-entropy, and ThermoAgent respectively; these unpaired
+training diagnostics do not estimate holdout treatment effects.
+
+Using actual validation and training time, the runtime-only ladder selected its
+largest allocation: 696 method episodes. Projected holdout use with the frozen
+15% buffer is 23.9307 single-GPU hours; projected total v2 use through holdout
+is 28.6265 hours, including profile, smoke, validation, training, and the 0.1-
+hour reserve. The selected design has 144 base panels, 128 non-nominal and 16
+nominal. Each application has 16 unseen seeds in isolated, communication-
+partition, correlated, and compound-OOD regimes and eight unseen nominal seeds.
+The four priority methods use all 144 panels; the five secondary controls use
+the same 24-panel subset defined by seeds `8101`, `8106`, and `8111`. This size
+decision used runtime only and did not inspect any future holdout outcome.
+
+The validation-based precision simulation projects a one-sided commercial
+non-inferiority upper bound of 0.906% if the validation effect repeats and 0%
+for humanitarian logistics. These are design diagnostics, not confirmatory
+evidence. The new holdout remains unseen and outcome-sealed.

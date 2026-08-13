@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
@@ -17,11 +18,13 @@ from thermoagent.analysis import (
 from thermoagent.experiments import (
     _published_output_matches,
     _recover_published_staging,
+    _resumed_manifest_matches_execution,
     expand_matrix,
     freeze_protocol,
     run_matrix,
     verify_protocol,
 )
+from thermoagent.environment import ScenarioConfig
 
 
 def test_holm_adjust_is_monotone_in_sorted_p_values():
@@ -257,6 +260,42 @@ def test_resumed_published_episode_requires_both_manifest_checksums(tmp_path: Pa
     (output / "events.jsonl.gz").write_bytes(b"tampered")
     assert not _published_output_matches(output, manifest)
     assert not _published_output_matches(output, {"output_checksums": {}})
+
+
+def test_resumed_manifest_must_match_the_frozen_execution_contract():
+    scenario = ScenarioConfig(
+        application="commercial", seed=8101, horizon=16, n_agents=10,
+        communication="partition", disruption="moderate",
+        topology="tri_region_bridge_v2",
+    )
+    run_config = {
+        "llm_seed": 9101,
+        "protocol_checksum": "freeze",
+        "model": {"identifier": "model", "revision": "revision"},
+        "resolved_trigger": {"parameters": {"direction": "low"}},
+    }
+    manifest = {
+        "completion_status": "complete",
+        "source": {"checksum": "source"},
+        "application": "commercial",
+        "method": "doet_rule",
+        "configuration": asdict(scenario),
+        "environment_seed": 8101,
+        "llm_seed": 9101,
+        "rl_seed": 0,
+        "topology_identifier": "tri_region_bridge_v2",
+        "model_identifier": "model",
+        "model_revision": "revision",
+        "protocol_checksum": "freeze",
+        "trigger_parameters": {"direction": "low"},
+    }
+    assert _resumed_manifest_matches_execution(
+        manifest, "source", scenario, "doet_rule", 0, run_config
+    )
+    manifest["configuration"]["horizon"] = 17
+    assert not _resumed_manifest_matches_execution(
+        manifest, "source", scenario, "doet_rule", 0, run_config
+    )
 
 
 def test_protocol_verification_fails_closed_after_frozen_file_changes(tmp_path: Path):

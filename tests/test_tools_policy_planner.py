@@ -208,6 +208,7 @@ def test_ppo_updates_and_checkpoint_roundtrip(tmp_path):
     assert all(np.isfinite(value) for value in losses.values())
     path = tmp_path / "policy.pt"
     policy.save(path, {"training_seed": 3})
+    assert not path.with_name(path.name + ".tmp").exists()
     restored = CoordinationPolicy.load(path)
     assert policy.act(np.zeros(OBSERVATION_DIM), deterministic=True)[0] == restored.act(np.zeros(OBSERVATION_DIM), deterministic=True)[0]
 

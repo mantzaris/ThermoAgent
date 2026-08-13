@@ -92,7 +92,7 @@ def _load_training_trigger_settings(
     trigger_normalizers = trigger_record.get("normalizers")
     normalizers_path: Optional[Path] = None
     configured_path = trigger_record.get("normalizers_path")
-    if trigger_normalizers is None and configured_path:
+    if configured_path:
         configured = Path(str(configured_path))
         candidates = [configured] if configured.is_absolute() else [
             Path.cwd() / configured,
@@ -119,7 +119,16 @@ def _load_training_trigger_settings(
                 "selected trigger calibration %s has no %s field"
                 % (normalizers_path, normalizer_key)
             )
-        trigger_normalizers = normalizer_record[normalizer_key]
+        referenced_normalizers = normalizer_record[normalizer_key]
+        if (
+            trigger_normalizers is not None
+            and trigger_normalizers != referenced_normalizers
+        ):
+            raise ValueError(
+                "embedded selected trigger normalizers differ from %s[%s]"
+                % (normalizers_path, normalizer_key)
+            )
+        trigger_normalizers = referenced_normalizers
     return (
         trigger_record,
         trigger_parameters,
@@ -493,6 +502,42 @@ def _published_output_matches(
     )
 
 
+def _resumed_manifest_matches_execution(
+    manifest: Mapping[str, Any],
+    expected_source_checksum: str,
+    scenario: ScenarioConfig,
+    method: str,
+    rl_seed: int,
+    run_config: Mapping[str, Any],
+) -> bool:
+    """Reject a run-ID collision from a different frozen execution contract."""
+
+    uses_model = method in MODEL_REQUIRED_METHODS
+    model = dict(run_config.get("model", {}))
+    expected_protocol = run_config.get("protocol_checksum")
+    checks = (
+        manifest.get("completion_status") == "complete",
+        manifest.get("source", {}).get("checksum")
+        == expected_source_checksum,
+        manifest.get("application") == scenario.application,
+        manifest.get("method") == method,
+        manifest.get("configuration") == asdict(scenario),
+        int(manifest.get("environment_seed", -1)) == scenario.seed,
+        int(manifest.get("llm_seed", -1))
+        == int(run_config.get("llm_seed", 0)),
+        int(manifest.get("rl_seed", -1)) == int(rl_seed),
+        manifest.get("topology_identifier") == scenario.topology,
+        manifest.get("model_identifier")
+        == (model.get("identifier") if uses_model else "none"),
+        manifest.get("model_revision")
+        == (model.get("revision") if uses_model else "none"),
+        manifest.get("protocol_checksum") == expected_protocol,
+        manifest.get("trigger_parameters")
+        == run_config.get("resolved_trigger", {}).get("parameters"),
+    )
+    return all(checks)
+
+
 def _episode_manifest(
     root: Path,
     result: Any,
@@ -668,6 +713,29 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
     log_root.mkdir(parents=True, exist_ok=True)
     for index, (application, n_agents, seed, method, scenario_values) in enumerate(matrix):
         rl_seed = int(scenario_values.get("_rl_seed", config.get("rl_seed", 0)))
+        scenario = ScenarioConfig(
+            application=application,
+            seed=seed,
+            horizon=int(scenario_values.get("horizon", config.get("horizon", 20))),
+            n_agents=n_agents,
+            private_information=float(scenario_values.get("private_information", 0.5)),
+            objective_misalignment=float(scenario_values.get("objective_misalignment", 0.5)),
+            communication=str(scenario_values.get("communication", "reliable")),
+            disruption=str(scenario_values.get("disruption", "moderate")),
+            decision_interval=int(scenario_values.get("decision_interval", config.get("decision_interval", 4))),
+            communication_budget=int(scenario_values.get("communication_budget", config.get("communication_budget", 12))),
+            random_gate_probability=float(scenario_values.get("random_gate_probability", config.get("random_gate_probability", 0.5))),
+            topology=str(scenario_values.get("topology", "ring_plus_hubs")),
+        )
+        trigger_settings = _resolved_trigger_settings(
+            config, scenario_values, root
+        )
+        run_config = {
+            **config,
+            "resolved_scenario_name": scenario_values["name"],
+            "resolved_trigger": trigger_settings,
+            "resolved_rl_seed": rl_seed,
+        }
         run_id = "%s-%s-%s-n%02d-s%03d" % (stage, application, method, n_agents, seed)
         if len(config["scenarios"]) > 1:
             run_id = "%s-%s" % (run_id, scenario_values["name"])
@@ -772,6 +840,37 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 existing_manifest = json.loads(
                     existing_manifest_path.read_text(encoding="utf-8")
                 )
+                if not _resumed_manifest_matches_execution(
+                    existing_manifest,
+                    source_checksum(root),
+                    scenario,
+                    method,
+                    rl_seed,
+                    run_config,
+                ):
+                    summaries.append({
+                        "run_id": run_id,
+                        "application": application,
+                        "method": method,
+                        "method_variant": method_variant,
+                        "scenario_name": scenario_values["name"],
+                        "seed": seed,
+                        "rl_training_seed": rl_seed,
+                        "n_agents": n_agents,
+                        "status": "failed",
+                        "error": (
+                            "published manifest does not match the current "
+                            "frozen execution contract; retained without rerun"
+                        ),
+                        "wall_clock_seconds": existing.get(
+                            "wall_clock_seconds", 0.0
+                        ),
+                        "resumed": True,
+                        "manifest": str(
+                            existing_manifest_path.relative_to(results_root)
+                        ),
+                    })
+                    continue
                 if not _published_output_matches(output_dir, existing_manifest):
                     summaries.append({
                         "run_id": run_id,
@@ -815,33 +914,10 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                     "manifest": str((manifest_root / (run_id + ".json")).relative_to(results_root)),
                 })
                 continue
-        scenario = ScenarioConfig(
-            application=application,
-            seed=seed,
-            horizon=int(scenario_values.get("horizon", config.get("horizon", 20))),
-            n_agents=n_agents,
-            private_information=float(scenario_values.get("private_information", 0.5)),
-            objective_misalignment=float(scenario_values.get("objective_misalignment", 0.5)),
-            communication=str(scenario_values.get("communication", "reliable")),
-            disruption=str(scenario_values.get("disruption", "moderate")),
-            decision_interval=int(scenario_values.get("decision_interval", config.get("decision_interval", 4))),
-            communication_budget=int(scenario_values.get("communication_budget", config.get("communication_budget", 12))),
-            random_gate_probability=float(scenario_values.get("random_gate_probability", config.get("random_gate_probability", 0.5))),
-            topology=str(scenario_values.get("topology", "ring_plus_hubs")),
-        )
         policy = _policy_for_method(
             method, checkpoints, policy_cache, rl_seed=rl_seed
         )
         episode_planner = _planner_for_method(method, planner)
-        trigger_settings = _resolved_trigger_settings(
-            config, scenario_values, root
-        )
-        run_config = {
-            **config,
-            "resolved_scenario_name": scenario_values["name"],
-            "resolved_trigger": trigger_settings,
-            "resolved_rl_seed": rl_seed,
-        }
         runner = EpisodeRunner(
             scenario, method, planner=episode_planner, policy=policy,
             calibration=calibration,

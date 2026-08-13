@@ -202,7 +202,9 @@ class CoordinationPolicy:
             "metadata": metadata or {},
             "initialization_seed": self.seed,
         }
-        self.torch.save(payload, str(path))
+        temporary = path.with_name(path.name + ".tmp")
+        self.torch.save(payload, str(temporary))
+        temporary.replace(path)
 
     @classmethod
     def load(cls, path: Path, device: str = "cpu") -> "CoordinationPolicy":

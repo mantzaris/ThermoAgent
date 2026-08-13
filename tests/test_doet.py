@@ -613,6 +613,13 @@ def test_doet_training_resolves_selected_nominal_normalizers(tmp_path, monkeypat
             "trigger": {
                 "normalizers_path": "results/calibration/normalizers.json",
                 "normalizers_key": "normalizers",
+                "normalizers": {
+                    "applications": {
+                        "commercial": {
+                            "default": {"center": 0.61, "scale": 0.07}
+                        }
+                    }
+                },
                 "parameters": {"direction": "low", "tau_on": 1.5},
             }
         }),
@@ -632,6 +639,20 @@ def test_doet_training_resolves_selected_nominal_normalizers(tmp_path, monkeypat
         }
     }
     assert resolved_path == normalizers.resolve()
+
+    selected.write_text(
+        json.dumps({
+            "trigger": {
+                "normalizers_path": "results/calibration/normalizers.json",
+                "normalizers_key": "normalizers",
+                "normalizers": {"different": True},
+                "parameters": {"direction": "low"},
+            }
+        }),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="embedded.*differ"):
+        _load_training_trigger_settings(selected)
 
 
 def test_doet_training_fails_closed_when_selected_normalizers_are_missing(

@@ -114,7 +114,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 142/142 passing. New tests cover trigger
+The current complete suite is 143/143 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -122,6 +122,14 @@ topology connectivity, balanced five-seed assignment, paired/hierarchical
 analysis, multi-cost frontier behavior, filtered provenance, and deterministic
 replay. A dedicated control test verifies that a zero-rate random gate still
 performs quiet local planning without activating communication.
+Published episode reuse now additionally requires exact agreement with the
+current frozen execution contract (source checksum, complete scenario,
+application/method/seeds/topology, model revision, protocol checksum, and
+trigger parameters) and verifies both the episode and event-ledger checksums.
+Mismatches are retained as failed audit rows rather than silently rerun. Policy
+checkpoints are published by atomic rename, preventing a partially written
+checkpoint from being mistaken for a completed seed.
+
 The restart test also forces one PPO seed attempt to fail, resumes all fifteen
 slots, and verifies that both the failed and successful terminal records remain
 in the attempt ledger.
@@ -180,9 +188,10 @@ have used the generic trigger center/scale while validation and holdout used the
 application- and role-conditioned nominal calibration. No checkpoint had begun
 and no validation outcome was inspected. The watcher alone was stopped;
 validation remains on its immutable source. Training now resolves the selected
-normalizer key fail-closed, records the calibration path and checksum in each
-checkpoint, and has positive and missing-file tests. The full suite passes
-142/142. This correction changes only the not-yet-run training stage, so the
+normalizer key fail-closed, checks that embedded and referenced calibration
+values agree exactly, records the calibration path and checksum in each
+checkpoint, and has positive, mismatch, and missing-file tests. The full suite
+passes 143/143. This correction changes only the not-yet-run training stage, so the
 validation-to-holdout simulator-equivalence gate remains applicable.
 
 ## Filtered remote execution sequence

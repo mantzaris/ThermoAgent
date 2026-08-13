@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thermoagent"
+version = "0.1.0"
+description = "Free-energy-guided coordination of independent logistics agents"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+dependencies = [
+  "numpy>=1.22,<3",
+  "PyYAML>=5.3,<7",
+]
+
+[project.optional-dependencies]
+research = [
+  "scipy>=1.7,<2",
+  "pandas>=1.3,<3",
+  "matplotlib>=3.6,<4",
+  "networkx>=3,<4",
+  "PyMuPDF==1.28.2",
+  "pydantic>=2.7,<3",
+  "pytest>=8,<9",
+  "torch>=2.2,<3",
+  "transformers==4.55.4",
+  "accelerate==1.10.1",
+  "bitsandbytes==0.47.0",
+  "huggingface-hub==0.34.4",
+  "safetensors>=0.4,<1",
+]
+
+[project.scripts]
+thermoagent = "thermoagent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["thermoagent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]

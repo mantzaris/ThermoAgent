@@ -1,0 +1,42 @@
+# Deterministic parameter-matched ablation preflight; never research evidence.
+stage: ablations
+planner_backend: mock
+prompt_template_revision: planner-json-v6
+llm_seed: 0
+rl_seed: 3001
+decision_interval: 3
+communication_budget: 10
+random_gate_probability: 0.2
+calibration: results/reproducibility/macrostate_calibration.json
+checkpoints:
+  no_entropy: results/checkpoints/coordination_no_entropy.pt
+  thermo: results/checkpoints/coordination_thermo.pt
+model:
+  identifier: deterministic-mock-preflight
+  revision: mock-v2
+  precision: none
+  decoding:
+    do_sample: false
+applications:
+  commercial:
+    n_agents: 8
+  humanitarian:
+    n_agents: 8
+methods:
+  - thermoagent
+  - learned_no_entropy
+  - entropy_llm_only
+  - no_episodic_memory
+  - autonomous_fixed_comm
+  - autonomous_no_comm
+  - random_gate
+  - global_entropy_oracle
+  - shuffled_entropy
+seeds: [9992]
+scenarios:
+  compound_partition:
+    horizon: 10
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: partition
+    disruption: compound

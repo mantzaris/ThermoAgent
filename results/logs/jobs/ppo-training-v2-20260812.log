@@ -1,0 +1,24 @@
+{
+  "checkpoint_sha256": "cb48caadec3e64e885e2947b75b12955207ec4eee006c0991448ff3f5c8061f6",
+  "episodes": 96,
+  "execution_features": "24 local features; entropy/free-energy fields zeroed",
+  "final_window_primary_mean": 1.5528018778488981,
+  "generated_at": "2026-08-12T03:07:14.486020+00:00",
+  "planner": "deterministic mock-v2",
+  "training_method": "PPO, staged planner training",
+  "training_seed": 3001,
+  "variant": "no_entropy",
+  "wall_clock_seconds": 7.500995427370071
+}
+{
+  "checkpoint_sha256": "d709f7f2ebfd452060d58234be77ffdd4026765915ea651dfc3f6aaf6ce33ea4",
+  "episodes": 96,
+  "execution_features": "24 local features; distributed entropy/free-energy fields present",
+  "final_window_primary_mean": 3.9396433457683835,
+  "generated_at": "2026-08-12T03:07:25.924052+00:00",
+  "planner": "deterministic mock-v2",
+  "training_method": "PPO, staged planner training",
+  "training_seed": 3001,
+  "variant": "thermo",
+  "wall_clock_seconds": 6.592829767614603
+}

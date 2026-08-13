@@ -1,0 +1,80 @@
+{
+  "application": "commercial",
+  "checkpoint_selection": {
+    "no_entropy": "results/checkpoints/coordination_no_entropy.pt",
+    "thermo": "results/checkpoints/coordination_thermo.pt"
+  },
+  "completion_status": "complete",
+  "configuration": {
+    "application": "commercial",
+    "communication": "intermittent",
+    "communication_budget": 12,
+    "decision_interval": 4,
+    "disruption": "compound",
+    "horizon": 16,
+    "n_agents": 8,
+    "objective_misalignment": 1.0,
+    "private_information": 1.0,
+    "random_gate_probability": 0.5,
+    "seed": 1101,
+    "topology": "ring_plus_hubs"
+  },
+  "decoding": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "dependencies": {
+    "accelerate": "1.10.1",
+    "bitsandbytes": "0.47.0",
+    "matplotlib": "3.10.5",
+    "networkx": "3.5",
+    "numpy": "2.1.2",
+    "pandas": "2.3.1",
+    "pydantic": "2.11.7",
+    "scipy": "1.16.1",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.55.4"
+  },
+  "end_timestamp": "2026-08-12T04:15:49.133021+00:00",
+  "environment_seed": 1101,
+  "environment_steps": 16,
+  "generated_tokens": 2613,
+  "hardware": {
+    "cpu_count": 32,
+    "cuda_available": true,
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_memory_bytes": 25261047808,
+    "hostname": "2acac16f37c7",
+    "platform": "Linux-6.8.0-90-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128"
+  },
+  "llm_calls": 40,
+  "llm_seed": 0,
+  "messages": 9,
+  "method": "thermoagent",
+  "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "output_checksums": {
+    "episode.json": "fa396b6da660d5cd808685805f94c573abd7350ea9f066080a88a8d3198b5de0",
+    "events.jsonl.gz": "d609e75401c82e0e6fadf799398c1a61ffd559b5a7bb478bb8cf0dad800e9276"
+  },
+  "precision": "bitsandbytes NF4, bfloat16 compute, double quantization",
+  "prompt_template_revision": "planner-json-v2",
+  "prompt_tokens": 42954,
+  "rl_seed": 3001,
+  "run_id": "pilot-commercial-thermoagent-n08-s1101-compound_stress_v2",
+  "source": {
+    "checksum": "8719fb0fcbf62562a6f0cf86eec9651cc11717dc9d2e9cb09eecd756bac8cad2",
+    "commit": "8bd699b86119bd660d26bb1bfe4c690d27058943",
+    "dirty": true,
+    "thermoagent_version": "0.1.0"
+  },
+  "start_timestamp": "2026-08-12T04:15:23.420265+00:00",
+  "tool_calls": 40,
+  "topology_checksum": "c816411ad6b10d147b1981faacecead61032afd3f6507c46ced0d9b3625b9d86",
+  "topology_identifier": "ring_plus_hubs",
+  "wall_clock_seconds": 25.43183447420597
+}

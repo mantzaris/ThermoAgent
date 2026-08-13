@@ -1,0 +1,110 @@
+{
+  "figures": [
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "ablation_effects.pdf",
+      "rendered": "reproducibility/pdf_qa/ablation_effects-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "agentic_metrics.pdf",
+      "rendered": "reproducibility/pdf_qa/agentic_metrics-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "agentic_necessity_map.pdf",
+      "rendered": "reproducibility/pdf_qa/agentic_necessity_map-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "communication_performance_pareto.pdf",
+      "rendered": "reproducibility/pdf_qa/communication_performance_pareto-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "entropy_dynamics.pdf",
+      "rendered": "reproducibility/pdf_qa/entropy_dynamics-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "main_performance.pdf",
+      "rendered": "reproducibility/pdf_qa/main_performance-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "network_snapshots_commercial.pdf",
+      "rendered": "reproducibility/pdf_qa/network_snapshots_commercial-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "network_snapshots_humanitarian.pdf",
+      "rendered": "reproducibility/pdf_qa/network_snapshots_humanitarian-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "recovery_curves.pdf",
+      "rendered": "reproducibility/pdf_qa/recovery_curves-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "system_architecture.pdf",
+      "rendered": "reproducibility/pdf_qa/system_architecture-render.png",
+      "validation_backend": "pymupdf",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All ten final 180-DPI previews inspected at original resolution; labels, legends, uncertainty, seed points, stage titles, network encodings, and coalition outlines are readable and unclipped after the documented presentation-only polish.",
+      "visual_reviewer": "Codex manual preview review"
+    }
+  ],
+  "pymupdf_available": true,
+  "tools": {
+    "pdffonts": null,
+    "pdfinfo": null,
+    "pdftoppm": null
+  }
+}

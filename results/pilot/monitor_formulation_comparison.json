@@ -1,0 +1,61 @@
+{
+  "comparisons": [
+    {
+      "entropy_shift_after_moderate_disruption": 0.0629712936519673,
+      "formulation": "pooled",
+      "free_energy_shift_after_moderate_disruption": -0.03078339116725029,
+      "nominal_entropy_mean": 0.5834855526888825,
+      "nominal_entropy_std": 0.026289233657156158,
+      "nominal_stability_cv": 0.045055500579246927,
+      "selection_score": 3.934495891308928,
+      "sensitivity_score": 3.934495891308928,
+      "window": 1
+    },
+    {
+      "entropy_shift_after_moderate_disruption": 0.04053247900028595,
+      "formulation": "pooled",
+      "free_energy_shift_after_moderate_disruption": -0.03258688659025094,
+      "nominal_entropy_mean": 0.42984453528337124,
+      "nominal_entropy_std": 0.0493272443367712,
+      "nominal_stability_cv": 0.11475601127336107,
+      "selection_score": 2.2579941155745558,
+      "sensitivity_score": 2.2579941155745558,
+      "window": 3
+    },
+    {
+      "entropy_shift_after_moderate_disruption": 0.04422910846381911,
+      "formulation": "role_conditioned",
+      "free_energy_shift_after_moderate_disruption": -0.02108918386151959,
+      "nominal_entropy_mean": 0.7372451491667996,
+      "nominal_entropy_std": 0.018760023576434685,
+      "nominal_stability_cv": 0.02544611327403971,
+      "selection_score": 3.265914616266935,
+      "sensitivity_score": 3.265914616266935,
+      "window": 1
+    },
+    {
+      "entropy_shift_after_moderate_disruption": 0.022204745341560805,
+      "formulation": "role_conditioned",
+      "free_energy_shift_after_moderate_disruption": -0.02527806809863209,
+      "nominal_entropy_mean": 0.569056191839046,
+      "nominal_entropy_std": 0.05000521890736404,
+      "nominal_stability_cv": 0.0878739562533531,
+      "selection_score": 1.6028029484523871,
+      "sensitivity_score": 1.6028029484523871,
+      "window": 3
+    }
+  ],
+  "generated_at": "2026-08-12T07:07:47.899841+00:00",
+  "horizon": 18,
+  "seeds": [
+    501,
+    502,
+    503
+  ],
+  "selected": {
+    "formulation": "pooled",
+    "window": 1
+  },
+  "selection_rule": "maximize absolute disruption sensitivity with nominal CV penalty; no treatment outcomes used",
+  "status": "selected before method comparison and main evaluation"
+}

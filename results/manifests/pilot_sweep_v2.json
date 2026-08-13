@@ -1,0 +1,17 @@
+{
+  "config_checksum": "41a02684fd9c3120414f47f189ee1413930575ad65a25f22dd6fd381d08b586f",
+  "config_path": "/workspace/ThermoAgent/configs/pilot.yaml",
+  "end_timestamp": "2026-08-12T04:22:55.846911+00:00",
+  "episodes_complete": 90,
+  "episodes_failed": 0,
+  "episodes_planned": 90,
+  "generated_tokens": 164105,
+  "llm_calls": 2304,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 2715563,
+  "source_checksum": "8719fb0fcbf62562a6f0cf86eec9651cc11717dc9d2e9cb09eecd756bac8cad2",
+  "stage": "pilot",
+  "start_timestamp": "2026-08-12T04:08:32.833430+00:00",
+  "wall_clock_seconds_including_model_load": 863.0134873539209
+}

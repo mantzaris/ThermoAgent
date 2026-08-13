@@ -1,0 +1,17 @@
+{
+  "config_checksum": "250b19e36da07dda7ea2040b4157166e5a1e86b17683c4dca6946e39c0a2ff8a",
+  "config_path": "/workspace/ThermoAgent/configs/holdout.yaml",
+  "end_timestamp": "2026-08-13T03:31:05.574098+00:00",
+  "episodes_complete": 80,
+  "episodes_failed": 0,
+  "episodes_planned": 80,
+  "generated_tokens": 249888,
+  "llm_calls": 4152,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 6073489,
+  "source_checksum": "4b76671d2d1cbaa7b213d2b11917ab02a440d91b3d46d5646dfacdf934599c55",
+  "stage": "holdout",
+  "start_timestamp": "2026-08-13T02:28:40.599855+00:00",
+  "wall_clock_seconds_including_model_load": 3744.9742398299277
+}

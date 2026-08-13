@@ -1,0 +1,17 @@
+{
+  "completed_new_rows": 16,
+  "completed_scope": "commercial paired_nominal_v5 through learned_no_entropy seed 1101",
+  "config_checksum": "d0e915b5f9856e9beb7e503b5e401246dfab73ec792d1e66fc1260027f0d95e6",
+  "config_path": "results/reproducibility/pilot_v5_interrupted_config.yaml",
+  "end_timestamp": "2026-08-12T06:21:07+00:00",
+  "exit_status": 130,
+  "inference_validity": "valid only for pre-freeze engineering and throughput diagnostics",
+  "new_rows_planned": 84,
+  "outcome_validity": "invalid for treatment inference",
+  "reason": "Pre-freeze privacy audit found that actor consensus_error compared a local gossip estimate with evaluator-only global occupancy and interaction_entropy used the evaluator's global interaction graph. The no-entropy controls also retained global interaction entropy in planner context.",
+  "retention_rule": "All 16 atomically published rows, one interrupted staging attempt, manifests, logs, and nonzero termination are retained; paired_*_v5 is prospectively excluded before inspecting treatment outcomes.",
+  "source_checksum": "ef241fa549556525e0b815d3fcd38d1a617484ee2e43c16247db90f6e48ec2a1",
+  "start_timestamp": "2026-08-12T06:12:56+00:00",
+  "status": "intentionally_interrupted_pre_freeze",
+  "wall_clock_seconds_approximate": 491
+}

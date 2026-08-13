@@ -1,0 +1,66 @@
+{
+  "checkpoint_sha256": "231f451497349ef8d87de768f9d11fdf139f767f6f70fa754398688ce3ad4373",
+  "episodes": 192,
+  "execution_features": "24 local features; entropy/free-energy fields zeroed",
+  "final_window_primary_mean": 718.253630819513,
+  "generated_at": "2026-08-12T06:33:40.338214+00:00",
+  "offline_initialization": {
+    "balanced_rows_per_option": 256,
+    "demonstration_episodes": 32,
+    "demonstration_options": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "demonstration_rows": 2304,
+    "epochs": 12,
+    "final_minibatch_accuracy_mean": 0.6791087962962963,
+    "loss_mean": 1.178485665332388,
+    "method": "behavior cloning from scripted local-observation trajectories",
+    "seed": 3018
+  },
+  "planner": "deterministic mock-v2",
+  "training_method": "PPO, staged planner training",
+  "training_seed": 3001,
+  "variant": "no_entropy",
+  "wall_clock_seconds": 18.03148365020752
+}
+{
+  "checkpoint_sha256": "09899d19c432489e7f6afb24923b6e97c30838a8210962548b11b9af8d91706b",
+  "episodes": 192,
+  "execution_features": "24 local features; distributed entropy/free-energy fields present",
+  "final_window_primary_mean": 724.6013463258475,
+  "generated_at": "2026-08-12T06:34:01.948458+00:00",
+  "offline_initialization": {
+    "balanced_rows_per_option": 256,
+    "demonstration_episodes": 32,
+    "demonstration_options": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "demonstration_rows": 2304,
+    "epochs": 12,
+    "final_minibatch_accuracy_mean": 0.6791087962962963,
+    "loss_mean": 1.178485665332388,
+    "method": "behavior cloning from scripted local-observation trajectories",
+    "seed": 3018
+  },
+  "planner": "deterministic mock-v2",
+  "training_method": "PPO, staged planner training",
+  "training_seed": 3001,
+  "variant": "thermo",
+  "wall_clock_seconds": 18.54664009436965
+}

@@ -1,0 +1,17 @@
+{
+  "completed_new_rows": 10,
+  "completed_scope": "commercial paired_nominal_v7 through autonomous_no_comm seed 1101",
+  "config_checksum": "f4df08f046b51dae45dca60df579cd59a959640afec24d2eb638b92024bce9d4",
+  "config_path": "results/reproducibility/pilot_v7_interrupted_config.yaml",
+  "end_timestamp": "2026-08-12T07:02:43+00:00",
+  "exit_status": 130,
+  "inference_validity": "valid only for pre-freeze engineering and throughput diagnostics",
+  "new_rows_planned": 84,
+  "outcome_validity": "invalid for treatment inference",
+  "reason": "A pre-freeze communication audit found that partitioned ordinary messages were impaired from period 0 while entropy-sketch gossip remained connected until the disruption onset. The two channels therefore exposed contradictory communication regimes.",
+  "retention_rule": "All 10 atomically published rows, any interrupted staging attempt, manifests, logs, and nonzero termination are retained; paired_*_v7 is prospectively excluded before inspecting treatment outcomes.",
+  "source_checksum": "b988cb6af7208ca43755aa2394f6cbd450a26907b1ce09ca9cd2552d39f87269",
+  "start_timestamp": "2026-08-12T07:02:03+00:00",
+  "status": "intentionally_interrupted_pre_freeze",
+  "wall_clock_seconds_approximate": 40
+}

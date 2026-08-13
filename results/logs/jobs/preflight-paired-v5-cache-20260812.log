@@ -1,0 +1,27 @@
+{
+  "complete": 100,
+  "episodes": 100,
+  "failed": 0
+}
+{
+  "complete": 18,
+  "episodes": 18,
+  "failed": 0
+}
+{
+  "complete": 10,
+  "episodes": 10,
+  "failed": 0
+}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/ThermoAgent/thermoagent/__main__.py", line 3, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/cli.py", line 130, in main
+    value = replay_results(args.results, args.stages)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/replay.py", line 126, in replay_results
+    raise RuntimeError("one or more quantitative replays failed; see %s" % output)
+RuntimeError: one or more quantitative replays failed; see /tmp/thermoagent-preflight-paired-v5/reproducibility/replay_report.json

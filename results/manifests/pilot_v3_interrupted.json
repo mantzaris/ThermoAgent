@@ -1,0 +1,17 @@
+{
+  "completed_new_rows": 19,
+  "completed_scope": "commercial final_nominal_v3 only",
+  "config_checksum": "1dee9ca07bd1ce545121b5ee78e71b0fc339d80c3df0dcb5d591be5731d4c73d",
+  "config_path": "results/reproducibility/pilot_v3_interrupted_config.yaml",
+  "end_timestamp": "2026-08-12T01:10:50-04:00",
+  "exit_status": 130,
+  "inference_validity": "valid for planner behavior and throughput only",
+  "new_rows_planned": 84,
+  "outcome_validity": "invalid for paired treatment inference",
+  "reason": "Pre-freeze audit found action-dependent RNG coupling: message/forecast draws could shift later exogenous demand and production draws across methods.",
+  "retention_rule": "All completed rows, the interrupted log, and nonzero status are retained; no row is relabeled or overwritten.",
+  "source_checksum": "151c27a10bb4153118cc8f40cfaeac7c3b868abf9548042e81d9b12a86fa5ee9",
+  "start_timestamp": "2026-08-12T00:51:59-04:00",
+  "status": "intentionally_interrupted_pre_freeze",
+  "wall_clock_seconds_approximate": 1131
+}

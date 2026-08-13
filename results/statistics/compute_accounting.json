@@ -1,0 +1,11 @@
+{
+  "episode_wall_clock_hours": 20.173615723609302,
+  "episodes": 1334,
+  "excluded_complete_episodes": 58,
+  "failed_episodes": 0,
+  "generated_at": "2026-08-13T03:36:10.173628+00:00",
+  "generated_tokens": 4952073,
+  "llm_calls": 76939,
+  "note": "Episode wall time excludes one-time model loading unless an external sweep log adds it; GPU-hour accounting is finalized from job manifests.",
+  "prompt_tokens": 126742334
+}

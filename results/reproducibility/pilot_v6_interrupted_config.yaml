@@ -1,0 +1,101 @@
+stage: pilot
+source_provenance:
+  commit: 8bd699b86119bd660d26bb1bfe4c690d27058943
+  dirty: true
+prompt_template_revision: planner-json-v4
+llm_seed: 0
+rl_seed: 3001
+decision_interval: 4
+communication_budget: 12
+calibration: results/reproducibility/macrostate_calibration.json
+checkpoints:
+  no_entropy: results/checkpoints/coordination_no_entropy.pt
+  thermo: results/checkpoints/coordination_thermo.pt
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  precision: bitsandbytes NF4, bfloat16 compute, double quantization
+  load_in_4bit: true
+  max_input_tokens: 2560
+  max_new_tokens: 160
+  decoding:
+    do_sample: false
+    temperature: 0.0
+    top_p: 1.0
+applications:
+  commercial:
+    n_agents: 8
+  humanitarian:
+    n_agents: 8
+methods:
+  - scripted_independent
+  - learned_no_entropy
+  - thermoagent
+seeds: [1101, 1102, 1103]
+scenarios:
+  nominal:
+    horizon: 16
+    private_information: 0.5
+    objective_misalignment: 0.5
+    communication: reliable
+    disruption: nominal
+  single_disruption:
+    horizon: 16
+    private_information: 0.5
+    objective_misalignment: 0.5
+    communication: reliable
+    disruption: moderate
+  communication_loss:
+    horizon: 16
+    private_information: 0.5
+    objective_misalignment: 0.5
+    communication: partition
+    disruption: moderate
+  single_disruption_route_v2:
+    # Added before main freeze after the v1 completeness audit introduced a
+    # real route closure into the moderate shock. Existing v1 run IDs resume.
+    horizon: 16
+    private_information: 0.5
+    objective_misalignment: 0.5
+    communication: reliable
+    disruption: moderate
+  compound_stress_v2:
+    # Focused validation of route closure, correlated demand/capacity loss,
+    # facility outage, and lead-time inflation under intermittent messaging.
+    horizon: 16
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: intermittent
+    disruption: compound
+  paired_nominal_v6:
+    # Final pre-freeze qualification after separating RNG streams, correcting
+    # coordinator information, and replacing evaluator-only monitor residuals
+    # with link-local actor features. Interrupted v3/v5 configurations are
+    # archived under results/reproducibility.
+    horizon: 20
+    private_information: 0.5
+    objective_misalignment: 0.5
+    communication: reliable
+    disruption: nominal
+    methods:
+      - centralized_lookahead
+      - centralized_llm
+      - scripted_independent
+      - autonomous_no_comm
+      - autonomous_fixed_comm
+      - learned_no_entropy
+      - thermoagent
+  paired_compound_v6:
+    horizon: 20
+    private_information: 1.0
+    objective_misalignment: 1.0
+    communication: partition
+    disruption: compound
+    methods:
+      - centralized_lookahead
+      - centralized_llm
+      - scripted_independent
+      - autonomous_no_comm
+      - autonomous_fixed_comm
+      - learned_no_entropy
+      - thermoagent

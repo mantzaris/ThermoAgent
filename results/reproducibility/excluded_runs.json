@@ -1,0 +1,38 @@
+{
+  "generated_before_main": true,
+  "rules": [
+    {
+      "run_id_contains": "-final_nominal_v3",
+      "reason": "Pre-freeze action-dependent RNG coupling invalidated paired treatment inference; retained for planner behavior and throughput only."
+    },
+    {
+      "run_id_contains": "-final_compound_v3",
+      "reason": "Pre-freeze action-dependent RNG coupling invalidated paired treatment inference; retained for planner behavior and throughput only."
+    },
+    {
+      "run_id_contains": "-paired_nominal_v5",
+      "reason": "Pre-freeze privacy audit found evaluator-only consensus error and global interaction entropy in actor features; interrupted after 16 published rows and retained only as an engineering diagnostic."
+    },
+    {
+      "run_id_contains": "-paired_compound_v5",
+      "reason": "Pre-freeze privacy audit found evaluator-only consensus error and global interaction entropy in actor features; interrupted after 16 published rows and retained only as an engineering diagnostic."
+    },
+    {
+      "run_id_contains": "-paired_nominal_v6",
+      "reason": "Pre-freeze factorial audit found that private-information severity changed true marginal costs and local forecast noise; interrupted after 13 published rows before outcome comparison and retained only as an engineering diagnostic."
+    },
+    {
+      "run_id_contains": "-paired_compound_v6",
+      "reason": "Pre-freeze factorial audit found that private-information severity changed true marginal costs and local forecast noise; interrupted after 13 published rows before outcome comparison and retained only as an engineering diagnostic."
+    },
+    {
+      "run_id_contains": "-paired_nominal_v7",
+      "reason": "Pre-freeze communication audit found inconsistent partition onset between ordinary messages and entropy-sketch gossip; interrupted after 10 published rows before outcome comparison and retained only as an engineering diagnostic."
+    },
+    {
+      "run_id_contains": "-paired_compound_v7",
+      "reason": "Pre-freeze communication audit found inconsistent partition onset between ordinary messages and entropy-sketch gossip; interrupted after 10 published rows before outcome comparison and retained only as an engineering diagnostic."
+    }
+  ],
+  "selection_rule": "Only defects discovered and documented before protocol freeze can exclude an outcome row. No result magnitude or direction was inspected for this decision."
+}

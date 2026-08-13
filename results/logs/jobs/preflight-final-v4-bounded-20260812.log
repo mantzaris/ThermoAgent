@@ -1,0 +1,1407 @@
+{
+  "complete": 100,
+  "episodes": 100,
+  "failed": 0
+}
+{
+  "complete": 18,
+  "episodes": 18,
+  "failed": 0
+}
+{
+  "complete": 10,
+  "episodes": 10,
+  "failed": 0
+}
+{
+  "episodes_checked": 128,
+  "episodes_passed": 128,
+  "records": [
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_fixed_comm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_fixed_comm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_fixed_comm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_fixed_comm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_fixed_comm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_fixed_comm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_fixed_comm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_fixed_comm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_no_comm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_no_comm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_no_comm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_no_comm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_no_comm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_no_comm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_no_comm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_no_comm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_no_comm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_no_comm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_no_comm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_no_comm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-autonomous_no_comm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-autonomous_no_comm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-commercial-autonomous_no_comm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_llm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_llm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_llm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_llm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_llm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_llm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_llm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_llm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_llm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_llm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_llm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_llm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_llm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_llm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_llm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_lookahead-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_lookahead-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_lookahead-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_lookahead-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_lookahead-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_lookahead-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_lookahead-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_lookahead-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_lookahead-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_lookahead-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_lookahead-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 19,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_lookahead-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-centralized_lookahead-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-centralized_lookahead-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-commercial-centralized_lookahead-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-global_entropy_oracle-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-global_entropy_oracle-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 49,
+      "replay_passed": true,
+      "run_id": "main-commercial-global_entropy_oracle-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-global_entropy_oracle-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-global_entropy_oracle-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 42,
+      "replay_passed": true,
+      "run_id": "main-commercial-global_entropy_oracle-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-global_entropy_oracle-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-global_entropy_oracle-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-commercial-global_entropy_oracle-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-global_entropy_oracle-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-global_entropy_oracle-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 43,
+      "replay_passed": true,
+      "run_id": "main-commercial-global_entropy_oracle-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-global_entropy_oracle-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-global_entropy_oracle-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "main-commercial-global_entropy_oracle-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-learned_no_entropy-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-learned_no_entropy-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-commercial-learned_no_entropy-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-learned_no_entropy-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-learned_no_entropy-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "main-commercial-learned_no_entropy-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-learned_no_entropy-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-learned_no_entropy-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-commercial-learned_no_entropy-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-learned_no_entropy-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-learned_no_entropy-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 42,
+      "replay_passed": true,
+      "run_id": "main-commercial-learned_no_entropy-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-learned_no_entropy-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-learned_no_entropy-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "main-commercial-learned_no_entropy-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-random_gate-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-random_gate-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "main-commercial-random_gate-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-random_gate-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-random_gate-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "main-commercial-random_gate-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-random_gate-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-random_gate-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 39,
+      "replay_passed": true,
+      "run_id": "main-commercial-random_gate-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-random_gate-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-random_gate-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 31,
+      "replay_passed": true,
+      "run_id": "main-commercial-random_gate-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-random_gate-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-random_gate-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 31,
+      "replay_passed": true,
+      "run_id": "main-commercial-random_gate-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-scripted_independent-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-scripted_independent-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-commercial-scripted_independent-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-scripted_independent-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-scripted_independent-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "main-commercial-scripted_independent-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-scripted_independent-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-scripted_independent-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-commercial-scripted_independent-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-scripted_independent-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-scripted_independent-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 39,
+      "replay_passed": true,
+      "run_id": "main-commercial-scripted_independent-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-scripted_independent-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-scripted_independent-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "main-commercial-scripted_independent-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-shuffled_entropy-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-shuffled_entropy-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 49,
+      "replay_passed": true,
+      "run_id": "main-commercial-shuffled_entropy-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-shuffled_entropy-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-shuffled_entropy-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 42,
+      "replay_passed": true,
+      "run_id": "main-commercial-shuffled_entropy-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-shuffled_entropy-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-shuffled_entropy-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-commercial-shuffled_entropy-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-shuffled_entropy-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-shuffled_entropy-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "main-commercial-shuffled_entropy-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-shuffled_entropy-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-shuffled_entropy-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "main-commercial-shuffled_entropy-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-thermoagent-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-thermoagent-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 49,
+      "replay_passed": true,
+      "run_id": "main-commercial-thermoagent-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-thermoagent-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-thermoagent-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 42,
+      "replay_passed": true,
+      "run_id": "main-commercial-thermoagent-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-thermoagent-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-thermoagent-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-commercial-thermoagent-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-thermoagent-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-thermoagent-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 43,
+      "replay_passed": true,
+      "run_id": "main-commercial-thermoagent-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-commercial-thermoagent-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-commercial-thermoagent-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "main-commercial-thermoagent-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_fixed_comm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_fixed_comm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_no_comm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_no_comm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_no_comm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_no_comm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_no_comm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_no_comm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_no_comm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-autonomous_no_comm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_llm-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_llm-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_llm-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_llm-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_llm-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_llm-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_llm-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_llm-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_llm-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_llm-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_llm-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_llm-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_llm-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_llm-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_llm-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_lookahead-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_lookahead-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_lookahead-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_lookahead-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_lookahead-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_lookahead-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_lookahead-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_lookahead-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_lookahead-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 17,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 11,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-centralized_lookahead-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-global_entropy_oracle-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-global_entropy_oracle-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-global_entropy_oracle-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-global_entropy_oracle-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-global_entropy_oracle-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-global_entropy_oracle-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-global_entropy_oracle-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-global_entropy_oracle-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-learned_no_entropy-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-learned_no_entropy-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-learned_no_entropy-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-learned_no_entropy-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-learned_no_entropy-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-learned_no_entropy-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-learned_no_entropy-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-learned_no_entropy-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 47,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-learned_no_entropy-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-learned_no_entropy-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-random_gate-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-random_gate-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 35,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-random_gate-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-random_gate-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-random_gate-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-random_gate-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-random_gate-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-random_gate-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-random_gate-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-random_gate-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-random_gate-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 30,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-random_gate-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-random_gate-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-random_gate-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 31,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-random_gate-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-scripted_independent-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-scripted_independent-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-scripted_independent-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-scripted_independent-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-scripted_independent-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-scripted_independent-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-scripted_independent-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-scripted_independent-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-scripted_independent-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-scripted_independent-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-scripted_independent-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-scripted_independent-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-scripted_independent-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-scripted_independent-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 35,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-scripted_independent-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-shuffled_entropy-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-shuffled_entropy-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-shuffled_entropy-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-shuffled_entropy-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-shuffled_entropy-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-shuffled_entropy-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-shuffled_entropy-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-shuffled_entropy-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-shuffled_entropy-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-shuffled_entropy-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-thermoagent-n08-s9991-p0_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-thermoagent-n08-s9991-p0_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-thermoagent-n08-s9991-p0_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-thermoagent-n08-s9991-p0_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-thermoagent-n08-s9991-p0_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-thermoagent-n08-s9991-p0_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-thermoagent-n08-s9991-p1_o0_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-thermoagent-n08-s9991-p1_o0_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 48,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-thermoagent-n08-s9991-p1_o0_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-thermoagent-n08-s9991-p1_o1_compound/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-thermoagent-n08-s9991-p1_o1_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-thermoagent-n08-s9991-p1_o1_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/main/main-humanitarian-thermoagent-n08-s9991-p1_o1_moderate/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/main-humanitarian-thermoagent-n08-s9991-p1_o1_moderate.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "main-humanitarian-thermoagent-n08-s9991-p1_o1_moderate",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-autonomous_fixed_comm-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-autonomous_fixed_comm-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-autonomous_fixed_comm-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-autonomous_no_comm-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-autonomous_no_comm-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-autonomous_no_comm-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-entropy_llm_only-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-entropy_llm_only-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 39,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-entropy_llm_only-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-global_entropy_oracle-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-global_entropy_oracle-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-global_entropy_oracle-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-learned_no_entropy-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-learned_no_entropy-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-learned_no_entropy-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-no_episodic_memory-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-no_episodic_memory-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-no_episodic_memory-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-random_gate-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-random_gate-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-random_gate-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-shuffled_entropy-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-shuffled_entropy-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-shuffled_entropy-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-commercial-thermoagent-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-commercial-thermoagent-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "ablations-commercial-thermoagent-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-autonomous_fixed_comm-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-autonomous_fixed_comm-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-autonomous_fixed_comm-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-autonomous_no_comm-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-autonomous_no_comm-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-autonomous_no_comm-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-entropy_llm_only-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-entropy_llm_only-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 34,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-entropy_llm_only-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-global_entropy_oracle-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-global_entropy_oracle-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-global_entropy_oracle-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-learned_no_entropy-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-learned_no_entropy-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-learned_no_entropy-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-no_episodic_memory-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-no_episodic_memory-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-no_episodic_memory-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-random_gate-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-random_gate-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 32,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-random_gate-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-shuffled_entropy-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-shuffled_entropy-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-shuffled_entropy-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -5.684341886080802e-14,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/ablations/ablations-humanitarian-thermoagent-n08-s9992/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/ablations-humanitarian-thermoagent-n08-s9992.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "ablations-humanitarian-thermoagent-n08-s9992",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-commercial-autonomous_fixed_comm-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-commercial-centralized_lookahead-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-commercial-centralized_lookahead-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 28,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-commercial-learned_no_entropy-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-commercial-learned_no_entropy-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-commercial-scripted_independent-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-commercial-scripted_independent-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 37,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-commercial-thermoagent-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-commercial-thermoagent-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 38,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 36,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-humanitarian-centralized_lookahead-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 39,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-humanitarian-learned_no_entropy-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-humanitarian-scripted_independent-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-humanitarian-scripted_independent-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 40,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s9993",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "/tmp/thermoagent-preflight-final-v4/raw/holdout/holdout-humanitarian-thermoagent-n09-s9993/episode.json",
+      "manifest_path": "/tmp/thermoagent-preflight-final-v4/manifests/holdout-humanitarian-thermoagent-n09-s9993.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 41,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s9993",
+      "tool_result_mismatches": []
+    }
+  ],
+  "stages": [
+    "main",
+    "ablations",
+    "holdout"
+  ]
+}
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+/workspace/ThermoAgent/thermoagent/analysis.py:493: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  correlation = stats.spearmanr(group[signal].astype(float), future_loss).correlation
+{
+  "episode_wall_clock_hours": 0.0007508909071071281,
+  "episodes": 128,
+  "excluded_complete_episodes": 0,
+  "failed_episodes": 0,
+  "generated_at": "2026-08-12T05:47:39.892350+00:00",
+  "generated_tokens": 0,
+  "llm_calls": 0,
+  "note": "Episode wall time excludes one-time model loading unless an external sweep log adds it; GPU-hour accounting is finalized from job manifests.",
+  "prompt_tokens": 0
+}
+{
+  "figures": [
+    "ablation_effects.pdf",
+    "agentic_metrics.pdf",
+    "agentic_necessity_map.pdf",
+    "communication_performance_pareto.pdf",
+    "entropy_dynamics.pdf",
+    "main_performance.pdf",
+    "network_snapshots_commercial.pdf",
+    "network_snapshots_humanitarian.pdf",
+    "recovery_curves.pdf",
+    "system_architecture.pdf"
+  ]
+}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/ThermoAgent/thermoagent/__main__.py", line 3, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/cli.py", line 118, in main
+    value = validate_pdfs(args.results)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/figures.py", line 681, in validate_pdfs
+    raise RuntimeError("PDF QA requires pdfinfo, pdffonts, and pdftoppm")
+RuntimeError: PDF QA requires pdfinfo, pdffonts, and pdftoppm

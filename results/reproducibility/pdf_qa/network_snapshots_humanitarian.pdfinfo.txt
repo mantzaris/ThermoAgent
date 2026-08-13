@@ -1,0 +1,21 @@
+{
+  "backend": "PyMuPDF 1.28.2",
+  "metadata": {
+    "author": "",
+    "creationDate": "D:20260813035230Z",
+    "creator": "Matplotlib v3.10.5, https://matplotlib.org",
+    "encryption": null,
+    "format": "PDF 1.4",
+    "keywords": "",
+    "modDate": "",
+    "producer": "Matplotlib pdf backend v3.10.5",
+    "subject": "",
+    "title": "",
+    "trapped": ""
+  },
+  "page_count": 1,
+  "page_size_points": [
+    518.4000244140625,
+    468.0
+  ]
+}

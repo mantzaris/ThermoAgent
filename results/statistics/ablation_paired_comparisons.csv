@@ -1,0 +1,17 @@
+stage,application,treatment,comparator,n_pairs,mean_improvement,ci95_low,ci95_high,paired_win_rate,probability_superiority,p_value_sign_flip,p_value_holm
+ablations,commercial,thermoagent,autonomous_fixed_comm,4,-0.437849472969412,-0.7807043209405151,-0.055998119184970996,0.25,0.25,0.29411764705882354,1.0
+ablations,commercial,thermoagent,autonomous_no_comm,4,-1.824193132083232,-2.463361831388087,-1.3427608806173095,0.0,0.0,0.17647058823529413,1.0
+ablations,commercial,thermoagent,entropy_llm_only,4,-0.17860157070387217,-0.6476858531449219,0.19639583778679448,0.25,0.375,0.7647058823529411,1.0
+ablations,commercial,thermoagent,global_entropy_oracle,4,0.08801901741399742,0.0,0.2640570522419923,0.25,0.625,1.0,1.0
+ablations,commercial,thermoagent,learned_no_entropy,4,-0.07573448209389966,-0.5792700259563199,0.5352454875573249,0.25,0.25,0.7647058823529411,1.0
+ablations,commercial,thermoagent,no_episodic_memory,4,0.19499124100766974,0.0,0.5849737230230092,0.25,0.625,1.0,1.0
+ablations,commercial,thermoagent,random_gate,4,0.19499124100766974,0.0,0.5849737230230092,0.25,0.625,1.0,1.0
+ablations,commercial,thermoagent,shuffled_entropy,4,0.19499124100766974,0.0,0.5849737230230092,0.25,0.625,1.0,1.0
+ablations,humanitarian,thermoagent,autonomous_fixed_comm,4,-11.25,-33.75,0.0,0.0,0.375,1.0,1.0
+ablations,humanitarian,thermoagent,autonomous_no_comm,4,-48.26587500000005,-144.79762500000015,0.0,0.0,0.375,1.0,1.0
+ablations,humanitarian,thermoagent,entropy_llm_only,4,0.0,0.0,0.0,0.0,0.5,1.0,1.0
+ablations,humanitarian,thermoagent,global_entropy_oracle,4,-42.95654999999988,-128.86964999999964,0.0,0.0,0.375,1.0,1.0
+ablations,humanitarian,thermoagent,learned_no_entropy,4,0.0,0.0,0.0,0.0,0.5,1.0,1.0
+ablations,humanitarian,thermoagent,no_episodic_memory,4,-12.865860000000339,-38.59758000000102,0.0,0.0,0.375,1.0,1.0
+ablations,humanitarian,thermoagent,random_gate,4,0.0,0.0,0.0,0.0,0.5,1.0,1.0
+ablations,humanitarian,thermoagent,shuffled_entropy,4,-13.782824999999775,-41.348474999999326,0.0,0.0,0.375,1.0,1.0

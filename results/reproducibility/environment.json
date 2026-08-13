@@ -1,0 +1,22 @@
+{
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "packages": {
+    "PyYAML": "6.0.2",
+    "accelerate": "1.10.1",
+    "bitsandbytes": "0.47.0",
+    "huggingface-hub": "0.34.4",
+    "matplotlib": "3.10.5",
+    "networkx": "3.5",
+    "pandas": "2.3.1",
+    "pydantic": "2.11.7",
+    "pytest": "8.4.1",
+    "safetensors": "0.6.2",
+    "scipy": "1.16.1",
+    "thermoagent": "0.1.0",
+    "transformers": "4.55.4"
+  },
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "torch_cuda": "12.8"
+}

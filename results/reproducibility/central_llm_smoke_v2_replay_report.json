@@ -1,0 +1,42 @@
+{
+  "episodes_checked": 3,
+  "episodes_passed": 3,
+  "records": [
+    {
+      "conservation_error": 5.684341886080802e-14,
+      "episode_path": "results/raw/smoke/smoke-commercial-centralized_llm-n08-s1901-legal_absent_reports_v2_public_routes/episode.json",
+      "manifest_path": "results/manifests/smoke-commercial-centralized_llm-n08-s1901-legal_absent_reports_v2_public_routes.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 0,
+      "replay_passed": true,
+      "run_id": "smoke-commercial-centralized_llm-n08-s1901-legal_absent_reports_v2_public_routes",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 5.684341886080802e-14,
+      "episode_path": "results/raw/smoke/smoke-commercial-centralized_llm-n08-s1901-legal_coarse_reports_v2_public_routes/episode.json",
+      "manifest_path": "results/manifests/smoke-commercial-centralized_llm-n08-s1901-legal_coarse_reports_v2_public_routes.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 3,
+      "replay_passed": true,
+      "run_id": "smoke-commercial-centralized_llm-n08-s1901-legal_coarse_reports_v2_public_routes",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 5.684341886080802e-14,
+      "episode_path": "results/raw/smoke/smoke-commercial-centralized_llm-n08-s1901-legal_exact_reports_v2_public_routes/episode.json",
+      "manifest_path": "results/manifests/smoke-commercial-centralized_llm-n08-s1901-legal_exact_reports_v2_public_routes.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 3,
+      "replay_passed": true,
+      "run_id": "smoke-commercial-centralized_llm-n08-s1901-legal_exact_reports_v2_public_routes",
+      "tool_result_mismatches": []
+    }
+  ],
+  "run_id_contains": [
+    "v2_public_routes"
+  ],
+  "stages": [
+    "smoke"
+  ]
+}

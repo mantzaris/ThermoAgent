@@ -1,0 +1,17 @@
+{
+  "config_checksum": "d203cfbb8385e8c857525e9fbb57bfd46925dbe298f34452ecef33bbfbb41175",
+  "config_path": "/workspace/ThermoAgent/configs/ablations.yaml",
+  "end_timestamp": "2026-08-13T02:27:26.925220+00:00",
+  "episodes_complete": 72,
+  "episodes_failed": 0,
+  "episodes_planned": 72,
+  "generated_tokens": 511402,
+  "llm_calls": 7793,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 12584017,
+  "source_checksum": "4b76671d2d1cbaa7b213d2b11917ab02a440d91b3d46d5646dfacdf934599c55",
+  "stage": "ablations",
+  "start_timestamp": "2026-08-13T00:18:41.478109+00:00",
+  "wall_clock_seconds_including_model_load": 7725.447112113237
+}

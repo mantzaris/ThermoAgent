@@ -1,0 +1,17 @@
+{
+  "config_checksum": "3ca2240718bd05a6e2fb5cc030a1f061c001d1653eaa70976186a893be9ae98a",
+  "config_path": "configs/pilot.yaml",
+  "end_timestamp": "2026-08-12T04:02:14.994917+00:00",
+  "episodes_complete": 54,
+  "episodes_failed": 0,
+  "episodes_planned": 54,
+  "generated_tokens": 97188,
+  "llm_calls": 1344,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 1598502,
+  "source_checksum": "44dc91c4896e81a69d3a4b94493c522b90904fcbc42a9c1b152fb8ca06f6bf2b",
+  "stage": "pilot",
+  "start_timestamp": "2026-08-12T03:42:17.634840+00:00",
+  "wall_clock_seconds_including_model_load": 1197.3600802272558
+}

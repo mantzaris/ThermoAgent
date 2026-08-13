@@ -1,0 +1,312 @@
+{
+  "agent_rng_rule": "environment_seed * 100 + stable agent index",
+  "agentic_metric_revision": "agentic-metrics-v2-two-party-joined-coalition",
+  "application": "humanitarian",
+  "central_baseline_revision": "central-controls-v2-prefreeze-audit",
+  "checkpoint_selection": "results/checkpoints/coordination_thermo.pt",
+  "checkpoint_sha256": "62d5a1c74d183b8227f6347dd08bc3b243a52268775fcb2336aba432a2af74d2",
+  "completion_status": "complete",
+  "configuration": {
+    "application": "humanitarian",
+    "communication": "partition",
+    "communication_budget": 12,
+    "decision_interval": 4,
+    "disruption": "compound",
+    "horizon": 20,
+    "n_agents": 8,
+    "objective_misalignment": 1.0,
+    "private_information": 1.0,
+    "random_gate_probability": 0.5,
+    "seed": 2107,
+    "topology": "ring_plus_hubs"
+  },
+  "decoding": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "dependencies": {
+    "accelerate": "1.10.1",
+    "bitsandbytes": "0.47.0",
+    "matplotlib": "3.10.5",
+    "networkx": "3.5",
+    "numpy": "2.1.2",
+    "pandas": "2.3.1",
+    "pydantic": "2.11.7",
+    "pymupdf": "1.28.2",
+    "scipy": "1.16.1",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.55.4"
+  },
+  "end_timestamp": "2026-08-12T17:37:27.552125+00:00",
+  "environment_rng_streams": {
+    "communication": 3002124,
+    "exogenous_dynamics": 1002110,
+    "initialization": 2107,
+    "monitor_link_sampling": 4002144,
+    "monitor_noise": 5002118,
+    "observation_noise": 2002110
+  },
+  "environment_seed": 2107,
+  "environment_steps": 20,
+  "experiment_configuration": {
+    "agentic_metric_revision": "agentic-metrics-v2-two-party-joined-coalition",
+    "applications": {
+      "commercial": {
+        "agent_counts": [
+          8,
+          11
+        ]
+      },
+      "humanitarian": {
+        "agent_counts": [
+          8,
+          10
+        ]
+      }
+    },
+    "calibration": "results/reproducibility/macrostate_calibration.json",
+    "central_baseline_revision": "central-controls-v2-prefreeze-audit",
+    "checkpoints": {
+      "no_entropy": "results/checkpoints/coordination_no_entropy.pt",
+      "thermo": "results/checkpoints/coordination_thermo.pt"
+    },
+    "communication_budget": 12,
+    "decision_interval": 4,
+    "llm_seed": 0,
+    "methods": [
+      "centralized_lookahead",
+      "centralized_llm",
+      "scripted_independent",
+      "autonomous_no_comm",
+      "autonomous_fixed_comm",
+      "learned_no_entropy",
+      "thermoagent"
+    ],
+    "model": {
+      "decoding": {
+        "do_sample": false,
+        "temperature": 0.0,
+        "top_p": 1.0
+      },
+      "identifier": "Qwen/Qwen2.5-7B-Instruct",
+      "load_in_4bit": true,
+      "max_input_tokens": 2560,
+      "max_new_tokens": 160,
+      "precision": "bitsandbytes NF4, bfloat16 compute, double quantization",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    },
+    "prompt_template_revision": "planner-json-v6",
+    "rl_seed": 3001,
+    "scenarios": {
+      "factor_moderate_center": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "moderate",
+        "horizon": 20,
+        "objective_misalignment": 0.5,
+        "private_information": 0.5
+      },
+      "factor_private_aligned": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "moderate",
+        "horizon": 20,
+        "objective_misalignment": 0.0,
+        "private_information": 1.0
+      },
+      "factor_private_mixed": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "moderate",
+        "horizon": 20,
+        "objective_misalignment": 1.0,
+        "private_information": 1.0
+      },
+      "factor_shared_aligned": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "moderate",
+        "horizon": 20,
+        "objective_misalignment": 0.0,
+        "private_information": 0.0
+      },
+      "factor_shared_mixed": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "moderate",
+        "horizon": 20,
+        "objective_misalignment": 1.0,
+        "private_information": 0.0
+      },
+      "nominal_control": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "reliable",
+        "disruption": "nominal",
+        "horizon": 20,
+        "methods": [
+          "centralized_lookahead",
+          "scripted_independent",
+          "autonomous_fixed_comm",
+          "learned_no_entropy",
+          "thermoagent"
+        ],
+        "objective_misalignment": 0.5,
+        "private_information": 0.5
+      },
+      "private_mixed_compound_partition_large": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "partition",
+        "disruption": "compound",
+        "horizon": 20,
+        "objective_misalignment": 1.0,
+        "private_information": 1.0
+      },
+      "private_mixed_compound_partition_small": {
+        "agent_counts_by_application": {
+          "commercial": [
+            8
+          ],
+          "humanitarian": [
+            8
+          ]
+        },
+        "communication": "partition",
+        "disruption": "compound",
+        "horizon": 20,
+        "methods": [
+          "centralized_lookahead",
+          "scripted_independent",
+          "autonomous_fixed_comm",
+          "learned_no_entropy",
+          "thermoagent"
+        ],
+        "objective_misalignment": 1.0,
+        "private_information": 1.0
+      },
+      "private_mixed_correlated": {
+        "agent_counts_by_application": {
+          "commercial": [
+            11
+          ],
+          "humanitarian": [
+            10
+          ]
+        },
+        "communication": "intermittent",
+        "disruption": "correlated",
+        "horizon": 20,
+        "objective_misalignment": 1.0,
+        "private_information": 1.0
+      }
+    },
+    "seeds": [
+      2101,
+      2102,
+      2103,
+      2104,
+      2105,
+      2106,
+      2107,
+      2108
+    ],
+    "source_provenance": {
+      "commit": "8bd699b86119bd660d26bb1bfe4c690d27058943",
+      "dirty": true
+    },
+    "stage": "main"
+  },
+  "generated_tokens": 7185,
+  "hardware": {
+    "cpu_count": 32,
+    "cuda_available": true,
+    "cuda_runtime": "12.8",
+    "driver_version": "570.195.03",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_memory_bytes": 25757220864,
+    "gpu_query": "bounded nvidia-smi (10-second timeout)",
+    "hostname": "2acac16f37c7",
+    "platform": "Linux-6.8.0-90-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128"
+  },
+  "llm_calls": 99,
+  "llm_seed": 0,
+  "max_input_tokens": 2560,
+  "max_new_tokens": 160,
+  "messages": 164,
+  "method": "thermoagent",
+  "method_uses_language_model": true,
+  "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "output_checksums": {
+    "episode.json": "9eb0288091d060840de5bb17efd7b5114fbc621ab7f96707a9b27e48d9647813",
+    "events.jsonl.gz": "d30354ff9f5bd2ed3518a214150f61591df0ff3aced3ec9c2a45e8873b3df4b1"
+  },
+  "planner_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "precision": "bitsandbytes NF4, bfloat16 compute, double quantization",
+  "prompt_template_revision": "planner-json-v6",
+  "prompt_tokens": 166333,
+  "rl_seed": 3001,
+  "run_id": "main-humanitarian-thermoagent-n08-s2107-private_mixed_compound_partition_small",
+  "source": {
+    "checksum": "4b76671d2d1cbaa7b213d2b11917ab02a440d91b3d46d5646dfacdf934599c55",
+    "commit": "8bd699b86119bd660d26bb1bfe4c690d27058943",
+    "dirty": true,
+    "thermoagent_version": "0.1.0"
+  },
+  "start_timestamp": "2026-08-12T17:35:31.892239+00:00",
+  "tool_calls": 72,
+  "topology_checksum": "30b3f2ad9aa9f62fe3dad134014ad98f7c4b0e4bc8489c554e206c03debebac6",
+  "topology_identifier": "ring_plus_hubs",
+  "wall_clock_seconds": 115.49805291369557
+}

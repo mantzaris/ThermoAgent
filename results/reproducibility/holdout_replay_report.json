@@ -1,0 +1,810 @@
+{
+  "episodes_checked": 80,
+  "episodes_passed": 80,
+  "records": [
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 95,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 85,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 91,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 89,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 93,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 88,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 90,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 87,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 9,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 24,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 7,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 22,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 13,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 28,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 7,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-centralized_lookahead-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-centralized_lookahead-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 22,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-centralized_lookahead-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 86,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 73,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 89,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 79,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-learned_no_entropy-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-learned_no_entropy-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-learned_no_entropy-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 69,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 74,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 83,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 73,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 81,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 83,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 72,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-scripted_independent-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-scripted_independent-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 79,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-scripted_independent-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 84,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 83,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 84,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 81,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 89,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 84,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-commercial-thermoagent-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-commercial-thermoagent-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 81,
+      "replay_passed": true,
+      "run_id": "holdout-commercial-thermoagent-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 70,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 66,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 71,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 73,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 72,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 64,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 72,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 66,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-autonomous_fixed_comm-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 15,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 45,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 33,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 63,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 30,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -2.2737367544323206e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 56,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 35,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 65,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-centralized_lookahead-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 87,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 72,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 74,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 72,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 124,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-learned_no_entropy-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 81,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 68,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 67,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 66,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 91,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 85,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-scripted_independent-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-scripted_independent-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 66,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-scripted_independent-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4101-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4101-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4101-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4101-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4101-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 75,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4101-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4102-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4102-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 81,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4102-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4102-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4102-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 95,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4102-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": -1.1368683772161603e-13,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4103-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4103-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 80,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4103-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4103-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4103-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 82,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4103-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4104-unseen_compound/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4104-unseen_compound.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 78,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4104-unseen_compound",
+      "tool_result_mismatches": []
+    },
+    {
+      "conservation_error": 0.0,
+      "episode_path": "results/raw/holdout/holdout-humanitarian-thermoagent-n09-s4104-unseen_correlated_partition/episode.json",
+      "manifest_path": "results/manifests/holdout-humanitarian-thermoagent-n09-s4104-unseen_correlated_partition.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 85,
+      "replay_passed": true,
+      "run_id": "holdout-humanitarian-thermoagent-n09-s4104-unseen_correlated_partition",
+      "tool_result_mismatches": []
+    }
+  ],
+  "run_id_contains": [],
+  "stages": [
+    "holdout"
+  ]
+}

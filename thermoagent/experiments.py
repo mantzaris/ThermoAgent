@@ -110,7 +110,12 @@ def source_checksum(root: Path) -> str:
         directory = root / base
         if not directory.exists():
             continue
-        included.extend(path for path in directory.rglob("*") if path.is_file() and "__pycache__" not in path.parts)
+        included.extend(
+            path for path in directory.rglob("*")
+            if path.is_file()
+            and "__pycache__" not in path.parts
+            and path.suffix not in (".pyc", ".pyo")
+        )
     included.extend(path for path in (root / "pyproject.toml", root / "requirements-runpod.txt") if path.exists())
     for path in sorted(included):
         relative = str(path.relative_to(root))

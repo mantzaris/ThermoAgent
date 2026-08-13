@@ -14,7 +14,7 @@ Last updated: 2026-08-13 America/New_York
   strong communication controls; five-seed training runner; validation and
   1,296-episode holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
-  128 passing tests; 8/8 v2 preflight replays.
+  129 passing tests; 8/8 v2 preflight replays.
 - **Active work:** deploy the clean committed branch without touching frozen-v1
   results, run v2-only setup, and launch the eight-episode real-Qwen profile.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.

@@ -26,7 +26,11 @@ from thermoagent.policy import CoordinationPolicy
 from thermoagent.doet_analysis import _comparison_rows, _frontier_rows
 from thermoagent.doet_ablations import run as design_doet_ablations
 from thermoagent.doet_holdout import run as design_doet_holdout
-from thermoagent.experiments import capture_source_provenance, expand_matrix
+from thermoagent.experiments import (
+    capture_source_provenance,
+    expand_matrix,
+    source_checksum,
+)
 from thermoagent.types import CoordinationOption
 
 
@@ -476,6 +480,19 @@ def test_filtered_deployment_provenance_records_branch_and_source(tmp_path):
     assert record["branch"]
     assert len(record["source_checksum"]) == 64
     assert "credentials" in record["security_note"]
+
+
+def test_source_checksum_ignores_python_bytecode(tmp_path):
+    package = tmp_path / "thermoagent"
+    package.mkdir()
+    (package / "module.py").write_text("VALUE = 1\n", encoding="utf-8")
+    source_checksum.cache_clear()
+    before = source_checksum(tmp_path)
+    (package / "module.pyc").write_bytes(b"ignored bytecode")
+    (package / "__pycache__").mkdir()
+    (package / "__pycache__" / "module.pyc").write_bytes(b"also ignored")
+    source_checksum.cache_clear()
+    assert source_checksum(tmp_path) == before
 
 
 def test_real_llm_profile_is_small_and_seed_separated():

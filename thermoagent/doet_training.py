@@ -243,6 +243,16 @@ def run(
                     "planner": metadata.get("planner"),
                     "training_method": metadata.get("training_method"),
                     "checkpoint_generated_at": metadata.get("generated_at"),
+                    "trigger_normalizer_path": (
+                        (metadata.get("trigger_normalizer_source") or {}).get(
+                            "path", ""
+                        )
+                    ),
+                    "trigger_normalizer_sha256": (
+                        (metadata.get("trigger_normalizer_source") or {}).get(
+                            "sha256", ""
+                        )
+                    ),
                 })
             except Exception as error:
                 row.update({
@@ -268,6 +278,9 @@ def run(
         "rl_training_seed": row["rl_training_seed"],
         "checkpoint": row["checkpoint"],
         "checkpoint_sha256": row.get("checkpoint_sha256", ""),
+        "trigger_normalizer_sha256": row.get(
+            "trigger_normalizer_sha256", ""
+        ),
         "status": row["status"],
         "selection_rule": row["checkpoint_selection_rule"],
     } for row in rows]

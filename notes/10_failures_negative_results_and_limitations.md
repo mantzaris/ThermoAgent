@@ -211,3 +211,14 @@ no private operational field was added.
    separately documented presentation-only save wrapper regenerated the three
    affected PDFs, after which all ten opened, exposed fonts, rendered, and
    passed original-resolution manual inspection.
+
+## Entropy-triggered v2 pre-holdout issues
+
+1. While the 144-episode real-LLM validation remained outcome-sealed, a source
+   audit found that the staged DOET-RL trainer would read selected trigger
+   parameters but silently omit the selected application/role normalizers.
+   The automatic training watcher was stopped before it launched; validation
+   was neither changed nor inspected. No checkpoint or training trajectory was
+   produced under the faulty path. Training now resolves and checksums the
+   referenced calibration fail-closed, and missing calibration is a tested
+   error rather than a fallback to generic normalization.

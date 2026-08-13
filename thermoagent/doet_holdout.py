@@ -67,7 +67,10 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _checkpoint_maps(results_root: Path) -> Dict[str, Dict[str, str]]:
+def _checkpoint_maps(
+    results_root: Path,
+    expected_doet_normalizer_sha256: str,
+) -> Dict[str, Dict[str, str]]:
     training_path = results_root / "training" / "seed_manifest.csv"
     if not training_path.exists():
         raise FileNotFoundError(training_path)
@@ -97,6 +100,15 @@ def _checkpoint_maps(results_root: Path) -> Dict[str, Dict[str, str]]:
             observed = sha256_file(checkpoint)
             if observed != row["checkpoint_sha256"]:
                 raise ValueError("checkpoint checksum changed: %s" % checkpoint)
+            if (
+                variant == "doet_rl"
+                and row.get("trigger_normalizer_sha256")
+                != expected_doet_normalizer_sha256
+            ):
+                raise ValueError(
+                    "DOET-RL seed %d was not trained with the selected nominal "
+                    "normalizers" % seed
+                )
             output[variant][str(seed)] = str(
                 Path("results/entropy_triggered_v2") / relative
             )
@@ -268,7 +280,26 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         raise ValueError("validation contains failed episodes")
     selected_trigger = dict(selection["selected_trigger"])
     trigger_parameters = dict(selected_trigger["parameters"])
-    checkpoints = _checkpoint_maps(results_root)
+    configured_normalizers = selected_trigger.get("normalizers_path")
+    if not configured_normalizers:
+        raise ValueError(
+            "validation-selected trigger lacks a nominal-normalizer path"
+        )
+    configured_path = Path(str(configured_normalizers))
+    candidates = [configured_path] if configured_path.is_absolute() else [
+        Path.cwd() / configured_path,
+        *(parent / configured_path for parent in results_root.resolve().parents),
+    ]
+    selected_normalizers_path = next(
+        (candidate for candidate in candidates if candidate.is_file()),
+        candidates[0],
+    ).resolve()
+    if not selected_normalizers_path.is_file():
+        raise FileNotFoundError(selected_normalizers_path)
+    selected_normalizers_sha256 = sha256_file(selected_normalizers_path)
+    checkpoints = _checkpoint_maps(
+        results_root, selected_normalizers_sha256
+    )
 
     # Select the largest prospectively defined common secondary subset whose
     # conservative projection fits the hard 35-hour cap. Four priority methods
@@ -349,7 +380,7 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
             },
         },
         "trigger": {
-            "normalizers_path": "results/entropy_triggered_v2/calibration/trigger_nominal_calibration.json",
+            "normalizers_path": str(configured_normalizers),
             "normalizers_key": "normalizers",
             "parameters": trigger_parameters,
         },
@@ -529,6 +560,8 @@ def run(results_root: Path, config_path: Path) -> Dict[str, Any]:
         "learned_assignment_counts": learned_counts,
         "selected_trigger_variant": selection["selected_method_variant"],
         "selected_trigger_checksum": sha256_file(selection_path),
+        "selected_trigger_normalizers_path": str(configured_normalizers),
+        "selected_trigger_normalizers_sha256": selected_normalizers_sha256,
         "validation_pairs_checksum": sha256_file(pairs_path),
         "config_path": str(config_path),
         "config_checksum": sha256_file(config_path),

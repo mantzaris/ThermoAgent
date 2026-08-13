@@ -89,6 +89,11 @@ be included in accounting.
   manifest seed is therefore the seed actually applied at model load.
 - Restartable, outcome-sealed v2 job controls; a health command exposes only
   process/completion counts during holdout.
+- Restart acceptance verifies both published episode and compressed-ledger
+  checksums against the immutable manifest. An unreadable or changed artifact
+  is retained as a failed row and is never silently rerun. Holdout freeze also
+  requires 144/144 validation completions, 144/144 exact validation replays,
+  and 15/15 completed fixed-budget training runs.
 - Episode-paired non-inferiority and communication analysis with 10,000
   hierarchical bootstrap replicates, explicit training-seed resampling,
   preregistered Holm tests, multi-cost Pareto hypervolume, partition/consensus
@@ -109,7 +114,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 139/139 passing. New tests cover trigger
+The current complete suite is 142/142 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -167,6 +172,18 @@ it starts the fixed-budget fifteen-checkpoint training command after exit zero
 and otherwise writes a skip record. It does not inspect or select on validation
 outcomes. This makes the CPU-bound training handoff robust to SSH loss without
 broadening the authorized experiment.
+
+Before that watcher could launch training, a source audit found that
+`train_policy` unwrapped the selected trigger's parameters but did not resolve
+its repository-relative `normalizers_path`. Consequently DOET-RL training would
+have used the generic trigger center/scale while validation and holdout used the
+application- and role-conditioned nominal calibration. No checkpoint had begun
+and no validation outcome was inspected. The watcher alone was stopped;
+validation remains on its immutable source. Training now resolves the selected
+normalizer key fail-closed, records the calibration path and checksum in each
+checkpoint, and has positive and missing-file tests. The full suite passes
+142/142. This correction changes only the not-yet-run training stage, so the
+validation-to-holdout simulator-equivalence gate remains applicable.
 
 ## Filtered remote execution sequence
 

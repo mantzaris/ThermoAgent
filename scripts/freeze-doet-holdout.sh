@@ -33,6 +33,7 @@ required=(
   results/entropy_triggered_v2/training/training_attempts.csv
   results/entropy_triggered_v2/training/checkpoint_selection.csv
   results/entropy_triggered_v2/training/training_manifest.json
+  results/entropy_triggered_v2/reproducibility/validation_replay_report.json
   results/entropy_triggered_v2/reproducibility/execution_source.json
   results/entropy_triggered_v2/reproducibility/source_transition_equivalence.json
 )
@@ -42,6 +43,42 @@ for path in "${required[@]}"; do
     exit 2
   }
 done
+"$python_bin" - \
+  results/entropy_triggered_v2/manifests/validation_sweep.json \
+  results/entropy_triggered_v2/reproducibility/validation_replay_report.json \
+  results/entropy_triggered_v2/training/training_manifest.json <<'PY'
+import json
+import sys
+from pathlib import Path
+
+validation = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+replay = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+training = json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
+planned = int(validation.get("episodes_planned", -1))
+complete = int(validation.get("episodes_complete", -1))
+failed = int(validation.get("episodes_failed", -1))
+if planned != 144 or complete != planned or failed != 0:
+    raise SystemExit(
+        "Cannot freeze: validation must complete all 144 episodes without failure"
+    )
+if (
+    int(replay.get("episodes_checked", -1)) != planned
+    or int(replay.get("episodes_passed", -1)) != planned
+    or any(not row.get("replay_passed") for row in replay.get("records", []))
+):
+    raise SystemExit(
+        "Cannot freeze: every validation event ledger must replay exactly"
+    )
+if (
+    training.get("status") != "complete"
+    or int(training.get("planned_trainings", -1)) != 15
+    or int(training.get("completed_trainings", -1)) != 15
+    or int(training.get("failed_trainings", -1)) != 0
+):
+    raise SystemExit(
+        "Cannot freeze: all fifteen fixed-budget training runs must complete"
+    )
+PY
 "$python_bin" - results/entropy_triggered_v2/reproducibility/execution_source.json <<'PY'
 import json
 import sys

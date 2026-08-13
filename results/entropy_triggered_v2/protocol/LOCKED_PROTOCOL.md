@@ -48,6 +48,13 @@ freeze record exists and verifies.
 Thresholds, budget-matched controls, and operating points come only from the
 separate validation set.
 
+Freeze requires all 144 validation episodes to complete without failure and
+all 144 event ledgers to replay exactly. It also requires all fifteen fixed-
+budget training runs and rejects any DOET-RL checkpoint whose recorded nominal-
+normalizer checksum differs from the validation-selected calibration. A resumed
+episode is accepted only when both its episode and compressed event ledger match
+the manifest checksums; otherwise it is retained as a failure without rerun.
+
 Before freeze, a 20,000-replicate fixed-seed stratified Monte Carlo precision
 analysis and measured throughput must show that validation, all fifteen
 training runs, the measured real-Qwen profile and model smoke, a 0.1-hour

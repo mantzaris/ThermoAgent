@@ -36,6 +36,7 @@ from thermoagent.doet_ablations import run as design_doet_ablations
 from thermoagent.doet_holdout import run as design_doet_holdout
 from thermoagent.doet_reporting import _readiness
 from thermoagent.experiments import (
+    _load_training_trigger_settings,
     capture_source_provenance,
     expand_matrix,
     source_checksum,
@@ -590,6 +591,68 @@ def test_filtered_deployment_provenance_records_branch_and_source(tmp_path):
     assert "credentials" in record["security_note"]
 
 
+def test_doet_training_resolves_selected_nominal_normalizers(tmp_path, monkeypatch):
+    normalizers = tmp_path / "results" / "calibration" / "normalizers.json"
+    normalizers.parent.mkdir(parents=True)
+    normalizers.write_text(
+        json.dumps({
+            "normalizers": {
+                "applications": {
+                    "commercial": {
+                        "default": {"center": 0.61, "scale": 0.07}
+                    }
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+    selected = tmp_path / "results" / "protocol" / "selected.json"
+    selected.parent.mkdir(parents=True)
+    selected.write_text(
+        json.dumps({
+            "trigger": {
+                "normalizers_path": "results/calibration/normalizers.json",
+                "normalizers_key": "normalizers",
+                "parameters": {"direction": "low", "tau_on": 1.5},
+            }
+        }),
+        encoding="utf-8",
+    )
+    monkeypatch.chdir(tmp_path)
+    record, parameters, resolved, resolved_path = (
+        _load_training_trigger_settings(selected)
+    )
+    assert record["normalizers_key"] == "normalizers"
+    assert parameters == {"direction": "low", "tau_on": 1.5}
+    assert resolved == {
+        "applications": {
+            "commercial": {
+                "default": {"center": 0.61, "scale": 0.07}
+            }
+        }
+    }
+    assert resolved_path == normalizers.resolve()
+
+
+def test_doet_training_fails_closed_when_selected_normalizers_are_missing(
+    tmp_path, monkeypatch
+):
+    selected = tmp_path / "selected.json"
+    selected.write_text(
+        json.dumps({
+            "trigger": {
+                "normalizers_path": "missing.json",
+                "normalizers_key": "normalizers",
+                "parameters": {"direction": "low"},
+            }
+        }),
+        encoding="utf-8",
+    )
+    monkeypatch.chdir(tmp_path)
+    with pytest.raises(FileNotFoundError, match="normalizers are missing"):
+        _load_training_trigger_settings(selected)
+
+
 def test_source_checksum_ignores_python_bytecode(tmp_path):
     package = tmp_path / "thermoagent"
     package.mkdir()
@@ -814,7 +877,20 @@ def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_pat
         "validation", "manifests", "training", "checkpoints", "protocol",
     ):
         (root / directory).mkdir(parents=True, exist_ok=True)
+    selected_normalizers = root / "calibration" / "normalizers.json"
+    selected_normalizers.parent.mkdir(parents=True)
+    selected_normalizers.write_text(
+        json.dumps({"normalizers": {"default": {
+            "center": 0.5, "scale": 0.1,
+        }}}),
+        encoding="utf-8",
+    )
+    selected_normalizers_sha256 = hashlib.sha256(
+        selected_normalizers.read_bytes()
+    ).hexdigest()
     trigger = {
+        "normalizers_path": str(selected_normalizers),
+        "normalizers_key": "normalizers",
         "parameters": {
             "trigger_type": "cusum", "direction": "low", "rho": 0.8,
             "kappa": 0.15, "tau_on": 1.5, "tau_off": 0.5,
@@ -890,6 +966,10 @@ def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_pat
                 "checkpoint_sha256": hashlib.sha256(
                     checkpoint.read_bytes()
                 ).hexdigest(),
+                "trigger_normalizer_sha256": (
+                    selected_normalizers_sha256
+                    if variant == "doet_rl" else ""
+                ),
             })
     pd.DataFrame(seed_rows).to_csv(
         root / "training" / "seed_manifest.csv", index=False

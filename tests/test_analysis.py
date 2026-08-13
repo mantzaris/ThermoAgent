@@ -15,6 +15,7 @@ from thermoagent.analysis import (
     sign_flip_pvalue,
 )
 from thermoagent.experiments import (
+    _published_output_matches,
     _recover_published_staging,
     expand_matrix,
     freeze_protocol,
@@ -239,6 +240,23 @@ def test_checksum_backed_staging_publish_recovers_without_rerun(tmp_path: Path):
     assert _recover_published_staging(staging_root, output, run_id, manifest)
     assert output.joinpath("episode.json").read_bytes() == b"episode"
     assert not candidate.exists()
+
+
+def test_resumed_published_episode_requires_both_manifest_checksums(tmp_path: Path):
+    import hashlib
+
+    output = tmp_path / "episode"
+    output.mkdir()
+    (output / "episode.json").write_bytes(b"episode")
+    (output / "events.jsonl.gz").write_bytes(b"events")
+    manifest = {"output_checksums": {
+        "episode.json": hashlib.sha256(b"episode").hexdigest(),
+        "events.jsonl.gz": hashlib.sha256(b"events").hexdigest(),
+    }}
+    assert _published_output_matches(output, manifest)
+    (output / "events.jsonl.gz").write_bytes(b"tampered")
+    assert not _published_output_matches(output, manifest)
+    assert not _published_output_matches(output, {"output_checksums": {}})
 
 
 def test_protocol_verification_fails_closed_after_frozen_file_changes(tmp_path: Path):

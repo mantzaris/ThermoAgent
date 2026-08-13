@@ -258,6 +258,12 @@ The provenance record is recaptured and the resume controls are synchronized.
 checkpoints, runs the full tests, and writes a non-overwritable freeze over the
 selected trigger, budget matches, calibration, validation inputs, design,
 precision analysis, checkpoints, protocol note, and source checksum.
+It additionally rejects fewer than 144 complete validation episodes, any
+validation failure, any validation replay mismatch, an incomplete fifteen-run
+training matrix, or a DOET-RL checkpoint whose recorded nominal-normalizer
+checksum differs from the selected calibration. Published rows accepted on a
+restart must match both manifest-backed episode and event-ledger checksums;
+changed or unreadable rows are retained as failures without selective rerun.
 
 During the holdout, `doet-job-status.sh` reports only job/process health and
 counts of manifests/published directories. It intentionally displays no

@@ -54,6 +54,13 @@ Next stages on the connected Pod:
 4. train five independent seeds for each learned method;
 5. generate, inspect, checksum-freeze, and launch the genuinely unseen holdout.
 
+The automatic training handoff was stopped before validation completion after
+a pre-training audit found that the DOET-RL trainer did not resolve the
+validation-selected nominal-normalizer file. No training attempt existed and
+no validation outcome was inspected. The active validation was left untouched.
+The correction is covered by two fail-closed tests and will be deployed only
+after validation artifacts are complete and retrieved.
+
 The restartable commands and outcome-seal boundary are now implemented. The
 stale direct endpoint `213.173.109.33:19465` returned `Connection refused` on
 all three attempts on 2026-08-13. The user-supplied `ssh.runpod.io` proxy then

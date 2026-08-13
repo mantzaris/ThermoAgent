@@ -72,6 +72,62 @@ def load_yaml(path: Path) -> Dict[str, Any]:
     return value
 
 
+def _load_training_trigger_settings(
+    trigger_config_path: Optional[Path],
+) -> Tuple[Dict[str, Any], Dict[str, Any], Optional[Mapping[str, Any]], Optional[Path]]:
+    """Resolve the validation-selected trigger exactly as evaluation does.
+
+    The selected-trigger artifact references nominal normalizers by repository-
+    relative path. Training must not silently substitute the generic
+    ``TriggerConfig`` center and scale, because that changes the trigger modes
+    and therefore the DOET-RL actor's execution-time action masks.
+    """
+
+    trigger_record: Dict[str, Any] = {}
+    if trigger_config_path is not None:
+        trigger_record = load_yaml(trigger_config_path)
+        if "trigger" in trigger_record and "parameters" not in trigger_record:
+            trigger_record = dict(trigger_record["trigger"])
+    trigger_parameters = dict(trigger_record.get("parameters", {}))
+    trigger_normalizers = trigger_record.get("normalizers")
+    normalizers_path: Optional[Path] = None
+    configured_path = trigger_record.get("normalizers_path")
+    if trigger_normalizers is None and configured_path:
+        configured = Path(str(configured_path))
+        candidates = [configured] if configured.is_absolute() else [
+            Path.cwd() / configured,
+            *(
+                parent / configured
+                for parent in trigger_config_path.resolve().parents
+            ),
+        ]
+        normalizers_path = next(
+            (candidate for candidate in candidates if candidate.is_file()),
+            candidates[0],
+        ).resolve()
+        if not normalizers_path.is_file():
+            raise FileNotFoundError(
+                "selected trigger normalizers are missing: %s"
+                % normalizers_path
+            )
+        normalizer_record = load_yaml(normalizers_path)
+        normalizer_key = str(trigger_record.get(
+            "normalizers_key", "normalizers"
+        ))
+        if normalizer_key not in normalizer_record:
+            raise ValueError(
+                "selected trigger calibration %s has no %s field"
+                % (normalizers_path, normalizer_key)
+            )
+        trigger_normalizers = normalizer_record[normalizer_key]
+    return (
+        trigger_record,
+        trigger_parameters,
+        trigger_normalizers,
+        normalizers_path,
+    )
+
+
 def _resolved_trigger_settings(
     config: Mapping[str, Any],
     scenario_values: Mapping[str, Any],
@@ -420,6 +476,23 @@ def _recover_published_staging(
     return True
 
 
+def _published_output_matches(
+    output_dir: Path,
+    manifest: Mapping[str, Any],
+) -> bool:
+    """Verify both immutable episode files before accepting a resumed row."""
+
+    expected = dict(manifest.get("output_checksums", {}))
+    required = ("episode.json", "events.jsonl.gz")
+    if any(not expected.get(name) for name in required):
+        return False
+    return all(
+        (output_dir / name).is_file()
+        and sha256_file(output_dir / name) == expected[name]
+        for name in required
+    )
+
+
 def _episode_manifest(
     root: Path,
     result: Any,
@@ -649,7 +722,33 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 })
                 continue
         if episode_path.exists():
-            existing = json.loads(episode_path.read_text(encoding="utf-8"))
+            try:
+                existing = json.loads(
+                    episode_path.read_text(encoding="utf-8")
+                )
+            except (OSError, ValueError) as error:
+                summaries.append({
+                    "run_id": run_id,
+                    "application": application,
+                    "method": method,
+                    "method_variant": method_variant,
+                    "scenario_name": scenario_values["name"],
+                    "seed": seed,
+                    "rl_training_seed": rl_seed,
+                    "n_agents": n_agents,
+                    "status": "failed",
+                    "error": (
+                        "published episode is unreadable (%s); retained "
+                        "without rerun" % type(error).__name__
+                    ),
+                    "wall_clock_seconds": 0.0,
+                    "resumed": True,
+                    "manifest": (
+                        str(existing_manifest_path.relative_to(results_root))
+                        if existing_manifest_path.exists() else ""
+                    ),
+                })
+                continue
             if (
                 existing.get("completion_status") == "complete"
                 and not existing_manifest_path.exists()
@@ -670,6 +769,33 @@ def run_matrix(config_path: Path, root: Path, results_root: Path, limit: Optiona
                 })
                 continue
             if existing.get("completion_status") == "complete":
+                existing_manifest = json.loads(
+                    existing_manifest_path.read_text(encoding="utf-8")
+                )
+                if not _published_output_matches(output_dir, existing_manifest):
+                    summaries.append({
+                        "run_id": run_id,
+                        "application": application,
+                        "method": method,
+                        "method_variant": method_variant,
+                        "scenario_name": scenario_values["name"],
+                        "seed": seed,
+                        "rl_training_seed": rl_seed,
+                        "n_agents": n_agents,
+                        "status": "failed",
+                        "error": (
+                            "published episode checksum mismatch; retained "
+                            "without rerun"
+                        ),
+                        "wall_clock_seconds": existing.get(
+                            "wall_clock_seconds", 0.0
+                        ),
+                        "resumed": True,
+                        "manifest": str(
+                            existing_manifest_path.relative_to(results_root)
+                        ),
+                    })
+                    continue
                 summaries.append({
                     "run_id": run_id,
                     "application": application,
@@ -1138,13 +1264,12 @@ def train_policy(
         "no_entropy": Method.LEARNED_NO_ENTROPY.value,
         "doet_rl": Method.DOET_RL.value,
     }[variant]
-    trigger_record: Dict[str, Any] = {}
-    if trigger_config_path is not None:
-        trigger_record = load_yaml(trigger_config_path)
-        if "trigger" in trigger_record and "parameters" not in trigger_record:
-            trigger_record = dict(trigger_record["trigger"])
-    trigger_parameters = dict(trigger_record.get("parameters", {}))
-    trigger_normalizers = trigger_record.get("normalizers")
+    (
+        trigger_record,
+        trigger_parameters,
+        trigger_normalizers,
+        trigger_normalizers_path,
+    ) = _load_training_trigger_settings(trigger_config_path)
     scenarios = [
         ("nominal", "reliable", 0.0, 0.0),
         ("moderate", "reliable", 0.5, 0.5),
@@ -1249,6 +1374,21 @@ def train_policy(
         "planner": "deterministic mock-v2",
         "training_method": "PPO, staged planner training",
         "trigger_configuration": trigger_record if variant == "doet_rl" else None,
+        "trigger_normalizer_source": (
+            {
+                "path": str(trigger_normalizers_path),
+                "sha256": sha256_file(trigger_normalizers_path),
+                "key": str(trigger_record.get(
+                    "normalizers_key", "normalizers"
+                )),
+            }
+            if variant == "doet_rl" and trigger_normalizers_path is not None
+            else (
+                {"embedded": True}
+                if variant == "doet_rl" and trigger_normalizers is not None
+                else None
+            )
+        ),
         "offline_initialization": {
             "method": "behavior cloning from scripted local-observation trajectories",
             "demonstration_episodes": demonstration_episodes,

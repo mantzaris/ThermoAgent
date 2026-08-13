@@ -4,7 +4,7 @@
 
 Last updated: 2026-08-13 America/New_York
 
-- **Current phase:** The isolated RunPod setup, 139-test prevalidation verification, and
+- **Current phase:** The isolated RunPod setup, 142-test pretraining verification, and
   eight-episode real-Qwen profile are complete. The measured rate ruled out the
   preferred design; the prospectively reduced 144-episode validation and
   696/656/616-episode runtime-capped locked-holdout ladder are being verified.
@@ -15,23 +15,25 @@ Last updated: 2026-08-13 America/New_York
   strong communication controls; five-seed training runner; validation and
   compute-capped holdout generators; hierarchical locked analysis; filtered
   deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
-  139 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
+  142 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
   writers and full-resolution QA of the existing v2 diagnostic figures; and a
   development-only correction of a structurally impossible H4 lead-time rule.
 - **Active work:** the documented 144-episode real-Qwen validation is running
   in detached `tmux` on the exact checksum-matched source.
   No real-LLM v2 treatment outcome has begun, so no v2 performance claim exists.
-- **Active jobs:** `doet-validation` plus a health-only `doet-training-watcher`
-  that launches the fixed five-seed trainer only after validation, automatic
-  trigger selection, and replay exit zero. Retained `doet-setup` exited 2 before
+- **Active jobs:** `doet-validation` only. The automatic training watcher was
+  deliberately stopped before validation finished after a code audit found
+  that staged DOET-RL training did not resolve the validation-selected role/
+  application nominal-normalizer file. Validation itself was not stopped or
+  inspected. Retained `doet-setup` exited 2 before
   testing or model inference; `doet-setup-v2`, `doet-profile`, and the corrected
   prevalidation test job exited 0. A malformed quoted test launcher exited 127
   without starting an experiment and remains in the audit log.
 - **Blockers:** none. The stale direct alias still refuses port 19465, but the
   user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
   locally configured RSA key. The requested Ed25519 path was absent.
-- **Next actions:** execute the 144-episode validation, train all 15
-  checkpoints, fetch and commit
+- **Next actions:** complete and fetch the 144-episode validation, deploy the
+  tested normalizer-resolution correction, train all 15 checkpoints, and commit
   the validation-selected protocol, perform measured precision/budget analysis,
   freeze, and run the largest preregistered outcome-sealed holdout that remains
   within the 35-hour cap.

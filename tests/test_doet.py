@@ -84,6 +84,29 @@ def test_agents_have_independent_trigger_state_and_no_global_input():
         )
 
 
+def test_private_trigger_state_retains_local_change_calibration_and_coordination_age():
+    trigger = DistributedEntropyTrigger(
+        ["a"],
+        _config(direction="high"),
+        normalizers={"a": {"center": 0.55, "scale": 0.2}},
+    )
+    trigger.update("a", 0, 0.7, 0.1, 0.25, 0.8)
+    state = trigger.states["a"]
+    assert state.entropy_change == pytest.approx(0.0)
+    assert state.nominal_center == pytest.approx(0.55)
+    assert state.nominal_variance == pytest.approx(0.04)
+    assert state.consensus_confidence == pytest.approx(0.75)
+    assert state.communication_availability == pytest.approx(0.8)
+    assert state.time_since_last_coordination == -1
+
+    trigger.record_coordination("a", 0)
+    trigger.update("a", 1, 0.6, 0.1, 0.1, 0.7)
+    state = trigger.states["a"]
+    assert state.entropy_change == pytest.approx(-0.1)
+    assert state.last_coordination_step == 0
+    assert state.time_since_last_coordination == 1
+
+
 def test_cusum_hysteresis_enforces_dwell_and_deactivation_threshold():
     trigger = DistributedEntropyTrigger(["a"], _config(direction="high"))
     first = trigger.update("a", 0, 0.8, 0.0, 0.0, 1.0)
@@ -244,6 +267,18 @@ def test_doet_runner_counts_sparse_sketches_and_explicit_alerts_only():
         for event in trigger_events
     )
     assert all("global_entropy" not in event.payload for event in trigger_events)
+    local_states = [
+        event for event in runner.env.ledger.events
+        if event.kind == "trigger_local_state"
+    ]
+    assert len(local_states) == len(trigger_events)
+    assert all(event.private_to == event.actor for event in local_states)
+    assert all(
+        "entropy_change" in event.payload
+        and "nominal_variance" in event.payload
+        and "time_since_last_coordination" in event.payload
+        for event in local_states
+    )
     alert_messages = [
         event for event in runner.env.ledger.events
         if event.kind == "message" and event.payload.get("kind") == "entropy_alert"

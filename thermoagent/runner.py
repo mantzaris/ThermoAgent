@@ -673,6 +673,13 @@ class EpisodeRunner:
                     row,
                     private_to=agent_id,
                 )
+                self.env.ledger.append(
+                    self.env.step_index,
+                    "trigger_local_state",
+                    agent_id,
+                    self.trigger.states[agent_id].as_dict(),
+                    private_to=agent_id,
+                )
                 if decision.activated:
                     activated.append(agent_id)
 
@@ -1360,6 +1367,20 @@ class EpisodeRunner:
                 agent_id
             )
             mode = int(self._communication_mode(agent_id))
+            if self.trigger is not None and mode > int(CommunicationMode.QUIET):
+                self.trigger.record_coordination(agent_id, self.env.step_index)
+                self.env.ledger.append(
+                    self.env.step_index,
+                    "coordination_activity",
+                    agent_id,
+                    {
+                        "mode": mode,
+                        "last_coordination_step": self.trigger.states[
+                            agent_id
+                        ].last_coordination_step,
+                    },
+                    private_to=agent_id,
+                )
             context["communication_mode"] = {
                 "value": mode,
                 "name": CommunicationMode(mode).name.lower(),

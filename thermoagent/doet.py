@@ -118,8 +118,15 @@ class AgentTriggerState:
     cumulative_statistic: float = 0.0
     standardized_residual: float = 0.0
     trigger_residual: float = 0.0
+    entropy_change: float = 0.0
+    nominal_center: float = 0.5
+    nominal_variance: float = 0.01
+    consensus_confidence: float = 1.0
+    communication_availability: float = 1.0
     last_entropy: Optional[float] = None
     last_step: int = -1
+    last_coordination_step: int = -1
+    time_since_last_coordination: int = -1
     mode_since_step: int = 0
     last_activation_step: int = -1
     last_deactivation_step: int = -1
@@ -184,6 +191,18 @@ class DistributedEntropyTrigger:
             for row in self.normalizers.values()
         ):
             raise ValueError("all normalizers require finite center and positive scale")
+        for agent_id, state in self.states.items():
+            normalizer = self.normalizers.get(agent_id)
+            center = (
+                normalizer["center"] if normalizer is not None
+                else self.config.nominal_center
+            )
+            scale = (
+                normalizer["scale"] if normalizer is not None
+                else self.config.nominal_scale
+            )
+            state.nominal_center = float(center)
+            state.nominal_variance = float(scale) ** 2
 
     def _standardized(self, agent_id: str, entropy: float) -> float:
         normalizer = self.normalizers.get(agent_id)
@@ -306,6 +325,13 @@ class DistributedEntropyTrigger:
         state.cumulative_statistic = statistic
         state.standardized_residual = standardized
         state.trigger_residual = residual
+        state.entropy_change = change
+        state.consensus_confidence = confidence
+        state.communication_availability = float(communication_availability)
+        state.time_since_last_coordination = (
+            int(step) - state.last_coordination_step
+            if state.last_coordination_step >= 0 else -1
+        )
         state.last_entropy = float(entropy)
         state.last_step = int(step)
 
@@ -325,6 +351,17 @@ class DistributedEntropyTrigger:
             communication_availability=float(communication_availability),
             delivered_alerts=int(delivered_alerts),
         )
+
+    def record_coordination(self, agent_id: str, step: int) -> None:
+        """Record this agent's own intensive decision without changing mode."""
+
+        if agent_id not in self.states:
+            raise KeyError(agent_id)
+        state = self.states[agent_id]
+        if int(step) < state.last_step:
+            raise ValueError("coordination cannot precede the latest trigger update")
+        state.last_coordination_step = int(step)
+        state.time_since_last_coordination = 0
 
     def mode(self, agent_id: str) -> CommunicationMode:
         return CommunicationMode(self.states[agent_id].mode)

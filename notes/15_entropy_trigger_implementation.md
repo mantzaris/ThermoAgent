@@ -21,6 +21,11 @@ be included in accounting.
   consensus disagreement, and bounded neighbor-alert evidence.
 - Three modes: quiet (local planning and sparse sketching), targeted (bilateral
   information/negotiation), and crisis (coalition and accelerated planning).
+- Every private trigger state explicitly retains current entropy, recent
+  entropy change, its nominal center/variance, consensus confidence,
+  communication availability, and time since that agent's own last intensive
+  coordination event. These audit fields are private event-log state and are
+  not added to the frozen planner prompt or actor feature vector.
 - DOET-rule and DOET-RL. In DOET-RL the trigger masks expanded communication
   options; the actor still consumes exactly 24 private/local features and each
   LLM planner retains its own context and authority.
@@ -84,7 +89,7 @@ be included in accounting.
 
 ## Verification
 
-The current complete suite is 132/132 passing. New tests cover trigger
+The current complete suite is 133/133 passing. New tests cover trigger
 validation, per-agent state isolation, no global trigger input, dwell/cooldown,
 bounded alert propagation, mode cadence, route-information privacy, counted
 sketches and alerts, strong fixed communication, DOET-RL actor inputs, unseen
@@ -96,6 +101,9 @@ performs quiet local planning without activating communication.
 The eight-episode mock preflight completed with zero failures and maximum
 absolute material residual below `1.14e-13`; all eight ledgers replayed exactly.
 It is an engineering check only and supplies no research claim.
+After explicit private trigger-state logging was added, a fresh disposable
+eight-episode preflight again completed and replayed 8/8 with zero metric/tool
+mismatches and zero observed conservation residual.
 
 ## Deterministic artifact audit
 

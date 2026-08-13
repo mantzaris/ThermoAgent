@@ -24,6 +24,8 @@ EVENT_KINDS = {
     "public_signal",
     "macrostate_sketch",
     "coordination_trigger",
+    "trigger_local_state",
+    "coordination_activity",
     "trigger_alert_result",
     "offer",
     "counteroffer",

@@ -16,4 +16,3 @@ On test seeds 12405 and 12406:
 The cross-application rule failed. No validation seed was generated or opened,
 no operating point was selected on validation, and no margin was frozen. The
 `validation/NOT_RUN.json` record is deliberate absence, not lost data.
-

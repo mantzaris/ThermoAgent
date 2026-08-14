@@ -72,4 +72,3 @@ def test_dashboard_client_exposes_required_replay_controls_and_panels():
         "Explanation and bounded intervention",
     ):
         assert text in HTML
-

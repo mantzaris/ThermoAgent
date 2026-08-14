@@ -18,4 +18,3 @@ holdout design, or freeze. Consequently:
 The guarded commands raise while `holdout_unlocked=false`. Future work must
 create a new study version and genuinely unseen seeds; it may not unlock v3 by
 editing the gate record.
-

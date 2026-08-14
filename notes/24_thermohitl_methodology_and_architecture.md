@@ -33,4 +33,3 @@ scope and expiry are logged; authority is explicitly returned.
 
 Primary outcomes remain commercial service-loss AUC and humanitarian cumulative
 weighted unmet need. One complete episode is the outcome unit.
-

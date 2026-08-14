@@ -364,4 +364,3 @@ commercial same-information decision value without tuning on a new holdout,
 re-pass all gates, train at least five independent seeds, and complete fresh
 validation and sealed holdout evaluation. A real-human claim additionally
 requires separate institutional approval and participant evidence.
-

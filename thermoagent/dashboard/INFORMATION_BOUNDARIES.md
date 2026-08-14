@@ -27,4 +27,3 @@ The simulated operator may alter only a typed authority, information, priority,
 constraint, or feasibility record. Advisory directives preserve agent refusal;
 temporary emergency overrides are mandatory only for their recorded scope and
 duration, after which authority returns to the agents.
-

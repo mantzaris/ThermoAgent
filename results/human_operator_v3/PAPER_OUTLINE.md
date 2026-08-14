@@ -217,4 +217,3 @@ Figures: `thermodynamic_ablation.pdf`, `partition_robustness.pdf`, explicit
 | ThermoHITL improves a loss/effort Pareto frontier | no eligible main experiment | untested |
 | Robustness under partitions | abbreviated development diagnostic only | untested confirmatorily |
 | Actual human usability/workload benefit | no participants | untested |
-

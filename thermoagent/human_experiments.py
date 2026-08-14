@@ -556,7 +556,12 @@ def _write_dict_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
             if key not in fields:
                 fields.append(key)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fields,
+            extrasaction="ignore",
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 

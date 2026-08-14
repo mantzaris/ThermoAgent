@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-08-14T22:11:11.044478+00:00",
+  "created_at": "2026-08-14T22:18:36.327742+00:00",
   "decision": "fail_closed_stop_before_validation_and_holdout",
   "failed_or_incomplete_gates": [
     5
@@ -206,7 +206,7 @@
   ],
   "holdout_unlocked": false,
   "prospective_rule": "all six gates must pass before validation or holdout",
-  "source_checksum": "443705153100d9ca668d65532ae59bf312e0940f26007481e527404572bf9321",
+  "source_checksum": "a3288fd4d6227b1d56fd7db8af3383df9ae55df15d8eebf63e67d86630e54a65",
   "study": "thermohitl_v3",
   "validation_unlocked": false
 }

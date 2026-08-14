@@ -20,4 +20,3 @@ coarse sharing, priority adjustment, constraint relaxation, conflict resolution,
 temporary emergency override, and return of control. Tests cover advisory
 refusal, mandatory scope, duration, conservation, privacy injection, hash
 mutation, and autonomy transitions.
-

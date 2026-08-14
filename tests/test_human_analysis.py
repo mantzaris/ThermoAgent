@@ -56,4 +56,3 @@ def test_blocked_figure_is_explicit_vector_and_result_indexed(tmp_path: Path):
     index = build_index(tmp_path)
     indexed = pd.read_csv(index)
     assert any(indexed.artifact_path.str.endswith(name))
-

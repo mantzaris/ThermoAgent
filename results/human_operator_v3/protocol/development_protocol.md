@@ -20,4 +20,3 @@ The trigger candidate was `tau_on=1.5`, `tau_off=0.6`,
 
 Final disposition: gates 1–4 and 6 passed; Gate 5 failed commercially. The
 validation/holdout protocol was never frozen and no such outcome was opened.
-

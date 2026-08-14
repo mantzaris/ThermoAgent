@@ -8,4 +8,3 @@ export.
 
 This dashboard was engineering-tested with simulated operators. It has not been
 evaluated with human participants. See `../protocol/future_human_study_protocol.md`.
-

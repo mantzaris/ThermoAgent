@@ -1,6 +1,6 @@
 # ThermoHITL prospective protocol
 
-Status: **development protocol executed; closed by prospective no-go rule**  
+Status: **development protocol executed; closed by prospective no-go rule**
 Created: 2026-08-14 before any v3 outcome experiment
 
 ## Question

@@ -37,4 +37,3 @@
     "failure_reason": {"type": ["string", "null"]}
   }
 }
-

@@ -58,4 +58,3 @@ operator actions, view hashes, response timestamps, workload integration
 points, deterministic matched branches, SVG export, and the adjacent trial JSON
 schema and randomization specification. Questionnaire answers are schema slots
 only; no values have been fabricated.
-

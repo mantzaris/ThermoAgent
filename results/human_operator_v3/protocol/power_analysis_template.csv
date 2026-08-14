@@ -13,4 +13,3 @@ attrition_fraction,,predefine
 multiple_comparison_method,Holm,freeze family
 required_participants,,compute with fixed simulation seed
 power_simulation_seed,,record immutable seed
-

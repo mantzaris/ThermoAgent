@@ -20,4 +20,3 @@ The all-gates rule was recorded before expensive execution. Final results:
 
 Decision: `fail_closed_stop_before_validation_and_holdout`. The failure is a
 scientific no-go, not missing infrastructure.
-

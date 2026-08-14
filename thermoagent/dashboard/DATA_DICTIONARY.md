@@ -30,4 +30,3 @@ Never-present fields in normal views include raw private costs, exact private
 inventory/capacity, agent RNG state, future disruption labels, evaluator-global
 thermodynamic state, and counterfactual outcomes. Oracle-only fields use a
 separate explicitly privileged schema.
-

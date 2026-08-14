@@ -23,4 +23,3 @@ The final development trigger candidate used `tau_on=1.5`, `tau_off=0.6`,
 `actionable_tau_on=1.1`, dwell 2, cooldown 3. It activated timely in every final
 disrupted development episode with zero nominal or pre-disruption false
 activation. This timing result did not rescue the failed incremental-value gate.
-

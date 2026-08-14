@@ -21,4 +21,3 @@ The final trigger-development set averaged 7.33 requests, 3.97 completed
 interventions, and 38.2 simulated-operator minutes per disrupted episode. It was
 neither inactive nor always-on. Still, timing/actionability do not establish
 incremental thermodynamic information value.
-

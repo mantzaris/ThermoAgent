@@ -14,4 +14,3 @@ zero training seeds and zero checkpoints. `training/NOT_RUN.json`,
 for stable learning curves.
 
 V1/v2 checkpoints remain frozen antecedents and were not relabeled as v3 seeds.
-

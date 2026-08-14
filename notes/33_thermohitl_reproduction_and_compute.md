@@ -49,4 +49,3 @@ THERMO_HUMAN_REAL_STAGE=development_real_llm_actionability_retry1 \
 
 The initial projection was 0.172 hours per four-episode qualification including
 a 15% reserve. Total use remained far below the 40-hour cap.
-

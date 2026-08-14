@@ -1,0 +1,10 @@
+method,hard_operational_message_budget,fixed_broadcast_fanout,periodic_interval,random_gate_probability,entropy_sketches_counted,accounting,validation_target_counted_messages_per_episode,validation_predicted_messages_per_episode
+fixed_always_on,300,3.0,,,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+learned_no_entropy,300,,,,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+doet_rule,300,,,,True,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+doet_rl,300,,,,True,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+autonomous_no_comm,300,,,,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+periodic_communication,300,,6.0,,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,122.77229601518026
+random_budget_matched,300,,,0.363986839461523,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,119.16666666666666
+thermoagent,300,,,,True,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,
+kpi_cusum_trigger,300,,,,False,"all sketches, messages, bytes, prompt/generated tokens, LLM calls, and latency",119.16666666666667,

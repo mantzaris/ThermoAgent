@@ -1,0 +1,21 @@
+selected_method_variant,parameter,value,source
+hysteresis_low,cooldown,2,validation only
+hysteresis_low,crisis_decision_interval,2,validation only
+hysteresis_low,crisis_gossip_period,2,validation only
+hysteresis_low,crisis_gossip_rounds,1,validation only
+hysteresis_low,direction,low,validation only
+hysteresis_low,kappa,0.0,validation only
+hysteresis_low,max_alert_neighbors,2,validation only
+hysteresis_low,minimum_dwell,2,validation only
+hysteresis_low,propagation,neighbor,validation only
+hysteresis_low,quiet_decision_interval,8,validation only
+hysteresis_low,quiet_gossip_period,8,validation only
+hysteresis_low,quiet_gossip_rounds,1,validation only
+hysteresis_low,rho,0.6,validation only
+hysteresis_low,targeted_decision_interval,4,validation only
+hysteresis_low,targeted_gossip_period,4,validation only
+hysteresis_low,targeted_gossip_rounds,1,validation only
+hysteresis_low,tau_crisis,2.8,validation only
+hysteresis_low,tau_off,0.4,validation only
+hysteresis_low,tau_on,1.2,validation only
+hysteresis_low,trigger_type,hysteresis,validation only

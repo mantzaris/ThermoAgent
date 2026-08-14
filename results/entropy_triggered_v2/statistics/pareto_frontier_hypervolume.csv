@@ -1,0 +1,9 @@
+application,cost_metric,comparator_hypervolume,hypervolume_with_doet,doet_hypervolume_gain,doet_improves_frontier,normalization,comparators
+commercial,total_communication_messages,0.7592905669492911,0.7744518572718717,0.015161290322580623,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+commercial,prompt_tokens,0.19505060530508225,0.21765332838839235,0.0226027230833101,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+commercial,llm_calls,0.13215208726248262,0.16373869570498628,0.03158660844250366,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+commercial,llm_latency_seconds,0.195252015893822,0.22165295021021036,0.026400934316388375,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+humanitarian,total_communication_messages,1.0057031250000001,1.0103125000000002,0.004609375000000027,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+humanitarian,prompt_tokens,0.14453632614790268,0.16533717636741418,0.020800850219511502,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+humanitarian,llm_calls,0.10479545631513287,0.13477856442324102,0.029983108108108142,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched
+humanitarian,llm_latency_seconds,0.14372265885373434,0.16749681092829521,0.023774152074560878,True,"application-wise min-max; reference=(1.05,1.05)",kpi_cusum_trigger;learned_no_entropy;periodic_communication;random_budget_matched

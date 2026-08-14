@@ -1,0 +1,5 @@
+application,outcome,episodes,consensus_rmse_mean,slope_per_rmse,intercept,pearson_r,p_value_exploratory,slope_standard_error,interpretation
+commercial,relative_degradation,32,0.08200462225252333,-0.7429143232077637,0.06886702210420614,-0.19524229324512146,0.28423088687454695,0.6813413588608586,mechanistic exploratory; not a primary causal test
+commercial,trigger_activations,32,0.08200462225252333,,,,,,mechanistic exploratory; not a primary causal test
+humanitarian,relative_degradation,32,0.08584387186472862,-0.12057811471396777,0.011928515562257032,-0.10333596259312139,0.5735645117714991,0.21189715969850612,mechanistic exploratory; not a primary causal test
+humanitarian,trigger_activations,32,0.08584387186472862,,,,,,mechanistic exploratory; not a primary causal test

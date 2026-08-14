@@ -1,0 +1,18 @@
+{
+  "config_checksum": "135dce40023b328d6818099210657c178246e524ccd4c1bfbb6f47e4b4fa79ad",
+  "config_path": "results/entropy_triggered_v2/protocol/extended_ablation_config.yaml",
+  "cumulative_episode_single_gpu_hours": 2.4295069165869307,
+  "end_timestamp": "2026-08-14T17:14:31.602045+00:00",
+  "episodes_complete": 96,
+  "episodes_failed": 0,
+  "episodes_planned": 96,
+  "generated_tokens": 580029,
+  "llm_calls": 9046,
+  "model_loaded": true,
+  "planner_backend": "transformers",
+  "prompt_tokens": 16043512,
+  "source_checksum": "655cb19264b51a33b47273c28c990f07eb85a0f9caa54da2b8ab4d96509e06c9",
+  "stage": "ablations",
+  "start_timestamp": "2026-08-14T14:44:40.707725+00:00",
+  "wall_clock_seconds_including_model_load": 8990.89432213083
+}

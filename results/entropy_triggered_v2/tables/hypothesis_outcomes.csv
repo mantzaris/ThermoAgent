@@ -1,0 +1,7 @@
+hypothesis,outcome,criterion
+H1,supported,DOET-rule non-inferior to fixed in both applications after Holm correction
+H2,supported,message reduction CI excludes zero and mean reduction >=20% in both applications after Holm correction
+H3,unsupported,"DOET-rule is loss-message nondominated and strictly increases the frozen normalized frontier hypervolume for messages, prompt tokens, calls, and latency in both applications"
+H4,unsupported,">=75% first post-disruption activation before sustained severe collapse (service loss >=0.90 for three consecutive periods), severe collapse observed in every non-nominal episode, <=10% pre-disruption false activation, and <=10% nominal episode false activation"
+H5,unsupported,"non-inferior in partition and compound-partition regimes in both applications, with positive consensus-RMSE/degradation slope and Pearson r >=0.20 in each application"
+H6,supported,H1 and H2 supported in both applications

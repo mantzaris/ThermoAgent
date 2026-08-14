@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-08-14T19:58:50.945838+00:00",
+  "episodes_checked": 1,
+  "episodes_passed": 1,
+  "maximum_absolute_conservation_residual": 1.1368683772161603e-13,
+  "mismatches": 0,
+  "records": [
+    {
+      "conservation_error": 1.1368683772161603e-13,
+      "episode_path": "results/human_operator_v3/raw/development_harness_smoke/development_harness_smoke-commercial-thermohitl_rule-moderate-reliable-e10501-o40501-rnone/episode.json",
+      "manifest_path": "results/human_operator_v3/manifests/development_harness_smoke-commercial-thermohitl_rule-moderate-reliable-e10501-o40501-rnone.json",
+      "metric_mismatches": [],
+      "recorded_tool_calls": 58,
+      "replay_passed": true,
+      "run_id": "development_harness_smoke-commercial-thermohitl_rule-moderate-reliable-e10501-o40501-rnone",
+      "tool_or_intervention_mismatches": []
+    }
+  ],
+  "stages": [
+    "development_harness_smoke"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "template_not_executed",
+  "unit": "pseudonymous participant",
+  "conditions": ["local_kpi", "thermodynamic", "thermodynamic_disagreement"],
+  "blocking_factors": ["application", "disruption_regime", "scenario_difficulty"],
+  "design": "balanced Latin-square condition order with scenario-condition permutation",
+  "practice_seed_namespace": "human-study-practice-v1",
+  "confirmatory_seed_namespace": "human-study-confirmatory-v1",
+  "randomization_seed": null,
+  "constraint": "freeze seed and assignment manifest after IRB approval and before participant enrollment"
+}

@@ -1,0 +1,10 @@
+{
+  "complete": 1,
+  "created_at": "2026-08-14T19:58:45.343091+00:00",
+  "episodes": 1,
+  "failed": 0,
+  "planner_backend": "mock",
+  "source_checksum": "5075f7c7eebf43f616c959e247b9c33011813327f7f91a651352a4171a3a25a6",
+  "stage": "development_harness_smoke",
+  "summary_sha256": "4a237924d5acece1e0c4e926598ce862826e7a9c69f128f13b215f654358b80b"
+}

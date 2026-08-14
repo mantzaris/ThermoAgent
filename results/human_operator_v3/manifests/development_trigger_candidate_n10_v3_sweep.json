@@ -1,0 +1,10 @@
+{
+  "complete": 40,
+  "created_at": "2026-08-14T20:44:33.207017+00:00",
+  "episodes": 40,
+  "failed": 0,
+  "planner_backend": "mock",
+  "source_checksum": "4050d4c98cb57edc7e486b292d7280bab533b432c2b8c7de60ef79080372558b",
+  "stage": "development_trigger_candidate_n10_v3",
+  "summary_sha256": "62d32b1bd14ff3436d102fdcfbb4118110f52806d5cb03e2bacf9ea55d73b625"
+}

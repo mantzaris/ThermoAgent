@@ -1,0 +1,9 @@
+{
+  "branch": "thermodynamic-human-oversight",
+  "captured_at": "2026-08-14T22:11:09.744453+00:00",
+  "commit": "c0aa6fe6c98cbce0cdd5e40a0f720a98f5facbe6",
+  "deployment": "filtered rsync; Git metadata and credentials excluded",
+  "dirty": true,
+  "security_note": "No environment variables, remotes, credentials, SSH configuration, or tokens were read.",
+  "source_checksum": "443705153100d9ca668d65532ae59bf312e0940f26007481e527404572bf9321"
+}

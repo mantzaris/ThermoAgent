@@ -1,0 +1,7 @@
+condition,execution_boundary
+local_kpi,schema-limited authorized view
+entropy_only,schema-limited authorized view
+energy_only,schema-limited authorized view
+thermodynamic,schema-limited authorized view
+thermodynamic_plus_disagreement,schema-limited authorized view
+evaluator_global_oracle,privileged evaluator-only upper bound

@@ -1,0 +1,68 @@
+[
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000001",
+    "intervention_effect": 82.0491508687042,
+    "intervention_id": "HI000001",
+    "loss_with_intervention": 300.7315040569331,
+    "loss_without_intervention": 382.7806549256373,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "7c2ec215f3bb95fac0e8c0a5b12a99371670ceab78d6c6b1b1d4bc7692fa10e8",
+      "exogenous": "30bb6fa9f4753763a46f1ede2fb1a863a204612b1a47fe7356b29b52388a5554",
+      "initialization": "11bd0b25a9da6fa7d032c03a0566a1f5ad363af763ff99ed76d55a8c0c42aa3d",
+      "observation": "2e98c1e119477e20ce335ea3b04f32f24d3b73da6d022c6cab2f070fa4a21b8f"
+    },
+    "step": 13
+  },
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000002",
+    "intervention_effect": 41.61787727784224,
+    "intervention_id": "HI000002",
+    "loss_with_intervention": 308.91073817252015,
+    "loss_without_intervention": 350.5286154503624,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "7c2ec215f3bb95fac0e8c0a5b12a99371670ceab78d6c6b1b1d4bc7692fa10e8",
+      "exogenous": "2feb7e8d2fc9f013ee03162b8fb1c4a8011eb4a80ff9fa5effee670d1e610193",
+      "initialization": "11bd0b25a9da6fa7d032c03a0566a1f5ad363af763ff99ed76d55a8c0c42aa3d",
+      "observation": "2d684d7d1cda6eeeccb93b21ae8253e8c35a836925957f24b71f9b11b63a9fad"
+    },
+    "step": 14
+  },
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000003",
+    "intervention_effect": 82.0491508687042,
+    "intervention_id": "HI000003",
+    "loss_with_intervention": 243.90596948742376,
+    "loss_without_intervention": 325.95512035612796,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "a7c3804f0261888d1b3d86fea7676f19ac08a0b9184b5c34b7e302c17fc0e4e4",
+      "exogenous": "29e1d3a8fa035433ac528961061ead28649eee08576f2af4b10df09b99c28266",
+      "initialization": "11bd0b25a9da6fa7d032c03a0566a1f5ad363af763ff99ed76d55a8c0c42aa3d",
+      "observation": "07dbf30777ff7877bbbb6ae16609ed4a687e52debf8cdfe74a7490537623e4aa"
+    },
+    "step": 16
+  }
+]

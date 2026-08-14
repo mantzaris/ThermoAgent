@@ -1,0 +1,210 @@
+{
+  "figures": [
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "actionability_diagnostics.pdf",
+      "rendered": "reproducibility/pdf_qa/actionability_diagnostics-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "attention_allocation_heatmap.pdf",
+      "rendered": "reproducibility/pdf_qa/attention_allocation_heatmap-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "causal_intervention_effects.pdf",
+      "rendered": "reproducibility/pdf_qa/causal_intervention_effects-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "commercial_case_study.pdf",
+      "rendered": "reproducibility/pdf_qa/commercial_case_study-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "energy_entropy_phase_plane.pdf",
+      "rendered": "reproducibility/pdf_qa/energy_entropy_phase_plane-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "humanitarian_case_study.pdf",
+      "rendered": "reproducibility/pdf_qa/humanitarian_case_study-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "intervention_funnel.pdf",
+      "rendered": "reproducibility/pdf_qa/intervention_funnel-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "loss_operator_effort_pareto.pdf",
+      "rendered": "reproducibility/pdf_qa/loss_operator_effort_pareto-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "monitoring_incremental_value.pdf",
+      "rendered": "reproducibility/pdf_qa/monitoring_incremental_value-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "network_operator_sequence.pdf",
+      "rendered": "reproducibility/pdf_qa/network_operator_sequence-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "operator_dashboard_overview.pdf",
+      "rendered": "reproducibility/pdf_qa/operator_dashboard_overview-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "operator_view_incremental_value.pdf",
+      "rendered": "reproducibility/pdf_qa/operator_view_incremental_value-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "operator_workload_performance.pdf",
+      "rendered": "reproducibility/pdf_qa/operator_workload_performance-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "partition_robustness.pdf",
+      "rendered": "reproducibility/pdf_qa/partition_robustness-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "primary_effect_forest.pdf",
+      "rendered": "reproducibility/pdf_qa/primary_effect_forest-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "thermodynamic_ablation.pdf",
+      "rendered": "reproducibility/pdf_qa/thermodynamic_ablation-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "thermohitl_architecture.pdf",
+      "rendered": "reproducibility/pdf_qa/thermohitl_architecture-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "training_seed_curves.pdf",
+      "rendered": "reproducibility/pdf_qa/training_seed_curves-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "trigger_and_intervention_dynamics.pdf",
+      "rendered": "reproducibility/pdf_qa/trigger_and_intervention_dynamics-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "trigger_timing_and_false_alarms.pdf",
+      "rendered": "reproducibility/pdf_qa/trigger_timing_and_false_alarms-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "passed",
+      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
+      "visual_reviewer": "Codex visual inspection at original preview resolution"
+    }
+  ],
+  "pymupdf_available": false,
+  "tools": {
+    "pdffonts": "/usr/bin/pdffonts",
+    "pdfinfo": "/usr/bin/pdfinfo",
+    "pdftoppm": "/usr/bin/pdftoppm"
+  }
+}

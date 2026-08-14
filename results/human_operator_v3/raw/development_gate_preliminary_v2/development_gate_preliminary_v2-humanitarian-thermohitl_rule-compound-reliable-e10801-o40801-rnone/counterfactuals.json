@@ -1,0 +1,156 @@
+[
+  {
+    "agent_accepted": false,
+    "classification": "no_causal_benefit",
+    "common_randomness_verified": true,
+    "incident_id": "HA000001",
+    "intervention_effect": 0.0,
+    "intervention_id": "HI000001",
+    "loss_with_intervention": 765.1417417199714,
+    "loss_without_intervention": 765.1417417199714,
+    "material_action_accepted": false,
+    "material_reached_demand": false,
+    "material_reached_next_stage": false,
+    "primary_outcome_changed": false,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "ea4c36cc41aa65941fb09af10b6d8efd92d0f154176007d4511ea376da5ee30a",
+      "exogenous": "ccf4c31c05dd509c4cc8078ced7d4437a9102df64c0c4e4e7df781f1b5adee21",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "2b5e0f1a71218653a95a1ff8610a1df41eb96523eca3498fac11171239d63df7"
+    },
+    "step": 11
+  },
+  {
+    "agent_accepted": true,
+    "classification": "no_causal_benefit",
+    "common_randomness_verified": true,
+    "incident_id": "HA000004",
+    "intervention_effect": 0.0,
+    "intervention_id": "HI000002",
+    "loss_with_intervention": 1061.1291311437471,
+    "loss_without_intervention": 1061.1291311437471,
+    "material_action_accepted": false,
+    "material_reached_demand": false,
+    "material_reached_next_stage": false,
+    "primary_outcome_changed": false,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "2e1b2abc4e81c68dfd6bdb89ebc83d8f71b69e3efb6ec6aead5d48436ebb4fa6",
+      "exogenous": "7df1a2905dbea91f2c0f9ab670ee3c118059ff706ab65d8219ba167f256f9430",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "ad5e5d385eaa44298db86956fa81f911c083fc39dc6531b765d9f3d2ab356502"
+    },
+    "step": 14
+  },
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000002",
+    "intervention_effect": 9.182354600865438,
+    "intervention_id": "HI000003",
+    "loss_with_intervention": 1051.9467765428817,
+    "loss_without_intervention": 1061.1291311437471,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "2e1b2abc4e81c68dfd6bdb89ebc83d8f71b69e3efb6ec6aead5d48436ebb4fa6",
+      "exogenous": "7df1a2905dbea91f2c0f9ab670ee3c118059ff706ab65d8219ba167f256f9430",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "ad5e5d385eaa44298db86956fa81f911c083fc39dc6531b765d9f3d2ab356502"
+    },
+    "step": 14
+  },
+  {
+    "agent_accepted": false,
+    "classification": "no_causal_benefit",
+    "common_randomness_verified": true,
+    "incident_id": "HA000003",
+    "intervention_effect": 0.0,
+    "intervention_id": "HI000004",
+    "loss_with_intervention": 1339.0270456699584,
+    "loss_without_intervention": 1339.0270456699584,
+    "material_action_accepted": false,
+    "material_reached_demand": false,
+    "material_reached_next_stage": false,
+    "primary_outcome_changed": false,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "817a1e4f82dc615e8b460f5b4fb2f6d31c8718e5946e221317b20f1aa4e10ecb",
+      "exogenous": "724530189f05801b9d57ace740a2e8ab5ccf28354962470c855103cee7016268",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "d0cacbbea4a1a6f04c0a7630f44b0ae326ab64f5ca67593091de4ac0206f320c"
+    },
+    "step": 17
+  },
+  {
+    "agent_accepted": false,
+    "classification": "no_causal_benefit",
+    "common_randomness_verified": true,
+    "incident_id": "HA000006",
+    "intervention_effect": 0.0,
+    "intervention_id": "HI000005",
+    "loss_with_intervention": 1154.4262927662799,
+    "loss_without_intervention": 1154.4262927662799,
+    "material_action_accepted": false,
+    "material_reached_demand": false,
+    "material_reached_next_stage": false,
+    "primary_outcome_changed": false,
+    "probe_horizon": 5,
+    "rng_digests": {
+      "communication": "817a1e4f82dc615e8b460f5b4fb2f6d31c8718e5946e221317b20f1aa4e10ecb",
+      "exogenous": "f4f8d2ac794456452ed620f100050f0f1f21751dc137b4a3c1600c8a239c0703",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "3548fee697a96b476d3bbbf3f55a076a62f748fc2bfed7dfe90f445a417ce8e4"
+    },
+    "step": 18
+  },
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000005",
+    "intervention_effect": 11.912983400143503,
+    "intervention_id": "HI000006",
+    "loss_with_intervention": 727.1089715562566,
+    "loss_without_intervention": 739.0219549564001,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 3,
+    "rng_digests": {
+      "communication": "1963f35dcb2a7ec6747fb905850dc88913fbff21342f99142e6e1e6be7e1cc06",
+      "exogenous": "4700c496233c6d604fbe0eca63f130992051af0ccc5c1476d78f8e631f478b07",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "2ab855204fc827824b3dd33060e20c0988df37b541f2048fbb92f5d9fbadbe40"
+    },
+    "step": 20
+  },
+  {
+    "agent_accepted": true,
+    "classification": "no_causal_benefit",
+    "common_randomness_verified": true,
+    "incident_id": "HA000007",
+    "intervention_effect": 0.0,
+    "intervention_id": "HI000007",
+    "loss_with_intervention": 249.42179585095977,
+    "loss_without_intervention": 249.42179585095977,
+    "material_action_accepted": true,
+    "material_reached_demand": false,
+    "material_reached_next_stage": false,
+    "primary_outcome_changed": false,
+    "probe_horizon": 1,
+    "rng_digests": {
+      "communication": "16adcc1ec9aaee1c6f97acb0f347044edd4317c5fe360d0c3cf2137679ee72ff",
+      "exogenous": "2e5f01417f26d27126e08e008d6fbc0d9492f6baf2911b60edf97f0ba14b6f6b",
+      "initialization": "6c5df87f2213e09fe8240f0e471abb378740da1110cc7fa79c9a65c9ec903182",
+      "observation": "d981a643dd1fd7b5401090b6658d343715e7bda3e7f3444eff7f30eab5ecc8fc"
+    },
+    "step": 22
+  }
+]

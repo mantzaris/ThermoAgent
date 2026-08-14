@@ -1,0 +1,7 @@
+gate,name,status,passed,evidence
+1,engineering,passed,True,reproducibility/test_summary.json; reproducibility/development_replay_report.json
+2,agent_actionability,passed,True,raw/development_trigger_candidate_n10_v4; raw/development_real_llm_actionability_retry1; retained prior real-LLM attempts; manifests
+3,coordination_necessity,passed,True,development_gate_coordination_n10/episode_summary.csv
+4,human_causal_usefulness,passed,True,development_gate_preliminary_v3_n10/episode_summary.csv; raw/development_gate_preliminary_v3_n10
+5,thermodynamic_information_value,failed,False,monitoring/causal_value_summary.json; monitoring/causal_incremental_value.csv
+6,trigger_feasibility,passed,True,development_trigger_candidate_n10_v4/episode_summary.csv; raw/development_trigger_candidate_n10_v4

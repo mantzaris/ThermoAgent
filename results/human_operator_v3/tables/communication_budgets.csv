@@ -1,0 +1,11 @@
+evidence_stage,application,method,total_communication_messages,prompt_tokens,generated_tokens,llm_calls,llm_latency_seconds,operator_requests,operator_interventions,operator_minutes
+development,commercial,autonomous_no_human,78.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,commercial,fixed_communication_no_human,607.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,commercial,local_kpi_trigger,78.1,0.0,0.0,0.0,0.0,5.3,2.0,31.8
+development,commercial,no_communication,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,commercial,thermohitl_rule,2492.431818181818,11306.977272727272,353.8863636363636,6.545454545454546,4.87620158036324,4.045454545454546,2.4545454545454546,24.272727272727273
+development,humanitarian,autonomous_no_human,88.25,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,humanitarian,fixed_communication_no_human,657.1333333333333,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,humanitarian,local_kpi_trigger,88.15,0.0,0.0,0.0,0.0,8.65,2.0,51.9
+development,humanitarian,no_communication,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+development,humanitarian,thermohitl_rule,2686.8636363636365,13331.59090909091,379.0681818181818,6.840909090909091,5.143812042915008,7.5,2.772727272727273,38.04545454545455

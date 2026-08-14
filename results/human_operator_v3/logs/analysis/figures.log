@@ -1,0 +1,80 @@
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1402: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  ndim = x[:, None].ndim
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:276: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  x = x[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:278: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  y = y[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1426: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  X = np.atleast_1d(X.T if isinstance(X, np.ndarray) else np.asarray(X))
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1402: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  ndim = x[:, None].ndim
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:276: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  x = x[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:278: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  y = y[:, np.newaxis]
+{
+  "count": 20,
+  "evidence_boundary": "development only; simulated operator; no holdout",
+  "figures": [
+    "thermohitl_architecture.pdf",
+    "operator_dashboard_overview.pdf",
+    "energy_entropy_phase_plane.pdf",
+    "network_operator_sequence.pdf",
+    "trigger_and_intervention_dynamics.pdf",
+    "operator_view_incremental_value.pdf",
+    "loss_operator_effort_pareto.pdf",
+    "primary_effect_forest.pdf",
+    "causal_intervention_effects.pdf",
+    "intervention_funnel.pdf",
+    "operator_workload_performance.pdf",
+    "attention_allocation_heatmap.pdf",
+    "monitoring_incremental_value.pdf",
+    "training_seed_curves.pdf",
+    "trigger_timing_and_false_alarms.pdf",
+    "partition_robustness.pdf",
+    "commercial_case_study.pdf",
+    "humanitarian_case_study.pdf",
+    "thermodynamic_ablation.pdf",
+    "actionability_diagnostics.pdf"
+  ]
+}
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1402: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  ndim = x[:, None].ndim
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:276: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  x = x[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:278: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  y = y[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1426: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  X = np.atleast_1d(X.T if isinstance(X, np.ndarray) else np.asarray(X))
+/usr/lib/python3/dist-packages/matplotlib/cbook/__init__.py:1402: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  ndim = x[:, None].ndim
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:276: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  x = x[:, np.newaxis]
+/usr/lib/python3/dist-packages/matplotlib/axes/_base.py:278: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  y = y[:, np.newaxis]
+{
+  "count": 20,
+  "evidence_boundary": "development only; simulated operator; no holdout",
+  "figures": [
+    "thermohitl_architecture.pdf",
+    "operator_dashboard_overview.pdf",
+    "energy_entropy_phase_plane.pdf",
+    "network_operator_sequence.pdf",
+    "trigger_and_intervention_dynamics.pdf",
+    "operator_view_incremental_value.pdf",
+    "loss_operator_effort_pareto.pdf",
+    "primary_effect_forest.pdf",
+    "causal_intervention_effects.pdf",
+    "intervention_funnel.pdf",
+    "operator_workload_performance.pdf",
+    "attention_allocation_heatmap.pdf",
+    "monitoring_incremental_value.pdf",
+    "training_seed_curves.pdf",
+    "trigger_timing_and_false_alarms.pdf",
+    "partition_robustness.pdf",
+    "commercial_case_study.pdf",
+    "humanitarian_case_study.pdf",
+    "thermodynamic_ablation.pdf",
+    "actionability_diagnostics.pdf"
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "agent_accepted": true,
+    "classification": "beneficial",
+    "common_randomness_verified": true,
+    "incident_id": "HA000001",
+    "intervention_effect": 0.1417578485505877,
+    "intervention_id": "HI000001",
+    "loss_with_intervention": 3.1301100452717523,
+    "loss_without_intervention": 3.27186789382234,
+    "material_action_accepted": true,
+    "material_reached_demand": true,
+    "material_reached_next_stage": true,
+    "primary_outcome_changed": true,
+    "probe_horizon": 6,
+    "rng_digests": {
+      "communication": "76cf08b3d6f9cfcb5e202562810576ca4d771c73f48a371aaff886994ef220a8",
+      "exogenous": "25bdb9ebc457ef783cc7be1aa5014ba2d677b207ba2edd482912d9744ba1e47c",
+      "initialization": "2675ddbc9aaa56127e3a7bed64185ce6b62cc546913182f0c9db1711712e51ef",
+      "observation": "c63e639c1f1d15a56e04e39b779b189f1f0e2bc935bb5b8a755b4773e8d8022b"
+    },
+    "step": 14
+  }
+]

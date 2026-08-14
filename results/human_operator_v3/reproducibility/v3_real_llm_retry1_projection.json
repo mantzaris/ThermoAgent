@@ -1,0 +1,12 @@
+{
+  "cap_single_gpu_hours": 40.0,
+  "created_at": "2026-08-14T21:41:00Z",
+  "failed_attempt_retained": true,
+  "planned_episodes": 4,
+  "projected_additional_single_gpu_hours": 0.17155763888888884,
+  "projected_cumulative_single_gpu_hours": 0.3431152777777777,
+  "projected_incremental_cost_usd_at_0_34_per_hour": 0.05832959722222221,
+  "reason": "development-only retry after diagnosing a malformed Qwen repair chat turn; prompt revision v9 also foregrounds exact agent-local tools and targets",
+  "safety_reserve_fraction": 0.15,
+  "stage": "development_real_llm_actionability_retry1"
+}

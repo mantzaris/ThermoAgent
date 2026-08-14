@@ -1,0 +1,7 @@
+stage,planner,application,episodes,structured_attempts,first_pass_validity,valid_after_one_repair,material_actions_accepted,accepted_to_transit,accepted_to_next_stage,accepted_to_demand
+development_trigger_candidate_n10_v4,deterministic mock,commercial,20,2490,1.0,1.0,463,1.0,0.9740820734341252,0.9740820734341252
+development_trigger_candidate_n10_v4,deterministic mock,humanitarian,20,2555,1.0,1.0,728,1.0,0.9629120879120879,0.9629120879120879
+development_real_llm_actionability,Qwen2.5-7B-Instruct,commercial,2,152,0.875,0.875,6,1.0,1.0,1.0
+development_real_llm_actionability,Qwen2.5-7B-Instruct,humanitarian,2,153,0.7843137254901961,0.7843137254901961,9,1.0,1.0,1.0
+development_real_llm_actionability_retry1,Qwen2.5-7B-Instruct,commercial,2,136,0.9852941176470589,1.0,10,1.0,0.8,0.8
+development_real_llm_actionability_retry1,Qwen2.5-7B-Instruct,humanitarian,2,148,0.972972972972973,1.0,9,1.0,0.8888888888888888,0.8888888888888888

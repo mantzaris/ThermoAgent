@@ -1,0 +1,18 @@
+{
+  "additional_single_gpu_hours": 0.1894335204186953,
+  "counterfactual_rows": 631,
+  "development_episode_rows": 228,
+  "gate_decision": "fail_closed_stop_before_validation_and_holdout",
+  "index": "/home/resort/Documents/repos/ThermoAgent/results/human_operator_v3/INDEX.csv",
+  "paired_effect_rows": 16,
+  "status": "complete_development_no_go"
+}
+{
+  "additional_single_gpu_hours": 0.1894335204186953,
+  "counterfactual_rows": 631,
+  "development_episode_rows": 228,
+  "gate_decision": "fail_closed_stop_before_validation_and_holdout",
+  "index": "/home/resort/Documents/repos/ThermoAgent/results/human_operator_v3/INDEX.csv",
+  "paired_effect_rows": 16,
+  "status": "complete_development_no_go"
+}

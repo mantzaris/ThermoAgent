@@ -1,0 +1,19 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:07<00:21,  7.29s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:14<00:14,  7.29s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:22<00:07,  7.53s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  7.16s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  7.25s/it]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/ThermoAgent/thermoagent/human_cli.py", line 232, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/human_cli.py", line 198, in main
+    value = _real_actionability(root, results, seeds, args.stage)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/human_cli.py", line 119, in _real_actionability
+    rows = run_human_matrix(
+           ^^^^^^^^^^^^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/human_experiments.py", line 426, in run_human_matrix
+    existing = _existing_complete(manifest_path, episode_dir, expected_source)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ThermoAgent/thermoagent/human_experiments.py", line 342, in _existing_complete
+    raise RuntimeError("run-ID collision with a different source checksum")
+RuntimeError: run-ID collision with a different source checksum

@@ -1,0 +1,284 @@
+{
+  "applications": {
+    "commercial": {
+      "belief_entropy_center": 0.6007721142892433,
+      "belief_entropy_scale": 0.0789348167625364,
+      "by_role": {
+        "carrier": {
+          "belief_entropy_center": 0.5706000647229534,
+          "belief_entropy_scale": 0.04473308068698121,
+          "energy_center": 0.08513148148148147,
+          "energy_scale": 0.03156290666666667,
+          "entropy_center": 0.5592296460261468,
+          "entropy_scale": 0.05328060899183138,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.02179970458907622,
+          "free_energy_scale": 0.025
+        },
+        "manufacturer": {
+          "belief_entropy_center": 0.5404280151566637,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.10675000000000001,
+          "energy_scale": 0.03702381666666663,
+          "entropy_center": 0.5829682514198099,
+          "entropy_scale": 0.053362946553028305,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.052041822852590715,
+          "free_energy_center": -0.011474080568529423,
+          "free_energy_scale": 0.025
+        },
+        "retailer": {
+          "belief_entropy_center": 0.9309830866653079,
+          "belief_entropy_scale": 0.0369913317418144,
+          "energy_center": 0.10902777777777778,
+          "energy_scale": 0.0323289166666667,
+          "entropy_center": 0.5820822660254719,
+          "entropy_scale": 0.0373613106471232,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.09077130642232123,
+          "free_energy_scale": 0.025
+        },
+        "supplier": {
+          "belief_entropy_center": 0.6007721142892433,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.1121851851851852,
+          "energy_scale": 0.02805957777777777,
+          "entropy_center": 0.5909343185040943,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.004550930328791683,
+          "free_energy_scale": 0.025
+        },
+        "warehouse": {
+          "belief_entropy_center": 0.6273925165428977,
+          "belief_entropy_scale": 0.0394674083812682,
+          "energy_center": 0.07694444444444445,
+          "energy_scale": 0.025,
+          "entropy_center": 0.5134750664820711,
+          "entropy_scale": 0.02963499306211467,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.018668662562042027,
+          "free_energy_scale": 0.025
+        }
+      },
+      "energy_center": 0.09109953703703705,
+      "energy_scale": 0.036838491666666674,
+      "entropy_center": 0.571901050474958,
+      "entropy_scale": 0.052421766658911954,
+      "flow_entropy_center": 0.0,
+      "flow_entropy_scale": 0.025,
+      "free_energy_center": -0.02114998872148333,
+      "free_energy_scale": 0.025,
+      "revision": "thermohitl-nominal-calibration-dev-v1",
+      "temperature_center": 0.25
+    },
+    "humanitarian": {
+      "belief_entropy_center": 0.6007721142892433,
+      "belief_entropy_scale": 0.08946616137396242,
+      "by_role": {
+        "agency": {
+          "belief_entropy_center": 0.5404280151566637,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.13984444444444444,
+          "energy_scale": 0.04167753333333331,
+          "entropy_center": 0.6065975326266477,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.07618945782823452,
+          "free_energy_center": 0.010446445204918664,
+          "free_energy_scale": 0.025
+        },
+        "clinic": {
+          "belief_entropy_center": 0.9309830866653079,
+          "belief_entropy_scale": 0.03668852512114721,
+          "energy_center": 0.13301851851851854,
+          "energy_scale": 0.04292676111111111,
+          "entropy_center": 0.6053666471789526,
+          "entropy_scale": 0.0306326206576166,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.0498667144294801,
+          "free_energy_scale": 0.04417687760243097
+        },
+        "community": {
+          "belief_entropy_center": 0.9454530614170367,
+          "belief_entropy_scale": 0.041420100590363905,
+          "energy_center": 0.13540370370370375,
+          "energy_scale": 0.055273524444444486,
+          "entropy_center": 0.5982475136042786,
+          "entropy_scale": 0.031799571382368094,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.022896058857444584,
+          "free_energy_scale": 0.025
+        },
+        "depot": {
+          "belief_entropy_center": 0.5706000647229534,
+          "belief_entropy_scale": 0.04473308068698121,
+          "energy_center": 0.13551111111111114,
+          "energy_scale": 0.05458713555555553,
+          "entropy_center": 0.5980766743938268,
+          "entropy_scale": 0.03542503713619153,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": 0.012112473381782812,
+          "free_energy_scale": 0.027583702038506606
+        },
+        "ngo": {
+          "belief_entropy_center": 0.6007721142892433,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.12358425925925925,
+          "energy_scale": 0.030236803333333333,
+          "entropy_center": 0.6031767963800762,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": 0.0001729481600731414,
+          "free_energy_scale": 0.025
+        },
+        "transport": {
+          "belief_entropy_center": 0.5060802741785297,
+          "belief_entropy_scale": 0.05092396077418135,
+          "energy_center": 0.12944444444444447,
+          "energy_scale": 0.05010638888888889,
+          "entropy_center": 0.596821236417635,
+          "entropy_scale": 0.03464435815894587,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": 0.007654799036933502,
+          "free_energy_scale": 0.025865701422580843
+        }
+      },
+      "energy_center": 0.13098425925925927,
+      "energy_scale": 0.04414441499999999,
+      "entropy_center": 0.6012133817386399,
+      "entropy_scale": 0.027818585987851554,
+      "flow_entropy_center": 0.0,
+      "flow_entropy_scale": 0.025515085648637234,
+      "free_energy_center": -0.003280848322877443,
+      "free_energy_scale": 0.026989943453386872,
+      "revision": "thermohitl-nominal-calibration-dev-v1",
+      "temperature_center": 0.25
+    }
+  },
+  "created_at": "2026-08-14T20:13:24.822353+00:00",
+  "data_boundary": "nominal development seeds only",
+  "diagnostics": {
+    "commercial": {
+      "episodes": [
+        {
+          "application": "commercial",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 26,
+          "primary_outcome": 8.836427833737723,
+          "seed": 10901
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 26,
+          "primary_outcome": 9.99691355452994,
+          "seed": 10902
+        },
+        {
+          "application": "commercial",
+          "conservation_error": -6.821210263296962e-13,
+          "material_actions_reached_demand": 26,
+          "primary_outcome": 11.952826301428376,
+          "seed": 10903
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 2.2737367544323206e-13,
+          "material_actions_reached_demand": 26,
+          "primary_outcome": 9.872247135562187,
+          "seed": 10904
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 2.2737367544323206e-13,
+          "material_actions_reached_demand": 28,
+          "primary_outcome": 7.590139489187129,
+          "seed": 10905
+        },
+        {
+          "application": "commercial",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 26,
+          "primary_outcome": 6.531004751732378,
+          "seed": 10906
+        }
+      ]
+    },
+    "humanitarian": {
+      "episodes": [
+        {
+          "application": "humanitarian",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 43,
+          "primary_outcome": 1681.8840535590791,
+          "seed": 10901
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 41,
+          "primary_outcome": 3270.8311981418424,
+          "seed": 10902
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 40,
+          "primary_outcome": 4189.087862245519,
+          "seed": 10903
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 42,
+          "primary_outcome": 2210.229875268024,
+          "seed": 10904
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 45,
+          "primary_outcome": 2495.1633828046483,
+          "seed": 10905
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 38,
+          "primary_outcome": 1526.7433832868992,
+          "seed": 10906
+        }
+      ]
+    }
+  },
+  "energy_weights": {
+    "backlog": 0.24,
+    "commitment": 0.12,
+    "congestion": 0.16,
+    "lateness": 0.14,
+    "safety": 0.12,
+    "unmet": 0.22
+  },
+  "horizon": 24,
+  "n_agents": 10,
+  "seeds": [
+    10901,
+    10902,
+    10903,
+    10904,
+    10905,
+    10906
+  ],
+  "stage": "development_nominal_calibration",
+  "topology": "human_v3_development"
+}

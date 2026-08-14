@@ -1,0 +1,42 @@
+{
+  "allocation_caveat": "Budgeted allocation is a retrospective fixed-budget ranking diagnostic; episode-level execution remains the primary decision evaluation.",
+  "common_randomness_verified": true,
+  "created_at": "2026-08-14T20:37:28.497152+00:00",
+  "gate_5_causal_passed_both_applications": false,
+  "incremental": [
+    {
+      "application": "commercial",
+      "comparison": "paired_causal_effect_KPI_plus_thermodynamics_minus_same_information_KPI",
+      "delta_average_precision": -0.015247417931298468,
+      "delta_brier_score": -0.003352433050212711,
+      "delta_roc_auc": -0.006874607165304858,
+      "gate_passed": false,
+      "kpi_mean_budgeted_utility": 0.09652718609407404,
+      "positive_prevalence": 0.36752136752136755,
+      "rank_threshold": 0.05,
+      "relative_budgeted_utility_gain": 0.02864221537179487,
+      "test_environment_seeds": "12405;12406",
+      "thermodynamic_mean_budgeted_utility": 0.09929193854741383,
+      "utility_threshold": 0.05
+    },
+    {
+      "application": "humanitarian",
+      "comparison": "paired_causal_effect_KPI_plus_thermodynamics_minus_same_information_KPI",
+      "delta_average_precision": 0.06265053785833807,
+      "delta_brier_score": -0.06798368630634258,
+      "delta_roc_auc": 0.024300508720930036,
+      "gate_passed": true,
+      "kpi_mean_budgeted_utility": 22.568766150893204,
+      "positive_prevalence": 0.25146198830409355,
+      "rank_threshold": 0.05,
+      "relative_budgeted_utility_gain": 2.1843185624712826,
+      "test_environment_seeds": "12405;12406",
+      "thermodynamic_mean_budgeted_utility": 71.8661409863628,
+      "utility_threshold": 0.05
+    }
+  ],
+  "normal_operator_redundancy_rule_applied": true,
+  "paired_branch_label": "positive six-step loss_without_minus_loss_with",
+  "rows": 1734,
+  "stage": "dense_causal_development_n10_v3"
+}

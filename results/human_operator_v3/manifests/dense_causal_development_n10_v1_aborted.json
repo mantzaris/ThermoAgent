@@ -1,0 +1,9 @@
+{
+  "stage": "dense_causal_development_n10_v1",
+  "status": "development_efficiency_abort",
+  "completed_episode_artifacts_retained": 36,
+  "partial_outcomes_used_for_method_selection": false,
+  "reason": "All-agent dense branching measured substantially slower than the smoke projection. The run was stopped before comparative analysis; completed ledgers were retained. The successor design probes demand organizations and agents with explicit private actionability evidence only.",
+  "source_checksum_at_launch": "e8c3bf0bf8d72b6fcd1a9873aaeefc4dad4bb060bfc1d6c60647c9b7135f9a60",
+  "started_at": "2026-08-14T20:18:29.220542+00:00"
+}

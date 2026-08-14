@@ -1,0 +1,7 @@
+{
+  "stage": "dense_causal_development_n10_v2",
+  "status": "invalid_development_diagnostic",
+  "episodes_retained": 48,
+  "excluded_from_gates_and_claims": true,
+  "reason": "The evaluator probe authorized and dispatched over routes that were already feasible. The real bounded operator rejects that action from its authorized public-network view, so the probe overstated causal-positive prevalence. No v2 ledger was rewritten; a corrected successor stage applies the same redundancy rule."
+}

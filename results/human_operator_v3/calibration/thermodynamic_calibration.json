@@ -1,0 +1,270 @@
+{
+  "applications": {
+    "commercial": {
+      "belief_entropy_center": 0.5495260767704996,
+      "belief_entropy_scale": 0.026561119636549904,
+      "by_role": {
+        "carrier": {
+          "belief_entropy_center": 0.5495260767704996,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.042833333333333334,
+          "energy_scale": 0.025945500000000007,
+          "entropy_center": 0.4964846012468842,
+          "entropy_scale": 0.049601747088916515,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.04433015897866836,
+          "free_energy_scale": 0.025
+        },
+        "manufacturer": {
+          "belief_entropy_center": 0.5053335799892419,
+          "belief_entropy_scale": 0.0655197957278927,
+          "energy_center": 0.042833333333333334,
+          "energy_scale": 0.03175235,
+          "entropy_center": 0.42494923441950405,
+          "entropy_scale": 0.054137674436072,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.031098100621907827,
+          "free_energy_scale": 0.025
+        },
+        "retailer": {
+          "belief_entropy_center": 0.8381686216531494,
+          "belief_entropy_scale": 0.09942834106200206,
+          "energy_center": 0.05111111111111112,
+          "energy_scale": 0.025,
+          "entropy_center": 0.5001526556307091,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.10603014395614552,
+          "free_energy_scale": 0.026002267690744447
+        },
+        "supplier": {
+          "belief_entropy_center": 0.5495260767704996,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.05611111111111111,
+          "energy_scale": 0.027057449999999997,
+          "entropy_center": 0.43195284691298813,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.02166693618941258,
+          "free_energy_scale": 0.025
+        },
+        "warehouse": {
+          "belief_entropy_center": 0.6244002033632365,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.051944444444444446,
+          "energy_scale": 0.02604845833333333,
+          "entropy_center": 0.5900195346145855,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.05106597206473768,
+          "free_energy_scale": 0.025
+        }
+      },
+      "energy_center": 0.04555555555555556,
+      "energy_scale": 0.029754958333333335,
+      "entropy_center": 0.47099935499422146,
+      "entropy_scale": 0.05974713083565254,
+      "flow_entropy_center": 0.0,
+      "flow_entropy_scale": 0.025,
+      "free_energy_center": -0.042016605526905455,
+      "free_energy_scale": 0.03337632783686771,
+      "revision": "thermohitl-nominal-calibration-dev-v1",
+      "temperature_center": 0.25
+    },
+    "humanitarian": {
+      "belief_entropy_center": 0.5495260767704996,
+      "belief_entropy_scale": 0.026490234956634835,
+      "by_role": {
+        "agency": {
+          "belief_entropy_center": 0.46114108320798414,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.05244444444444444,
+          "energy_scale": 0.025,
+          "entropy_center": 0.46926904673488157,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.031038002459207677,
+          "free_energy_scale": 0.025
+        },
+        "clinic": {
+          "belief_entropy_center": 0.8490039496143946,
+          "belief_entropy_scale": 0.08336388382665992,
+          "energy_center": 0.05111111111111112,
+          "energy_scale": 0.025,
+          "entropy_center": 0.5001526556307091,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.10667131592360556,
+          "free_energy_scale": 0.025
+        },
+        "depot": {
+          "belief_entropy_center": 0.586963140066868,
+          "belief_entropy_scale": 0.0555041900431959,
+          "energy_center": 0.042833333333333334,
+          "energy_scale": 0.03175235,
+          "entropy_center": 0.5616433197675218,
+          "entropy_scale": 0.041483957193323366,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.05079128846527291,
+          "free_energy_scale": 0.025
+        },
+        "ngo": {
+          "belief_entropy_center": 0.5495260767704996,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.05611111111111112,
+          "energy_scale": 0.025,
+          "entropy_center": 0.4344987101728197,
+          "entropy_scale": 0.025,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.020752201382659437,
+          "free_energy_scale": 0.025
+        },
+        "transport": {
+          "belief_entropy_center": 0.5495260767704996,
+          "belief_entropy_scale": 0.025,
+          "energy_center": 0.04486111111111111,
+          "energy_scale": 0.025,
+          "entropy_center": 0.42916489783201556,
+          "entropy_scale": 0.04608013793541121,
+          "flow_entropy_center": 0.0,
+          "flow_entropy_scale": 0.025,
+          "free_energy_center": -0.031168228653348222,
+          "free_energy_scale": 0.025
+        }
+      },
+      "energy_center": 0.05111111111111112,
+      "energy_scale": 0.028148808333333344,
+      "entropy_center": 0.47099935499422146,
+      "entropy_scale": 0.0576416465717137,
+      "flow_entropy_center": 0.0,
+      "flow_entropy_scale": 0.025,
+      "free_energy_center": -0.04112271259850162,
+      "free_energy_scale": 0.03353961968061938,
+      "revision": "thermohitl-nominal-calibration-dev-v1",
+      "temperature_center": 0.25
+    }
+  },
+  "created_at": "2026-08-14T19:58:20.995893+00:00",
+  "data_boundary": "nominal development seeds only",
+  "diagnostics": {
+    "commercial": {
+      "episodes": [
+        {
+          "application": "commercial",
+          "conservation_error": 2.2737367544323206e-13,
+          "material_actions_reached_demand": 15,
+          "primary_outcome": 3.181047715907382,
+          "seed": 10401
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 17,
+          "primary_outcome": 4.952553110095157,
+          "seed": 10402
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 4.547473508864641e-13,
+          "material_actions_reached_demand": 16,
+          "primary_outcome": 5.885724720497493,
+          "seed": 10403
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 2.2737367544323206e-13,
+          "material_actions_reached_demand": 14,
+          "primary_outcome": 2.521179139132424,
+          "seed": 10404
+        },
+        {
+          "application": "commercial",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 16,
+          "primary_outcome": 9.487031591519752,
+          "seed": 10405
+        },
+        {
+          "application": "commercial",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 17,
+          "primary_outcome": 7.968522413375368,
+          "seed": 10406
+        }
+      ]
+    },
+    "humanitarian": {
+      "episodes": [
+        {
+          "application": "humanitarian",
+          "conservation_error": 3.410605131648481e-13,
+          "material_actions_reached_demand": 16,
+          "primary_outcome": 102.366852634977,
+          "seed": 10401
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 17,
+          "primary_outcome": 389.0615930709323,
+          "seed": 10402
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": 0.0,
+          "material_actions_reached_demand": 16,
+          "primary_outcome": 504.38757868065386,
+          "seed": 10403
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -2.2737367544323206e-13,
+          "material_actions_reached_demand": 12,
+          "primary_outcome": 90.19709080948185,
+          "seed": 10404
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": -1.1368683772161603e-13,
+          "material_actions_reached_demand": 16,
+          "primary_outcome": 1001.3545657549711,
+          "seed": 10405
+        },
+        {
+          "application": "humanitarian",
+          "conservation_error": 1.1368683772161603e-13,
+          "material_actions_reached_demand": 17,
+          "primary_outcome": 774.0686802068498,
+          "seed": 10406
+        }
+      ]
+    }
+  },
+  "energy_weights": {
+    "backlog": 0.24,
+    "commitment": 0.12,
+    "congestion": 0.16,
+    "lateness": 0.14,
+    "safety": 0.12,
+    "unmet": 0.22
+  },
+  "horizon": 24,
+  "seeds": [
+    10401,
+    10402,
+    10403,
+    10404,
+    10405,
+    10406
+  ],
+  "stage": "development_nominal_calibration"
+}

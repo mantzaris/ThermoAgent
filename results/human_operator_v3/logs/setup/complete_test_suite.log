@@ -1,0 +1,46 @@
+........................................................................ [ 39%]
+........................................................................ [ 78%]
+.......................................                                  [100%]
+=============================== warnings summary ===============================
+../../../../../usr/lib/python3/dist-packages/matplotlib/__init__.py:200
+../../../../../usr/lib/python3/dist-packages/matplotlib/__init__.py:200
+../../../../../usr/lib/python3/dist-packages/matplotlib/__init__.py:200
+../../../../../usr/lib/python3/dist-packages/matplotlib/__init__.py:200
+../../../../../usr/lib/python3/dist-packages/matplotlib/__init__.py:200
+  /usr/lib/python3/dist-packages/matplotlib/__init__.py:200: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if LooseVersion(module.__version__) < minver:
+
+../../../.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337
+../../../.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337
+../../../.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337
+../../../.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337
+../../../.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337
+  /home/resort/.local/lib/python3.8/site-packages/setuptools/_distutils/version.py:337: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    other = LooseVersion(other)
+
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+  /home/resort/.local/lib/python3.8/site-packages/torch/torch_version.py:3: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+    from pkg_resources import packaging  # type: ignore[attr-defined]
+
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+  /home/resort/.local/lib/python3.8/site-packages/pkg_resources/__init__.py:3144: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+  /home/resort/.local/lib/python3.8/site-packages/pkg_resources/__init__.py:3144: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+  /home/resort/.local/lib/python3.8/site-packages/pkg_resources/__init__.py:3144: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('repoze')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+tests/test_analysis.py::test_failed_episode_manifest_retains_complete_reproducibility_fields
+  /home/resort/.local/lib/python3.8/site-packages/pkg_resources/__init__.py:3144: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('zope')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

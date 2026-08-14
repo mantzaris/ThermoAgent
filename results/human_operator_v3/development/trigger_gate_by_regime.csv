@@ -1,0 +1,7 @@
+application,scenario,episodes,mean_requests,timely_rate,missed_rate,pre_disruption_false_rate
+commercial,human_v3_development-reliable-compound-p0.5-o0.5,5,7.0,1.0,0.0,0.0
+commercial,human_v3_development-reliable-correlated-p0.5-o0.5,5,7.0,1.0,0.0,0.0
+commercial,human_v3_development-reliable-moderate-p0.5-o0.5,5,2.0,1.0,0.0,0.0
+humanitarian,human_v3_development-reliable-compound-p0.5-o0.5,5,17.8,1.0,0.0,0.0
+humanitarian,human_v3_development-reliable-correlated-p0.5-o0.5,5,8.2,1.0,0.0,0.0
+humanitarian,human_v3_development-reliable-moderate-p0.5-o0.5,5,2.0,1.0,0.0,0.0

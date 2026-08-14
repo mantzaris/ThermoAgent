@@ -1,0 +1,16 @@
+field,value,status_or_instruction
+primary_endpoint,loss_reduction_per_operator_minute,freeze_before_confirmatory recruitment
+design,within_participant_crossover,blocked by application and scenario regime
+alpha,,specify family-wise alpha
+power,,specify target power
+minimally_important_difference,,justify operationally
+within_participant_sd,,estimate from blinded human pilot only
+participant_random_effect_sd,,estimate from blinded human pilot only
+episodes_per_condition,,set before confirmatory data
+conditions,3,KPI; entropy-energy; entropy-energy-disagreement
+applications,2,commercial and abstract humanitarian
+attrition_fraction,,predefine
+multiple_comparison_method,Holm,freeze family
+required_participants,,compute with fixed simulation seed
+power_simulation_seed,,record immutable seed
+

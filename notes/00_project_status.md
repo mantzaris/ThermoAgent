@@ -1,5 +1,47 @@
 # ThermoAgent project status
 
+## ThermoHITL human-on-the-loop study (v3)
+
+Last updated: 2026-08-14 18:05 America/New_York
+
+- **Current phase:** Complete development-stage no-go study. Five of six
+  prospective gates passed; Gate 5 failed cross-application, so validation,
+  multi-seed RL training, and locked holdout were never run.
+- **Branch:** `thermodynamic-human-oversight`, based exactly on pushed v2
+  commit `c0aa6fe6c98cbce0cdd5e40a0f720a98f5facbe6`.
+- **Frozen evidence:** v1 and `results/entropy_triggered_v2/` are read-only
+  scientific antecedents. V2 remains a negative mechanism result: its trigger
+  activated in zero episodes and no communication dominated DOET-rule.
+- **Completed:** additive v3 implementation; independent agents; actionable
+  simulators; distributed energy/entropy/disagreement; bounded operator and
+  dashboard; causal branches; 183-test suite; 817 exact replays; Qwen v8
+  failure diagnosis and versioned v9 qualification; development gates;
+  statistics; tables; 20 vector PDFs; mechanical and visual PDF QA.
+- **Active jobs:** none.
+- **Next actions:** final integrity scan and local commit; do not push without
+  separate authorization. A future scientific study must use a new version and
+  fresh validation/holdout rather than bypassing Gate 5.
+- **Blockers:** the intended positive research program is scientifically
+  blocked by Gate 5, not by infrastructure.
+- **Latest valid v3 result:** Gate 2 passes with Qwen v9 first-pass validity
+  97.89%, one-repair validity 100%, and accepted-to-demand 84.21%. Gates 3, 4,
+  and 6 pass on development evidence. Gate 5 fails because commercial
+  thermodynamic features have delta AP -0.0147, delta AUC -0.0066, and only
+  +2.86% budgeted utility; humanitarian passes but cross-application value does
+  not. Validation/holdout outcomes do not exist.
+- **Integrity:** 817/817 ledgers replay exactly; zero mismatches, privacy leaks,
+  or nonfinite values; maximum conservation residual `6.82e-13`. All 20 PDFs
+  open, expose fonts, render, and pass original-resolution visual review.
+- **Compute:** 0.12277 manifest-accounted episode GPU-hours plus a conservative
+  0.06667-hour model-load/guarded-launch estimate = 0.18943 additional
+  single-GPU hours; 589 LLM calls; 1,084,097 prompt and 32,250 generated tokens;
+  approximately $0.064 at $0.34/hour.
+- **RunPod:** final read-only audit found zero tmux sessions, ThermoAgent/Qwen
+  jobs, or CUDA compute processes. SSH is closed. The existing Pod is safe to
+  stop, but should not be deleted.
+
+---
+
 ## Entropy-triggered communication study (v2)
 
 Last updated: 2026-08-14 America/New_York

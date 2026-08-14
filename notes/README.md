@@ -1,6 +1,6 @@
 # ThermoAgent research notes and RunPod operations
 
-Last verified: 2026-08-12 (America/New_York)
+Last verified: 2026-08-14 (America/New_York)
 
 This is Git-facing research and operator documentation. It contains decisions,
 failed runs, commands, and the evidence boundary for paper claims. Never place
@@ -126,3 +126,21 @@ Store persistent remote state under `/workspace`:
 5. Observe it with `runpod-monitor.sh` (or SSH-based log tailing once logs exist).
 6. Write outputs beneath `runs/<run-id>/`.
 7. Retrieve outputs with `runpod-fetch.sh` and analyze them locally.
+
+## V3 ThermoHITL note map
+
+- `20_thermohitl_status.md`: provenance, final status, and stop decision.
+- `21_thermohitl_protocol.md`: prospective protocol and closed disposition.
+- `22_thermohitl_actionability.md`: v2 diagnosis and Qwen v8/v9 funnel.
+- `23_thermohitl_operator_dashboard.md`: functional dashboard and view boundary.
+- `24_thermohitl_methodology_and_architecture.md`: alternatives and decisions.
+- `25_thermohitl_independence_and_operator_authority.md`: privacy and authority.
+- `26_thermohitl_thermodynamics.md`: energy, entropy, disagreement, free energy.
+- `27_thermohitl_development_gates.md`: all six gate outcomes.
+- `28_thermohitl_monitoring_and_validation.md`: same-information result/no-go.
+- `29_thermohitl_rl_training.md`: prospectively not-run learned policies.
+- `30_thermohitl_holdout_and_outcome_seal.md`: zero holdout outcomes.
+- `31_thermohitl_findings_and_counterfactuals.md`: effects and causal chains.
+- `32_thermohitl_failures_and_claims.md`: negative findings and evidence map.
+- `33_thermohitl_reproduction_and_compute.md`: commands, tokens, and GPU use.
+- `34_thermohitl_future_human_study_and_irb.md`: no-human-evidence boundary.

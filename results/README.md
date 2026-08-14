@@ -16,9 +16,20 @@
   communication dominates DOET-rule on the common loss/message frontier.
   Accordingly, the v2 evidence is an engineering and boundary result and is
   insufficient for the intended positive AIJ contribution.
+- **ThermoHITL human-on-the-loop study (v3):**
+  [`human_operator_v3/README.md`](human_operator_v3/README.md). This additive
+  namespace implements independent escalation, distributed entropy/energy,
+  bounded simulated operators, a functional information-limited dashboard,
+  causal branching, and six prospective mechanism gates. It contains 809
+  deterministic development episodes plus eight real-Qwen qualification
+  episodes; all 817 v3 ledgers replay exactly. Gates 1–4 and 6 pass, but Gate 5
+  fails because thermodynamic features add same-information value only in the
+  abstract humanitarian application, not commercially. In accordance with the
+  preregistered stop rule, v3 has no validation, RL training, or locked holdout
+  episodes and is insufficient for the intended positive AIJ submission.
 
-The top-level `INDEX.csv` indexes both namespaces when rebuilt. No v2 derived
-artifact replaces a frozen-v1 source artifact.
+The top-level `INDEX.csv` indexes all three namespaces when rebuilt. No v2 or
+v3 derived artifact replaces a frozen-v1 source artifact.
 
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed

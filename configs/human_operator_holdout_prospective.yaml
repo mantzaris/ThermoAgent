@@ -1,0 +1,19 @@
+study: thermohitl_v3
+status: not_designed_not_frozen_not_run
+unlock_condition: all six prospective gates and validation selection pass
+fresh_topology_required: true
+fresh_environment_seeds_required: true
+fresh_llm_seeds_required: true
+fresh_operator_seeds_required: true
+regimes:
+  - nominal
+  - isolated_operational_disruption
+  - communication_partition
+  - correlated_disruption
+  - compound_out_of_distribution
+  - operator_overload
+  - operator_delay
+  - imperfect_operator
+minimum_rl_training_seeds_per_learned_method: 5
+outcome_seal_required: true
+warning: No seeds or outcome files were generated because prospective Gate 5 failed.

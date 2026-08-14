@@ -35,6 +35,21 @@ EVENT_KINDS = {
     "environment_transition",
     "plan_revision",
     "metric",
+    # ThermoHITL v3 events. These names are additive so frozen v1/v2 ledgers
+    # retain byte-for-byte meaning and continue to replay unchanged.
+    "thermodynamic_sketch",
+    "thermodynamic_state",
+    "human_request",
+    "operator_view",
+    "operator_queue",
+    "attention_allocation",
+    "operator_action",
+    "operator_result",
+    "autonomy_transition",
+    "human_directive",
+    "material_progress",
+    "counterfactual_snapshot",
+    "counterfactual_branch",
 }
 
 

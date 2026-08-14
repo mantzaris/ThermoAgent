@@ -98,6 +98,23 @@ def _specs() -> Dict[str, ToolSpec]:
         "join_coalition": ToolSpec("join_coalition", {"coalition_id": FieldRule(str)}, set(ALL_ROLES), True),
         "refuse_coalition": ToolSpec("refuse_coalition", {"coalition_id": FieldRule(str), "reason": FieldRule(str)}, set(ALL_ROLES), True),
         "withdraw_coalition": ToolSpec("withdraw_coalition", {"coalition_id": FieldRule(str), "reason": FieldRule(str)}, set(ALL_ROLES), True),
+        "request_human_assistance": ToolSpec(
+            "request_human_assistance",
+            {
+                "assistance_kind": FieldRule(
+                    str,
+                    choices=(
+                        "human_information", "human_recommendation",
+                        "human_approval", "conflict_resolution",
+                        "emergency_override",
+                    ),
+                ),
+                "reason": FieldRule(str),
+            },
+            set(ALL_ROLES),
+            False,
+            "Request bounded supervisory attention without surrendering ordinary action authority.",
+        ),
     }
 
 
@@ -146,6 +163,6 @@ OPTION_TOOLS = {
     4: {"accept_offer", "reject_offer", "counter_offer"},
     5: {"propose_coalition", "join_coalition", "refuse_coalition", "withdraw_coalition"},
     6: {"schedule_shipment", "transfer_resource", "request_priority", "challenge_allocation", "propose_coalition"},
-    7: {"schedule_shipment", "transfer_resource", "reroute_shipment", "expedite_shipment", "report_local_need", "propose_coalition", "central_dispatch"},
+    7: {"schedule_shipment", "transfer_resource", "reroute_shipment", "expedite_shipment", "report_local_need", "disclose_summary", "propose_coalition", "central_dispatch", "request_human_assistance"},
     8: {"no_op"},
 }

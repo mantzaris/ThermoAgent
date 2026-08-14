@@ -1,0 +1,114 @@
+"""Small standard-library HTTP application for live/replay dashboard use."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import tempfile
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Optional, Sequence
+from urllib.parse import parse_qs, urlparse
+
+from ..human_environment import HumanScenarioConfig
+from ..human_runner import HumanOperatorEpisodeRunner, write_human_episode
+from .replay import DashboardReplay, frame_svg
+
+
+HTML = r"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ThermoHITL Operator Dashboard</title>
+<style>
+:root{--ink:#18212f;--muted:#657285;--line:#cad2dd;--bg:#eef2f6;--panel:#fff;--blue:#4c78a8;--red:#e45756;--teal:#72b7b2;--gold:#f2cf5b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,-apple-system,Segoe UI,sans-serif}.bar{display:flex;align-items:center;gap:16px;padding:14px 22px;background:#172334;color:white}.bar h1{font-size:18px;margin:0}.bar small{color:#c8d2df}.controls{margin-left:auto;display:flex;gap:8px;align-items:center}button,select,input{font:inherit}.controls button{border:1px solid #657285;background:#26384a;color:white;border-radius:5px;padding:6px 10px;cursor:pointer}.layout{display:grid;grid-template-columns:minmax(560px,1.35fr) minmax(360px,.8fr);gap:14px;padding:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:0 1px 2px #0000000a;padding:14px}.panel h2{font-size:14px;margin:0 0 10px}.network{min-height:440px}.right{display:grid;gap:14px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric{background:#f6f8fa;border:1px solid #e0e5eb;border-radius:6px;padding:9px}.metric b{display:block;font-size:18px;margin-top:3px}.muted{color:var(--muted);font-size:12px}.phase{height:190px}.queue{max-height:190px;overflow:auto}.queue .item{padding:7px;border-bottom:1px solid #edf0f4}.footer{padding:0 18px 16px;color:var(--muted);font-size:12px}.badge{display:inline-block;border-radius:12px;padding:2px 8px;background:#e8eef5;color:#294766}.warning{background:#fde8e7;color:#922}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}svg text{font-family:system-ui,-apple-system,Segoe UI,sans-serif}.interventions{font-family:ui-monospace,SFMono-Regular,monospace;font-size:11px;max-height:140px;overflow:auto;white-space:pre-wrap}
+</style></head><body>
+<div class="bar"><h1>ThermoHITL</h1><small id="meta">loading replay…</small><div class="controls"><button id="rewind">↤</button><button id="play">Play</button><button id="step">Step</button><button id="alert">Jump to alert</button><label>Step <input id="slider" type="range" min="0" value="0"></label><button id="export">Export SVG</button></div></div>
+<main class="layout"><section class="panel network"><h2>Network and autonomy</h2><svg id="network" width="100%" viewBox="0 0 700 430"></svg></section><section class="right"><div class="panel"><h2>Thermodynamic system view</h2><div class="metrics" id="metrics"></div></div><div class="panel phase"><h2>Energy–entropy phase plane</h2><svg id="phase" width="100%" height="150" viewBox="0 0 400 150"></svg></div><div class="panel"><h2>Operator workload</h2><div class="metrics" id="workload"></div></div></section><section class="panel"><h2>Alert queue</h2><div id="queue" class="queue"></div></section><section class="panel"><h2>Explanation and bounded intervention</h2><div id="explanation"></div><div id="interventions" class="interventions"></div></section></main>
+<div class="footer">The dashboard renders the same hashed payload consumed by the simulated operator. It is technical preparation for a future approved human study, not human-subject evidence.</div>
+<script>
+let meta,step=0,timer=null,frame=null;const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+async function loadMeta(){meta=await(await fetch('/api/metadata')).json();$('meta').textContent=`${meta.run_id} · ${meta.application} · ${meta.method} · simulated operator`;$('slider').max=meta.steps-1;await load(0)}
+async function load(s){step=Math.max(0,Math.min(meta.steps-1,Number(s)));$('slider').value=step;frame=await(await fetch(`/api/frame?step=${step}`)).json();render()}
+function render(){renderNetwork();const t=frame.thermodynamics;const names=['energy','entropy','entropy_anomaly','entropy_slope','free_energy','disagreement','consensus_confidence','service_loss','autonomy_level'];$('metrics').innerHTML=names.map(k=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof t[k]==='number'?t[k].toFixed(3):esc(t[k])}</b></div>`).join('');renderPhase();const w=frame.workload;$('workload').innerHTML=Object.entries(w).map(([k,v])=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof v==='number'?v.toFixed(2):esc(v)}</b></div>`).join('');$('queue').innerHTML=frame.alert_queue.length?frame.alert_queue.map(q=>`<div class="item"><span class="badge">${esc(q.incident_id)}</span> queued at step ${q.action??''}</div>`).join(''):'<span class="muted">No queued alerts</span>';const x=frame.explanation;$('explanation').innerHTML=`<p><span class="badge">${esc(x.view_condition)}</span> Alert driver: <b>${esc(x.alert_reason??'none')}</b></p><p class="muted">${esc(JSON.stringify(x.prediction))}</p><p class="muted">Payload hashes: ${esc(frame.view_hashes.join(', ')||'none')}</p>`;$('interventions').textContent=JSON.stringify(frame.interventions.slice(-4),null,2)}
+function pos(n,i,N){if(Array.isArray(n.location))return [350+250*n.location[0],215+170*n.location[1]];let a=2*Math.PI*i/N;return [350+250*Math.cos(a),215+170*Math.sin(a)]}
+function renderNetwork(){const svg=$('network'),nodes=frame.network.nodes||[],P={};nodes.forEach((n,i)=>P[n.agent_id]=pos(n,i,nodes.length));let h='';for(const e of frame.network.physical_edges||[]){if(P[e[0]]&&P[e[1]])h+=`<line x1="${P[e[0]][0]}" y1="${P[e[0]][1]}" x2="${P[e[1]][0]}" y2="${P[e[1]][1]}" stroke="#7a8798" stroke-width="3"/>`}for(const e of frame.network.communication_edges||[]){if(P[e[0]]&&P[e[1]])h+=`<line x1="${P[e[0]][0]}" y1="${P[e[0]][1]}" x2="${P[e[1]][0]}" y2="${P[e[1]][1]}" stroke="#4c78a8" stroke-width="1.3" stroke-dasharray="5 4"/>`}for(const e of frame.network.authorized_emergency_edges||[]){if(P[e[0]]&&P[e[1]])h+=`<line x1="${P[e[0]][0]}" y1="${P[e[0]][1]}" x2="${P[e[1]][0]}" y2="${P[e[1]][1]}" stroke="#e45756" stroke-width="5"/>`}const C={low:'#72b7b2',nominal:'#f2cf5b',high:'#e45756'};nodes.forEach(n=>{let [x,y]=P[n.agent_id],r=17+2*(n.autonomy_level||0);h+=`<circle cx="${x}" cy="${y}" r="${r}" fill="${C[n.energy_band]||'#b9c2cf'}" stroke="#26384a" stroke-width="2"/><text x="${x}" y="${y+r+15}" text-anchor="middle" font-size="11">${esc(n.agent_id)}</text><text x="${x}" y="${y+4}" text-anchor="middle" font-size="10">L${n.autonomy_level||0}</text>`});svg.innerHTML=h}
+function renderPhase(){const t=frame.thermodynamics,x=45+300*Math.max(0,Math.min(1,t.entropy)),y=125-100*Math.max(0,Math.min(1,t.energy));$('phase').innerHTML=`<rect x="45" y="25" width="150" height="50" fill="#fff4cc"/><rect x="195" y="25" width="150" height="50" fill="#fde8e7"/><rect x="45" y="75" width="150" height="50" fill="#e6f4f1"/><rect x="195" y="75" width="150" height="50" fill="#e8eef5"/><line x1="45" y1="125" x2="345" y2="125" stroke="#26384a"/><line x1="45" y1="125" x2="45" y2="25" stroke="#26384a"/><circle cx="${x}" cy="${y}" r="7" fill="#e45756"/><text x="195" y="145" text-anchor="middle" font-size="11">operational entropy</text><text x="8" y="80" font-size="11" transform="rotate(-90 8 80)">operational energy</text>`}
+$('slider').oninput=e=>load(e.target.value);$('step').onclick=()=>load(step+1);$('rewind').onclick=()=>load(0);$('play').onclick=()=>{if(timer){clearInterval(timer);timer=null;$('play').textContent='Play'}else{timer=setInterval(()=>{if(step>=meta.steps-1){clearInterval(timer);timer=null;$('play').textContent='Play'}else load(step+1)},650);$('play').textContent='Pause'}};$('alert').onclick=async()=>{for(let s=step+1;s<meta.steps;s++){let f=await(await fetch(`/api/frame?step=${s}`)).json();if(f.view_hashes.length){return load(s)}}};$('export').onclick=()=>window.open(`/export/state.svg?step=${step}`,'_blank');loadMeta();
+</script></body></html>"""
+
+
+def _live_replay() -> DashboardReplay:
+    directory = Path(tempfile.mkdtemp(prefix="thermohitl-dashboard-"))
+    config = HumanScenarioConfig(
+        application="commercial",
+        seed=12001,
+        horizon=20,
+        n_agents=8,
+        topology="human_v3_development",
+        disruption="moderate",
+        decision_interval=2,
+        communication_budget=100,
+        operator_seed=22001,
+    )
+    runner = HumanOperatorEpisodeRunner(
+        config, "periodic_human_review", enable_counterfactual_probes=False
+    )
+    result = runner.run("dashboard-live-sample")
+    write_human_episode(result, runner.env.ledger, directory)
+    return DashboardReplay(directory / "episode.json")
+
+
+def serve(replay: DashboardReplay, host: str, port: int) -> None:
+    class Handler(BaseHTTPRequestHandler):
+        def _send(self, body: bytes, content_type: str, status: int = 200) -> None:
+            self.send_response(status)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(body)
+
+        def do_GET(self) -> None:  # noqa: N802 - stdlib callback
+            parsed = urlparse(self.path)
+            query = parse_qs(parsed.query)
+            if parsed.path == "/":
+                self._send(HTML.encode("utf-8"), "text/html; charset=utf-8")
+            elif parsed.path == "/api/metadata":
+                self._send(json.dumps(replay.metadata(), allow_nan=False).encode("utf-8"), "application/json")
+            elif parsed.path == "/api/frame":
+                step = int(query.get("step", ["0"])[0])
+                self._send(json.dumps(replay.frame(step).as_dict(), allow_nan=False).encode("utf-8"), "application/json")
+            elif parsed.path == "/export/state.svg":
+                step = int(query.get("step", ["0"])[0])
+                self._send(frame_svg(replay.frame(step)).encode("utf-8"), "image/svg+xml")
+            elif parsed.path == "/export/state.json":
+                step = int(query.get("step", ["0"])[0])
+                self._send(json.dumps(replay.frame(step).as_dict(), indent=2, allow_nan=False).encode("utf-8"), "application/json")
+            else:
+                self._send(b"not found", "text/plain", 404)
+
+        def log_message(self, format: str, *args: object) -> None:
+            return
+
+    server = ThreadingHTTPServer((host, int(port)), Handler)
+    print("ThermoHITL dashboard: http://%s:%d" % (host, port), flush=True)
+    server.serve_forever()
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    parser = argparse.ArgumentParser(description="ThermoHITL operator dashboard")
+    parser.add_argument("--episode", type=Path)
+    parser.add_argument("--live", action="store_true")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8765)
+    args = parser.parse_args(argv)
+    if bool(args.episode) == bool(args.live):
+        parser.error("choose exactly one of --episode or --live")
+    replay = _live_replay() if args.live else DashboardReplay(args.episode)
+    serve(replay, args.host, args.port)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+

@@ -138,6 +138,7 @@ class EpisodeRunner:
         trigger_normalizers: Optional[Mapping[str, Mapping[str, float]]] = None,
         periodic_interval: Optional[int] = None,
         fixed_broadcast_fanout: int = 3,
+        environment: Optional[LogisticsEnvironment] = None,
     ) -> None:
         self.config = config
         self.method = Method(method)
@@ -155,7 +156,9 @@ class EpisodeRunner:
         if self.fixed_broadcast_fanout < 1:
             raise ValueError("fixed_broadcast_fanout must be positive")
         self.registry = ToolRegistry()
-        self.env = LogisticsEnvironment(config)
+        # V3 supplies an additive environment subclass. Existing callers omit
+        # this parameter and retain the frozen v1/v2 simulator exactly.
+        self.env = environment or LogisticsEnvironment(config)
         self.monitor = RollingMacrostateMonitor(
             self.calibration, window=monitor_window, formulation=monitor_formulation
         )
@@ -182,6 +185,9 @@ class EpisodeRunner:
         self._active_decision_indices: Dict[str, int] = {}
         self.valid_structured_outputs = 0
         self.total_structured_outputs = 0
+        self.first_pass_structured_valid = 0
+        self.single_repair_attempts = 0
+        self.single_repair_successes = 0
         self.prompt_tokens = 0
         self.generated_tokens = 0
         self.llm_calls = 0
@@ -919,6 +925,13 @@ class EpisodeRunner:
             if message.kind in ("coalition_joined", "coalition_proposal"):
                 coalition_partners.add(message.sender)
         outbound.update(coalition_partners)
+        # A signed v3 operator authorization is an explicit local affordance;
+        # it does not reveal any other organization's private state.
+        authorized_edges = (
+            self.env.authorized_edges_for(agent_id)
+            if hasattr(self.env, "authorized_edges_for") else set()
+        )
+        outbound.update(target for source, target in authorized_edges if source == agent_id)
         direct_set = set(direct)
         return {
             "information_boundary": (
@@ -1220,6 +1233,14 @@ class EpisodeRunner:
             self.proposed_tool_calls += 1
             self.total_structured_outputs += 1
             self.valid_structured_outputs += int(response.valid_json)
+            self.first_pass_structured_valid += int(
+                response.valid_json
+                if response.first_pass_valid is None else response.first_pass_valid
+            )
+            self.single_repair_attempts += int(response.repair_attempted)
+            self.single_repair_successes += int(
+                response.repair_attempted and response.valid_json
+            )
             self.prompt_tokens += response.prompt_tokens
             self.generated_tokens += response.generated_tokens
             self.llm_calls += int(not isinstance(self.planner, MockPlanner))
@@ -1231,6 +1252,15 @@ class EpisodeRunner:
                 {
                     "plan": response.output.as_dict(),
                     "valid_json": response.valid_json,
+                    "first_pass_valid": (
+                        response.valid_json
+                        if response.first_pass_valid is None else response.first_pass_valid
+                    ),
+                    "repair_attempted": response.repair_attempted,
+                    "first_pass_error": response.first_pass_error,
+                    "first_pass_raw_text_sha256": hashlib.sha256(
+                        response.first_pass_raw_text.encode("utf-8")
+                    ).hexdigest() if response.first_pass_raw_text else None,
                     "recovery": response.recovery,
                     "raw_text_sha256": hashlib.sha256(
                         response.raw_text.encode("utf-8")
@@ -1366,6 +1396,9 @@ class EpisodeRunner:
             context["material_action_guidance"] = self._material_action_guidance(
                 agent_id
             )
+            context["human_directive"] = getattr(
+                self.env, "pending_human_directives", {}
+            ).get(agent_id)
             mode = int(self._communication_mode(agent_id))
             if self.trigger is not None and mode > int(CommunicationMode.QUIET):
                 self.trigger.record_coordination(agent_id, self.env.step_index)
@@ -1411,6 +1444,14 @@ class EpisodeRunner:
             self.proposed_tool_calls += 1
             self.total_structured_outputs += 1
             self.valid_structured_outputs += int(response.valid_json)
+            self.first_pass_structured_valid += int(
+                response.valid_json
+                if response.first_pass_valid is None else response.first_pass_valid
+            )
+            self.single_repair_attempts += int(response.repair_attempted)
+            self.single_repair_successes += int(
+                response.repair_attempted and response.valid_json
+            )
             self.prompt_tokens += response.prompt_tokens
             self.generated_tokens += response.generated_tokens
             self.llm_calls += int(not isinstance(self.planner, MockPlanner))
@@ -1422,6 +1463,15 @@ class EpisodeRunner:
                 {
                     "plan": response.output.as_dict(),
                     "valid_json": response.valid_json,
+                    "first_pass_valid": (
+                        response.valid_json
+                        if response.first_pass_valid is None else response.first_pass_valid
+                    ),
+                    "repair_attempted": response.repair_attempted,
+                    "first_pass_error": response.first_pass_error,
+                    "first_pass_raw_text_sha256": hashlib.sha256(
+                        response.first_pass_raw_text.encode("utf-8")
+                    ).hexdigest() if response.first_pass_raw_text else None,
                     "raw_text_sha256": hashlib.sha256(response.raw_text.encode("utf-8")).hexdigest(),
                     "raw_text_characters": len(response.raw_text),
                     "recovery": response.recovery,

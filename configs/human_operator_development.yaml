@@ -1,0 +1,38 @@
+study: thermohitl_v3
+evidence_stage: development
+topology: human_v3_development
+horizon: 24
+n_agents: 10
+applications: [commercial, humanitarian]
+communication: [reliable]
+calibration:
+  seeds: [10401, 10402, 10403, 10404, 10405, 10406]
+  disruption: nominal
+trigger:
+  tau_on: 1.5
+  tau_off: 0.6
+  actionable_tau_on: 1.1
+  minimum_dwell: 2
+  cooldown: 3
+matrices:
+  - stage: development_gate_coordination_n10
+    methods: [no_communication, fixed_communication_no_human]
+    regimes: [moderate, correlated, compound]
+    seeds: [12501, 12502, 12503, 12504, 12505]
+    counterfactual_probes: false
+  - stage: development_gate_preliminary_v3_n10
+    methods: [autonomous_no_human, local_kpi_trigger, thermohitl_rule]
+    regimes: [nominal, moderate, correlated, compound]
+    seeds: [11001, 11002, 11003, 11004, 11005]
+    counterfactual_probes: true
+  - stage: dense_causal_development_n10_v3
+    methods: [thermohitl_rule]
+    regimes: [nominal, moderate, correlated, compound]
+    seeds: [12401, 12402, 12403, 12404, 12405, 12406]
+    counterfactual_probes: false
+    dense_counterfactual_probes: true
+  - stage: development_trigger_candidate_n10_v4
+    methods: [thermohitl_rule]
+    regimes: [nominal, moderate, correlated, compound]
+    seeds: [12901, 12902, 12903, 12904, 12905]
+    counterfactual_probes: true

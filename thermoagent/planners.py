@@ -13,7 +13,7 @@ from .tools import OPTION_TOOLS, ToolRegistry
 from .types import CoordinationOption, PlanOutput, ToolResult
 
 
-PLANNER_PROMPT_REVISION = "planner-json-v7-route-affordances"
+PLANNER_PROMPT_REVISION = "planner-json-v9-human-affordance-repair-turn"
 
 
 @dataclass
@@ -35,6 +35,10 @@ class PlannerResponse:
     latency_seconds: float = 0.0
     raw_text: str = ""
     recovery: str = "none"
+    first_pass_valid: Optional[bool] = None
+    repair_attempted: bool = False
+    first_pass_error: str = ""
+    first_pass_raw_text: str = ""
 
 
 def request_affordances(request: PlannerRequest) -> Tuple[set[str], Dict[str, Any]]:
@@ -368,6 +372,7 @@ class MockPlanner:
         obs = request.context["observation"]
         option = int(request.option)
         role = request.role
+        human_directive = request.context.get("human_directive")
         inbox = request.context.get("messages", [])
         pending = [
             c for c in request.context.get("commitments", [])
@@ -384,6 +389,48 @@ class MockPlanner:
         target_demand = self._guided_target(
             request, "eligible_offer_target_ids", demand_roles
         )
+        if isinstance(human_directive, Mapping):
+            directive_tool = str(human_directive.get("tool", ""))
+            directive_source = str(human_directive.get("source", request.agent_id))
+            directive_target = human_directive.get("target")
+            if (
+                directive_tool in (
+                    "authorize_emergency_route",
+                    "temporary_emergency_override",
+                )
+                and directive_source == request.agent_id
+                and isinstance(directive_target, str)
+            ):
+                maximum = float(human_directive.get("maximum_quantity", 12.0))
+                quantity = max(0.01, min(
+                    maximum,
+                    float(obs["inventory"]),
+                    float(obs["capacity"]),
+                ))
+                if quantity <= min(float(obs["inventory"]), float(obs["capacity"])) + 1e-9:
+                    tool = "transfer_resource" if request.application == "humanitarian" else "schedule_shipment"
+                    observed_lead = 1 + int(math.ceil(2.0 * float(obs.get("delay", 0.0))))
+                    return PlanOutput(
+                        "Evaluate and execute the scoped operator authorization.",
+                        tool,
+                        {
+                            "target": directive_target,
+                            "quantity": quantity,
+                            "arrival_step": int(obs["step"]) + observed_lead,
+                        },
+                        "The organization independently accepts a feasible bounded directive.",
+                        0.95,
+                    )
+            if directive_tool == "authorize_information_sharing":
+                target = human_directive.get("target")
+                if isinstance(target, str) and target != request.agent_id:
+                    return PlanOutput(
+                        "Send the authorized coarse summary.",
+                        "disclose_summary",
+                        {"target": target, "level": "high" if float(obs["service_shortfall"]) >= 0.5 else "nominal"},
+                        "Only the operator-authorized coarse scope is disclosed.",
+                        0.9,
+                    )
         if target_source == request.agent_id:
             target_source = self._guided_target(
                 request, "direct_message_ids", source_roles
@@ -679,6 +726,24 @@ class TransformersPlanner:
     def _prompt(self, request: PlannerRequest) -> str:
         allowed_tools, private_guidance = request_affordances(request)
         tools = self.registry.prompt_schema(request.role, allowed_tools)
+        action_guidance = private_guidance.get("material_action", {})
+        target_requirements = {
+            "request_info": "direct_message_ids",
+            "disclose_summary": "direct_message_ids",
+            "report_local_need": "direct_message_ids",
+            "request_priority": "direct_message_ids",
+            "challenge_allocation": "direct_message_ids",
+            "request_quote": "eligible_quote_source_ids",
+            "submit_offer": "eligible_offer_target_ids",
+            "pledge_resource": "eligible_offer_target_ids",
+            "schedule_shipment": "known_outbound_material_ids",
+            "transfer_resource": "known_outbound_material_ids",
+        }
+        exact_targets = {
+            tool: list(action_guidance.get(group, []))
+            for tool, group in target_requirements.items()
+            if tool in allowed_tools
+        }
         observation = request.context["observation"]
         current_step = int(observation["step"])
         earliest_arrival = current_step + 1 + int(
@@ -698,6 +763,8 @@ class TransformersPlanner:
                 "recommended_coalition_expires_step": current_step + 4,
             },
             "private_action_guidance": private_guidance,
+            "exact_allowed_tool_names": sorted(allowed_tools),
+            "exact_valid_targets_by_tool": exact_targets,
             "allowed_tools": tools,
             "private_observation": observation,
             "private_utility": request.context["utility"],
@@ -711,6 +778,7 @@ class TransformersPlanner:
             "coordinator_assignment": request.context.get("coordinator_assignment"),
             "communication_mode": request.context.get("communication_mode"),
             "trigger_state": request.context.get("trigger_state"),
+            "human_directive": request.context.get("human_directive"),
             "candidate_agents_public_identity": [
                 candidate for candidate in request.candidate_agents
                 if candidate.get("agent_id") != request.agent_id
@@ -732,6 +800,8 @@ class TransformersPlanner:
             "reservation-price ceiling; a resource owner uses its private marginal-cost floor. Never counter "
             "outside the maximum_counter_price or minimum_counter_price stated in that guidance. Select a tool "
             "whose exact name appears in allowed_tools and include exactly its listed arguments, with no extra keys. "
+            "The exact_allowed_tool_names and exact_valid_targets_by_tool fields are authoritative concise lists; "
+            "copy one listed tool name and, when target is required, one target listed for that exact tool. "
             "Use the explicit integer values in time_bounds instead of reusing dates from memory or earlier plans."
         )
         if private_guidance.get("material_action"):
@@ -758,6 +828,12 @@ class TransformersPlanner:
             )
         if "submit_offer" in tools:
             system += " When you own surplus inventory and receive a quote_request, prefer submit_offer over requesting another quote."
+        if request.context.get("human_directive"):
+            system += (
+                " A signed bounded human_directive is present. You retain independent authority unless mandatory is true. "
+                "If you accept it, choose the exact feasible operational tool needed to implement only its stated target, "
+                "maximum_quantity, and expiry. Never expand its scope."
+            )
         # Preserve this insertion order so current constraints, private utility
         # guidance, and exact tool schemas remain at the front if a pathological
         # context still reaches the input-token bound.
@@ -770,14 +846,16 @@ class TransformersPlanner:
             )
         return system + "\n" + user + "\nJSON:"
 
-    def plan_batch(self, requests: Sequence[PlannerRequest]) -> List[PlannerResponse]:
+    def _generate_prompts(
+        self,
+        prompts: Sequence[str],
+    ) -> Tuple[List[str], List[int], List[int], float]:
         import torch
 
-        if not requests:
-            return []
-        prompts = [self._prompt(request) for request in requests]
+        if not prompts:
+            return [], [], [], 0.0
         encoded = self.tokenizer(
-            prompts, return_tensors="pt", padding=True, truncation=True,
+            list(prompts), return_tensors="pt", padding=True, truncation=True,
             max_length=self.max_input_tokens,
         )
         device = next(self.model.parameters()).device
@@ -794,33 +872,158 @@ class TransformersPlanner:
         elapsed = time.perf_counter() - started
         input_lengths = encoded["attention_mask"].sum(dim=1).tolist()
         prompt_width = encoded["input_ids"].shape[1]
-        responses: List[PlannerResponse] = []
-        for index, request in enumerate(requests):
+        raw_values: List[str] = []
+        generated_counts: List[int] = []
+        for index in range(len(prompts)):
             generated_ids = outputs[index, prompt_width:]
-            raw = self.tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
-            value = extract_json_object(raw)
-            valid = True
-            recovery = "none"
-            try:
-                if value is None:
-                    raise ValueError("no JSON object")
-                plan = coerce_plan(value)
-            except (ValueError, TypeError):
-                # A safe no-op is the only automatic recovery; the simulator
-                # never invents a domain action on behalf of the model.
-                valid = False
-                recovery = "safe_no_op"
-                plan = PlanOutput("Planner output was invalid; pause safely.", "no_op", {}, "Schema recovery permits no operational mutation.", 0.0)
-            generated_tokens = int((generated_ids != self.tokenizer.pad_token_id).sum().item())
-            responses.append(
-                PlannerResponse(
-                    output=plan,
-                    valid_json=valid,
-                    prompt_tokens=int(input_lengths[index]),
-                    generated_tokens=generated_tokens,
-                    latency_seconds=elapsed / len(requests),
-                    raw_text=raw,
-                    recovery=recovery,
-                )
+            raw_values.append(
+                self.tokenizer.decode(
+                    generated_ids, skip_special_tokens=True
+                ).strip()
             )
+            generated_counts.append(int(
+                (generated_ids != self.tokenizer.pad_token_id).sum().item()
+            ))
+        return (
+            raw_values,
+            [int(value) for value in input_lengths],
+            generated_counts,
+            elapsed,
+        )
+
+    def _parse_and_validate(
+        self,
+        request: PlannerRequest,
+        raw: str,
+    ) -> Tuple[Optional[PlanOutput], str]:
+        value = extract_json_object(raw)
+        try:
+            if value is None:
+                raise ValueError("no_json_object")
+            plan = coerce_plan(value)
+        except (ValueError, TypeError) as error:
+            return None, "schema:%s" % str(error)[:80]
+        validation = self.registry.validate(request.role, plan)
+        if not validation.ok:
+            return None, "typed_schema:%s" % validation.code
+        affordance_error = validate_request_plan(request, plan)
+        if affordance_error is not None:
+            return None, "private_affordance:%s" % affordance_error.code
+        return plan, ""
+
+    @staticmethod
+    def _repair_prompt(original_prompt: str, raw: str, error: str) -> str:
+        # The bounded repair sees exactly the same private context plus the
+        # rejected text and a short deterministic validator code. It receives
+        # no simulator state and is allowed only one attempt.
+        correction = (
+            "The prior JSON was rejected by the deterministic validator. "
+            "Error: " + error[:160] + ". Return exactly one corrected compact JSON object only. "
+            "Copy a tool from exact_allowed_tool_names and any target from "
+            "exact_valid_targets_by_tool for that tool. This is the single permitted repair."
+        )
+        # Qwen chat templates end in an empty assistant turn. Appending the
+        # correction after that marker makes it assistant text, which caused
+        # empty or truncated repairs in the retained first v3 qualification.
+        # Close the rejected assistant response and create a real user turn.
+        assistant_marker = "<|im_start|>assistant\n"
+        if original_prompt.endswith(assistant_marker):
+            return (
+                original_prompt + raw[:1200] + "<|im_end|>\n"
+                "<|im_start|>user\n" + correction + "<|im_end|>\n"
+                + assistant_marker
+            )
+        return (
+            original_prompt
+            + "\nPRIOR_REJECTED_OUTPUT:\n"
+            + raw[:1200]
+            + "\n"
+            + correction
+        )
+
+    @staticmethod
+    def _safe_no_op() -> PlanOutput:
+        return PlanOutput(
+            "Planner output remained invalid; pause safely.",
+            "no_op",
+            {},
+            "One repair was exhausted; no operational mutation is permitted.",
+            0.0,
+        )
+
+    def plan_batch(self, requests: Sequence[PlannerRequest]) -> List[PlannerResponse]:
+        if not requests:
+            return []
+        prompts = [self._prompt(request) for request in requests]
+        raw_values, prompt_counts, generated_counts, elapsed = self._generate_prompts(
+            prompts
+        )
+        parsed: List[Tuple[Optional[PlanOutput], str]] = [
+            self._parse_and_validate(request, raw)
+            for request, raw in zip(requests, raw_values)
+        ]
+        invalid_indices = [
+            index for index, (plan, _) in enumerate(parsed) if plan is None
+        ]
+        repair_by_index: Dict[int, Tuple[str, int, int, float, Optional[PlanOutput], str]] = {}
+        if invalid_indices:
+            repair_prompts = [
+                self._repair_prompt(
+                    prompts[index], raw_values[index], parsed[index][1]
+                )
+                for index in invalid_indices
+            ]
+            repair_raw, repair_prompt_counts, repair_generated_counts, repair_elapsed = (
+                self._generate_prompts(repair_prompts)
+            )
+            per_repair_latency = repair_elapsed / max(len(invalid_indices), 1)
+            for offset, index in enumerate(invalid_indices):
+                repaired_plan, repaired_error = self._parse_and_validate(
+                    requests[index], repair_raw[offset]
+                )
+                repair_by_index[index] = (
+                    repair_raw[offset],
+                    repair_prompt_counts[offset],
+                    repair_generated_counts[offset],
+                    per_repair_latency,
+                    repaired_plan,
+                    repaired_error,
+                )
+        responses: List[PlannerResponse] = []
+        per_first_latency = elapsed / max(len(requests), 1)
+        for index, (first_plan, first_error) in enumerate(parsed):
+            if first_plan is not None:
+                responses.append(PlannerResponse(
+                    output=first_plan,
+                    valid_json=True,
+                    prompt_tokens=prompt_counts[index],
+                    generated_tokens=generated_counts[index],
+                    latency_seconds=per_first_latency,
+                    raw_text=raw_values[index],
+                    recovery="none",
+                    first_pass_valid=True,
+                ))
+                continue
+            (
+                repair_raw,
+                repair_prompt_tokens,
+                repair_generated_tokens,
+                repair_latency,
+                repaired_plan,
+                _repaired_error,
+            ) = repair_by_index[index]
+            final_valid = repaired_plan is not None
+            responses.append(PlannerResponse(
+                output=repaired_plan if repaired_plan is not None else self._safe_no_op(),
+                valid_json=final_valid,
+                prompt_tokens=prompt_counts[index] + repair_prompt_tokens,
+                generated_tokens=generated_counts[index] + repair_generated_tokens,
+                latency_seconds=per_first_latency + repair_latency,
+                raw_text=repair_raw,
+                recovery="single_repair" if final_valid else "safe_no_op_after_single_repair",
+                first_pass_valid=False,
+                repair_attempted=True,
+                first_pass_error=first_error,
+                first_pass_raw_text=raw_values[index],
+            ))
         return responses

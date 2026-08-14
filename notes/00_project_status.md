@@ -4,10 +4,9 @@
 
 Last updated: 2026-08-14 America/New_York
 
-- **Current phase:** Locked evaluation, exploratory controls, replay,
-  statistical analysis, tables, and all 16 vector figures are complete. Final
-  repository hygiene, visual-QA attestation, logical commits, and push are in
-  progress.
+- **Current phase:** Complete. Locked evaluation, exploratory controls, replay,
+  statistical analysis, tables, all 16 vector figures, repository hygiene,
+  visual-QA attestation, and logical local commits are finished.
 - **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6`
   remains preserved by annotated tag `thermoagent-v1-frozen`. The original
   1,096 post-freeze episodes, result directories, and mixed/negative
@@ -31,14 +30,16 @@ Last updated: 2026-08-14 America/New_York
   `4.55e-13`. No outcome episode was rerun. The final 146-test suite passes,
   and all 16 vector PDFs open, expose fonts, render, and pass manual
   original-resolution review.
-- **Active jobs:** none. The RunPod experiment and model processes have exited.
-  A final read-only process check precedes disconnecting the SSH session.
-- **Blockers:** none. The existing Pod was reached through the user-supplied
-  `ssh.runpod.io` gateway; no new Pod or paid resource was created.
-- **Next actions:** finish repository-wide tests and secret/size checks, attest
-  the manually reviewed PDF previews, index all artifacts, commit the immutable
-  results and documentation, and push the branch if existing GitHub
-  authentication succeeds.
+- **Active jobs:** none. The final read-only RunPod check found no tmux session,
+  CUDA compute process, or ThermoAgent/Qwen process; SSH is disconnected and it
+  is safe to stop the Pod.
+- **Blockers:** no research blocker. The local execution approval guard declined
+  creation of a new remote branch because it requires a separate explicit push
+  authorization. No workaround was attempted.
+- **Next actions:** after explicit authorization, run
+  `git push -u origin entropy-triggered-communication` and
+  `git push origin thermoagent-v1-frozen`. Scientific extension would require a
+  new v3 validation/holdout rather than retuning this result.
 - **Latest valid result:** H1 and H2 formally pass for DOET-rule: relative loss
   degradation versus always-on fixed communication is `0.997%` commercial
   (one-sided 95% upper `1.565%`) and `0.382%` humanitarian (upper `0.584%`),

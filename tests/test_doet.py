@@ -892,6 +892,27 @@ def test_readiness_requires_the_full_preregistered_family_for_strong_aij():
     assert _readiness(hypotheses, primary) == "strong AIJ direction"
 
 
+def test_readiness_rejects_endpoint_success_without_trigger_activation():
+    hypotheses = pd.DataFrame([
+        {
+            "hypothesis": name,
+            "outcome": (
+                "supported" if name in ("H1", "H2", "H6")
+                else "unsupported"
+            ),
+        }
+        for name in ("H1", "H2", "H3", "H4", "H5", "H6")
+    ])
+    primary = pd.DataFrame([
+        {"application": application, "noninferior": True,
+         "communication_target_20_percent": True}
+        for application in ("commercial", "humanitarian")
+    ])
+    assert _readiness(
+        hypotheses, primary, mechanism_demonstrated=False,
+    ) == "insufficient for the intended AIJ submission"
+
+
 def test_holdout_generator_requires_and_balances_all_five_training_seeds(tmp_path):
     root = tmp_path / "results"
     for directory in (

@@ -145,3 +145,13 @@ outcomes, a deterministic runtime fallback was added: preserve all 576
 priority-method episodes and all five RL seeds, then reduce only the common
 secondary subset to produce 656 or 616 episodes if required. Actual validation
 and all fifteen training times must still pass the fail-closed design gate.
+
+## Post-validation closure
+
+The measured design gate selected the full 696-episode option, all freeze checks
+passed, and the locked holdout subsequently completed without failure. The
+validation warning proved decisive: the selected trigger again activated zero
+times. Nothing in this note was used to retune the trigger afterward. Final
+holdout results and the resulting insufficient-for-AIJ classification are in
+`notes/17_entropy_trigger_main_results.md`, `notes/18_entropy_trigger_holdout.md`,
+and `notes/19_entropy_trigger_paper_claims.md`.

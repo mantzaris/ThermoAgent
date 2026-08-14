@@ -36,8 +36,18 @@ def _primary_rows(root: Path) -> pd.DataFrame:
     ].sort_values("application")
 
 
-def _readiness(hypotheses: pd.DataFrame, primary: pd.DataFrame) -> str:
+def _readiness(
+    hypotheses: pd.DataFrame,
+    primary: pd.DataFrame,
+    mechanism_demonstrated: bool = True,
+) -> str:
     outcomes = dict(zip(hypotheses["hypothesis"], hypotheses["outcome"]))
+    # Non-inferiority and savings cannot validate an event-trigger contribution
+    # if the preregistered trigger never activates.  Keep the default True for
+    # backwards-compatible unit-level use; the evidence-bound report passes the
+    # observed mechanistic result explicitly.
+    if not mechanism_demonstrated:
+        return "insufficient for the intended AIJ submission"
     if all(outcomes.get(name) == "supported" for name in ("H1", "H2", "H3", "H5", "H6")):
         return "strong AIJ direction"
     jointly_useful_apps = int((
@@ -135,12 +145,32 @@ def run(root: Path) -> Dict[str, Any]:
             encoding="utf-8"
         )
     )
+    execution_source = json.loads(
+        (root / "reproducibility" / "execution_source.json").read_text(
+            encoding="utf-8"
+        )
+    )
     frontier = pd.read_csv(
         root / "statistics" / "pareto_frontier_hypervolume.csv"
     )
+    pareto = pd.read_csv(root / "statistics" / "pareto_points.csv")
+    mechanistic = pd.read_csv(root / "processed" / "mechanistic_events.csv")
     config_path = Path(str(design["config_path"]))
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
-    readiness = _readiness(hypotheses, primary)
+    core_mechanistic = mechanistic[
+        mechanistic["method"].isin(["doet_rule", "doet_rl"])
+    ].copy()
+    primary_mechanistic = core_mechanistic[
+        core_mechanistic["method"] == "doet_rule"
+    ]
+    primary_triggered_episodes = int(
+        primary_mechanistic["trigger_activations"].gt(0).sum()
+    )
+    mechanism_demonstrated = primary_triggered_episodes > 0
+    readiness = _readiness(
+        hypotheses, primary,
+        mechanism_demonstrated=mechanism_demonstrated,
+    )
     failed = int(analysis["failed_episode_count"])
     trigger = selection["selected_trigger"]["parameters"]
     supported = hypotheses[hypotheses["outcome"] == "supported"]["hypothesis"].tolist()
@@ -148,6 +178,113 @@ def run(root: Path) -> Dict[str, Any]:
     finding_table = _finding_table(primary)
     cost_table = _cost_table(primary)
     all_frontiers = bool(frontier["doet_improves_frontier"].map(_truth).all())
+    h3_rows = hypotheses.loc[
+        hypotheses["hypothesis"] == "H3", "outcome"
+    ]
+    h3_supported = bool(len(h3_rows) == 1 and h3_rows.eq("supported").all())
+    no_comm_dominates = pareto[
+        pareto["method"] == "doet_rule"
+    ]["dominated_by"].fillna("").str.contains("autonomous_no_comm")
+    no_comm_dominates_both = bool(
+        len(no_comm_dominates) == 2 and no_comm_dominates.all()
+    )
+    mechanism_lines: List[str] = []
+    for method in ("doet_rule", "doet_rl"):
+        rows = core_mechanistic[core_mechanistic["method"] == method]
+        mechanism_lines.append(
+            "- `%s`: %d/%d episodes activated; %d total activations; "
+            "mean quiet-mode fraction %.3f; maximum observed trigger residual "
+            "%.3f versus `tau_on=%.3f`."
+            % (
+                method,
+                int(rows["trigger_activations"].gt(0).sum()),
+                len(rows),
+                int(rows["trigger_activations"].sum()),
+                float(rows["quiet_mode_fraction"].mean()),
+                float(rows["maximum_trigger_residual"].max()),
+                float(trigger["tau_on"]),
+            )
+        )
+    mechanism_summary = "\n".join(mechanism_lines)
+    ablation_path = root / "ablations" / "episodes.csv"
+    if ablation_path.exists():
+        ablation = pd.read_csv(ablation_path)
+        cell_keys = ["application", "scenario_name"]
+        selected_loss = ablation[
+            (ablation["method"] == "doet_rule")
+            & (ablation["method_variant"] == "selected")
+        ].groupby(cell_keys)["primary_outcome"].mean().rename("selected_loss")
+        ablation_cells = ablation.groupby(
+            cell_keys + ["method", "method_variant"]
+        ).agg(
+            primary_outcome=("primary_outcome", "mean"),
+            messages=("total_communication_messages", "mean"),
+        ).reset_index().merge(
+            selected_loss.reset_index(), on=cell_keys, validate="many_to_one"
+        )
+        ablation_cells["relative_loss_change"] = (
+            ablation_cells["primary_outcome"]
+            - ablation_cells["selected_loss"]
+        ) / ablation_cells["selected_loss"].abs().clip(lower=1e-9)
+        selected_messages = float(
+            ablation_cells[
+                (ablation_cells["method"] == "doet_rule")
+                & (ablation_cells["method_variant"] == "selected")
+            ]["messages"].mean()
+        )
+
+        def control_values(method: str, variant: str) -> Dict[str, float]:
+            rows = ablation_cells[
+                (ablation_cells["method"] == method)
+                & (ablation_cells["method_variant"] == variant)
+            ]
+            raw = ablation[
+                (ablation["method"] == method)
+                & (ablation["method_variant"] == variant)
+            ]
+            return {
+                "episodes": float(len(raw)),
+                "activated": float(raw["trigger_activations"].gt(0).sum()),
+                "activations": float(raw["trigger_activations"].sum()),
+                "relative_loss_change": float(rows["relative_loss_change"].mean()),
+                "message_change": float(
+                    rows["messages"].mean() / max(selected_messages, 1e-9) - 1.0
+                ),
+            }
+
+        global_oracle = control_values("global_entropy_trigger_oracle", "base")
+        label_oracle = control_values("disruption_label_oracle", "base")
+        kpi_control = control_values("kpi_cusum_trigger", "private_local_kpi")
+        local_variants = ablation[
+            ablation["method"] == "doet_rule"
+        ]
+        ablation_summary = (
+            "- All %d local DOET-variant episodes and all %d exact-global-entropy "
+            "oracle episodes had zero activations.\n"
+            "- The private-KPI control activated in %d/%d episodes and changed "
+            "mean loss by %s while using %s messages than selected DOET.\n"
+            "- The putative disruption-label oracle activated in %d/%d episodes "
+            "and changed mean loss by %s while using %s messages than selected "
+            "DOET. Ledger timing shows both active controls first fired at period "
+            "0, eight periods before disruption; these are false activations, not "
+            "timely alarms. The binary-label oracle inherited the selected "
+            "low-direction transform, so label 0 was treated as anomalously low; "
+            "it is retained as an invalid exploratory oracle implementation, not "
+            "an upper bound."
+            % (
+                len(local_variants), int(global_oracle["episodes"]),
+                int(kpi_control["activated"]), int(kpi_control["episodes"]),
+                _percent(kpi_control["relative_loss_change"], 3),
+                _percent(abs(kpi_control["message_change"]), 1)
+                + (" more" if kpi_control["message_change"] >= 0 else " fewer"),
+                int(label_oracle["activated"]), int(label_oracle["episodes"]),
+                _percent(label_oracle["relative_loss_change"], 3),
+                _percent(abs(label_oracle["message_change"]), 1)
+                + (" more" if label_oracle["message_change"] >= 0 else " fewer"),
+            )
+        )
+    else:
+        ablation_summary = "Extended signal/oracle controls were not run."
 
     readme = f"""# Distributed Operational Entropy Triggering (DOET)
 
@@ -191,13 +328,26 @@ Positive reductions mean DOET used less than fixed communication. Every message 
 
 {cost_table}
 
-Did DOET strictly improve every frozen normalized loss-cost frontier comparison? **{'yes' if all_frontiers else 'no'}**. The hypervolume analysis compares DOET against periodic, budget-matched random, learned non-entropic, and local-KPI-CUSUM communication for messages, prompt tokens, LLM calls, and latency in each application.
+## Critical mechanistic result
+
+{mechanism_summary}
+
+The selected entropy trigger never activated in the locked holdout. This repeats the preregistered validation warning: all four entropy candidates also had zero activations there, but the frozen selector lacked a minimum-activation eligibility gate and chose among them on non-inferiority and communication. The formal H1/H2 endpoint results therefore show that the frozen sparse quiet-mode schedule was close to fixed communication while using less communication; they do **not** show that operational entropy successfully triggered timely coordination. This is the central negative finding and prevents the intended causal event-trigger contribution.
+
+### Exploratory signal and oracle controls
+
+{ablation_summary}
+
+Did DOET satisfy the complete preregistered Pareto criterion? **{'yes' if h3_supported else 'no'}**. Normalized hypervolume increased in all frozen comparator/cost cells (**{'yes' if all_frontiers else 'no'}**), but H3 also required loss-message nondominance. No communication dominated DOET-rule on loss and messages in both applications (**{'yes' if no_comm_dominates_both else 'no'}**), so a hypervolume-only positive claim is not permitted.
 
 ## Preregistered hypotheses
 
 """
     for _, row in hypotheses.iterrows():
-        readme += f"- `{row['hypothesis']}` — **{row['outcome']}**: {row['criterion']}\n"
+        readme += (
+            f"- `{row['hypothesis']}` — **{row['outcome']}**. "
+            f"Frozen success criterion: {row['criterion']}\n"
+        )
     readme += f"""
 
 Supported: {', '.join(supported) if supported else 'none'}. Unsupported: {', '.join(unsupported) if unsupported else 'none'}.
@@ -211,7 +361,7 @@ Negative, mixed, and failed findings are retained in `tables/hypothesis_outcomes
 - LLM calls: {compute['llm_calls']:,}; prompt tokens: {compute['prompt_tokens']:,}; generated tokens: {compute['generated_tokens']:,}.
 - All counted messages: {compute['messages_including_sketches']:,}; structured bytes: {compute['structured_bytes']:,}.
 - Approximate GPU cost at $0.34/hour: ${_number(compute['approximate_gpu_cost_usd_at_0_34_per_hour'], 2)}. One-time model load and non-GPU local diagnostics are reported separately in manifests.
-- Total additional validation/training/holdout/authorized-ablation Pod time including model loads: {_number(total_compute['additional_single_gpu_hours_including_model_load'], 3)} single-GPU hours; approximate cost ${_number(total_compute['approximate_gpu_cost_usd_at_0_34_per_hour'], 2)}. CPU-bound staged PPO time on the reserved Pod is included. This is the value audited against the 35-hour cap.
+- Total additional model-smoke/profile/validation/training/holdout/authorized-ablation Pod time including model loads: {_number(total_compute['additional_single_gpu_hours_including_model_load'], 3)} single-GPU hours; approximate cost ${_number(total_compute['approximate_gpu_cost_usd_at_0_34_per_hour'], 2)}. CPU-bound staged PPO time on the reserved Pod is included. This is the value audited against the 35-hour cap.
 
 ## Artifacts
 
@@ -225,32 +375,73 @@ Negative, mixed, and failed findings are retained in `tables/hypothesis_outcomes
 - `figures/pdf/` and `figures/previews/`: vector paper figures and rendered previews; `reproducibility/pdf_qa/` contains mechanical and visual QA.
 - `logs/` and `manifests/`: restartable run status, exact model/config/seeds/tokens/checksums, and failure records.
 
+### Figure guide
+
+- [`doet_architecture.pdf`](figures/pdf/doet_architecture.pdf): decentralized sketches, local trigger state, three communication modes, and retained agent authority.
+- [`original_holdout_tie_diagnostics.pdf`](figures/pdf/original_holdout_tie_diagnostics.pdf): v1 action and communication divergence despite exact service-outcome ties.
+- [`monitoring_baseline_comparison.pdf`](figures/pdf/monitoring_baseline_comparison.pdf): entropy detectors against thresholds, rolling statistics, change detectors, and multivariate KPI models.
+- [`entropy_incremental_value.pdf`](figures/pdf/entropy_incremental_value.pdf): incremental entropy value under global and private-local observability.
+- [`trigger_dynamics.pdf`](figures/pdf/trigger_dynamics.pdf): aligned entropy, trigger statistic, active agents, messages, and service loss; it explicitly displays the absent activation.
+- [`performance_communication_pareto.pdf`](figures/pdf/performance_communication_pareto.pdf): common-panel loss-message frontier, including no communication and strong controls.
+- [`noninferiority_forest.pdf`](figures/pdf/noninferiority_forest.pdf): paired DOET-rule degradation intervals against the frozen 2% margin by application and regime.
+- [`communication_reduction.pdf`](figures/pdf/communication_reduction.pdf): fully counted reductions in messages, bytes, tokens, calls, latency, and wall time.
+- [`multiple_seed_learning_curves.pdf`](figures/pdf/multiple_seed_learning_curves.pdf): all five independent seeds for each learned method.
+- [`training_seed_variability.pdf`](figures/pdf/training_seed_variability.pdf): checkpoint-level outcome and communication variability in locked evaluation.
+- [`holdout_primary_results.pdf`](figures/pdf/holdout_primary_results.pdf): common matched-panel primary outcomes with seed points.
+- [`partition_robustness.pdf`](figures/pdf/partition_robustness.pdf): consensus error, loss degradation, and the zero-activation result under partitions.
+- [`trigger_ablation_effects.pdf`](figures/pdf/trigger_ablation_effects.pdf): validation candidates plus prospectively specified exploratory signal/oracle controls.
+- [`commercial_event_case_study.pdf`](figures/pdf/commercial_event_case_study.pdf) and [`humanitarian_event_case_study.pdf`](figures/pdf/humanitarian_event_case_study.pdf): disruption-aligned episode sequences with the absent trigger visibly annotated.
+- [`network_snapshots_entropy_trigger.pdf`](figures/pdf/network_snapshots_entropy_trigger.pdf): deterministic physical/communication network snapshots showing that quiet mode persisted rather than implying an unobserved escalation.
+
+### Table guide
+
+- `experimental_design.csv`: episode counts, matched seeds, systems, regimes, and methods; the `.tex` companion is publication-ready.
+- `rl_training_seed_results.csv`: evaluation variability for all independent learned checkpoints; `training/seed_manifest.csv` records selection and hashes.
+- `trigger_parameters.csv`, `communication_budgets.csv`, and `achieved_budget_match.csv`: frozen trigger and communication-control settings plus realized matching error.
+- `monitoring_comparison.csv`: detector performance; the richer source tables under `monitoring/` retain prevalence, timing, localization, and incremental-value analyses.
+- `main_paired_comparisons.csv`, `noninferiority_analysis.csv`, and `communication_reductions.csv`: paired effects, hierarchical intervals, formal margins, and fully counted savings.
+- `pareto_operating_points.csv`: common-panel loss/cost points and dominance flags.
+- `holdout_results.csv`: application/scenario/method summaries; episode-level rows remain under `holdout_locked/` and `processed/`.
+- `mechanistic_summary.csv` and `rl_option_selection.csv`: trigger/collapse/mode behavior and learned option distributions.
+- `trigger_ablation_results.csv` and `extended_ablation_results.csv`: validation candidates and post-holdout exploratory signal/oracle controls.
+- `compute_token_accounting.*` and `total_compute_accounting.*`: holdout-only and complete additional-resource accounting.
+- `failed_runs.csv`: all locked failures (empty because all 696 completed); training attempts and any retained setup failures remain in their stage logs.
+- `hypothesis_outcomes.csv`: frozen H1--H6 decisions; the `.tex` companion is publication-ready.
+
 ## Reproduction commands
 
 ```bash
+./scripts/run-entropy-trigger-diagnostics.sh
+./scripts/run-monitoring-validation-v2.sh
 ./scripts/run-doet-calibration.sh
+./scripts/run-doet-profile.sh
 ./scripts/run-doet-validation.sh
 ./scripts/train-doet-multiseed.sh
 ./scripts/design-doet-holdout.sh
 ./scripts/freeze-doet-holdout.sh
 ./scripts/run-doet-holdout.sh
+./scripts/run-doet-ablations.sh  # exploratory, after the locked holdout
 ./scripts/rebuild-doet-results.sh
 ```
 
-For filtered RunPod deployment, use `./scripts/runpod-sync.sh`, then `./scripts/runpod-sync-v2-controls.sh bootstrap`. Fetch only this study with `./scripts/runpod-fetch-v2-results.sh`; the command never overwrites the frozen v1 namespace. Exact sequencing and restart instructions are in `notes/14_entropy_trigger_protocol.md` and `notes/15_entropy_trigger_implementation.md`.
+The locked episodes were executed from commit `{execution_source['commit']}` with source checksum `{execution_source['source_checksum']}`; the authoritative values are also stored in `reproducibility/execution_source.json` and every run manifest. For filtered RunPod deployment, use `./scripts/runpod-sync.sh`, then `./scripts/runpod-sync-v2-controls.sh bootstrap`. Fetch only this study with `./scripts/runpod-fetch-v2-results.sh`; the command never overwrites the frozen v1 namespace. Exact sequencing and restart instructions are in `notes/14_entropy_trigger_protocol.md` and `notes/15_entropy_trigger_implementation.md`.
 
 ## Limitations and readiness
 
 These are abstract logistics simulators, one 7B model family, deterministic decoding, a small discrete coordination policy, synthetic disruption processes, and a single 4090 execution environment. Full/global KPI detectors can dominate entropy when centralized observability is available. Balanced learned-checkpoint evaluation exposes five training seeds but does not cross every checkpoint with every panel. Communication cost uses measured messages/bytes/tokens/calls/latency and a transparent hourly-rate estimate, not a deployment-specific network tariff.
 
-Current classification: **{readiness}**. See `PAPER_SUMMARY.md` and `notes/19_entropy_trigger_paper_claims.md` for the exact allowed claims and remaining work.
+Current classification: **{readiness}**. The completed platform and boundary result are suitable as an engineering demonstration, but the intended entropy-triggered positive contribution is not presently sufficient for an AIJ submission. See `PAPER_SUMMARY.md` and `notes/19_entropy_trigger_paper_claims.md` for the exact allowed claims and remaining work.
 """
     (root / "README.md").write_text(readme, encoding="utf-8")
 
     abstract_result = (
         "The locked evaluation supports the event-triggered contribution."
         if readiness == "strong AIJ direction"
-        else "The locked evaluation establishes a bounded or negative result rather than the full proposed contribution."
+        else (
+            "The locked evaluation establishes a negative mechanistic boundary: "
+            "the selected trigger never activated, so observed savings cannot be "
+            "attributed to entropy-triggered coordination."
+        )
     )
     paper = f"""# Paper-oriented summary
 
@@ -264,8 +455,8 @@ Autonomous logistics agents can benefit from rich communication during disruptio
 
 ## Verified contributions
 
-1. A decentralized, privacy-preserving, fully counted event-trigger architecture with independent agent authority.
-2. A causal diagnosis of why the original frozen holdout tied despite policy divergence.
+1. An implemented decentralized, privacy-preserving, fully counted event-trigger architecture with independent agent authority; the locked run did not demonstrate successful trigger activation.
+2. A replay-backed mechanistic diagnosis of why the original frozen holdout tied despite policy divergence.
 3. Monitoring evidence separating globally redundant entropy from its incremental value under private local information.
 4. A multiple-training-seed, paired, frozen-holdout comparison against always-on communication and budget-matched controls.
 5. Exact replay, conservation, communication/inference accounting, and mechanistic trigger analyses.
@@ -276,11 +467,24 @@ Autonomous logistics agents can benefit from rich communication during disruptio
 
 {cost_table}
 
+## Mechanistic interpretation
+
+{mechanism_summary}
+
+H1, H2, and the formal cross-application endpoint H6 are supported as preregistered statistical statements. They do not validate the proposed entropy mechanism: both DOET variants remained in quiet mode in every locked episode, H4 and H5 failed, H3 failed, and the common-panel no-communication control dominated DOET-rule on loss and messages in both applications.
+
+### Exploratory control result
+
+{ablation_summary}
+
 ## Hypothesis outcomes
 
 """
     for _, row in hypotheses.iterrows():
-        paper += f"- `{row['hypothesis']}`: **{row['outcome']}** — {row['criterion']}\n"
+        paper += (
+            f"- `{row['hypothesis']}`: **{row['outcome']}**. "
+            f"Frozen success criterion: {row['criterion']}\n"
+        )
     paper += f"""
 
 ## Figure plan
@@ -293,7 +497,7 @@ Experimental design, RL seeds, trigger parameters, communication budgets, monito
 
 ## Limitations and recommendation
 
-The strongest limitations are synthetic environments, one primary language model, abstract humanitarian roles, deterministic decoding, and restricted topology/model diversity. The result does not establish literal thermodynamic behavior or general autonomous-agent necessity. Recommendation: **{readiness}**. Any manuscript must retain the original negative study, global-KPI redundancy, all failed/unstable seeds, and application/regime-specific exceptions.
+The strongest limitations are the absent trigger activation, synthetic environments, one primary language model, abstract humanitarian roles, deterministic decoding, and restricted topology/model diversity. The result does not establish literal thermodynamic behavior, useful entropy-triggered coordination, or general autonomous-agent necessity. Recommendation: **{readiness}**. Any manuscript must retain the original negative study, global-KPI redundancy, all failed/unstable seeds, the zero-activation mechanism, no-communication dominance, and application/regime-specific exceptions.
 """
     (root / "PAPER_SUMMARY.md").write_text(paper, encoding="utf-8")
     return {

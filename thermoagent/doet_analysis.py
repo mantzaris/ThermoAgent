@@ -500,6 +500,54 @@ def _read_events(path: Path) -> List[Dict[str, Any]]:
         return [json.loads(line) for line in handle if line.strip()]
 
 
+def _ablation_mechanisms(
+    results_root: Path,
+    frame: pd.DataFrame,
+) -> pd.DataFrame:
+    """Recover activation timing for the prospectively specified controls."""
+
+    rows: List[Dict[str, Any]] = []
+    for _, summary in frame.iterrows():
+        run_id = str(summary["run_id"])
+        events = _read_events(
+            results_root / "raw" / "ablations" / run_id / "events.jsonl.gz"
+        )
+        activations = [
+            int(event["step"])
+            for event in events
+            if event["kind"] == "coordination_trigger"
+            and event["payload"].get("activated")
+        ]
+        disruptions = [
+            int(event["step"])
+            for event in events if event["kind"] == "disruption"
+        ]
+        first_activation = min(activations, default=None)
+        disruption_step = min(disruptions, default=None)
+        rows.append({
+            "run_id": run_id,
+            "application": str(summary["application"]),
+            "scenario_name": str(summary["scenario_name"]),
+            "method": str(summary["method"]),
+            "method_variant": str(summary["method_variant"]),
+            "environment_seed": int(summary["seed"]),
+            "first_activation_step": first_activation,
+            "disruption_step": disruption_step,
+            "pre_disruption_activation": bool(
+                first_activation is not None
+                and disruption_step is not None
+                and first_activation < disruption_step
+            ),
+            "activation_delay_from_disruption": (
+                first_activation - disruption_step
+                if first_activation is not None and disruption_step is not None
+                else None
+            ),
+            "trigger_activations": int(summary["trigger_activations"]),
+        })
+    return pd.DataFrame(rows)
+
+
 def _activation_timing(
     activation_steps: Sequence[int],
     disruption_step: Optional[int],
@@ -712,6 +760,31 @@ def _mechanistic(
                 and timing["first_activation_step"] is not None
             ),
             "trigger_activations": int(summary["trigger_activations"]),
+            "maximum_trigger_residual": max(
+                (
+                    float(event["payload"].get("trigger_residual", 0.0))
+                    for event in triggers
+                ),
+                default=0.0,
+            ),
+            "minimum_standardized_entropy_residual": min(
+                (
+                    float(event["payload"].get(
+                        "standardized_residual", 0.0
+                    ))
+                    for event in triggers
+                ),
+                default=0.0,
+            ),
+            "maximum_standardized_entropy_residual": max(
+                (
+                    float(event["payload"].get(
+                        "standardized_residual", 0.0
+                    ))
+                    for event in triggers
+                ),
+                default=0.0,
+            ),
             "quiet_mode_fraction": float(summary["quiet_mode_fraction"]),
             "targeted_mode_fraction": float(summary["targeted_mode_fraction"]),
             "crisis_mode_fraction": float(summary["crisis_mode_fraction"]),
@@ -1080,6 +1153,33 @@ def run(results_root: Path) -> Dict[str, Any]:
     mechanistic_rows, message_rows, cases = _mechanistic(results_root, completed)
     mechanistic = pd.DataFrame(mechanistic_rows)
     message_types = pd.DataFrame(message_rows)
+    mechanistic_summary = mechanistic.groupby(
+        ["application", "method", "scenario"], dropna=False
+    ).agg(
+        episodes=("run_id", "count"),
+        episodes_with_activation=(
+            "trigger_activations", lambda value: int((value > 0).sum())
+        ),
+        total_trigger_activations=("trigger_activations", "sum"),
+        maximum_trigger_residual=("maximum_trigger_residual", "max"),
+        minimum_standardized_entropy_residual=(
+            "minimum_standardized_entropy_residual", "min"
+        ),
+        maximum_standardized_entropy_residual=(
+            "maximum_standardized_entropy_residual", "max"
+        ),
+        mean_quiet_mode_fraction=("quiet_mode_fraction", "mean"),
+        mean_targeted_mode_fraction=("targeted_mode_fraction", "mean"),
+        mean_crisis_mode_fraction=("crisis_mode_fraction", "mean"),
+        severe_collapse_rate=("severe_collapse_observed", "mean"),
+        activation_before_collapse_rate=("activation_before_collapse", "mean"),
+        pre_disruption_false_activation_rate=(
+            "pre_disruption_false_activation", "mean"
+        ),
+        nominal_false_activation_rate=("nominal_false_activation", "mean"),
+        mean_consensus_rmse=("mean_consensus_rmse", "mean"),
+        entropy_alert_messages=("entropy_alert_messages", "sum"),
+    ).reset_index()
     rl_options, rl_option_differences = _rl_option_selection(
         results_root, completed
     )
@@ -1256,6 +1356,27 @@ def run(results_root: Path) -> Dict[str, Any]:
     locked_ablation_path = results_root / "ablations" / "episodes.csv"
     if locked_ablation_path.exists():
         locked_ablation = pd.read_csv(locked_ablation_path)
+        locked_ablation_mechanisms = _ablation_mechanisms(
+            results_root, locked_ablation
+        )
+        locked_ablation_mechanism_summary = locked_ablation_mechanisms.groupby(
+            ["application", "scenario_name", "method", "method_variant"],
+            dropna=False,
+        ).agg(
+            episodes=("run_id", "count"),
+            episodes_with_activation=(
+                "trigger_activations", lambda value: int((value > 0).sum())
+            ),
+            total_trigger_activations=("trigger_activations", "sum"),
+            pre_disruption_activation_rate=(
+                "pre_disruption_activation", "mean"
+            ),
+            first_activation_step_mean=("first_activation_step", "mean"),
+            disruption_step_mean=("disruption_step", "mean"),
+            activation_delay_from_disruption_mean=(
+                "activation_delay_from_disruption", "mean"
+            ),
+        ).reset_index()
         locked_ablation_summary = locked_ablation.groupby(
             ["application", "scenario_name", "method", "method_variant"],
             dropna=False,
@@ -1264,20 +1385,49 @@ def run(results_root: Path) -> Dict[str, Any]:
             complete=("status", lambda value: int((value == "complete").sum())),
             primary_outcome_mean=("primary_outcome", "mean"),
             total_messages_mean=("total_communication_messages", "mean"),
+            total_bytes_mean=("total_communication_bytes", "mean"),
             prompt_tokens_mean=("prompt_tokens", "mean"),
+            generated_tokens_mean=("generated_tokens", "mean"),
             llm_calls_mean=("llm_calls", "mean"),
+            latency_seconds_mean=("llm_latency_seconds", "mean"),
+            episodes_with_activation=(
+                "trigger_activations", lambda value: int((value > 0).sum())
+            ),
+            total_trigger_activations=("trigger_activations", "sum"),
+            quiet_mode_fraction_mean=("quiet_mode_fraction", "mean"),
+            targeted_mode_fraction_mean=("targeted_mode_fraction", "mean"),
+            crisis_mode_fraction_mean=("crisis_mode_fraction", "mean"),
         ).reset_index()
     else:
+        locked_ablation_mechanisms = pd.DataFrame(columns=[
+            "run_id", "application", "scenario_name", "method",
+            "method_variant", "environment_seed", "first_activation_step",
+            "disruption_step", "pre_disruption_activation",
+            "activation_delay_from_disruption", "trigger_activations",
+        ])
+        locked_ablation_mechanism_summary = pd.DataFrame(columns=[
+            "application", "scenario_name", "method", "method_variant",
+            "episodes", "episodes_with_activation", "total_trigger_activations",
+            "pre_disruption_activation_rate", "first_activation_step_mean",
+            "disruption_step_mean", "activation_delay_from_disruption_mean",
+        ])
         locked_ablation_summary = pd.DataFrame(columns=[
             "application", "scenario_name", "method", "method_variant",
             "episodes", "complete", "primary_outcome_mean",
-            "total_messages_mean", "prompt_tokens_mean", "llm_calls_mean",
+            "total_messages_mean", "total_bytes_mean", "prompt_tokens_mean",
+            "generated_tokens_mean", "llm_calls_mean", "latency_seconds_mean",
+            "episodes_with_activation", "total_trigger_activations",
+            "quiet_mode_fraction_mean", "targeted_mode_fraction_mean",
+            "crisis_mode_fraction_mean",
         ])
     output_frames = {
         processed / "holdout_results.csv": completed,
         processed / "mechanistic_events.csv": mechanistic,
         processed / "message_type_counts.csv": message_types,
         processed / "rl_option_selection.csv": rl_options,
+        processed / "ablation_mechanistic_events.csv": (
+            locked_ablation_mechanisms
+        ),
         statistics / "main_paired_comparisons.csv": comparisons,
         statistics / "pareto_points.csv": pareto,
         statistics / "pareto_frontier_hypervolume.csv": frontier,
@@ -1291,9 +1441,13 @@ def run(results_root: Path) -> Dict[str, Any]:
         tables / "communication_budgets.csv": communication_budgets,
         tables / "achieved_budget_match.csv": achieved_budget_match,
         tables / "holdout_results.csv": holdout_summary,
+        tables / "mechanistic_summary.csv": mechanistic_summary,
         tables / "main_paired_comparisons.csv": comparisons,
         tables / "trigger_ablation_results.csv": validation_ablation,
         tables / "extended_ablation_results.csv": locked_ablation_summary,
+        tables / "extended_ablation_mechanisms.csv": (
+            locked_ablation_mechanism_summary
+        ),
         tables / "noninferiority_analysis.csv": comparisons[
             [column for column in comparisons if "noninfer" in column or column in (
                 "method", "application", "scenario", "paired_episodes",

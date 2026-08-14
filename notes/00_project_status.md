@@ -2,66 +2,69 @@
 
 ## Entropy-triggered communication study (v2)
 
-Last updated: 2026-08-13 18:47 America/New_York
+Last updated: 2026-08-14 America/New_York
 
-- **Current phase:** The isolated RunPod setup, eight-episode real-Qwen profile,
-  144-episode real-Qwen validation, exact 144/144 validation replay, and all 15
-  independently initialized PPO training runs are complete. The runtime-only
-  gate selected the full 696-episode holdout. Final checksum freeze and sealed
-  launch are next.
-- **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6` is preserved by the annotated local tag `thermoagent-v1-frozen`; its 1,096 post-freeze episodes and original interpretation are unchanged.
-- **Active branch:** `entropy-triggered-communication`, created from the frozen v1 commit.
-- **Completed:** preservation/tag/branch; exact v1 holdout-tie diagnosis;
-  monitoring comparison; nominal/development calibration; DOET-rule/DOET-RL;
-  strong communication controls; five-seed training runner; validation and
-  compute-capped holdout generators; hierarchical locked analysis; filtered
-  deployment provenance and v2-only sync/fetch; outcome-sealed job controls;
-  144 passing tests; 8/8 v2 preflight replays; deterministic gzip/PDF artifact
-  writers and full-resolution QA of the existing v2 diagnostic figures; and a
-  development-only correction of a structurally impossible H4 lead-time rule.
-- **Active work:** finalize and commit the generated holdout design, training
-  evidence, protocol, source-transition proof, and execution provenance; then
-  deploy, freeze, and launch the outcome-sealed holdout. No new locked-holdout
-  outcome exists.
-- **Active jobs:** none. `doet-validation` exited 0 after 144/144 episodes and
-  `doet-training-v2` exited 0 after 15/15 fixed-budget runs;
-  the automatic training watcher had been deliberately stopped before
-  validation finished after a code audit found that staged DOET-RL training did
-  not resolve the validation-selected role/application nominal-normalizer file.
-  Validation itself was not stopped or inspected. Retained `doet-setup` exited 2 before
-  testing or model inference; `doet-setup-v2`, `doet-profile`, and the corrected
-  prevalidation test job exited 0. A malformed quoted test launcher exited 127
-  without starting an experiment and remains in the audit log.
-- **Blockers:** none. The stale direct alias still refuses port 19465, but the
-  user-supplied `ssh.runpod.io` proxy connected with forced PTY using the
-  locally configured RSA key. The requested Ed25519 path was absent.
-- **Next actions:** recapture final clean source provenance, rerun the two-
-  application source-transition gate, deploy the 696-row design and all 15
-  checkpoints, freeze the selected protocol and source, then run the
-  preregistered outcome-sealed holdout.
-- **Evidence boundary:** the original holdout is diagnostic-only for v2. It will not be reused as the new confirmatory holdout.
-- **Compute used by v2:** profile sweep 0.1984 single-GPU hours including model
-  load, 0.0216 hours for model smoke, 4.3054 wall-clock Pod hours for
-  validation (4.2516 summed episode GPU-hours), and 0.0705 reserved-Pod hours
-  for training. Validation used 13,031 LLM
-  calls, 26,706,959 prompt tokens, and 974,801 generated tokens. The setup
-  interval is retained separately. The proxy remains connected to Pod
-  `o4figaziv32yyd`; no replacement resource was created.
-- **Latest valid v2 evidence:** full evaluator KPIs make entropy redundant for
-  disruption rank, whereas distributed entropy adds about 0.097--0.098 AP and
-  0.169--0.171 AUC to private local KPIs on original-main diagnostics. On new
-  validation, selected `hysteresis_low` degraded commercial primary loss by
-  0.792% on average and tied humanitarian loss, while reducing counted messages
-  by 70.7%. Crucially, all four entropy candidates had zero trigger activations:
-  the savings arose from quiet-mode scheduling, not demonstrated event-triggered
-  coordination. This mixed/negative mechanism result is frozen and will not be
-  tuned away.
-- **Locked design:** 696 method episodes over 144 base panels: 128
-  non-nominal panels (16 seeds for each of four regimes in each application)
-  and 16 nominal panels (8 seeds/application). Fixed, learned non-entropic,
-  DOET-rule, and DOET-RL use every panel; five secondary methods share 24
-  prospectively fixed non-nominal panels. Projected total additional use is
-  28.6265 single-GPU hours including a 15% holdout buffer and reserve.
+- **Current phase:** Locked evaluation, exploratory controls, replay,
+  statistical analysis, tables, and all 16 vector figures are complete. Final
+  repository hygiene, visual-QA attestation, logical commits, and push are in
+  progress.
+- **Frozen v1:** pushed commit `d555ac04927968ad577707b5c7e9e7b1162069e6`
+  remains preserved by annotated tag `thermoagent-v1-frozen`. The original
+  1,096 post-freeze episodes, result directories, and mixed/negative
+  interpretation were not rewritten.
+- **Active branch:** `entropy-triggered-communication`.
+- **Execution freeze:** the locked episodes ran from clean commit
+  `09ac91b72dd7fb5151fc6af2c28da9855653b2dc`, source checksum
+  `655cb19264b51a33b47273c28c990f07eb85a0f9caa54da2b8ab4d96509e06c9`,
+  and holdout-freeze checksum
+  `34470a323c0b1adc868b8c1e67aded847a43631fb4feb507120c5efc77db18ec`.
+- **Completed:** v1 tie diagnosis; entropy/KPI monitoring controls; nominal
+  calibration; DOET-rule and DOET-RL; five independent training seeds for each
+  of three learned methods; 144-episode validation; frozen 696-episode unseen
+  holdout; 96 preregistered exploratory controls; paired hierarchical analysis;
+  communication/token/latency accounting; and publication artifact generation.
+  All 15 PPO trainings and all 696 holdout episodes completed; no training seed
+  or locked episode failed.
+- **Replay/integrity:** all 936 v2 research ledgers (144 validation + 696
+  holdout + 96 exploratory controls) replay exactly with zero metric and tool
+  mismatches. Maximum absolute material-conservation residual is
+  `4.55e-13`. No outcome episode was rerun. The final 146-test suite passes,
+  and all 16 vector PDFs open, expose fonts, render, and pass manual
+  original-resolution review.
+- **Active jobs:** none. The RunPod experiment and model processes have exited.
+  A final read-only process check precedes disconnecting the SSH session.
+- **Blockers:** none. The existing Pod was reached through the user-supplied
+  `ssh.runpod.io` gateway; no new Pod or paid resource was created.
+- **Next actions:** finish repository-wide tests and secret/size checks, attest
+  the manually reviewed PDF previews, index all artifacts, commit the immutable
+  results and documentation, and push the branch if existing GitHub
+  authentication succeeds.
+- **Latest valid result:** H1 and H2 formally pass for DOET-rule: relative loss
+  degradation versus always-on fixed communication is `0.997%` commercial
+  (one-sided 95% upper `1.565%`) and `0.382%` humanitarian (upper `0.584%`),
+  while fully counted messages fall `72.35%` and `74.22%`. However, DOET-rule
+  and DOET-RL activate in `0/144` episodes each; the maximum trigger statistic
+  is `0.618` versus frozen `tau_on=1.2`. The savings therefore come from a
+  sparse quiet-mode schedule, not demonstrated entropy-triggered coordination.
+  H3, H4, and H5 fail; no communication dominates DOET-rule on loss and
+  messages in the common panel. Formal H6 passes only because H1/H2 pass in
+  both applications and is not evidence for a causal cross-application entropy
+  mechanism.
+- **Monitoring boundary:** full evaluator KPIs already achieve AP/AUC `1.0`,
+  so entropy adds no global rank information. Distributed entropy improves
+  development AP by about `0.097--0.098` and AUC by `0.169--0.171` when ordinary
+  inputs are restricted to one agent's private local KPIs, but the seen v1
+  holdout does not preserve a robust rank gain.
+- **Compute used by v2:** `22.0623` additional single-GPU hours, 79,212 LLM
+  calls, 144,595,485 prompt tokens, 5,336,303 generated tokens, and about
+  `$7.50` at the documented `$0.34/hour`; this includes model loads, staged
+  training time on the reserved Pod, validation, holdout, and authorized
+  exploratory controls and remains below the 35-hour ceiling.
+- **Readiness:** engineering demonstration: yes. Intended positive DOET
+  mechanism and autonomous-agent necessity: not demonstrated. Current evidence
+  is insufficient for the intended AIJ submission; a new v3 protocol would
+  need a prospectively enforced activation/timing eligibility gate and a fresh
+  unseen holdout.
 
 ---
 

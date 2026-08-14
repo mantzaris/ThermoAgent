@@ -42,6 +42,38 @@ def _compare_public_metrics(expected: Mapping[str, Any], actual: Mapping[str, An
     return mismatches
 
 
+def _replay_protocol_message(
+    env: LogisticsEnvironment,
+    event: Event,
+    tool_mismatches: List[str],
+) -> None:
+    """Replay a counted protocol packet at its recorded within-step phase."""
+
+    payload = event.payload
+    message_payload = payload.get("payload", {})
+    if payload.get("kind") == "fixed_status":
+        result = env.send_fixed_status_summary(
+            event.actor,
+            str(payload["recipient"]),
+            str(message_payload["pressure"]),
+            str(message_payload["capacity"]),
+            str(message_payload["commitment_strain"]),
+        )
+    else:
+        result = env.send_entropy_alert(
+            event.actor,
+            str(payload["recipient"]),
+            int(message_payload["recommended_mode"]),
+            str(message_payload["anomaly_level"]),
+        )
+    expected_code = "packet_dropped" if payload.get("dropped") else "sent"
+    if not result.ok or result.code != expected_code:
+        tool_mismatches.append(
+            "event %s protocol message expected %s, replayed %s/%s"
+            % (event.event_id, expected_code, result.ok, result.code)
+        )
+
+
 def replay_episode(episode_path: Path, manifest_path: Path) -> Dict[str, Any]:
     episode = json.loads(episode_path.read_text(encoding="utf-8"))
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -76,12 +108,28 @@ def replay_episode(episode_path: Path, manifest_path: Path) -> Dict[str, Any]:
     for _ in range(scenario.horizon):
         env.transition()
         env.deliver_observations()
+        step_actions = replay_actions.get(env.step_index, [])
+        # Trigger alerts are emitted by EpisodeRunner._prepare_step_modes before
+        # the public time-series snapshot. Fixed-status packets and tool calls
+        # occur later in the decision epoch. Preserving this within-step order
+        # matters when an oracle activates at period zero.
+        for action_kind, event in step_actions:
+            if (
+                action_kind == "protocol"
+                and event.payload.get("kind") == "entropy_alert"
+            ):
+                _replay_protocol_message(env, event, tool_mismatches)
         expected = expected_series.get(env.step_index, {})
         metric_mismatches.extend(
             "step %d: %s" % (env.step_index, mismatch)
             for mismatch in _compare_public_metrics(expected, env.public_metrics())
         )
-        for action_kind, event in replay_actions.get(env.step_index, []):
+        for action_kind, event in step_actions:
+            if (
+                action_kind == "protocol"
+                and event.payload.get("kind") == "entropy_alert"
+            ):
+                continue
             if action_kind == "tool":
                 payload = event.payload
                 result = env.execute_tool(
@@ -102,29 +150,7 @@ def replay_episode(episode_path: Path, manifest_path: Path) -> Dict[str, Any]:
                         )
                     )
                 continue
-            payload = event.payload
-            message_payload = payload.get("payload", {})
-            if payload.get("kind") == "fixed_status":
-                result = env.send_fixed_status_summary(
-                    event.actor,
-                    str(payload["recipient"]),
-                    str(message_payload["pressure"]),
-                    str(message_payload["capacity"]),
-                    str(message_payload["commitment_strain"]),
-                )
-            else:
-                result = env.send_entropy_alert(
-                    event.actor,
-                    str(payload["recipient"]),
-                    int(message_payload["recommended_mode"]),
-                    str(message_payload["anomaly_level"]),
-                )
-            expected_code = "packet_dropped" if payload.get("dropped") else "sent"
-            if not result.ok or result.code != expected_code:
-                tool_mismatches.append(
-                    "event %s protocol message expected %s, replayed %s/%s"
-                    % (event.event_id, expected_code, result.ok, result.code)
-                )
+            _replay_protocol_message(env, event, tool_mismatches)
         env.advance()
     return {
         "run_id": episode["run_id"],

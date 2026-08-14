@@ -45,3 +45,36 @@ def test_replay_results_can_select_a_prospectively_named_run_family(tmp_path: Pa
     assert report["episodes_checked"] == 1
     assert report["episodes_passed"] == 1
     assert report["records"][0]["run_id"] == "pilot-paired_nominal_v6-keep"
+
+
+def test_replay_applies_trigger_alerts_before_public_metric_snapshot(tmp_path: Path):
+    scenario = ScenarioConfig(
+        application="commercial", seed=73, horizon=4, n_agents=8,
+        disruption="moderate", communication="reliable", decision_interval=2,
+    )
+    runner = EpisodeRunner(
+        scenario,
+        "disruption_label_oracle",
+        trigger_config={
+            "trigger_type": "hysteresis",
+            "direction": "low",
+            "tau_on": 1.2,
+            "tau_off": 0.4,
+            "tau_crisis": 2.8,
+            "minimum_dwell": 2,
+            "cooldown": 2,
+            "propagation": "neighbor",
+        },
+    )
+    result = runner.run("replay-trigger-alert-order")
+    assert result.time_series[0]["messages"] > 0
+    run_dir = tmp_path / "raw" / "ablations" / result.run_id
+    write_episode(result, runner.env.ledger, run_dir)
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps({"configuration": asdict(scenario)}), encoding="utf-8"
+    )
+    report = replay_episode(run_dir / "episode.json", manifest)
+    assert report["replay_passed"]
+    assert report["metric_mismatches"] == []
+    assert report["tool_result_mismatches"] == []

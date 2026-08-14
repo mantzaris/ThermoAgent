@@ -222,3 +222,47 @@ no private operational field was added.
    produced under the faulty path. Training now resolves and checksums the
    referenced calibration fail-closed, and missing calibration is a tested
    error rather than a fallback to generic normalization.
+
+## Entropy-triggered v2 locked and post-holdout issues
+
+1. Every validation candidate activated zero times. The prospectively frozen
+   selector optimized non-inferiority and communication lexicographically but
+   did not require a minimum nonzero, post-disruption activation rate. It chose
+   `hysteresis_low`; the warning was documented and the method was not retuned
+   before holdout.
+2. The same failure generalized: DOET-rule and DOET-RL each activated in 0/144
+   holdout episodes, and the exact-global entropy oracle activated in 0/12
+   exploratory episodes. Maximum realized trigger statistic was 0.618 versus
+   frozen `tau_on=1.2`. H4 and H5 are unsupported, and H1/H2 savings cannot be
+   attributed to operational-entropy triggering.
+3. Aggregate DOET-rule non-inferiority passes, but commercial isolated and
+   communication-partition regime bounds exceed the 2% margin. No communication
+   has lower common-panel loss and fewer messages than DOET-rule in both
+   applications. H3 and autonomous-agent necessity are unsupported.
+4. Full/evaluator ordinary KPI models reach AP/AUC 1.0 on these synthetic
+   trajectories, leaving no incremental global rank value for entropy. Private-
+   local observability shows encouraging development gains, but those gains are
+   not robust on the already-seen v1 holdout.
+5. The first locked-result wrapper returned exit 1 after successful replay and
+   analysis because three diagnostic PDFs were not present on the filtered
+   remote copy. This was an artifact-packaging failure, not an episode failure.
+   Existing local diagnostics were retained and only derived figures were
+   rebuilt.
+6. The 96-row exploratory-control wrapper returned exit 1 because 12 alerting
+   episodes exposed an event-order mismatch in replay: protocol alerts were
+   applied after instead of before the same-period public metric snapshot.
+   Recorded actions, tool results, and conservation were correct. Replay order
+   and a regression test were fixed without rerunning episodes; 936/936 v2
+   ledgers now replay exactly.
+7. The private-KPI and putative disruption-label controls activated at period
+   0, eight periods before disruption. The binary label inherited the selected
+   low-direction transform, so healthy label 0 looked anomalously low. The
+   label result is retained as an invalid exploratory oracle implementation,
+   not reported as an upper bound.
+8. Five independent training seeds remedy the v1 single-seed limitation, but
+   the compute-balanced design does not cross every learned checkpoint with
+   every holdout panel. One open-weight planner family and deterministic
+   decoding still limit model-level generality.
+9. A positive v3 experiment cannot repair these results by lowering thresholds
+   post hoc. It requires new development/validation data, a preregistered
+   activation-and-timing eligibility gate, and a genuinely unseen holdout.

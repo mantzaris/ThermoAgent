@@ -278,3 +278,34 @@ finishes, fetch and rebuild without rerunning episodes:
 ./scripts/runpod-fetch-v2-results.sh
 ./scripts/rebuild-doet-results.sh
 ```
+
+## Post-holdout implementation audit
+
+The locked run executed exclusively from commit
+`09ac91b72dd7fb5151fc6af2c28da9855653b2dc` and source checksum
+`655cb19264b51a33b47273c28c990f07eb85a0f9caa54da2b8ab4d96509e06c9`.
+No simulator, prompt, trigger, checkpoint, or statistical rule changed during
+the run.
+
+Post-holdout code changes are restricted to evidence-bound reporting, visual
+presentation, mechanistic summaries, and one replay-order correction:
+
+- reporting now classifies the study as insufficient for the intended AIJ
+  submission whenever the proposed trigger mechanism is not demonstrated,
+  even if H1/H2 endpoints pass;
+- event and network figures explicitly say that no activation was observed and
+  no longer label quiet snapshots as unobserved targeted/crisis states;
+- analysis exports maximum trigger statistics, mode fractions, activation
+  timing, and exploratory-control timing;
+- replay applies explicit protocol alert messages before capturing same-period
+  public communication metrics, matching live `_prepare_step_modes` ordering.
+
+The last item changes only reconstruction of already-recorded event order. A
+regression test covers it. No result episode was rerun; all 936 validation,
+holdout, and exploratory ledgers replay exactly after the correction. The exact
+post-holdout change manifest is
+`results/entropy_triggered_v2/reproducibility/post_holdout_presentation_changes.json`.
+
+All large model weights, caches, virtual environments, Git metadata, agent
+configuration, SSH material, environment files, and credentials remain outside
+the v2 synchronization and result namespace.

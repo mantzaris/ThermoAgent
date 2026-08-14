@@ -9,10 +9,13 @@
 - **Entropy-triggered communication study (v2):**
   [`entropy_triggered_v2/README.md`](entropy_triggered_v2/README.md). This is a
   strictly separate namespace for Distributed Operational Entropy Triggering.
-  Diagnostics, monitoring validation, implementation, deterministic preflight,
-  and the real-Qwen throughput profile are complete. The compute-capped v2
-  validation is active on the reconnected original RunPod; no locked-holdout
-  claim exists yet.
+  Diagnostics, monitoring controls, five-seed training, 144-episode validation,
+  a frozen 696-episode unseen holdout, 96 exploratory controls, exact replay,
+  statistical analysis, and 16 vector figures are complete. H1/H2 formally
+  pass, but the selected entropy trigger activated in zero episodes and no
+  communication dominates DOET-rule on the common loss/message frontier.
+  Accordingly, the v2 evidence is an engineering and boundary result and is
+  insufficient for the intended positive AIJ contribution.
 
 The top-level `INDEX.csv` indexes both namespaces when rebuilt. No v2 derived
 artifact replaces a frozen-v1 source artifact.

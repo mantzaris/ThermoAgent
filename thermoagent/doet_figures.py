@@ -180,10 +180,25 @@ def trigger_dynamics(root: Path) -> str:
         if activation is not None:
             ax.axvline(activation, color=PALETTE["red"], linestyle=":", linewidth=1.2)
     axes[-1].set_xlabel("Simulator period")
-    axes[0].legend(handles=[
+    legend_handles = [
         Line2D([0], [0], color=PALETTE["black"], linestyle="--", label="Disruption"),
-        Line2D([0], [0], color=PALETTE["red"], linestyle=":", label="First activation"),
-    ], loc="best", frameon=False)
+    ]
+    if activation is not None:
+        legend_handles.append(
+            Line2D([0], [0], color=PALETTE["red"], linestyle=":", label="First activation")
+        )
+    else:
+        axes[0].text(
+            0.99, 0.95, "No trigger activation observed",
+            transform=axes[0].transAxes, ha="right", va="top",
+            color=PALETTE["red"], fontsize=9,
+            bbox={"facecolor": "white", "edgecolor": PALETTE["red"],
+                  "boxstyle": "round,pad=0.25", "alpha": 0.9},
+        )
+    # Keep the disruption key separate from the explicit zero-activation
+    # annotation in the upper-right corner; the lower-left of this panel has
+    # no trace at the selected episode's scale.
+    axes[0].legend(handles=legend_handles, loc="lower left", frameon=False)
     fig.suptitle("DOET trigger dynamics in a representative commercial holdout episode")
     fig.tight_layout(rect=(0, 0, 1, 0.97), h_pad=1.0)
     return _save(fig, "trigger_dynamics", root)
@@ -364,6 +379,14 @@ def partition_robustness(root: Path) -> str:
     axes[0].set_ylabel("Loss degradation vs fixed (%)")
     axes[1].set_xlabel("Mean local consensus RMSE")
     axes[1].set_ylabel("Mean activations per episode")
+    if len(joined) and joined["trigger_activations"].eq(0).all():
+        axes[1].text(
+            0.5, 0.88, "No trigger activation\nunder either partition regime",
+            transform=axes[1].transAxes, ha="center", va="top",
+            color=PALETTE["red"], fontsize=9,
+            bbox={"facecolor": "white", "edgecolor": PALETTE["red"],
+                  "boxstyle": "round,pad=0.25", "alpha": 0.9},
+        )
     axes[0].legend(frameon=False)
     fig.suptitle("DOET robustness under communication partitions")
     fig.tight_layout(rect=(0, 0, 1, 0.93))
@@ -373,7 +396,7 @@ def partition_robustness(root: Path) -> str:
 def trigger_ablation_effects(root: Path) -> str:
     validation = pd.read_csv(root / "validation" / "trigger_candidate_comparison.csv")
     holdout_path = root / "ablations" / "episodes.csv"
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.1))
+    fig, axes = plt.subplots(2, 1, figsize=(7.2, 8.0))
     ordered = validation.sort_values("mean_message_reduction", ascending=False)
     y = np.arange(len(ordered))
     axes[0].errorbar(100 * ordered["mean_relative_degradation"], y, fmt="o", color=PALETTE["blue"], label="Loss degradation")
@@ -381,30 +404,56 @@ def trigger_ablation_effects(root: Path) -> str:
     axes[0].set_yticks(y)
     axes[0].set_yticklabels(ordered["method_variant"].str.replace("_", " "))
     axes[0].set_xlabel("Validation loss degradation (%)")
-    axes[0].set_title("Trigger and hysteresis candidates")
+    axes[0].set_title("Validation: trigger and hysteresis candidates", pad=8)
     if holdout_path.exists():
         ablations = pd.read_csv(holdout_path)
-        fixed = ablations[ablations["method"] == "doet_rule"]["primary_outcome"].mean()
-        grouped = ablations.groupby(["method", "method_variant"])["primary_outcome"].mean().reset_index()
-        grouped["effect"] = 100 * (grouped["primary_outcome"] - fixed) / max(abs(fixed), 1e-9)
-        names = (grouped["method"].astype(str) + ":" + grouped["method_variant"].astype(str)).str.replace("_", " ")
-        axes[1].barh(np.arange(len(grouped)), grouped["effect"], color=PALETTE["green"])
-        axes[1].set_yticks(np.arange(len(grouped)))
-        axes[1].set_yticklabels(names)
-        axes[1].set_xlabel("Primary-loss change vs selected DOET (%)")
+        cell_keys = ["application", "scenario_name"]
+        selected = ablations[
+            (ablations["method"] == "doet_rule")
+            & (ablations["method_variant"] == "selected")
+        ].groupby(cell_keys)["primary_outcome"].mean().rename("selected_loss")
+        grouped = ablations.groupby(
+            cell_keys + ["method", "method_variant"]
+        )["primary_outcome"].mean().reset_index().merge(
+            selected.reset_index(), on=cell_keys, validate="many_to_one"
+        )
+        grouped["effect"] = 100 * (
+            grouped["primary_outcome"] - grouped["selected_loss"]
+        ) / grouped["selected_loss"].abs().clip(lower=1e-9)
+        grouped["control"] = (
+            grouped["method"].astype(str) + ":"
+            + grouped["method_variant"].astype(str)
+        )
+        summary = grouped.groupby("control")["effect"].mean().sort_values()
+        positions = np.arange(len(summary))
+        axes[1].barh(positions, summary.values, color=PALETTE["green"], alpha=0.72)
+        for position, control in enumerate(summary.index):
+            values = grouped.loc[grouped["control"] == control, "effect"]
+            axes[1].scatter(
+                values, np.full(len(values), position), color=PALETTE["black"],
+                marker="|", s=34, linewidths=0.9, zorder=3,
+            )
+        names = [value.replace("_", " ") for value in summary.index]
+        axes[1].set_yticks(positions)
+        axes[1].set_yticklabels(names, fontsize=8.5)
+        axes[1].axvline(0, color=PALETTE["black"], linewidth=0.8)
+        axes[1].set_xlabel(
+            "Mean within-application/scenario loss change\n"
+            "vs selected DOET (%)"
+        )
     else:
         axes[1].text(0.5, 0.5, "Locked ablations pending", transform=axes[1].transAxes, ha="center", va="center", color=PALETTE["gray"])
         axes[1].set_xticks([])
         axes[1].set_yticks([])
-    axes[1].set_title("Signal and distributed-estimate controls")
-    fig.suptitle("DOET trigger ablation effects")
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    axes[1].set_title("Exploratory locked signal and oracle controls", pad=8)
+    fig.suptitle("DOET trigger ablation effects", y=0.995)
+    fig.tight_layout(rect=(0, 0, 1, 0.975), h_pad=2.3)
     return _save(fig, "trigger_ablation_effects", root)
 
 
 def event_case_study(root: Path, application: str) -> str:
     case = pd.read_csv(root / "processed" / (application + "_event_case_study.csv"))
-    fig, axes = plt.subplots(4, 1, figsize=(7.2, 7.2), sharex=True)
+    fig, axes = plt.subplots(4, 1, figsize=(7.2, 7.7), sharex=True)
     metrics = [
         ("distributed_entropy_mean", "Distributed entropy", PALETTE["blue"]),
         ("mean_trigger_statistic_agents", "Trigger statistic", PALETTE["red"]),
@@ -422,7 +471,15 @@ def event_case_study(root: Path, application: str) -> str:
             ax.axvline(activation, color=PALETTE["red"], linestyle=":", linewidth=1.1)
     axes[-1].set_xlabel("Simulator period")
     axes[0].set_title("%s DOET event sequence" % application.capitalize())
-    fig.tight_layout(h_pad=1.0)
+    if activation is None:
+        axes[0].text(
+            0.99, 0.95, "No trigger activation observed",
+            transform=axes[0].transAxes, ha="right", va="top",
+            color=PALETTE["red"], fontsize=9,
+            bbox={"facecolor": "white", "edgecolor": PALETTE["red"],
+                  "boxstyle": "round,pad=0.25", "alpha": 0.9},
+        )
+    fig.tight_layout(rect=(0, 0.025, 1, 0.99), h_pad=1.15)
     return _save(fig, application + "_event_case_study", root)
 
 
@@ -458,15 +515,24 @@ def network_snapshots(root: Path) -> str:
         int(crisis_rows["step"].iloc[0])
         if len(crisis_rows) else min(int(case["step"].max()), activation + 2)
     )
+    trigger_observed = bool(len(active_rows))
     steps = [
         max(0, disruption - 2), max(0, disruption - 1), targeted_step,
         crisis_step, int(case["step"].max()),
     ]
-    titles = [
-        "Quiet", "Entropy deviation", "Targeted communication",
-        "Crisis coalition" if len(crisis_rows) else "No crisis activation",
-        "Recovery",
-    ]
+    titles = (
+        [
+            "Quiet", "Entropy deviation", "Targeted communication",
+            "Crisis coalition" if len(crisis_rows) else "No crisis activation",
+            "Recovery",
+        ]
+        if trigger_observed else
+        [
+            "Quiet, pre-disruption", "Entropy deviation",
+            "Post-disruption; no activation", "Quiet mode persists",
+            "Episode end",
+        ]
+    )
     identities = topology["agents"]
     pos = {agent_id: tuple(row["location"]) for agent_id, row in identities.items()}
     physical_initial = {tuple(edge) for edge in topology["physical_edges"]}
@@ -573,13 +639,21 @@ def network_snapshots(root: Path) -> str:
     legend_ax.legend(handles=[
         Line2D([0], [0], color="#BBBBBB", linewidth=1.2, label="Physical route"),
         Line2D([0], [0], color=PALETTE["gray"], linestyle="--", label="Available communication"),
-        Line2D([0], [0], color=PALETTE["red"], linewidth=1.5, label="Entropy alert"),
+        Line2D(
+            [0], [0], color=PALETTE["red"], linewidth=1.5,
+            label=("Entropy alert" if trigger_observed else
+                   "Entropy alert (none observed)"),
+        ),
         Line2D([0], [0], color=PALETTE["orange"], linewidth=1.5, label="Negotiation message"),
         Line2D([0], [0], color=PALETTE["green"], linewidth=2.2, label="Accepted commitment"),
         Line2D([0], [0], color=PALETTE["purple"], linestyle="-.", linewidth=1.2, label="Coalition membership"),
         Line2D([0], [0], marker="o", color="none", markerfacecolor=PALETTE["blue"], markeredgecolor=PALETTE["black"], markersize=7, label="Node color: local surprisal"),
     ], loc="center", frameon=False)
-    fig.suptitle("Network evolution under distributed entropy triggering")
+    fig.suptitle(
+        "Network evolution under distributed entropy triggering"
+        if trigger_observed else
+        "Network evolution: selected DOET trigger did not activate"
+    )
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     return _save(fig, "network_snapshots_entropy_trigger", root)
 

@@ -1,0 +1,55 @@
+{
+  "recorded_at": "2026-08-14T13:42:01-04:00",
+  "scope": "post-holdout replay, mechanistic reporting, and presentation corrections only",
+  "locked_execution": {
+    "commit": "09ac91b72dd7fb5151fc6af2c28da9855653b2dc",
+    "source_checksum": "655cb19264b51a33b47273c28c990f07eb85a0f9caa54da2b8ab4d96509e06c9",
+    "holdout_freeze_checksum": "34470a323c0b1adc868b8c1e67aded847a43631fb4feb507120c5efc77db18ec",
+    "holdout_input_checksum": "f73608583849a5b063038dcfdec6e3bb3cd59969fcc7b5f969f60dd1167e9338"
+  },
+  "post_holdout_source_checksum": "78f7d61eda0b9b493412d07b1485be1140fb6f5438ecc8903c3dbe3ee431ef11",
+  "changes": [
+    {
+      "files": [
+        "thermoagent/replay.py",
+        "tests/test_replay.py"
+      ],
+      "reason": "Apply recorded entropy-alert protocol messages before the same-period public communication metric snapshot, matching live execution order.",
+      "research_effect": "None. Recorded actions, tool results, episode outcomes, and conservation were unchanged; no episode was rerun."
+    },
+    {
+      "files": [
+        "thermoagent/doet_analysis.py"
+      ],
+      "reason": "Export maximum trigger residuals, communication-mode fractions, and exploratory-control activation timing.",
+      "research_effect": "Adds mechanistic summaries derived from immutable ledgers; primary comparisons and hypothesis rules are unchanged."
+    },
+    {
+      "files": [
+        "thermoagent/doet_reporting.py",
+        "tests/test_doet.py"
+      ],
+      "reason": "Require demonstrated trigger activation for a positive journal-readiness classification and label hypothesis text as frozen success criteria.",
+      "research_effect": "Prevents a false positive interpretation; numerical results are unchanged."
+    },
+    {
+      "files": [
+        "thermoagent/doet_figures.py"
+      ],
+      "reason": "Explicitly annotate zero activation, retain quiet-mode labels in network snapshots, normalize ablation effects within application/scenario, and remove layout collisions.",
+      "research_effect": "Presentation only; figures are regenerated from the same derived tables."
+    }
+  ],
+  "verification": {
+    "v2_ledgers_checked": 936,
+    "v2_ledgers_passed": 936,
+    "metric_mismatches": 0,
+    "tool_result_mismatches": 0,
+    "maximum_absolute_conservation_residual": 4.547473508864641e-13,
+    "tests_passed": 146,
+    "pdfs_open_with_fonts_and_render": 16,
+    "pdfs_manual_visual_qa_passed": 16,
+    "episodes_rerun": 0,
+    "primary_statistics_checksum": "e993b8bd68581790ebd0a2e327c52c3a1075cdd63445a44c55e1206b0fdbc842"
+  }
+}

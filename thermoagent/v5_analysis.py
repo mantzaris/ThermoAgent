@@ -110,50 +110,68 @@ def select_budget(
     consensus_abstention: bool = False,
     force_selection: bool = False,
 ) -> pd.DataFrame:
-    temporary = frame.copy()
-    temporary["predicted_value"] = np.asarray(scores, dtype=float)
+    predicted = np.asarray(scores, dtype=float)
+    if len(predicted) != len(frame):
+        raise ValueError("V5 score length does not match candidate frame")
+    clusters = frame["cluster_id"].astype(str).to_numpy()
+    incidents = frame["incident_id"].astype(str).to_numpy()
+    actions = frame["action"].astype(str).to_numpy()
+    severity = frame["visible_severity"].to_numpy(dtype=float)
+    confidence = frame["consensus_confidence"].to_numpy(dtype=float)
+    effects = frame["causal_effect"].to_numpy(dtype=float)
+    losses_without = frame["loss_without"].to_numpy(dtype=float)
+    minutes = frame["operator_minutes"].to_numpy(dtype=float)
+    harmful = frame["harmful"].astype(bool).to_numpy()
+    beneficial = frame["beneficial"].astype(bool).to_numpy()
+    reaches = frame["reached_service"].astype(bool).to_numpy()
+    candidate_ids = frame["candidate_id"].astype(str).to_numpy()
+    scenario_families = frame["scenario_family"].astype(str).to_numpy()
     records: List[Dict[str, Any]] = []
-    for cluster_id, cluster in temporary.groupby("cluster_id", sort=True):
-        ranked = cluster.sort_values(
-            ["predicted_value", "incident_id", "action"],
-            ascending=[False, True, True],
-        )
-        selected: List[pd.Series] = []
-        incidents = set()
-        for _, row in ranked.iterrows():
-            if row["incident_id"] in incidents:
+    for cluster_id in sorted(set(clusters)):
+        positions = np.flatnonzero(clusters == cluster_id)
+        # lexsort uses the final key as primary: descending prediction, then
+        # stable incident/action ordering for exact deterministic ties.
+        ranked = positions[np.lexsort((actions[positions], incidents[positions], -predicted[positions]))]
+        selected: List[int] = []
+        selected_incidents = set()
+        for position in ranked:
+            incident_id = incidents[position]
+            if incident_id in selected_incidents:
                 continue
-            if float(row["visible_severity"]) < 0.30:
+            if severity[position] < 0.30:
                 continue
-            if consensus_abstention and float(row["consensus_confidence"]) < 0.42:
+            if consensus_abstention and confidence[position] < 0.42:
                 continue
-            if not force_selection and float(row["predicted_value"]) <= 0.0:
+            if not force_selection and predicted[position] <= 0.0:
                 continue
-            selected.append(row)
-            incidents.add(row["incident_id"])
+            selected.append(int(position))
+            selected_incidents.add(incident_id)
             if len(selected) >= int(budget):
                 break
-        unique_incidents = cluster.drop_duplicates("incident_id")
-        baseline_loss = float(unique_incidents["loss_without"].sum())
-        total_effect = float(sum(float(row["causal_effect"]) for row in selected))
+        first_per_incident: Dict[str, int] = {}
+        for position in positions:
+            first_per_incident.setdefault(incidents[position], int(position))
+        baseline_loss = float(sum(losses_without[position] for position in first_per_incident.values()))
+        total_effect = float(effects[selected].sum()) if selected else 0.0
+        first = int(positions[0])
         records.append({
             "cluster_id": str(cluster_id),
-            "application": str(cluster["application"].iloc[0]),
-            "regime": str(cluster["regime"].iloc[0]),
-            "information_condition": str(cluster["information_condition"].iloc[0]),
-            "environment_seed": int(cluster["environment_seed"].iloc[0]),
-            "topology_family": str(cluster["topology_family"].iloc[0]),
+            "application": str(frame["application"].iloc[first]),
+            "regime": str(frame["regime"].iloc[first]),
+            "information_condition": str(frame["information_condition"].iloc[first]),
+            "environment_seed": int(frame["environment_seed"].iloc[first]),
+            "topology_family": str(frame["topology_family"].iloc[first]),
             "panel_baseline_loss": baseline_loss,
             "selected_effect": total_effect,
             "loss_after_selection": baseline_loss - total_effect,
             "selected_count": len(selected),
-            "operator_minutes": float(sum(float(row["operator_minutes"]) for row in selected)),
-            "harmful_count": int(sum(bool(row["harmful"]) for row in selected)),
-            "beneficial_count": int(sum(bool(row["beneficial"]) for row in selected)),
-            "service_reaching_count": int(sum(bool(row["reached_service"]) for row in selected)),
-            "selected_candidates": ";".join(str(row["candidate_id"]) for row in selected),
-            "selected_scenario_families": ";".join(str(row["scenario_family"]) for row in selected),
-            "mean_consensus_confidence": float(np.mean([float(row["consensus_confidence"]) for row in selected])) if selected else 0.0,
+            "operator_minutes": float(minutes[selected].sum()) if selected else 0.0,
+            "harmful_count": int(harmful[selected].sum()) if selected else 0,
+            "beneficial_count": int(beneficial[selected].sum()) if selected else 0,
+            "service_reaching_count": int(reaches[selected].sum()) if selected else 0,
+            "selected_candidates": ";".join(candidate_ids[selected]),
+            "selected_scenario_families": ";".join(scenario_families[selected]),
+            "mean_consensus_confidence": float(confidence[selected].mean()) if selected else 0.0,
         })
     return pd.DataFrame(records)
 
@@ -324,6 +342,7 @@ def refit_permutation_test(
     budget: int,
     replicates: int,
     seed: int,
+    evaluation_excluded_regimes: Sequence[str] = ("nominal",),
 ) -> Dict[str, Any]:
     """Permute the thermodynamic block, then refit every grouped fold."""
 
@@ -359,14 +378,22 @@ def refit_permutation_test(
             permuted, FEATURE_BLOCKS["kpi_plus_entropy_disagreement"], alpha_grid, budget,
         )
         selected = select_budget(permuted, scores, budget=budget, consensus_abstention=True)
-        paired = kpi_selection[["cluster_id", "selected_effect"]].merge(
-            selected[["cluster_id", "selected_effect"]], on="cluster_id",
+        evaluation_kpi = kpi_selection[
+            ~kpi_selection["regime"].isin(evaluation_excluded_regimes)
+        ]
+        evaluation_selected = selected[
+            ~selected["regime"].isin(evaluation_excluded_regimes)
+        ]
+        paired = evaluation_kpi[["cluster_id", "selected_effect"]].merge(
+            evaluation_selected[["cluster_id", "selected_effect"]], on="cluster_id",
             suffixes=("_kpi", "_permuted"), validate="one_to_one",
         )
         gains.append(float((paired["selected_effect_permuted"] - paired["selected_effect_kpi"]).mean()))
     array = np.asarray(gains, dtype=float)
     return {
         "procedure": "within-stratum block permutation with full grouped-pipeline refit",
+        "fit_regimes": sorted(frame["regime"].astype(str).unique().tolist()),
+        "evaluation_excluded_regimes": list(evaluation_excluded_regimes),
         "replicates": int(replicates),
         "seed": int(seed),
         "true_mean_gain": float(true_gain),
@@ -593,16 +620,15 @@ def analyze_development(
         subset = candidates[
             (candidates["application"] == application)
             & (candidates["information_condition"] == "private_fragmented")
-            & (candidates["regime"] != "nominal")
         ].reset_index(drop=True)
         selections_subset = selections[
             (selections["application"] == application)
             & (selections["information_condition"] == "private_fragmented")
-            & (selections["regime"] != "nominal")
         ]
         kpi = selections_subset[selections_subset["feature_block"] == "local_kpi_only"]
         thermo = selections_subset[selections_subset["feature_block"] == "kpi_plus_entropy_disagreement"]
         true_pair = _selection_pair(kpi, thermo)
+        true_pair = true_pair[true_pair["regime"] != "nominal"]
         true_gain = float(true_pair["utility_difference"].mean())
         permutation_results[application] = refit_permutation_test(
             subset, kpi, true_gain, alpha_grid, budget,
@@ -626,4 +652,108 @@ def analyze_development(
         "refit_permutation": permutation_results,
     }
     atomic_json(results_root / "development" / "development_analysis.json", report)
+    return report
+
+
+def run_refit_permutation_application(
+    results_root: Path,
+    application: str,
+    stage: str = "development_primary_v2",
+    replicates: int = 199,
+) -> Dict[str, Any]:
+    if application not in ("humanitarian", "utility_restoration"):
+        raise ValueError("formal V5 permutation is limited to the two primary applications")
+    config = yaml.safe_load((Path("configs") / "human_operator_v5_development.yaml").read_text(encoding="utf-8"))
+    candidates = pd.read_csv(results_root / "development" / stage / "candidate_interventions.csv")
+    for column in ("beneficial", "harmful", "accepted_action", "reached_next_stage", "reached_service"):
+        candidates[column] = candidates[column].astype(str).str.lower().map({"true": True, "false": False, "1": True, "0": False})
+    subset = candidates[
+        (candidates["application"] == application)
+        & (candidates["information_condition"] == "private_fragmented")
+    ].reset_index(drop=True)
+    alpha_grid = [float(value) for value in config["primary_model"]["regularization_grid"]]
+    budget = int(config["simulation"]["operator_budget"])
+    kpi_scores, _ = crossfit_action_values(subset, KPI_FEATURES, alpha_grid, budget)
+    thermo_scores, _ = crossfit_action_values(
+        subset, FEATURE_BLOCKS["kpi_plus_entropy_disagreement"], alpha_grid, budget,
+    )
+    kpi = select_budget(subset, kpi_scores, budget=budget)
+    thermo = select_budget(subset, thermo_scores, budget=budget, consensus_abstention=True)
+    paired = _selection_pair(kpi, thermo)
+    paired = paired[paired["regime"] != "nominal"]
+    result = refit_permutation_test(
+        subset, kpi, float(paired["utility_difference"].mean()),
+        alpha_grid, budget, int(replicates),
+        55092 if application == "humanitarian" else 55093,
+    )
+    atomic_json(results_root / "statistics" / ("refit_permutation_%s.json" % application), result)
+    return result
+
+
+def analyze_sketch_ablation(
+    results_root: Path,
+    stage: str = "sketch_ablation",
+) -> Dict[str, Any]:
+    stage_root = results_root / "development" / stage
+    episodes = pd.read_csv(stage_root / "episode_summary.csv")
+    candidates = pd.read_csv(stage_root / "candidate_interventions.csv")
+    incidents = candidates.drop_duplicates(["cluster_id", "sketch_policy", "incident_id"])
+    rows: List[Dict[str, Any]] = []
+    for keys, group in episodes.groupby(
+        ["application", "information_condition", "sketch_policy"], sort=True,
+    ):
+        application, condition, policy = keys
+        incident_group = incidents[
+            (incidents["application"] == application)
+            & (incidents["information_condition"] == condition)
+            & (incidents["sketch_policy"] == policy)
+        ]
+        rows.append({
+            "application": application,
+            "information_condition": condition,
+            "sketch_policy": policy,
+            "panels": int(len(group)),
+            "incidents": int(len(incident_group)),
+            "mean_sketch_messages": float(group["sketch_messages"].mean()),
+            "mean_sketch_bytes": float(group["sketch_bytes"].mean()),
+            "mean_sketch_latency": float(group["sketch_latency"].mean()),
+            "mean_entropy_estimation_error": float(incident_group["distributed_entropy_error"].mean()),
+            "p95_entropy_estimation_error": float(incident_group["distributed_entropy_error"].quantile(0.95)),
+        })
+    frame = pd.DataFrame(rows)
+    comparisons: List[Dict[str, Any]] = []
+    for application in sorted(frame["application"].unique()):
+        for condition in sorted(frame["information_condition"].unique()):
+            subset = frame[(frame["application"] == application) & (frame["information_condition"] == condition)].set_index("sketch_policy")
+            event = subset.loc["event_triggered"]
+            always = subset.loc["always_on"]
+            periodic = subset.loc["periodic"]
+            byte_reduction = 1.0 - float(event["mean_sketch_bytes"] / max(always["mean_sketch_bytes"], 1e-12))
+            dominated = bool(
+                periodic["mean_sketch_bytes"] <= event["mean_sketch_bytes"]
+                and periodic["mean_entropy_estimation_error"] <= event["mean_entropy_estimation_error"]
+                and (
+                    periodic["mean_sketch_bytes"] < event["mean_sketch_bytes"]
+                    or periodic["mean_entropy_estimation_error"] < event["mean_entropy_estimation_error"]
+                )
+            )
+            comparisons.append({
+                "application": application,
+                "information_condition": condition,
+                "event_byte_reduction_vs_always_on": byte_reduction,
+                "event_error": float(event["mean_entropy_estimation_error"]),
+                "periodic_error": float(periodic["mean_entropy_estimation_error"]),
+                "event_dominated_by_periodic_on_bytes_and_error": dominated,
+            })
+    write_csv(results_root / "statistics" / "sketch_communication_accounting.csv", rows)
+    write_csv(results_root / "statistics" / "sketch_policy_comparisons.csv", comparisons)
+    report = {
+        "stage": stage,
+        "episodes": int(len(episodes)),
+        "independent_panels_per_policy": int(episodes.groupby("sketch_policy")["cluster_id"].nunique().min()),
+        "rows": rows,
+        "comparisons": comparisons,
+        "all_sketch_traffic_counted": True,
+    }
+    atomic_json(results_root / "development" / "sketch_ablation_analysis.json", report)
     return report

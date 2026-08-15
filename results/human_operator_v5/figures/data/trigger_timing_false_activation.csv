@@ -1,0 +1,4 @@
+application,disrupted_panels,activation_fraction,timely_activation_fraction,missed_eligible_fraction,nominal_false_activation_fraction,pre_disruption_activation_fraction,maximum_queue_length
+commercial,240,0.8375,0.8375,0.1625,0.3,0.0,2
+humanitarian,240,0.8,0.8,0.2,0.3,0.0,2
+utility_restoration,240,0.7416666666666667,0.7416666666666667,0.2583333333333333,0.325,0.0,2

@@ -1,0 +1,7 @@
+application,information_condition,event_byte_reduction_vs_always_on,event_error,periodic_error,event_dominated_by_periodic_on_bytes_and_error
+commercial,private_fragmented,0.624352354577187,0.02156907683736179,0.018596598401699898,False
+commercial,public_shared,0.6034441145595553,0.029351703014657893,0.0025520627674860286,False
+humanitarian,private_fragmented,0.6348764626302423,0.018906139857409215,0.016153741736221916,False
+humanitarian,public_shared,0.605803127542258,0.028661676786841422,0.002214694274442991,False
+utility_restoration,private_fragmented,0.6158699448686779,0.020924243651831882,0.012438293391817198,False
+utility_restoration,public_shared,0.5968118097750585,0.030131660513944607,0.0021716874025955435,True

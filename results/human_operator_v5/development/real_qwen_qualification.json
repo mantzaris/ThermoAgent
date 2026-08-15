@@ -1,0 +1,49 @@
+{
+  "applications": {
+    "commercial": {
+      "action_diversity": 3,
+      "decision_epochs": 36,
+      "episodes": 12,
+      "first_pass_validity": 1.0,
+      "material_acceptance": 0.8333333333333334,
+      "private_evidence_action_divergence": 0.5,
+      "service_reaching": 0.2222222222222222,
+      "validity_after_one_repair": 1.0
+    },
+    "humanitarian": {
+      "action_diversity": 4,
+      "decision_epochs": 36,
+      "episodes": 12,
+      "first_pass_validity": 1.0,
+      "material_acceptance": 0.8333333333333334,
+      "private_evidence_action_divergence": 0.9,
+      "service_reaching": 0.3888888888888889,
+      "validity_after_one_repair": 1.0
+    },
+    "utility_restoration": {
+      "action_diversity": 3,
+      "decision_epochs": 36,
+      "episodes": 12,
+      "first_pass_validity": 1.0,
+      "material_acceptance": 0.8611111111111112,
+      "private_evidence_action_divergence": 0.0,
+      "service_reaching": 0.6388888888888888,
+      "validity_after_one_repair": 1.0
+    }
+  },
+  "decision_epochs": 108,
+  "episodes": 36,
+  "generated_tokens": 6116,
+  "latency_seconds": 40.6921340636909,
+  "llm_calls": 108,
+  "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "precision": "bitsandbytes NF4 with BF16 computation",
+  "prompt_tokens": 104836,
+  "real_human_participants": false,
+  "real_qwen_agents": true,
+  "simulated_operator": false,
+  "stage": "real_qwen_qualification",
+  "study": "ThermoHITL v5",
+  "wall_seconds_including_model_load": 109.3418309353292
+}

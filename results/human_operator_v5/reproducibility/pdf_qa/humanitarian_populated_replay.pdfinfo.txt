@@ -1,0 +1,14 @@
+Producer:       cairo 1.16.0 (https://cairographics.org)
+CreationDate:   Sat Aug 15 04:29:30 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      900 x 570 pts
+Page rot:       0
+File size:      24087 bytes
+Optimized:      no
+PDF version:    1.5

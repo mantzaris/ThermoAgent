@@ -14,6 +14,7 @@ from ..human_environment import HumanScenarioConfig
 from ..human_runner import HumanOperatorEpisodeRunner, write_human_episode
 from .replay import DashboardReplay, frame_svg
 from .v4 import V4DashboardReplay, frame_svg_v4
+from .v5 import V5DashboardReplay, frame_svg_v5
 
 
 HTML = r"""<!doctype html>
@@ -60,14 +61,16 @@ def _live_replay() -> DashboardReplay:
     return DashboardReplay(directory / "episode.json")
 
 
-def _load_replay(episode_path: Path) -> Union[DashboardReplay, V4DashboardReplay]:
+def _load_replay(episode_path: Path) -> Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay]:
     payload = json.loads(episode_path.read_text(encoding="utf-8"))
+    if payload.get("study") == "ThermoHITL v5":
+        return V5DashboardReplay(episode_path)
     if "information_condition" in payload and "regime" in payload:
         return V4DashboardReplay(episode_path)
     return DashboardReplay(episode_path)
 
 
-def serve(replay: Union[DashboardReplay, V4DashboardReplay], host: str, port: int) -> None:
+def serve(replay: Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay], host: str, port: int) -> None:
     class Handler(BaseHTTPRequestHandler):
         def _send(self, body: bytes, content_type: str, status: int = 200) -> None:
             self.send_response(status)
@@ -91,8 +94,8 @@ def serve(replay: Union[DashboardReplay, V4DashboardReplay], host: str, port: in
                 step = int(query.get("step", ["0"])[0])
                 frame = replay.frame(step)
                 rendered = (
-                    frame_svg_v4(frame)
-                    if isinstance(replay, V4DashboardReplay)
+                    frame_svg_v5(frame) if isinstance(replay, V5DashboardReplay)
+                    else frame_svg_v4(frame) if isinstance(replay, V4DashboardReplay)
                     else frame_svg(frame)
                 )
                 self._send(rendered.encode("utf-8"), "image/svg+xml")

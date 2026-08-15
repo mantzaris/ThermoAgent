@@ -1,0 +1,17 @@
+Title:          communication_cost_service_loss_pareto
+Subject:        ThermoHITL V5 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 04:28:48 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      540.764 x 355.25 pts
+Page rot:       0
+File size:      386068 bytes
+Optimized:      no
+PDF version:    1.4

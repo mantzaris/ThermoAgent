@@ -1,0 +1,9 @@
+{
+  "candidate_rows": 27648,
+  "completed_now": 768,
+  "episodes": 768,
+  "failures": 0,
+  "finished_at": "2026-08-15T07:42:14.677300+00:00",
+  "resumed_existing": 0,
+  "stage": "sketch_ablation"
+}

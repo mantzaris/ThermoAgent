@@ -1,0 +1,19 @@
+view,field,value
+KPI-only,visible_severity,0.2785333043747386
+KPI-only,visible_backlog,0.3080131893112385
+KPI-only,visible_delay,0.3740467624447913
+KPI-only,resource_scarcity,0.4166152418959463
+KPI-only,safety_risk,0.3360275358619405
+KPI-only,commitment_strain,0.0365265710021528
+KPI + entropy/disagreement,visible_severity,0.2785333043747386
+KPI + entropy/disagreement,visible_backlog,0.3080131893112385
+KPI + entropy/disagreement,visible_delay,0.3740467624447913
+KPI + entropy/disagreement,resource_scarcity,0.4166152418959463
+KPI + entropy/disagreement,safety_risk,0.3360275358619405
+KPI + entropy/disagreement,commitment_strain,0.0365265710021528
+KPI + entropy/disagreement,mean_belief_entropy,0.868626256013365
+KPI + entropy/disagreement,entropy_dispersion,0.1071825555184845
+KPI + entropy/disagreement,js_disagreement,0.1155779382338247
+KPI + entropy/disagreement,entropy_slope,-0.0291289887331239
+KPI + entropy/disagreement,consensus_residual,0.1772161745951247
+KPI + entropy/disagreement,consensus_confidence,0.7802798477847329

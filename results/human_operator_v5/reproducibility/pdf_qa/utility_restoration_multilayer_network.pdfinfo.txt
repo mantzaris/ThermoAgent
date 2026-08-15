@@ -1,0 +1,17 @@
+Title:          utility_restoration_multilayer_network
+Subject:        ThermoHITL V5 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 04:28:16 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      443.516 x 422.268 pts
+Page rot:       0
+File size:      385914 bytes
+Optimized:      no
+PDF version:    1.4

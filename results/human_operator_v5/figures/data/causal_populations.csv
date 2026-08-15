@@ -1,0 +1,11 @@
+population,stage,count
+autonomous,Panel actions,3360
+autonomous,Accepted,3170
+autonomous,Reached service,2610
+autonomous,Changed outcome,264
+counterfactual probes,Counterfactual probes,30240
+counterfactual probes,Accepted,19462
+counterfactual probes,Next stage,18556
+counterfactual probes,Reached service,7276
+counterfactual probes,Beneficial,4237
+counterfactual probes,Harmful,22643

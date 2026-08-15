@@ -23,6 +23,7 @@ def test_pdf_validation_opens_detects_fonts_and_renders(tmp_path: Path):
     assert len(report["figures"]) == 1
     record = report["figures"][0]
     assert record["opens"] and record["fonts_detected"]
+    assert record["fonts_embedded"] in (True, None)
     assert (tmp_path / record["rendered"]).stat().st_size > 1000
 
 

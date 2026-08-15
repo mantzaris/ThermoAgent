@@ -16,6 +16,8 @@ from thermoagent.v5_environment import V5PanelEnvironment
 from thermoagent.v5_experiments import run_panel, write_panel
 from thermoagent.v5_replay import replay_v5_episode
 from thermoagent.v5_types import OPERATOR_ACTIONS
+from thermoagent.v5_tools import V5ToolRegistry
+from thermoagent.dashboard.v5 import V5DashboardReplay, frame_svg_v5
 
 
 @pytest.fixture()
@@ -242,3 +244,48 @@ def test_generated_v5_text_uses_lf(tmp_path: Path):
     for path in root.rglob("*"):
         if path.is_file() and path.suffix in {".json", ".csv", ".jsonl"}:
             assert b"\r\n" not in path.read_bytes()
+
+
+def test_role_specific_typed_tool_validation(utility_environment):
+    agent = next(value for value in utility_environment.agents.values() if value.identity.role == "field_crew")
+    incident = agent.identity.incident_scope[0]
+    registry = V5ToolRegistry()
+    valid = registry.validate(agent.identity.role, agent.identity.incident_scope, {
+        "action": "deploy_repair_capacity",
+        "incident_id": incident,
+        "quantity": 1.0,
+        "reason_code": "private field evidence",
+    })
+    assert valid.ok
+    forbidden = registry.validate(agent.identity.role, agent.identity.incident_scope, {
+        "action": "authorize_emergency_resource",
+        "incident_id": incident,
+        "quantity": 1.0,
+        "reason_code": "outside crew authority",
+    })
+    assert not forbidden.ok
+    out_of_scope = registry.validate(agent.identity.role, agent.identity.incident_scope, {
+        "action": "deploy_repair_capacity",
+        "incident_id": "hidden_peer_incident",
+        "quantity": 1.0,
+        "reason_code": "forbidden scope",
+    })
+    assert not out_of_scope.ok
+
+
+def test_v5_dashboard_replay_is_deterministic_and_private(tmp_path: Path):
+    environment, summary, candidates = run_panel(
+        "utility_restoration", "partition", "private_fragmented", 51011,
+    )
+    root = tmp_path / "results"
+    write_panel(Path.cwd(), root, "dashboard", environment, summary, candidates)
+    episode = root / "raw" / "dashboard" / summary["run_id"] / "episode.json"
+    first = V5DashboardReplay(episode)
+    second = V5DashboardReplay(episode)
+    assert first.digest() == second.digest()
+    encoded = json.dumps([frame.as_dict() for frame in first.frames], sort_keys=True)
+    for prohibited in ("true_mode", "correct_action", "stochastic_tape", "loss_without", "causal_effect"):
+        assert prohibited not in encoded
+    svg = frame_svg_v5(first.frames[-1])
+    assert svg.startswith("<svg")
+    assert "Simulated operator" in svg

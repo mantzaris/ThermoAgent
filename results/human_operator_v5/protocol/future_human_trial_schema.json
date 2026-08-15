@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Technical schema for a future ethics-approved study; V5 contains no participant records.",
+  "properties": {
+    "action": {"type": "string"},
+    "condition": {"enum": ["kpi_only", "kpi_plus_entropy_disagreement"]},
+    "environment_panel_id": {"type": "string"},
+    "operator_minutes": {"minimum": 0, "type": "number"},
+    "participant_pseudonym": {"type": "string"},
+    "response_time_ms": {"minimum": 0, "type": "integer"},
+    "sequence_block": {"type": "string"},
+    "trial_id": {"type": "string"},
+    "view_payload_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "workload_response": {"type": ["object", "null"]}
+  },
+  "required": ["trial_id", "participant_pseudonym", "environment_panel_id", "condition", "view_payload_sha256", "action", "response_time_ms"],
+  "title": "ThermoHITL future human trial record",
+  "type": "object"
+}

@@ -1,0 +1,10 @@
+{
+  "additional_v5_single_gpu_hours": 0.03037273081536922,
+  "estimated_gpu_cost_usd_at_0_34_per_hour": 0.010326728477225535,
+  "generated_tokens": 6116,
+  "projected_cap_gpu_hours": 50.0,
+  "projected_cost_cap_usd": 40.0,
+  "prompt_tokens": 104836,
+  "qwen_calls": 108,
+  "rl_cpu_wall_seconds_sum": 898.6927778110839
+}

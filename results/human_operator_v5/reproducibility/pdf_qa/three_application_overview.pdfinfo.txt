@@ -1,0 +1,17 @@
+Title:          three_application_overview
+Subject:        ThermoHITL V5 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 04:28:15 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      543.255 x 355.91 pts
+Page rot:       0
+File size:      735194 bytes
+Optimized:      no
+PDF version:    1.4

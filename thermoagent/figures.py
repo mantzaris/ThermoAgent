@@ -795,6 +795,14 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             fonts = subprocess.run([tools["pdffonts"], str(pdf)], capture_output=True, text=True, check=True).stdout
             subprocess.run([tools["pdftoppm"], "-f", "1", "-singlefile", "-png", "-r", "240", str(pdf), str(render_prefix)], capture_output=True, check=True)
             fonts_detected = len(fonts.splitlines()) > 2
+            font_rows = [line for line in fonts.splitlines()[2:] if line.strip()]
+            embedded_flags = [
+                match.group(1) == "yes"
+                for line in font_rows
+                for match in [re.search(r"\s(yes|no)\s+(?:yes|no)\s+(?:yes|no)\s+\d+\s+\d+\s*$", line)]
+                if match is not None
+            ]
+            fonts_embedded = bool(embedded_flags) and all(embedded_flags)
             backend = "poppler"
         else:
             document = pymupdf.open(str(pdf))
@@ -816,13 +824,14 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             fonts = "\n".join(font_rows) + "\n"
             document[0].get_pixmap(dpi=240, alpha=False).save(str(render))
             fonts_detected = bool(font_rows)
+            fonts_embedded = None  # PyMuPDF fallback cannot reproduce pdffonts' embedding audit.
             backend = "pymupdf"
             document.close()
         if not render.exists() or render.stat().st_size < 1000:
             raise RuntimeError("render failed for %s" % pdf)
         (qa_dir / (pdf.stem + ".pdfinfo.txt")).write_text(info, encoding="utf-8")
         (qa_dir / (pdf.stem + ".fonts.txt")).write_text(fonts, encoding="utf-8")
-        records.append({"pdf": str(pdf.relative_to(results_root)), "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
+        records.append({"pdf": str(pdf.relative_to(results_root)), "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "fonts_embedded": fonts_embedded, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
     report = {"tools": tools, "pymupdf_available": pymupdf is not None, "figures": records}
     (qa_dir / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
@@ -836,7 +845,8 @@ def mark_visual_qa(results_root: Path, reviewer: str, note: str) -> Dict[str, An
         raise ValueError("no rendered figures are available for visual review")
     for record in report["figures"]:
         render = results_root / record["rendered"]
-        if not record.get("opens") or not record.get("fonts_detected") or not render.exists():
+        if (not record.get("opens") or not record.get("fonts_detected")
+                or record.get("fonts_embedded") is False or not render.exists()):
             raise ValueError("mechanical QA is incomplete for %s" % record.get("pdf"))
         record["visual_inspection"] = "passed"
         record["visual_inspection_note"] = note

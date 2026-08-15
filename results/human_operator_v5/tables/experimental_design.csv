@@ -1,0 +1,12 @@
+stage,evidence_type,eligible_for_inference,episodes,candidate_rows,failed_runs,simulated_operator,confirmatory
+pilot,deterministic independent-agent development,False,168,6048,0,True,False
+pilot_iteration_2,deterministic independent-agent development,False,168,6048,0,True,False
+pilot_iteration_3,deterministic independent-agent development,False,168,6048,0,True,False
+pilot_iteration_4,deterministic independent-agent development,False,168,6048,0,True,False
+development_primary,deterministic independent-agent development,False,654,23544,186,True,False
+development_primary_v2,deterministic independent-agent development,True,840,30240,0,True,False
+sketch_ablation,deterministic independent-agent development,True,768,27648,0,True,False
+real_qwen_qualification,real Qwen independent-agent qualification,False,36,108,0,False,False
+multiseed_decentralized_rl,development-only RL policy training,False,10,21600,0,False,False
+validation,prospectively locked—not run,False,0,0,0,True,False
+sealed_holdout,prospectively locked—not run,False,0,0,0,True,False

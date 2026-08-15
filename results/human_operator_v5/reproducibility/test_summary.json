@@ -1,0 +1,9 @@
+{
+  "errors": 0,
+  "failed_tests": 0,
+  "passed": true,
+  "passed_tests": 238,
+  "skipped_tests": 0,
+  "source": "reproducibility/test_results.xml",
+  "total_tests": 238
+}

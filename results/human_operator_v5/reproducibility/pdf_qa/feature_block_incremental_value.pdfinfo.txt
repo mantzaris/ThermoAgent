@@ -1,0 +1,17 @@
+Title:          feature_block_incremental_value
+Subject:        ThermoHITL V5 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 04:28:39 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      540.83 x 390.758 pts
+Page rot:       0
+File size:      387775 bytes
+Optimized:      no
+PDF version:    1.4

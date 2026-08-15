@@ -1,5 +1,46 @@
 # ThermoAgent project status
 
+## Distributed entropic observability study (v5)
+
+Last updated: 2026-08-15 America/New_York
+
+- **Current phase:** Complete development-stage prospective no-go. Gates 1, 3,
+  4, and 8 pass; Gates 2, 5, 6, 7, 9, and 10 fail. Validation therefore
+  remained locked and the sealed holdout was never opened.
+- **Branch:** `thermodynamic-human-oversight-v5`, based on the repaired V4
+  maintenance commit `d39eb2eefefa54259a2bafc6dcd6e9b0dbde2ffe`; immutable
+  original V4 result snapshot `8ccd27df248940fc0cbb55c43a30949de3370533`
+  remains in history.
+- **Completed:** V4 clone/line-ending and presentation maintenance; V4 audit;
+  prospective V5 protocol; three competitive four-incident applications; 840
+  valid development panels; 768 sketch-ablation panels; 36 real-Qwen
+  qualification episodes; ten decentralized multi-seed RL runs; cluster-aware
+  causal analysis; 3,156 exact event replays; populated dashboard exports;
+  publication figures and reporting.
+- **Latest valid result:** KPI-plus-entropy/disagreement triage has negative
+  paired development utility relative to KPI-only in humanitarian logistics
+  (`-0.0116`, 95% CI `[-0.0279, 0.0043]`) and utility restoration (`-0.0100`,
+  95% CI `[-0.0277, 0.0068]`). The private-minus-public interaction intervals
+  cross zero. Low-consensus abstention nevertheless reduces harmful selections
+  by 45.7% and 69.0%, respectively, a narrower safety finding.
+- **Autonomous-agent evidence:** 108 real-Qwen decisions were structurally
+  valid, but service-reaching and private-evidence divergence thresholds were
+  not met. All five seeds for each of two decentralized learned policies
+  completed, but both policies reproducibly collapsed to `no_action`.
+- **Integrity:** 238 tests and 3,156 replays pass with zero replay mismatches
+  and maximum conservation residual 0.0. All 24 publication/dashboard PDFs
+  open, use embedded fonts, render at 240 DPI, and passed original-resolution
+  visual review; final Git/fresh-clone verification is the remaining handoff.
+- **Active jobs:** none locally or on the RunPod. The final read-only remote
+  audit found 0% GPU utilization, no CUDA compute job, no tmux session, and no
+  ThermoAgent/Qwen process.
+- **Blocker:** scientific progression gates, not infrastructure. No routine
+  rerun can unlock validation without violating the prospective protocol.
+- **Readiness:** engineering demonstration and transparent development/boundary
+  workshop evidence; insufficient for a confirmatory journal or AIJ claim.
+
+---
+
 ## ThermoHITL distributed-observability study (v4)
 
 Last updated: 2026-08-15 America/New_York

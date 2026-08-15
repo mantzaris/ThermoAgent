@@ -1,0 +1,20 @@
+{
+  "checkpoint": "training/checkpoints/ippo_kpi_only-seed-52002.pt",
+  "checkpoint_sha256": "fbecba919fe033ad284a02ba22b4bbbeee57d34633087d8333c66a28378d9d2f",
+  "curve_path": "training/curves/ippo_kpi_only-seed-52002.csv",
+  "device": "cpu",
+  "evaluation_action_diversity": 1,
+  "evaluation_beneficial_fraction": 0.0,
+  "evaluation_decision_epochs": 2160,
+  "evaluation_harmful_fraction": 0.0,
+  "evaluation_mean_reward": 0.0,
+  "evaluation_path": "training/evaluation/ippo_kpi_only-seed-52002.csv",
+  "evaluation_policy_entropy": 0.007746277842670679,
+  "evaluation_reward_std": 0.0,
+  "method": "ippo_kpi_only",
+  "rl_seed": 52002,
+  "status": "complete",
+  "training_decision_epochs": 30208,
+  "training_steps": 30000,
+  "wall_seconds": 96.65834967500996
+}

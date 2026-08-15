@@ -1,0 +1,20 @@
+{
+  "checkpoint": "training/checkpoints/ippo_entropy_disagreement-seed-52001.pt",
+  "checkpoint_sha256": "5871910dfc37d08d469152e675277138ff6abb6cd918fc0984708c8019e9f2ad",
+  "curve_path": "training/curves/ippo_entropy_disagreement-seed-52001.csv",
+  "device": "cpu",
+  "evaluation_action_diversity": 1,
+  "evaluation_beneficial_fraction": 0.0,
+  "evaluation_decision_epochs": 2160,
+  "evaluation_harmful_fraction": 0.0,
+  "evaluation_mean_reward": 0.0,
+  "evaluation_path": "training/evaluation/ippo_entropy_disagreement-seed-52001.csv",
+  "evaluation_policy_entropy": 0.01105009950697422,
+  "evaluation_reward_std": 0.0,
+  "method": "ippo_entropy_disagreement",
+  "rl_seed": 52001,
+  "status": "complete",
+  "training_decision_epochs": 30208,
+  "training_steps": 30000,
+  "wall_seconds": 94.67575932200998
+}

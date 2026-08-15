@@ -1,0 +1,6 @@
+stage,failure_type,count,selectively_rerun,disposition
+development_primary,concurrent_execution_FileExistsError,186,false,entire stage invalidated and untouched replacement seeds used
+development_analysis,profiled_nonvectorized_runtime_interruption,1,false,no outcome emitted; vectorized implementation retained
+development_refit_permutation,fit_boundary_inconsistency,2,false,outputs preserved as superseded and corrected procedure rerun
+multiseed_training,failed_seed,0,false,all ten policy runs retained
+real_qwen_qualification,failed_episode,0,false,all 36 episodes retained

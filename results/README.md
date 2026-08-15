@@ -38,9 +38,22 @@
   were not run. Development thermodynamic gains in humanitarian and utility
   restoration remain promising but non-confirmatory, with an exact commercial
   null.
+- **Competitive entropic-observability study (v5):**
+  [`human_operator_v5/README.md`](human_operator_v5/README.md). V5 removes the
+  V4 single-verification shortcut, uses four simultaneous incidents, costly
+  imperfect and potentially harmful interventions, explicit sketch traffic,
+  grouped causal-utility models, 20 formal development seeds, 108 real-Qwen
+  decisions, and five decentralized RL seeds per method. Coordination and
+  bounded simulated-operator action are consequential, and low-consensus
+  abstention reduces harmful choices. The primary KPI-plus-entropy/disagreement
+  effect is nevertheless negative in both humanitarian and utility-restoration
+  applications; Qwen actionability, trigger feasibility, mechanism specificity,
+  communication-adjusted value, and learned-policy stability gates fail.
+  Validation and the sealed holdout were therefore never run. V5 is an honest
+  development no-go, not positive AIJ evidence.
 
 The top-level `INDEX.csv` indexes the historical namespaces when rebuilt. No
-v2, v3, or v4 derived artifact replaces a frozen-v1 source artifact.
+v2, v3, v4, or v5 derived artifact replaces a frozen-v1 source artifact.
 
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed

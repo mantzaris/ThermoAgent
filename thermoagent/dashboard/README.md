@@ -1,7 +1,7 @@
 # ThermoHITL operator dashboard
 
 The dashboard is a dependency-light local web application. Replay mode reads a
-v3 or v4 `episode.json` and adjacent compressed event ledger; it does not load a
+v3, v4, or v5 `episode.json` and adjacent compressed event ledger; it does not load a
 model or require a GPU. V4 replay detects `operator_view_v4` events and refuses
 to reconstruct a richer display from evaluator time-series fields. Live mode
 runs a deterministic small mock-planner scenario and serves the same interface.
@@ -14,6 +14,9 @@ runs a deterministic small mock-planner scenario and serves the same interface.
 
 ./scripts/run-human-operator-v4-dashboard.sh --episode \
   results/human_operator_v4/raw/development_gate_trigger/<run-id>/episode.json
+
+./scripts/run-human-operator-v5-dashboard.sh --episode \
+  results/human_operator_v5/raw/development_primary_v2/<run-id>/episode.json
 ```
 
 Open `http://127.0.0.1:8765`. The application supports play, pause, step,
@@ -29,6 +32,14 @@ commercial, humanitarian, and utility replay SVG/PDF exports under
 `results/human_operator_v4/dashboard_exports/`. They are generated from the
 functional replay frames and retain source ledger/view hashes; they are not
 hand-drawn dashboard mockups.
+
+## V5 populated exports
+
+`./scripts/generate-human-operator-v5-figures.sh` produces actual populated
+commercial, humanitarian, and utility replay SVG/PDF/PNG exports under
+`results/human_operator_v5/dashboard_exports/`. V5 ranks four simultaneous
+incidents, exposes only the hashed deployable KPI/entropy/disagreement payload,
+and excludes evaluator counterfactual effects and true incident modes.
 
 ## Data dictionary
 
@@ -58,8 +69,8 @@ hashes.
 
 ## Human-study boundary
 
-V3 and v4 evaluate simulated operators only. The interface is technical
+V3, v4, and v5 evaluate simulated operators only. The interface is technical
 preparation for a future IRB-approved study. It does not establish human
 usability, trust, fatigue, cognitive workload, or safety. See
-`results/human_operator_v4/protocol/future_human_study_protocol.md` for the v4
-study boundary, power template, trial schema, and randomization template.
+`results/human_operator_v5/protocol/future_human_study_protocol.md` and
+`future_human_trial_schema.json` for the current technical preparation.

@@ -13,6 +13,8 @@ from .v5_experiments import atomic_json
 
 def replay_v5_episode(episode_path: Path) -> Dict[str, Any]:
     episode = json.loads(episode_path.read_text(encoding="utf-8"))
+    if episode.get("stage") == "real_qwen_qualification":
+        return replay_v5_qwen_episode(episode_path, episode)
     ledgers = list(episode_path.parent.glob("events.jsonl*"))
     if len(ledgers) != 1:
         raise ValueError("expected exactly one V5 event ledger")
@@ -75,6 +77,60 @@ def replay_v5_episode(episode_path: Path) -> Dict[str, Any]:
     }
 
 
+def replay_v5_qwen_episode(
+    episode_path: Path,
+    episode: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    value = episode or json.loads(episode_path.read_text(encoding="utf-8"))
+    ledgers = list(episode_path.parent.glob("events.jsonl*"))
+    if len(ledgers) != 1:
+        raise ValueError("expected exactly one V5 Qwen ledger")
+    ledger_path = ledgers[0]
+    ledger = EventLedger.read_jsonl(ledger_path)
+    if ledger.digest() != value["event_ledger_digest"]:
+        raise ValueError("V5 Qwen ledger digest mismatch")
+    tapes = [event for event in ledger.events if event.kind == "v5_stochastic_tape"]
+    if len(tapes) != 1 or tapes[0].payload["digest"] != value["stochastic_tape_digest"]:
+        raise ValueError("V5 Qwen stochastic tape mismatch")
+    requests = [event for event in ledger.events if event.kind == "llm_request"]
+    responses = [event for event in ledger.events if event.kind == "llm_structured_response"]
+    calls = [event for event in ledger.events if event.kind == "tool_call"]
+    results = [event for event in ledger.events if event.kind == "tool_result"]
+    decisions = value["decisions"]
+    if not (len(requests) == len(responses) == len(calls) == len(results) == len(decisions)):
+        raise ValueError("V5 Qwen decision-event count mismatch")
+    if any(event.private_to != event.actor for event in requests + responses):
+        raise ValueError("V5 Qwen private planner event leaked")
+    audits = [event for event in ledger.events if event.kind == "v5_privacy_audit"]
+    if not audits or any(
+        event.payload.get("private_state_leak")
+        or event.payload.get("future_state_leak")
+        or event.payload.get("operator_global_state_leak")
+        for event in audits
+    ):
+        raise ValueError("V5 Qwen privacy audit failed")
+    for decision, response, result in zip(decisions, responses, results):
+        if decision["agent_id"] != response.actor:
+            raise ValueError("V5 Qwen decision actor mismatch")
+        if bool(decision["material_action_accepted"]) != bool(result.payload["accepted"]):
+            raise ValueError("V5 Qwen tool-result regeneration mismatch")
+        if abs(float(decision["causal_effect"]) - float(result.payload["causal_effect"])) > 1e-12:
+            raise ValueError("V5 Qwen causal-effect regeneration mismatch")
+    return {
+        "run_id": value["run_id"],
+        "episode_path": str(episode_path),
+        "ledger_path": str(ledger_path),
+        "events": len(ledger.events),
+        "counterfactual_branches": 0,
+        "maximum_conservation_residual": 0.0,
+        "privacy_audits": len(audits),
+        "mismatches": 0,
+        "ledger_sha256": sha256_file(ledger_path),
+        "status": "passed",
+        "real_qwen_decisions": len(decisions),
+    }
+
+
 def replay_v5_results(results_root: Path, stages: Optional[Sequence[str]] = None) -> Dict[str, Any]:
     allowed = set(stages) if stages is not None else None
     paths = [
@@ -92,6 +148,12 @@ def replay_v5_results(results_root: Path, stages: Optional[Sequence[str]] = None
         "episodes_replayed": len(records),
         "failures": len(failures),
         "mismatches": len(failures),
+        "privacy_failures": sum("privacy" in row["error"].lower() for row in failures),
+        "nonfinite_metrics": sum("nonfinite" in row["error"].lower() for row in failures),
+        "checksum_failures": sum(
+            any(value in row["error"].lower() for value in ("digest", "checksum", "sha256"))
+            for row in failures
+        ),
         "maximum_conservation_residual": max(
             [float(row["maximum_conservation_residual"]) for row in records] or [0.0]
         ),

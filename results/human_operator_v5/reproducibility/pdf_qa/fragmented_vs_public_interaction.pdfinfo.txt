@@ -1,0 +1,17 @@
+Title:          fragmented_vs_public_interaction
+Subject:        ThermoHITL V5 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 04:28:45 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      548.64 x 362.88 pts
+Page rot:       0
+File size:      384765 bytes
+Optimized:      no
+PDF version:    1.4

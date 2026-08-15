@@ -1,0 +1,431 @@
+{
+  "all_semantically_equal": true,
+  "files_normalized": 47,
+  "records": [
+    {
+      "normalized_v4_branch_sha256": "2d836673e7b554a2f27a2c684f79524990625067ce0e17ddc4a7edf04d86a170",
+      "original_crlf_sequences": 2305,
+      "original_v3_sha256": "106f705bead2565975f3edbfb08779e1bb967eb96cc4c8aecf797c75aa83505b",
+      "path": "results/human_operator_v3/calibration/nominal_agent_periods.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "3ed134fee5b52536adab283ad3a8cc4e3004f3a21e968d4738cd6f561af231f6",
+      "original_crlf_sequences": 2881,
+      "original_v3_sha256": "70f681ff0d1e9e1c2267612e6db0bb8e0381986680962bce0f928c936cacaed5",
+      "path": "results/human_operator_v3/calibration/thermodynamic_calibration_n10_agent_periods.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "c4243cee518ea4ba69bd86c45337449426983d8c34c9e2e0dd42d788584bdd07",
+      "original_crlf_sequences": 632,
+      "original_v3_sha256": "ff64d43c4b0be36dd82300d2cf8ec1a81f4bdc24ea60955dc0cf8273c6f54d41",
+      "path": "results/human_operator_v3/counterfactuals/paired_intervention_effects.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "86562b0212a4b365b94eeea7751573aaaf2b19c835dee4989567d1e723af7e36",
+      "original_crlf_sequences": 49,
+      "original_v3_sha256": "4eb69fe3dcb3e32d2a55722de22aa8afa47c0e9f7bec38c4961c67bba490f405",
+      "path": "results/human_operator_v3/dense_causal_development_n10_v2/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "372afc3cc5abdacf16897d163cf23673bee79ff124ae351a94293cb7297a5fa2",
+      "original_crlf_sequences": 49,
+      "original_v3_sha256": "29bc84dd54c8f245b504ae1161c7ce3f86965835368a4c80e4fdc642c0de839a",
+      "path": "results/human_operator_v3/dense_causal_development_n10_v3/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "8eefd03365cb88ae5fd3d6f5142d11c2582c9dd6bc0bda5e32d026c1a52af4e7",
+      "original_crlf_sequences": 61,
+      "original_v3_sha256": "0d9a74989615d344606d3390765f1232d0e1d95a4a308e4ffc9d92adbe112741",
+      "path": "results/human_operator_v3/development_gate_coordination_n10/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "8e9e62cac99a0369878dfd0bf815c10b72ef2b2c7a4e377ffe2efb35fd3f266d",
+      "original_crlf_sequences": 121,
+      "original_v3_sha256": "4ebd54278158e936f02907b0355390bc34f6712852ae7719e548832b4c346923",
+      "path": "results/human_operator_v3/development_gate_preliminary_v1/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "57b56d521cf61008c1e3c5c7c924bcaf9d44f6ef64add74ea016ed96b93614b9",
+      "original_crlf_sequences": 121,
+      "original_v3_sha256": "d7251ba0807af8b98425d24d44b211c0376f5d0bff237fda8059b1fb2906e788",
+      "path": "results/human_operator_v3/development_gate_preliminary_v2/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "f6896cbf8259e0eba495322b309acf068be80b508b38813d23f82687b29aec5e",
+      "original_crlf_sequences": 121,
+      "original_v3_sha256": "a285846265a718814c837bec5e353f208b26a00c0083d1c676ec2f249512302b",
+      "path": "results/human_operator_v3/development_gate_preliminary_v3_n10/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "2f8028365cc7ef6808297698f05ff8e3b722833fafc25f3716c3412689ae76e5",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "4a237924d5acece1e0c4e926598ce862826e7a9c69f128f13b215f654358b80b",
+      "path": "results/human_operator_v3/development_harness_smoke/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "310bf3828c5f9202a731f063b35cba75c439e6e53205b8608ed4fad9bea91a3a",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "91304cb37b1c5ac30cbb7593f6b631c672c28bd85b548af19051fdae6fb9d0a6",
+      "path": "results/human_operator_v3/development_real_llm_actionability/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "077438cb95aca3ae4fd1255f415f480c063d7dfe14ada4b0a7ef2d1c49c78228",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "3494cd3d595e3e8a198a9c5c41e359dc783e6158f53a18a31fa4c54ba6b2e121",
+      "path": "results/human_operator_v3/development_real_llm_actionability_retry1/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "f1e2352bf32141b1eb58d62dd0f569e2a3d3d008e104f07c438be90cb44319a4",
+      "original_crlf_sequences": 41,
+      "original_v3_sha256": "8cfd0528bc2dfa9cebf3b1c9989c9a0342f3a59631b6b7151c92ce1135f61dc6",
+      "path": "results/human_operator_v3/development_trigger_candidate_n10_v1/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "0cc27f981a72af7ede8f8f561b5e97264fffde49a8da2320d04097f2ff7b3ec9",
+      "original_crlf_sequences": 41,
+      "original_v3_sha256": "a41ae613e7a691f91d76df5135b4312289d40e6bbb774546bdfe8fa36f62c573",
+      "path": "results/human_operator_v3/development_trigger_candidate_n10_v2/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "f0974de823747c0a8aed6f6072496d8891ed76c5b43902df7983e5cad72741b4",
+      "original_crlf_sequences": 41,
+      "original_v3_sha256": "62d32b1bd14ff3436d102fdcfbb4118110f52806d5cb03e2bacf9ea55d73b625",
+      "path": "results/human_operator_v3/development_trigger_candidate_n10_v3/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "c5868e7030a4c23a0264fbc4ddeca8af8835e031eb63990a4db99eda0464abec",
+      "original_crlf_sequences": 41,
+      "original_v3_sha256": "e2a44a5bc2f6980bdce03e78537fa1b93d8ddc54bf66fe11d4befb90925d320c",
+      "path": "results/human_operator_v3/development_trigger_candidate_n10_v4/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "ae663825ff87d70668d41d85722ed8db29c4cd126a1802b7b2efbf2435257897",
+      "original_crlf_sequences": 100,
+      "original_v3_sha256": "e15aef0e22956fb62f73e914278c52874d88f0fe658e989ddcfc611d80612009",
+      "path": "results/human_operator_v3/diagnostics/v2_tool_result_codes.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "45538cbcb4836bd1323d7b7bea904cd293f4ff7a0739467a3008bc12d7b92764",
+      "original_crlf_sequences": 33,
+      "original_v3_sha256": "3617ba57ae213f7d8f4a6f34a66b96172571584d6a480c133b7a2b060b32082a",
+      "path": "results/human_operator_v3/monitoring/causal_allocation_utility.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "472c6ff9c90f43a2177042b7579521882c5498c9bfc15e3ea471abab4a908794",
+      "original_crlf_sequences": 3,
+      "original_v3_sha256": "a2af919920dbc89d2b74457d234abe8d1509074b95f0d71830d8444b45210d97",
+      "path": "results/human_operator_v3/monitoring/causal_incremental_value.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "caff13fe807c0552c9c598c44a36a66e814f221e3ed556181c1e62a6ea8b8413",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "c26ba41ba7c28979e7964d0b417fd7cc14f6cdafafe9342284bdb78990a9a19d",
+      "path": "results/human_operator_v3/monitoring/causal_monitoring_baselines.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "235f2c0fd51599afaae05d5a5bbb5c845f3fe9a1e8637287888beb56c2ae3cde",
+      "original_crlf_sequences": 65,
+      "original_v3_sha256": "b5ae2c809465166de0283241d26d96d1e9789c064208e3810dc3619efc43da1c",
+      "path": "results/human_operator_v3/monitoring/detection_lead_time.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "73f646c60b99e7acdf5eade78a3d34754eee5bc2e8c6cf8c79ed6b99029ed51b",
+      "original_crlf_sequences": 33,
+      "original_v3_sha256": "12449f3b3ae321ee88e5370050556735d699cbebb42f604024a2f8eef83cc2a5",
+      "path": "results/human_operator_v3/monitoring/development_causal_analysis_pre_local_energy/causal_allocation_utility.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "7b8003ca3a056839f8523695636ac36f3f60f09f9f5dd1fc17db0daa78407599",
+      "original_crlf_sequences": 3,
+      "original_v3_sha256": "53931188c6e761b4a362ed647e8808bacb726d9028b155f21c449c58e5ba2562",
+      "path": "results/human_operator_v3/monitoring/development_causal_analysis_pre_local_energy/causal_incremental_value.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "d225c932d657f0067b1140cc894c05a5e93c63d33c727d2eadadff28eabf7b8a",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "80f78cddc4f518909765815ba6b2581fa11b21c14252cc684db2f0ca284e54c3",
+      "path": "results/human_operator_v3/monitoring/development_causal_analysis_pre_local_energy/causal_monitoring_baselines.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "0e195f5cdd28717041a5d647806ee24cffed30274e6697855e19ca67ec1aae8f",
+      "original_crlf_sequences": 3,
+      "original_v3_sha256": "7cc3728ed9572cf79c8f99d0898265adfbd7fa287ad7817a54f7647e7f573a75",
+      "path": "results/human_operator_v3/monitoring/incremental_value.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "4c4558895df6e4ce7010ebec432e99931e2e0dfbe0c5e0934a56400af5e3402a",
+      "original_crlf_sequences": 721,
+      "original_v3_sha256": "812e232be1098075d65e10a148c1c2650d8d5bdbdd1538286286f27b53039ef5",
+      "path": "results/human_operator_v3/monitoring/localization.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "897ae153fbf001ceb68c1bc8a262c26a144a1e020cbbc8ccdccfc54cc65e3b45",
+      "original_crlf_sequences": 15,
+      "original_v3_sha256": "1216ae7639d95bd67138c7757a01e7b987ee164059affb2b4d50e76cbe97776c",
+      "path": "results/human_operator_v3/monitoring/monitoring_baselines.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "7391256a7ab836203a22300b620d31310985dc24b0278d842672ab05cdf1b31b",
+      "original_crlf_sequences": 97,
+      "original_v3_sha256": "c81b8f5ddf092f28839b9d0dc857a3c81f17b7c76d4e0c47c68e90e0dad3db92",
+      "path": "results/human_operator_v3/monitoring_development/episode_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "b8b4891322bbcadc48090a9fcb23e91290c61d3612aa009561a971a17ebcacaf",
+      "original_crlf_sequences": 7,
+      "original_v3_sha256": "552e4fae9eeff038bc9ccb78935b466f7eb891b85f8ec7874ad0abf14a99ccde",
+      "path": "results/human_operator_v3/statistics/actionability_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "3bcea2576953756fa4a4e4db1f0b29692073d02f6d3e6b8bad3cdd3f026db6c4",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "0b968153537cf9aef551e20168a7a2cc483f01151be8eb14b161315aba5a448e",
+      "path": "results/human_operator_v3/statistics/counterfactual_summary.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "dacbdc68970b51853784773a0564a7c800a4f4e3289bcb4866931ae869fe0402",
+      "original_crlf_sequences": 17,
+      "original_v3_sha256": "d05f6124b49ff93f7ecd08c778b2f9ce06269c3debe61877d83c3c72a26dc844",
+      "path": "results/human_operator_v3/statistics/development_paired_effects.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a2f80bd4eb880054bb797e0165b9b8c894ca60a689a477f9b54bd66bd4cd971f",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "7edf25754e9384dbe63352f5d913970b45b9a83ad8641b5653c5e01940affac0",
+      "path": "results/human_operator_v3/tables/ablation_results.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "b8b4891322bbcadc48090a9fcb23e91290c61d3612aa009561a971a17ebcacaf",
+      "original_crlf_sequences": 7,
+      "original_v3_sha256": "552e4fae9eeff038bc9ccb78935b466f7eb891b85f8ec7874ad0abf14a99ccde",
+      "path": "results/human_operator_v3/tables/actionability_diagnostics.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a2f80bd4eb880054bb797e0165b9b8c894ca60a689a477f9b54bd66bd4cd971f",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "7edf25754e9384dbe63352f5d913970b45b9a83ad8641b5653c5e01940affac0",
+      "path": "results/human_operator_v3/tables/communication_reductions.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "9b3bec913c15e1dac90e740ee1776181898f79875162c28af10686ff1ef144b2",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "603cf39f82cc7429e18f1ba830fc750796afab1f4b0a9d64335a3891ba765af4",
+      "path": "results/human_operator_v3/tables/compute_accounting.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "3bcea2576953756fa4a4e4db1f0b29692073d02f6d3e6b8bad3cdd3f026db6c4",
+      "original_crlf_sequences": 5,
+      "original_v3_sha256": "0b968153537cf9aef551e20168a7a2cc483f01151be8eb14b161315aba5a448e",
+      "path": "results/human_operator_v3/tables/counterfactual_causal_chain.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "dacbdc68970b51853784773a0564a7c800a4f4e3289bcb4866931ae869fe0402",
+      "original_crlf_sequences": 17,
+      "original_v3_sha256": "d05f6124b49ff93f7ecd08c778b2f9ce06269c3debe61877d83c3c72a26dc844",
+      "path": "results/human_operator_v3/tables/development_paired_effects.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "6b8a416e94128140f173c1a9df1c9b668622fb88291dd98e219fa3ea84ac713c",
+      "original_crlf_sequences": 7,
+      "original_v3_sha256": "f99f6949bb5c7b9c11167d511a62d3239fbf2d020aaf36be876de1437f59fc7b",
+      "path": "results/human_operator_v3/tables/experimental_design.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "13ed088d945eb3b860d5d0d733321e5c434c41f408ceec6289d36c6ab7d6539b",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "71a0b4bd81c85788996f147378a10c54087ac48cbf4ffca6ee65c8e231e9d0b4",
+      "path": "results/human_operator_v3/tables/holdout_results.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "f75c235467fbdc7ae5e395f303ee4f407eede0b405c18c811fea36fa2647736e",
+      "original_crlf_sequences": 9,
+      "original_v3_sha256": "4aabe1222c19851a1bcaad4fed89074a6cfe63f13ffb07057a9bce60717a4739",
+      "path": "results/human_operator_v3/tables/hypothesis_outcomes.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a2f80bd4eb880054bb797e0165b9b8c894ca60a689a477f9b54bd66bd4cd971f",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "7edf25754e9384dbe63352f5d913970b45b9a83ad8641b5653c5e01940affac0",
+      "path": "results/human_operator_v3/tables/main_paired_comparisons.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a2f80bd4eb880054bb797e0165b9b8c894ca60a689a477f9b54bd66bd4cd971f",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "7edf25754e9384dbe63352f5d913970b45b9a83ad8641b5653c5e01940affac0",
+      "path": "results/human_operator_v3/tables/noninferiority_analysis.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "aa11e97855ba2f7f03b592f28a23861f9663f2d46f79694f0d35adf6ec74c67c",
+      "original_crlf_sequences": 7,
+      "original_v3_sha256": "a2601246dd4d7f04d7942f01a7ad1992ebce63084540f8275550e2da8364226d",
+      "path": "results/human_operator_v3/tables/operator_profiles.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "15b3eb9fdf9773edccadd18d45d9b23fd8589e18babb413a84b4f1e3b706afcd",
+      "original_crlf_sequences": 7,
+      "original_v3_sha256": "9423495747caf39e0734dd72735b8f1656ec965b1264431ff63b1cb2e362f1af",
+      "path": "results/human_operator_v3/tables/operator_view_conditions.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a2f80bd4eb880054bb797e0165b9b8c894ca60a689a477f9b54bd66bd4cd971f",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "7edf25754e9384dbe63352f5d913970b45b9a83ad8641b5653c5e01940affac0",
+      "path": "results/human_operator_v3/tables/pareto_operating_points.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "a514dd15a01fca58e2c45b344aa24a76088230150b46789fe494e7363738c5b4",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "d8093f38cdd8c54f83d9e6c8b51851dae8fa30661b66d39325d8c1081e3a7147",
+      "path": "results/human_operator_v3/tables/rl_training_seeds.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    },
+    {
+      "normalized_v4_branch_sha256": "0938dc4c1d910bcbf4a45d50661ec0565ff0385b28a79ba15cd36dbe303842de",
+      "original_crlf_sequences": 2,
+      "original_v3_sha256": "e7cba5ce6be8eac7fecf331e3c30040a46c447435c78d388731fd72c4afe2b0e",
+      "path": "results/human_operator_v3/tables/trigger_parameters.csv",
+      "semantic_equal": true,
+      "semantic_method": "csv_rows",
+      "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+    }
+  ],
+  "scope": "v3 text artifacts containing CRLF; v1/v2 excluded",
+  "source_snapshot": "3f844966930b1cfb5a43bdf3a4d3e744391d1018"
+}

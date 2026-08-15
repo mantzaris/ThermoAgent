@@ -16,7 +16,7 @@ from matplotlib.lines import Line2D
 import numpy as np
 import pandas as pd
 
-from .dashboard.replay import DashboardReplay
+from .dashboard.replay import DashboardReplay, frame_svg
 
 
 COLORS = {
@@ -36,13 +36,13 @@ COLORS = {
 def configure_style() -> None:
     mpl.rcParams.update({
         "font.family": "DejaVu Sans",
-        "font.size": 9.5,
-        "axes.labelsize": 10.5,
-        "axes.titlesize": 11,
-        "xtick.labelsize": 9,
-        "ytick.labelsize": 9,
-        "legend.fontsize": 8.5,
-        "figure.titlesize": 12,
+        "font.size": 10.5,
+        "axes.labelsize": 11.5,
+        "axes.titlesize": 12,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+        "legend.fontsize": 10,
+        "figure.titlesize": 13,
         "axes.spines.top": False,
         "axes.spines.right": False,
         "axes.grid": True,
@@ -82,7 +82,14 @@ def _blocked(name: str, root: Path, title: str, detail: str) -> str:
     ax.text(0.5, 0.29, "Zero observations are displayed; no values were imputed.",
             transform=ax.transAxes, ha="center", va="center", color=COLORS["gray"])
     ax.set_title(title)
-    return _save(fig, name, root)
+    record_root = root / "reproducibility" / "not_run_figures"
+    record_root.mkdir(parents=True, exist_ok=True)
+    pdf = record_root / (name + ".pdf")
+    preview = record_root / (name + ".png")
+    fig.savefig(pdf, format="pdf")
+    fig.savefig(preview, format="png", dpi=240)
+    plt.close(fig)
+    return str(pdf.relative_to(root))
 
 
 def _summary(root: Path, stage: str) -> pd.DataFrame:
@@ -128,6 +135,43 @@ def _regime(scenario: str) -> str:
         if "-" + value + "-" in str(scenario):
             return value
     return "other"
+
+
+def export_populated_dashboard_replays(root: Path) -> List[str]:
+    """Export real, schema-validated replay frames rather than a mock dashboard."""
+
+    export_root = root / "dashboard" / "populated_replays"
+    export_root.mkdir(parents=True, exist_ok=True)
+    exported: List[str] = []
+    metadata: List[Dict[str, Any]] = []
+    for application in ("commercial", "humanitarian"):
+        episode_path, _ = _episode(root, application, "compound")
+        replay = DashboardReplay(episode_path)
+        frame = max(
+            replay.frames,
+            key=lambda value: (
+                bool(value.explanation.get("features")),
+                len(value.alert_queue),
+                len(value.interventions),
+            ),
+        )
+        output = export_root / (application + "_populated_replay.svg")
+        output.write_text(frame_svg(frame) + "\n", encoding="utf-8")
+        exported.append(str(output.relative_to(root)))
+        metadata.append({
+            **replay.metadata(),
+            "selected_step": frame.step,
+            "export": str(output.relative_to(root)),
+            "selection_rule": "authorized payload present, then largest queue and intervention history",
+            "data_populated": True,
+        })
+    metadata_path = export_root / "metadata.json"
+    metadata_path.write_text(
+        json.dumps(metadata, indent=2, sort_keys=True, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
+    exported.append(str(metadata_path.relative_to(root)))
+    return exported
 
 
 def thermohitl_architecture(root: Path) -> str:
@@ -195,16 +239,23 @@ def _draw_network(ax: Any, frame: Any, title: str) -> None:
         role = str(node.get("role", "agent"))
         suffix = str(node["agent_id"]).rsplit("_", 1)[-1]
         label = abbreviations.get(role, role[:2].title()) + suffix
-        ax.text(p[0], p[1] - 0.13, label, ha="center", va="top", fontsize=6.2,
+        ax.text(p[0], p[1] - 0.13, label, ha="center", va="top", fontsize=9.5,
                 bbox={"facecolor": "white", "edgecolor": "none", "alpha": 0.72, "pad": 0.3})
-    ax.set_title(title, fontsize=9.5)
+    ax.set_title(title, fontsize=10.5)
     ax.set_aspect("equal"); ax.axis("off")
 
 
 def operator_dashboard_overview(root: Path) -> str:
     path, _ = _episode(root, "commercial")
     replay = DashboardReplay(path)
-    frame = max(replay.frames, key=lambda value: len(value.interventions))
+    frame = max(
+        replay.frames,
+        key=lambda value: (
+            bool(value.explanation.get("features")),
+            len(value.alert_queue),
+            len(value.interventions),
+        ),
+    )
     fig = plt.figure(figsize=(8.4, 5.2))
     ax_net = fig.add_axes((0.035, 0.25, 0.27, 0.62))
     _draw_network(ax_net, frame, "Network and autonomy")
@@ -214,19 +265,42 @@ def operator_dashboard_overview(root: Path) -> str:
         fig.add_axes((0.345, 0.25, 0.285, 0.28)),
         fig.add_axes((0.675, 0.25, 0.285, 0.28)),
     ]
+    thermo = frame.thermodynamics
+    latest = frame.interventions[-1] if frame.interventions else {}
+    prediction = frame.explanation.get("prediction", {})
     labels = [
-        ("Thermodynamic state", ["energy", "entropy", "entropy_anomaly", "disagreement"]),
-        ("Alert queue", ["incidents", "priority", "collapse horizon", "view hash"]),
-        ("Intervention panel", ["approve", "request information", "override", "return control"]),
-        ("Operator workload", ["finite slots", "queue delay", "fatigue", "minutes"]),
+        ("Thermodynamic state", [
+            "energy %.3f" % thermo["energy"],
+            "entropy %.3f · anomaly %.2fσ" % (thermo["entropy"], thermo["entropy_anomaly"]),
+            "disagreement %.3f" % thermo["disagreement"],
+            "consensus confidence %.3f" % thermo["consensus_confidence"],
+        ]),
+        ("Alert queue", [
+            "%d queued incident(s)" % len(frame.alert_queue),
+            "reason %s" % (frame.explanation.get("alert_reason") or "none"),
+            "predicted collapse %s periods" % (prediction.get("predicted_steps_until_collapse", "—")),
+            "view payload hashes %d" % len(frame.view_hashes),
+        ]),
+        ("Latest bounded intervention", [
+            "event %s" % latest.get("event", "none"),
+            "tool %s" % latest.get("tool", "—"),
+            "status %s" % latest.get("code", "—"),
+            "autonomy level %d" % thermo["autonomy_level"],
+        ]),
+        ("Operator workload", [
+            "workload %.3f" % frame.workload["workload"],
+            "active interventions %d" % frame.workload["active_interventions"],
+            "fatigue %.3f" % frame.workload["fatigue"],
+            "minutes %.1f" % frame.workload["operator_minutes"],
+        ]),
     ]
     for ax, (title, lines) in zip(axes, labels):
         ax.axis("off")
         ax.add_patch(patches.FancyBboxPatch((0.03, 0.05), 0.94, 0.88, transform=ax.transAxes,
                      boxstyle="round,pad=0.02", facecolor="#F7F9FB", edgecolor="#BBC4CE"))
-        ax.text(0.08, 0.82, title, transform=ax.transAxes, weight="bold", fontsize=9.5)
+        ax.text(0.08, 0.82, title, transform=ax.transAxes, weight="bold", fontsize=10.2)
         for index, line in enumerate(lines):
-            ax.text(0.10, 0.64 - 0.15 * index, "• " + line, transform=ax.transAxes, fontsize=8.3)
+            ax.text(0.10, 0.64 - 0.15 * index, "• " + line, transform=ax.transAxes, fontsize=9.2)
     bottom = fig.add_axes((0.045, 0.035, 0.91, 0.16)); bottom.axis("off")
     bottom.text(0.00, 0.78, "Execution-time information boundary", weight="bold", fontsize=9.5)
     bottom.text(0.00, 0.44,
@@ -236,33 +310,85 @@ def operator_dashboard_overview(root: Path) -> str:
     bottom.text(0.00, 0.05,
                 "Replay controls: play · pause · step · rewind · jump to alert · compare branch · export SVG",
                 color=COLORS["gray"], fontsize=8.7)
-    fig.suptitle("Functional ThermoHITL operator dashboard (vector reconstruction)", y=0.97)
+    fig.suptitle(
+        "Functional ThermoHITL operator dashboard — populated ledger replay, step %d" % frame.step,
+        y=0.97,
+    )
     return _save(fig, "operator_dashboard_overview", root)
 
 
 def energy_entropy_phase_plane(root: Path) -> str:
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.5), sharex=True, sharey=True)
+    calibration = json.loads(
+        (root / "calibration" / "thermodynamic_calibration_n10.json").read_text(encoding="utf-8")
+    )["applications"]
+    fig, axes = plt.subplots(1, 2, figsize=(9.0, 4.25), sharex=True, sharey=True)
     for ax, application in zip(axes, ("commercial", "humanitarian")):
-        _, episode = _episode(root, application, "compound")
+        episode_path, episode = _episode(root, application, "compound")
         frame = pd.DataFrame(episode["time_series"])
-        e = frame.distributed_energy_mean.to_numpy(); s = frame.distributed_entropy_mean.to_numpy()
-        ax.axvspan(0, 0.5, ymin=0, ymax=0.5, color=COLORS["green"], alpha=0.08)
-        ax.axvspan(0.5, 1, ymin=0, ymax=0.5, color=COLORS["blue"], alpha=0.07)
-        ax.axvspan(0, 0.5, ymin=0.5, ymax=1, color=COLORS["orange"], alpha=0.08)
-        ax.axvspan(0.5, 1, ymin=0.5, ymax=1, color=COLORS["red"], alpha=0.08)
-        ax.plot(s, e, color=COLORS["black"], lw=1.2, marker="o", ms=3)
-        request_steps = set(episode["operator_metrics"].get("first_post_disruption_request_step") for _ in [0])
-        for step in request_steps:
-            if step is not None and step < len(frame):
-                ax.scatter(s[step], e[step], s=75, marker="*", color=COLORS["red"], zorder=4, label="first request")
-        ax.scatter(s[0], e[0], s=35, marker="s", color=COLORS["green"], label="start")
+        values = calibration[application]
+        z_energy = (
+            frame.distributed_energy_mean.to_numpy(dtype=float) - float(values["energy_center"])
+        ) / float(values["energy_scale"])
+        entropy_anomaly = frame.entropy_anomaly_mean.to_numpy(dtype=float)
+
+        x_grid = np.linspace(0.0, max(7.0, float(entropy_anomaly.max()) + 0.5), 180)
+        y_grid = np.linspace(min(-2.0, float(z_energy.min()) - 0.5), max(7.0, float(z_energy.max()) + 0.5), 180)
+        xx, yy = np.meshgrid(x_grid, y_grid)
+        # This is the exact two-variable projection of the frozen prospective
+        # v3 rule. Slope, disagreement, local disruption risk, and workload are
+        # held at their nominal zero residuals; actual requests retain all terms.
+        projected_score = 0.30 * np.maximum(yy, 0.0) + 0.22 * xx
+        regions = np.where(projected_score >= 1.1, 2, np.where(projected_score >= 0.6, 1, 0))
+        ax.contourf(
+            xx,
+            yy,
+            regions,
+            levels=[-0.5, 0.5, 1.5, 2.5],
+            colors=[COLORS["green"], COLORS["orange"], COLORS["red"]],
+            alpha=0.09,
+        )
+        boundary = (1.1 - 0.22 * x_grid) / 0.30
+        ax.plot(x_grid, boundary, color=COLORS["red"], ls="--", lw=1.3,
+                label="projected actionable boundary")
+        ax.add_patch(patches.Rectangle(
+            (0.0, -1.0), 1.0, 2.0, facecolor="none", edgecolor=COLORS["green"],
+            lw=1.1, ls=":", label="nominal ±1σ region",
+        ))
+        ax.plot(entropy_anomaly, z_energy, color=COLORS["black"], lw=1.25,
+                marker="o", ms=3.2, label="episode trajectory")
+        events = _events(episode_path)
+        disruption_steps = [int(event["step"]) for event in events if event["kind"] == "disruption"]
+        intervention_steps = [int(event["step"]) for event in events if event["kind"] == "operator_action"]
+        disruption = disruption_steps[0] if disruption_steps else max(2, len(frame) // 3)
+        if 0 <= disruption < len(frame):
+            ax.scatter(entropy_anomaly[disruption], z_energy[disruption], s=65, marker="X",
+                       color=COLORS["orange"], edgecolor=COLORS["black"], linewidth=0.5,
+                       zorder=5, label="disruption")
+        if intervention_steps:
+            step = intervention_steps[0]
+            ax.scatter(entropy_anomaly[step], z_energy[step], s=95, marker="*",
+                       color=COLORS["purple"], edgecolor=COLORS["black"], linewidth=0.5,
+                       zorder=5, label="first intervention")
+        ax.scatter(entropy_anomaly[0], z_energy[0], s=45, marker="s",
+                   color=COLORS["green"], edgecolor=COLORS["black"], linewidth=0.5,
+                   label="start")
         ax.set_title(application.capitalize())
-        ax.set_xlabel("Distributed operational entropy")
-        ax.set_xlim(0, 1); ax.set_ylim(0, 1)
-    axes[0].set_ylabel("Distributed operational energy")
-    axes[0].legend(frameon=False, loc="best")
-    fig.suptitle("Energy–entropy trajectories and simulated-operator request points\nDevelopment evidence")
-    fig.tight_layout(rect=(0, 0, 1, 0.91))
+        ax.set_xlabel("Entropy anomaly, |Ŝ − μₛ| / σₛ")
+        ax.set_xlim(x_grid.min(), x_grid.max()); ax.set_ylim(y_grid.min(), y_grid.max())
+    axes[0].set_ylabel("Standardized operational energy, (Ê − μₑ) / σₑ")
+    handles, labels = axes[0].get_legend_handles_labels()
+    handles = [
+        patches.Patch(facecolor=mpl.colors.to_rgba(COLORS["green"], 0.12), label="quiet/autonomy region"),
+        patches.Patch(facecolor=mpl.colors.to_rgba(COLORS["orange"], 0.12), label="monitor or abstain region"),
+        patches.Patch(facecolor=mpl.colors.to_rgba(COLORS["red"], 0.12), label="alert-eligible region"),
+    ] + handles
+    labels = [item.get_label() for item in handles]
+    fig.legend(handles, labels, frameon=False, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.01))
+    fig.suptitle(
+        "Data-derived energy–entropy phase plane — development evidence\n"
+        "Shading is the frozen 2-D rule projection; actual alerts use all authorized local terms"
+    )
+    fig.tight_layout(rect=(0, 0.12, 1, 0.90))
     return _save(fig, "energy_entropy_phase_plane", root)
 
 
@@ -275,11 +401,22 @@ def network_operator_sequence(root: Path) -> str:
     intervention = intervention_steps[0] if intervention_steps else min(first + 2, len(replay.frames) - 1)
     steps = [0, disruption, first, intervention, len(replay.frames) - 1]
     titles = ["quiet autonomy", "disruption", "request/queue", "bounded intervention", "post-intervention"]
-    fig, axes = plt.subplots(1, 5, figsize=(10.0, 2.8))
-    for ax, step, title in zip(axes, steps, titles):
+    fig, axes = plt.subplots(2, 3, figsize=(8.4, 6.2))
+    for ax, step, title in zip(axes.ravel(), steps, titles):
         _draw_network(ax, replay.frame(step), "%s\n$t=%d$" % (title, step))
+    legend_ax = axes.ravel()[-1]
+    legend_ax.axis("off")
+    legend_ax.legend(handles=[
+        Line2D([0], [0], color="#9AA3AD", lw=2.3, label="physical logistics edge"),
+        Line2D([0], [0], color=COLORS["sky"], lw=1.2, ls="--", label="communication edge"),
+        Line2D([0], [0], marker="o", color="none", markerfacecolor=COLORS["blue"],
+               markeredgecolor=COLORS["black"], markersize=9, label="quiet agent"),
+        Line2D([0], [0], marker="o", color="none", markerfacecolor=COLORS["blue"],
+               markeredgecolor=COLORS["red"], markeredgewidth=1.5, markersize=11,
+               label="elevated autonomy"),
+    ], frameon=False, loc="center", fontsize=10.5)
     fig.suptitle("Commercial event sequence: network, communication, and autonomy level")
-    fig.tight_layout(rect=(0, 0, 1, 0.90))
+    fig.tight_layout(rect=(0, 0, 1, 0.94), h_pad=1.4)
     return _save(fig, "network_operator_sequence", root)
 
 
@@ -349,30 +486,118 @@ def trigger_and_intervention_dynamics(root: Path) -> str:
 
 
 def operator_view_incremental_value(root: Path) -> str:
-    metrics = pd.read_csv(root / "monitoring" / "causal_monitoring_baselines.csv")
-    inc = pd.read_csv(root / "monitoring" / "causal_incremental_value.csv")
-    fig, axes = plt.subplots(1, 2, figsize=(8.4, 3.55))
+    source = pd.read_csv(root / "monitoring" / "causal_allocation_utility.csv")
     names = ["causal_local_kpi_logistic", "causal_kpi_plus_thermodynamic_logistic"]
-    labels = ["Local KPI", "KPI + energy/entropy/\ndisagreement"]
-    x = np.arange(2); width = 0.34
-    for index, application in enumerate(("commercial", "humanitarian")):
-        values = [float(metrics[(metrics.application == application) & (metrics.detector == name)].average_precision.iloc[0]) for name in names]
-        axes[0].bar(x + (index - 0.5) * width, values, width, label=application.capitalize(),
-                    color=[COLORS["blue"], COLORS["orange"]][index], alpha=0.88)
-    axes[0].set_xticks(x); axes[0].set_xticklabels(labels)
-    axes[0].set_ylabel("Average precision for beneficial intervention")
-    axes[0].legend(frameon=False)
-    colors = [COLORS["red"] if not value else COLORS["green"] for value in inc.gate_passed]
-    axes[1].bar(inc.application.str.capitalize(), 100 * inc.relative_budgeted_utility_gain,
-                color=colors, edgecolor=COLORS["black"], lw=0.6)
-    axes[1].axhline(5, color=COLORS["black"], ls="--", lw=1, label="prospective +5% gate")
-    axes[1].axhline(0, color=COLORS["gray"], lw=0.8)
-    axes[1].set_ylabel("Budgeted causal utility gain (%)")
-    axes[1].legend(frameon=False)
-    axes[0].set_title("Ranking at same information boundary")
-    axes[1].set_title("Decision utility at fixed budget")
-    fig.suptitle("Operator-view incremental value — held-out development seeds only")
-    fig.tight_layout(rect=(0, 0, 1, 0.92))
+    source = source[source.detector.isin(names)].copy()
+    source["regime"] = source.scenario.map(_regime)
+    paired = source.pivot_table(
+        index=["application", "run_id", "regime"],
+        columns="detector",
+        values="realized_counterfactual_utility",
+        aggfunc="first",
+    ).dropna().reset_index()
+    paired["difference"] = paired[names[1]] - paired[names[0]]
+
+    def interval(values: np.ndarray, denominator: Optional[np.ndarray] = None) -> Tuple[float, float, float]:
+        values = np.asarray(values, dtype=float)
+        rng = np.random.RandomState(42031)
+        indices = rng.randint(0, len(values), size=(10000, len(values)))
+        if denominator is None:
+            draws = values[indices].mean(axis=1)
+            point = float(values.mean())
+        else:
+            denominator = np.asarray(denominator, dtype=float)
+            draws = values[indices].mean(axis=1) / np.maximum(
+                np.abs(denominator[indices].mean(axis=1)), 1e-12
+            )
+            point = float(values.mean() / max(abs(float(denominator.mean())), 1e-12))
+        low, high = np.quantile(draws, [0.025, 0.975])
+        return point, float(low), float(high)
+
+    fig, axes = plt.subplots(2, 2, figsize=(9.4, 7.4))
+    app_order = ("commercial", "humanitarian")
+    x = np.arange(len(app_order)); width = 0.34
+    for detector_index, (detector, label, color) in enumerate((
+        (names[0], "KPI only", COLORS["blue"]),
+        (names[1], "KPI + thermodynamics", COLORS["orange"]),
+    )):
+        means = []
+        errors = [[], []]
+        for application in app_order:
+            values = paired.loc[paired.application == application, detector].to_numpy(dtype=float)
+            point, low, high = interval(values)
+            means.append(point); errors[0].append(point - low); errors[1].append(high - point)
+        axes[0, 0].bar(x + (detector_index - 0.5) * width, means, width, color=color,
+                       label=label, alpha=0.88)
+        axes[0, 0].errorbar(x + (detector_index - 0.5) * width, means, yerr=errors,
+                            fmt="none", ecolor=COLORS["black"], capsize=3, lw=1)
+    axes[0, 0].set_xticks(x); axes[0, 0].set_xticklabels([item.capitalize() for item in app_order])
+    axes[0, 0].set_ylabel("Budgeted causal utility")
+    axes[0, 0].set_title("Absolute utility at matched budget")
+    axes[0, 0].legend(frameon=False)
+
+    difference_points = []
+    difference_errors = [[], []]
+    relative_points = []
+    relative_errors = [[], []]
+    for application in app_order:
+        selected = paired[paired.application == application]
+        point, low, high = interval(selected.difference.to_numpy(dtype=float))
+        difference_points.append(point); difference_errors[0].append(point - low); difference_errors[1].append(high - point)
+        point, low, high = interval(
+            selected.difference.to_numpy(dtype=float), selected[names[0]].to_numpy(dtype=float)
+        )
+        relative_points.append(100 * point); relative_errors[0].append(100 * (point - low)); relative_errors[1].append(100 * (high - point))
+    colors = [COLORS["red"], COLORS["green"]]
+    axes[0, 1].bar(x, difference_points, color=colors, alpha=0.88)
+    axes[0, 1].errorbar(x, difference_points, yerr=difference_errors, fmt="none",
+                        ecolor=COLORS["black"], capsize=4, lw=1)
+    axes[0, 1].axhline(0, color=COLORS["black"], lw=0.9)
+    axes[0, 1].set_xticks(x); axes[0, 1].set_xticklabels([item.capitalize() for item in app_order])
+    axes[0, 1].set_ylabel("Paired utility difference")
+    axes[0, 1].set_title("Thermodynamic view − KPI-only")
+
+    axes[1, 0].bar(x, relative_points, color=colors, alpha=0.88)
+    axes[1, 0].errorbar(x, relative_points, yerr=relative_errors, fmt="none",
+                        ecolor=COLORS["black"], capsize=4, lw=1)
+    axes[1, 0].axhline(5, color=COLORS["black"], ls="--", lw=1, label="prospective +5% gate")
+    axes[1, 0].axhline(0, color=COLORS["gray"], lw=0.8)
+    axes[1, 0].set_xticks(x); axes[1, 0].set_xticklabels([item.capitalize() for item in app_order])
+    axes[1, 0].set_ylabel("Relative utility gain (%)")
+    axes[1, 0].set_title("Relative gain with cluster bootstrap CI")
+    axes[1, 0].legend(frameon=False)
+
+    regime_order = ["moderate", "correlated", "compound"]
+    positions = np.arange(len(regime_order))
+    for index, (application, marker, color) in enumerate((
+        ("commercial", "o", COLORS["blue"]),
+        ("humanitarian", "s", COLORS["orange"]),
+    )):
+        points = []
+        errors = [[], []]
+        for regime in regime_order:
+            values = paired.loc[
+                (paired.application == application) & (paired.regime == regime), "difference"
+            ].to_numpy(dtype=float)
+            point, low, high = interval(values)
+            points.append(point); errors[0].append(point - low); errors[1].append(high - point)
+        offset = (index - 0.5) * 0.12
+        axes[1, 1].errorbar(positions + offset, points, yerr=errors, color=color,
+                            marker=marker, capsize=3, lw=1.2, label=application.capitalize())
+    axes[1, 1].axhline(0, color=COLORS["black"], lw=0.9)
+    axes[1, 1].set_xticks(positions)
+    axes[1, 1].set_xticklabels([item.capitalize() + "\n(n=2/app)" for item in regime_order])
+    axes[1, 1].set_ylabel("Paired utility difference")
+    axes[1, 1].set_title("Per-regime decision utility")
+    axes[1, 1].legend(frameon=False)
+
+    counts = paired.groupby("application").run_id.nunique().to_dict()
+    fig.suptitle(
+        "Operator-view incremental value — DEVELOPMENT ONLY\n"
+        "Independent matched environment panels: commercial n=%d; humanitarian n=%d"
+        % (counts.get("commercial", 0), counts.get("humanitarian", 0))
+    )
+    fig.tight_layout(rect=(0, 0, 1, 0.91), h_pad=1.7, w_pad=1.3)
     return _save(fig, "operator_view_incremental_value", root)
 
 
@@ -458,34 +683,51 @@ def causal_intervention_effects(root: Path) -> str:
 
 def intervention_funnel(root: Path) -> str:
     episodes = list(_episodes_for_figure(root, "development_trigger_candidate_n10_v4"))
-    requests = sum(row["metrics"]["operator_requests"] for row in episodes)
-    interventions = sum(row["metrics"]["operator_interventions"] for row in episodes)
-    accepted = sum(row["metrics"]["material_actions_accepted"] for row in episodes)
-    demand = sum(row["metrics"]["material_actions_reached_demand"] for row in episodes)
     causal = [probe for row in episodes for probe in row.get("counterfactuals", [])]
-    chain = [
-        ("Trigger request", requests),
-        ("Operator intervention", interventions),
-        ("Accepted material action*", accepted),
-        ("Demand-reaching action*", demand),
-        ("Paired primary outcome changed", sum(bool(row.get("primary_outcome_changed")) for row in causal)),
+    autonomous_chain = [
+        ("Accepted actions", sum(row["metrics"]["material_actions_accepted"] for row in episodes)),
+        ("Entered transit", sum(row["metrics"]["material_actions_entered_transit"] for row in episodes)),
+        ("Reached next stage", sum(row["metrics"]["material_actions_next_stage"] for row in episodes)),
+        ("Reached demand", sum(row["metrics"]["material_actions_reached_demand"] for row in episodes)),
+    ]
+    probe_chain = [
+        ("Paired probes", len(causal)),
+        ("Agent accepted", sum(bool(row.get("agent_accepted")) for row in causal)),
+        ("Material accepted", sum(bool(row.get("material_action_accepted")) for row in causal)),
+        ("Reached next stage", sum(bool(row.get("material_reached_next_stage")) for row in causal)),
+        ("Reached demand", sum(bool(row.get("material_reached_demand")) for row in causal)),
+        ("Outcome changed", sum(bool(row.get("primary_outcome_changed")) for row in causal)),
         ("Beneficial complete chain", sum(
             bool(row.get("agent_accepted") and row.get("material_action_accepted")
                  and row.get("material_reached_demand") and row.get("primary_outcome_changed")
                  and row.get("intervention_effect", 0) > 0) for row in causal
         )),
     ]
-    fig, ax = plt.subplots(figsize=(7.2, 3.9))
-    y = np.arange(len(chain)); values = np.array([value for _, value in chain], dtype=float)
-    bars = ax.barh(y, values, color=[COLORS["blue"], COLORS["purple"], COLORS["orange"], COLORS["green"], COLORS["sky"], COLORS["red"]])
-    ax.set_yticks(y); ax.set_yticklabels([label for label, _ in chain]); ax.invert_yaxis()
-    ax.set_xlabel("Count across 40 final trigger-development episodes")
-    for bar, value in zip(bars, values):
-        ax.text(value + max(values) * 0.01, bar.get_y() + bar.get_height() / 2, "%d" % value, va="center")
-    ax.text(0.01, -0.18, "*Material progression counts all accepted autonomous actions; paired causal stages count probed interventions only.",
-            transform=ax.transAxes, fontsize=8.2, color=COLORS["gray"])
-    ax.set_title("Observed intervention and actionability funnel — development")
-    fig.tight_layout()
+    fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.7))
+    for ax, chain, title, color in (
+        (axes[0], autonomous_chain, "Episode-wide autonomous actions", COLORS["blue"]),
+        (axes[1], probe_chain, "Paired intervention probes only", COLORS["purple"]),
+    ):
+        y = np.arange(len(chain)); values = np.asarray([value for _, value in chain], dtype=float)
+        bars = ax.barh(y, values, color=color, alpha=0.83, edgecolor=COLORS["black"], lw=0.5)
+        ax.set_yticks(y); ax.set_yticklabels([label for label, _ in chain]); ax.invert_yaxis()
+        ax.set_xlabel("Count")
+        for bar, value in zip(bars, values):
+            ax.text(value + max(values) * 0.015, bar.get_y() + bar.get_height() / 2,
+                    "%d" % value, va="center", fontsize=10)
+        ax.set_xlim(0, max(values) * 1.16)
+        ax.set_title(title)
+    requests = sum(row["metrics"]["operator_requests"] for row in episodes)
+    interventions = sum(row["metrics"]["operator_interventions"] for row in episodes)
+    fig.text(
+        0.5, 0.015,
+        "Distinct denominators: left = all autonomous material actions; right = %d counterfactual probes. "
+        "Episode context: %d requests and %d interventions."
+        % (len(causal), requests, interventions),
+        ha="center", fontsize=10, color=COLORS["gray"],
+    )
+    fig.suptitle("Separate actionability and causal-chain populations — development only")
+    fig.tight_layout(rect=(0, 0.07, 1, 0.91), w_pad=2.2)
     return _save(fig, "intervention_funnel", root)
 
 
@@ -589,10 +831,13 @@ def trigger_timing_and_false_alarms(root: Path) -> str:
     axes[0].set_ylabel("Timely activation (%)"); axes[1].set_ylabel("Mean requests per episode")
     for ax in axes:
         ax.set_xticks(x); ax.set_xticklabels(["Moderate", "Correlated", "Compound"])
-    axes[0].legend(frameon=False); axes[1].set_title("Nonzero, non-always-on use")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, loc="lower center", ncol=3,
+               bbox_to_anchor=(0.5, 0.01))
+    axes[1].set_title("Nonzero, non-always-on use")
     axes[0].set_title("Activation before sustained collapse")
     fig.suptitle("Trigger timing and false alarms — final development candidate\nNominal and pre-disruption false activation: 0%")
-    fig.tight_layout(rect=(0, 0, 1, 0.89))
+    fig.tight_layout(rect=(0, 0.14, 1, 0.89))
     return _save(fig, "trigger_timing_and_false_alarms", root)
 
 
@@ -615,16 +860,22 @@ def partition_robustness(root: Path) -> str:
         grouped = frame.groupby(["application", "communication"])[metric].mean().unstack()
         grouped.plot.bar(ax=ax, color=[COLORS["red"], COLORS["blue"]], width=0.72)
         ax.set_ylabel(label); ax.set_xlabel(""); ax.tick_params(axis="x", rotation=0)
-        ax.legend(frameon=False, title="network")
+        ax.get_legend().remove()
         if metric == "requests" and float(frame.requests.abs().sum()) == 0.0:
             ax.set_ylim(0, 1)
             ax.text(0.5, 0.52, "Zero requests in both\nv1 diagnostic conditions",
                     transform=ax.transAxes, ha="center", va="center", color=COLORS["red"])
     fig.suptitle("Partition robustness — commercial-only development diagnostic")
+    handles = [
+        patches.Patch(facecolor=COLORS["red"], label="partition"),
+        patches.Patch(facecolor=COLORS["blue"], label="reliable"),
+    ]
+    fig.legend(handles=handles, frameon=False, title="Network", loc="lower center",
+               ncol=2, bbox_to_anchor=(0.5, 0.075))
     fig.text(0.5, 0.01,
              "The all-agent v1 diagnostic was efficiency-aborted before humanitarian episodes; it was not promoted.",
-             ha="center", fontsize=8.3, color=COLORS["red"])
-    fig.tight_layout(rect=(0, 0.06, 1, 0.92))
+             ha="center", fontsize=10, color=COLORS["red"])
+    fig.tight_layout(rect=(0, 0.16, 1, 0.92))
     return _save(fig, "partition_robustness", root)
 
 
@@ -700,14 +951,17 @@ def actionability_diagnostics(root: Path) -> str:
         ax.set_title(title)
         ax.set_ylim(0, 105)
     axes[0].set_ylabel("Rate (%)")
-    axes[0].legend(frameon=False)
+    handles, legend_labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, legend_labels, frameon=False, loc="lower center", ncol=3,
+               bbox_to_anchor=(0.5, 0.01))
     fig.suptitle("V3 structured-output and material-action funnel")
-    fig.tight_layout(rect=(0, 0, 1, 0.92))
+    fig.tight_layout(rect=(0, 0.15, 1, 0.92))
     return _save(fig, "actionability_diagnostics", root)
 
 
 def run(root: Path) -> Dict[str, Any]:
     configure_style()
+    dashboard_exports = export_populated_dashboard_replays(root)
     figures = [
         thermohitl_architecture(root),
         operator_dashboard_overview(root),
@@ -733,5 +987,6 @@ def run(root: Path) -> Dict[str, Any]:
     return {
         "figures": figures,
         "count": len(figures),
+        "populated_dashboard_exports": dashboard_exports,
         "evidence_boundary": "development only; simulated operator; no holdout",
     }

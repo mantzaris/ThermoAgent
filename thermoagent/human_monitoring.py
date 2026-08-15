@@ -264,7 +264,7 @@ def analyze_monitoring(
     frame = build_monitoring_frame(results_root, stage)
     processed = results_root / "monitoring" / "agent_period_features.csv"
     processed.parent.mkdir(parents=True, exist_ok=True)
-    frame.to_csv(processed, index=False)
+    frame.to_csv(processed, index=False, lineterminator="\n")
     metric_rows: List[Dict[str, Any]] = []
     incremental_rows: List[Dict[str, Any]] = []
     timing_rows: List[Dict[str, Any]] = []
@@ -338,6 +338,7 @@ def analyze_monitoring(
     pd.concat(scored_frames, ignore_index=True).to_csv(
         results_root / "monitoring" / "held_out_development_predictions.csv",
         index=False,
+        lineterminator="\n",
     )
     summary = {
         "created_at": utc_now(),
@@ -478,7 +479,7 @@ def analyze_dense_causal_value(
 
     frame = build_dense_causal_frame(results_root, stage)
     output_frame = results_root / "monitoring" / "dense_causal_features.csv"
-    frame.to_csv(output_frame, index=False)
+    frame.to_csv(output_frame, index=False, lineterminator="\n")
     metric_rows: List[Dict[str, Any]] = []
     incremental_rows: List[Dict[str, Any]] = []
     utility_rows: List[Dict[str, Any]] = []
@@ -554,7 +555,9 @@ def analyze_dense_causal_value(
     _write_dict_csv(results_root / "monitoring" / "causal_incremental_value.csv", incremental_rows)
     _write_dict_csv(results_root / "monitoring" / "causal_allocation_utility.csv", utility_rows)
     pd.concat(predictions, ignore_index=True).to_csv(
-        results_root / "monitoring" / "dense_causal_predictions.csv", index=False
+        results_root / "monitoring" / "dense_causal_predictions.csv",
+        index=False,
+        lineterminator="\n",
     )
     summary = {
         "created_at": utc_now(),

@@ -375,7 +375,11 @@ def run(repository_root: Path, results_root: Path) -> Dict[str, Any]:
             frame.insert(0, "evidence_stage", stage)
             episode_frames.append(frame)
     combined = pd.concat(episode_frames, ignore_index=True) if episode_frames else pd.DataFrame()
-    combined.to_csv(results_root / "processed" / "development_episodes.csv", index=False)
+    combined.to_csv(
+        results_root / "processed" / "development_episodes.csv",
+        index=False,
+        lineterminator="\n",
+    )
 
     effects = []
     effects.extend(_paired_bootstrap(
@@ -404,7 +408,9 @@ def run(repository_root: Path, results_root: Path) -> Dict[str, Any]:
     monitoring_path = results_root / "monitoring" / "causal_incremental_value.csv"
     if monitoring_path.is_file():
         pd.read_csv(monitoring_path).to_csv(
-            results_root / "tables" / "monitoring_incremental_value.csv", index=False
+            results_root / "tables" / "monitoring_incremental_value.csv",
+            index=False,
+            lineterminator="\n",
         )
 
     hypothesis_rows = _hypotheses(gates)
@@ -436,7 +442,11 @@ def run(repository_root: Path, results_root: Path) -> Dict[str, Any]:
             .mean(numeric_only=True)
         )
         communication.insert(0, "evidence_stage", "development")
-        communication.to_csv(results_root / "tables" / "communication_budgets.csv", index=False)
+        communication.to_csv(
+            results_root / "tables" / "communication_budgets.csv",
+            index=False,
+            lineterminator="\n",
+        )
     trigger = next((gate for gate in gates.get("gates", []) if gate.get("gate") == 6), {})
     _write_dict_csv(results_root / "tables" / "trigger_parameters.csv", [
         {**trigger.get("frozen_candidate_parameters", {}), "stage": "development candidate only", "promoted_to_validation": False}

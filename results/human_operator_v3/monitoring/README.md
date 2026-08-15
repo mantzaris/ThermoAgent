@@ -1,4 +1,27 @@
-# V3 monitoring and intervention-value analysis
+# Superseded intermediate v3 monitoring classifier
+
+> **Historical development artifact — not the authoritative Gate 5 result.**
+> This file records the earlier `monitoring_development` classifier, where
+> both applications failed the ranking-only test. It preceded the dense paired
+> counterfactual analysis and must not be cited as the final v3 Gate 5 result.
+
+The final causal Gate 5 analysis used actual paired intervention effects and a
+fixed attention budget. It found a commercial failure and a humanitarian pass,
+then failed the required cross-application rule. The authoritative evidence is:
+
+- [`../development/gate_status.json`](../development/gate_status.json) — final
+  prospective six-gate decision;
+- [`causal_value_summary.json`](causal_value_summary.json) — final dense causal
+  summary;
+- [`causal_incremental_value.csv`](causal_incremental_value.csv) — application
+  results and thresholds; and
+- [`../PAPER_SUMMARY.md`](../PAPER_SUMMARY.md) — paper-facing interpretation.
+
+The JSON below is retained verbatim as a superseded intermediate diagnostic for
+development-history transparency. Its row-level classification target and
+ranking-only criterion differ from the final causal-utility Gate 5 analysis.
+
+```json
 
 {
   "applications": [
@@ -31,3 +54,4 @@
   "rows": 17664,
   "stage": "monitoring_development"
 }
+```

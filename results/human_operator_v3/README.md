@@ -257,30 +257,33 @@ data or became a selective scientific rerun. See `logs/diagnostics/`.
 
 ## Figures
 
-All 20 paper-facing files are vector PDFs. Poppler opened each PDF, detected
+All 19 evidence-bearing paper-facing files are vector PDFs. Poppler opened each PDF, detected
 fonts, rendered a preview, and the original-resolution previews passed visual
 inspection. The QA record is [`report.json`](reproducibility/pdf_qa/report.json).
 
 1. [thermohitl_architecture.pdf](figures/pdf/thermohitl_architecture.pdf) — independent agents, distributed monitor, attention queue, bounded operator, and returned autonomy.
-2. [operator_dashboard_overview.pdf](figures/pdf/operator_dashboard_overview.pdf) — vector reconstruction of the functional information-limited dashboard.
-3. [energy_entropy_phase_plane.pdf](figures/pdf/energy_entropy_phase_plane.pdf) — development trajectories and request points in the energy/entropy plane.
+2. [operator_dashboard_overview.pdf](figures/pdf/operator_dashboard_overview.pdf) — data-populated vector replay of the functional information-limited dashboard; the underlying commercial and humanitarian SVG exports and replay metadata are in [`dashboard/populated_replays/`](dashboard/populated_replays/).
+3. [energy_entropy_phase_plane.pdf](figures/pdf/energy_entropy_phase_plane.pdf) — nominal-standardized development trajectories, the prospective projected trigger boundary, and actual disruption/intervention points.
 4. [network_operator_sequence.pdf](figures/pdf/network_operator_sequence.pdf) — quiet, disruption, request, intervention, and response network sequence.
 5. [trigger_and_intervention_dynamics.pdf](figures/pdf/trigger_and_intervention_dynamics.pdf) — trigger features, queue, workload, autonomy, interventions, and loss.
-6. [operator_view_incremental_value.pdf](figures/pdf/operator_view_incremental_value.pdf) — information-view comparison with development boundary.
+6. [operator_view_incremental_value.pdf](figures/pdf/operator_view_incremental_value.pdf) — absolute utility, paired and relative differences, cluster-bootstrap intervals, panel counts, and regime results, explicitly limited to development evidence.
 7. [loss_operator_effort_pareto.pdf](figures/pdf/loss_operator_effort_pareto.pdf) — exploratory development loss/effort points; not a confirmatory frontier.
 8. [primary_effect_forest.pdf](figures/pdf/primary_effect_forest.pdf) — paired gate-3/gate-4 effects with bootstrap intervals.
 9. [causal_intervention_effects.pdf](figures/pdf/causal_intervention_effects.pdf) — paired per-intervention effect distributions.
-10. [intervention_funnel.pdf](figures/pdf/intervention_funnel.pdf) — request-to-demand-to-outcome causal stages.
+10. [intervention_funnel.pdf](figures/pdf/intervention_funnel.pdf) — separate autonomous-action progression and counterfactual-probe causal stages, with distinct denominators.
 11. [operator_workload_performance.pdf](figures/pdf/operator_workload_performance.pdf) — normalized loss versus operator minutes and queue demand.
 12. [attention_allocation_heatmap.pdf](figures/pdf/attention_allocation_heatmap.pdf) — normalized incident attention priorities over time.
 13. [monitoring_incremental_value.pdf](figures/pdf/monitoring_incremental_value.pdf) — ranking and causal utility beyond local KPIs.
-14. [training_seed_curves.pdf](figures/pdf/training_seed_curves.pdf) — explicit `PROSPECTIVELY NOT RUN` panel; zero seeds are not imputed.
-15. [trigger_timing_and_false_alarms.pdf](figures/pdf/trigger_timing_and_false_alarms.pdf) — timing, misses, and false activations.
-16. [partition_robustness.pdf](figures/pdf/partition_robustness.pdf) — honest commercial-only aborted v1 partition diagnostic.
-17. [commercial_case_study.pdf](figures/pdf/commercial_case_study.pdf) — one complete development commercial ledger case.
-18. [humanitarian_case_study.pdf](figures/pdf/humanitarian_case_study.pdf) — one complete abstract humanitarian ledger case.
-19. [thermodynamic_ablation.pdf](figures/pdf/thermodynamic_ablation.pdf) — entropy, energy, free-energy, disagreement, and combined development diagnostics.
-20. [actionability_diagnostics.pdf](figures/pdf/actionability_diagnostics.pdf) — deterministic mechanics, retained Qwen v8 failure, and qualified v9 retry.
+14. [trigger_timing_and_false_alarms.pdf](figures/pdf/trigger_timing_and_false_alarms.pdf) — timing, misses, and false activations.
+15. [partition_robustness.pdf](figures/pdf/partition_robustness.pdf) — honest commercial-only aborted v1 partition diagnostic.
+16. [commercial_case_study.pdf](figures/pdf/commercial_case_study.pdf) — one complete development commercial ledger case.
+17. [humanitarian_case_study.pdf](figures/pdf/humanitarian_case_study.pdf) — one complete abstract humanitarian ledger case.
+18. [thermodynamic_ablation.pdf](figures/pdf/thermodynamic_ablation.pdf) — entropy, energy, free-energy, disagreement, and combined development diagnostics.
+19. [actionability_diagnostics.pdf](figures/pdf/actionability_diagnostics.pdf) — deterministic mechanics, retained Qwen v8 failure, and qualified v9 retry.
+
+The explicit `PROSPECTIVELY NOT RUN` training-seed panel is retained as a
+non-result in [`reproducibility/not_run_figures/`](reproducibility/not_run_figures/);
+it is deliberately excluded from the publication figure set.
 
 ## Tables and statistics
 

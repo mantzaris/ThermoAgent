@@ -48,11 +48,12 @@ def test_real_llm_projection_remains_below_cap_and_records_zero_large_stages(tmp
     assert stored["planned_episodes"] == 4
 
 
-def test_blocked_figure_is_explicit_vector_and_result_indexed(tmp_path: Path):
+def test_blocked_figure_is_explicit_non_result_and_indexed(tmp_path: Path):
     name = _blocked("training_seed_curves", tmp_path, "Training", "Gate 5 failed")
-    assert name == "training_seed_curves.pdf"
-    pdf = tmp_path / "figures" / "pdf" / name
+    assert name == "reproducibility/not_run_figures/training_seed_curves.pdf"
+    pdf = tmp_path / name
     assert pdf.read_bytes().startswith(b"%PDF")
+    assert not (tmp_path / "figures" / "pdf" / "training_seed_curves.pdf").exists()
     index = build_index(tmp_path)
     indexed = pd.read_csv(index)
     assert any(indexed.artifact_path.str.endswith(name))

@@ -1,0 +1,32 @@
+# Keep source, documentation, and generated text deterministic across platforms.
+*.py      text eol=lf
+*.sh      text eol=lf
+*.md      text eol=lf
+*.txt     text eol=lf
+*.csv     text eol=lf
+*.json    text eol=lf
+*.jsonl   text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.toml    text eol=lf
+*.tex     text eol=lf
+*.svg     text eol=lf
+*.log     text eol=lf
+
+# Research figures, archives, compressed ledgers, and model artifacts are binary.
+*.pdf         -text
+*.png         -text
+*.jpg         -text
+*.jpeg        -text
+*.gif         -text
+*.gz          -text
+*.zip         -text
+*.parquet     -text
+*.npy         -text
+*.npz         -text
+*.pt          -text
+*.pth         -text
+*.bin         -text
+*.safetensors -text
+*.gguf        -text
+*.mp4         -text

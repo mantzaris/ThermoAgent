@@ -199,7 +199,11 @@ def calibrate_human_thermodynamics(
     _atomic_json(calibration_path, record)
     csv_path = results_root / "calibration" / (artifact_stem + "_agent_periods.csv")
     with csv_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(all_rows[0]))
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(all_rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(all_rows)
     record["artifacts"] = {

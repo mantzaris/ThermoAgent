@@ -7,8 +7,8 @@
       "rendered": "reproducibility/pdf_qa/actionability_diagnostics-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -17,8 +17,8 @@
       "rendered": "reproducibility/pdf_qa/attention_allocation_heatmap-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -27,8 +27,8 @@
       "rendered": "reproducibility/pdf_qa/causal_intervention_effects-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -37,8 +37,8 @@
       "rendered": "reproducibility/pdf_qa/commercial_case_study-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -47,8 +47,8 @@
       "rendered": "reproducibility/pdf_qa/energy_entropy_phase_plane-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -57,8 +57,8 @@
       "rendered": "reproducibility/pdf_qa/humanitarian_case_study-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -67,8 +67,8 @@
       "rendered": "reproducibility/pdf_qa/intervention_funnel-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -77,8 +77,8 @@
       "rendered": "reproducibility/pdf_qa/loss_operator_effort_pareto-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -87,8 +87,8 @@
       "rendered": "reproducibility/pdf_qa/monitoring_incremental_value-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -97,8 +97,8 @@
       "rendered": "reproducibility/pdf_qa/network_operator_sequence-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -107,8 +107,8 @@
       "rendered": "reproducibility/pdf_qa/operator_dashboard_overview-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -117,8 +117,8 @@
       "rendered": "reproducibility/pdf_qa/operator_view_incremental_value-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -127,8 +127,8 @@
       "rendered": "reproducibility/pdf_qa/operator_workload_performance-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -137,8 +137,8 @@
       "rendered": "reproducibility/pdf_qa/partition_robustness-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -147,8 +147,8 @@
       "rendered": "reproducibility/pdf_qa/primary_effect_forest-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -157,8 +157,8 @@
       "rendered": "reproducibility/pdf_qa/thermodynamic_ablation-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -167,18 +167,8 @@
       "rendered": "reproducibility/pdf_qa/thermohitl_architecture-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
-    },
-    {
-      "fonts_detected": true,
-      "opens": true,
-      "pdf": "training_seed_curves.pdf",
-      "rendered": "reproducibility/pdf_qa/training_seed_curves-render.png",
-      "validation_backend": "poppler",
-      "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -187,8 +177,8 @@
       "rendered": "reproducibility/pdf_qa/trigger_and_intervention_dynamics-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     },
     {
       "fonts_detected": true,
@@ -197,8 +187,8 @@
       "rendered": "reproducibility/pdf_qa/trigger_timing_and_false_alarms-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "All 20 rendered previews inspected; revised dashboard, architecture, network labels, Pareto labels, forest annotation, trigger panels, scale-normalized workload/heatmap, explicit aborted partition diagnostic, and three-panel Qwen actionability history are readable with no clipping or overlap that obscures evidence.",
-      "visual_reviewer": "Codex visual inspection at original preview resolution"
+      "visual_inspection_note": "All 19 evidence-bearing PDFs inspected after repair; no clipped, overlapping, unreadably small, or misleading labels observed. Placeholder training panel excluded from publication figures and retained under reproducibility/not_run_figures.",
+      "visual_reviewer": "Codex visual QA (original-resolution rendered previews)"
     }
   ],
   "pymupdf_available": false,

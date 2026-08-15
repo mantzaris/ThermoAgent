@@ -102,4 +102,3 @@ def test_v4_thermodynamic_crossfit_ranks_fragmented_cases() -> None:
     frame["score"] = scores
     selected = _budget_selection(frame, "score", budget=1)
     assert selected.causal_utility.mean() > 0.5
-

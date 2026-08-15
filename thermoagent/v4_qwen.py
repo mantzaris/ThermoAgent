@@ -386,4 +386,3 @@ def run_real_qwen_qualification(
         encoding="utf-8",
     )
     return report
-

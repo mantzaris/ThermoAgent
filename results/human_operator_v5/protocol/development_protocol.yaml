@@ -1,0 +1,27 @@
+# Frozen prospective development protocol. The canonical machine-readable file
+# is copied verbatim from configs/human_operator_v5_development.yaml before any
+# V5 development outcomes are generated. It is intentionally duplicated here
+# so the result package remains interpretable without source-code navigation.
+study: thermohitl_v5
+protocol_version: "5.0.3-development-frozen-after-pilot"
+canonical_config: configs/human_operator_v5_development.yaml
+frozen_before_formal_v5_development_outcomes: true
+pilot_iteration_1_retained: true
+pilot_iteration_2_retained: true
+pilot_iteration_3_retained: true
+scientific_question: >-
+  Under fragmented private information and a fixed simulated-operator budget,
+  does KPI plus distributed entropy and belief disagreement select more useful
+  interventions than the same-information KPI-only policy in humanitarian and
+  utility-restoration panels with multiple competitive incidents?
+primary_applications: [humanitarian, utility_restoration]
+boundary_application: commercial
+primary_comparison: kpi_plus_entropy_disagreement_vs_kpi_only
+primary_endpoint: paired_panel_budgeted_counterfactual_utility
+independent_unit: competitive_environment_panel
+operator_budget: 2
+bootstrap_replicates: 10000
+validation_unlock_requires_all_development_gates: true
+holdout_unlock_requires_all_validation_gates: true
+real_human_participants: false
+cyber_scope: abstract_defensive_simulation_only

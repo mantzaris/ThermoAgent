@@ -63,6 +63,18 @@ EVENT_KINDS = {
     "intervention_causal_stage",
     "information_boundary_audit",
     "v4_state_transition",
+    # ThermoHITL v5 competitive multi-incident oversight events. These remain
+    # abstract simulator events; cyber-physical modes never encode procedures,
+    # targets, protocols, credentials, or deployable offensive actions.
+    "v5_panel_snapshot",
+    "v5_operator_view",
+    "v5_candidate_intervention",
+    "v5_stochastic_tape",
+    "v5_state_transition",
+    "v5_privacy_audit",
+    "v5_sketch_accounting",
+    "v5_abstention",
+    "v5_policy_decision",
 }
 
 

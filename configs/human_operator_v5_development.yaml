@@ -1,0 +1,222 @@
+study: thermohitl_v5
+protocol_version: "5.0.3-development-frozen-after-pilot"
+title: Distributed Entropic Observability for Budgeted Human Oversight of Decentralized Autonomous Agents Under Fragmented Information
+evidence_stage: development
+informed_by_v4: true
+v4_snapshot: 8ccd27df248940fc0cbb55c43a30949de3370533
+v4_maintenance_parent: d39eb2eefefa54259a2bafc6dcd6e9b0dbde2ffe
+applications: [commercial, humanitarian, utility_restoration]
+primary_positive_applications: [humanitarian, utility_restoration]
+boundary_application: commercial
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  precision: bitsandbytes_NF4_with_BF16_compute
+  prompt_revision: thermohitl-v5-independent-json-v1
+simulation:
+  incidents_per_panel_minimum: 3
+  incidents_per_panel_maximum: 6
+  formal_incidents_per_panel: 4
+  horizon: 24
+  disruption_step_range: [5, 8]
+  operator_budget: 2
+  operator_slots: 1
+  operator_window_minutes: 30.0
+  verification_accuracy: 0.82
+  verification_false_positive: 0.08
+  verification_false_negative: 0.10
+  verification_delay_steps: 2
+  verification_cost: 0.055
+  intervention_cost_range: [0.025, 0.14]
+  intervention_delay_range: [1, 4]
+  bounded_harm_cap: 0.24
+  stochastic_tape_length: 256
+  low_consensus_threshold: 0.42
+  competitive_panel_minimum: 0.85
+information_conditions: [private_fragmented, public_shared]
+regimes:
+  - nominal
+  - isolated_physical
+  - telemetry_integrity
+  - partition
+  - correlated
+  - compound
+  - ood
+sketch_policies: [none, periodic, event_triggered, always_on]
+primary_sketch_policy: event_triggered
+sketch:
+  periodic_interval: 4
+  event_entropy_delta: 0.120
+  event_disagreement_delta: 0.140
+  maximum_payload_fields: 7
+  message_latency_steps: 1
+  byte_cost: 0.000002
+  latency_cost: 0.0005
+operator_actions:
+  - verify
+  - request_peer_evidence
+  - authorize_emergency_resource
+  - reroute_or_reconfigure
+  - deploy_repair_capacity
+  - isolate_or_quarantine
+  - revise_commitment
+  - defer
+  - no_action
+operator_triage_methods:
+  - no_human
+  - random
+  - kpi_only
+  - kpi_entropy_disagreement
+  - kpi_energy
+  - full_thermodynamic
+  - always_on
+  - oracle
+triage_eligibility:
+  visible_severity_minimum: 0.30
+  predicted_action_value_must_be_positive: true
+  thermodynamic_safe_abstention_below_consensus: 0.42
+  decision_time: first_post_disruption_decision_epoch
+feature_blocks:
+  local_kpi_only: [visible_severity, visible_backlog, visible_delay, resource_scarcity, safety_risk, commitment_strain]
+  energy_only: [operational_energy]
+  entropy_disagreement_only: [mean_belief_entropy, entropy_dispersion, js_disagreement, entropy_slope, consensus_residual]
+  kpi_plus_energy: [visible_severity, visible_backlog, visible_delay, resource_scarcity, safety_risk, commitment_strain, operational_energy]
+  kpi_plus_entropy_disagreement: [visible_severity, visible_backlog, visible_delay, resource_scarcity, safety_risk, commitment_strain, mean_belief_entropy, entropy_dispersion, js_disagreement, entropy_slope, consensus_residual]
+  complete_thermodynamic: [visible_severity, visible_backlog, visible_delay, resource_scarcity, safety_risk, commitment_strain, operational_energy, mean_belief_entropy, entropy_dispersion, js_disagreement, entropy_slope, consensus_residual, consensus_confidence]
+  exploratory_free_energy: [operational_energy, mean_belief_entropy, effective_temperature, free_energy]
+primary_model:
+  class: l2_regularized_action_value_model_with_logistic_calibration_sensitivity
+  target: action_specific_counterfactual_utility
+  regularization_grid: [0.03, 0.1, 0.3, 1.0, 3.0]
+  outer_group_folds: 5
+  inner_group_folds: 3
+  split_groups: [environment_seed, topology_family, scenario_family]
+  selection_metric: panel_budgeted_causal_utility
+  refit_permutation_replicates_development: 199
+  refit_permutation_replicates_formal: 999
+  permutation_strata: [application, information_condition, regime, visible_severity_quintile]
+statistics:
+  independent_unit: competitive_environment_panel
+  bootstrap_replicates: 10000
+  bootstrap_seed: 55051
+  multiplicity: holm
+  primary_interval: cluster_paired_95_percent
+  noninferiority_margin_relative_service_loss: 0.02
+development:
+  seeds: [51001, 51002, 51003, 51004, 51005, 51006, 51007, 51008, 51009, 51010, 51011, 51012, 51013, 51014, 51015, 51016, 51017, 51018, 51019, 51020]
+  pilot_seeds: [50901, 50902, 50903, 50904]
+  pilot_iteration_1_status: retained_failed_engineering_calibration
+  pilot_iteration_2_status: retained_failed_coordination_calibration
+  pilot_iteration_3_status: retained_failed_utility_coordination_calibration
+  formal_development_begins_after_protocol_5_0_3: true
+  planner: deterministic_independent_engineering_control
+  retain_all_iterations: true
+real_qwen_qualification:
+  seeds: [51901, 51902, 51903, 51904]
+  episodes_per_application: 12
+  decision_epochs_per_episode: 3
+  minimum_total_decision_epochs: 108
+  first_pass_validity_minimum: 0.90
+  validity_after_one_repair_minimum: 0.98
+  material_acceptance_minimum: 0.75
+  service_reaching_minimum: 0.45
+  distinct_action_types_minimum: 4
+  private_evidence_divergence_minimum: 0.20
+training:
+  algorithms: [ippo_kpi_only, ippo_entropy_disagreement]
+  seeds: [52001, 52002, 52003, 52004, 52005]
+  environment_steps_per_seed: 30000
+  checkpoint_rule: final_finite_checkpoint_no_best_seed_selection
+  execution: decentralized
+validation:
+  seeds: [53001, 53002, 53003, 53004, 53005, 53006, 53007, 53008, 53009, 53010, 53011, 53012]
+  run_once: true
+  immutable_after_start: true
+holdout:
+  seed_namespace: thermohitl-v5-sealed-holdout-v1
+  seeds: [54001, 54002, 54003, 54004, 54005, 54006, 54007, 54008, 54009, 54010, 54011, 54012, 54013, 54014, 54015, 54016]
+  minimum_disrupted_panels_per_regime_application: 12
+  outcome_sealed: true
+  inspect_during_execution: [process_health, completion_count, schema_presence, finite_values, disk_usage]
+gates:
+  gate_1_engineering:
+    tests_must_pass: true
+    replay_mismatch_maximum: 0
+    conservation_residual_maximum: 1.0e-9
+    privacy_failures_maximum: 0
+    nonfinite_metrics_maximum: 0
+    checksum_failures_maximum: 0
+  gate_2_autonomous_validity:
+    deterministic_first_pass_tool_validity_minimum: 0.95
+    deterministic_repaired_validity_minimum: 0.99
+    material_acceptance_minimum: 0.90
+    next_stage_progression_minimum: 0.80
+    service_reaching_minimum: 0.70
+    action_types_minimum: 6
+    negotiation_or_revision_panel_fraction_minimum: 0.20
+    privacy_leaks_maximum: 0
+    qwen_requirements_from_real_qwen_section: true
+  gate_3_coordination_necessity:
+    required_applications: [humanitarian, utility_restoration]
+    directional_paired_lower_90ci_above_zero: true
+    aggregate_relative_loss_reduction_minimum: 0.03
+    panels_with_changed_outcome_fraction_minimum: 0.25
+    improved_disrupted_regimes_minimum: 3
+    communication_adjusted_utility_must_be_positive: true
+  gate_4_human_causal_usefulness:
+    required_applications: [humanitarian, utility_restoration]
+    paired_loss_reduction_lower_95ci_above_zero: true
+    relative_loss_reduction_minimum: 0.03
+    complete_causal_chain_fraction_minimum: 0.20
+    operator_minutes_per_panel_maximum: 16.0
+  gate_5_thermodynamic_incremental_value:
+    required_applications: [humanitarian, utility_restoration]
+    paired_utility_gain_lower_95ci_above_zero: true
+    relative_budgeted_utility_gain_minimum: 0.05
+    improved_regime_count_minimum: 3
+    harmful_intervention_rate_increase_maximum: 0.03
+    service_loss_relative_degradation_maximum: 0.02
+    univariate_entropy_or_disagreement_auc_maximum: 0.90
+    minimum_common_support_fraction: 0.80
+    no_single_scenario_family_fraction_maximum: 0.60
+  gate_6_trigger_triage_feasibility:
+    timely_activation_minimum: 0.75
+    missed_eligible_event_maximum: 0.15
+    nominal_false_activation_maximum: 0.10
+    pre_disruption_activation_maximum: 0.10
+    maximum_queue_length: 4
+    eligible_disruption_coverage_minimum: 0.75
+  gate_7_mechanism_specificity:
+    fragmented_minus_public_relative_gain_minimum: 0.05
+    interaction_lower_95ci_above_zero: true
+    shuffled_refit_gain_fraction_maximum: 0.50
+  gate_8_safety_abstention:
+    low_confidence_partition_panel_fraction_minimum: 0.10
+    harmful_intervention_relative_reduction_minimum: 0.20
+    service_loss_relative_degradation_maximum: 0.02
+  gate_9_communication_cost:
+    event_triggered_sketch_byte_reduction_vs_always_on_minimum: 0.50
+    communication_adjusted_incremental_utility_lower_95ci_above_zero: true
+    must_not_be_pareto_dominated_by_periodic: true
+  gate_10_learning_stability:
+    independent_training_seeds: 5
+    finite_seed_minimum: 5
+    selective_seed_removal: false
+    entropy_policy_mean_gain_above_zero: true
+    between_seed_coefficient_of_variation_maximum: 0.60
+progression:
+  validation_requires_gates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  holdout_requires_validation_gates: [3, 4, 5, 6, 7, 8, 9, 10]
+  failed_gate_action: stop_preserve_rebuild_report_no_threshold_changes
+integrity:
+  no_selective_reruns: true
+  retain_failed_attempts: true
+  exclusions_must_be_prespecified: true
+  real_human_participants: false
+  simulated_operator_label_required: true
+  cyber_scope: abstract_defensive_simulation_only
+  no_external_targets: true
+compute_cap:
+  gpu_hours: 50.0
+  approximate_cost_usd: 40.0
+  safety_reserve_fraction: 0.15

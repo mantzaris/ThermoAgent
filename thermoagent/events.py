@@ -50,6 +50,19 @@ EVENT_KINDS = {
     "material_progress",
     "counterfactual_snapshot",
     "counterfactual_branch",
+    # ThermoHITL v4 utility-restoration and observability events. Cyber labels
+    # are abstract simulator states and never contain operational instructions.
+    "telemetry_observation",
+    "telemetry_verification",
+    "belief_update",
+    "restoration_action",
+    "resource_assignment",
+    "service_transition",
+    "operator_view_v4",
+    "attention_decision_v4",
+    "intervention_causal_stage",
+    "information_boundary_audit",
+    "v4_state_transition",
 }
 
 

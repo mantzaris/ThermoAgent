@@ -1,0 +1,10 @@
+{
+  "candidate_interventions": 336,
+  "completed_now": 192,
+  "counterfactuals": 0,
+  "episodes": 192,
+  "failures": 0,
+  "finished_at": "2026-08-15T04:00:54.390061+00:00",
+  "resumed_existing": 0,
+  "stage": "implementation_pilot_v9_dense"
+}

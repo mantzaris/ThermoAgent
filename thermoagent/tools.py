@@ -56,10 +56,20 @@ ALL_ROLES = {
     "supplier", "manufacturer", "carrier", "warehouse", "retailer",
     "ngo", "agency", "transport", "depot", "clinic", "community",
     "coordinator",
+    # Defensive v4 utility-restoration roles. These are abstract simulator
+    # organizations and never identify or address a real utility asset.
+    "distribution_zone", "substation", "microgrid", "crew_dispatch",
+    "parts_depot", "mobile_generation", "critical_load",
+    "incident_coordinator",
 }
 SOURCE_ROLES = {"supplier", "manufacturer", "warehouse", "ngo", "agency", "depot"}
 TRANSPORT_ROLES = {"carrier", "transport"}
 DEMAND_ROLES = {"retailer", "clinic", "community"}
+UTILITY_ROLES = {
+    "distribution_zone", "substation", "microgrid", "crew_dispatch",
+    "parts_depot", "mobile_generation", "critical_load",
+    "incident_coordinator",
+}
 
 
 def _specs() -> Dict[str, ToolSpec]:
@@ -115,6 +125,112 @@ def _specs() -> Dict[str, ToolSpec]:
             False,
             "Request bounded supervisory attention without surrendering ordinary action authority.",
         ),
+        "request_telemetry_verification": ToolSpec(
+            "request_telemetry_verification",
+            {"asset_id": FieldRule(str), "reason": FieldRule(str)},
+            set(UTILITY_ROLES),
+            False,
+            "Request an abstract field or cross-agent verification; no real system is contacted.",
+        ),
+        "dispatch_field_crew": ToolSpec(
+            "dispatch_field_crew",
+            {
+                "crew_id": FieldRule(str),
+                "target_zone": FieldRule(str),
+                "skill": FieldRule(str, choices=("electrical", "telemetry", "generation")),
+            },
+            {"crew_dispatch", "incident_coordinator"},
+            True,
+            "Assign one available simulated crew to one restoration task.",
+        ),
+        "redirect_field_crew": ToolSpec(
+            "redirect_field_crew",
+            {"crew_id": FieldRule(str), "target_zone": FieldRule(str)},
+            {"crew_dispatch"},
+            True,
+        ),
+        "allocate_spare_component": ToolSpec(
+            "allocate_spare_component",
+            {
+                "component": FieldRule(str, choices=("switch_module", "telemetry_module", "transformer_module")),
+                "quantity": FieldRule(int, minimum=1, maximum=4),
+                "target_zone": FieldRule(str),
+            },
+            {"parts_depot"},
+            True,
+        ),
+        "route_mobile_generator": ToolSpec(
+            "route_mobile_generator",
+            {"generator_id": FieldRule(str), "target_zone": FieldRule(str)},
+            {"mobile_generation"},
+            True,
+        ),
+        "allocate_fuel": ToolSpec(
+            "allocate_fuel",
+            {
+                "quantity": FieldRule(float, minimum=0.1, maximum=100.0),
+                "target_zone": FieldRule(str),
+            },
+            {"mobile_generation", "parts_depot"},
+            True,
+        ),
+        "prioritize_critical_load": ToolSpec(
+            "prioritize_critical_load",
+            {
+                "load_id": FieldRule(str),
+                "priority": FieldRule(str, choices=("ordinary", "elevated", "critical")),
+                "duration": FieldRule(int, minimum=1, maximum=12),
+            },
+            {"incident_coordinator", "critical_load"},
+            True,
+        ),
+        "negotiate_repair_commitment": ToolSpec(
+            "negotiate_repair_commitment",
+            {
+                "target": FieldRule(str),
+                "resource": FieldRule(str),
+                "quantity": FieldRule(float, minimum=0.1, maximum=100.0),
+                "due_step": due,
+            },
+            set(UTILITY_ROLES),
+            True,
+        ),
+        "revise_resource_commitment": ToolSpec(
+            "revise_resource_commitment",
+            {
+                "commitment_id": FieldRule(str),
+                "quantity": FieldRule(float, minimum=0.1, maximum=100.0),
+                "due_step": due,
+            },
+            set(UTILITY_ROLES),
+            True,
+        ),
+        "request_emergency_logistics_edge": ToolSpec(
+            "request_emergency_logistics_edge",
+            {"source": FieldRule(str), "target": FieldRule(str), "reason": FieldRule(str)},
+            set(UTILITY_ROLES),
+            False,
+            "Request bounded operator authority for a temporary simulated logistics edge.",
+        ),
+        "temporarily_isolate_service_zone": ToolSpec(
+            "temporarily_isolate_service_zone",
+            {"zone_id": FieldRule(str), "duration": FieldRule(int, minimum=1, maximum=8)},
+            {"distribution_zone", "substation", "microgrid"},
+            True,
+            "Isolate an abstract simulator zone; this is not a real control command.",
+        ),
+        "request_cross_agent_consensus": ToolSpec(
+            "request_cross_agent_consensus",
+            {"topic": FieldRule(str), "participants": FieldRule(list)},
+            set(UTILITY_ROLES),
+            False,
+        ),
+        "defer_due_to_uncertainty": ToolSpec(
+            "defer_due_to_uncertainty",
+            {"reason": FieldRule(str), "reconsider_step": due},
+            set(UTILITY_ROLES),
+            False,
+        ),
     }
 
 
@@ -156,13 +272,13 @@ class ToolRegistry:
 
 
 OPTION_TOOLS = {
-    0: {"no_op", "inspect_private_inventory", "forecast_local_demand", "schedule_shipment", "transfer_resource"},
-    1: {"request_info", "request_quote", "request_priority"},
-    2: {"disclose_summary", "report_local_need"},
-    3: {"request_quote", "submit_offer", "pledge_resource"},
+    0: {"no_op", "inspect_private_inventory", "forecast_local_demand", "schedule_shipment", "transfer_resource", "defer_due_to_uncertainty"},
+    1: {"request_info", "request_quote", "request_priority", "request_telemetry_verification", "request_cross_agent_consensus"},
+    2: {"disclose_summary", "report_local_need", "request_cross_agent_consensus"},
+    3: {"request_quote", "submit_offer", "pledge_resource", "negotiate_repair_commitment"},
     4: {"accept_offer", "reject_offer", "counter_offer"},
     5: {"propose_coalition", "join_coalition", "refuse_coalition", "withdraw_coalition"},
-    6: {"schedule_shipment", "transfer_resource", "request_priority", "challenge_allocation", "propose_coalition"},
-    7: {"schedule_shipment", "transfer_resource", "reroute_shipment", "expedite_shipment", "report_local_need", "disclose_summary", "propose_coalition", "central_dispatch", "request_human_assistance"},
-    8: {"no_op"},
+    6: {"schedule_shipment", "transfer_resource", "request_priority", "challenge_allocation", "propose_coalition", "dispatch_field_crew", "redirect_field_crew", "allocate_spare_component", "route_mobile_generator", "allocate_fuel", "prioritize_critical_load", "revise_resource_commitment"},
+    7: {"schedule_shipment", "transfer_resource", "reroute_shipment", "expedite_shipment", "report_local_need", "disclose_summary", "propose_coalition", "central_dispatch", "request_human_assistance", "request_telemetry_verification", "dispatch_field_crew", "allocate_spare_component", "route_mobile_generator", "allocate_fuel", "prioritize_critical_load", "request_emergency_logistics_edge", "temporarily_isolate_service_zone", "request_cross_agent_consensus"},
+    8: {"no_op", "defer_due_to_uncertainty"},
 }

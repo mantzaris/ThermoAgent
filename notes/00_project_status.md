@@ -30,7 +30,9 @@ Last updated: 2026-08-15 America/New_York
 - **Integrity:** 238 tests and 3,156 replays pass with zero replay mismatches
   and maximum conservation residual 0.0. All 24 publication/dashboard PDFs
   open, use embedded fonts, render at 240 DPI, and passed original-resolution
-  visual review; final Git/fresh-clone verification is the remaining handoff.
+  visual review. A temporary fresh clone of results commit `455c86c0` had a
+  clean worktree, passed all diff and artifact checks, ran 28 focused tests,
+  and replayed a populated dashboard without a GPU.
 - **Active jobs:** none locally or on the RunPod. The final read-only remote
   audit found 0% GPU utilization, no CUDA compute job, no tmux session, and no
   ThermoAgent/Qwen process.

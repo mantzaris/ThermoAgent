@@ -45,11 +45,22 @@ def git_metadata(repository: Path) -> Dict[str, Any]:
             text=True, check=True,
         ).stdout.strip()
 
-    return {
-        "commit": run("rev-parse", "HEAD"),
-        "branch": run("branch", "--show-current"),
-        "dirty": bool(run("status", "--porcelain")),
-    }
+    try:
+        return {
+            "commit": run("rev-parse", "HEAD"),
+            "branch": run("branch", "--show-current"),
+            "dirty": bool(run("status", "--porcelain")),
+        }
+    except subprocess.CalledProcessError:
+        # The established RunPod deployment intentionally excludes .git.
+        # Carry the clean local execution commit explicitly rather than
+        # inventing remote Git state.
+        return {
+            "commit": os.environ.get("THERMO_SOURCE_COMMIT", "filtered_source_bundle"),
+            "branch": os.environ.get("THERMO_SOURCE_BRANCH", "filtered_source_bundle"),
+            "dirty": False,
+            "git_metadata_filtered_from_deployment": True,
+        }
 
 
 def protocol_checksum(repository: Path) -> str:

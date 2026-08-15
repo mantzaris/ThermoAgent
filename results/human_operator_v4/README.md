@@ -283,8 +283,9 @@ The 21 paper-facing PDFs in [`figures/pdf/`](figures/pdf/) are vector outputs;
 
 RL-curve and holdout-frontier figures are intentionally absent because those
 stages were not unlocked. `reproducibility/pdf_qa/` records mechanical and
-manual visual QA. The three actual replay SVG/PDF exports are separate from the
-publication reconstruction and hash their source payloads.
+manual visual QA for all 21 paper figures and all three populated replay PDFs.
+The three actual replay SVG/PDF exports are separate from the publication
+reconstruction and hash their source payloads.
 
 ## 11. Tables and artifact map
 

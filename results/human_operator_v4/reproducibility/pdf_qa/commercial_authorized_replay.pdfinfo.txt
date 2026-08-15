@@ -9,6 +9,6 @@ Pages:          1
 Encrypted:      no
 Page size:      540 x 342 pts
 Page rot:       0
-File size:      26221 bytes
+File size:      25957 bytes
 Optimized:      no
 PDF version:    1.5

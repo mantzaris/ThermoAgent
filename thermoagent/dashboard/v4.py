@@ -275,7 +275,10 @@ def frame_svg_v4(frame: V4DashboardFrame, width: int = 1200, height: int = 760) 
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">' % (width, height, width, height),
         '<rect width="100%" height="100%" fill="#F6F8FA"/>',
-        '<style>text{font-family:DejaVu Sans,Arial,sans-serif;fill:#18212F}.title{font-size:32px;font-weight:700}.head{font-size:25px;font-weight:700}.label{font-size:23px}.small{font-size:20px}.panel{fill:#fff;stroke:#C7D0DB;stroke-width:1.2}.service{stroke:#009E73;stroke-width:3}.logistics{stroke:#7A8798;stroke-width:2.2}.comm{stroke:#0072B2;stroke-width:1.4;stroke-dasharray:6 4}.emergency{stroke:#D55E00;stroke-width:5}</style>',
+        # Liberation Sans avoids a Cairo/Poppler glyph-subset defect observed
+        # with one DejaVu Sans dashboard export while retaining embedded,
+        # selectable vector text. Arial and the generic family are fallbacks.
+        '<style>text{font-family:Liberation Sans,Arial,sans-serif;fill:#18212F}.title{font-size:32px;font-weight:700}.head{font-size:25px;font-weight:700}.label{font-size:23px}.small{font-size:20px}.panel{fill:#fff;stroke:#C7D0DB;stroke-width:1.2}.service{stroke:#009E73;stroke-width:3}.logistics{stroke:#7A8798;stroke-width:2.2}.comm{stroke:#0072B2;stroke-width:1.4;stroke-dasharray:6 4}.emergency{stroke:#D55E00;stroke-width:5}</style>',
         '<text x="28" y="36" class="title">ThermoHITL v4 operator replay — %s — step %d</text>' % (html.escape(frame.application.replace("_", " ")), frame.step),
         '<text x="28" y="58" class="small">Simulated operator · development evidence · authorized payload only</text>',
         '<rect x="24" y="78" width="575" height="505" rx="8" class="panel"/>',

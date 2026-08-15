@@ -763,7 +763,14 @@ def generate_all(results_root: Path) -> List[str]:
 
 
 def validate_pdfs(results_root: Path) -> Dict[str, Any]:
-    pdfs = sorted((results_root / "figures" / "pdf").glob("*.pdf"))
+    # Dashboard replay exports are evidentiary PDFs too. Keep them in the same
+    # mechanical and visual-QA contract as paper-facing figures instead of
+    # silently validating only the publication directory.
+    pdfs = sorted(
+        [*(results_root / "figures" / "pdf").glob("*.pdf"),
+         *(results_root / "dashboard_exports").glob("*.pdf")],
+        key=lambda path: path.as_posix(),
+    )
     preview_dir = results_root / "figures" / "previews"
     qa_dir = results_root / "reproducibility" / "pdf_qa"
     qa_dir.mkdir(parents=True, exist_ok=True)
@@ -815,7 +822,7 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             raise RuntimeError("render failed for %s" % pdf)
         (qa_dir / (pdf.stem + ".pdfinfo.txt")).write_text(info, encoding="utf-8")
         (qa_dir / (pdf.stem + ".fonts.txt")).write_text(fonts, encoding="utf-8")
-        records.append({"pdf": pdf.name, "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
+        records.append({"pdf": str(pdf.relative_to(results_root)), "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
     report = {"tools": tools, "pymupdf_available": pymupdf is not None, "figures": records}
     (qa_dir / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report

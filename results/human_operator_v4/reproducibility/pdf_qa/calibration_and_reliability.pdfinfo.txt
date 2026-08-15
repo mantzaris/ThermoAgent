@@ -2,7 +2,7 @@ Title:          calibration_and_reliability
 Subject:        ThermoHITL v4 development evidence
 Creator:        matplotlib 3.1.2, http://matplotlib.org
 Producer:       matplotlib pdf backend 3.1.2
-CreationDate:   Sat Aug 15 01:54:29 2026 EDT
+CreationDate:   Sat Aug 15 02:21:18 2026 EDT
 Tagged:         no
 UserProperties: no
 Suspects:       no

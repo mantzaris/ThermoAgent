@@ -12,9 +12,9 @@
   insufficient for AIJ submission.
 - Final integrity: 213/213 tests passed; 1,590/1,590 ledgers replayed
   exactly; replay mismatches and maximum conservation residual were both zero.
-  All 21 vector PDFs opened, exposed fonts, rendered at 240 DPI, and passed
-  original-resolution visual inspection. The 5,020-row artifact index has no
-  missing files or checksum mismatches.
+  All 21 paper-facing vector PDFs and all three populated replay PDFs opened,
+  exposed fonts, rendered at 240 DPI, and passed original-resolution visual
+  inspection. The artifact index has no missing files or checksum mismatches.
 - Repository hygiene: v3/v4 maintained text has no CRLF; the 47 normalized v3
   artifacts match both the immutable v3 byte hashes and parsed CSV semantics;
   both required diff checks pass; no credential signature or file over 50 MB

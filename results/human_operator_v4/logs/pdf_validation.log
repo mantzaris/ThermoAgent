@@ -3,7 +3,34 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "alert_timing_and_false_alarms.pdf",
+      "pdf": "dashboard_exports/commercial_authorized_replay.pdf",
+      "render_dpi": 240,
+      "rendered": "reproducibility/pdf_qa/commercial_authorized_replay-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "pending manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "dashboard_exports/humanitarian_authorized_replay.pdf",
+      "render_dpi": 240,
+      "rendered": "reproducibility/pdf_qa/humanitarian_authorized_replay-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "pending manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "dashboard_exports/utility_restoration_authorized_replay.pdf",
+      "render_dpi": 240,
+      "rendered": "reproducibility/pdf_qa/utility_restoration_authorized_replay-render.png",
+      "validation_backend": "poppler",
+      "visual_inspection": "pending manual preview review"
+    },
+    {
+      "fonts_detected": true,
+      "opens": true,
+      "pdf": "figures/pdf/alert_timing_and_false_alarms.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/alert_timing_and_false_alarms-render.png",
       "validation_backend": "poppler",
@@ -12,7 +39,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "budgeted_causal_utility_cluster_intervals.pdf",
+      "pdf": "figures/pdf/budgeted_causal_utility_cluster_intervals.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/budgeted_causal_utility_cluster_intervals-render.png",
       "validation_backend": "poppler",
@@ -21,7 +48,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "calibration_and_reliability.pdf",
+      "pdf": "figures/pdf/calibration_and_reliability.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/calibration_and_reliability-render.png",
       "validation_backend": "poppler",
@@ -30,7 +57,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "causal_intervention_and_action_funnels.pdf",
+      "pdf": "figures/pdf/causal_intervention_and_action_funnels.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/causal_intervention_and_action_funnels-render.png",
       "validation_backend": "poppler",
@@ -39,7 +66,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "commercial_boundary_condition.pdf",
+      "pdf": "figures/pdf/commercial_boundary_condition.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/commercial_boundary_condition-render.png",
       "validation_backend": "poppler",
@@ -48,7 +75,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "conditional_benefit_vs_information_fragmentation.pdf",
+      "pdf": "figures/pdf/conditional_benefit_vs_information_fragmentation.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/conditional_benefit_vs_information_fragmentation-render.png",
       "validation_backend": "poppler",
@@ -57,7 +84,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "distributed_consensus_error_under_partitions.pdf",
+      "pdf": "figures/pdf/distributed_consensus_error_under_partitions.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/distributed_consensus_error_under_partitions-render.png",
       "validation_backend": "poppler",
@@ -66,7 +93,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "harmful_neutral_beneficial_interventions.pdf",
+      "pdf": "figures/pdf/harmful_neutral_beneficial_interventions.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/harmful_neutral_beneficial_interventions-render.png",
       "validation_backend": "poppler",
@@ -75,7 +102,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "humanitarian_development_case_study.pdf",
+      "pdf": "figures/pdf/humanitarian_development_case_study.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/humanitarian_development_case_study-render.png",
       "validation_backend": "poppler",
@@ -84,7 +111,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "operator_dashboard_populated.pdf",
+      "pdf": "figures/pdf/operator_dashboard_populated.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/operator_dashboard_populated-render.png",
       "validation_backend": "poppler",
@@ -93,7 +120,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "operator_view_kpi_vs_thermodynamic.pdf",
+      "pdf": "figures/pdf/operator_view_kpi_vs_thermodynamic.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/operator_view_kpi_vs_thermodynamic-render.png",
       "validation_backend": "poppler",
@@ -102,7 +129,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "operator_workload_vs_service_performance.pdf",
+      "pdf": "figures/pdf/operator_workload_vs_service_performance.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/operator_workload_vs_service_performance-render.png",
       "validation_backend": "poppler",
@@ -111,7 +138,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "per_application_regime_effect_forest.pdf",
+      "pdf": "figures/pdf/per_application_regime_effect_forest.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/per_application_regime_effect_forest-render.png",
       "validation_backend": "poppler",
@@ -120,7 +147,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "standardized_energy_entropy_disagreement_phase_plane.pdf",
+      "pdf": "figures/pdf/standardized_energy_entropy_disagreement_phase_plane.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/standardized_energy_entropy_disagreement_phase_plane-render.png",
       "validation_backend": "poppler",
@@ -129,7 +156,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "thermodynamic_feature_block_ablation.pdf",
+      "pdf": "figures/pdf/thermodynamic_feature_block_ablation.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/thermodynamic_feature_block_ablation-render.png",
       "validation_backend": "poppler",
@@ -138,7 +165,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "thermohitl_v4_architecture.pdf",
+      "pdf": "figures/pdf/thermohitl_v4_architecture.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/thermohitl_v4_architecture-render.png",
       "validation_backend": "poppler",
@@ -147,7 +174,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "three_application_comparison.pdf",
+      "pdf": "figures/pdf/three_application_comparison.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/three_application_comparison-render.png",
       "validation_backend": "poppler",
@@ -156,7 +183,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "trigger_and_intervention_timeline.pdf",
+      "pdf": "figures/pdf/trigger_and_intervention_timeline.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/trigger_and_intervention_timeline-render.png",
       "validation_backend": "poppler",
@@ -165,7 +192,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "utility_cyber_disruption_event_sequence.pdf",
+      "pdf": "figures/pdf/utility_cyber_disruption_event_sequence.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/utility_cyber_disruption_event_sequence-render.png",
       "validation_backend": "poppler",
@@ -174,7 +201,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "utility_restoration_development_case_study.pdf",
+      "pdf": "figures/pdf/utility_restoration_development_case_study.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/utility_restoration_development_case_study-render.png",
       "validation_backend": "poppler",
@@ -183,7 +210,7 @@
     {
       "fonts_detected": true,
       "opens": true,
-      "pdf": "utility_restoration_multilayer_network.pdf",
+      "pdf": "figures/pdf/utility_restoration_multilayer_network.pdf",
       "render_dpi": 240,
       "rendered": "reproducibility/pdf_qa/utility_restoration_multilayer_network-render.png",
       "validation_backend": "poppler",

@@ -367,12 +367,21 @@ def export_dashboard_replays(root: Path) -> List[str]:
     destination.mkdir(parents=True, exist_ok=True)
     records = []
     outputs = []
+    converter = shutil.which("rsvg-convert")
+    if converter is None:
+        raise RuntimeError("vector dashboard PDF export requires rsvg-convert")
     for application in APP_LABELS:
         episode_path, replay, frame = _first_populated_frame(root, application)
         svg_path = destination / (application + "_authorized_replay.svg")
         pdf_path = destination / (application + "_authorized_replay.pdf")
         svg_path.write_text(frame_svg_v4(frame) + "\n", encoding="utf-8")
-        subprocess.run(["rsvg-convert", "-w", "540", "-f", "pdf", "-o", str(pdf_path), str(svg_path)], check=True)
+        # Keep the direct librsvg output: it retains embedded, selectable
+        # vector text. The replay SVG deliberately uses Liberation Sans after
+        # cross-render QA found a DejaVu Sans subset defect in Poppler.
+        subprocess.run(
+            [converter, "-w", "540", "-f", "pdf", "-o", str(pdf_path), str(svg_path)],
+            check=True,
+        )
         outputs.extend([str(svg_path.relative_to(root)), str(pdf_path.relative_to(root))])
         records.append({
             "application": application,

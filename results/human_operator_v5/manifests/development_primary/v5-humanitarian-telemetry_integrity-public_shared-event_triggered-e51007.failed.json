@@ -1,0 +1,10 @@
+{
+  "application": "humanitarian",
+  "environment_seed": 51007,
+  "failure_reason": "V5 output already exists: v5-humanitarian-telemetry_integrity-public_shared-event_triggered-e51007",
+  "failure_type": "FileExistsError",
+  "information_condition": "public_shared",
+  "regime": "telemetry_integrity",
+  "run_id": "v5-humanitarian-telemetry_integrity-public_shared-event_triggered-e51007",
+  "sketch_policy": "event_triggered"
+}

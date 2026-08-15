@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import fcntl
 import hashlib
 import json
 import os
@@ -297,6 +298,39 @@ def run_matrix(
     seeds: Sequence[int],
     sketch_policies: Sequence[str] = ("event_triggered",),
     resume: bool = True,
+) -> Dict[str, Any]:
+    lock_path = results_root / "logs" / (stage + ".execution.lock")
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_handle = lock_path.open("a+", encoding="utf-8")
+    try:
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        lock_handle.close()
+        raise RuntimeError("another V5 process already owns stage lock: %s" % stage)
+    lock_handle.seek(0)
+    lock_handle.truncate()
+    lock_handle.write("pid=%d started=%s\n" % (os.getpid(), utc_now()))
+    lock_handle.flush()
+    try:
+        return _run_matrix_locked(
+            repository, results_root, stage, applications, regimes,
+            information_conditions, seeds, sketch_policies, resume,
+        )
+    finally:
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
+        lock_handle.close()
+
+
+def _run_matrix_locked(
+    repository: Path,
+    results_root: Path,
+    stage: str,
+    applications: Sequence[str],
+    regimes: Sequence[str],
+    information_conditions: Sequence[str],
+    seeds: Sequence[int],
+    sketch_policies: Sequence[str],
+    resume: bool,
 ) -> Dict[str, Any]:
     summaries: List[Dict[str, Any]] = []
     candidate_rows: List[Dict[str, Any]] = []

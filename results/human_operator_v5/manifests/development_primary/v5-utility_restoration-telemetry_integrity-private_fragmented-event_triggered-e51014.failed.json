@@ -1,0 +1,10 @@
+{
+  "application": "utility_restoration",
+  "environment_seed": 51014,
+  "failure_reason": "V5 output already exists: v5-utility_restoration-telemetry_integrity-private_fragmented-event_triggered-e51014",
+  "failure_type": "FileExistsError",
+  "information_condition": "private_fragmented",
+  "regime": "telemetry_integrity",
+  "run_id": "v5-utility_restoration-telemetry_integrity-private_fragmented-event_triggered-e51014",
+  "sketch_policy": "event_triggered"
+}

@@ -1,0 +1,17 @@
+{
+  "deviations": [
+    {
+      "action": "invalidated complete stage namespace and assigned untouched replacement seeds",
+      "affected_stage": "development_primary",
+      "detected_before_outcome_analysis": true,
+      "failure_type": "concurrent execution race",
+      "new_protocol_version": "5.0.4-development-execution-repair",
+      "new_stage": "development_primary_v2",
+      "old_protocol_version": "5.0.3-development-frozen-after-pilot",
+      "outcome_adaptation": false,
+      "records_preserved": true,
+      "threshold_change": false
+    }
+  ],
+  "study": "ThermoHITL v5"
+}

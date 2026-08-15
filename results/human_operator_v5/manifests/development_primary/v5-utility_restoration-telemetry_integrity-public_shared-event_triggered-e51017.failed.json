@@ -1,0 +1,10 @@
+{
+  "application": "utility_restoration",
+  "environment_seed": 51017,
+  "failure_reason": "V5 output already exists: v5-utility_restoration-telemetry_integrity-public_shared-event_triggered-e51017",
+  "failure_type": "FileExistsError",
+  "information_condition": "public_shared",
+  "regime": "telemetry_integrity",
+  "run_id": "v5-utility_restoration-telemetry_integrity-public_shared-event_triggered-e51017",
+  "sketch_policy": "event_triggered"
+}

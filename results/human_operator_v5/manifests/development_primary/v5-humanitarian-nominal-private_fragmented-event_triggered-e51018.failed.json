@@ -1,0 +1,10 @@
+{
+  "application": "humanitarian",
+  "environment_seed": 51018,
+  "failure_reason": "V5 output already exists: v5-humanitarian-nominal-private_fragmented-event_triggered-e51018",
+  "failure_type": "FileExistsError",
+  "information_condition": "private_fragmented",
+  "regime": "nominal",
+  "run_id": "v5-humanitarian-nominal-private_fragmented-event_triggered-e51018",
+  "sketch_policy": "event_triggered"
+}

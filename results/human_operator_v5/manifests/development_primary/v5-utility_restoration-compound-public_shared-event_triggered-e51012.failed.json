@@ -1,0 +1,10 @@
+{
+  "application": "utility_restoration",
+  "environment_seed": 51012,
+  "failure_reason": "V5 output already exists: v5-utility_restoration-compound-public_shared-event_triggered-e51012",
+  "failure_type": "FileExistsError",
+  "information_condition": "public_shared",
+  "regime": "compound",
+  "run_id": "v5-utility_restoration-compound-public_shared-event_triggered-e51012",
+  "sketch_policy": "event_triggered"
+}

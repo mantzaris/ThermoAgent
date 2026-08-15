@@ -1,0 +1,10 @@
+{
+  "application": "utility_restoration",
+  "environment_seed": 51011,
+  "failure_reason": "V5 output already exists: v5-utility_restoration-nominal-public_shared-event_triggered-e51011",
+  "failure_type": "FileExistsError",
+  "information_condition": "public_shared",
+  "regime": "nominal",
+  "run_id": "v5-utility_restoration-nominal-public_shared-event_triggered-e51011",
+  "sketch_policy": "event_triggered"
+}

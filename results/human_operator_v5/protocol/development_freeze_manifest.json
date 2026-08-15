@@ -1,6 +1,6 @@
 {
   "canonical_config": "configs/human_operator_v5_development.yaml",
-  "canonical_config_sha256": "fa925b90837348bad07b25bf17b44fbb3d58c4ad3d816c9227622d7a9b647757",
+  "canonical_config_sha256": "687aee0ebde467c3d5b5919906345a570abb9454b3fdbbd33c9b2a965d575770",
   "frozen_before_formal_development": true,
   "parent_commit": "d39eb2eefefa54259a2bafc6dcd6e9b0dbde2ffe",
   "pilot_iterations_retained": [
@@ -9,8 +9,14 @@
     "pilot_iteration_3",
     "pilot_iteration_4"
   ],
-  "protocol_version": "5.0.3-development-frozen-after-pilot",
+  "invalidated_execution_freeze": {
+    "config_sha256": "fa925b90837348bad07b25bf17b44fbb3d58c4ad3d816c9227622d7a9b647757",
+    "protocol_version": "5.0.3-development-frozen-after-pilot",
+    "source_checksum": "e48de9f4baa67becef957d3e3793c61fd759120758b0f4240060c091a4ea1f38",
+    "stage": "development_primary"
+  },
+  "protocol_version": "5.0.4-development-execution-repair",
   "scientific_thresholds_changed_after_pilot": false,
-  "source_checksum_before_formal_development": "e48de9f4baa67becef957d3e3793c61fd759120758b0f4240060c091a4ea1f38",
+  "source_checksum_before_formal_development": "b24b01b1e4d20d9e96e842f6edadbffdc9956a7c901be8d15ca52238744cc026",
   "stage_boundary": "No formal V5 development outcome existed when this manifest was written."
 }

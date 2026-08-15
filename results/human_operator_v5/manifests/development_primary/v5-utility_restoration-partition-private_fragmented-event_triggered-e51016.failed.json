@@ -1,0 +1,10 @@
+{
+  "application": "utility_restoration",
+  "environment_seed": 51016,
+  "failure_reason": "V5 output already exists: v5-utility_restoration-partition-private_fragmented-event_triggered-e51016",
+  "failure_type": "FileExistsError",
+  "information_condition": "private_fragmented",
+  "regime": "partition",
+  "run_id": "v5-utility_restoration-partition-private_fragmented-event_triggered-e51016",
+  "sketch_policy": "event_triggered"
+}

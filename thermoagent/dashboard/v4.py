@@ -268,7 +268,7 @@ def frame_svg_v4(frame: V4DashboardFrame, width: int = 1200, height: int = 760) 
     if frame.interventions:
         action_value = str(frame.interventions[-1].get("action", frame.interventions[-1].get("code", "none")))
         latest_action = {
-            "bounded_intervention_applied": "intervention applied",
+        "bounded_intervention_applied": "applied after displayed view",
             "authorize_verification": "verification authorized",
         }.get(action_value, action_value.replace("_", " "))
 
@@ -342,7 +342,7 @@ def frame_svg_v4(frame: V4DashboardFrame, width: int = 1200, height: int = 760) 
         '<text x="648" y="423" class="label">Reason</text><text x="1138" y="423" text-anchor="end" class="label">%s</text>' % html.escape(reason_label),
         '<text x="648" y="452" class="label">Queue length</text><text x="1138" y="452" text-anchor="end" class="label">%d</text>' % len(frame.alert_queue),
         '<text x="648" y="481" class="label">Operator workload</text><text x="1138" y="481" text-anchor="end" class="label">%.2f</text>' % float(frame.workload.get("workload", 0.0)),
-        '<text x="648" y="510" class="label">Operator minutes</text><text x="1138" y="510" text-anchor="end" class="label">%.1f</text>' % float(frame.workload.get("operator_minutes", 0.0)),
+        '<text x="648" y="510" class="label">Minutes before decision</text><text x="1138" y="510" text-anchor="end" class="label">%.1f</text>' % float(frame.workload.get("operator_minutes", 0.0)),
         '<text x="648" y="539" class="small">Latest action</text><text x="1138" y="539" text-anchor="end" class="small">%s</text>' % html.escape(latest_action),
         '<rect x="24" y="604" width="1148" height="125" rx="8" class="panel"/>',
         '<text x="44" y="634" class="head">Data provenance and causal progress</text>',

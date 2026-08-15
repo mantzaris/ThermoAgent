@@ -1,0 +1,16 @@
+{
+  "artifact_classification": {
+    "dashboard_timing_label": "presentational_only",
+    "smoke_csv_line_endings": "line_ending_only",
+    "utility_network_layout": "presentational_only"
+  },
+  "gate_status_sha256_after": "2ec7536b4f5e32d7eaa6a5c1d3add252716bcc30f88174b621fcd35a7c921d5a",
+  "gate_status_sha256_before": "2ec7536b4f5e32d7eaa6a5c1d3add252716bcc30f88174b621fcd35a7c921d5a",
+  "gate_status_unchanged": true,
+  "pdfs_mechanically_valid": 24,
+  "pdfs_visually_passed": 24,
+  "scientific_snapshot": "8ccd27df248940fc0cbb55c43a30949de3370533",
+  "tests_failed": 0,
+  "tests_passed": 213,
+  "tests_skipped": 0
+}

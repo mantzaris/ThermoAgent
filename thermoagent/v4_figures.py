@@ -222,7 +222,12 @@ def _draw_network(ax: Any, frame: V4DashboardFrame, title: str) -> None:
         }
         suffix = str(node["agent_id"]).rsplit("_", 1)[-1]
         label = abbreviations.get(role, role.replace("_", " ").title()) + " " + suffix
-        ax.text(point[0], point[1] - 0.14, label, ha="center", va="top", fontsize=10)
+        # Put labels for the two lowest nodes above their markers.  The prior
+        # uniform below-node placement collided with the publication legend.
+        if point[1] < -0.72:
+            ax.text(point[0], point[1] + 0.13, label, ha="center", va="bottom", fontsize=10)
+        else:
+            ax.text(point[0], point[1] - 0.14, label, ha="center", va="top", fontsize=10)
     ax.set_aspect("equal"); ax.axis("off"); ax.set_title(title)
 
 
@@ -236,7 +241,7 @@ def utility_multilayer_network(root: Path) -> str:
         Line2D([0], [0], color=COLORS["blue"], lw=1.4, ls="--", label="Communication"),
         Line2D([0], [0], marker="o", color=COLORS["orange"], mfc="none", lw=0, markersize=14, label="Visible incident"),
     ]
-    ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, -0.10), ncol=2, frameon=False)
+    ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, -0.13), ncol=2, frameon=False)
     return _save(fig, root, "utility_restoration_multilayer_network")
 
 

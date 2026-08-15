@@ -1,7 +1,7 @@
 {
   "failed": 0,
   "scope": "complete repository test suite",
-  "seconds": 22.829,
+  "seconds": 22.313,
   "skipped": 0,
   "tests": 213
 }

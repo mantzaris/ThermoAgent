@@ -326,6 +326,8 @@ def test_v4_dashboard_replay_uses_only_hashed_authorized_views(tmp_path) -> None
     svg = frame_svg_v4(populated[0])
     assert "authorized payload only" in svg
     assert "utility restoration" in svg
+    assert "Minutes before decision" in svg
+    assert "Operator minutes</text>" not in svg
 
 
 def test_v4_index_builder_hashes_artifacts_and_excludes_itself(tmp_path: Path) -> None:

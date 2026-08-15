@@ -8,8 +8,8 @@
       "rendered": "reproducibility/pdf_qa/commercial_authorized_replay-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -19,8 +19,8 @@
       "rendered": "reproducibility/pdf_qa/humanitarian_authorized_replay-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -30,8 +30,8 @@
       "rendered": "reproducibility/pdf_qa/utility_restoration_authorized_replay-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -41,8 +41,8 @@
       "rendered": "reproducibility/pdf_qa/alert_timing_and_false_alarms-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -52,8 +52,8 @@
       "rendered": "reproducibility/pdf_qa/budgeted_causal_utility_cluster_intervals-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -63,8 +63,8 @@
       "rendered": "reproducibility/pdf_qa/calibration_and_reliability-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -74,8 +74,8 @@
       "rendered": "reproducibility/pdf_qa/causal_intervention_and_action_funnels-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -85,8 +85,8 @@
       "rendered": "reproducibility/pdf_qa/commercial_boundary_condition-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -96,8 +96,8 @@
       "rendered": "reproducibility/pdf_qa/conditional_benefit_vs_information_fragmentation-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -107,8 +107,8 @@
       "rendered": "reproducibility/pdf_qa/distributed_consensus_error_under_partitions-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -118,8 +118,8 @@
       "rendered": "reproducibility/pdf_qa/harmful_neutral_beneficial_interventions-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -129,8 +129,8 @@
       "rendered": "reproducibility/pdf_qa/humanitarian_development_case_study-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -140,8 +140,8 @@
       "rendered": "reproducibility/pdf_qa/operator_dashboard_populated-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -151,8 +151,8 @@
       "rendered": "reproducibility/pdf_qa/operator_view_kpi_vs_thermodynamic-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -162,8 +162,8 @@
       "rendered": "reproducibility/pdf_qa/operator_workload_vs_service_performance-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -173,8 +173,8 @@
       "rendered": "reproducibility/pdf_qa/per_application_regime_effect_forest-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -184,8 +184,8 @@
       "rendered": "reproducibility/pdf_qa/standardized_energy_entropy_disagreement_phase_plane-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -195,8 +195,8 @@
       "rendered": "reproducibility/pdf_qa/thermodynamic_feature_block_ablation-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -206,8 +206,8 @@
       "rendered": "reproducibility/pdf_qa/thermohitl_v4_architecture-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -217,8 +217,8 @@
       "rendered": "reproducibility/pdf_qa/three_application_comparison-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -228,8 +228,8 @@
       "rendered": "reproducibility/pdf_qa/trigger_and_intervention_timeline-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -239,8 +239,8 @@
       "rendered": "reproducibility/pdf_qa/utility_cyber_disruption_event_sequence-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -250,8 +250,8 @@
       "rendered": "reproducibility/pdf_qa/utility_restoration_development_case_study-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     },
     {
       "fonts_detected": true,
@@ -261,8 +261,8 @@
       "rendered": "reproducibility/pdf_qa/utility_restoration_multilayer_network-render.png",
       "validation_backend": "poppler",
       "visual_inspection": "passed",
-      "visual_inspection_note": "Inspected all 21 paper figures and three populated dashboard replay exports from Poppler-rendered 240-DPI PDFs at original resolution; text, legends, vector diagrams, evidence labels, and plot boundaries are readable and unclipped.",
-      "visual_reviewer": "Codex visual QA"
+      "visual_inspection_note": "Inspected all 21 paper figures and three populated replay exports at original resolution after V4 maintenance; the utility lower labels no longer overlap the legend, the dashboard timing labels are unambiguous, text is readable, and no data encoding changed.",
+      "visual_reviewer": "Codex V4 maintenance QA"
     }
   ],
   "pymupdf_available": false,

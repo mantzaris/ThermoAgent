@@ -8,6 +8,13 @@ Local operators and future development sessions should consult
 the evidence. Both are Git-facing; credentials, local agent configuration,
 virtual environments, model weights, and caches are excluded.
 
+The latest additive study is
+[`results/human_operator_v4/README.md`](results/human_operator_v4/README.md):
+ThermoHITL v4 adds an abstract utility-restoration application and tests
+distributed thermodynamic observability for scarce simulated-operator
+attention. It stopped prospectively at development Gate 3; no v4 validation,
+RL training, holdout, or real-human evidence exists.
+
 ThermoAgent is a reproducible research system for asking when genuinely
 independent, tool-using organizational agents are justified relative to strong
 centralized and scripted logistics controls. It provides two abstract,

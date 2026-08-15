@@ -83,5 +83,19 @@ contain validation or holdout evidence.
     gain fractions of 0.171 humanitarian and 0.084 utility restoration.  These
     remain pilot diagnostics; the 2,000-replicate formal test is not yet run.
 
-No formal development gate has yet been evaluated.  The frozen thresholds in
-`configs/human_operator_v4_development.yaml` have not been changed.
+The preceding entries were recorded before formal gate evaluation. The frozen
+thresholds in `configs/human_operator_v4_development.yaml` were not changed.
+
+## Formal development disposition
+
+Formal development subsequently completed 1,584 deterministic episodes and
+six real-Qwen actionability episodes. Gates 1, 2, 4, 5, 6, and 7 passed. Gate 3
+failed because utility-restoration fixed communication reduced aggregate loss
+by 4.4317%, below the frozen 5% practical threshold. The paired absolute effect
+was -0.4843 (95% cluster-bootstrap interval [-0.7715, -0.2065]), but statistical
+direction does not replace the prospective practical criterion.
+
+The protocol therefore stopped before validation, learned-policy training, and
+holdout. The authoritative gate report is
+`results/human_operator_v4/development/gate_status.json`; detailed interpretation
+is in `notes/40_v4_gate_results_and_disposition.md`.

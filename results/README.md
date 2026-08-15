@@ -27,9 +27,20 @@
   abstract humanitarian application, not commercially. In accordance with the
   preregistered stop rule, v3 has no validation, RL training, or locked holdout
   episodes and is insufficient for the intended positive AIJ submission.
+- **Distributed thermodynamic observability study (v4):**
+  [`human_operator_v4/README.md`](human_operator_v4/README.md). V4 preserves the
+  v3 snapshot, adds an abstract critical-infrastructure utility-restoration
+  application, repairs reviewed repository/figure issues, and prospectively
+  tests same-information causal triage across three applications. Formal
+  development contains 1,584 deterministic and six real-Qwen episodes. Gate 3
+  fails because utility-restoration fixed communication improves loss by 4.43%,
+  below the frozen 5% threshold; therefore validation, RL training, and holdout
+  were not run. Development thermodynamic gains in humanitarian and utility
+  restoration remain promising but non-confirmatory, with an exact commercial
+  null.
 
-The top-level `INDEX.csv` indexes all three namespaces when rebuilt. No v2 or
-v3 derived artifact replaces a frozen-v1 source artifact.
+The top-level `INDEX.csv` indexes the historical namespaces when rebuilt. No
+v2, v3, or v4 derived artifact replaces a frozen-v1 source artifact.
 
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed

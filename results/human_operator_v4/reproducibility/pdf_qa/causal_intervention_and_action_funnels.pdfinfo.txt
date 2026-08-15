@@ -1,0 +1,17 @@
+Title:          causal_intervention_and_action_funnels
+Subject:        ThermoHITL v4 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 01:54:30 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      614.962 x 581.184 pts
+Page rot:       0
+File size:      384465 bytes
+Optimized:      no
+PDF version:    1.4

@@ -99,6 +99,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     subparsers.add_parser("replay")
     subparsers.add_parser("analyze")
     subparsers.add_parser("real-qwen")
+    subparsers.add_parser("figures")
+    subparsers.add_parser("report")
+    subparsers.add_parser("index")
     args = parser.parse_args(argv)
     repository = _repository(args.root)
     results_root = repository / "results" / "human_operator_v4"
@@ -108,8 +111,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         value = replay_v4_results(results_root)
     elif args.command == "analyze":
         value = analyze_v4_development(repository)
-    else:
+    elif args.command == "real-qwen":
         value = run_real_qwen_qualification(repository, results_root)
+    elif args.command == "figures":
+        from .v4_figures import generate_all
+
+        value = {"generated": generate_all(results_root)}
+    elif args.command == "report":
+        from .v4_reporting import build_v4_reporting
+
+        value = build_v4_reporting(repository)
+    else:
+        from .v4_reporting import build_index
+
+        value = build_index(results_root)
     print(json.dumps(value, indent=2, sort_keys=True, default=str))
     return 0
 

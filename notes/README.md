@@ -144,3 +144,18 @@ Store persistent remote state under `/workspace`:
 - `32_thermohitl_failures_and_claims.md`: negative findings and evidence map.
 - `33_thermohitl_reproduction_and_compute.md`: commands, tokens, and GPU use.
 - `34_thermohitl_future_human_study_and_irb.md`: no-human-evidence boundary.
+
+## V4 distributed-observability note map
+
+- `35_v4_repository_cleanup.md`: LF normalization and v3 review repairs.
+- `36_v4_utility_restoration_design.md`: defensive three-layer utility simulator.
+- `37_v4_prospective_protocol.md`: frozen hypotheses, feature blocks, gates,
+  thresholds, and stopping rule.
+- `38_v4_development_findings.md`: append-only pilot/repair history and formal
+  disposition.
+- `39_v4_compute_projection.md`: pre-execution budget with 15% reserve.
+- `40_v4_gate_results_and_disposition.md`: formal gate outcomes and hard stop.
+- `41_v4_dashboard_and_information_boundaries.md`: deployable view and replay.
+- `42_v4_claims_and_prohibited_claims.md`: claims-to-evidence map.
+- `43_v4_reproduction_and_compute.md`: commands, resources, and provenance.
+- `44_v4_final_status.md`: concise branch/evidence disposition.

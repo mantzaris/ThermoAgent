@@ -1,0 +1,7 @@
+{
+  "gate_decision": "stop_before_validation",
+  "index_path": "/home/resort/Documents/repos/ThermoAgent/results/human_operator_v4/INDEX.csv",
+  "indexed_artifacts_excluding_self": 5020,
+  "self_exclusion": "INDEX.csv cannot contain its own stable checksum and is intentionally excluded",
+  "tables_generated": 15
+}

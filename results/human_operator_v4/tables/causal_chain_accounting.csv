@@ -1,0 +1,7 @@
+evidence_stage,application,method,episodes,operator_requests,operator_interventions,commitment_changes,accepted_material_actions,next_stage_actions,demand_or_service_arrivals,primary_outcome_changes,beneficial_interventions,harmful_interventions,complete_causal_chains,confirmatory
+development,commercial,autonomy_no_operator,60,0,0,0,96,96,94,0,0,0,0,False
+development,commercial,thermohitl_v4_rule,60,96,60,115,96,96,96,2,2,0,2,False
+development,humanitarian,autonomy_no_operator,60,0,0,0,96,96,54,0,0,0,0,False
+development,humanitarian,thermohitl_v4_rule,60,96,60,115,96,96,86,32,32,0,32,False
+development,utility_restoration,autonomy_no_operator,60,0,0,0,96,96,54,0,0,0,0,False
+development,utility_restoration,thermohitl_v4_rule,60,96,60,115,96,96,88,34,34,0,34,False

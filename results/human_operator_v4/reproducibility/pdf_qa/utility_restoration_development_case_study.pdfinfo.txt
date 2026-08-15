@@ -1,0 +1,17 @@
+Title:          utility_restoration_development_case_study
+Subject:        ThermoHITL v4 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 01:54:38 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      618.646 x 564.98 pts
+Page rot:       0
+File size:      386084 bytes
+Optimized:      no
+PDF version:    1.4

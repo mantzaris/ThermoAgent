@@ -1,5 +1,33 @@
 # ThermoAgent project status
 
+## ThermoHITL distributed-observability study (v4)
+
+Last updated: 2026-08-15 America/New_York
+
+- **Current phase:** Complete development-stage prospective stop. Gates 1, 2,
+  4, 5, 6, and 7 pass; Gate 3 fails, so validation, RL training, and holdout
+  were not run.
+- **Branch:** `thermodynamic-human-oversight-v4`, descended from immutable v3
+  commit `3f844966930b1cfb5a43bdf3a4d3e744391d1018`.
+- **Completed:** v3 CRLF/checksum/document/figure repair; three-application v4
+  implementation; abstract utility-restoration simulator; 1,584 deterministic
+  episodes; six real-Qwen episodes; cluster-aware causal-utility analysis;
+  actual dashboard exports; vector figures; reproducibility package.
+- **Latest valid result:** fixed communication improved utility-restoration loss
+  4.432%, below the frozen 5% Gate 3 target. Thermodynamic causal-utility gains
+  were 0.1589 [0.0619, 0.2613] humanitarian and 0.1787 [0.1029, 0.2609]
+  utility, with exact zero commercial gain. These are development findings.
+- **Integrity:** 1,590 ledgers replay exactly, zero mismatches, maximum
+  conservation residual 0; final test/PDF QA counts are recorded in the v4
+  reproducibility directory.
+- **Active jobs:** none after final verification.
+- **Blocker:** scientific Gate 3 failure, not infrastructure.
+- **Next action:** preserve the local commit and let the user push explicitly.
+- **Readiness:** not sufficient for AIJ; no validation, learned v4 policy,
+  holdout, or real-human evidence exists.
+
+---
+
 ## ThermoHITL human-on-the-loop study (v3)
 
 Last updated: 2026-08-14 18:05 America/New_York

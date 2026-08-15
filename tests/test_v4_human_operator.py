@@ -3,10 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import csv
+import hashlib
+import json
+from pathlib import Path
 
 import pytest
 
 from thermoagent.agents import PrivacyViolation
+from thermoagent.dashboard.v4 import V4DashboardReplay, frame_svg_v4
 from thermoagent.types import PlanOutput
 from thermoagent.v4_environment import FragmentedOversightEnvironment
 from thermoagent.v4_operator import (
@@ -14,6 +19,7 @@ from thermoagent.v4_operator import (
     SimulatedOperatorV4,
 )
 from thermoagent.v4_qwen import _agent_and_action, _validate
+from thermoagent.v4_reporting import build_index
 from thermoagent.v4_runner import V4EpisodeConfig, V4EpisodeRunner
 from thermoagent.v4_types import (
     AttentionRequestV4,
@@ -288,3 +294,62 @@ def test_v4_real_qwen_qualification_affordance_is_typed(application: str) -> Non
     assert environment.registry.validate(
         environment.agents[agent_id].identity.role, plan
     ).ok
+
+
+def test_v4_dashboard_replay_uses_only_hashed_authorized_views(tmp_path) -> None:
+    result = V4EpisodeRunner(V4EpisodeConfig(
+        application="utility_restoration", regime="compound",
+        information_condition="private_fragmented",
+        method="thermohitl_v4_rule", environment_seed=24001,
+        operator_seed=124001, operator_budget=1,
+        counterfactual_probes=False, stage="unit_dashboard",
+    )).run()
+    run_root = tmp_path / result.run_id
+    run_root.mkdir()
+    episode_path = run_root / "episode.json"
+    episode_path.write_text(
+        json.dumps(result.episode_dict(), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    result.ledger.write_jsonl(run_root / "events.jsonl.gz")
+    replay = V4DashboardReplay(episode_path)
+    assert replay.metadata()["information_boundary"].startswith("schema-validated")
+    populated = [frame for frame in replay.frames if frame.view_hashes]
+    assert populated
+    rendered = json.dumps([frame.as_dict() for frame in replay.frames], sort_keys=True)
+    for forbidden in (
+        "true_mode", "resource_required", "counterfactual_loss",
+        "rng_state", "evaluator_global_state", "private_agent_state",
+    ):
+        assert forbidden not in rendered
+    assert populated[0].thermodynamics["standardized_energy"] is not None
+    svg = frame_svg_v4(populated[0])
+    assert "authorized payload only" in svg
+    assert "utility restoration" in svg
+
+
+def test_v4_index_builder_hashes_artifacts_and_excludes_itself(tmp_path: Path) -> None:
+    artifact = tmp_path / "development" / "sample.json"
+    artifact.parent.mkdir()
+    artifact.write_text('{"status":"development"}\n', encoding="utf-8")
+    report = build_index(tmp_path)
+    with (tmp_path / "INDEX.csv").open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert report["indexed_artifacts_excluding_self"] == 1
+    assert [row["path"] for row in rows] == ["development/sample.json"]
+    assert rows[0]["sha256"] == hashlib.sha256(artifact.read_bytes()).hexdigest()
+    assert "INDEX.csv" not in {row["path"] for row in rows}
+
+
+def test_v4_gate_stop_has_no_later_stage_outcomes() -> None:
+    repository = Path(__file__).resolve().parents[1]
+    results = repository / "results" / "human_operator_v4"
+    gate = json.loads((results / "development" / "gate_status.json").read_text(encoding="utf-8"))
+    assert gate["decision"] == "stop_before_validation"
+    assert gate["gates"]["gate_3_coordination_necessity"]["passed"] is False
+    for stage in ("validation", "training", "holdout"):
+        marker = json.loads((results / stage / "NOT_RUN.json").read_text(encoding="utf-8"))
+        assert marker["status"] == "prospectively_not_run"
+        assert marker["outcomes_observed"] is False
+        assert marker["fabricated_rows"] == 0
+        assert not list((results / stage).glob("*results*.csv"))

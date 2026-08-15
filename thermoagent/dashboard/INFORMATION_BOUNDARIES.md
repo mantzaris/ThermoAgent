@@ -23,6 +23,13 @@ Every operator payload is schema validated, canonically serialized, SHA-256
 hashed, and logged before attention allocation or intervention. Replay checks
 the stored hash. Tests inject forbidden fields and require rejection.
 
+For v4 utility restoration, the normal view may show a coarse visible telemetry
+confidence state and conflicting-summary disagreement. It may not show the true
+cyber-compromise label, true incident mode, hidden resource requirement, raw
+private telemetry, or future cascade. The dashboard builds v4 frames only from
+topology, explicit messages/actions/material results, and validated
+`operator_view_v4` events; evaluator episode metrics are analysis-only.
+
 The simulated operator may alter only a typed authority, information, priority,
 constraint, or feasibility record. Advisory directives preserve agent refusal;
 temporary emergency overrides are mandatory only for their recorded scope and

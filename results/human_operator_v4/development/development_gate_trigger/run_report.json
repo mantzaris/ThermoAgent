@@ -1,0 +1,10 @@
+{
+  "candidate_interventions": 0,
+  "completed_now": 432,
+  "counterfactuals": 0,
+  "episodes": 432,
+  "failures": 0,
+  "finished_at": "2026-08-15T04:34:32.510479+00:00",
+  "resumed_existing": 0,
+  "stage": "development_gate_trigger"
+}

@@ -30,3 +30,16 @@ Never-present fields in normal views include raw private costs, exact private
 inventory/capacity, agent RNG state, future disruption labels, evaluator-global
 thermodynamic state, and counterfactual outcomes. Oracle-only fields use a
 separate explicitly privileged schema.
+
+## V4 schema additions
+
+V4 uses `OperatorViewV4` and hashes its canonical JSON before allocation.
+`public_network` distinguishes `service_edges`, `logistics_edges`,
+`communication_edges`, `authorized_emergency_edges`, and
+`visible_incidents`. A visible utility incident may expose a coarse
+`telemetry_confidence_state`; it never exposes the simulator's true corruption
+label. `features` is restricted by the assigned view condition, `alert` carries
+reason/benefit/uncertainty/time-to-collapse fields, `workload` carries the
+one-slot budget state, and `provenance` records contributor and boundary
+metadata. V4 replay leaves unauthorized values null rather than substituting
+evaluator-global values.

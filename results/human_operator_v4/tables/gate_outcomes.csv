@@ -1,0 +1,8 @@
+gate,description,passed,evidence_stage,disposition,confirmatory
+gate_1_engineering_integrity,Engineering integrity,True,development,qualified,False
+gate_2_agent_actionability,Autonomous-agent actionability,True,development,qualified,False
+gate_3_coordination_necessity,Coordination necessity,False,development,failed; stop before validation,False
+gate_4_human_causal_usefulness,Simulated-operator causal usefulness,True,development,qualified,False
+gate_5_thermodynamic_incremental_value,Thermodynamic incremental value,True,development,qualified,False
+gate_6_trigger_feasibility,Trigger feasibility,True,development,qualified,False
+gate_7_mechanism_specificity,Mechanism specificity,True,development,qualified,False

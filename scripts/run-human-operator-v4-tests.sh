@@ -4,8 +4,16 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 results_dir="$repo_dir/results/human_operator_v4"
 mkdir -p "$results_dir/logs" "$results_dir/reproducibility"
 report_xml="$results_dir/reproducibility/pytest_v4.xml"
+if python3 -c 'import pytest' >/dev/null 2>&1; then
+  test_command=(python3 -m pytest)
+elif command -v pytest >/dev/null 2>&1; then
+  test_command=(pytest)
+else
+  echo "pytest is not available in the active project environment" >&2
+  exit 2
+fi
 set +e
-(cd "$repo_dir" && python3 -m pytest -q --junitxml="$report_xml") \
+(cd "$repo_dir" && "${test_command[@]}" -q --junitxml="$report_xml") \
   2>&1 | tee "$results_dir/logs/tests.log"
 test_status="${PIPESTATUS[0]}"
 set -e

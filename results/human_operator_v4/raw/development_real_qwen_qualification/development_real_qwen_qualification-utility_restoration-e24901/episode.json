@@ -1,0 +1,103 @@
+{
+  "application": "utility_restoration",
+  "candidate_interventions": [],
+  "counterfactuals": [],
+  "environment_seed": 24901,
+  "event_ledger_digest": "24a8c1091599f5111779213c48212bd00abe798f4425225ba32c102eb3f4b0e6",
+  "evidence_boundary": "simulated operator; deterministic independent agents unless planner metadata says real Qwen",
+  "information_condition": "globally_public",
+  "manifest_fields": {
+    "application": "utility_restoration",
+    "completion_status": "complete",
+    "environment_seed": 24901,
+    "event_count": 583,
+    "event_ledger_digest": "24a8c1091599f5111779213c48212bd00abe798f4425225ba32c102eb3f4b0e6",
+    "failure_reason": null,
+    "generated_tokens": 53,
+    "information_condition": "globally_public",
+    "llm_calls": 1,
+    "llm_latency_seconds": 1.123050494119525,
+    "method": "real_qwen_actionability_qualification",
+    "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "operator_seed": 0,
+    "planner": "real_qwen_transformers_nf4",
+    "planner_seed": 24999,
+    "precision": "bitsandbytes NF4; BF16 computation",
+    "prompt_tokens": 702,
+    "regime": "compound",
+    "rl_seed": null,
+    "run_id": "development_real_qwen_qualification-utility_restoration-e24901",
+    "serving_library": "Transformers 4.55.4",
+    "simulated_operator": false,
+    "single_gpu_hours": 0.0003119584705887569,
+    "stage": "development_real_qwen_qualification"
+  },
+  "method": "real_qwen_actionability_qualification",
+  "metrics": {
+    "conservation_feasible": true,
+    "first_pass_valid": 1,
+    "generated_tokens": 53,
+    "llm_calls": 1,
+    "llm_latency_seconds": 1.123050494119525,
+    "material_actions_accepted": 1,
+    "material_actions_next_stage": 1,
+    "material_actions_reached_service": 1,
+    "maximum_conservation_residual": 0.0,
+    "primary_outcome": 6.1933696000000005,
+    "prompt_tokens": 702,
+    "structured_attempts": 1,
+    "valid_after_repair": 1
+  },
+  "operator_seed": 0,
+  "regime": "compound",
+  "rl_seed": null,
+  "run_id": "development_real_qwen_qualification-utility_restoration-e24901",
+  "status": "complete",
+  "time_series": [
+    {
+      "loss": 0.0,
+      "step": 0
+    },
+    {
+      "loss": 0.0,
+      "step": 1
+    },
+    {
+      "loss": 0.0,
+      "step": 2
+    },
+    {
+      "loss": 0.0,
+      "step": 3
+    },
+    {
+      "loss": 0.0,
+      "step": 4
+    },
+    {
+      "loss": 0.0,
+      "step": 5
+    },
+    {
+      "loss": 1.22369664,
+      "step": 6
+    },
+    {
+      "loss": 1.24931328,
+      "step": 7
+    },
+    {
+      "loss": 1.27492992,
+      "step": 8
+    },
+    {
+      "loss": 1.30054656,
+      "step": 9
+    },
+    {
+      "loss": 1.1448832000000002,
+      "step": 10
+    }
+  ]
+}

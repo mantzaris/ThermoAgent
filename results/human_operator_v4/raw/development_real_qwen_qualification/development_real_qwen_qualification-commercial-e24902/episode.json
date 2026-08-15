@@ -1,0 +1,103 @@
+{
+  "application": "commercial",
+  "candidate_interventions": [],
+  "counterfactuals": [],
+  "environment_seed": 24902,
+  "event_ledger_digest": "f64e41b56f6f71f4d322a5ed3bc169321992166583b0b0c1cb646fa8c041c42d",
+  "evidence_boundary": "simulated operator; deterministic independent agents unless planner metadata says real Qwen",
+  "information_condition": "globally_public",
+  "manifest_fields": {
+    "application": "commercial",
+    "completion_status": "complete",
+    "environment_seed": 24902,
+    "event_count": 473,
+    "event_ledger_digest": "f64e41b56f6f71f4d322a5ed3bc169321992166583b0b0c1cb646fa8c041c42d",
+    "failure_reason": null,
+    "generated_tokens": 54,
+    "information_condition": "globally_public",
+    "llm_calls": 1,
+    "llm_latency_seconds": 1.1834858134388924,
+    "method": "real_qwen_actionability_qualification",
+    "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "operator_seed": 0,
+    "planner": "real_qwen_transformers_nf4",
+    "planner_seed": 24999,
+    "precision": "bitsandbytes NF4; BF16 computation",
+    "prompt_tokens": 636,
+    "regime": "compound",
+    "rl_seed": null,
+    "run_id": "development_real_qwen_qualification-commercial-e24902",
+    "serving_library": "Transformers 4.55.4",
+    "simulated_operator": false,
+    "single_gpu_hours": 0.0003287460592885812,
+    "stage": "development_real_qwen_qualification"
+  },
+  "method": "real_qwen_actionability_qualification",
+  "metrics": {
+    "conservation_feasible": true,
+    "first_pass_valid": 1,
+    "generated_tokens": 54,
+    "llm_calls": 1,
+    "llm_latency_seconds": 1.1834858134388924,
+    "material_actions_accepted": 1,
+    "material_actions_next_stage": 1,
+    "material_actions_reached_service": 1,
+    "maximum_conservation_residual": 0.0,
+    "primary_outcome": 6.0285696,
+    "prompt_tokens": 636,
+    "structured_attempts": 1,
+    "valid_after_repair": 1
+  },
+  "operator_seed": 0,
+  "regime": "compound",
+  "rl_seed": null,
+  "run_id": "development_real_qwen_qualification-commercial-e24902",
+  "status": "complete",
+  "time_series": [
+    {
+      "loss": 0.0,
+      "step": 0
+    },
+    {
+      "loss": 0.0,
+      "step": 1
+    },
+    {
+      "loss": 0.0,
+      "step": 2
+    },
+    {
+      "loss": 0.0,
+      "step": 3
+    },
+    {
+      "loss": 0.0,
+      "step": 4
+    },
+    {
+      "loss": 0.0,
+      "step": 5
+    },
+    {
+      "loss": 1.22369664,
+      "step": 6
+    },
+    {
+      "loss": 1.24931328,
+      "step": 7
+    },
+    {
+      "loss": 1.27492992,
+      "step": 8
+    },
+    {
+      "loss": 1.30054656,
+      "step": 9
+    },
+    {
+      "loss": 0.9800832000000002,
+      "step": 10
+    }
+  ]
+}

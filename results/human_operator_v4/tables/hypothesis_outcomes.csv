@@ -1,0 +1,9 @@
+hypothesis,short_statement,status,evidence,evidence_stage,confirmatory
+H1,Communication materially useful in fragmented regimes,unsupported at the frozen gate,"Utility restoration improved 4.43%, below the 5% target; Gate 3 failed.",development,False
+H2,Bounded simulated-operator intervention causally improves at least two applications,supported in development,Humanitarian and utility restoration passed; commercial did not.,development,False
+H3,KPI plus entropy/disagreement improves causal utility in humanitarian and utility,supported in development,Both cluster-bootstrap lower bounds exceeded zero at budget one.,development,False
+H4,Benefit increases with information fragmentation,supported in development,Fragmented gains were positive; globally public gains were zero.,development,False
+H5,Thermodynamic triage improves effort/safety without >2% loss degradation,mixed development evidence,"No harmful selections; humanitarian loss degradation was 1.78%, utility improved 1.10%; effort superiority was not confirmatory.",development,False
+H6,Distributed estimates degrade predictably and support safe abstention,mixed development evidence,"Partition error was measured, but no low-confidence operator decision occurred, so abstention was not exercised.",development,False
+H7,Complete causal chain is observed,supported in development,"Complete chains: 2 commercial, 32 humanitarian, 34 utility restoration.",development,False
+H8,Commercial logistics is a KPI-sufficient boundary condition,supported as development boundary evidence,Commercial thermodynamic incremental utility was exactly zero.,development,False

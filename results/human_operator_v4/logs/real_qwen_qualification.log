@@ -1,0 +1,174 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:07<00:21,  7.22s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:14<00:14,  7.06s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:22<00:07,  7.51s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:29<00:00,  7.39s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:29<00:00,  7.36s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{
+  "applications": {
+    "commercial": {
+      "accepted_to_next_stage": 1.0,
+      "accepted_to_service": 1.0,
+      "episodes": 2,
+      "first_pass_validity": 1.0,
+      "passed": true,
+      "validity_after_one_repair": 1.0
+    },
+    "humanitarian": {
+      "accepted_to_next_stage": 1.0,
+      "accepted_to_service": 1.0,
+      "episodes": 2,
+      "first_pass_validity": 1.0,
+      "passed": true,
+      "validity_after_one_repair": 1.0
+    },
+    "utility_restoration": {
+      "accepted_to_next_stage": 1.0,
+      "accepted_to_service": 1.0,
+      "episodes": 2,
+      "first_pass_validity": 1.0,
+      "passed": true,
+      "validity_after_one_repair": 1.0
+    }
+  },
+  "cases": [
+    {
+      "agent_id": "supplier_01",
+      "application": "commercial",
+      "environment_seed": 24901,
+      "executed_tool": "schedule_shipment",
+      "expected_tool": "schedule_shipment",
+      "first_pass_valid": true,
+      "generated_tokens": 54,
+      "latency_seconds": 1.1834858134388924,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 636,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "supplier",
+      "run_id": "development_real_qwen_qualification-commercial-e24901",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    },
+    {
+      "agent_id": "supplier_01",
+      "application": "commercial",
+      "environment_seed": 24902,
+      "executed_tool": "schedule_shipment",
+      "expected_tool": "schedule_shipment",
+      "first_pass_valid": true,
+      "generated_tokens": 54,
+      "latency_seconds": 1.1834858134388924,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 636,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "supplier",
+      "run_id": "development_real_qwen_qualification-commercial-e24902",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    },
+    {
+      "agent_id": "ngo_01",
+      "application": "humanitarian",
+      "environment_seed": 24901,
+      "executed_tool": "transfer_resource",
+      "expected_tool": "transfer_resource",
+      "first_pass_valid": true,
+      "generated_tokens": 58,
+      "latency_seconds": 1.1329041756689548,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 646,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "ngo",
+      "run_id": "development_real_qwen_qualification-humanitarian-e24901",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    },
+    {
+      "agent_id": "ngo_01",
+      "application": "humanitarian",
+      "environment_seed": 24902,
+      "executed_tool": "transfer_resource",
+      "expected_tool": "transfer_resource",
+      "first_pass_valid": true,
+      "generated_tokens": 58,
+      "latency_seconds": 1.1329041756689548,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 646,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "ngo",
+      "run_id": "development_real_qwen_qualification-humanitarian-e24902",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    },
+    {
+      "agent_id": "crew_dispatch_04",
+      "application": "utility_restoration",
+      "environment_seed": 24901,
+      "executed_tool": "dispatch_field_crew",
+      "expected_tool": "dispatch_field_crew",
+      "first_pass_valid": true,
+      "generated_tokens": 53,
+      "latency_seconds": 1.123050494119525,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 702,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "crew_dispatch",
+      "run_id": "development_real_qwen_qualification-utility_restoration-e24901",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    },
+    {
+      "agent_id": "parts_depot_05",
+      "application": "utility_restoration",
+      "environment_seed": 24902,
+      "executed_tool": "allocate_spare_component",
+      "expected_tool": "allocate_spare_component",
+      "first_pass_valid": true,
+      "generated_tokens": 51,
+      "latency_seconds": 1.123050494119525,
+      "llm_calls": 1,
+      "material_action_accepted": 1,
+      "material_action_next_stage": 1,
+      "material_action_reached_service": 1,
+      "prompt_tokens": 676,
+      "raw_output_retained": false,
+      "repair_attempted": false,
+      "role": "parts_depot",
+      "run_id": "development_real_qwen_qualification-utility_restoration-e24902",
+      "tool_result_ok": true,
+      "valid_after_one_repair": true
+    }
+  ],
+  "episodes": 6,
+  "generated_tokens": 328,
+  "llm_calls": 6,
+  "llm_latency_seconds": 6.878880966454744,
+  "model_identifier": "Qwen/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "passed": true,
+  "precision": "bitsandbytes NF4; BF16 computation",
+  "prompt_tokens": 3942,
+  "real_human_operators": false,
+  "real_qwen_agents": true,
+  "simulated_environment": true,
+  "stage": "development_real_qwen_qualification",
+  "study": "ThermoHITL v4"
+}

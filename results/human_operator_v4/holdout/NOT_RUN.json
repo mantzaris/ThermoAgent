@@ -1,0 +1,11 @@
+{
+  "fabricated_rows": 0,
+  "failed_application": "utility_restoration",
+  "failed_gate": "gate_3_coordination_necessity",
+  "observed_aggregate_relative_loss_reduction": 0.04431717249899478,
+  "outcomes_observed": false,
+  "reason": "Required development Gate 3 (coordination necessity) failed.",
+  "required_aggregate_relative_loss_reduction": 0.05,
+  "stage": "holdout",
+  "status": "prospectively_not_run"
+}

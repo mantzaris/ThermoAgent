@@ -786,7 +786,7 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
         if poppler_available:
             info = subprocess.run([tools["pdfinfo"], str(pdf)], capture_output=True, text=True, check=True).stdout
             fonts = subprocess.run([tools["pdffonts"], str(pdf)], capture_output=True, text=True, check=True).stdout
-            subprocess.run([tools["pdftoppm"], "-f", "1", "-singlefile", "-png", "-r", "150", str(pdf), str(render_prefix)], capture_output=True, check=True)
+            subprocess.run([tools["pdftoppm"], "-f", "1", "-singlefile", "-png", "-r", "240", str(pdf), str(render_prefix)], capture_output=True, check=True)
             fonts_detected = len(fonts.splitlines()) > 2
             backend = "poppler"
         else:
@@ -807,7 +807,7 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
                 "backend": "PyMuPDF %s" % getattr(pymupdf, "__version__", "unknown"),
             }, indent=2, sort_keys=True)
             fonts = "\n".join(font_rows) + "\n"
-            document[0].get_pixmap(dpi=150, alpha=False).save(str(render))
+            document[0].get_pixmap(dpi=240, alpha=False).save(str(render))
             fonts_detected = bool(font_rows)
             backend = "pymupdf"
             document.close()
@@ -815,7 +815,7 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             raise RuntimeError("render failed for %s" % pdf)
         (qa_dir / (pdf.stem + ".pdfinfo.txt")).write_text(info, encoding="utf-8")
         (qa_dir / (pdf.stem + ".fonts.txt")).write_text(fonts, encoding="utf-8")
-        records.append({"pdf": pdf.name, "opens": True, "rendered": str(render.relative_to(results_root)), "fonts_detected": fonts_detected, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
+        records.append({"pdf": pdf.name, "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
     report = {"tools": tools, "pymupdf_available": pymupdf is not None, "figures": records}
     (qa_dir / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report

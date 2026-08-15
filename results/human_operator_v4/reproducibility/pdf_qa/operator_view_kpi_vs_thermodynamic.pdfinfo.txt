@@ -1,0 +1,17 @@
+Title:          operator_view_kpi_vs_thermodynamic
+Subject:        ThermoHITL v4 development evidence
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sat Aug 15 01:54:18 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      525.266 x 387.648 pts
+Page rot:       0
+File size:      937871 bytes
+Optimized:      no
+PDF version:    1.4

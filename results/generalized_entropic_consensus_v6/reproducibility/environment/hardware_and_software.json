@@ -1,0 +1,22 @@
+{
+  "bitsandbytes": "0.47.0",
+  "cuda_available": true,
+  "execution_path": "/workspace/ThermoAgent",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_memory_mib": 24564,
+  "matplotlib": "3.10.5",
+  "model_cache": "/workspace/.cache/huggingface",
+  "networkx": "3.5",
+  "nvidia_driver": "570.195.03",
+  "numpy": "2.1.2",
+  "pandas": "2.3.1",
+  "physical_ram_gib": 124,
+  "python": "3.12.3",
+  "pytorch": "2.8.0+cu128",
+  "scikit_learn": "1.5.2",
+  "torch_cuda": "12.8",
+  "transformers": "4.55.4",
+  "verified_at": "2026-08-16T00:20:00Z",
+  "workspace_available_at_verification": "398 TiB",
+  "workspace_filesystem": "persistent RunPod network storage"
+}

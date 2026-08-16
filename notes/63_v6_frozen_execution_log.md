@@ -50,18 +50,17 @@ stage is incomplete. The remote result namespace is exclusively
 `results/generalized_entropic_consensus_v6/`; frozen V1-V5 results are not
 written by V6 jobs.
 
-## Pending non-scientific maintenance
+## Completed non-scientific maintenance
 
 A pre-outcome audit of `git diff --check c895235d..HEAD` found one extra blank
 line at EOF in each of `thermoagent/v6_entropy.py`,
 `tests/test_v6_entropy.py`, and
-`results/generalized_entropic_consensus_v6/v5_reanalysis/README.md`. These are
-not CRLF defects and do not change Python semantics or numerical evidence. To
-avoid mixing source checksums within the active formal stage, the frozen
-execution copy is not being changed. After all frozen execution ends, the
-three trailing blank lines will be removed in a documented formatting-only
-maintenance change; the scientific execution commit and checksum above remain
-the authoritative provenance for formal results.
+`results/generalized_entropic_consensus_v6/v5_reanalysis/README.md`. These were
+not CRLF defects and did not change Python semantics or numerical evidence.
+They were removed in pre-outcome amendment commit `2fa69d5e` while the initial
+reference generator continued on its unchanged `v6.0.0` bundle. Both diff
+checks were clean before training. Per-episode manifests distinguish the
+initial reference checksum from the amended training checksum.
 
 ## Pre-outcome training amendment
 
@@ -75,3 +74,42 @@ training-only correctness repair: no scientific hypothesis, gate, threshold,
 seed, environment, feature block, comparator, or sealed input changed. The
 running reference generator does not import or execute this training path and
 continues unchanged under its recorded `v6.0.0` source provenance.
+
+The amended training source commit is
+`2fa69d5e5a075db290904897b449ded87945ffc5`, its source checksum is
+`3d4893616700c956dfed6ad7e77e58dbf11d3055c099bc9e330a1f92613e7ce1`,
+and the amended protocol checksum is
+`5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb`.
+The complete transition record is
+`results/generalized_entropic_consensus_v6/reproducibility/source_transition_v6_0_1.json`.
+
+## Pre-training communication instrumentation
+
+Before the still-sealed dynamic stage closed and before PPO training began, a
+second outcome-blind audit found that the PPO evaluation rows retained total
+messages and bytes but training trajectories did not persist their exact
+operational-versus-sketch split. Commit
+`be729f536a04573f42ad0548b746c072b2b81f87` adds accounting fields only. Its
+source checksum is
+`e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5`.
+The protocol remains `v6.0.1` with checksum
+`5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb`;
+no observation, reward, policy, action, threshold, seed, environment, or gate
+changed. The machine-readable record is
+`results/generalized_entropic_consensus_v6/reproducibility/source_transition_pretraining_communication_instrumentation.json`.
+
+## Reference and analysis execution
+
+The frozen reference generator completed 1,260 formal reference panels and
+720 communication-sketch panels with zero failed episodes. All 1,980 episode
+manifests retained the initial `v6.0.0` source checksum. The detached wrapper
+itself exited zero; its first status marker contained the literal suffix `n`
+because of shell quoting, so that marker alone was normalized to `0\n` after
+the tmux session had ended. No scientific artifact or episode was rerun.
+
+After reference closure, the `v6.0.1` amended training/analysis bundle was
+synced and its source and protocol checksums were verified before launch.
+Grouped cross-fitting, entropy-family ablations, the 200-refit permutation
+test in each primary application, and the supervised learnability ceiling
+completed atomically before full dynamic execution. Comparative result values
+were not opened while the composite analysis stage remained active.

@@ -2,9 +2,10 @@
 
 ## Generalized entropic consensus study (v6)
 
-Last updated: 2026-08-15 20:27 America/New_York
+Last updated: 2026-08-15 22:07 America/New_York
 
-- **Current phase:** Frozen formal V6 development execution. V5 is preserved
+- **Current phase:** Frozen formal V6 development analysis and matched dynamic
+  execution. V5 is preserved
   as an immutable development no-go; its fair abstention addendum and
   implementation audit are complete under the V6 namespace.
 - **Branch:** `generalized-entropic-consensus-v6`, based exactly on pushed V5
@@ -29,10 +30,15 @@ Last updated: 2026-08-15 20:27 America/New_York
   54 agent decisions and 57 calls in 37.46 seconds including model load. A
   preceding one-application profile exposed and retained a non-formal summary
   limitation for absent applications; it did not touch formal outputs.
-- **Active jobs:** the exclusive RunPod `v6-development` tmux job is executing
-  the frozen 1,260-episode reference matrix, followed separately by the
-  720-episode sketch reference. No second V6 writer is active.
-- **Next actions:** complete the frozen development matrices, analysis,
+- **Formal progress:** all 1,260 frozen reference panels and all 720 sketch
+  panels completed without a failed episode. Grouped cross-fitting, the
+  prespecified entropy-family analysis, 200 full-refit permutations per
+  primary application, and the learnability ceiling completed atomically.
+  The dynamic stage is executing 2,520 paired policy episodes; comparative
+  outputs remain unopened until that stage closes.
+- **Active jobs:** the exclusive RunPod `v6-analysis` tmux job is the only V6
+  writer. No Qwen, PPO, or second analysis process is active.
+- **Next actions:** complete dynamic development analysis,
   five-seed sequential PPO, substantial real-Qwen qualification, replay and
   gate evaluation. Validation remains locked until every gate passes.
 - **Blockers:** none at present. Projected use is 11.50 single-GPU hours and

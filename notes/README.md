@@ -159,3 +159,32 @@ Store persistent remote state under `/workspace`:
 - `42_v4_claims_and_prohibited_claims.md`: claims-to-evidence map.
 - `43_v4_reproduction_and_compute.md`: commands, resources, and provenance.
 - `44_v4_final_status.md`: concise branch/evidence disposition.
+
+## V5 distributed-entropic-observability note map
+
+- `45_v5_verified_starting_state.md`: immutable V4 ancestry and repository audit.
+- `46_v4_maintenance_after_snapshot.md`: outcome-neutral V4 maintenance record.
+- `47_v5_v4_mechanism_audit.md`: prospective diagnosis motivating V5.
+- `48_v5_prospective_protocol.md`: frozen V5 hypotheses, gates, and stopping rule.
+- `49_v5_pilot_findings.md`: retained pilot iterations and design evidence.
+- `50_v5_execution_deviation.md`: append-only execution deviations.
+- `51_v5_compute_projection.md`: prospective compute and cost envelope.
+- `52_v5_analysis_correction_and_training.md`: grouped analysis and learned-policy record.
+- `53_v5_development_findings.md`: development-only results.
+- `54_v5_gate_disposition.md`: prospective no-go decision; validation stayed locked.
+- `55_v5_reproduction_and_compute.md`: commands, provenance, and resource accounting.
+- `56_v5_future_human_study_boundary.md`: simulated-operator and ethics boundary.
+
+## V6 generalized-entropic-consensus note map
+
+- `57_v6_verified_starting_state.md`: pushed V5 verification and RunPod audit.
+- `58_v6_v5_abstention_and_implementation_audit.md`: post-development fair-comparator reanalysis; V5 gates unchanged.
+- `59_v6_pilot_design_iterations.md`: append-only pilot and calibration record.
+- `60_v6_prospective_protocol_draft.md`: prospective hypotheses, gates, and alternatives considered.
+- `61_v6_architecture_entropy_and_information_boundaries.md`: selective-autonomy architecture and formal measure definitions.
+- `62_v6_future_human_study_boundary.md`: dashboard preparation without human-subject claims.
+- `63_v6_frozen_execution_log.md`: outcome-sealed execution provenance and amendments.
+- `64_v6_development_findings.md`: frozen development results (written after stage closure).
+- `65_v6_gate_disposition.md`: gate-by-gate advancement or no-go decision.
+- `66_v6_reproduction_and_compute.md`: final commands, hardware, tokens, and compute.
+- `67_v6_final_status.md`: final branch, integrity, process, and readiness status.

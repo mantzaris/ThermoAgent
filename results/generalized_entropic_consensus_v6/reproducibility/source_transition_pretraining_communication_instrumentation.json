@@ -1,0 +1,17 @@
+{
+  "amendment_identifier": "pretraining_communication_instrumentation",
+  "analysis_or_outcome_information_used": false,
+  "affected_stage": "sequential PPO training and evaluation only",
+  "environment_dynamics_changed": false,
+  "hypotheses_thresholds_features_models_rewards_actions_and_seeds_changed": false,
+  "new_source_checksum": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "new_source_commit": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "previous_source_checksum": "3d4893616700c956dfed6ad7e77e58dbf11d3055c099bc9e330a1f92613e7ce1",
+  "previous_source_commit": "2fa69d5e5a075db290904897b449ded87945ffc5",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "protocol_version": "v6.0.1",
+  "reason": "Persist exact operational-message, thermodynamic-sketch-message, byte, and component-split counts for every PPO training and evaluation trajectory instead of reporting evaluation-only totals.",
+  "recorded_at": "2026-08-16T02:58:47Z",
+  "scientific_behavior_changed": false,
+  "training_started_before_amendment": false
+}

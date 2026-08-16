@@ -75,6 +75,27 @@ EVENT_KINDS = {
     "v5_sketch_accounting",
     "v5_abstention",
     "v5_policy_decision",
+    # V6 generalized-entropic selective-autonomy events. These preserve the
+    # frozen meaning of all earlier ledgers while making delegation, sketch
+    # costs, and independent resource accounting explicit.
+    "v6_panel_snapshot",
+    "v6_stochastic_tape",
+    "v6_private_observation",
+    "v6_belief_update",
+    "v6_operational_proposal",
+    "v6_delegation_decision",
+    "v6_sketch",
+    "v6_consensus_state",
+    "v6_action_scheduled",
+    "v6_action_completed",
+    "v6_resource_transition",
+    "v6_service_transition",
+    "v6_counterfactual_branch",
+    "v6_privacy_audit",
+    "v6_conservation_audit",
+    "v6_operator_escalation",
+    "v6_operator_response",
+    "v6_replay_checkpoint",
 }
 
 

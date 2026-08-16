@@ -1,0 +1,4 @@
+application,episodes,decision_epochs,beneficial_actions,neutral_actions,harmful_actions,harmful_action_rate,mean_causal_effect,accepted_action_rate,accepted_metric_caveat,service_reaching_rate
+commercial,12,36,8,0,28,0.7777777777777778,-0.15483067512601245,0.8333333333333334,Includes accepted verification/evidence actions; not exclusively material flow.,0.2222222222222222
+humanitarian,12,36,16,0,20,0.5555555555555556,-0.03954602660785419,0.8333333333333334,Includes accepted verification/evidence actions; not exclusively material flow.,0.3888888888888889
+utility_restoration,12,36,23,0,13,0.3611111111111111,-0.05334832940912529,0.8611111111111112,Includes accepted verification/evidence actions; not exclusively material flow.,0.6388888888888888

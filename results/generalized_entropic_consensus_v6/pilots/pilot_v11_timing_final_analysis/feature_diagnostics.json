@@ -1,0 +1,242 @@
+{
+  "commercial|private_fragmented|combined_generalized_entropic": {
+    "condition_number": 2031233678806652.2,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 294,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|private_fragmented|generalized_tsallis_gini": {
+    "condition_number": 1.279276378934339e+16,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 294,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|private_fragmented|kpi_confidence": {
+    "condition_number": 13.103763682374861,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8503948606064681,
+    "rows": 294,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|private_fragmented|predictive_uncertainty": {
+    "condition_number": 13.62329609058334,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8503948606064681,
+    "rows": 294,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|private_fragmented|shannon_js": {
+    "condition_number": 1879813138055104.2,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 294,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|public_shared|combined_generalized_entropic": {
+    "condition_number": 1944311160178075.5,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.9999999999999998,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|public_shared|generalized_tsallis_gini": {
+    "condition_number": 1.0811785331362918e+16,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|public_shared|kpi_confidence": {
+    "condition_number": 11.825688557307801,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8445336127029541,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|public_shared|predictive_uncertainty": {
+    "condition_number": 12.616100086541188,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8445336127029541,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "commercial|public_shared|shannon_js": {
+    "condition_number": 1852281659770472.8,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.9999999999999998,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|private_fragmented|combined_generalized_entropic": {
+    "condition_number": 2173327011681613.2,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 297,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|private_fragmented|generalized_tsallis_gini": {
+    "condition_number": 1.471809646946345e+16,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 297,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|private_fragmented|kpi_confidence": {
+    "condition_number": 11.94858111019363,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8566558594282577,
+    "rows": 297,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|private_fragmented|predictive_uncertainty": {
+    "condition_number": 12.431907516385511,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8566558594282577,
+    "rows": 297,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|private_fragmented|shannon_js": {
+    "condition_number": 2142629414220993.0,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 297,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|public_shared|combined_generalized_entropic": {
+    "condition_number": 2131154151384133.0,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 293,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|public_shared|generalized_tsallis_gini": {
+    "condition_number": 1.372637082189575e+16,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 293,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|public_shared|kpi_confidence": {
+    "condition_number": 12.739985986810373,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8606345299986384,
+    "rows": 293,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|public_shared|predictive_uncertainty": {
+    "condition_number": 13.277101477675743,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 0.8606345299986384,
+    "rows": 293,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "humanitarian|public_shared|shannon_js": {
+    "condition_number": 2022580498824599.0,
+    "independent_panels": 16,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 293,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|private_fragmented|combined_generalized_entropic": {
+    "condition_number": 2163318799650512.5,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.9999999999999996,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|private_fragmented|generalized_tsallis_gini": {
+    "condition_number": 2.1915318510922756e+16,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|private_fragmented|kpi_confidence": {
+    "condition_number": 12.970556029589423,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.8171280588426746,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|private_fragmented|predictive_uncertainty": {
+    "condition_number": 13.580480215081657,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.8945647017053704,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|private_fragmented|shannon_js": {
+    "condition_number": 2115766836647133.2,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.9999999999999996,
+    "rows": 291,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|public_shared|combined_generalized_entropic": {
+    "condition_number": 2414045519419891.5,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 286,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|public_shared|generalized_tsallis_gini": {
+    "condition_number": 1.6068748169299058e+16,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 286,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|public_shared|kpi_confidence": {
+    "condition_number": 12.429557028761833,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.8220273233332872,
+    "rows": 286,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|public_shared|predictive_uncertainty": {
+    "condition_number": 12.783048051655507,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 0.8639711651136686,
+    "rows": 286,
+    "split_families": 5,
+    "zero_variance_features": []
+  },
+  "utility_restoration|public_shared|shannon_js": {
+    "condition_number": 2223890633443402.5,
+    "independent_panels": 15,
+    "maximum_absolute_pairwise_correlation": 1.0,
+    "rows": 286,
+    "split_families": 5,
+    "zero_variance_features": []
+  }
+}

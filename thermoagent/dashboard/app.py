@@ -15,6 +15,8 @@ from ..human_runner import HumanOperatorEpisodeRunner, write_human_episode
 from .replay import DashboardReplay, frame_svg
 from .v4 import V4DashboardReplay, frame_svg_v4
 from .v5 import V5DashboardReplay, frame_svg_v5
+from .v6 import V6DashboardReplay, frame_svg_v6
+from ..v6_experiments import read_episode_json
 
 
 HTML = r"""<!doctype html>
@@ -31,7 +33,7 @@ HTML = r"""<!doctype html>
 let meta,step=0,timer=null,frame=null;const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 async function loadMeta(){meta=await(await fetch('/api/metadata')).json();$('meta').textContent=`${meta.run_id} · ${meta.application} · ${meta.method} · simulated operator`;$('slider').max=meta.steps-1;await load(0)}
 async function load(s){step=Math.max(0,Math.min(meta.steps-1,Number(s)));$('slider').value=step;frame=await(await fetch(`/api/frame?step=${step}`)).json();render()}
-function render(){renderNetwork();const t=frame.thermodynamics;const names=['energy','entropy','entropy_anomaly','entropy_slope','free_energy','disagreement','consensus_confidence','service_loss','autonomy_level'];$('metrics').innerHTML=names.map(k=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof t[k]==='number'?t[k].toFixed(3):esc(t[k])}</b></div>`).join('');renderPhase();const w=frame.workload;$('workload').innerHTML=Object.entries(w).map(([k,v])=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof v==='number'?v.toFixed(2):esc(v)}</b></div>`).join('');$('queue').innerHTML=frame.alert_queue.length?frame.alert_queue.map(q=>`<div class="item"><span class="badge">${esc(q.incident_id)}</span> queued at step ${q.action??''}</div>`).join(''):'<span class="muted">No queued alerts</span>';const x=frame.explanation;$('explanation').innerHTML=`<p><span class="badge">${esc(x.view_condition)}</span> Alert driver: <b>${esc(x.alert_reason??'none')}</b></p><p class="muted">${esc(JSON.stringify(x.prediction))}</p><p class="muted">Payload hashes: ${esc(frame.view_hashes.join(', ')||'none')}</p>`;$('interventions').textContent=JSON.stringify(frame.interventions.slice(-4),null,2)}
+function render(){renderNetwork();const t=frame.thermodynamics;const names=['energy','effective_temperature','free_energy','entropy','tsallis_q_0_5','gini_simpson','pooled_uncertainty','entropy_slope','disagreement','graph_disagreement','consensus_confidence','consensus_residual','service_loss','autonomy_level'];$('metrics').innerHTML=names.map(k=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof t[k]==='number'?t[k].toFixed(3):esc(t[k])}</b></div>`).join('');renderPhase();const w=frame.workload;$('workload').innerHTML=Object.entries(w).map(([k,v])=>`<div class="metric"><span class="muted">${esc(k.replaceAll('_',' '))}</span><b>${typeof v==='number'?v.toFixed(2):esc(v)}</b></div>`).join('');$('queue').innerHTML=frame.alert_queue.length?frame.alert_queue.map(q=>`<div class="item"><span class="badge">${esc(q.incident_id)}</span> ${esc(q.proposed_action??'no proposal')} · JS ${typeof q.disagreement==='number'?q.disagreement.toFixed(3):'n/a'} · consensus ${typeof q.consensus==='number'?q.consensus.toFixed(3):'n/a'}</div>`).join(''):'<span class="muted">No queued alerts</span>';const x=frame.explanation;$('explanation').innerHTML=`<p><span class="badge">${esc(x.view_condition)}</span> Alert driver: <b>${esc(x.alert_reason??'none')}</b></p><p class="muted">${esc(JSON.stringify(x.prediction))}</p><p class="muted">Alternatives: ${esc((frame.alternatives||[]).join(' · '))}</p><p class="muted">Payload hashes: ${esc(frame.view_hashes.join(', ')||'none')}</p>`;$('interventions').textContent=JSON.stringify(frame.interventions.slice(-4),null,2)}
 function pos(n,i,N){if(Array.isArray(n.location))return [350+250*n.location[0],215+170*n.location[1]];let a=2*Math.PI*i/N;return [350+250*Math.cos(a),215+170*Math.sin(a)]}
 function edge(h,e,P,color,width,dash=''){if(P[e[0]]&&P[e[1]])return h+`<line x1="${P[e[0]][0]}" y1="${P[e[0]][1]}" x2="${P[e[1]][0]}" y2="${P[e[1]][1]}" stroke="${color}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;return h}
 function renderNetwork(){const svg=$('network'),nodes=frame.network.nodes||[],P={};nodes.forEach((n,i)=>P[n.agent_id]=pos(n,i,nodes.length));let h='';for(const e of frame.network.service_edges||[])h=edge(h,e,P,'#009e73',3);for(const e of frame.network.logistics_edges||frame.network.physical_edges||[])h=edge(h,e,P,'#7a8798',2.3);for(const e of frame.network.communication_edges||[])h=edge(h,e,P,'#0072b2',1.3,'5 4');for(const e of frame.network.authorized_emergency_edges||[])h=edge(h,e,P,'#d55e00',5);const C={low:'#72b7b2',nominal:'#f2cf5b',high:'#e45756'};nodes.forEach(n=>{let [x,y]=P[n.agent_id],r=17+2*(n.autonomy_level||0);h+=`<circle cx="${x}" cy="${y}" r="${r}" fill="${C[n.energy_band]||'#b9c2cf'}" stroke="#26384a" stroke-width="2"/><text x="${x}" y="${y+r+15}" text-anchor="middle" font-size="11">${esc(n.agent_id)}</text><text x="${x}" y="${y+4}" text-anchor="middle" font-size="10">L${n.autonomy_level||0}</text>`});svg.innerHTML=h}
@@ -61,8 +63,10 @@ def _live_replay() -> DashboardReplay:
     return DashboardReplay(directory / "episode.json")
 
 
-def _load_replay(episode_path: Path) -> Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay]:
-    payload = json.loads(episode_path.read_text(encoding="utf-8"))
+def _load_replay(episode_path: Path) -> Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay, V6DashboardReplay]:
+    payload = read_episode_json(episode_path) if episode_path.name.endswith(".json.gz") else json.loads(episode_path.read_text(encoding="utf-8"))
+    if payload.get("study") == "Generalized Entropic Consensus V6":
+        return V6DashboardReplay(episode_path)
     if payload.get("study") == "ThermoHITL v5":
         return V5DashboardReplay(episode_path)
     if "information_condition" in payload and "regime" in payload:
@@ -70,7 +74,7 @@ def _load_replay(episode_path: Path) -> Union[DashboardReplay, V4DashboardReplay
     return DashboardReplay(episode_path)
 
 
-def serve(replay: Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay], host: str, port: int) -> None:
+def serve(replay: Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay, V6DashboardReplay], host: str, port: int) -> None:
     class Handler(BaseHTTPRequestHandler):
         def _send(self, body: bytes, content_type: str, status: int = 200) -> None:
             self.send_response(status)
@@ -94,7 +98,8 @@ def serve(replay: Union[DashboardReplay, V4DashboardReplay, V5DashboardReplay], 
                 step = int(query.get("step", ["0"])[0])
                 frame = replay.frame(step)
                 rendered = (
-                    frame_svg_v5(frame) if isinstance(replay, V5DashboardReplay)
+                    frame_svg_v6(frame) if isinstance(replay, V6DashboardReplay)
+                    else frame_svg_v5(frame) if isinstance(replay, V5DashboardReplay)
                     else frame_svg_v4(frame) if isinstance(replay, V4DashboardReplay)
                     else frame_svg(frame)
                 )

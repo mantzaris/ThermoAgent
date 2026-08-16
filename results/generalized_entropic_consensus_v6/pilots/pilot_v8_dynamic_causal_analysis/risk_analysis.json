@@ -1,0 +1,127 @@
+{
+  "baseline_selection": [
+    {
+      "feature_block": "kpi_confidence",
+      "mean_brier": 0.1752669265191763,
+      "risk_coverage_area": 0.29930555555555555
+    },
+    {
+      "feature_block": "predictive_uncertainty",
+      "mean_brier": 0.17230462731712654,
+      "risk_coverage_area": 0.30041666666666667
+    },
+    {
+      "feature_block": "conformal_risk_control",
+      "mean_brier": 0.37036241663725117,
+      "risk_coverage_area": 0.3306944444444444
+    }
+  ],
+  "candidate_rows": 1800,
+  "evidence_boundary": "pilot/development only; candidate rows are nested within environment panels",
+  "fragmentation_interaction": [
+    {
+      "application": "commercial",
+      "ci95_high": 0.04,
+      "ci95_low": -0.013333333333333334,
+      "matched_seed_panels": 15,
+      "private_minus_public_harm_reduction": 0.013333333333333332
+    },
+    {
+      "application": "humanitarian",
+      "ci95_high": 0.02666666666666666,
+      "ci95_low": -0.04000000000000001,
+      "matched_seed_panels": 15,
+      "private_minus_public_harm_reduction": -0.006666666666666672
+    },
+    {
+      "application": "utility_restoration",
+      "ci95_high": 0.03333333333333333,
+      "ci95_low": -0.019999999999999997,
+      "matched_seed_panels": 15,
+      "private_minus_public_harm_reduction": 0.006666666666666669
+    }
+  ],
+  "independent_panels": 90,
+  "primary_matched_effects": [
+    {
+      "application": "commercial",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": 0.006666666666666667,
+      "harm_reduction_ci95_high": 0.026666666666666672,
+      "harm_reduction_ci95_low": -0.013333333333333336,
+      "independent_panels": 15,
+      "information_condition": "private_fragmented",
+      "mean_causal_utility_gain": -0.005169286811203742,
+      "utility_gain_ci95_high": 0.013355947164167551,
+      "utility_gain_ci95_low": -0.02581031743471281
+    },
+    {
+      "application": "commercial",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": -0.006666666666666665,
+      "harm_reduction_ci95_high": 0.0,
+      "harm_reduction_ci95_low": -0.019999999999999997,
+      "independent_panels": 15,
+      "information_condition": "public_shared",
+      "mean_causal_utility_gain": -0.019488287958781516,
+      "utility_gain_ci95_high": -0.002095729663219609,
+      "utility_gain_ci95_low": -0.03977891523372328
+    },
+    {
+      "application": "humanitarian",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": 0.013333333333333329,
+      "harm_reduction_ci95_high": 0.039999999999999994,
+      "harm_reduction_ci95_low": -0.013333333333333338,
+      "independent_panels": 15,
+      "information_condition": "private_fragmented",
+      "mean_causal_utility_gain": 0.015697085842614433,
+      "utility_gain_ci95_high": 0.040424430799311135,
+      "utility_gain_ci95_low": -0.008355300268892857
+    },
+    {
+      "application": "humanitarian",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": 0.020000000000000004,
+      "harm_reduction_ci95_high": 0.04,
+      "harm_reduction_ci95_low": 0.0,
+      "independent_panels": 15,
+      "information_condition": "public_shared",
+      "mean_causal_utility_gain": 0.019318349852049818,
+      "utility_gain_ci95_high": 0.03982990570094671,
+      "utility_gain_ci95_low": 0.0019440198648976433
+    },
+    {
+      "application": "utility_restoration",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": 0.006666666666666669,
+      "harm_reduction_ci95_high": 0.03333333333333333,
+      "harm_reduction_ci95_low": -0.019999999999999997,
+      "independent_panels": 15,
+      "information_condition": "private_fragmented",
+      "mean_causal_utility_gain": 0.0033984725452298466,
+      "utility_gain_ci95_high": 0.023606152261800104,
+      "utility_gain_ci95_low": -0.018356038363386635
+    },
+    {
+      "application": "utility_restoration",
+      "baseline": "kpi_confidence",
+      "coverage": 0.5,
+      "harm_rate_reduction": 0.0,
+      "harm_reduction_ci95_high": 0.0,
+      "harm_reduction_ci95_low": 0.0,
+      "independent_panels": 15,
+      "information_condition": "public_shared",
+      "mean_causal_utility_gain": 0.0066086526943839674,
+      "utility_gain_ci95_high": 0.027133831808131084,
+      "utility_gain_ci95_low": -0.011621717582403563
+    }
+  ],
+  "selected_strongest_nonentropic_baseline": "kpi_confidence",
+  "stage": "pilot_v8_dynamic_causal_analysis"
+}

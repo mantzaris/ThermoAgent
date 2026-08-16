@@ -1,5 +1,37 @@
 # ThermoAgent project status
 
+## Generalized entropic consensus study (v6)
+
+Last updated: 2026-08-15 America/New_York
+
+- **Current phase:** Pre-formal protocol freeze. V5 is preserved as an
+  immutable development no-go; its fair abstention addendum and implementation
+  audit are complete under the V6 namespace.
+- **Branch:** `generalized-entropic-consensus-v6`, based exactly on pushed V5
+  commit `c895235d02dd05ccc9315621d818def9345a398c`.
+- **Completed:** generalized Shannon/Tsallis/Gini and consensus measures;
+  two-level selective autonomy; dynamic matched counterfactuals; real resource
+  accounting; separate-agent privacy and action masks; grouped risk and
+  conformal baselines; sequential decentralized PPO; substantial Qwen runner;
+  pilot iteration; outcome-blind escalation calibration; 91 V6-focused and
+  329 complete-repository tests passing.
+- **Latest pilot result:** the primary selective-safety direction remains
+  unfavorable. On the final untouched timing pilot, combined harm reduction
+  versus predictive uncertainty was -0.0133 in humanitarian and approximately
+  zero in utility restoration, with both intervals spanning zero. This is not
+  a gate decision; the larger frozen development batch will estimate it.
+- **Timing:** threshold 0.80 was selected only from activation and burden. It
+  passed pilot timing criteria without using harm or outcome labels.
+- **Active jobs:** none locally. Formal development, multi-seed training, and
+  real-Qwen qualification have not started.
+- **Next actions:** create the clean source-freeze commit, freeze manifests,
+  sync to the existing idle RunPod, profile, and execute all prospective
+  development evidence. Validation remains locked until every gate passes.
+- **Blockers:** none at present. Projected use is 11.50 single-GPU hours and
+  USD 3.91 including reserve, below the authorized caps.
+
+---
+
 ## Distributed entropic observability study (v5)
 
 Last updated: 2026-08-15 America/New_York

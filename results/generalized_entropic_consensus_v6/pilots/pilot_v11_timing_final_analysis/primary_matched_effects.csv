@@ -1,0 +1,7 @@
+application,information_condition,coverage,baseline,independent_panels,harm_rate_reduction,harm_reduction_ci95_low,harm_reduction_ci95_high,mean_causal_utility_gain,utility_gain_ci95_low,utility_gain_ci95_high
+commercial,private_fragmented,0.5,predictive_uncertainty,16,0.01805555555555556,-0.01944444444444444,0.06180555555555556,0.04115481198582021,0.009151557210581782,0.08284478579241265
+commercial,public_shared,0.5,predictive_uncertainty,16,0.0,0.0,0.0,-0.002347981450456971,-0.008994294343769475,0.003204790172936513
+humanitarian,private_fragmented,0.5,predictive_uncertainty,16,-0.006249999999999999,-0.018749999999999996,0.0,-0.009209150670392059,-0.029678524910317174,0.00456315806665064
+humanitarian,public_shared,0.5,predictive_uncertainty,16,0.0,0.0,0.0,0.001652742531791211,-0.003914232402452398,0.008097647530676376
+utility_restoration,private_fragmented,0.5,predictive_uncertainty,15,0.0,-0.019999999999999997,0.019999999999999997,-0.004862473905599686,-0.040126956539345615,0.031040726191303027
+utility_restoration,public_shared,0.5,predictive_uncertainty,15,0.0,0.0,0.0,-0.0038385388032841933,-0.01523941169127953,0.006581107470113087

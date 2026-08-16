@@ -1,0 +1,9 @@
+{
+  "candidate_decisions": 2160,
+  "completed_actions": 0,
+  "consensus_estimates": 2160,
+  "delegation_decisions": 2160,
+  "episodes": 90,
+  "failed_episodes": 0,
+  "stage": "pilot_v10_timing_threshold"
+}

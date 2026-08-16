@@ -1,0 +1,7 @@
+application,stage,independent_panels_per_information_condition,pilot_panels,pilot_mean_difference,pilot_sd,planning_sd_floor,practical_effect,approximate_power,approximate_95pct_half_width,method
+humanitarian,development,210,16,-0.006249999999999999,0.02499999999999999,0.1,0.03,0.9915171226452595,0.013525036432825018,normal approximation from paired pilot SD with 0.10 floor
+humanitarian,validation,120,16,-0.006249999999999999,0.02499999999999999,0.1,0.03,0.9076416398303766,0.01789194143717157,normal approximation from paired pilot SD with 0.10 floor
+humanitarian,holdout,144,16,-0.006249999999999999,0.02499999999999999,0.1,0.03,0.9495011606219859,0.01633303320450045,normal approximation from paired pilot SD with 0.10 floor
+utility_restoration,development,210,15,0.0,0.037796447300922714,0.1,0.03,0.9915171226452595,0.013525036432825018,normal approximation from paired pilot SD with 0.10 floor
+utility_restoration,validation,120,15,0.0,0.037796447300922714,0.1,0.03,0.9076416398303766,0.01789194143717157,normal approximation from paired pilot SD with 0.10 floor
+utility_restoration,holdout,144,15,0.0,0.037796447300922714,0.1,0.03,0.9495011606219859,0.01633303320450045,normal approximation from paired pilot SD with 0.10 floor

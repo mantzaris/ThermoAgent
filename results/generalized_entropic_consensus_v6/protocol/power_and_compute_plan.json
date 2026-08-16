@@ -1,0 +1,97 @@
+{
+  "cost_cap_usd": 40.0,
+  "gpu_hour_cap": 50.0,
+  "planned_independent_panels_per_application_information_condition": {
+    "development": 210,
+    "holdout": 144,
+    "validation": 120
+  },
+  "planning_evidence": "V6 pilot only; calculated before formal development outcomes",
+  "power_rows": [
+    {
+      "application": "humanitarian",
+      "approximate_95pct_half_width": 0.013525036432825018,
+      "approximate_power": 0.9915171226452595,
+      "independent_panels_per_information_condition": 210,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": -0.006249999999999999,
+      "pilot_panels": 16,
+      "pilot_sd": 0.02499999999999999,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "development"
+    },
+    {
+      "application": "humanitarian",
+      "approximate_95pct_half_width": 0.01789194143717157,
+      "approximate_power": 0.9076416398303766,
+      "independent_panels_per_information_condition": 120,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": -0.006249999999999999,
+      "pilot_panels": 16,
+      "pilot_sd": 0.02499999999999999,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "validation"
+    },
+    {
+      "application": "humanitarian",
+      "approximate_95pct_half_width": 0.01633303320450045,
+      "approximate_power": 0.9495011606219859,
+      "independent_panels_per_information_condition": 144,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": -0.006249999999999999,
+      "pilot_panels": 16,
+      "pilot_sd": 0.02499999999999999,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "holdout"
+    },
+    {
+      "application": "utility_restoration",
+      "approximate_95pct_half_width": 0.013525036432825018,
+      "approximate_power": 0.9915171226452595,
+      "independent_panels_per_information_condition": 210,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": 0.0,
+      "pilot_panels": 15,
+      "pilot_sd": 0.037796447300922714,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "development"
+    },
+    {
+      "application": "utility_restoration",
+      "approximate_95pct_half_width": 0.01789194143717157,
+      "approximate_power": 0.9076416398303766,
+      "independent_panels_per_information_condition": 120,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": 0.0,
+      "pilot_panels": 15,
+      "pilot_sd": 0.037796447300922714,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "validation"
+    },
+    {
+      "application": "utility_restoration",
+      "approximate_95pct_half_width": 0.01633303320450045,
+      "approximate_power": 0.9495011606219859,
+      "independent_panels_per_information_condition": 144,
+      "method": "normal approximation from paired pilot SD with 0.10 floor",
+      "pilot_mean_difference": 0.0,
+      "pilot_panels": 15,
+      "pilot_sd": 0.037796447300922714,
+      "planning_sd_floor": 0.1,
+      "practical_effect": 0.03,
+      "stage": "holdout"
+    }
+  ],
+  "projected_cost_usd_at_0_34_per_hour": 3.91,
+  "projected_generated_tokens": 253000,
+  "projected_gpu_hours_including_reserve": 11.5,
+  "projected_llm_calls": 2730,
+  "projected_prompt_tokens": 2730000,
+  "projected_storage_gib": 4.3,
+  "within_caps": true
+}

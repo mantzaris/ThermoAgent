@@ -1,0 +1,9 @@
+{
+  "candidate_decisions": 1800,
+  "completed_actions": 0,
+  "consensus_estimates": 1800,
+  "delegation_decisions": 1800,
+  "episodes": 90,
+  "failed_episodes": 0,
+  "stage": "pilot_v8_dynamic_causal"
+}

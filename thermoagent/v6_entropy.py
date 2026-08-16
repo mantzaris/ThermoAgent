@@ -194,4 +194,3 @@ def temporal_information_state(
         ewma=ewma,
         time_above_threshold=above,
     )
-

@@ -94,4 +94,3 @@ def test_temporal_information_state():
 def test_invalid_beliefs_fail(belief):
     with pytest.raises(ValueError):
         shannon_entropy(belief)
-

@@ -1,7 +1,14 @@
 # Generalized Entropic Consensus V6 prospective protocol
 
-Protocol version: `v6.0.0` (becomes frozen only when accompanied by
+Protocol version: `v6.0.1` (becomes frozen only when accompanied by
 `frozen_protocol.yaml` and `freeze_manifest.json`).
+
+Amendment `v6.0.1` was made before PPO training and before any formal
+comparative outcome was inspected. It computes GAE separately within each
+persistent agent trajectory instead of bootstrapping across interleaved
+organizations. The active reference generator did not use this training code;
+all hypotheses, gates, thresholds, seeds, applications, actions, environments,
+feature blocks, and sealed validation/holdout inputs remain unchanged.
 
 Evidence boundary: autonomous-agent simulations and bounded simulated
 operators. No human participants are enrolled. Abstract cyber-physical events

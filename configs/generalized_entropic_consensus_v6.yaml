@@ -1,7 +1,7 @@
 study:
   identifier: generalized_entropic_consensus_v6
   title: Generalized Entropic Consensus for Risk-Controlled Human Oversight of Decentralized Autonomous Agents
-  protocol_version: v6.0.0
+  protocol_version: v6.0.1
   status: frozen_before_formal_development
   evidence_boundary: simulated operators; no real human participants
   parent_commit: c895235d02dd05ccc9315621d818def9345a398c
@@ -131,6 +131,11 @@ progression:
   no_selective_reruns: true
   validation_run_count_maximum: 1
   holdout_run_count_maximum: 1
+  pre_outcome_amendment:
+    identifier: per_agent_gae_boundary
+    scope: training_only
+    reason: prevent value bootstrapping across interleaved independent agents
+    thresholds_hypotheses_seeds_and_environment_unchanged: true
 compute_caps:
   gpu_hours: 50
   estimated_cost_usd: 40

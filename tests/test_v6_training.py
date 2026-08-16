@@ -6,7 +6,8 @@ torch = pytest.importorskip("torch")
 from thermoagent.v6_environment import V6PanelEnvironment
 from thermoagent.v6_training import (
     METHODS, DecentralizedRolePolicies, TrajectoryController,
-    assign_trajectory_rewards, delegation_mask, feature_vector,
+    Transition, assign_agent_grouped_gae, assign_trajectory_rewards,
+    delegation_mask, feature_vector,
 )
 
 
@@ -45,3 +46,24 @@ def test_delegation_mask_removes_impossible_autonomous_no_action():
     mask = delegation_mask(context)
     assert mask.dtype == bool
     assert mask.any()
+
+
+def test_gae_never_bootstraps_across_independent_agents():
+    def transition(agent_id, step, value, reward):
+        return Transition(
+            role="field_crew", agent_id=agent_id, step=step,
+            incident_id="incident_01", observation=np.zeros(2),
+            mask=np.ones(6, dtype=bool), action=0,
+            log_probability=0.0, value=value, reward=reward,
+        )
+
+    first_a = transition("agent_a", 0, 1.0, 1.0)
+    only_b = transition("agent_b", 0, 100.0, 0.0)
+    second_a = transition("agent_a", 2, 2.0, 3.0)
+    assign_agent_grouped_gae(
+        [first_a, only_b, second_a], gamma=0.5, gae_lambda=1.0,
+    )
+
+    assert second_a.return_value == pytest.approx(3.0)
+    assert first_a.return_value == pytest.approx(2.5)
+    assert only_b.return_value == pytest.approx(0.0)

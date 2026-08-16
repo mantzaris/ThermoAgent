@@ -64,4 +64,3 @@ Exact command:
 ```bash
 ./scripts/run-v6-v5-reanalysis.sh
 ```
-

@@ -2,11 +2,11 @@
 
 ## Generalized entropic consensus study (v6)
 
-Last updated: 2026-08-15 America/New_York
+Last updated: 2026-08-15 20:27 America/New_York
 
-- **Current phase:** Pre-formal protocol freeze. V5 is preserved as an
-  immutable development no-go; its fair abstention addendum and implementation
-  audit are complete under the V6 namespace.
+- **Current phase:** Frozen formal V6 development execution. V5 is preserved
+  as an immutable development no-go; its fair abstention addendum and
+  implementation audit are complete under the V6 namespace.
 - **Branch:** `generalized-entropic-consensus-v6`, based exactly on pushed V5
   commit `c895235d02dd05ccc9315621d818def9345a398c`.
 - **Completed:** generalized Shannon/Tsallis/Gini and consensus measures;
@@ -22,11 +22,19 @@ Last updated: 2026-08-15 America/New_York
   a gate decision; the larger frozen development batch will estimate it.
 - **Timing:** threshold 0.80 was selected only from activation and burden. It
   passed pilot timing criteria without using harm or outcome labels.
-- **Active jobs:** none locally. Formal development, multi-seed training, and
-  real-Qwen qualification have not started.
-- **Next actions:** create the clean source-freeze commit, freeze manifests,
-  sync to the existing idle RunPod, profile, and execute all prospective
-  development evidence. Validation remains locked until every gate passes.
+- **Freeze:** source commit `33d975b8760c672d2850ee3273907fd94893e73f`,
+  source checksum `7b860191b0f2b55c5e32dcfaf3f629bd692e67b49cdd00310a71a068154519da`,
+  protocol checksum `7a61b2ff03bce7e83a8d80c784d8a7d218dfdcbcdeb601ab6dd51aa4b99ccb10`.
+- **Profile:** the smallest valid three-application real-Qwen profile completed
+  54 agent decisions and 57 calls in 37.46 seconds including model load. A
+  preceding one-application profile exposed and retained a non-formal summary
+  limitation for absent applications; it did not touch formal outputs.
+- **Active jobs:** the exclusive RunPod `v6-development` tmux job is executing
+  the frozen 1,260-episode reference matrix, followed separately by the
+  720-episode sketch reference. No second V6 writer is active.
+- **Next actions:** complete the frozen development matrices, analysis,
+  five-seed sequential PPO, substantial real-Qwen qualification, replay and
+  gate evaluation. Validation remains locked until every gate passes.
 - **Blockers:** none at present. Projected use is 11.50 single-GPU hours and
   USD 3.91 including reserve, below the authorized caps.
 

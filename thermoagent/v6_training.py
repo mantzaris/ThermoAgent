@@ -230,14 +230,36 @@ def assign_trajectory_rewards(
         elif delegation == "defer":
             reward -= 0.006
         transition.reward = float(reward)
-    next_value = 0.0
-    next_advantage = 0.0
-    for transition in reversed(transitions):
-        delta = transition.reward + gamma * next_value - transition.value
-        transition.advantage = float(delta + gamma * gae_lambda * next_advantage)
-        transition.return_value = float(transition.advantage + transition.value)
-        next_value = transition.value
-        next_advantage = transition.advantage
+    assign_agent_grouped_gae(transitions, gamma, gae_lambda)
+
+
+def assign_agent_grouped_gae(
+    transitions: Sequence[Transition], gamma: float = 0.97,
+    gae_lambda: float = 0.92,
+) -> None:
+    """Compute GAE within each independent agent trajectory.
+
+    Decision records are interleaved by incident at each simulator epoch. A
+    value from another organization's actor/critic is therefore not a valid
+    bootstrap target. Grouping by persistent agent identity preserves temporal
+    credit assignment without crossing private-policy boundaries.
+    """
+    by_agent: Dict[str, List[Transition]] = {}
+    for transition in transitions:
+        by_agent.setdefault(transition.agent_id, []).append(transition)
+    for agent_transitions in by_agent.values():
+        next_value = 0.0
+        next_advantage = 0.0
+        for transition in reversed(agent_transitions):
+            delta = transition.reward + gamma * next_value - transition.value
+            transition.advantage = float(
+                delta + gamma * gae_lambda * next_advantage
+            )
+            transition.return_value = float(
+                transition.advantage + transition.value
+            )
+            next_value = transition.value
+            next_advantage = transition.advantage
 
 
 def _ppo_update(

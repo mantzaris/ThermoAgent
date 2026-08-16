@@ -7,7 +7,7 @@ from thermoagent.v6_environment import V6PanelEnvironment
 from thermoagent.v6_training import (
     METHODS, DecentralizedRolePolicies, TrajectoryController,
     Transition, assign_agent_grouped_gae, assign_trajectory_rewards,
-    delegation_mask, feature_vector,
+    delegation_mask, feature_vector, train_seed,
 )
 
 
@@ -67,3 +67,20 @@ def test_gae_never_bootstraps_across_independent_agents():
     assert second_a.return_value == pytest.approx(3.0)
     assert first_a.return_value == pytest.approx(2.5)
     assert only_b.return_value == pytest.approx(0.0)
+
+
+def test_training_manifest_counts_all_operational_and_sketch_communication(tmp_path):
+    result = train_seed(
+        "ppo_kpi_only", 66904, tmp_path,
+        training_episodes=1, evaluation_episodes=1,
+    )
+    assert result["training_operational_messages"] >= 0
+    assert result["training_sketch_messages"] > 0
+    assert result["evaluation_operational_messages"] >= 0
+    assert result["evaluation_sketch_messages"] > 0
+    assert result["all_training_and_evaluation_messages"] == (
+        result["training_operational_messages"]
+        + result["training_sketch_messages"]
+        + result["evaluation_operational_messages"]
+        + result["evaluation_sketch_messages"]
+    )

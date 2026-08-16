@@ -347,6 +347,12 @@ def train_seed(
     started = time.perf_counter()
     pending: List[Transition] = []
     decisions_seen = 0
+    training_communication = {
+        "operational_messages": 0,
+        "operational_bytes": 0,
+        "sketch_messages": 0,
+        "sketch_bytes": 0,
+    }
     for episode_index in range(int(training_episodes)):
         application, regime, condition, environment_seed = _episode_spec(
             episode_index, int(rl_seed) % 24,
@@ -356,6 +362,8 @@ def train_seed(
         )
         controller = TrajectoryController(model, method, device, stochastic=True)
         summary = environment.run(controller, method)
+        for key in training_communication:
+            training_communication[key] += int(summary[key])
         assign_trajectory_rewards(controller.transitions, environment)
         pending.extend(controller.transitions)
         decisions_seen += len(controller.transitions)
@@ -410,6 +418,10 @@ def train_seed(
                 / max(summary["autonomous_completed_actions"], 1)
             ),
             "operator_minutes": summary["operator_minutes"],
+            "operational_messages": summary["operational_messages"],
+            "operational_bytes": summary["operational_bytes"],
+            "sketch_messages": summary["sketch_messages"],
+            "sketch_bytes": summary["sketch_bytes"],
             "total_messages": summary["total_messages"],
             "total_bytes": summary["total_bytes"],
             "trajectory_reward": float(sum(value.reward for value in controller.transitions)),
@@ -418,6 +430,13 @@ def train_seed(
     actions_used = {
         action for row in evaluation_rows for action in DELEGATION_ACTIONS
         if row["delegation_%s" % action] > 0
+    }
+    evaluation_communication = {
+        key: int(sum(int(row[key]) for row in evaluation_rows))
+        for key in (
+            "operational_messages", "operational_bytes",
+            "sketch_messages", "sketch_bytes",
+        )
     }
     checkpoint = results_root / "training" / "checkpoints" / (
         "%s-seed-%d.pt" % (method, rl_seed)
@@ -460,6 +479,26 @@ def train_seed(
         "evaluation_action_diversity": len(actions_used),
         "evaluation_actions_used": sorted(actions_used),
         "collapsed_to_no_action": bool(actions_used.issubset({"defer", "abstain"})),
+        "training_operational_messages": training_communication["operational_messages"],
+        "training_operational_bytes": training_communication["operational_bytes"],
+        "training_sketch_messages": training_communication["sketch_messages"],
+        "training_sketch_bytes": training_communication["sketch_bytes"],
+        "evaluation_operational_messages": evaluation_communication["operational_messages"],
+        "evaluation_operational_bytes": evaluation_communication["operational_bytes"],
+        "evaluation_sketch_messages": evaluation_communication["sketch_messages"],
+        "evaluation_sketch_bytes": evaluation_communication["sketch_bytes"],
+        "all_training_and_evaluation_messages": int(
+            training_communication["operational_messages"]
+            + training_communication["sketch_messages"]
+            + evaluation_communication["operational_messages"]
+            + evaluation_communication["sketch_messages"]
+        ),
+        "all_training_and_evaluation_bytes": int(
+            training_communication["operational_bytes"]
+            + training_communication["sketch_bytes"]
+            + evaluation_communication["operational_bytes"]
+            + evaluation_communication["sketch_bytes"]
+        ),
         "wall_seconds": float(time.perf_counter() - started),
         "device": str(device),
         "checkpoint": str(checkpoint.relative_to(results_root)),

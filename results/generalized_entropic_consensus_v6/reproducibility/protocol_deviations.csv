@@ -1,2 +1,3 @@
-status
-none_at_freeze
+status,identifier,recorded_at,scope,reason,scientific_decisions_changed,affected_stage,disposition
+none_at_initial_freeze,none,2026-08-16T00:03:30Z,none,none,false,none,initial freeze clean
+pre_outcome_amendment,per_agent_gae_boundary,2026-08-16T00:41:04Z,training_only,Compute GAE within persistent agent trajectories instead of across interleaved organizations,false,training_and_later,Reference generator unaffected; amendment completed before training and before comparative outcomes were inspected

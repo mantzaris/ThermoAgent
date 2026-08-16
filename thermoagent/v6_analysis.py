@@ -1071,7 +1071,13 @@ def analyze_entropy_family_ablations(
     predictions = pd.concat(prediction_rows, ignore_index=True)
     selections = pd.concat(selection_rows, ignore_index=True)
     destination.mkdir(parents=True, exist_ok=True)
-    write_csv(destination / "entropy_family_predictions.csv", predictions.to_dict("records"))
+    # Full row-level predictions slightly exceed the repository's 50 MiB
+    # per-artifact guard in the frozen development design. Store the exact
+    # same rows as deterministic gzip so a clean rebuild remains Git-facing.
+    write_csv_gzip(
+        destination / "entropy_family_predictions.csv.gz",
+        predictions.to_dict("records"),
+    )
     write_csv(destination / "entropy_family_panel_selections.csv", selections.to_dict("records"))
     write_csv(destination / "entropy_family_summary.csv", summary_rows)
     primary = pd.DataFrame(summary_rows)

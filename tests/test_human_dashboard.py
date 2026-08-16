@@ -69,6 +69,7 @@ def test_dashboard_client_exposes_required_replay_controls_and_panels():
         "Play", "Step", "Jump to alert", "Export SVG",
         "Network and autonomy", "Thermodynamic system view",
         "Energy–entropy phase plane", "Alert queue", "Operator workload",
-        "Explanation and bounded intervention",
+        "Explanation and bounded intervention", "Evaluator analysis",
+        "Privileged analysis",
     ):
         assert text in HTML

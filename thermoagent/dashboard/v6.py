@@ -248,6 +248,52 @@ class V6DashboardReplay:
             "gpu_required": False,
             "evidence_boundary": "simulated operator; no real-human evidence",
             "information_boundary": "hashed authorized payload; evaluator outcomes excluded",
+            "evaluator_analysis_available": any(
+                event.kind == "v6_counterfactual_branch"
+                and event.private_to == "evaluator"
+                for event in self.ledger.events
+            ),
+        }
+
+    def evaluator_frame(self, step: int) -> Dict[str, Any]:
+        """Return an explicitly privileged analysis view for replay only.
+
+        This method is intentionally separate from :meth:`frame`.  Neither an
+        autonomous agent nor the simulated operator consumes this payload.  It
+        exists so a researcher can inspect matched action/no-action branches
+        without making the deployable dashboard appear to know counterfactual
+        outcomes.
+        """
+        bounded_step = max(0, min(int(step), len(self._frames) - 1))
+        branches: List[Dict[str, Any]] = []
+        for event in self.ledger.events:
+            if event.step > bounded_step or event.kind != "v6_counterfactual_branch":
+                continue
+            if event.private_to != "evaluator":
+                raise ValueError("V6 counterfactual branch has incorrect audience")
+            branches.append({
+                "event_id": event.event_id,
+                "step": event.step,
+                "incident_id": event.payload["incident_id"],
+                "action": event.payload["action"],
+                "loss_with_action": event.payload["loss_with_action"],
+                "loss_without_action": event.payload["loss_without_action"],
+                "loss_reduction": event.payload["loss_reduction"],
+                "matched_stochastic_tape": (
+                    event.payload["stochastic_tape_digest_action"]
+                    == event.payload["stochastic_tape_digest_no_action"]
+                ),
+            })
+        return {
+            "analysis_only": True,
+            "audience": "evaluator",
+            "step": bounded_step,
+            "warning": (
+                "PRIVILEGED COUNTERFACTUAL REPLAY: unavailable to agents, "
+                "the delegation controller, and the simulated operator"
+            ),
+            "authorized_replay_digest": self.digest(),
+            "counterfactuals": branches,
         }
 
 
@@ -256,13 +302,13 @@ def frame_svg_v6(frame: V6DashboardFrame, width: int = 1200, height: int = 760) 
     positions = {
         value["agent_id"]: (
             315 + 215 * float(value["location"][0]),
-            355 + 245 * float(value["location"][1]),
+            405 + 220 * float(value["location"][1]),
         ) for value in nodes
     }
     parts = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">' % (width, height, width, height),
         '<rect width="100%" height="100%" fill="#F6F8FA"/>',
-        '<style>text{font-family:Liberation Sans,Arial,sans-serif;fill:#18212F}.title{font-size:28px;font-weight:700}.head{font-size:19px;font-weight:700}.label{font-size:14px}.small{font-size:12px}.panel{fill:#fff;stroke:#C7D0DB;stroke-width:1.2}</style>',
+        '<style>text{font-family:Liberation Sans,Arial,sans-serif;fill:#18212F}.title{font-size:36px;font-weight:700}.head{font-size:26px;font-weight:700}.label{font-size:20px}.small{font-size:18px}.panel{fill:#fff;stroke:#C7D0DB;stroke-width:1.2}</style>',
         '<text x="28" y="40" class="title">V6 generalized-entropic selective-autonomy replay</text>',
         '<text x="28" y="64" class="small">Simulated operator · authorized view · evaluator counterfactuals excluded</text>',
         '<rect x="24" y="84" width="610" height="640" rx="8" class="panel"/>',
@@ -275,10 +321,28 @@ def frame_svg_v6(frame: V6DashboardFrame, width: int = 1200, height: int = 760) 
             x1, y1 = positions[left]; x2, y2 = positions[right]
             parts.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#0072B2" stroke-width="1.3" stroke-dasharray="6 4"/>' % (x1, y1, x2, y2))
     colors = {"contributor": "#56B4E9", "missing": "#D55E00", "unobserved": "#B8C2CC"}
+    short_roles = {
+        "distribution_node": "Distribution",
+        "critical_load": "Critical load",
+        "communications": "Comms",
+        "cyber_defense": "Cyber",
+        "field_crew": "Crew",
+        "resource_allocation": "Resource",
+        "supplier": "Supplier",
+        "carrier": "Carrier",
+        "warehouse": "Warehouse",
+        "retailer": "Retailer",
+        "ngo": "NGO",
+        "regional_hub": "Hub",
+        "local_authority": "Authority",
+        "demand_region": "Demand",
+    }
     for node in nodes:
         x, y = positions[node["agent_id"]]
+        incident_suffix = node["agent_id"].rsplit("_", 2)[1]
+        display_role = short_roles.get(node["role"], node["role"].replace("_", " "))
         parts.append('<circle cx="%.1f" cy="%.1f" r="17" fill="%s" stroke="#26384A" stroke-width="2"/>' % (x, y, colors[node["consensus_status"]]))
-        parts.append('<text x="%.1f" y="%.1f" text-anchor="middle" class="small">%s</text>' % (x, y + 31, html.escape(node["role"].replace("_", " "))))
+        parts.append('<text x="%.1f" y="%.1f" text-anchor="middle" class="small">%s %s</text>' % (x, y + 34, html.escape(display_role), html.escape(incident_suffix)))
     for index, alert in enumerate(frame.alert_queue[:4]):
         y = 150 + index * 102
         parts.extend([

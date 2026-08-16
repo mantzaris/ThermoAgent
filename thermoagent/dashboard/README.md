@@ -1,7 +1,7 @@
 # ThermoHITL operator dashboard
 
 The dashboard is a dependency-light local web application. Replay mode reads a
-v3, v4, or v5 `episode.json` and adjacent compressed event ledger; it does not load a
+v3, v4, v5, or v6 `episode.json` and adjacent compressed event ledger; it does not load a
 model or require a GPU. V4 replay detects `operator_view_v4` events and refuses
 to reconstruct a richer display from evaluator time-series fields. Live mode
 runs a deterministic small mock-planner scenario and serves the same interface.
@@ -17,6 +17,9 @@ runs a deterministic small mock-planner scenario and serves the same interface.
 
 ./scripts/run-human-operator-v5-dashboard.sh --episode \
   results/human_operator_v5/raw/development_primary_v2/<run-id>/episode.json
+
+./scripts/run-v6-dashboard.sh --episode \
+  results/generalized_entropic_consensus_v6/raw/development_dynamic/<run-id>/episode.json.gz
 ```
 
 Open `http://127.0.0.1:8765`. The application supports play, pause, step,
@@ -40,6 +43,20 @@ commercial, humanitarian, and utility replay SVG/PDF/PNG exports under
 `results/human_operator_v5/dashboard_exports/`. V5 ranks four simultaneous
 incidents, exposes only the hashed deployable KPI/entropy/disagreement payload,
 and excludes evaluator counterfactual effects and true incident modes.
+
+## V6 selective-autonomy replay
+
+V6 adds the proposed autonomous action, action-value margin, Shannon and
+Tsallis uncertainty, Gini-Simpson impurity, pooled uncertainty, Jensen-Shannon
+and graph disagreement, consensus residual, missing contributors, delegation
+recommendation, operator queue, and communication provenance. The ordinary
+frame remains exactly the hashed authorized simulated-operator payload.
+
+The **Evaluator analysis** control is a separate, red-labeled research view.
+It reads only `private_to="evaluator"` matched counterfactual ledger events and
+shows loss with/without an action under the common stochastic tape. It is never
+loaded by default, never enters an operator payload, and is unavailable to
+agents, learned policies, and the simulated operator.
 
 ## Data dictionary
 
@@ -69,7 +86,7 @@ hashes.
 
 ## Human-study boundary
 
-V3, v4, and v5 evaluate simulated operators only. The interface is technical
+V3, v4, v5, and v6 evaluate simulated operators only. The interface is technical
 preparation for a future IRB-approved study. It does not establish human
 usability, trust, fatigue, cognitive workload, or safety. See
 `results/human_operator_v5/protocol/future_human_study_protocol.md` and

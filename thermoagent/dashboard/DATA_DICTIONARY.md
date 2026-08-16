@@ -43,3 +43,17 @@ reason/benefit/uncertainty/time-to-collapse fields, `workload` carries the
 one-slot budget state, and `provenance` records contributor and boundary
 metadata. V4 replay leaves unauthorized values null rather than substituting
 evaluator-global values.
+
+## V6 schema additions
+
+V6 adds `thermodynamics.tsallis_q_0_5`, `gini_simpson`,
+`pooled_uncertainty`, `graph_disagreement`, and `consensus_residual` plus queue
+fields for proposed action, estimated action value, value margin, contributors,
+and missing agents. These are drawn from the same authorized, hashed payload
+used by the bounded simulated operator.
+
+`/api/evaluator-frame` is a distinct retrospective schema containing
+`analysis_only=true`, `audience="evaluator"`, an explicit warning, and matched
+counterfactual loss fields from evaluator-addressed ledger events. It is not an
+operator-view field and is never fetched unless the researcher explicitly
+opens the red evaluator-analysis panel.

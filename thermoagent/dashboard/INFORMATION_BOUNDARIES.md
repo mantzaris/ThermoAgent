@@ -34,3 +34,19 @@ The simulated operator may alter only a typed authority, information, priority,
 constraint, or feasibility record. Advisory directives preserve agent refusal;
 temporary emergency overrides are mandatory only for their recorded scope and
 duration, after which authority returns to the agents.
+
+## V6 evaluator-only replay
+
+V6 normal frames are reconstructed exclusively from hashed `operator_view`
+events whose audience is `simulated_operator`. They can show the proposed
+action, action-value margin, local/generalized uncertainty, pooled uncertainty,
+disagreement, consensus residual, sketch contributors, missing agents, and the
+bounded queue state. They cannot show the incident's true mode, correct action,
+future stochastic tape, or matched causal effect.
+
+The optional evaluator-analysis panel is a separate endpoint and is never
+loaded by the ordinary dashboard. It reads only
+`v6_counterfactual_branch` events addressed `private_to="evaluator"`, carries a
+permanent privileged-analysis warning, and exposes matched loss with/without an
+action solely for retrospective causal-chain inspection. No agent, delegation
+policy, or simulated-operator policy can call this view during execution.

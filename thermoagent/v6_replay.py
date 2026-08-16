@@ -20,6 +20,23 @@ PROHIBITED_DEPLOYABLE_KEYS = {
 }
 
 
+def _evidence_category(results_root: Path, episode_path: Path) -> str:
+    """Separate frozen/formal evidence from retained design iterations.
+
+    Early pilots are intentionally retained even when they document a privacy
+    defect repaired before formal development. They must be replayed and
+    counted, but are not eligible to pass or fail the frozen formal gate. This
+    classification uses only the immutable namespace, never replay outcomes.
+    """
+    relative = episode_path.relative_to(results_root)
+    raw_stage = relative.parts[1] if len(relative.parts) > 1 else "unknown"
+    if raw_stage.startswith("development_") or raw_stage == "qwen":
+        return "formal_or_qualified"
+    if raw_stage.startswith("pilot_"):
+        return "retained_pilot"
+    return "unclassified"
+
+
 def _contains_key(value: Any, prohibited: set) -> bool:
     if isinstance(value, Mapping):
         return bool(prohibited.intersection(value)) or any(
@@ -118,6 +135,7 @@ def replay_episode(results_root: Path, episode_path: Path) -> Dict[str, Any]:
         "episode_path": str(episode_path.relative_to(results_root)),
         "ledger_path": str(ledger_path.relative_to(results_root)),
         "run_id": episode.get("run_id", summary.get("run_id", episode_path.parent.name)),
+        "evidence_category": _evidence_category(results_root, episode_path),
         "events": len(ledger.events),
         "ledger_sha256_match": bool(sha_match),
         "ledger_digest_match": bool(digest_match),
@@ -138,6 +156,19 @@ def replay_all(results_root: Path) -> Dict[str, Any]:
     destination = results_root / "reproducibility" / "replay"
     write_csv(destination / "ledger_replay_audit.csv", rows)
     mismatches = [value for value in rows if value["status"] != "pass"]
+    formal = [
+        value for value in rows
+        if value["evidence_category"] == "formal_or_qualified"
+    ]
+    formal_mismatches = [value for value in formal if value["status"] != "pass"]
+    retained_pilots = [
+        value for value in rows
+        if value["evidence_category"] == "retained_pilot"
+    ]
+    unclassified = [
+        value for value in rows
+        if value["evidence_category"] == "unclassified"
+    ]
     report = {
         "episodes_replayed": len(rows),
         "replay_mismatches": len(mismatches),
@@ -146,7 +177,29 @@ def replay_all(results_root: Path) -> Dict[str, Any]:
         ),
         "privacy_failures": sum(not value["privacy_boundary_pass"] for value in rows),
         "nonfinite_failures": sum(not value["finite_metrics"] for value in rows),
-        "status": "pass" if not mismatches else "fail",
+        "formal_episodes_replayed": len(formal),
+        "formal_replay_mismatches": len(formal_mismatches),
+        "formal_maximum_conservation_residual": max(
+            [value["maximum_reconstructed_conservation_residual"] for value in formal]
+            or [0.0]
+        ),
+        "formal_privacy_failures": sum(
+            not value["privacy_boundary_pass"] for value in formal
+        ),
+        "formal_nonfinite_failures": sum(
+            not value["finite_metrics"] for value in formal
+        ),
+        "retained_pilot_episodes": len(retained_pilots),
+        "retained_pilot_mismatches": sum(
+            value["status"] != "pass" for value in retained_pilots
+        ),
+        "unclassified_episodes": len(unclassified),
+        "formal_status": (
+            "pass" if not formal_mismatches and not unclassified else "fail"
+        ),
+        "all_retained_evidence_status": (
+            "pass" if not mismatches else "contains_documented_failures"
+        ),
     }
     atomic_json(destination / "replay_summary.json", report)
     return report

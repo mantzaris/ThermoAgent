@@ -535,6 +535,15 @@ All distributed-sketch messages, bytes, latency, operational messages, LLM calls
 
 The gate table at `development/gate_checks.csv` is authoritative. Negative, zero, and harmful actions are retained. Simulated-operator results are not evidence about real-human usability, workload, trust, or effectiveness.
 
+The primary selective-risk cross-fitting passed the frozen seed, topology, and
+scenario-family isolation audit. A post-outcome audit found that the separate
+pooled supervised learnability ceiling reused numeric environment seeds across
+applications even though it isolated application-specific topology and
+scenario families. That diagnostic is retained but methodologically
+compromised; it cannot rescue a failed gate or unlock validation. See
+`reproducibility/protocol_deviations.csv` and
+`notes/64_v6_development_findings.md`.
+
 ## Real Qwen and learned agents
 
 Primary model: `Qwen/Qwen2.5-7B-Instruct`, immutable revision `a09a35458c702b33eeacc393d103063234e8bc28`, bitsandbytes NF4, BF16 computation. Real-Qwen qualification contains {qwen.get('episodes', 0)} episodes and {qwen.get('decision_epochs', 0)} independent-agent decision records. Sequential role-specific PPO uses local execution observations, action masks, discounted trajectories, GAE, clipping, and five independent seeds per method. It is not the V5 contextual actor-critic.
@@ -668,6 +677,11 @@ We study selective autonomy among independent agents with private observations, 
 {chr(10).join(communication_lines) if communication_lines else '- Communication-ablation results were not generated.'}
 
 All intervals and decisions above are development evidence. Validation and holdout values appear here only if those prospectively locked stages actually ran.
+
+The separate pooled supervised learnability ceiling reused numeric environment
+seeds across applications. Primary selective-risk folds did not have this
+defect. The ceiling is therefore retained as a qualified engineering
+diagnostic, not independent inferential support.
 
 ## Journal readiness
 

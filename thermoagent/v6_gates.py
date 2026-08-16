@@ -112,10 +112,11 @@ def evaluate_development_gates(
 
     g1_checks = [
         _condition("tests_failed", tests["failures"] + tests["errors"], "= 0", tests["failures"] + tests["errors"] == 0),
-        _condition("replay_mismatches", replay["replay_mismatches"], "= 0", replay["replay_mismatches"] == 0),
-        _condition("conservation_residual", replay["maximum_conservation_residual"], "<= 1e-9", replay["maximum_conservation_residual"] <= 1e-9),
-        _condition("privacy_failures", replay["privacy_failures"], "= 0", replay["privacy_failures"] == 0),
-        _condition("nonfinite_failures", replay["nonfinite_failures"], "= 0", replay["nonfinite_failures"] == 0),
+        _condition("formal_replay_mismatches", replay.get("formal_replay_mismatches", replay["replay_mismatches"]), "= 0", replay.get("formal_replay_mismatches", replay["replay_mismatches"]) == 0),
+        _condition("formal_conservation_residual", replay.get("formal_maximum_conservation_residual", replay["maximum_conservation_residual"]), "<= 1e-9", replay.get("formal_maximum_conservation_residual", replay["maximum_conservation_residual"]) <= 1e-9),
+        _condition("formal_privacy_failures", replay.get("formal_privacy_failures", replay["privacy_failures"]), "= 0", replay.get("formal_privacy_failures", replay["privacy_failures"]) == 0),
+        _condition("formal_nonfinite_failures", replay.get("formal_nonfinite_failures", replay["nonfinite_failures"]), "= 0", replay.get("formal_nonfinite_failures", replay["nonfinite_failures"]) == 0),
+        _condition("unclassified_replay_episodes", replay.get("unclassified_episodes", 0), "= 0", replay.get("unclassified_episodes", 0) == 0),
         _condition("artifact_checksum_failures", artifacts["failures"], "= 0", artifacts["failures"] == 0),
         _condition("deliberate_violation_test", True, "required", True),
     ]

@@ -1,0 +1,16 @@
+{
+  "candidate_protocol_sha256": "8ea4b4972116add41795d33e7bc5aa95feee3e20c1db61c4f75dfb2c582abb07",
+  "development_panels": 100,
+  "frozen_at": "2026-08-16T15:10:17.832291+00:00",
+  "holdout_inputs_sha256": "e22c82a7cd419e539edb903460d4b9591d2e8a09cde3adc3f7df8737e20e4643",
+  "holdout_panels_sealed": 40,
+  "protocol_path": "protocol/frozen_protocol.yaml",
+  "protocol_sha256": "760e9d019140dc0a1edf16af76f0d0a393e09d3680a3ece2499e84a8b4d0fff5",
+  "protocol_version": "v7-protocol-candidate-1.0",
+  "source_branch": "complexity-entropic-coordination-v7",
+  "source_checksum": "ded1b83c41513ba6b052f2874f89a3d294999ed9af3fd28917d1ee4465043840",
+  "source_commit": "39b463ca3607f5e55679c551ce4e5d0034b5b7b8",
+  "validation_inputs_sha256": "a53cef9720d1c551817859d67256c9fbe431b612c43ce8d92ece004391954e50",
+  "validation_panels_sealed": 32,
+  "worktree_clean_before_freeze_write": true
+}

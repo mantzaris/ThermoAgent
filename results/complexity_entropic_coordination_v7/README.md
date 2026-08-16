@@ -43,8 +43,8 @@ are accounted independently in messages, bytes, drops, and latency.
 
 - Feasibility gates: all A/B/C gates passed; this did not require a favorable
   entropy effect.
-- Frozen protocol: `not frozen`;
-  checksum `not available`.
+- Frozen protocol: `v7-protocol-candidate-1.0`;
+  checksum `760e9d019140dc0a1edf16af76f0d0a393e09d3680a3ece2499e84a8b4d0fff5`.
 - Episode counts: `{"formal_communication": 0, "formal_dynamic": 0, "formal_reference": 0, "holdout": 0, "smoke_and_pilots": 43, "validation": 0}`.
 - Validation unlocked: `False`.
 - Holdout unlocked: `False`.

@@ -2,45 +2,54 @@
 
 ## Generalized entropic consensus study (v6)
 
-Last updated: 2026-08-15 22:07 America/New_York
+Last updated: 2026-08-15 23:57 America/New_York
 
-- **Current phase:** Frozen formal V6 development analysis and matched dynamic
-  execution. V5 is preserved
-  as an immutable development no-go; its fair abstention addendum and
-  implementation audit are complete under the V6 namespace.
+- **Current phase:** Frozen V6 development execution and analysis are complete.
+  The prespecified five-method, five-seed sequential-PPO qualification is
+  running on the existing RunPod; the substantial Qwen qualification follows
+  after the complete training matrix closes. V5 remains immutable, with its
+  post-development abstention addendum isolated under the V6 namespace.
 - **Branch:** `generalized-entropic-consensus-v6`, based exactly on pushed V5
   commit `c895235d02dd05ccc9315621d818def9345a398c`.
 - **Completed:** generalized Shannon/Tsallis/Gini and consensus measures;
   two-level selective autonomy; dynamic matched counterfactuals; real resource
   accounting; separate-agent privacy and action masks; grouped risk and
-  conformal baselines; sequential decentralized PPO; substantial Qwen runner;
-  pilot iteration; outcome-blind escalation calibration; 91 V6-focused and
-  329 complete-repository tests passing.
-- **Latest pilot result:** the primary selective-safety direction remains
-  unfavorable. On the final untouched timing pilot, combined harm reduction
-  versus predictive uncertainty was -0.0133 in humanitarian and approximately
-  zero in utility restoration, with both intervals spanning zero. This is not
-  a gate decision; the larger frozen development batch will estimate it.
+  conformal baselines; sequential decentralized PPO implementation;
+  substantial Qwen runner; eleven retained pilot/reference iterations;
+  outcome-blind escalation calibration; 1,260 formal reference, 720 sketch,
+  and 2,520 dynamic episodes; 336 complete-repository tests currently passing.
+- **Latest valid result:** against the frozen strongest non-entropic comparator,
+  private-fragmented harm-rate reduction is `0.02258` humanitarian and
+  `0.01224` utility restoration. Both paired intervals exclude zero, but both
+  miss the frozen `0.03` practical threshold. The fragmentation interaction is
+  `0.01908` humanitarian and `0.00916` utility; the former narrowly misses the
+  `0.02` threshold and the latter interval crosses zero. Gates 5 and 7 therefore
+  fail without threshold revision.
 - **Timing:** threshold 0.80 was selected only from activation and burden. It
   passed pilot timing criteria without using harm or outcome labels.
-- **Freeze:** source commit `33d975b8760c672d2850ee3273907fd94893e73f`,
-  source checksum `7b860191b0f2b55c5e32dcfaf3f629bd692e67b49cdd00310a71a068154519da`,
-  protocol checksum `7a61b2ff03bce7e83a8d80c784d8a7d218dfdcbcdeb601ab6dd51aa4b99ccb10`.
+- **Freeze:** scientific source commit
+  `33d975b8760c672d2850ee3273907fd94893e73f`; execution instrumentation commit
+  `be729f536a04573f42ad0548b746c072b2b81f87`; execution-source checksum
+  `e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5`;
+  active protocol v6.0.1 checksum
+  `5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb`.
 - **Profile:** the smallest valid three-application real-Qwen profile completed
   54 agent decisions and 57 calls in 37.46 seconds including model load. A
   preceding one-application profile exposed and retained a non-formal summary
   limitation for absent applications; it did not touch formal outputs.
-- **Formal progress:** all 1,260 frozen reference panels and all 720 sketch
-  panels completed without a failed episode. Grouped cross-fitting, the
-  prespecified entropy-family analysis, 200 full-refit permutations per
-  primary application, and the learnability ceiling completed atomically.
-  The dynamic stage is executing 2,520 paired policy episodes; comparative
-  outputs remain unopened until that stage closes.
-- **Active jobs:** the exclusive RunPod `v6-analysis` tmux job is the only V6
-  writer. No Qwen, PPO, or second analysis process is active.
-- **Next actions:** complete dynamic development analysis,
-  five-seed sequential PPO, substantial real-Qwen qualification, replay and
-  gate evaluation. Validation remains locked until every gate passes.
+- **Formal progress:** all 4,500 frozen formal development ledgers completed
+  without a generator failure. The prespecified grouped risk analysis,
+  entropy-family comparison, 200 full-refit permutations per primary
+  application, communication ablation, dynamic causal analysis, and power
+  analysis are closed. Early pre-repair pilots remain retained and separately
+  classified in replay; they do not enter formal inference.
+- **Active jobs:** all 25 PPO runs completed with zero failures. The exclusive
+  RunPod `v6-qwen` tmux job is now running the frozen 150-episode Qwen
+  qualification; no second experiment process is active.
+- **Next actions:** close the Qwen qualification, retrieve artifacts, replay,
+  evaluate all gates, and
+  build/QA the no-go package. Validation and holdout are prospectively locked
+  because required development gates already failed.
 - **Blockers:** none at present. Projected use is 11.50 single-GPU hours and
   USD 3.91 including reserve, below the authorized caps.
 

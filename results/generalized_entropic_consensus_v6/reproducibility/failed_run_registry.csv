@@ -1,3 +1,4 @@
 status,stage,run_id,failure_type,failure_reason,scientific_impact,retained_location,selective_rerun
 none_at_initial_freeze,freeze,none,none,none,none,none,false
 failed,preformal_throughput_profile,v6-profile-one-application,ValueError,Absent-application summary fields serialized as NaN after the requested one-application subset completed,No formal output and no effect on frozen policy or scientific evidence,/workspace/.cache/thermoagent/v6_profile,false
+invalidated,pilot_privacy_iterations,792 retained pilot episodes,privacy_boundary_failure,Early pilot consensus events were not evaluator-private under the final V6 audit,These pilots are design-history evidence only and never entered frozen formal inference,raw/pilot_v1;raw/pilot_v2;raw/pilot_v3_reference;raw/pilot_v4_reference;raw/pilot_v5_reference;raw/pilot_v6_matched,false

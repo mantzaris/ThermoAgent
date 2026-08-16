@@ -8,7 +8,7 @@ source "$script_dir/runpod-common.sh"
 
 destination="$repo_dir/results/generalized_entropic_consensus_v6"
 mkdir -p "$destination"
-rsync --archive --no-owner --no-group --compress --human-readable \
+rsync --archive --update --no-owner --no-group --compress --human-readable \
   --itemize-changes --rsh="$rsync_shell_quoted" \
   "$remote_host:$remote_dir/results/generalized_entropic_consensus_v6/" \
   "$destination/"

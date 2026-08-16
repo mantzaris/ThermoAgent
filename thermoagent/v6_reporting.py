@@ -497,6 +497,8 @@ def _readme(root: Path, gates: Mapping[str, Any], design: pd.DataFrame, compute:
             )
     qwen_path = root / "qwen" / "qualification_summary.json"
     qwen = _json(qwen_path) if qwen_path.exists() else {}
+    replay_path = root / "reproducibility" / "replay" / "replay_summary.json"
+    replay = _json(replay_path) if replay_path.exists() else {}
     failed_text = ", ".join("Gate %d (%s)" % (value["gate"], value["name"]) for value in failed) or "none"
     text = f"""# Generalized Entropic Consensus V6
 
@@ -511,6 +513,24 @@ V6 is scientifically distinct from V5. V5's immutable negative result remains un
 The authoritative disposition is **{disposition.replace('_', ' ')}**. Failed required gates: {failed_text}. This package distinguishes pilots, frozen development, real-Qwen qualification, multi-seed sequential PPO, validation, and sealed holdout. It never treats candidate decisions within one panel as independent replicates.
 
 Validation status: **{'unlocked' if gates.get('validation_unlocked') else 'prospectively not run'}**. Holdout status: **{'unlocked' if gates.get('holdout_unlocked') else 'prospectively not run'}**.
+
+## Integrity and retained failures
+
+The audit replayed {int(replay.get('episodes_replayed', 0)):,} stored V6
+ledgers. Frozen formal/Qwen evidence accounts for
+{int(replay.get('formal_episodes_replayed', 0)):,} ledgers with
+{int(replay.get('formal_replay_mismatches', 0)):,} mismatches, maximum
+independently reconstructed conservation residual
+`{_fmt(replay.get('formal_maximum_conservation_residual', 0), 12)}`, and
+{int(replay.get('formal_privacy_failures', 0)):,} privacy failures. The same
+audit intentionally retains {int(replay.get('retained_pilot_mismatches', 0)):,}
+privacy-invalid early pilot ledgers; these are the design iterations that
+preceded the final privacy repair, not silently excluded formal episodes.
+
+Scientific episodes remain bound to their recorded execution-source checksum.
+Post-outcome source transitions are explicitly limited to lossless storage,
+reporting, dashboard presentation, and replay evidence classification; none
+can change a hypothesis, threshold, result, or gate outcome.
 
 ## Applications and independence
 

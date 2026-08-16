@@ -1,0 +1,31 @@
+{
+  "permutations": 200,
+  "prediction_time_shuffle_only": false,
+  "rows": [
+    {
+      "application": "humanitarian",
+      "holm_adjusted_p": 0.009950248756218905,
+      "monte_carlo_standard_error": 0.0049627330154608604,
+      "observed_harm_rate_reduction": 0.006172839506172784,
+      "one_sided_refit_permutation_p": 0.004975124378109453,
+      "permutation_mean": -0.0006530864197531366,
+      "permutation_sd": 0.0011863749534079778,
+      "permutations": 200,
+      "reference_family": "shannon_js",
+      "tested_family": "combined_generalized_entropic"
+    },
+    {
+      "application": "utility_restoration",
+      "holm_adjusted_p": 0.07960199004975124,
+      "monte_carlo_standard_error": 0.0190920151095852,
+      "observed_harm_rate_reduction": 0.0016574585635358852,
+      "one_sided_refit_permutation_p": 0.07960199004975124,
+      "permutation_mean": -0.0003356353591160141,
+      "permutation_sd": 0.0011339215033323573,
+      "permutations": 200,
+      "reference_family": "shannon_js",
+      "tested_family": "combined_generalized_entropic"
+    }
+  ],
+  "test": "generalized-spectrum beyond Shannon/JS; severity/regime/split-stratified full-refit permutation"
+}

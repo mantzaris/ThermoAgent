@@ -1,0 +1,14 @@
+{
+  "episodes": 12458,
+  "estimated_cost_usd_at_0_34_per_pod_hour": 0.5753964592841079,
+  "generated_tokens": 236987,
+  "gpu_active_hours": 1.1422675149999144,
+  "llm_calls": 2812,
+  "prompt_tokens": 3161730,
+  "reserved_single_gpu_pod_hours": 1.6923425273061994,
+  "single_gpu_hours": 1.6923425273061994,
+  "total_bytes": 203207336,
+  "total_messages": 1737561,
+  "wall_seconds_sum": 6092.433098302318,
+  "workflows": 7
+}

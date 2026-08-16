@@ -1,0 +1,22 @@
+{
+  "transition_identifier": "post_outcome_reporting_aggregation_and_figure_qa",
+  "recorded_at": "2026-08-16T05:05:00Z",
+  "previous_presentation_source_commit": "e070800e6c6e00c2fae96e54c98d78d5e18eb327",
+  "previous_presentation_source_checksum": "e86e8b4947ea72862ef0c8c503c12a62b26d38614e8e86513e2f7205e4d1ae5c",
+  "new_presentation_source_commit": "498be518fda83506311581e08ce11f270cf3d002",
+  "new_presentation_source_checksum": "ca983c14dc7ce886c3b7bcfceed9dacb5358c964db60782df325d5f5f67d2ab3",
+  "formal_execution_source_commit_unchanged": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "formal_execution_source_checksum_unchanged": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "protocol_version": "v6.0.1",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "formal_decisions_or_outcomes_changed": false,
+  "scientific_results_or_gate_thresholds_changed": false,
+  "scope": [
+    "derive the descriptive completed-action application field from its validated run identifier",
+    "repair overflowing or missing publication-figure labels discovered during manual 240-DPI review",
+    "encode delivered-sketch node entropy, pairwise disagreement, and reliability in the consensus-network figure",
+    "label zero-sample Qwen physical-action summaries with their actual denominators"
+  ],
+  "formal_ledgers_remain_bound_to_execution_source": true,
+  "reason": "These changes are deterministic reporting and presentation repairs made after development outcomes were open; they cannot alter agent decisions, trajectories, counterfactuals, statistics, hypotheses, thresholds, or gate disposition."
+}

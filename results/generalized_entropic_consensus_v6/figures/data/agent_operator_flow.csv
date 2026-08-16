@@ -1,0 +1,15 @@
+order,stage
+0,"Private
+observation"
+1,"Local
+proposal"
+2,"Peer
+offers"
+3,"Distributed
+consensus"
+4,"Delegate or
+escalate"
+5,"Bounded
+action"
+6,"Service
+outcome"

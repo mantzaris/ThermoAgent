@@ -1,0 +1,163 @@
+{
+  "all_sketch_traffic_counted": true,
+  "costs": [
+    {
+      "episodes": 180,
+      "operational_messages_mean": 40.84444444444444,
+      "sketch_bytes_mean": 24596.666666666668,
+      "sketch_latency_seconds_mean": 0.484044316881245,
+      "sketch_messages_mean": 245.96666666666667,
+      "sketch_policy": "always_on",
+      "total_bytes_mean": 30641.644444444446,
+      "total_messages_mean": 286.81111111111113
+    },
+    {
+      "episodes": 180,
+      "operational_messages_mean": 40.84444444444444,
+      "sketch_bytes_mean": 9608.333333333334,
+      "sketch_latency_seconds_mean": 0.18912055365392927,
+      "sketch_messages_mean": 96.08333333333333,
+      "sketch_policy": "event_triggered",
+      "total_bytes_mean": 15653.31111111111,
+      "total_messages_mean": 136.92777777777778
+    },
+    {
+      "episodes": 180,
+      "operational_messages_mean": 40.84444444444444,
+      "sketch_bytes_mean": 0.0,
+      "sketch_latency_seconds_mean": 0.0,
+      "sketch_messages_mean": 0.0,
+      "sketch_policy": "none",
+      "total_bytes_mean": 6044.977777777778,
+      "total_messages_mean": 40.84444444444444
+    },
+    {
+      "episodes": 180,
+      "operational_messages_mean": 40.84444444444444,
+      "sketch_bytes_mean": 8337.777777777777,
+      "sketch_latency_seconds_mean": 0.16409296773032644,
+      "sketch_messages_mean": 83.37777777777778,
+      "sketch_policy": "periodic",
+      "total_bytes_mean": 14382.755555555555,
+      "total_messages_mean": 124.22222222222223
+    }
+  ],
+  "episodes": 720,
+  "estimation": [
+    {
+      "distributed_estimation_mae": 0.048319337580952054,
+      "distributed_estimation_maximum": 0.4523003946585083,
+      "distributed_estimation_median": 0.0135308467542044,
+      "estimates": 4320,
+      "missing_agents_mean": 0.0,
+      "sketch_policy": "always_on"
+    },
+    {
+      "distributed_estimation_mae": 0.08740526035935822,
+      "distributed_estimation_maximum": 0.4459935006466435,
+      "distributed_estimation_median": 0.0633604718830179,
+      "estimates": 4320,
+      "missing_agents_mean": 0.0,
+      "sketch_policy": "event_triggered"
+    },
+    {
+      "distributed_estimation_mae": 0.18823884366054913,
+      "distributed_estimation_maximum": 0.5059272882506686,
+      "distributed_estimation_median": 0.17835398157081714,
+      "estimates": 4320,
+      "missing_agents_mean": 2.0,
+      "sketch_policy": "none"
+    },
+    {
+      "distributed_estimation_mae": 0.13865532802480887,
+      "distributed_estimation_maximum": 0.4459935006466435,
+      "distributed_estimation_median": 0.13087665333513995,
+      "estimates": 4320,
+      "missing_agents_mean": 0.0,
+      "sketch_policy": "periodic"
+    }
+  ],
+  "reductions": [
+    {
+      "application": "commercial",
+      "matched_panels": 60,
+      "sketch_bytes_ci95_high": 0.616162015311585,
+      "sketch_bytes_ci95_low": 0.5973896964017626,
+      "sketch_bytes_reduction": 0.6067173934597986,
+      "sketch_messages_ci95_high": 0.616162015311585,
+      "sketch_messages_ci95_low": 0.5973896964017626,
+      "sketch_messages_reduction": 0.6067173934597986,
+      "total_bytes_ci95_high": 0.49515334894205265,
+      "total_bytes_ci95_low": 0.4804990169190804,
+      "total_bytes_reduction": 0.4877343448889719,
+      "total_messages_ci95_high": 0.528841671164576,
+      "total_messages_ci95_low": 0.5130736839853188,
+      "total_messages_reduction": 0.520858356796082
+    },
+    {
+      "application": "humanitarian",
+      "matched_panels": 60,
+      "sketch_bytes_ci95_high": 0.613282031487384,
+      "sketch_bytes_ci95_low": 0.5927668046920329,
+      "sketch_bytes_reduction": 0.6028943360383934,
+      "sketch_messages_ci95_high": 0.613282031487384,
+      "sketch_messages_ci95_low": 0.5927668046920329,
+      "sketch_messages_reduction": 0.6028943360383934,
+      "total_bytes_ci95_high": 0.4925084551772639,
+      "total_bytes_ci95_low": 0.47610622014957643,
+      "total_bytes_reduction": 0.4841729930890291,
+      "total_messages_ci95_high": 0.5260899030048505,
+      "total_messages_ci95_low": 0.5085523692684584,
+      "total_messages_reduction": 0.5172005987117435
+    },
+    {
+      "application": "utility_restoration",
+      "matched_panels": 60,
+      "sketch_bytes_ci95_high": 0.61956898426606,
+      "sketch_bytes_ci95_low": 0.5965845051437231,
+      "sketch_bytes_reduction": 0.6078255048040127,
+      "sketch_messages_ci95_high": 0.61956898426606,
+      "sketch_messages_ci95_low": 0.5965845051437231,
+      "sketch_messages_reduction": 0.6078255048040127,
+      "total_bytes_ci95_high": 0.4978813421494037,
+      "total_bytes_ci95_low": 0.4792619319997003,
+      "total_bytes_reduction": 0.4883907543895834,
+      "total_messages_ci95_high": 0.531777520751255,
+      "total_messages_ci95_low": 0.5118891332463449,
+      "total_messages_reduction": 0.5216292821672371
+    }
+  ],
+  "safety": [
+    {
+      "always_minus_event_causal_utility": 0.0013014044010531162,
+      "application": "commercial",
+      "event_minus_always_harm_rate": 0.0016666666666666672,
+      "harm_ci95_high": 0.011666666666666665,
+      "harm_ci95_low": -0.008333333333333331,
+      "matched_panels": 60,
+      "utility_ci95_high": 0.011020575819192847,
+      "utility_ci95_low": -0.008318249507566992
+    },
+    {
+      "always_minus_event_causal_utility": -0.0001556102836333099,
+      "application": "humanitarian",
+      "event_minus_always_harm_rate": -0.004999999999999999,
+      "harm_ci95_high": 0.0016666666666666663,
+      "harm_ci95_low": -0.011708333333332965,
+      "matched_panels": 60,
+      "utility_ci95_high": 0.0061664794107768005,
+      "utility_ci95_low": -0.006683218047506054
+    },
+    {
+      "always_minus_event_causal_utility": 0.000957602788329673,
+      "application": "utility_restoration",
+      "event_minus_always_harm_rate": 0.0016666666666666676,
+      "harm_ci95_high": 0.008333333333333333,
+      "harm_ci95_low": -0.0033333333333333327,
+      "matched_panels": 60,
+      "utility_ci95_high": 0.005641273957572874,
+      "utility_ci95_low": -0.003621063874544111
+    }
+  ],
+  "stage": "development_sketch_communication"
+}

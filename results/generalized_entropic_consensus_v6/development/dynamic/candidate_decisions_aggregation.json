@@ -1,0 +1,5 @@
+{
+  "candidate_decisions": 60480,
+  "reason": "authoritative candidate rows remain in compressed per-episode ledgers; omission keeps each Git artifact below 50 MiB",
+  "status": "omitted_from_flat_aggregate"
+}

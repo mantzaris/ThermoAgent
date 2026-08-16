@@ -1,0 +1,22 @@
+{
+  "transition_identifier": "post_outcome_final_figure_layout_and_disposition_notes",
+  "recorded_at": "2026-08-16T05:16:07Z",
+  "previous_presentation_source_commit": "498be518fda83506311581e08ce11f270cf3d002",
+  "previous_presentation_source_checksum": "ca983c14dc7ce886c3b7bcfceed9dacb5358c964db60782df325d5f5f67d2ab3",
+  "new_presentation_source_commit": "bb44183cc6a545b5890eea38ec366804615e2a46",
+  "new_presentation_source_checksum": "527c0120aed7d47529365927838a2eb1a85faeb82d38d6bffe7330ca78ae7d30",
+  "formal_execution_source_commit_unchanged": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "formal_execution_source_checksum_unchanged": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "protocol_version": "v6.0.1",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "formal_decisions_or_outcomes_changed": false,
+  "scientific_results_or_gate_thresholds_changed": false,
+  "scope": [
+    "move the graph-consensus encoding legend outside node and edge data",
+    "replace overlapping per-axis entropy-family labels with one shared label",
+    "close execution, Qwen, gate, compute, and readiness notes using already frozen results",
+    "add the V6 no-go namespace to the top-level results map"
+  ],
+  "formal_ledgers_remain_bound_to_execution_source": true,
+  "reason": "These post-outcome edits change only figure layout and documentation. They cannot alter formal trajectories, statistical values, thresholds, gate decisions, or stage progression."
+}

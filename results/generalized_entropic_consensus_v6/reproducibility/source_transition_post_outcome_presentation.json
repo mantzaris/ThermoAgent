@@ -1,0 +1,22 @@
+{
+  "transition_identifier": "post_outcome_reporting_dashboard_and_storage_hardening",
+  "recorded_at": "2026-08-16T03:35:00Z",
+  "previous_formal_execution_source_commit": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "previous_formal_execution_source_checksum": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "presentation_source_commit": "81f28e7222c1ac81f2db5a7a529893a35136419e",
+  "presentation_source_checksum": "0ecf1d6b272aaa4abaa7b3b1bcd198c00b6a94e6a214b9abd78a7d9a70caae7e",
+  "protocol_version": "v6.0.1",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "formal_outcomes_had_been_opened": true,
+  "scientific_behavior_changed": false,
+  "hypotheses_thresholds_features_models_rewards_actions_seeds_and_results_changed": false,
+  "scope": [
+    "lossless deterministic compression for one over-50-MiB row-level prediction artifact",
+    "figure provenance and statistical-source corrections",
+    "simulated-operator versus evaluator-only dashboard separation",
+    "complete communication and compute accounting",
+    "publication-facing reporting"
+  ],
+  "formal_ledgers_remain_bound_to_execution_source": true,
+  "reason": "These changes were made after development outcomes were available and therefore cannot change or unlock any scientific gate; they only harden storage, provenance, presentation, and reporting."
+}

@@ -1,0 +1,17 @@
+Title:          primary_dynamic_effect_forest
+Subject:        Generalized Entropic Consensus V6
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sun Aug 16 01:04:26 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      521.632 x 339.411 pts
+Page rot:       0
+File size:      385171 bytes
+Optimized:      no
+PDF version:    1.4

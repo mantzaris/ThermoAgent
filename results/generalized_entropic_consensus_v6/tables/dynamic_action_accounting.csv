@@ -1,0 +1,7 @@
+application,controller,completed_typed_actions,accepted_physical_actions,beneficial_actions,neutral_actions,harmful_actions,reached_next_stage,reached_service,changed_commitment,mean_causal_effect
+commercial,combined_generalized_entropic_crossfit,4682,3639,2910,216,1556,3034,2391,824,0.16343955552041178
+commercial,kpi_confidence_crossfit,4666,3632,2857,217,1592,2988,2369,791,0.1592414879062514
+humanitarian,combined_generalized_entropic_crossfit,4585,3501,2663,217,1705,2868,2259,516,0.14790038460462734
+humanitarian,kpi_confidence_crossfit,4574,3494,2613,213,1748,2832,2236,497,0.14250358625665843
+utility_restoration,combined_generalized_entropic_crossfit,4623,3691,2457,211,1955,2755,2065,311,0.12266196047548855
+utility_restoration,kpi_confidence_crossfit,4633,3693,2427,208,1998,2722,2041,307,0.11951222919853803

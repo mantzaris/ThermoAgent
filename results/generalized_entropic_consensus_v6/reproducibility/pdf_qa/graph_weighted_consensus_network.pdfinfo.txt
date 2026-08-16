@@ -1,0 +1,17 @@
+Title:          graph_weighted_consensus_network
+Subject:        Generalized Entropic Consensus V6
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sun Aug 16 01:04:20 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      590.508 x 469.644 pts
+Page rot:       0
+File size:      388905 bytes
+Optimized:      no
+PDF version:    1.4

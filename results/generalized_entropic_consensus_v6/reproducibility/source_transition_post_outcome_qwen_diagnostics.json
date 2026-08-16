@@ -1,0 +1,23 @@
+{
+  "transition_identifier": "post_outcome_qwen_identifiable_diagnostics",
+  "recorded_at": "2026-08-16T04:19:00Z",
+  "previous_presentation_source_commit": "e8b8bea6292a9c1540d418bdc7bde1afddbe33c8",
+  "previous_presentation_source_checksum": "e2a06a8da2608af8c01d4deae015d9d583765134b9b38611ca0b7f568dced3e6",
+  "new_presentation_source_commit": "e070800e6c6e00c2fae96e54c98d78d5e18eb327",
+  "new_presentation_source_checksum": "e86e8b4947ea72862ef0c8c503c12a62b26d38614e8e86513e2f7205e4d1ae5c",
+  "formal_execution_source_commit_unchanged": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "formal_execution_source_checksum_unchanged": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "protocol_version": "v6.0.1",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "formal_qwen_decisions_changed": false,
+  "scientific_results_changed": false,
+  "gate_thresholds_changed": false,
+  "added_diagnostics": [
+    "mean regret relative to a no-action comparator",
+    "benefit-confidence Brier score",
+    "ten-bin benefit-confidence expected calibration error"
+  ],
+  "explicitly_unidentified_endpoint": "regret relative to a best-authorized-action oracle was not prospectively defined and is not fitted post hoc",
+  "formal_ledgers_remain_bound_to_execution_source": true,
+  "reason": "The reporting layer computes only diagnostics mathematically identifiable from sealed Qwen decisions and evaluator labels; it does not change the model, prompts, actions, counterfactuals, or gate evaluation."
+}

@@ -1,0 +1,3 @@
+application,reference_family,tested_family,permutations,observed_harm_rate_reduction,permutation_mean,permutation_sd,one_sided_refit_permutation_p,monte_carlo_standard_error,holm_adjusted_p
+humanitarian,shannon_js,combined_generalized_entropic,200,0.0061728395061727,-0.0006530864197531,0.0011863749534079,0.0049751243781094,0.0049627330154608,0.0099502487562189
+utility_restoration,shannon_js,combined_generalized_entropic,200,0.0016574585635358,-0.000335635359116,0.0011339215033323,0.0796019900497512,0.0190920151095852,0.0796019900497512

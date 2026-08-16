@@ -1,0 +1,18 @@
+{
+  "transition_identifier": "post_outcome_replay_evidence_classification",
+  "recorded_at": "2026-08-16T03:47:00Z",
+  "previous_presentation_source_commit": "81f28e7222c1ac81f2db5a7a529893a35136419e",
+  "previous_presentation_source_checksum": "0ecf1d6b272aaa4abaa7b3b1bcd198c00b6a94e6a214b9abd78a7d9a70caae7e",
+  "new_presentation_source_commit": "95d31aa7ea9d7b7b6b56e001866a8f00595c57f4",
+  "new_presentation_source_checksum": "8da9df3e44e98f6accedc084daa7e76dda22c7e9ab44b2918f4ad64cbe436137",
+  "formal_execution_source_commit_unchanged": "be729f536a04573f42ad0548b746c072b2b81f87",
+  "formal_execution_source_checksum_unchanged": "e9e698f458a0ce32a19390d26c6eae67fddeb8b1ec39554bfe0baaa626fcb3c5",
+  "protocol_version": "v6.0.1",
+  "protocol_checksum_unchanged": "5a6e9e041db841ca98a95451760b82570af1786518e90ffe1cb0f16ebcf5a8fb",
+  "formal_outcomes_had_been_opened": true,
+  "scientific_results_changed": false,
+  "gate_thresholds_changed": false,
+  "retained_pilot_failures_removed_or_suppressed": false,
+  "classification_rule": "raw/development_* and raw/qwen are formal_or_qualified; raw/pilot_* are retained_pilot; all other paths fail closed as unclassified",
+  "reason": "The first complete replay audit correctly found privacy failures in 792 deliberately retained pre-repair pilot ledgers. The report now exposes those failures separately from zero mismatches in frozen formal evidence so Gate 1 does not confuse a documented design iteration with the formal protocol."
+}

@@ -1,0 +1,25 @@
+x,y,component,color
+0.4,7.25,"Independent agents
+private belief · memory
+utility · authority",blue
+6.0,7.25,"Ad-hoc messages
+compressed entropy spectra
+logged communication",green
+11.5,7.25,"Distributed estimator
+uncertainty · disagreement
+consensus residual",orange
+11.5,4.35,"Delegation controller
+execute · communicate
+abstain · escalate",purple
+6.0,4.35,"Bounded simulated operator
+queue · minutes
+finite budget",red
+0.4,4.35,"Typed operational action
+role mask
+accept · reject · counter",blue
+3.0,1.4,"Dynamic state transition
+resources · commitments
+service",green
+9.0,1.4,"Evaluator-only branch
+matched stochastic tape
+counterfactual analysis",orange

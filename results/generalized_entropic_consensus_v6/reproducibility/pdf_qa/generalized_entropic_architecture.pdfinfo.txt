@@ -1,0 +1,17 @@
+Title:          generalized_entropic_architecture
+Subject:        Generalized Entropic Consensus V6
+Creator:        matplotlib 3.1.2, http://matplotlib.org
+Producer:       matplotlib pdf backend 3.1.2
+CreationDate:   Sun Aug 16 01:04:16 2026 EDT
+Tagged:         no
+UserProperties: no
+Suspects:       no
+Form:           none
+JavaScript:     no
+Pages:          1
+Encrypted:      no
+Page size:      600.3 x 378.797 pts
+Page rot:       0
+File size:      384373 bytes
+Optimized:      no
+PDF version:    1.4

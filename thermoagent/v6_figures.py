@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from .dashboard.v6 import V6DashboardFrame, V6DashboardReplay, frame_svg_v6
-from .v6_entropy import shannon_entropy, tsallis_entropy
+from .v6_entropy import generalized_disagreement, shannon_entropy, tsallis_entropy
 
 
 COLORS = {
@@ -120,31 +120,38 @@ def _read(root: Path, relative: str) -> pd.DataFrame:
 
 def architecture(root: Path) -> str:
     rows = [
-        (0.4, 7.4, "Independent agents\nprivate belief · memory · utility", "blue"),
-        (4.5, 7.4, "Ad-hoc messages\ncompressed entropy spectra", "green"),
-        (8.6, 7.4, "Distributed estimator\nuncertainty · disagreement · residual", "orange"),
-        (8.6, 4.6, "Delegation controller\nexecute · communicate · abstain", "purple"),
-        (4.5, 4.6, "Bounded simulated operator\nqueue · minutes · finite budget", "red"),
-        (0.4, 4.6, "Typed operational action\nrole mask · accept/reject/counter", "blue"),
-        (2.45, 1.7, "Dynamic state transition\nresources · commitments · service", "green"),
-        (6.65, 1.7, "Evaluator-only branch\nmatched stochastic tape", "orange"),
+        (0.4, 7.25, "Independent agents\nprivate belief · memory\nutility · authority", "blue"),
+        (6.0, 7.25, "Ad-hoc messages\ncompressed entropy spectra\nlogged communication", "green"),
+        (11.5, 7.25, "Distributed estimator\nuncertainty · disagreement\nconsensus residual", "orange"),
+        (11.5, 4.35, "Delegation controller\nexecute · communicate\nabstain · escalate", "purple"),
+        (6.0, 4.35, "Bounded simulated operator\nqueue · minutes\nfinite budget", "red"),
+        (0.4, 4.35, "Typed operational action\nrole mask\naccept · reject · counter", "blue"),
+        (3.0, 1.4, "Dynamic state transition\nresources · commitments\nservice", "green"),
+        (9.0, 1.4, "Evaluator-only branch\nmatched stochastic tape\ncounterfactual analysis", "orange"),
     ]
     _data(root, "architecture", pd.DataFrame(rows, columns=["x", "y", "component", "color"]))
-    fig, ax = plt.subplots(figsize=(7.5, 6.2)); ax.set(xlim=(0, 12), ylim=(0, 10)); ax.axis("off")
+    box_width = 4.1
+    box_height = 1.55
+    fig, ax = plt.subplots(figsize=(10.5, 6.3)); ax.set(xlim=(0, 16), ylim=(0, 10)); ax.axis("off")
     for x, y, label, color in rows:
         ax.add_patch(patches.FancyBboxPatch(
-            (x, y), 3.0, 1.35, boxstyle="round,pad=0.06",
+            (x, y), box_width, box_height, boxstyle="round,pad=0.06",
             facecolor=mpl.colors.to_rgba(COLORS[color], 0.12),
             edgecolor=COLORS[color], linewidth=1.6,
         ))
-        ax.text(x + 1.5, y + 0.675, label, ha="center", va="center", fontsize=9.2)
-    arrows = [((3.4, 8.08), (4.5, 8.08)), ((7.5, 8.08), (8.6, 8.08)),
-              ((10.1, 7.4), (10.1, 5.95)), ((8.6, 5.28), (7.5, 5.28)),
-              ((4.5, 5.28), (3.4, 5.28)), ((1.9, 4.6), (3.4, 3.05)),
-              ((5.45, 2.38), (6.65, 2.38))]
+        ax.text(x + box_width / 2, y + box_height / 2, label, ha="center", va="center", fontsize=9.4)
+    arrows = [
+        ((4.5, 8.03), (6.0, 8.03)),
+        ((10.1, 8.03), (11.5, 8.03)),
+        ((13.55, 7.25), (13.55, 5.90)),
+        ((11.5, 5.13), (10.1, 5.13)),
+        ((6.0, 5.13), (4.5, 5.13)),
+        ((2.45, 4.35), (4.05, 2.95)),
+        ((7.1, 2.18), (9.0, 2.18)),
+    ]
     for first, second in arrows:
         ax.annotate("", xy=second, xytext=first, arrowprops={"arrowstyle": "->", "lw": 1.5})
-    ax.text(6, 0.72, "Environment validates actions; it never substitutes an oracle decision.", ha="center")
+    ax.text(8, 0.55, "Environment validates actions; it never substitutes an oracle decision.", ha="center")
     ax.set_title("Generalized-entropic selective autonomy")
     return _save(fig, root, "generalized_entropic_architecture", stamp=False)
 
@@ -213,11 +220,18 @@ def phase_plane(root: Path) -> str:
     fig, axes = plt.subplots(1, 2, figsize=(7.5, 3.9), sharex=True, sharey=True)
     for ax, application in zip(axes, ("humanitarian", "utility_restoration")):
         subset = sample[sample.application == application]
-        points = ax.scatter(subset.shannon_local, subset.js_disagreement, c=subset.harmful.astype(int), cmap=mpl.colors.ListedColormap([COLORS["green"], COLORS["red"]]), s=15, alpha=.48)
+        ax.scatter(subset.shannon_local, subset.js_disagreement, c=subset.harmful.astype(int), cmap=mpl.colors.ListedColormap([COLORS["green"], COLORS["red"]]), s=15, alpha=.48)
         ax.set(title=APP_LABELS[application], xlabel="Local uncertainty (Shannon)")
     axes[0].set_ylabel("Epistemic disagreement (Jensen–Shannon)")
     fig.suptitle("Aleatoric uncertainty and epistemic disagreement are distinct")
-    fig.legend(handles=[Line2D([], [], marker="o", ls="", color=COLORS["green"], label="Beneficial/neutral proposal"), Line2D([], [], marker="o", ls="", color=COLORS["red"], label="Harmful proposal")], loc="lower center", ncol=2)
+    axes[0].legend(
+        handles=[
+            Line2D([], [], marker="o", ls="", color=COLORS["green"], label="Beneficial/neutral proposal"),
+            Line2D([], [], marker="o", ls="", color=COLORS["red"], label="Harmful proposal"),
+        ],
+        loc="upper left",
+        fontsize=8.7,
+    )
     return _save(fig, root, "uncertainty_disagreement_phase_plane")
 
 
@@ -245,20 +259,66 @@ def graph_consensus(root: Path) -> str:
     episode = _representative_episode(root, "humanitarian")
     events = _events(episode)
     sketches = [value for value in events if value["kind"] == "v6_sketch" and value["step"] == 2]
+    beliefs = {
+        value["actor"]: np.asarray(value["payload"]["belief_summary"], dtype=float)
+        for value in sketches
+    }
     edges = pd.DataFrame([{
         "sender": value["actor"], "recipient": value["payload"]["recipient"],
         "reliability": value["payload"]["reliability"], "step": value["step"],
+        "sender_entropy": shannon_entropy(beliefs[value["actor"]]),
+        "recipient_entropy": shannon_entropy(beliefs[value["payload"]["recipient"]]),
+        "pairwise_disagreement": generalized_disagreement(
+            [beliefs[value["actor"]], beliefs[value["payload"]["recipient"]]],
+            [.5, .5],
+            1.0,
+        ),
     } for value in sketches])
     _data(root, "graph_weighted_consensus_network", edges)
     nodes = sorted(set(edges.sender).union(edges.recipient))
     positions = {node: (math.cos(2 * math.pi * index / len(nodes)), math.sin(2 * math.pi * index / len(nodes))) for index, node in enumerate(nodes)}
-    fig, ax = plt.subplots(figsize=(7.0, 5.8)); ax.axis("off")
+    node_entropy = {node: shannon_entropy(beliefs[node]) for node in nodes}
+    node_cmap = mpl.cm.get_cmap("cividis")
+    edge_cmap = mpl.cm.get_cmap("magma")
+    node_normalizer = mpl.colors.Normalize(vmin=0.0, vmax=1.0)
+    edge_maximum = max(float(edges.pairwise_disagreement.max()), 1e-6)
+    edge_normalizer = mpl.colors.Normalize(vmin=0.0, vmax=edge_maximum)
+
+    fig, ax = plt.subplots(figsize=(8.2, 6.2)); ax.axis("off")
     for row in edges.itertuples(index=False):
         x1, y1 = positions[row.sender]; x2, y2 = positions[row.recipient]
-        ax.plot([x1, x2], [y1, y2], color=COLORS["blue"], alpha=.18 + .55 * row.reliability, lw=.6 + 1.8 * row.reliability)
+        ax.plot(
+            [x1, x2], [y1, y2],
+            color=edge_cmap(edge_normalizer(row.pairwise_disagreement)),
+            alpha=.35 + .55 * row.reliability,
+            lw=.6 + 2.2 * row.reliability,
+        )
     for node, (x, y) in positions.items():
-        ax.scatter([x], [y], s=120, color=COLORS["sky"], edgecolor=COLORS["black"], zorder=3)
-        ax.text(x, y - .10, node.split("_")[-2], ha="center", va="top", fontsize=9)
+        ax.scatter(
+            [x], [y], s=150,
+            color=[node_cmap(node_normalizer(node_entropy[node]))],
+            edgecolor=COLORS["black"], zorder=3,
+        )
+        if "_regional_hub_" in node:
+            role = "Hub"
+        elif "_clinic_" in node:
+            role = "Clinic"
+        else:
+            role = "NGO"
+        ax.text(x, y - .11, "%s %s" % (role, node.split("_")[-2]), ha="center", va="top", fontsize=8.6)
+    edge_map = mpl.cm.ScalarMappable(norm=edge_normalizer, cmap=edge_cmap)
+    edge_bar = fig.colorbar(edge_map, ax=ax, fraction=.033, pad=.02)
+    edge_bar.set_label("Pairwise JS disagreement", fontsize=9.2)
+    entropy_handles = [
+        Line2D(
+            [], [], marker="o", ls="", markeredgecolor=COLORS["black"],
+            markerfacecolor=node_cmap(node_normalizer(value)),
+            label="Node H = %.1f" % value,
+        )
+        for value in (0.0, 0.5, 1.0)
+    ]
+    entropy_handles.append(Line2D([], [], color=COLORS["gray"], lw=2.4, label="Edge width = reliability"))
+    ax.legend(handles=entropy_handles, loc="lower center", bbox_to_anchor=(.5, .015), ncol=2, fontsize=8.2, title="Delivered-sketch encodings", title_fontsize=8.5)
     ax.set_title("Graph-weighted consensus over delivered ad-hoc sketches")
     return _save(fig, root, "graph_weighted_consensus_network")
 
@@ -372,10 +432,14 @@ def effect_forest(root: Path) -> str:
         )
         ax.axvline(0, color=COLORS["black"], lw=1)
         ax.set(
-            yticks=y, yticklabels=labels if ax is axes[0] else [],
-            xlabel="Paired harm-rate reduction vs Shannon",
+            yticks=y,
+            xlabel="Δ harmful-action rate vs Shannon",
             title=APP_LABELS[application],
         )
+        if ax is axes[0]:
+            ax.set_yticklabels(labels)
+        else:
+            ax.tick_params(axis="y", labelleft=False)
     fig.suptitle("Prespecified entropy-family effects at 50% action coverage")
     return _save(fig, root, "entropy_family_effect_forest")
 
@@ -411,11 +475,29 @@ def v5_abstention(root: Path, name: str, metric: str, title: str) -> str:
     selected = frame[frame.policy.isin(["original_safe", "same_score_no_consensus", "coverage_matched_no_consensus", "operator_budget_matched_escalation", "mandatory_intervention"])].copy()
     grouped = selected.groupby(["application", "policy"], as_index=False)[metric].mean()
     _data(root, name, grouped)
-    fig, axes = plt.subplots(1, 3, figsize=(7.5, 3.8), sharey=True)
+    policy_order = [
+        "original_safe",
+        "same_score_no_consensus",
+        "coverage_matched_no_consensus",
+        "operator_budget_matched_escalation",
+        "mandatory_intervention",
+    ]
+    policy_colors = {
+        policy: color for policy, color in zip(
+            policy_order,
+            [COLORS["blue"], COLORS["green"], COLORS["orange"], COLORS["purple"], COLORS["red"]],
+        )
+    }
+    fig, axes = plt.subplots(1, 3, figsize=(9.4, 4.1), sharey=True)
     for ax, app in zip(axes, ("commercial", "humanitarian", "utility_restoration")):
-        subset = grouped[grouped.application == app]
-        ax.barh(range(len(subset)), subset[metric], color=[COLORS["blue"], COLORS["green"], COLORS["orange"], COLORS["purple"], COLORS["red"]][:len(subset)])
-        ax.set(yticks=range(len(subset)), yticklabels=[value.replace("_", " ") for value in subset.policy] if ax is axes[0] else [], title=APP_LABELS[app])
+        subset = grouped[grouped.application == app].set_index("policy").reindex(policy_order).reset_index()
+        positions = np.arange(len(subset))
+        ax.barh(positions, subset[metric], color=[policy_colors[value] for value in subset.policy])
+        ax.set(yticks=positions, title=APP_LABELS[app])
+        if ax is axes[0]:
+            ax.set_yticklabels([value.replace("_", " ") for value in subset.policy])
+        else:
+            ax.tick_params(axis="y", labelleft=False)
     axes[0].set_xlabel(metric.replace("_", " ")); fig.suptitle(title)
     fig.text(
         .995, .012,
@@ -454,8 +536,12 @@ def training_curves(root: Path) -> str:
             ax.fill_between(x, mean - error, mean + error, color=color, alpha=.10, linewidth=0)
     axes[0].set(xlabel="Training episode", ylabel="Mean trajectory reward", title="Seed trajectories and 95% mean intervals")
     axes[1].set(xlabel="Training episode", ylabel="Policy entropy", title="Exploration stability")
-    axes[0].legend(fontsize=9.0, loc="best")
-    fig.text(.995, .012, "Thin lines: all independent seeds · bold: mean · band: 95% normal interval", ha="right", fontsize=9.0, color=COLORS["gray"])
+    axes[0].legend(
+        fontsize=8.7,
+        loc="best",
+        title="Thin: seed · bold/band: mean ±95%",
+        title_fontsize=8.5,
+    )
     return _save(fig, root, "sequential_rl_learning_curves")
 
 
@@ -478,14 +564,22 @@ def qwen_evaluation(root: Path) -> str:
     rows = []
     for app, subset in frame.groupby("application"):
         physical = subset[subset.accepted_physical_action.astype(str).str.lower().isin(["true", "1"])]
-        rows.append({"application": app, "decisions": len(subset), "first_pass": subset.first_pass_valid.mean(), "harm_rate": physical.harmful.mean() if len(physical) else 0, "mean_effect": physical.causal_effect.mean() if len(physical) else 0, "abstention": (subset.delegation=="abstain").mean(), "escalation": (subset.delegation=="escalate_operator").mean()})
+        rows.append({"application": app, "decisions": len(subset), "physical_actions": len(physical), "first_pass": subset.first_pass_valid.mean(), "harm_rate": physical.harmful.mean() if len(physical) else 0, "mean_effect": physical.causal_effect.mean() if len(physical) else 0, "abstention": (subset.delegation=="abstain").mean(), "escalation": (subset.delegation=="escalate_operator").mean()})
     summary = pd.DataFrame(rows); _data(root, "qwen_agent_evaluation", summary)
-    fig, axes = plt.subplots(1, 2, figsize=(7.5, 4.0))
+    fig, axes = plt.subplots(1, 2, figsize=(9.2, 4.4))
     x=np.arange(len(summary)); width=.22
+    tick_labels = []
+    for row in summary.itertuples(index=False):
+        label = APP_LABELS[row.application]
+        if row.application in {"commercial", "utility_restoration"}:
+            label = label.replace(" ", "\n")
+        tick_labels.append("%s\nphysical n=%d" % (label, row.physical_actions))
     for offset, key, label in [(-width,"first_pass","First-pass valid"),(0,"harm_rate","Harmful physical"),(width,"abstention","Abstention")]:
         axes[0].bar(x+offset,summary[key],width,label=label)
-    axes[0].set(xticks=x,xticklabels=[APP_LABELS[v] for v in summary.application],ylim=(0,1),ylabel="Fraction",title="Behavioral rates"); axes[0].legend(fontsize=9.0)
-    axes[1].bar(x,summary.mean_effect,color=[APP_COLORS[v] for v in summary.application]); axes[1].axhline(0,color=COLORS["black"]); axes[1].set(xticks=x,xticklabels=[APP_LABELS[v] for v in summary.application],ylabel="Mean causal effect",title="Accepted physical actions")
+    axes[0].set(xticks=x,xticklabels=tick_labels,ylim=(0,1),ylabel="Fraction",title="Behavioral rates"); axes[0].legend(fontsize=9.0)
+    axes[1].bar(x,summary.mean_effect,color=[APP_COLORS[v] for v in summary.application]); axes[1].axhline(0,color=COLORS["black"]); axes[1].set(xticks=x,xticklabels=tick_labels,ylabel="Mean causal effect",title="Accepted physical actions")
+    for ax in axes:
+        ax.tick_params(axis="x", labelsize=8.5)
     return _save(fig, root, "qwen_agent_evaluation")
 
 
@@ -508,7 +602,11 @@ def regime_heterogeneity(root: Path) -> str:
     fig,axes=plt.subplots(1,2,figsize=(7.5,4.5),sharey=True)
     for ax,app in zip(axes,("humanitarian","utility_restoration")):
         subset=frame[frame.application==app]; y=np.arange(len(subset))[::-1]
-        ax.errorbar(subset.harm_rate_reduction,y,xerr=[subset.harm_rate_reduction-subset.harm_ci95_low,subset.harm_ci95_high-subset.harm_rate_reduction],fmt="o",capsize=2,color=APP_COLORS[app]); ax.axvline(0,color=COLORS["black"]); ax.set(yticks=y,yticklabels=subset.regime if ax is axes[0] else [],xlabel="Harm reduction",title=APP_LABELS[app])
+        ax.errorbar(subset.harm_rate_reduction,y,xerr=[subset.harm_rate_reduction-subset.harm_ci95_low,subset.harm_ci95_high-subset.harm_rate_reduction],fmt="o",capsize=2,color=APP_COLORS[app]); ax.axvline(0,color=COLORS["black"]); ax.set(yticks=y,xlabel="Harm reduction",title=APP_LABELS[app])
+        if ax is axes[0]:
+            ax.set_yticklabels([value.replace("_", " ") for value in subset.regime])
+        else:
+            ax.tick_params(axis="y", labelleft=False)
     fig.suptitle("Development effect heterogeneity by disruption regime")
     return _save(fig,root,"regime_heterogeneity")
 
@@ -836,7 +934,7 @@ def causal_chain_funnel(root: Path) -> str:
     ]
     frame = pd.DataFrame(rows)
     _data(root, "causal_chain_funnel", frame)
-    fig, axes = plt.subplots(1, 2, figsize=(7.5, 4.8), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 5.0), sharey=False)
     for ax, population, color, title in (
         (axes[0], "operator", COLORS["red"], "Escalated operator path"),
         (axes[1], "autonomous", COLORS["blue"], "Autonomous execution path"),
@@ -847,8 +945,11 @@ def causal_chain_funnel(root: Path) -> str:
         widths = subset["count"].to_numpy(dtype=float) / maximum
         ax.barh(y, widths, color=mpl.colors.to_rgba(color, .78), edgecolor=color)
         for position, width, count in zip(y, widths, subset["count"]):
-            ax.text(max(width / 2, .03), position, "%d" % count, ha="center", va="center", fontsize=9, color="white" if width > .2 else COLORS["black"])
-        ax.set(yticks=y, yticklabels=subset.stage, xlim=(0, 1.05), xlabel="Fraction of panel-specific starting population", title=title)
+            if width >= .28:
+                ax.text(width / 2, position, "%d" % count, ha="center", va="center", fontsize=9, color="white")
+            else:
+                ax.text(width + .025, position, "%d" % count, ha="left", va="center", fontsize=9, color=COLORS["black"])
+        ax.set(yticks=y, yticklabels=subset.stage, xlim=(0, 1.14), xlabel="Fraction of panel-specific starting population", title=title)
     fig.suptitle("Separate causal-chain populations; counts are never pooled across paths")
     return _save(fig, root, "causal_chain_funnel")
 

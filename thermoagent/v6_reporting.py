@@ -207,6 +207,18 @@ def _action_accounting(root: Path) -> None:
     frame = _safe_frame(root / "development" / "dynamic" / "completed_actions.csv")
     if frame.empty:
         return
+    if "application" not in frame.columns:
+        if "run_id" not in frame.columns:
+            raise ValueError("completed-action accounting requires application or run_id")
+        frame["application"] = frame["run_id"].map(
+            lambda run_id: next(
+                (application for application in APPLICATIONS
+                 if "-%s-" % application in str(run_id)),
+                "unknown",
+            )
+        )
+        if (frame["application"] == "unknown").any():
+            raise ValueError("could not derive application from completed-action run_id")
     def truth(column: str) -> pd.Series:
         return frame[column].astype(str).str.lower().isin(["true", "1"])
 

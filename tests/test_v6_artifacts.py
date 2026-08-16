@@ -4,7 +4,9 @@ import pandas as pd
 
 from thermoagent.v6_artifacts import build_index, verify_artifacts
 from thermoagent.v6_figures import FIGURE_DATA_SOURCES
-from thermoagent.v6_reporting import _claims, _compute_table, _qwen_table
+from thermoagent.v6_reporting import (
+    _action_accounting, _claims, _compute_table, _qwen_table,
+)
 
 
 def test_artifact_index_detects_mutation_and_crlf(tmp_path):
@@ -123,3 +125,21 @@ def test_qwen_reporting_uses_identifiable_no_action_regret_and_calibration(tmp_p
     assert abs(row["mean_regret_relative_to_no_action"] - (0.2 / 3)) < 1e-12
     assert abs(row["benefit_confidence_brier"] - ((0.8**2 + 0.2**2 + 0.3**2) / 3)) < 1e-12
     assert "not prospectively defined" in row["best_authorized_action_regret_status"]
+
+
+def test_action_accounting_derives_application_from_run_id(tmp_path):
+    root = tmp_path / "results"
+    target = root / "development" / "dynamic"
+    target.mkdir(parents=True)
+    pd.DataFrame([{
+        "run_id": "v6-development_dynamic-humanitarian-compound-private_fragmented-e1-policy-event_triggered",
+        "controller": "policy", "accepted_physical_action": True,
+        "beneficial": True, "neutral": False, "harmful": False,
+        "reached_next_stage": True, "reached_service": True,
+        "changed_commitment": False, "causal_effect": 0.4,
+    }]).to_csv(target / "completed_actions.csv", index=False)
+
+    _action_accounting(root)
+    row = pd.read_csv(root / "tables" / "dynamic_action_accounting.csv").iloc[0]
+    assert row["application"] == "humanitarian"
+    assert row["accepted_physical_actions"] == 1

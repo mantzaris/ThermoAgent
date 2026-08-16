@@ -1,0 +1,2 @@
+timestamp,stage,issue,scope,response,formal_evidence_affected
+2026-08-16T09:58:00-04:00,retained_pilot,Two yielded command transports remained alive after appearing complete and briefly overlapped the tmux writer,pilot execution only,"Identified exact process ancestry; terminated only two duplicate writers; retained one tmux writer; added exclusive nonblocking stage lock; exact replay and checksum audit required before use",false

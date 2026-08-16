@@ -1,0 +1,20 @@
+study: complexity-dependent generalized-entropic coordination V7
+protocol_status: retained_feasibility_pilot_iteration_2_not_frozen
+created_before_iteration_2_outcomes: true
+changes_from_iteration_1:
+  - evaluator action cost is zero for a rejected physical action
+  - candidate analysis conditions on evaluator action acceptance
+  - utility disruption creates physical-node and service-edge failures
+  - low-integrity telemetry causes conservative service derating
+  - unresolved corrupted telemetry can propagate defensive service lockouts
+purpose: verify a nondegenerate beneficial-neutral-harmful utility action pool; not estimate a formal entropy effect
+panels:
+  - {application: humanitarian, complexity: small, coupling: low, fragmentation: low, network_disruption: low, topology_family: random_geometric, environment_seed: 773101, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: humanitarian, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 773102, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: small, coupling: low, fragmentation: low, network_disruption: low, topology_family: grid, environment_seed: 774101, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: small, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 774102, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: medium, fragmentation: medium, network_disruption: medium, topology_family: scale_free, environment_seed: 774103, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: high, fragmentation: low, network_disruption: medium, topology_family: grid, environment_seed: 774104, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: low, fragmentation: high, network_disruption: medium, topology_family: modular, environment_seed: 774105, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 774106, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: large, coupling: high, fragmentation: high, network_disruption: high, topology_family: grid, environment_seed: 774107, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 5}

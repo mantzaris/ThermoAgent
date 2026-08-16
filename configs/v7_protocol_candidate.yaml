@@ -1,0 +1,116 @@
+study:
+  version: v7-protocol-candidate-1.0
+  title: Complexity-Dependent Value of Generalized Entropic Consensus in Decentralized Autonomous Coordination
+  status: candidate_not_frozen
+  informed_by_v6: true
+  created_before_formal_v7_outcomes: true
+  primary_applications: [humanitarian, utility_restoration]
+  historical_boundary: generalized-entropic-consensus-v6
+independent_unit: matched environment panel defined by application, graph instance, scenario factors, environment seed, and information condition
+complexity:
+  small: {agents: 12, operational_nodes: 8, horizon: 30, decision_interval: 3}
+  medium: {agents: 28, operational_nodes: 16, horizon: 60, decision_interval: 4}
+  large: {agents: 52, operational_nodes: 30, horizon: 100, decision_interval: 5}
+factors:
+  coupling: {low: 0.20, medium: 0.55, high: 0.85}
+  fragmentation: {low: 0.20, medium: 0.55, high: 0.85}
+  network_disruption: {low: 0.20, medium: 0.55, high: 0.85}
+  information_condition: [private_fragmented, public_shared]
+  humanitarian_topologies: [random_geometric, small_world, modular]
+  utility_topologies: [grid, scale_free, modular]
+  structurally_held_out_validation_topologies:
+    humanitarian: chain
+    utility_restoration: small_world
+entropy_family:
+  tsallis_q: [0.5, 1.0, 1.5, 2.0, 3.0]
+  primary_block: [shannon_local, pooled_uncertainty, js_disagreement, graph_disagreement, consensus_residual, disagreement_slope]
+  generalized_secondary: [tsallis_0_5, tsallis_1_5, tsallis_2, tsallis_3, gini_simpson, jensen_tsallis]
+  energy_and_free_energy_status: secondary_not_primary
+controllers:
+  primary_baseline: strongest_nonentropic_regularized_logistic
+  primary_entropic: same_capacity_generalized_entropic_regularized_logistic
+  matched_autonomous_action_coverage: 0.60
+  maximum_mean_absolute_coverage_difference: 0.02
+  operator_slots_per_epoch: 1
+  operator_minutes_per_escalation: 3.0
+  fixed_rule_references: [always_act, never_act, random_abstention, fixed_severity, kpi_confidence, predictive_uncertainty, shannon_js, generalized_tsallis_gini, graph_disagreement, combined_generalized_entropic]
+  communication_references: [none, periodic, always_on, kpi_event_triggered, agent_event_triggered]
+  sketch_policies: [none, periodic, event_triggered, always_on]
+development_design:
+  reference_panel_count_per_application: 50
+  primary_medium_response_surface:
+    cells: 9
+    replicates_per_cell: 3
+  high_high_medium_total_panels_per_application: 12
+  high_high_scaling_panels_per_application: {small: 4, large: 4}
+  public_shared_high_high_panels_per_application: 6
+  reference_counterfactual_probes_per_decision_epoch: 6
+  communication_ablation_panels_per_application: 6
+  random_seed_namespace: 787000
+primary_hypotheses:
+  H1:
+    estimand: controller-by-coupling-by-fragmentation interaction in absolute harmful-action rate at matched coverage
+    success: pooled lower_95_ci_above_zero and point_interaction_at_least_0.02 and application_specific_points_positive
+  H2:
+    estimand: KPI-baseline harm rate minus entropic-controller harm rate in high-coupling high-fragmentation private panels
+    success: both_applications_lower_95_ci_above_zero and both_point_effects_at_least_0.04 and service_noninferiority
+  H3:
+    estimand: event-triggered versus always-on fully counted communication with paired safety
+    success: messages_and_bytes_reduced_at_least_0.20 and harm_degradation_upper_95_ci_at_most_0.02 and estimation_mae_at_most_0.08
+service_noninferiority:
+  relative_margin: 0.02
+  fallback_absolute_margin: at_most_0.20_fixed_baseline_standard_deviations_frozen_from_development_reference
+statistical_methods:
+  outer_grouped_crossfit_folds: 5
+  inner_grouped_crossfit_folds: 4
+  regularization_candidates: [0.03, 0.10, 0.30, 1.0, 3.0]
+  cluster_bootstrap_replicates: 10000
+  bootstrap_seed_namespace: 787700
+  multiple_testing: Holm within the prespecified individual entropy-family tests after family-level success
+  interaction_model: linear hierarchical panel model with application fixed effect and graph-instance clustered interval
+  candidate_rows_are_independent: false
+progression:
+  formal_development_requires: [gate_A, gate_B, gate_C]
+  formal_primary_progression_requires:
+    - zero_formal_episode_failures
+    - zero_replay_mismatches
+    - zero_privacy_failures
+    - H1_complexity_interaction
+    - H2_high_complexity_selective_safety
+    - H3_communication_noninferiority
+  decentralized_training_and_qwen_require: [formal_H1_feasibility, formal_H2_feasibility]
+  validation_requires: [engineering, environment_agent_validity, primary_mechanism, RL_stability, Qwen_pilot_if_available, communication_feasibility]
+  holdout_requires: [all_frozen_validation_primary_criteria]
+training:
+  methods: [ppo_kpi_only, ppo_predictive_uncertainty, ppo_shannon_js, ppo_generalized_tsallis_gini, ppo_combined_generalized_entropic]
+  seeds: [78731, 78732, 78733, 78734, 78735]
+  episodes_per_seed: 80
+  evaluation_episodes_per_seed: 24
+  selection: all_seeds_retained_no_best_seed_selection
+qwen:
+  model: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: bitsandbytes_NF4
+  compute_dtype: BF16
+  pilot_gate: {first_pass_validity: 0.85, one_repair_validity: 0.98, minimum_action_types_per_application: 3, minimum_delegation_types_per_application: 2, maximum_verification_fraction: 0.75}
+  formal_minimum_episodes: {humanitarian: 20, utility_restoration: 20}
+validation:
+  status: sealed_only_after_protocol_freeze
+  minimum_high_high_panels_per_application: 12
+  execute_once: true
+holdout:
+  status: sealed_only_after_protocol_freeze
+  minimum_high_high_panels_per_application: 16
+  structurally_held_out_topologies: true
+  execute_once: true
+compute_caps:
+  gpu_hours: 50
+  incremental_usd: 40
+  reserve_fraction: 0.15
+integrity:
+  validation_or_holdout_before_unlock: prohibited
+  selective_reruns: prohibited
+  failed_seeds_retained: true
+  evaluator_truth_in_deployable_context: prohibited
+  sketch_traffic_counted: true
+  real_human_evidence: false

@@ -1,0 +1,27 @@
+study: complexity-dependent generalized-entropic coordination V7
+protocol_status: retained_feasibility_pilot_iteration_3_not_frozen
+created_before_iteration_3_outcomes: true
+informed_by:
+  - iteration 2 utility accepted probes included 10 beneficial and 280 harmful actions
+  - utility proposals were dominated by isolation and relay actions from roles with overly broad authority
+changes_from_iteration_2:
+  - role-specific utility action authorities are enforced for every utility role
+  - communication failure is separated from physical service-edge failure
+  - relay restoration prioritizes communication edges associated with the target asset
+  - defensive isolation expires after a fixed four-step dwell period
+unchanged:
+  - belief generation and thermodynamic features do not use action outcomes
+  - entropy does not affect domain transitions or action effects
+  - evaluator probes are stratified by proposed action before outcomes are observed
+purpose: verify domain actionability and a nondegenerate action pool; not estimate a formal entropy effect
+panels:
+  - {application: humanitarian, complexity: small, coupling: low, fragmentation: low, network_disruption: low, topology_family: random_geometric, environment_seed: 775101, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: humanitarian, complexity: medium, coupling: medium, fragmentation: medium, network_disruption: medium, topology_family: small_world, environment_seed: 775102, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: humanitarian, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 775103, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: small, coupling: low, fragmentation: low, network_disruption: low, topology_family: grid, environment_seed: 776101, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: small, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 776102, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: medium, fragmentation: medium, network_disruption: medium, topology_family: scale_free, environment_seed: 776103, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: high, fragmentation: low, network_disruption: medium, topology_family: grid, environment_seed: 776104, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: low, fragmentation: high, network_disruption: medium, topology_family: modular, environment_seed: 776105, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 776106, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 6}
+  - {application: utility_restoration, complexity: large, coupling: high, fragmentation: high, network_disruption: high, topology_family: grid, environment_seed: 776107, controllers: [always_act], sketch_policies: [event_triggered], counterfactual_limit_per_epoch: 5}

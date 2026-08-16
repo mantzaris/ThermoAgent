@@ -1,0 +1,71 @@
+{
+  "candidate_rows": 3920,
+  "communication": [],
+  "counterfactual_action_rows": 537,
+  "episodes": 10,
+  "evidence_status": "retained_feasibility_pilot",
+  "high_complexity": [
+    {
+      "application": "humanitarian",
+      "causal_utility_gain": -7.2029063475906305,
+      "harm_ci95_high": 0.023255813953488413,
+      "harm_ci95_low": 0.023255813953488413,
+      "harm_rate_reduction": 0.023255813953488413,
+      "panels": 1,
+      "utility_ci95_high": -7.2029063475906305,
+      "utility_ci95_low": -7.2029063475906305
+    },
+    {
+      "application": "utility_restoration",
+      "causal_utility_gain": -0.7820223247400581,
+      "harm_ci95_high": -0.022222222222222254,
+      "harm_ci95_low": -0.05882352941176472,
+      "harm_rate_reduction": -0.034591008120419896,
+      "panels": 3,
+      "utility_ci95_high": -0.10546860394482982,
+      "utility_ci95_low": -1.7527859182972614
+    }
+  ],
+  "independent_panels": 10,
+  "interaction_model": {
+    "coupling_coefficient": 0.03169934640522877,
+    "coupling_fragmentation_interaction": -0.05879266420414086,
+    "design_rank": 5,
+    "fragmentation_coefficient": 0.031699346405228715,
+    "intercept": -0.04535732320202042,
+    "panels": 10,
+    "size_coefficient": 0.04588666078550155
+  },
+  "not_confirmatory": true,
+  "stage": "pilots_iteration3",
+  "variation": [
+    {
+      "application": "humanitarian",
+      "beneficial_actions": 69,
+      "competitive_panels": 3,
+      "distributed_contributors_mean": 2.3214285714285716,
+      "graph_disagreement_std": 0.031719549125427855,
+      "harmful_actions": 99,
+      "independent_panels": 3,
+      "js_disagreement_std": 0.025360078603301188,
+      "kpi_severity_std": 0.3309943910031013,
+      "neutral_actions": 0,
+      "rows": 168,
+      "shannon_std": 0.09060452357477246
+    },
+    {
+      "application": "utility_restoration",
+      "beneficial_actions": 41,
+      "competitive_panels": 7,
+      "distributed_contributors_mean": 2.6910569105691056,
+      "graph_disagreement_std": 0.020897710188225106,
+      "harmful_actions": 328,
+      "independent_panels": 7,
+      "js_disagreement_std": 0.021822449839661542,
+      "kpi_severity_std": 0.3644122794474454,
+      "neutral_actions": 0,
+      "rows": 369,
+      "shannon_std": 0.08485060182452354
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "formal_development_unlocked": true,
+  "gate_status": {
+    "A": true,
+    "B": true,
+    "C": true
+  },
+  "holdout_unlocked": false,
+  "interpretation": "feasibility gates pass; formal protocol may now be frozen",
+  "stage": "pilots_iteration3",
+  "threshold_version": "v7-feasibility-gates-1.0-draft",
+  "validation_unlocked": false
+}

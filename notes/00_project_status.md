@@ -418,3 +418,29 @@ No external blocker.
 ## Estimated remaining time
 
 No work remains for the frozen design. No GPU process is active.
+# Current continuation: V7
+
+- **Phase:** V7 Stage D pre-freeze review; V1--V6 remain frozen.
+- **Branch:** `complexity-entropic-coordination-v7` from V6 commit
+  `8013300c23553928a0269e6be27f5baaedee7e53`.
+- **Completed:** parent/remote verification, 12,475-artifact V6 checksum audit,
+  V6 formal replay verification, V6 complexity audit, separate humanitarian
+  and utility transition systems, persistent multi-asset agents, structural
+  graphs, dynamic conservation/replay tests, 45 retained smoke/pilot episodes,
+  39 V7-focused tests, all 378 repository tests under system Python, exact
+  replay of all V7 pilot ledgers, prospective feasibility gates A/B/C, compute
+  profiling, and the formal-development protocol candidate.
+- **Active job:** none. No Python, tmux, CUDA, Qwen, or experiment writer is
+  active. The formal-development batch has not started.
+- **Blocker:** existing RunPod endpoint refuses SSH connection. GPU PPO and
+  real-Qwen stages remain sealed until the same Pod is started/reachable.
+- **Next:** commit the clean pre-freeze implementation and retained pilots,
+  freeze protocol/manifests from that source commit, then execute the single
+  formal CPU development batch. Learned PPO, Qwen, validation, and holdout
+  remain prospectively locked.
+- **Latest valid result:** feasibility A/B/C passed without requiring a
+  favorable entropy effect. Across 45 pilot/smoke ledgers there were zero
+  replay mismatches, zero privacy failures, and maximum independently
+  reconstructed conservation residual `1.3002932064409833e-12`. The final
+  pilot's coupling-by-fragmentation interaction was negative (`-0.05879`), so
+  it is not evidence for the primary mechanism.

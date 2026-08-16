@@ -1,0 +1,4 @@
+run_id,complexity,allocation_inequality_gini,resource_waste,delivery_completion
+v7-pilots_iteration3-humanitarian-medium-high-high-high-modular-private_fragmented-775103-always_act-event_triggered,medium,0.4542746611715996,8.0,75.73340403794755
+v7-pilots_iteration3-humanitarian-medium-medium-medium-medium-small_world-private_fragmented-775102-always_act-event_triggered,medium,0.4669222850589909,3.5,105.90204925541306
+v7-pilots_iteration3-humanitarian-small-low-low-low-random_geometric-private_fragmented-775101-always_act-event_triggered,small,0.5443911208334247,0.0,27.466399741909697

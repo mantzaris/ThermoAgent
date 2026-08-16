@@ -1,0 +1,11 @@
+application,run_id,maximum_cascade_depth,service_reaching_actions,physical_actions
+humanitarian,v7-pilots_iteration3-humanitarian-medium-high-high-high-modular-private_fragmented-775103-always_act-event_triggered,3,47,173
+humanitarian,v7-pilots_iteration3-humanitarian-medium-medium-medium-medium-small_world-private_fragmented-775102-always_act-event_triggered,3,60,132
+humanitarian,v7-pilots_iteration3-humanitarian-small-low-low-low-random_geometric-private_fragmented-775101-always_act-event_triggered,3,17,40
+utility_restoration,v7-pilots_iteration3-utility_restoration-large-high-high-high-grid-private_fragmented-776107-always_act-event_triggered,3,18,284
+utility_restoration,v7-pilots_iteration3-utility_restoration-medium-high-high-high-modular-private_fragmented-776106-always_act-event_triggered,3,10,98
+utility_restoration,v7-pilots_iteration3-utility_restoration-medium-high-low-medium-grid-private_fragmented-776104-always_act-event_triggered,3,9,108
+utility_restoration,v7-pilots_iteration3-utility_restoration-medium-low-high-medium-modular-private_fragmented-776105-always_act-event_triggered,3,17,101
+utility_restoration,v7-pilots_iteration3-utility_restoration-medium-medium-medium-medium-scale_free-private_fragmented-776103-always_act-event_triggered,3,16,62
+utility_restoration,v7-pilots_iteration3-utility_restoration-small-high-high-high-modular-private_fragmented-776102-always_act-event_triggered,3,8,28
+utility_restoration,v7-pilots_iteration3-utility_restoration-small-low-low-low-grid-private_fragmented-776101-always_act-event_triggered,3,7,19

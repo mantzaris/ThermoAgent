@@ -1,0 +1,3 @@
+application,rows,independent_panels,beneficial_actions,harmful_actions,neutral_actions,shannon_std,js_disagreement_std,graph_disagreement_std,distributed_contributors_mean,kpi_severity_std,competitive_panels
+humanitarian,92,2,30,62,0,0.09116572909476016,0.025304362628423765,0.03735995552455494,2.130434782608696,0.3327399080854874,2
+utility_restoration,290,7,10,280,0,0.07940973810086918,0.02648225930020692,0.022370503843668177,2.56551724137931,0.3331086025114527,6

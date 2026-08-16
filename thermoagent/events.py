@@ -96,6 +96,33 @@ EVENT_KINDS = {
     "v6_operator_escalation",
     "v6_operator_response",
     "v6_replay_checkpoint",
+    # V7 complexity-dependent entropic coordination events. V7 uses separate
+    # domain transition systems, persistent agents with multi-asset scopes,
+    # and a four-part action schema. The additive event names preserve every
+    # frozen V1--V6 ledger.
+    "v7_topology_snapshot",
+    "v7_private_observation",
+    "v7_belief_update",
+    "v7_operational_proposal",
+    "v7_information_action",
+    "v7_communication_action",
+    "v7_delegation_decision",
+    "v7_message_sent",
+    "v7_message_dropped",
+    "v7_message_delivered",
+    "v7_entropy_sketch",
+    "v7_distributed_state",
+    "v7_commitment_transition",
+    "v7_action_scheduled",
+    "v7_action_completed",
+    "v7_resource_transition",
+    "v7_domain_transition",
+    "v7_cascade_transition",
+    "v7_service_transition",
+    "v7_counterfactual_branch",
+    "v7_conservation_audit",
+    "v7_privacy_audit",
+    "v7_replay_checkpoint",
 }
 
 

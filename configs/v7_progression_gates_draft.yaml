@@ -1,0 +1,33 @@
+study: Complexity-Dependent Value of Generalized Entropic Consensus
+version: v7-feasibility-gates-1.0-draft
+created_before_iteration3_outcomes: true
+v6_informed: true
+status: prospective_feasibility_thresholds_not_formal_protocol
+gate_a_engineering:
+  maximum_required_test_failures: 0
+  maximum_replay_mismatches: 0
+  maximum_conservation_residual: 1.0e-9
+  maximum_privacy_failures: 0
+gate_b_environment_agent_validity:
+  minimum_independent_panels_per_application: 3
+  minimum_accepted_counterfactual_probes_per_application: 50
+  minimum_beneficial_probes_per_application: 15
+  minimum_harmful_probes_per_application: 15
+  minimum_beneficial_fraction: 0.08
+  maximum_beneficial_fraction: 0.92
+  minimum_physical_action_types_per_application: 4
+  minimum_causal_chain_depth: 3
+  minimum_cross_community_messages: 1
+  maximum_kpi_harm_auc: 0.92
+gate_c_primary_mechanism_feasibility:
+  minimum_competitive_panels_per_application: 3
+  minimum_shannon_standard_deviation: 0.03
+  minimum_js_standard_deviation: 0.01
+  minimum_graph_disagreement_standard_deviation: 0.01
+  minimum_mean_distributed_contributors: 1.5
+  maximum_single_entropy_harm_auc: 0.95
+  maximum_projected_reference_panels: 160
+notes:
+  - Feasibility does not require a positive pilot entropy effect.
+  - Thresholds test whether the domain can identify a prospective effect without label leakage.
+  - Iteration 3 is the final planned environment-actionability repair cycle.

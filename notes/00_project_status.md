@@ -2,13 +2,12 @@
 
 ## Generalized entropic consensus study (v6)
 
-Last updated: 2026-08-15 23:57 America/New_York
+Last updated: 2026-08-16 America/New_York
 
-- **Current phase:** Frozen V6 development execution and analysis are complete.
-  The prespecified five-method, five-seed sequential-PPO qualification is
-  running on the existing RunPod; the substantial Qwen qualification follows
-  after the complete training matrix closes. V5 remains immutable, with its
-  post-development abstention addendum isolated under the V6 namespace.
+- **Current phase:** Complete prospective development-stage no-go. V5 remains
+  immutable, and its post-development abstention addendum is isolated under the
+  V6 namespace. Required V6 development Gates 4, 5, 6, 7, 9, and 10 fail;
+  validation and the sealed holdout were therefore never opened.
 - **Branch:** `generalized-entropic-consensus-v6`, based exactly on pushed V5
   commit `c895235d02dd05ccc9315621d818def9345a398c`.
 - **Completed:** generalized Shannon/Tsallis/Gini and consensus measures;
@@ -17,7 +16,8 @@ Last updated: 2026-08-15 23:57 America/New_York
   conformal baselines; sequential decentralized PPO implementation;
   substantial Qwen runner; eleven retained pilot/reference iterations;
   outcome-blind escalation calibration; 1,260 formal reference, 720 sketch,
-  and 2,520 dynamic episodes; 336 complete-repository tests currently passing.
+  2,520 dynamic, 6,500 PPO, and 150 real-Qwen episodes; final repository and
+  V6-focused test counts are recorded in the reproducibility package.
 - **Latest valid result:** against the frozen strongest non-entropic comparator,
   private-fragmented harm-rate reduction is `0.02258` humanitarian and
   `0.01224` utility restoration. Both paired intervals exclude zero, but both
@@ -42,16 +42,25 @@ Last updated: 2026-08-15 23:57 America/New_York
   entropy-family comparison, 200 full-refit permutations per primary
   application, communication ablation, dynamic causal analysis, and power
   analysis are closed. Early pre-repair pilots remain retained and separately
-  classified in replay; they do not enter formal inference.
-- **Active jobs:** all 25 PPO runs completed with zero failures. The exclusive
-  RunPod `v6-qwen` tmux job is now running the frozen 150-episode Qwen
-  qualification; no second experiment process is active.
-- **Next actions:** close the Qwen qualification, retrieve artifacts, replay,
-  evaluate all gates, and
-  build/QA the no-go package. Validation and holdout are prospectively locked
-  because required development gates already failed.
-- **Blockers:** none at present. Projected use is 11.50 single-GPU hours and
-  USD 3.91 including reserve, below the authorized caps.
+  classified in replay; they do not enter formal inference. All 25 PPO runs
+  completed with zero failures. The 150-episode Qwen qualification completed
+  2,700 independent decisions and 2,755 generation calls; it failed the frozen
+  autonomous-agent qualification because humanitarian agents issued no
+  physical actions and utility agents had a 57.14% harmful rate among their 91
+  physical actions.
+- **Integrity:** 4,650 formal/Qwen ledgers replay exactly with zero mismatches,
+  privacy violations, or nonfinite values and maximum independently
+  reconstructed conservation residual `0`. The retained 1,308 pilot ledgers
+  include 792 deliberately preserved pre-repair mismatches and are excluded
+  from formal inference. All 27 vector PDFs open, use embedded fonts, render at
+  240 DPI, and passed original-resolution review.
+- **Active jobs:** none locally or on the RunPod at last read-only audit.
+- **Next action:** preserve the local V6 result commit and let the user push it
+  explicitly. Any continuation requires a new protocol and fresh seeds rather
+  than revising these failed gates.
+- **Blocker/readiness:** scientific progression gates, not infrastructure. V6
+  supports an engineering demonstration and transparent boundary evidence, but
+  not validation, a confirmatory journal claim, or an AIJ submission.
 
 ---
 

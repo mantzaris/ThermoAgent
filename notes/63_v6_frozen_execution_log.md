@@ -142,7 +142,27 @@ predictive-uncertainty comparator in mean reward, but its between-seed harm SD
 was `0.09382`, above the frozen `0.08` maximum. Gate 9 therefore fails.
 
 The real-Qwen qualification was launched in a separate exclusive writer only
-after the training exit code was zero and the GPU was clear. It uses the
-unchanged formal execution source commit and protocol checksum. Monitoring is
+after the training exit code was zero and the GPU was clear. It used the
+unchanged formal execution source commit and protocol checksum. Monitoring was
 limited to atomic episode counts, process health, disk use, and GPU memory
-until all 150 episodes close.
+until all 150 episodes closed.
+
+## Qwen and execution closure
+
+All 150 planned Qwen episodes completed: 30 commercial, 60 humanitarian, and
+60 utility-restoration episodes. They contain 2,700 independent agent decision
+epochs and 2,755 model-generation calls. No episode or seed was selectively
+rerun. The immutable model was `Qwen/Qwen2.5-7B-Instruct` revision
+`a09a35458c702b33eeacc393d103063234e8bc28`, served with Transformers 4.55.4,
+NF4 quantization, and BF16 computation on the existing RTX 4090.
+
+After all formal and Qwen artifacts were retrieved, 4,650 formal/Qwen ledgers
+replayed with zero mismatches, privacy failures, or nonfinite metrics. Maximum
+independently reconstructed resource-conservation residual was zero. The
+separate retained-pilot audit includes 1,308 deliberately preserved early
+iterations, of which 792 pre-repair ledgers mismatch current replay semantics;
+none enter formal inference. Validation and holdout remain locked because the
+frozen development gates failed.
+
+No experiment, tmux, Python, or CUDA process remained after the final read-only
+RunPod audit. The existing Pod is safe to stop, but not delete.

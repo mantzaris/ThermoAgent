@@ -39,16 +39,36 @@ does not use Qwen calls or tokens.
 ## Real-Qwen qualification
 
 The frozen 150-episode qualification was launched only after the entire PPO
-matrix closed. It uses the pinned `Qwen/Qwen2.5-7B-Instruct` revision
+matrix closed. It used the pinned `Qwen/Qwen2.5-7B-Instruct` revision
 `a09a35458c702b33eeacc393d103063234e8bc28`, NF4 quantization, BF16 compute,
 separate agent contexts, private observations/beliefs/memories, typed
 role-authorized tools, and at most one prospectively allowed structured-output
 repair.
 
-Planned coverage is 60 humanitarian, 60 utility-restoration, and 30 commercial
+Coverage was 60 humanitarian, 60 utility-restoration, and 30 commercial
 episodes, split across private-fragmented and public-shared information and
-five disrupted regimes. Each episode has several sequential decisions. The
-qualification remains development evidence and cannot override the already
-failed selective-safety and mechanism gates. Final behavioral, causal, token,
-and latency results will be added only after all 150 episodes close.
+five disrupted regimes. The 150 episodes contain 2,700 agent decisions and
+2,755 calls, using 3,096,925 prompt tokens and 232,235 generated tokens. Model
+generation took 1,936.05 seconds and the load-inclusive run took 1,986.59
+seconds.
 
+| Application | Decisions | First-pass valid | Valid after repair | Physical actions | Service-reaching | Harmful / physical | Mean effect per decision | Distinct actions |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Commercial boundary | 540 | 98.33% | 100% | 1 | 0 | 1 / 1 | -0.04350 | 4 |
+| Humanitarian | 1,080 | 99.07% | 100% | 0 | 0 | 0 / 0 | -0.03106 | 3 |
+| Utility restoration | 1,080 | 96.67% | 100% | 91 | 26 | 52 / 91 | -0.03454 | 4 |
+
+The repair-validity result does not establish action quality. Humanitarian
+agents issued no physical actions. Utility agents did act, but 57.14% of those
+physical actions were harmful and their mean causal effect was `-0.06586` per
+physical action. Commercial evidence consists of only one physical action,
+which was harmful. No application produced a human escalation. These failures
+are retained and Gate 4 fails; the qualification is behavioral development
+evidence, not a positive autonomous-agent claim.
+
+Post-outcome diagnostic calibration, added without changing frozen gate
+decisions, reports all-decision Brier scores of `0.6212`, `0.6231`, and
+`0.5825` and expected calibration errors of `0.7725`, `0.7785`, and `0.7210`
+for commercial, humanitarian, and utility restoration respectively. Regret in
+the package is explicitly measured against `no_action`; a best-authorized-
+action regret model was not prospectively specified and is not claimed.

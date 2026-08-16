@@ -284,7 +284,7 @@ def graph_consensus(root: Path) -> str:
     edge_maximum = max(float(edges.pairwise_disagreement.max()), 1e-6)
     edge_normalizer = mpl.colors.Normalize(vmin=0.0, vmax=edge_maximum)
 
-    fig, ax = plt.subplots(figsize=(8.2, 6.2)); ax.axis("off")
+    fig, ax = plt.subplots(figsize=(8.2, 6.8)); ax.axis("off")
     for row in edges.itertuples(index=False):
         x1, y1 = positions[row.sender]; x2, y2 = positions[row.recipient]
         ax.plot(
@@ -318,7 +318,15 @@ def graph_consensus(root: Path) -> str:
         for value in (0.0, 0.5, 1.0)
     ]
     entropy_handles.append(Line2D([], [], color=COLORS["gray"], lw=2.4, label="Edge width = reliability"))
-    ax.legend(handles=entropy_handles, loc="lower center", bbox_to_anchor=(.5, .015), ncol=2, fontsize=8.2, title="Delivered-sketch encodings", title_fontsize=8.5)
+    ax.legend(
+        handles=entropy_handles,
+        loc="upper center",
+        bbox_to_anchor=(.5, -.035),
+        ncol=4,
+        fontsize=8.2,
+        title="Delivered-sketch encodings",
+        title_fontsize=8.5,
+    )
     ax.set_title("Graph-weighted consensus over delivered ad-hoc sketches")
     return _save(fig, root, "graph_weighted_consensus_network")
 
@@ -433,7 +441,6 @@ def effect_forest(root: Path) -> str:
         ax.axvline(0, color=COLORS["black"], lw=1)
         ax.set(
             yticks=y,
-            xlabel="Δ harmful-action rate vs Shannon",
             title=APP_LABELS[application],
         )
         if ax is axes[0]:
@@ -441,6 +448,14 @@ def effect_forest(root: Path) -> str:
         else:
             ax.tick_params(axis="y", labelleft=False)
     fig.suptitle("Prespecified entropy-family effects at 50% action coverage")
+    fig.text(
+        .5,
+        .055,
+        "Harmful-action-rate reduction versus Shannon (positive favors row)",
+        ha="center",
+        va="bottom",
+        fontsize=11.0,
+    )
     return _save(fig, root, "entropy_family_effect_forest")
 
 

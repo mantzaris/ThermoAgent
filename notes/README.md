@@ -185,6 +185,6 @@ Store persistent remote state under `/workspace`:
 - `62_v6_future_human_study_boundary.md`: dashboard preparation without human-subject claims.
 - `63_v6_frozen_execution_log.md`: outcome-sealed execution provenance and amendments.
 - `64_v6_development_findings.md`: frozen development results (written after stage closure).
-- `65_v6_gate_disposition.md`: gate-by-gate advancement or no-go decision.
-- `66_v6_reproduction_and_compute.md`: final commands, hardware, tokens, and compute.
-- `67_v6_final_status.md`: final branch, integrity, process, and readiness status.
+- `65_v6_training_and_qwen_qualification.md`: five-seed sequential PPO and substantial real-Qwen evidence.
+- `66_v6_gate_disposition_and_no_go.md`: gate-by-gate disposition and frozen no-go decision.
+- `67_v6_reproduction_compute_and_final_status.md`: final commands, compute, process, and readiness status.

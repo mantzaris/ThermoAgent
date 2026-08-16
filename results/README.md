@@ -51,9 +51,23 @@
   communication-adjusted value, and learned-policy stability gates fail.
   Validation and the sealed holdout were therefore never run. V5 is an honest
   development no-go, not positive AIJ evidence.
+- **Generalized-entropic selective-autonomy study (v6):**
+  [`generalized_entropic_consensus_v6/README.md`](generalized_entropic_consensus_v6/README.md).
+  V6 preserves V5 and prospectively reframes entropy as a selective-safety
+  signal rather than a direct intervention ranker. It implements normalized
+  Shannon, Tsallis, Gini-Simpson, Jensen-Shannon/Jensen-Tsallis, graph-weighted,
+  and temporal consensus measures; dynamic matched counterfactuals; real
+  conservation accounting; event-triggered sketch traffic; 25 five-seed
+  sequential-PPO runs; and 150 substantial Qwen episodes. Development effects
+  are directionally favorable, but humanitarian and utility harm-rate
+  reductions (`0.02258` and `0.01224`) miss the frozen `0.03` practical
+  threshold, the fragmentation interaction does not replicate, learned-policy
+  variability is too high, and Qwen actionability fails. Validation and
+  holdout therefore remain unopened. V6 is a transparent engineering and
+  boundary result, not confirmatory AIJ evidence.
 
 The top-level `INDEX.csv` indexes the historical namespaces when rebuilt. No
-v2, v3, v4, or v5 derived artifact replaces a frozen-v1 source artifact.
+v2, v3, v4, v5, or v6 derived artifact replaces a frozen-v1 source artifact.
 
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed

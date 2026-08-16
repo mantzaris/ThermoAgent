@@ -52,6 +52,11 @@ def freeze_protocol(repository: Path, results_root: Path) -> Dict[str, Any]:
     for stage in ("validation", "holdout"):
         if (results_root / stage).exists():
             raise RuntimeError("cannot freeze after %s outputs exist" % stage)
+    # Capture provenance before creating any freeze artifacts. Otherwise the
+    # freeze itself makes an initially clean worktree appear dirty.
+    git = git_metadata(repository)
+    if git["dirty"]:
+        raise RuntimeError("V6 protocol freeze requires a clean source worktree")
     protocol_root = results_root / "protocol"
     protocol_root.mkdir(parents=True, exist_ok=True)
     frozen = protocol_root / "frozen_protocol.yaml"
@@ -67,7 +72,6 @@ def freeze_protocol(repository: Path, results_root: Path) -> Dict[str, Any]:
     manifests = results_root / "manifests"
     write_csv(manifests / "validation_inputs_sealed.csv", validation_rows)
     write_csv(manifests / "holdout_inputs_sealed.csv", holdout_rows)
-    git = git_metadata(repository)
     report = {
         "study": "Generalized Entropic Consensus V6",
         "protocol_version": config["study"]["protocol_version"],

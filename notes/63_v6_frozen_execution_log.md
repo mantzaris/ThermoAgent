@@ -113,3 +113,36 @@ Grouped cross-fitting, entropy-family ablations, the 200-refit permutation
 test in each primary application, and the supervised learnability ceiling
 completed atomically before full dynamic execution. Comparative result values
 were not opened while the composite analysis stage remained active.
+
+## Dynamic development closure
+
+The matched dynamic stage completed all 2,520 planned episodes with zero
+generator failures. Together with the 1,260 formal reference and 720 sketch
+episodes, frozen formal development contains 4,500 event-sourced episodes.
+Only after the dynamic wrapper exited zero were paired effects opened. Gates 5
+and 7 failed their frozen practical criteria, and Gate 6 also failed coverage
+and escalation-burden subconditions. These failures permanently lock V6
+validation and holdout.
+
+A post-outcome audit found that the separate pooled supervised-learnability
+diagnostic reused numeric environment seeds across applications even though it
+isolated application-specific topology and scenario families. The primary
+selective-risk cross-fitting isolated all three required axes. The pooled
+ceiling is retained and labeled methodologically compromised; it cannot rescue
+or unlock the study.
+
+## Training closure
+
+Sequential decentralized PPO began only after the outcome-blind training
+amendments above. All five methods and all seeds `66201`--`66205` completed:
+25 runs, 6,500 train/evaluation episodes, 156,000 decentralized decision
+epochs, and zero selectively removed or collapsed seeds. The matrix was kept
+sealed until every run closed. The combined controller exceeded the frozen
+predictive-uncertainty comparator in mean reward, but its between-seed harm SD
+was `0.09382`, above the frozen `0.08` maximum. Gate 9 therefore fails.
+
+The real-Qwen qualification was launched in a separate exclusive writer only
+after the training exit code was zero and the GPU was clear. It uses the
+unchanged formal execution source commit and protocol checksum. Monitoring is
+limited to atomic episode counts, process health, disk use, and GPU memory
+until all 150 episodes close.

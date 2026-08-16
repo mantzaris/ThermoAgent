@@ -4,7 +4,7 @@ import pandas as pd
 
 from thermoagent.v6_artifacts import build_index, verify_artifacts
 from thermoagent.v6_figures import FIGURE_DATA_SOURCES
-from thermoagent.v6_reporting import _claims, _compute_table
+from thermoagent.v6_reporting import _claims, _compute_table, _qwen_table
 
 
 def test_artifact_index_detects_mutation_and_crlf(tmp_path):
@@ -93,3 +93,33 @@ def test_compute_accounting_retains_qwen_and_rl_communication(tmp_path):
     assert accounting.loc["real_qwen_qualification", "thermodynamic_sketch_messages"] == 8
     assert totals["total_messages"] == 18
     assert totals["total_bytes"] == 1902
+
+
+def test_qwen_reporting_uses_identifiable_no_action_regret_and_calibration(tmp_path):
+    root = tmp_path / "results"
+    (root / "qwen").mkdir(parents=True)
+    (root / "qwen" / "qualification_summary.json").write_text(
+        '{"applications":{"humanitarian":{"episodes":1}}}',
+        encoding="utf-8",
+    )
+    pd.DataFrame([
+        {
+            "application": "humanitarian", "selected_action": "deploy_resource",
+            "causal_effect": -0.2, "confidence": 0.8, "beneficial": False,
+        },
+        {
+            "application": "humanitarian", "selected_action": "no_action",
+            "causal_effect": 0.0, "confidence": 0.2, "beneficial": False,
+        },
+        {
+            "application": "humanitarian", "selected_action": "reroute",
+            "causal_effect": 0.4, "confidence": 0.7, "beneficial": True,
+        },
+    ]).to_csv(root / "qwen" / "decision_epochs.csv", index=False)
+
+    _qwen_table(root)
+    row = pd.read_csv(root / "tables" / "qwen_agent_qualification.csv").iloc[0]
+    assert row["no_action_frequency"] == 1 / 3
+    assert abs(row["mean_regret_relative_to_no_action"] - (0.2 / 3)) < 1e-12
+    assert abs(row["benefit_confidence_brier"] - ((0.8**2 + 0.2**2 + 0.3**2) / 3)) < 1e-12
+    assert "not prospectively defined" in row["best_authorized_action_regret_status"]

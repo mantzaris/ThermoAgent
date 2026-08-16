@@ -233,7 +233,42 @@ def _qwen_table(root: Path) -> None:
     if not path.exists():
         return
     report = _json(path)
-    rows = [{"application": application, **values} for application, values in report["applications"].items()]
+    decisions = _safe_frame(root / "qwen" / "decision_epochs.csv")
+    rows = []
+    for application, values in report["applications"].items():
+        diagnostics: Dict[str, Any] = {
+            "no_action_frequency": None,
+            "mean_causal_effect_all_decisions": None,
+            "mean_regret_relative_to_no_action": None,
+            "benefit_confidence_brier": None,
+            "benefit_confidence_ece_10bin": None,
+            "best_authorized_action_regret_status": (
+                "not prospectively defined; no post-hoc action oracle fitted"
+            ),
+        }
+        if not decisions.empty:
+            subset = decisions[decisions["application"] == application].copy()
+            if len(subset):
+                effect = pd.to_numeric(subset["causal_effect"], errors="coerce").fillna(0.0)
+                confidence = pd.to_numeric(subset["confidence"], errors="coerce").clip(0.0, 1.0)
+                beneficial = subset["beneficial"].astype(str).str.lower().isin(["true", "1"]).astype(float)
+                diagnostics.update({
+                    "no_action_frequency": float((subset["selected_action"] == "no_action").mean()),
+                    "mean_causal_effect_all_decisions": float(effect.mean()),
+                    "mean_regret_relative_to_no_action": float(np.maximum(-effect, 0.0).mean()),
+                    "benefit_confidence_brier": float(np.mean((confidence - beneficial) ** 2)),
+                })
+                bins = np.minimum((confidence.to_numpy() * 10).astype(int), 9)
+                ece = 0.0
+                for bin_index in range(10):
+                    selected = bins == bin_index
+                    if selected.any():
+                        ece += float(selected.mean()) * abs(
+                            float(confidence.to_numpy()[selected].mean())
+                            - float(beneficial.to_numpy()[selected].mean())
+                        )
+                diagnostics["benefit_confidence_ece_10bin"] = float(ece)
+        rows.append({"application": application, **values, **diagnostics})
     write_csv(root / "tables" / "qwen_agent_qualification.csv", rows)
 
 

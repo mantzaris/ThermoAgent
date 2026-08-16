@@ -54,7 +54,10 @@ Last updated: 2026-08-16 America/New_York
   include 792 deliberately preserved pre-repair mismatches and are excluded
   from formal inference. All 27 vector PDFs open, use embedded fonts, render at
   240 DPI, and passed original-resolution review.
-- **Active jobs:** none locally or on the RunPod at last read-only audit.
+- **Active jobs:** none locally or on the RunPod at the last successful
+  read-only audit. The final 2026-08-16 connection attempt was refused at the
+  established SSH endpoint, consistent with a stopped or unreachable Pod; no
+  new remote workload was launched after that successful audit.
 - **Next action:** preserve the local V6 result commit and let the user push it
   explicitly. Any continuation requires a new protocol and fresh seeds rather
   than revising these failed gates.

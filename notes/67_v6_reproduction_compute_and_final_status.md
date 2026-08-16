@@ -49,8 +49,11 @@ this protocol.
 ## Final operational status
 
 All formal writers finished and all retrieved manifests have terminal status.
-The final read-only RunPod check found no tmux session, Python experiment, or
-CUDA compute process. The Pod is safe to stop, but should not be deleted.
+The last successful read-only RunPod check found no tmux session, Python
+experiment, or CUDA compute process. A final connection attempt on 2026-08-16
+was refused at the established SSH endpoint, consistent with a stopped or
+otherwise unreachable Pod. No new remote process was launched after the clean
+audit. It remains safe to leave the Pod stopped; it should not be deleted.
 
 The branch is intentionally not pushed by Codex. After final local verification
 the user may publish it with:

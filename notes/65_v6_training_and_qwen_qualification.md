@@ -54,9 +54,9 @@ seconds.
 
 | Application | Decisions | First-pass valid | Valid after repair | Physical actions | Service-reaching | Harmful / physical | Mean effect per decision | Distinct actions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Commercial boundary | 540 | 98.33% | 100% | 1 | 0 | 1 / 1 | -0.04350 | 4 |
-| Humanitarian | 1,080 | 99.07% | 100% | 0 | 0 | 0 / 0 | -0.03106 | 3 |
-| Utility restoration | 1,080 | 96.67% | 100% | 91 | 26 | 52 / 91 | -0.03454 | 4 |
+| Commercial boundary | 540 | 98.33% | 98.33% | 1 | 0 | 1 / 1 | -0.04350 | 4 |
+| Humanitarian | 1,080 | 99.07% | 99.07% | 0 | 0 | 0 / 0 | -0.03106 | 3 |
+| Utility restoration | 1,080 | 96.67% | 96.67% | 91 | 26 | 52 / 91 | -0.03454 | 4 |
 
 The repair-validity result does not establish action quality. Humanitarian
 agents issued no physical actions. Utility agents did act, but 57.14% of those

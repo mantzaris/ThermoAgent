@@ -58,7 +58,10 @@ five-seed set 88201--88205 was never trained. Qwen was not used in V8.
 Completed retained stages contain 1,292 episodes: 196 `pilots`, 196
 `pilots_v2`, 88 `pilots_v3`, 8 routing-repair pilots, three 60-episode
 hysteresis-repair pilots, and 624 development episodes. Two invalidated stages
-retain 396 additional complete episodes plus two partial run directories.
+retain 396 additional complete episodes plus two partial run directories. Six
+earlier interrupted ledger fragments are retained byte-for-byte as `.partial`
+artifacts with their original sizes and SHA-256 values in the failed-run
+registry; they are not episodes and are not replay-counted.
 
 ## Protocol and integrity
 
@@ -82,8 +85,9 @@ retain 396 additional complete episodes plus two partial run directories.
 The V8 namespace is approximately 1.6 GiB, above the aspirational 150 MiB
 target. This is an explicit auditability tradeoff: all 1,688 complete ledgers,
 including 396 invalidated completed runs, and two partial invalidated runs are retained
-losslessly, without unpacked duplication. No individual artifact exceeds the
-Git-facing limit.
+losslessly, without unpacked duplication; six smaller interruption fragments
+are also retained separately. No individual artifact exceeds the Git-facing
+limit.
 
 ## Compute and environment
 

@@ -19,9 +19,17 @@ environment:
 ./scripts/replay-v7-results.sh
 ./scripts/generate-v7-figures.sh
 ./scripts/validate-v7-pdfs.sh
+python3 -m thermoagent mark-visual-qa \
+  --results results/complexity_entropic_coordination_v7 \
+  --reviewer "<reviewer>" \
+  --note "All original-resolution and 240-DPI renders inspected"
 ./scripts/build-v7-report.sh
 ./scripts/index-v7-artifacts.sh
 ```
+
+The visual-QA command is an attestation and must be run only after a reviewer
+actually inspects every generated original-resolution preview and 240-DPI
+render. It is not a substitute for inspection.
 
 The following commands must refuse to run because the frozen formal primary
 gate failed:

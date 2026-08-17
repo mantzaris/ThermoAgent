@@ -431,8 +431,9 @@ No work remains for the frozen design. No GPU process is active.
   or unlocked validation/holdout process.
 - **Blocker:** none. The RunPod endpoint was unreachable, but GPU stages became
   scientifically ineligible after the primary formal gate failed.
-- **Next:** create the local final commit and verify a clean fresh clone. Do
-  not push.
+- **Next:** no in-scope work remains. The final local commit and clean fresh-
+  clone verification are complete; the user may push the branch. Do not push
+  from this session.
 - **Latest valid result:** H1 failed (interaction `0.006094`, 95% CI
   `[-0.026463, 0.045763]`); H2 failed in both applications. H3 passed only as
   a same-controller monitoring-cost result, reducing total communication by

@@ -1,0 +1,20 @@
+{
+  "configuration": "v8_routing_repair_pilot.yaml",
+  "execution": {
+    "applications": [
+      "utility_restoration"
+    ],
+    "completed_episodes": 8,
+    "independent_panels": 4,
+    "schedulers": [
+      "always_on",
+      "generalized_information"
+    ],
+    "stage": "routing_repair_pilot"
+  },
+  "stage": "routing_repair_pilot",
+  "status": "complete",
+  "tasks_completed": 8,
+  "tasks_failed": 0,
+  "tasks_total": 8
+}

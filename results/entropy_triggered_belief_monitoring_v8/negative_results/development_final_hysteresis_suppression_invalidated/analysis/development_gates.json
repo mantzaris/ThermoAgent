@@ -1,0 +1,13 @@
+{
+  "byte_reduction_point_at_least_0_25": true,
+  "delivered_information_changed_private_beliefs": true,
+  "detection_delay_upper_interval_at_most_one_epoch": true,
+  "development_progression_feasible": true,
+  "downstream_outcomes_can_change_across_schedulers": true,
+  "message_reduction_point_at_least_0_25": true,
+  "minimum_24_independent_panels_per_application": true,
+  "nondegenerate_activation": true,
+  "p95_error_increase_upper_interval_at_most_0_01": true,
+  "primary_error_upper_interval_at_most_0_02": true,
+  "privacy_and_conservation": true
+}

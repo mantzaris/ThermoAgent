@@ -1,0 +1,23 @@
+version: v8-pilot-3.0
+base_configuration: v8_pilot.yaml
+panels:
+  - {application: humanitarian, complexity: small, coupling: high, fragmentation: low, network_disruption: medium, topology_family: modular, environment_seed: 880301}
+  - {application: humanitarian, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: small_world, environment_seed: 880302}
+  - {application: humanitarian, complexity: medium, coupling: medium, fragmentation: high, network_disruption: medium, topology_family: random_geometric, environment_seed: 880303}
+  - {application: humanitarian, complexity: large, coupling: high, fragmentation: high, network_disruption: high, topology_family: modular, environment_seed: 880304}
+  - {application: utility_restoration, complexity: small, coupling: high, fragmentation: low, network_disruption: medium, topology_family: scale_free, environment_seed: 880351}
+  - {application: utility_restoration, complexity: medium, coupling: high, fragmentation: high, network_disruption: high, topology_family: grid, environment_seed: 880352}
+  - {application: utility_restoration, complexity: medium, coupling: medium, fragmentation: high, network_disruption: medium, topology_family: modular, environment_seed: 880353}
+  - {application: utility_restoration, complexity: large, coupling: high, fragmentation: high, network_disruption: high, topology_family: small_world, environment_seed: 880354}
+candidates:
+  - {name: always_on_u8, method: always_on, encoding: uint8_simplex, maximum_silence_steps: 30}
+  - {name: none_u8, method: none, encoding: uint8_simplex, maximum_silence_steps: 30}
+  - {name: generalized_010_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.10, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: generalized_011_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.11, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: generalized_012_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.12, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: generalized_0125_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.125, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: generalized_013_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.13, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: kpi_012_u8, method: kpi_change, encoding: uint8_simplex, kpi_threshold: 0.12, maximum_silence_steps: 30}
+  - {name: uncertainty_008_u8, method: predictive_uncertainty_change, encoding: uint8_simplex, uncertainty_threshold: 0.08, maximum_silence_steps: 30}
+  - {name: random_045_u8, method: matched_random, encoding: uint8_simplex, random_probability: 0.45, maximum_silence_steps: 30}
+  - {name: periodic_18_u8, method: periodic, encoding: uint8_simplex, periodic_interval_steps: 18, maximum_silence_steps: 30}

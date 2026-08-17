@@ -1,0 +1,4 @@
+hypothesis,status,evidence
+H1 communication-efficient estimation,not_tested_formally_trigger_gate_failed,negative_results/v8_stop_decision.json
+H2 generalized-information superiority at matched bytes,not_tested_formally_no_frozen_comparator,statistics/v8_pilot_no_go_summary.json
+H3 frozen decentralized-agent retention,not_tested_training_locked,training/NOT_RUN.md

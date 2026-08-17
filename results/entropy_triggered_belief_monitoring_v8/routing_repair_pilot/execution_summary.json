@@ -1,0 +1,12 @@
+{
+  "applications": [
+    "utility_restoration"
+  ],
+  "completed_episodes": 8,
+  "independent_panels": 4,
+  "schedulers": [
+    "always_on",
+    "generalized_information"
+  ],
+  "stage": "routing_repair_pilot"
+}

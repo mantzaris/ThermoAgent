@@ -1,0 +1,31 @@
+{
+  "configuration": "v8_pilot.yaml",
+  "execution": {
+    "applications": [
+      "humanitarian",
+      "utility_restoration"
+    ],
+    "completed_episodes": 196,
+    "independent_panels": 8,
+    "schedulers": [
+      "age_of_information",
+      "always_on",
+      "generalized_information",
+      "js_drift",
+      "kpi_change",
+      "l1_belief_drift",
+      "matched_random",
+      "none",
+      "periodic",
+      "predictive_uncertainty_change",
+      "tsallis_spectrum_change",
+      "v7_shannon_change"
+    ],
+    "stage": "pilots"
+  },
+  "stage": "pilots",
+  "status": "complete",
+  "tasks_completed": 196,
+  "tasks_failed": 0,
+  "tasks_total": 196
+}

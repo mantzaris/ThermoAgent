@@ -1,0 +1,83 @@
+{
+  "all_roundtrips_verified": true,
+  "archives": [
+    {
+      "application": "humanitarian",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part01.tar.xz",
+      "archive_sha256": "cc421ae25beef1c923e5e9ee6514baff0080827e3fb5471b830f552f8a1ad87a",
+      "archive_size_bytes": 51352132,
+      "logical_bytes": 1243464486,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part01.tar.manifest.csv",
+      "manifest_sha256": "4a347e198d6d0eefe18bb0354b70c39ef7bbbef206d11062f363867d21812f27",
+      "members": 96,
+      "roundtrip_verified": true,
+      "runs": 12
+    },
+    {
+      "application": "humanitarian",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part02.tar.xz",
+      "archive_sha256": "90f88b99cf8b6c7ea7c5966f4f5aeb4937b0afd11ba8a402cab1664e3f349a36",
+      "archive_size_bytes": 5097112,
+      "logical_bytes": 115513166,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part02.tar.manifest.csv",
+      "manifest_sha256": "14fe39651103aeffa85ef4d4ef69bff62771e0a05d1a779724263fb913f834fc",
+      "members": 96,
+      "roundtrip_verified": true,
+      "runs": 12
+    },
+    {
+      "application": "humanitarian",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part03.tar.xz",
+      "archive_sha256": "324ffec8a92a2979d65446b5b77793a61590d6c575db964820a74184b2216d9b",
+      "archive_size_bytes": 633224,
+      "logical_bytes": 20057740,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/humanitarian-part03.tar.manifest.csv",
+      "manifest_sha256": "c98f92143fd47f68c26e229ce61eeb09d5e0742e2a9d3d3754a34fcd9a14fdc1",
+      "members": 48,
+      "roundtrip_verified": true,
+      "runs": 6
+    },
+    {
+      "application": "utility_restoration",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part01.tar.xz",
+      "archive_sha256": "53b2018a3eafc3e4feb3320c32481718c45d7efd0e51469e5b7f6f3ac51a4daa",
+      "archive_size_bytes": 25213016,
+      "logical_bytes": 648814831,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part01.tar.manifest.csv",
+      "manifest_sha256": "74f855c263a20240ca88c94e655af3c293801b31e4991815f37589296467243b",
+      "members": 96,
+      "roundtrip_verified": true,
+      "runs": 12
+    },
+    {
+      "application": "utility_restoration",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part02.tar.xz",
+      "archive_sha256": "28264282ab5971070bd26497182f95974c9a43b553ad8ded385072fa3bfd3774",
+      "archive_size_bytes": 3406576,
+      "logical_bytes": 89561399,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part02.tar.manifest.csv",
+      "manifest_sha256": "2a12a0b972b8cfa95457d811283dd671053dca222956eb3d91bde7a069f6d498",
+      "members": 96,
+      "roundtrip_verified": true,
+      "runs": 12
+    },
+    {
+      "application": "utility_restoration",
+      "archive": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part03.tar.xz",
+      "archive_sha256": "6faf761cb099ed5614abda63aff34314a00de8091ae400942cb2e6c42cd141cf",
+      "archive_size_bytes": 228756,
+      "logical_bytes": 6388270,
+      "manifest": "/home/resort/Documents/repos/ThermoAgent/results/entropy_triggered_belief_monitoring_v8/raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part03.tar.manifest.csv",
+      "manifest_sha256": "d225ddb77e82eb58715737ee6328e2cefe1e6c76668bb3896cd610084f7ff7e4",
+      "members": 48,
+      "roundtrip_verified": true,
+      "runs": 6
+    }
+  ],
+  "episodes": 60,
+  "maximum_archive_size_bytes": 51352132,
+  "recovery": "extract the application tar.xz beneath raw/hysteresis_repair_pilot_v2",
+  "stage": "hysteresis_repair_pilot_v2",
+  "status": "pass",
+  "unpacked_stage_removed_after_verification": true
+}

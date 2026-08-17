@@ -1,0 +1,2 @@
+encoding,episodes,mean_sketch_bytes,mean_quantization_l1_error,mean_estimation_error
+uint8_simplex,16,375504.5,0.0017179253762899,0.06810996862735846

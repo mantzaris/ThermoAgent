@@ -1,0 +1,13 @@
+{
+  "development_protocol_path": "results/entropy_triggered_belief_monitoring_v8/protocol/v8_development_protocol_no_go.json",
+  "development_protocol_sha256": "32b519cd7c282fbc8eecc60757c511bc74322ddf26919a9af08752d74969684f",
+  "development_protocol_version": "v8-development-3.0-no-go",
+  "formal_source_commit": "not created; progression stopped before formal freeze",
+  "holdout_manifest_created": false,
+  "manifest_sha256": "32b519cd7c282fbc8eecc60757c511bc74322ddf26919a9af08752d74969684f",
+  "manifest_sha256_scope": "development_protocol_sha256 identifies the sealed protocol body",
+  "parent_v7_commit": "e46b6738231883e92b9b525ab1c3c190e38391e7",
+  "source_checksum": "0ba9dbb58a6970600f7749bb442762064fcbe593946a2cc976cdc1454583af69",
+  "status": "closed_no_go_before_formal_freeze",
+  "validation_manifest_created": false
+}

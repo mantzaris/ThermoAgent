@@ -1,0 +1,9 @@
+version: v8-hysteresis-repair-pilot-2.0
+base_configuration: v8_hysteresis_repair_pilot.yaml
+panel_seed_offset: 200
+candidates:
+  - {name: always_on_u8, method: always_on, encoding: uint8_simplex, maximum_silence_steps: 30}
+  - {name: none_u8, method: none, encoding: uint8_simplex, maximum_silence_steps: 30}
+  - {name: generalized_011_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.11, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: generalized_0115_u8, method: generalized_information, encoding: uint8_simplex, tau_on: 0.115, tau_off: 0.04, maximum_silence_steps: 30, cooldown_steps: 2}
+  - {name: kpi_012_u8, method: kpi_change, encoding: uint8_simplex, kpi_threshold: 0.12, maximum_silence_steps: 30}

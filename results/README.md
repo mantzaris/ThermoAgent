@@ -65,9 +65,27 @@
   variability is too high, and Qwen actionability fails. Validation and
   holdout therefore remain unopened. V6 is a transparent engineering and
   boundary result, not confirmatory AIJ evidence.
+- **Complexity-dependent entropic-coordination study (v7):**
+  [`complexity_entropic_coordination_v7/README.md`](complexity_entropic_coordination_v7/README.md).
+  V7 introduced coupled, topology-dependent humanitarian and defensive utility
+  environments and retained its negative selective-safety result at pushed
+  commit `e46b6738231883e92b9b525ab1c3c190e38391e7`. Its event-triggered
+  communication result used six medium-complexity panels per application, an
+  absolute Shannon-change scheduler, JSON byte accounting, and an always-act
+  controller; it is preserved as development evidence rather than generalized-
+  entropy or learned-agent confirmation.
+- **Entropy-triggered belief-monitoring study (v8):**
+  [`entropy_triggered_belief_monitoring_v8/README.md`](entropy_triggered_belief_monitoring_v8/README.md).
+  V8 implemented a deterministic binary belief-sketch wire protocol and a
+  locally deployable generalized-information trigger. The final repaired pilot
+  became information-driven but transmitted during 71–86% of nominal
+  pre-disruption opportunities, exceeding the prospectively fixed 10% limit.
+  The pilot gate therefore stopped replacement formal development, five-seed
+  training, validation, and holdout. V8 is an engineering/no-go package, not a
+  positive communication-efficiency claim.
 
 The top-level `INDEX.csv` indexes the historical namespaces when rebuilt. No
-v2, v3, v4, v5, or v6 derived artifact replaces a frozen-v1 source artifact.
+v2, v3, v4, v5, v6, v7, or v8 derived artifact replaces a frozen-v1 source artifact.
 
 Status: complete frozen evaluation. All 1,096 post-freeze episodes finished,
 all 1,096 event ledgers replayed exactly, and all ten paper-facing PDFs passed

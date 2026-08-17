@@ -1,0 +1,2540 @@
+{
+  "artifacts": [
+    {
+      "relative_path": "CLAIMS_MATRIX.md",
+      "sha256": "d8a7c0f3a55137f814f82e412a6d9a5a071ea60ff39090d404bdb84e95c2e2e3",
+      "size_bytes": 1289
+    },
+    {
+      "relative_path": "PAPER_OUTLINE.md",
+      "sha256": "6d757a53bcb85e05d664f9ee3db5d1b483ae4585e57ae078263924290df76381",
+      "size_bytes": 2703
+    },
+    {
+      "relative_path": "PAPER_SUMMARY.md",
+      "sha256": "fd1ca388902d31bb22b6ff5b3ab6762e86c285cee553c88b1a75a9f0032bb5e1",
+      "size_bytes": 1242
+    },
+    {
+      "relative_path": "README.md",
+      "sha256": "a21b36fe7c3c02f02642c1a4c9f3525eecc4c20adfd367d18a8cb1132792971b",
+      "size_bytes": 5292
+    },
+    {
+      "relative_path": "ablations/NOT_RUN.md",
+      "sha256": "55a1d4ddcc1f91b4841891fd64a957e20bbba7bba5418478e0a04179e39c9dab",
+      "size_bytes": 216
+    },
+    {
+      "relative_path": "audit/v7_to_v8_audit.csv",
+      "sha256": "3b00c4b8670c100e035b7add1ed1c3a44cb999761a3d26adbfe76db982aeb7ef",
+      "size_bytes": 1052
+    },
+    {
+      "relative_path": "audit/verified_start.json",
+      "sha256": "5111fbc5c614eb502eb4a549489dbc4565f667e7e2948c94436d3f2479429dd8",
+      "size_bytes": 425
+    },
+    {
+      "relative_path": "development/FORMAL_REPLACEMENT_NOT_RUN.md",
+      "sha256": "f62dd3e2bd43a80e01422751eafec2c9f9c005969e632ccdf229068b956a7ab2",
+      "size_bytes": 269
+    },
+    {
+      "relative_path": "development/README.md",
+      "sha256": "0b0fe57ade99a32e341084151253de41315f7403bc7c33b2976d0541cbf7462b",
+      "size_bytes": 500
+    },
+    {
+      "relative_path": "development/candidate_registry.csv",
+      "sha256": "0e4dbcfe29349fc93488b10f07dec490a8a0a15308b105c3e7a1aedbce34e99c",
+      "size_bytes": 6564
+    },
+    {
+      "relative_path": "development/development_gates.json",
+      "sha256": "9132f968d67186ee31236a932a94c646fb5e459e05a548e518492e9592191ad5",
+      "size_bytes": 561
+    },
+    {
+      "relative_path": "development/development_selection.json",
+      "sha256": "3a580bc5b478968a0f4fc18dea8acc643c17deb3a5433561fe0197f31e368ced",
+      "size_bytes": 1082
+    },
+    {
+      "relative_path": "development/episode_summary.csv",
+      "sha256": "f64579c39461d58e5bbce6a91493a7dbe0dc35d01b2e488e196d8d65a17df222",
+      "size_bytes": 723020
+    },
+    {
+      "relative_path": "development/execution_summary.json",
+      "sha256": "ceae2058e115ae25d2056daf7d51ef6b69b1d176ef6b250300946e6a7e4bfba1",
+      "size_bytes": 475
+    },
+    {
+      "relative_path": "development/nonentropic_comparator_ranking.csv",
+      "sha256": "4f5347a21246194792fe192f0666eb7fd9f15281a7c3b2e5d9d6da33a62322b6",
+      "size_bytes": 953
+    },
+    {
+      "relative_path": "development/paired_scheduler_results.csv",
+      "sha256": "86fa32456e235e70b1635f8e0158efaf6d5bd83bdb839da75217f8dbfafad7e7",
+      "size_bytes": 990309
+    },
+    {
+      "relative_path": "development/panel_bootstrap_intervals.csv",
+      "sha256": "75f63774b8a851b31d7952d0f6c9fac3f3ccdda37e5bc6cdd16395f82aba5552",
+      "size_bytes": 4557
+    },
+    {
+      "relative_path": "figures/pdf/v8_application_network_snapshots.pdf",
+      "sha256": "46b3baea3739928d9ff4ea411c9edea9f388e22ad85636db9636ccc8daedf52e",
+      "size_bytes": 15310
+    },
+    {
+      "relative_path": "figures/pdf/v8_belief_monitoring_architecture.pdf",
+      "sha256": "7649a8e3569052087abbe90452abc8da44f8b8f9624033f288935b810c1ed766",
+      "size_bytes": 19956
+    },
+    {
+      "relative_path": "figures/pdf/v8_communication_estimation_frontier.pdf",
+      "sha256": "146cd63b8a03dc17e7fa9f3cc2e5c7516b1a1d66f3e2a38b7b2b71487024d2eb",
+      "size_bytes": 16477
+    },
+    {
+      "relative_path": "figures/pdf/v8_disruption_partition_trajectory.pdf",
+      "sha256": "4bf495e2454aa40660a5bfee731c766af2705dabb1b443c6867b7bda637c4178",
+      "size_bytes": 14557
+    },
+    {
+      "relative_path": "figures/pdf/v8_downstream_performance_vs_communication.pdf",
+      "sha256": "5e860d400eea69399063044752031bd20f43b98a446b633fa2e8853c02297b2b",
+      "size_bytes": 23141
+    },
+    {
+      "relative_path": "figures/pdf/v8_primary_effect_forest.pdf",
+      "sha256": "d44753036dec3b3e00835f62369b5103dbb4f4d670e85a423af049424a48165f",
+      "size_bytes": 13976
+    },
+    {
+      "relative_path": "figures/pdf/v8_scaling_topology_robustness.pdf",
+      "sha256": "3b9515485627ad5868e1f33b536ab915b5cb934924daa33c9445f721c4ce743f",
+      "size_bytes": 14077
+    },
+    {
+      "relative_path": "figures/pdf/v8_trigger_feasibility_no_go.pdf",
+      "sha256": "64fc14775091569fefcbda2ec31a8348001f891c2ce35bfdd8aed0d52dd2eddf",
+      "size_bytes": 13092
+    },
+    {
+      "relative_path": "figures/png/v8_application_network_snapshots.png",
+      "sha256": "c2a2416dcd3385ebf1ec472d2e8ec53a7d5731197ad33328b1f471f77dc5b596",
+      "size_bytes": 187435
+    },
+    {
+      "relative_path": "figures/png/v8_belief_monitoring_architecture.png",
+      "sha256": "d679d4b2ba95f77c9f69956dcf61f0901ad815c996d4b26560d04d4475240863",
+      "size_bytes": 116130
+    },
+    {
+      "relative_path": "figures/png/v8_communication_estimation_frontier.png",
+      "sha256": "3ea20a64decee84648b49d5e186ea2488cd6e676c5d402daaafe54376b20841a",
+      "size_bytes": 114178
+    },
+    {
+      "relative_path": "figures/png/v8_disruption_partition_trajectory.png",
+      "sha256": "038cb61437fc1364daa99b5d0c7036d20ee3216653058bff17c2c3067a0777db",
+      "size_bytes": 186348
+    },
+    {
+      "relative_path": "figures/png/v8_downstream_performance_vs_communication.png",
+      "sha256": "fd46bf60887473afc0380c0a46fbed8133403335db48517919c889fe981f5d85",
+      "size_bytes": 174205
+    },
+    {
+      "relative_path": "figures/png/v8_primary_effect_forest.png",
+      "sha256": "d9d45fa662221b83a283979579d636952dd80b907df8ec0fb1e552130096156b",
+      "size_bytes": 139071
+    },
+    {
+      "relative_path": "figures/png/v8_scaling_topology_robustness.png",
+      "sha256": "c0aa855b2918f9ddf001ac2263475948d77147faca315c341e3f2ebb0a6bc105",
+      "size_bytes": 135562
+    },
+    {
+      "relative_path": "figures/png/v8_trigger_feasibility_no_go.png",
+      "sha256": "00be63a7ebb0b7e2a0a3f443a39863b022485956458f2671b82ea2f8f2c2acd9",
+      "size_bytes": 99273
+    },
+    {
+      "relative_path": "figures/source_data/v8_application_network_snapshots.csv",
+      "sha256": "19b4db2121cfa292bfeb58c4ec5303f372e336b0688fbd0975b031c766847ea1",
+      "size_bytes": 5643
+    },
+    {
+      "relative_path": "figures/source_data/v8_belief_monitoring_architecture.csv",
+      "sha256": "675f1cf0dc42a6109ac4d7b4eef0fc7ac3febbb59a9e80904336f384f459bc34",
+      "size_bytes": 733
+    },
+    {
+      "relative_path": "figures/source_data/v8_communication_estimation_frontier.csv",
+      "sha256": "2bdced00195fd08757344e68d68dfe9e756193f1c053c1ba49b7312834c3ca5e",
+      "size_bytes": 1482
+    },
+    {
+      "relative_path": "figures/source_data/v8_disruption_partition_trajectory.csv",
+      "sha256": "1eb0220263f67dfe8f4e6292eb1707ab9c845e549e1178c4c89f0b2c5d300278",
+      "size_bytes": 9785
+    },
+    {
+      "relative_path": "figures/source_data/v8_downstream_performance_vs_communication.csv",
+      "sha256": "027f8e436718a0b494af3a8ba3b761921cad40b071aa383db1bf187b47593d07",
+      "size_bytes": 1439
+    },
+    {
+      "relative_path": "figures/source_data/v8_primary_effect_forest.csv",
+      "sha256": "1074eb0990678de9a338dfea34d97147321adf899ec4483edeef572357014013",
+      "size_bytes": 2299
+    },
+    {
+      "relative_path": "figures/source_data/v8_scaling_topology_robustness.csv",
+      "sha256": "f7d35b3d9f3864a8a6a72d2624a6b9d464c5987684c8710102471b854b424692",
+      "size_bytes": 1140
+    },
+    {
+      "relative_path": "figures/source_data/v8_trigger_feasibility_no_go.csv",
+      "sha256": "34c96bfa7419222d5b91f4c9f6217503902a4ead61e74aa82a94553cf0b5e894",
+      "size_bytes": 614
+    },
+    {
+      "relative_path": "holdout/NOT_RUN.md",
+      "sha256": "fd44085ad964fe75fba113a5f542b6baa5609f2d97b1e30420181f76bf0c99b9",
+      "size_bytes": 157
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot/candidate_registry.csv",
+      "sha256": "c5f9d350240306637fbedb36fd47d93a2ecfa8c92203bd8dfd824dab0a71ef3c",
+      "size_bytes": 2558
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot/episode_summary.csv",
+      "sha256": "71d213fdb4f4acb69db77474dad451c5df2f74101884f68c65a76b0493ae4fec",
+      "size_bytes": 76593
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot/execution_summary.json",
+      "sha256": "55a00ef272ef8aa1207a7554cfa1f4b1c514a2607b8a53d8dda198d72a3ddf92",
+      "size_bytes": 268
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot/hysteresis_repair_selection.json",
+      "sha256": "be2417d24f870e999dd21e6ca80d594e8d06a789485bb787b9db03842da9f6a0",
+      "size_bytes": 3056
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v2/candidate_registry.csv",
+      "sha256": "6b050440cea01806db2745534a2fe019d35591fbb5576a8ca3c2a863b77ea2c6",
+      "size_bytes": 2558
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v2/episode_summary.csv",
+      "sha256": "e12db6eaa1a8878f995f3af4b9367f3a912a49844bce5f2feae3881d3b061968",
+      "size_bytes": 76463
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v2/execution_summary.json",
+      "sha256": "b7abd45840514bd45209da0ba6d041bd11ce5f47a5344f6228733123f30a6b92",
+      "size_bytes": 271
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v2/hysteresis_repair_selection.json",
+      "sha256": "285fd5a3aeb8577bc13bb1e34d4af67ce98e26187e2bec263a5c5da3ddb6791a",
+      "size_bytes": 3303
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v3/candidate_registry.csv",
+      "sha256": "6b050440cea01806db2745534a2fe019d35591fbb5576a8ca3c2a863b77ea2c6",
+      "size_bytes": 2558
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v3/episode_summary.csv",
+      "sha256": "4fb335e28bebe9b696ab5fcdfa0c101291ca711e2f2295c049fb2b4d2d38131f",
+      "size_bytes": 77950
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v3/execution_summary.json",
+      "sha256": "e54e0bb3b018f1abce5cba2b279731fa04e5a628eeabcaac90a0c642aca4b9bc",
+      "size_bytes": 271
+    },
+    {
+      "relative_path": "hysteresis_repair_pilot_v3/hysteresis_repair_selection.json",
+      "sha256": "579bbf8819c8946aaecc224f3644115f78e34ca03cc8e0ca9b61b3dffcd3603a",
+      "size_bytes": 3677
+    },
+    {
+      "relative_path": "logs/development.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/development_supervisor_status.json",
+      "sha256": "c9ab605abaa7af340945b2d837349f46ee34f70bbce0f1d3c5f50d4e5b0bd44e",
+      "size_bytes": 701
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot_supervisor_status.json",
+      "sha256": "9538840ba0551a21bb453bb2dc231a8a28ae2f5b76dceb3b7c50555664a4d792",
+      "size_bytes": 498
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot_v2.lock",
+      "sha256": "4a77fa25a244fb7c8c09b9270443b42bf67b73ab0bf1a24e72c7d1240ca770c4",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot_v2_supervisor_status.json",
+      "sha256": "cf4e5472f70a0cec4d6a84d3e9acc9cc9e4464899ec4f0fc35ce862374c91df5",
+      "size_bytes": 507
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot_v3.lock",
+      "sha256": "4a77fa25a244fb7c8c09b9270443b42bf67b73ab0bf1a24e72c7d1240ca770c4",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/hysteresis_repair_pilot_v3_supervisor_status.json",
+      "sha256": "2cab66411cb351fe00cca6dd8fa7f33109d47509ac26dac2e489c0b7b56158cc",
+      "size_bytes": 507
+    },
+    {
+      "relative_path": "logs/pilots.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/pilots_supervisor_status.json",
+      "sha256": "32a71af6edfb96367681c4a425f8d3130ffe6157a08e5a1f9f4d26ff829d77f4",
+      "size_bytes": 660
+    },
+    {
+      "relative_path": "logs/pilots_v2.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/pilots_v2_supervisor_status.json",
+      "sha256": "8442bb9d8d7ad1f624cc5758e6a8153740314764d5f236f058449a17a9f0956f",
+      "size_bytes": 669
+    },
+    {
+      "relative_path": "logs/pilots_v3.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/pilots_v3_supervisor_status.json",
+      "sha256": "4233d13be2a073eef5dd01af2f2d041943cef4bbde4657cd7c79b746bcb68afe",
+      "size_bytes": 535
+    },
+    {
+      "relative_path": "logs/routing_repair_pilot.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "logs/routing_repair_pilot_supervisor_status.json",
+      "sha256": "dc2592124e0aa5bfb475da557de73da8ae23eaa30ba08ffbf605ff2a71b6b9e0",
+      "size_bytes": 429
+    },
+    {
+      "relative_path": "manifests/compute_manifest.json",
+      "sha256": "b7e3076106c59c1c768ff537a1754473b1a438247fe5d6250ba7a4a80d980813",
+      "size_bytes": 446
+    },
+    {
+      "relative_path": "manifests/development_seed_registry.csv",
+      "sha256": "028480288ffaaf2dadea472deb637767f611466fba427cd33bde0fd751321a6b",
+      "size_bytes": 10551
+    },
+    {
+      "relative_path": "manifests/exclusion_ledger.csv",
+      "sha256": "75614a022f27afc458ddb78c3671de70a4617ff548134c70108ef73bae8cbaea",
+      "size_bytes": 302
+    },
+    {
+      "relative_path": "manifests/failed_run_registry.csv",
+      "sha256": "53271e8e9f46dc9009d8d28dce9bef22667da1d816d5f0c614cb87351158aea8",
+      "size_bytes": 458
+    },
+    {
+      "relative_path": "manifests/formal_rl_seed_disposition.csv",
+      "sha256": "9a6eb69d2bb569f23850f39c32fd6d3f1ff5cdd68442c296bac89d8bef1be66b",
+      "size_bytes": 497
+    },
+    {
+      "relative_path": "manifests/protocol_deviation_ledger.csv",
+      "sha256": "e4574b3b1158db479d50a73bee86820ed37bb9d2e8cd8d249054ff65f2572e48",
+      "size_bytes": 647
+    },
+    {
+      "relative_path": "manifests/stage_disposition.json",
+      "sha256": "25d41de66fd26d91df38858dd43518f321843c4b99d89dd574eef7cef0b6c1a4",
+      "size_bytes": 272
+    },
+    {
+      "relative_path": "negative_results/STOP_DECISION.md",
+      "sha256": "1135b413e26e908eccead4658b8fd630d68ba99ade80a27b72eadfcd51722b50",
+      "size_bytes": 608
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/INVALIDATION.md",
+      "sha256": "0c71106fada00a103165a1dd5b1eb143afa773a27cec55beb083466658fd49d4",
+      "size_bytes": 1174
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/candidate_registry.csv",
+      "sha256": "f10da8bdda9db303d30d663cc1256e1cfd3799f6a3190b3544da26170be28433",
+      "size_bytes": 3045
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/development_gates.json",
+      "sha256": "4128c357f500e96acccb6d018abf8538d52b4bb44dbc7c3cfa98da86ffdf8195",
+      "size_bytes": 559
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/development_selection.json",
+      "sha256": "9c1d3740246f2e380dcc7b549260c022ea0b4a25496e70517295ee654850ac2d",
+      "size_bytes": 1599
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/episode_summary.csv",
+      "sha256": "4fff348c995d4b176f0ebe2939707eb8b884b40d1693e28bb9355ed094cc8417",
+      "size_bytes": 339279
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/execution_summary.json",
+      "sha256": "0c4ce943a991bf601a559dddfeba5b7240ee3dac2631d6bcc978cd4d5b8606fb",
+      "size_bytes": 263
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/final_trigger_candidate_intervals.csv",
+      "sha256": "72df9ec140c7a5a2c05ba919d6e53d1c80736cb5f1e0e71db5452c82791654dd",
+      "size_bytes": 2075
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/nonentropic_comparator_ranking.csv",
+      "sha256": "e1bed2b430854fa5a574edd9794499f15320efd8102495aefe22032303d0fd83",
+      "size_bytes": 432
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/paired_scheduler_results.csv",
+      "sha256": "c25baa1d8be1b98b0c6a2c5516a01da315648668a77ef6a2cb977906ebf3397b",
+      "size_bytes": 474080
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/panel_bootstrap_intervals.csv",
+      "sha256": "7b6bb2bfcbf1a47712a9fe0350e2263f10c096dfbd02b2efc95e15972101b712",
+      "size_bytes": 4557
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/analysis/pre_disruption_transmission_rates.csv",
+      "sha256": "3875119e97ad11eeff0759def0985d84d493f36d3cc8293fbdb81a28f581af9b",
+      "size_bytes": 60322
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/stage.lock",
+      "sha256": "e46fee58c24e3b1ae5b9bc2cf5fbcb81bb70973503f1609a5127694d8621a924",
+      "size_bytes": 6
+    },
+    {
+      "relative_path": "negative_results/development_final_hysteresis_suppression_invalidated/supervisor_status.json",
+      "sha256": "bb9c91b620b2686aeea20d8e7d376831ed237aa34808fedffd80e612847d679e",
+      "size_bytes": 483
+    },
+    {
+      "relative_path": "negative_results/development_final_pre_hysteresis_invalidated/README.md",
+      "sha256": "b12dc310e36e86f2b3de46abb48e529d19b246c4873bc4edbc9c0cf2cd9c49d1",
+      "size_bytes": 1156
+    },
+    {
+      "relative_path": "negative_results/development_final_pre_hysteresis_invalidated/candidate_registry.csv",
+      "sha256": "c5f9d350240306637fbedb36fd47d93a2ecfa8c92203bd8dfd824dab0a71ef3c",
+      "size_bytes": 2558
+    },
+    {
+      "relative_path": "negative_results/development_final_pre_hysteresis_invalidated/configuration.yaml",
+      "sha256": "0653667933abc746cce635cfebf4c28c17c5182d8f6630a62470942f5bf2d1ee",
+      "size_bytes": 857
+    },
+    {
+      "relative_path": "negative_results/development_final_pre_hysteresis_invalidated/invalidation.json",
+      "sha256": "f3614e59cef92c3ad6da027bb4763210234181919633eb83bd4514c68e446327",
+      "size_bytes": 547
+    },
+    {
+      "relative_path": "negative_results/development_final_pre_hysteresis_invalidated/supervisor_status.json",
+      "sha256": "eea7fdad379e2bc5d940bc2805aa9075fc14cc45117aec41043163b915081cfa",
+      "size_bytes": 175
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/interrupted_attempts.csv",
+      "sha256": "7be3e85c688b36c3cbe85e7781a9677d5c6d2c62c4a56bf22424b0d91f69e41d",
+      "size_bytes": 1896
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/interruption.json",
+      "sha256": "4c541a893905bd50b9f82a1ba45b14de936b4af352cd56cf2cc97db041c7304e",
+      "size_bytes": 337
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-always_on-f06f6808d09b-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "207d5cbbfc3a00a9e6a24e9b52e97fce0b77b0149c78c85dd5176f6544dd8408",
+      "size_bytes": 983142
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-generalized_information-e25eb5b9df1b-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "ffa6a30f9aa94700fb255167bf5ab6c87b5b8e652c6993118d49cd8ceeda3cea",
+      "size_bytes": 1228926
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-kpi_change-314c8c128df2-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "fcf79e30e18de1b088ce8be690167faecb752f236f27aa9dcc93b4134a66930e",
+      "size_bytes": 491583
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-matched_random-681a73b1e0f1-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "dbf905993c8dde9f50186d315b3bd9fe562d06a15801ba547c376c47edf1a2e0",
+      "size_bytes": 184359
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-periodic-52761a8cde7f-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "45b9c851aab20a33589521fb71c53d0157a9b17d2db9843de71b5134bc8f0136",
+      "size_bytes": 553026
+    },
+    {
+      "relative_path": "negative_results/interrupted_development/v8-development-humanitarian-large-medium-high-medium-random_geometric-private_fragmented-8810021-predictive_uncertainty_change-71c476debc21-uint8_simplex-frozen_local_rule/events.jsonl.xz.tmp",
+      "sha256": "204b40145919776079ce7b71265c19364be2e147ec7d9fcad71e640173b625d3",
+      "size_bytes": 737362
+    },
+    {
+      "relative_path": "negative_results/v8_stop_decision.json",
+      "sha256": "39cef9e6925a6a278e6605926007aa871655df7799b391ba7e29eeb2db3ed525",
+      "size_bytes": 2430
+    },
+    {
+      "relative_path": "pilots/candidate_registry.csv",
+      "sha256": "a86b13bc25508beff0b57b35f2d7bb88e4eb02b7070c855ea7b63774ee82dd66",
+      "size_bytes": 12770
+    },
+    {
+      "relative_path": "pilots/encoding_pilot_summary.csv",
+      "sha256": "cdd7bdcd295c0c63234f00cac372c046f134e73fd606f729b54672d060eb3598",
+      "size_bytes": 264
+    },
+    {
+      "relative_path": "pilots/episode_summary.csv",
+      "sha256": "bc92abd614a8f1301a7835bea95b9b24408b7343ede6d15a6a6336a95cc116d9",
+      "size_bytes": 209235
+    },
+    {
+      "relative_path": "pilots/execution_summary.json",
+      "sha256": "a1dffa3a8126a694db55ccf9c206cdb0284dd98e26c65f533c563a43c5cbe29a",
+      "size_bytes": 447
+    },
+    {
+      "relative_path": "pilots/nonentropic_comparator_ranking.csv",
+      "sha256": "a67ce6929f485a9096f6aabcd5c4ae61fa482fa1d01cddddeca6513809fb6868",
+      "size_bytes": 15
+    },
+    {
+      "relative_path": "pilots/paired_scheduler_results.csv",
+      "sha256": "453e8503494bb700721d1b8810b6b1a0f9c58e5a05e3f80078ffa505b63bca47",
+      "size_bytes": 865098
+    },
+    {
+      "relative_path": "pilots/pilot_feasibility_initial_invalidated.json",
+      "sha256": "ce1acc3627a79d60636c66516980b7d805f14fe5e8bdb37389473601eae291a8",
+      "size_bytes": 429
+    },
+    {
+      "relative_path": "pilots/pilot_selection_initial_invalidated.json",
+      "sha256": "ae89c1ad0a130a7079ed20779ed876f7601fc29252b80fc0a8a2aadb9dacdcdb",
+      "size_bytes": 729
+    },
+    {
+      "relative_path": "pilots/rl_pilot/training/checkpoints/v8-ippo-seed-88101.json.gz",
+      "sha256": "f5a5872b896a96d599437443031831b0bea9884b851ffb329a3ddc03be948c7e",
+      "size_bytes": 24105
+    },
+    {
+      "relative_path": "pilots/rl_pilot/training/curves/v8-ippo-seed-88101.csv",
+      "sha256": "e698a88ba2b0c5d4db7a559af346beb907208369384b1726ebe5ad76c23f8604",
+      "size_bytes": 1523
+    },
+    {
+      "relative_path": "pilots/rl_pilot/training/manifests/v8-ippo-seed-88101.json",
+      "sha256": "209d07e9dba0f0a50884197043d43631180b8740ddc32293be273897b6ef524d",
+      "size_bytes": 877
+    },
+    {
+      "relative_path": "pilots/scheduler_pilot_summary.csv",
+      "sha256": "06f1787dc2cc1ae64ebaba5b5334a189fe98419eeaa63522ef132546411dea10",
+      "size_bytes": 14980
+    },
+    {
+      "relative_path": "pilots_v2/candidate_registry.csv",
+      "sha256": "a86b13bc25508beff0b57b35f2d7bb88e4eb02b7070c855ea7b63774ee82dd66",
+      "size_bytes": 12770
+    },
+    {
+      "relative_path": "pilots_v2/encoding_pilot_summary.csv",
+      "sha256": "635998911339be33736fa3cc4de7450f7c6a3fcb2faf23e597b39bda67789301",
+      "size_bytes": 261
+    },
+    {
+      "relative_path": "pilots_v2/episode_summary.csv",
+      "sha256": "9fce5f789d71867d4615da17a5b1bb3d97a3ae4d27fb52df455f0d8bc70f5e5f",
+      "size_bytes": 219159
+    },
+    {
+      "relative_path": "pilots_v2/execution_summary.json",
+      "sha256": "a10d0ccccde8039bb756b0fc825c102dcddd23faf1053e90a499c00061c97734",
+      "size_bytes": 450
+    },
+    {
+      "relative_path": "pilots_v2/nonentropic_comparator_ranking.csv",
+      "sha256": "a67ce6929f485a9096f6aabcd5c4ae61fa482fa1d01cddddeca6513809fb6868",
+      "size_bytes": 15
+    },
+    {
+      "relative_path": "pilots_v2/paired_scheduler_results.csv",
+      "sha256": "c3a8177a385654446c43c484874c8c97dcf618abe40824bd42bf4f8f70b822c8",
+      "size_bytes": 286837
+    },
+    {
+      "relative_path": "pilots_v2/pilot_feasibility.json",
+      "sha256": "16ed3e932800e56c1313631a854c8b4fab76231d010b6cb4200e3552683398fb",
+      "size_bytes": 428
+    },
+    {
+      "relative_path": "pilots_v2/pilot_selection.json",
+      "sha256": "71d9d19bdf0fa7a68177dd669ad84d0375dfd0cb8eaa434aa5ae5a2fdbfbf22f",
+      "size_bytes": 728
+    },
+    {
+      "relative_path": "pilots_v2/scheduler_pilot_summary.csv",
+      "sha256": "50bda0e1d7b8ec21b0cfc8b6538eb6025d139b2c18379e5e180747952266eaaa",
+      "size_bytes": 15280
+    },
+    {
+      "relative_path": "pilots_v3/candidate_registry.csv",
+      "sha256": "0fd48e9198b2f9749155dd9dac94d9b6e38c083f4a93b9efe70a66fe7aa95fee",
+      "size_bytes": 6604
+    },
+    {
+      "relative_path": "pilots_v3/encoding_pilot_summary.csv",
+      "sha256": "d5d267cd7466e76b800683b6f4ff4dc85b2269ac9ede7bf4b47a13c6f37b5618",
+      "size_bytes": 150
+    },
+    {
+      "relative_path": "pilots_v3/episode_summary.csv",
+      "sha256": "ffdf7fd23798c162156e62148aac2e7324d984a753a47518c50f69d52d653e14",
+      "size_bytes": 104659
+    },
+    {
+      "relative_path": "pilots_v3/execution_summary.json",
+      "sha256": "e5a6bb3b51684073192cd54e0f2884ba877513174ce330d3d662f704fc71aec3",
+      "size_bytes": 328
+    },
+    {
+      "relative_path": "pilots_v3/nonentropic_comparator_ranking.csv",
+      "sha256": "76983f68b1342295f5b4316374580bc9515a0728bc88f2c2eea3a4b6d6193f0d",
+      "size_bytes": 470
+    },
+    {
+      "relative_path": "pilots_v3/paired_scheduler_results.csv",
+      "sha256": "a121e2c41e950b9e41bed0d1492cc80720f48eb0cbef79070fc94c9ed61f0b7c",
+      "size_bytes": 305083
+    },
+    {
+      "relative_path": "pilots_v3/pilot_feasibility.json",
+      "sha256": "f3063aedbb99309c1ed2c25f74b263a34e93c31cf073f3005737a22e24df660c",
+      "size_bytes": 423
+    },
+    {
+      "relative_path": "pilots_v3/pilot_selection.json",
+      "sha256": "8474b50b2e49f6037cccef11c275285b2e6d199e492a90444e3af8eabd7d08d6",
+      "size_bytes": 1185
+    },
+    {
+      "relative_path": "pilots_v3/scheduler_pilot_summary.csv",
+      "sha256": "a89604cd869026569c45f123be696f6e7fabdd03e181941913f5802bfe79e244",
+      "size_bytes": 9292
+    },
+    {
+      "relative_path": "protocol/v8_development_protocol_no_go.json",
+      "sha256": "32b519cd7c282fbc8eecc60757c511bc74322ddf26919a9af08752d74969684f",
+      "size_bytes": 3926
+    },
+    {
+      "relative_path": "protocol/v8_development_stop_manifest.json",
+      "sha256": "0c4baca1bc8bb008db9291e3118d6b04050add542d9925f0e70d0806e0fd4861",
+      "size_bytes": 838
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part01.tar.manifest.csv",
+      "sha256": "6be87b4f14c132a0d8b8767beee89a64308f7555a06950b00f4ad0fca0c9eb8e",
+      "size_bytes": 47701
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part01.tar.xz",
+      "sha256": "808df7fcef8ac457cc540d862e34178f070ca95653e23266c5b7d65a8e62d8b7",
+      "size_bytes": 34721616
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part02.tar.manifest.csv",
+      "sha256": "5401efafa6a099b89730988382f6b24a9ceadd92c7ae18da4ba7df8c9deb6431",
+      "size_bytes": 47077
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part02.tar.xz",
+      "sha256": "860c00481202da2dc7d5eda84bdbf57b1f5c0fe5181b2c924dee0e53b9899fd5",
+      "size_bytes": 21304252
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part03.tar.manifest.csv",
+      "sha256": "b2ba7e0b7cac174656c5021b8d5cb991aa9a806e727829bb9b6da921d1a0f66e",
+      "size_bytes": 46773
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part03.tar.xz",
+      "sha256": "ba68c89713dcd2c03ab5c98eb7be2787268be9a2e5a9e938c0e6649e3d4897db",
+      "size_bytes": 20202356
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part04.tar.manifest.csv",
+      "sha256": "0670a510c2ed2b6ccff528c3f7640b38854279fdf84622474f7e0980e0386aa1",
+      "size_bytes": 47221
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part04.tar.xz",
+      "sha256": "9b33b5a5f03166a98b159bbce59825026a7cef21279daede4c2284495196c668",
+      "size_bytes": 26620988
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part05.tar.manifest.csv",
+      "sha256": "ca3e25bf2404d217faa6e10bf2cb80c02049fe3b2e717adf73be7305d04046bf",
+      "size_bytes": 47045
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part05.tar.xz",
+      "sha256": "3cfd81a04162a7b3addec2e0e480019fcaaf119b05beca0c2352bcda5a1d50e3",
+      "size_bytes": 22147024
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part06.tar.manifest.csv",
+      "sha256": "4cc161e7298bc8aab981c901e103d207147a07c9e9ac68ee483b17972dc78199",
+      "size_bytes": 48049
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part06.tar.xz",
+      "sha256": "edf3ac2d22e896c44d60e789e006f10c6f9e0ef424a6343a80484c179b7ea040",
+      "size_bytes": 32339424
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part07.tar.manifest.csv",
+      "sha256": "cd0c0b72fa9b34eca8c2400400aab14e72077acb2bbbee219c5c1c8a8a557582",
+      "size_bytes": 48229
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part07.tar.xz",
+      "sha256": "cc26454e79781586a5f95a3d7111a28c2f21f870d8abb65c0de31c2248704025",
+      "size_bytes": 38150324
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part08.tar.manifest.csv",
+      "sha256": "d53b526e2a24b05b95319f51428a7f23925f1b3b7b25412b879f10e45cf20c22",
+      "size_bytes": 47925
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part08.tar.xz",
+      "sha256": "b4170acb6940c3253e0b11e38762830e85967d748f37658cf759bdb91eeda24e",
+      "size_bytes": 29422672
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part09.tar.manifest.csv",
+      "sha256": "f77a91f01978ceb5a9cf5b3a8e523d0c242d3098c0f38ea66f790f6dfaba32a4",
+      "size_bytes": 47668
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part09.tar.xz",
+      "sha256": "a724483bab1e7aa8ffa25d0af4e5e01a2c8d40f3db5b83ec504babd12fee9b88",
+      "size_bytes": 15363028
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part10.tar.manifest.csv",
+      "sha256": "56d3959930705d67fd84018208dd5248f66e8f94e3b15fee5083ba8007d42886",
+      "size_bytes": 47363
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part10.tar.xz",
+      "sha256": "88dbc21001ed9e76fe291638d516d768878d5263c9dd898a04f9f108458627a1",
+      "size_bytes": 6999268
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part11.tar.manifest.csv",
+      "sha256": "c07b795b699475bc65ca6c51a05335a85043d49580dcae3598500924af53f175",
+      "size_bytes": 48095
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part11.tar.xz",
+      "sha256": "bb0e11f0b19542b08785cc5cfc68ea32dfaa59678fd8e28b69ff1bbef7f8cb76",
+      "size_bytes": 6071764
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part12.tar.manifest.csv",
+      "sha256": "a79f6b58669c9996e6b9309abf280d2f3a23a0408bcd25320b02135fe9f21eec",
+      "size_bytes": 48018
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part12.tar.xz",
+      "sha256": "c00be7f17471e258b47bdf0a3f875ee3984596600f00c548578d49b9f9183013",
+      "size_bytes": 7143496
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part13.tar.manifest.csv",
+      "sha256": "48fc971d32d9d660911b3c8fa01dac1533dd27a07a4db5045a2ed7ea2f151578",
+      "size_bytes": 46293
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part13.tar.xz",
+      "sha256": "f79902344e5c82754c2691f230bfd7f594db098fa9b93e157eae4c265a86a84e",
+      "size_bytes": 7771932
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part14.tar.manifest.csv",
+      "sha256": "0a4c702f76e1765b635c3cdea4e62d182bd8bbe3d34f302b912069775fca810a",
+      "size_bytes": 48047
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part14.tar.xz",
+      "sha256": "6acfa24c69fdc916bfc85b5cb5d3b49aa6ab0644f8ffea367b6381d8d76a25e5",
+      "size_bytes": 8742804
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part15.tar.manifest.csv",
+      "sha256": "1c1b0360aca5a916dc8abe33125cba5a90eef6719c781b27ca0c4279ccf79a48",
+      "size_bytes": 47591
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part15.tar.xz",
+      "sha256": "b7acee2ff9a7941f3adddd51e7f75d894c903ca0c298d7382586bd03844bee32",
+      "size_bytes": 7881092
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part16.tar.manifest.csv",
+      "sha256": "1a5d0c7fb471fe47081d3b19915c60c2379e59dad511eb1bb285913d671ce06c",
+      "size_bytes": 46981
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part16.tar.xz",
+      "sha256": "bcfb77ade39732bf4a58a6fc32df1d4461aab01db9599c6077e2f5eb5304e3f6",
+      "size_bytes": 7336788
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part17.tar.manifest.csv",
+      "sha256": "c9f7816425a1968b681ccf8e3cacb0ab28437224bd3fbbd8b51536e4d6ccbb2e",
+      "size_bytes": 48662
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part17.tar.xz",
+      "sha256": "5eb4e801377b956bae37157d39b8ba5936daa37db0ea6d1038685368fd7b1a35",
+      "size_bytes": 7551640
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part18.tar.manifest.csv",
+      "sha256": "2695140324db4a320675b9d5dca24475f2d56ca00bdeed87d764043fae223021",
+      "size_bytes": 48124
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part18.tar.xz",
+      "sha256": "0b7e03bfbd2419e98e00f9a1bb1d635435dd4260b32583b4eeebc3fd47c84844",
+      "size_bytes": 3267052
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part19.tar.manifest.csv",
+      "sha256": "455f216badba94a611ae7073ca56afde67a376c9281ef8f07edfe66aa2abc4b5",
+      "size_bytes": 47500
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part19.tar.xz",
+      "sha256": "bffa8aca2f1ffbbe5702a804ea55e10a925d33906442a923566d244b949328f8",
+      "size_bytes": 1184220
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part20.tar.manifest.csv",
+      "sha256": "c5b10fa86b9c9a97c8ad062e3065d564aa8aa75113f23a15085a555fad2c0670",
+      "size_bytes": 46997
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part20.tar.xz",
+      "sha256": "91d0863d58a009d252193c9500556f72aa4e39113edfc9bb5a99063c0913c54d",
+      "size_bytes": 1164980
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part21.tar.manifest.csv",
+      "sha256": "2daf36c096ab320e88d4a860d7802d0a90c4b7f8127a266f1f07cac7d3cf0b7f",
+      "size_bytes": 46963
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part21.tar.xz",
+      "sha256": "edf477cadac8011b2dcdbe65e32fab1731edb3259b73588fe40bd42ec2353c4f",
+      "size_bytes": 1118272
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part22.tar.manifest.csv",
+      "sha256": "0f866ad09faa6ca094a75cd477528c6613fcfc6f91c39d3757fb7392fd3e62b8",
+      "size_bytes": 47094
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part22.tar.xz",
+      "sha256": "ad25c738ea7bc8871334803271f431afaf88358087b53ed29822b2fe1add56fa",
+      "size_bytes": 1011836
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part23.tar.manifest.csv",
+      "sha256": "7c536ca4ffdadc82945e395580946a07b2befcf3d463869d80ac602d6c78df7f",
+      "size_bytes": 47386
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part23.tar.xz",
+      "sha256": "d66cc29f1ea404947135507b946fe0fb3433074eb43bcf58708eff1730edc7c5",
+      "size_bytes": 941876
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part24.tar.manifest.csv",
+      "sha256": "62755f7e73a6e5f2e3c06e42d21d277d36852d13be016bd34f9cee88032b5b56",
+      "size_bytes": 48195
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part24.tar.xz",
+      "sha256": "5252f915927f0fe895c4d91e3b2c7a76dab42444c44d3172309c31dcdcda860a",
+      "size_bytes": 757468
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part25.tar.manifest.csv",
+      "sha256": "577f37d5712bc36d6ac9593bb02cb2d020a94e13d37910ac3afc469c90c36d4f",
+      "size_bytes": 47945
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part25.tar.xz",
+      "sha256": "83391922077402368ee8eccd99e1f8d1faaa20fc32db2594fad198b0f99547bf",
+      "size_bytes": 626148
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part26.tar.manifest.csv",
+      "sha256": "348e4827464b21c1afc84a72c4b2eb9010b76fef86b066c344c01fcb8903f0c9",
+      "size_bytes": 47804
+    },
+    {
+      "relative_path": "raw/packed/development/humanitarian-part26.tar.xz",
+      "sha256": "f5f677d0d3a163c02bc079c2d22b028563b61e133c1866cb4644dd4718180756",
+      "size_bytes": 998728
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "2da81bd690b2a87eb8a75b371eda9fc83e2399ab06c8f90ce2fa84693cd50779",
+      "size_bytes": 47394
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part01.tar.xz",
+      "sha256": "aeed099750b79d39fc8e1e823f5e36083ce0124f20aa6b7171dc2c1bb67d4684",
+      "size_bytes": 11503028
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "0220f179c16d0d0d0b04556b18d3fa25d683e5da77c3c01ce0c779337bc7b653",
+      "size_bytes": 48723
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part02.tar.xz",
+      "sha256": "706b2635d8a860346ad6f86d21041cb7152ec9063eb3d467fdf426a9d2f51925",
+      "size_bytes": 21289660
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "514a44bf393211d80e7dd1b78170b52960b779583f5d262d17e81d9737748868",
+      "size_bytes": 48597
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part03.tar.xz",
+      "sha256": "3376f45dadf5177a329d73f1f80383fd4f8365400ac911a760f10cf4b538818b",
+      "size_bytes": 21064644
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part04.tar.manifest.csv",
+      "sha256": "1fe948465dbb3bd868d21f9b6f53f983721f1cdc57ff16b27c10072cd44a9c4c",
+      "size_bytes": 47448
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part04.tar.xz",
+      "sha256": "8e60a7624d9d621e3e67fe2c5d7cafc0540fbb02fa5f7cadffd08f943cb99a5e",
+      "size_bytes": 13733452
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part05.tar.manifest.csv",
+      "sha256": "657abc917626b014ca7a2be7f2c029306d6182f46767a4ec44086a854aa31fb8",
+      "size_bytes": 48157
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part05.tar.xz",
+      "sha256": "9e6135231ace1d756a9f130d859db865b6c84545f9ebcad2b21938e9ec78ce84",
+      "size_bytes": 17455528
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part06.tar.manifest.csv",
+      "sha256": "6f9ed6af280b0eb39016879003fae9b9bd0328a2a73928bc0674b47d9374c706",
+      "size_bytes": 48629
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part06.tar.xz",
+      "sha256": "783641601ddd4c1779aed503e255c139b45a6692f7fa063de6d73ac08aded9ac",
+      "size_bytes": 16265524
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part07.tar.manifest.csv",
+      "sha256": "1d3e493bf1c861031abfef9c7025bf4fa70fd6cb126fd75dea8aa71a169f531b",
+      "size_bytes": 47922
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part07.tar.xz",
+      "sha256": "50e6bbd0a410bb0ee473df1e1eae6cc120313f068b953019e492f29b466b99fc",
+      "size_bytes": 11287180
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part08.tar.manifest.csv",
+      "sha256": "beaf36ff3096066047c94a3fc1d26d9994a24484b7379732f6fd6bbe323b2866",
+      "size_bytes": 48506
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part08.tar.xz",
+      "sha256": "cc52909857bbe71d70a1b0fe6952903770fd7a63568469e27dbb03c8b765116e",
+      "size_bytes": 15519564
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part09.tar.manifest.csv",
+      "sha256": "23a75f7f75acbb9e848d46b70dc5d7c88e8c4f391a845442843e549dab623661",
+      "size_bytes": 49495
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part09.tar.xz",
+      "sha256": "4f70f523a58460988d39647a57ae9e3fb6f495ad31f630e66c86e619c56e1988",
+      "size_bytes": 16454072
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part10.tar.manifest.csv",
+      "sha256": "e66750918ba08ade9516d36d3ff148e4091cd7c72680f932a403acb6843e4bb1",
+      "size_bytes": 48669
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part10.tar.xz",
+      "sha256": "e578e273a3926eaa1978dee2403bdb737ac05dd6c8eb51bdab694840cebe212a",
+      "size_bytes": 6366720
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part11.tar.manifest.csv",
+      "sha256": "8f5bcfede1374895fc38505cb823866dcc4d329a8a159411c5afeb2cd949bce3",
+      "size_bytes": 47805
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part11.tar.xz",
+      "sha256": "87b1f9de21a56b0611243f034c68d0e90d86c2f6a2909a942b5eb9db4416c264",
+      "size_bytes": 2393800
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part12.tar.manifest.csv",
+      "sha256": "f1208d3b10e1460575e911322f54ecfcdfe3a76051d86a72dea01e3cb4f40130",
+      "size_bytes": 47900
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part12.tar.xz",
+      "sha256": "08231a1e73ce3a46a4c6ad6fcba7c694d74006b75919243f6b064b386c4afadb",
+      "size_bytes": 2474316
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part13.tar.manifest.csv",
+      "sha256": "3728fcffb8e083fe79e9bc1a150babc1095356834a72688d396d236f0c33b13d",
+      "size_bytes": 48113
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part13.tar.xz",
+      "sha256": "d9988943250a3a26eb07b049af7452b2507a7644bbcb9f5dbe9a251785866700",
+      "size_bytes": 7698588
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part14.tar.manifest.csv",
+      "sha256": "79ad3988bdc3e88839d0a9ddce390c8b6e8db19c9cc8821bc48a8a172e2d3ee7",
+      "size_bytes": 47741
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part14.tar.xz",
+      "sha256": "0834eb7e171b42bcd055763c98129ad045cf69a3d4bd762dab2dc57bb71f4f00",
+      "size_bytes": 1959052
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part15.tar.manifest.csv",
+      "sha256": "944ec69a6f099b7af09157656652352c96332b6d4c8fd4c403d9a4b709de820d",
+      "size_bytes": 49239
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part15.tar.xz",
+      "sha256": "9ad2caddb1affa932da734ee522305d48b9512246d6feacc55da0669211ba15f",
+      "size_bytes": 6954884
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part16.tar.manifest.csv",
+      "sha256": "f1e50670f38492e856daa0b8c4ba171558874f75939f523be0dee70f0c45b105",
+      "size_bytes": 48807
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part16.tar.xz",
+      "sha256": "7ec5c083ef9f0f8410ea9cc8a2df0532ca44a49f2264e33d82111a37ba29d49f",
+      "size_bytes": 6948284
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part17.tar.manifest.csv",
+      "sha256": "521ede4285d08f327450907015f2bd733534c2e6e1d9f9c549d97d1ccaa6b9c0",
+      "size_bytes": 48893
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part17.tar.xz",
+      "sha256": "d86bff67aa3c4403c9300918c5dfbc66539f80540e5a8de4061369ec98de7e4f",
+      "size_bytes": 3419728
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part18.tar.manifest.csv",
+      "sha256": "06f8c9f0f27ecaa8568fa3fa167acf3e62b2348bf237fca389ada8ae022c84a7",
+      "size_bytes": 47827
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part18.tar.xz",
+      "sha256": "7fd5546968aae572eb2d81873e9e1debfd57a69d0de72b4e2c6128c635541f07",
+      "size_bytes": 1058124
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part19.tar.manifest.csv",
+      "sha256": "3d7a43ecd9adb15153b9c9d73118b5477fe59755bd84980aa644cd6c27811ff3",
+      "size_bytes": 48430
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part19.tar.xz",
+      "sha256": "17149f00b47cd969b37b11b0a8b74173da66c95dad20287595ce05fda4570a59",
+      "size_bytes": 463828
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part20.tar.manifest.csv",
+      "sha256": "323261430c7a25a5d1738e1b7c85ef958568d5d952a5e47e1f4b5893188e2a5b",
+      "size_bytes": 48803
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part20.tar.xz",
+      "sha256": "c37dc50be86ca6b83ff4ccdc84927542c1ac4236436c40ebd304e08f60fc46d3",
+      "size_bytes": 420324
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part21.tar.manifest.csv",
+      "sha256": "b99686953fdc907db9e4cc810084298821737a29897cc26eea1ab2bfbecf5158",
+      "size_bytes": 47891
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part21.tar.xz",
+      "sha256": "45e0db243d688b104e08eda9016566a59a1ed5253bc9253b834c0d5d7225b29b",
+      "size_bytes": 434568
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part22.tar.manifest.csv",
+      "sha256": "b2a6b3f34444ccc5d48f15268ef7b51968a09d2198de734c5b5f62bdb982c69f",
+      "size_bytes": 47492
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part22.tar.xz",
+      "sha256": "a4a84ca3c9322adb5a0f30844c44e157630cd59c4b338e1e037cfeb85280791f",
+      "size_bytes": 462260
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part23.tar.manifest.csv",
+      "sha256": "3b18f4edd2e4a3b5fb1b67672948761926d70b5996e85dd1cefdfe497ad4cbf7",
+      "size_bytes": 48657
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part23.tar.xz",
+      "sha256": "f1c4901b929524a1b19ae2ae2374aa8626bb464909149c4a9b69010cb4f1523f",
+      "size_bytes": 437172
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part24.tar.manifest.csv",
+      "sha256": "98a7d95dde44b9620c7f214b8fca204b2ea9c5c2d4c205777e692ae192da8b64",
+      "size_bytes": 47895
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part24.tar.xz",
+      "sha256": "675686a360cef89eb765c0c34aa47c3376d6f2d4f93321b7576f4f0a32e4113e",
+      "size_bytes": 478056
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part25.tar.manifest.csv",
+      "sha256": "af692fa5aaff185548a0e39fec8683e7617ae7cc7176456e1f8ffd7bb1d11637",
+      "size_bytes": 47813
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part25.tar.xz",
+      "sha256": "6457a659f972cddf3816a85e98c683bde8aba8654379e0f1e2027fa59355f145",
+      "size_bytes": 425684
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part26.tar.manifest.csv",
+      "sha256": "fcd29fc362845913e08294f1bfa42b50c6b12fa3825a02d3da8d9d8d16708bdc",
+      "size_bytes": 49600
+    },
+    {
+      "relative_path": "raw/packed/development/utility_restoration-part26.tar.xz",
+      "sha256": "f2261821f0645352bab90cbaad589400832d6a62289127654537d714374fc8b8",
+      "size_bytes": 283564
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part01.tar.manifest.csv",
+      "sha256": "29788096dc109d4d50887425fc765732d314ce12c2c500d389b5d85aa3f6b3f1",
+      "size_bytes": 24353
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part01.tar.xz",
+      "sha256": "d8721e9bf2362424c7f431c8cbb2626381f5cbb00cf6036cc6e94f45d5923a99",
+      "size_bytes": 34130820
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part02.tar.manifest.csv",
+      "sha256": "8963153e86a6b1b2972b2097400e05b51630cb56ad0985be32cbc42451e983d4",
+      "size_bytes": 24056
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part02.tar.xz",
+      "sha256": "1f5e0580f58a24462cdcddbe50f760dbc6cf820dfc7f41c4dab282df4330200d",
+      "size_bytes": 17393804
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part03.tar.manifest.csv",
+      "sha256": "b015ccce5f916f7bd8fe6e76e54d0a9033c848dda55c0287c2181008b2f7888d",
+      "size_bytes": 23961
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part03.tar.xz",
+      "sha256": "4814d852bb70cb861d03806d42c340bab940511c00bb83598ed4ec58409cb383",
+      "size_bytes": 18187024
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part04.tar.manifest.csv",
+      "sha256": "281e42304d48b669ea6b47b3603b9bfdb8ac6c92b2651a300ecd77800161b9a0",
+      "size_bytes": 24063
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part04.tar.xz",
+      "sha256": "3e944dda4db9fcb1aee8161e9ddfb04f2ff2a53654b5ba7857eb07c0d1183f06",
+      "size_bytes": 26327848
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part05.tar.manifest.csv",
+      "sha256": "389f4422454f2e80da988d6090e93155f8709c430095146dd51c9842418fcec2",
+      "size_bytes": 23960
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part05.tar.xz",
+      "sha256": "54cee174d4f7c22ae7cc6ee01a1936e4244c3a451c304ebaf5f3581090c35bbc",
+      "size_bytes": 16928576
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part06.tar.manifest.csv",
+      "sha256": "a0605a13668be8266899703cedb11ea3715b3db166c2ad170f4c764f85ee1ec5",
+      "size_bytes": 24737
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part06.tar.xz",
+      "sha256": "03defcff61056798c549e2dd38147d824bea4a2d02e9812ad6b01a33dc66ea95",
+      "size_bytes": 40560452
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part07.tar.manifest.csv",
+      "sha256": "0c50260553627ace6cc6f46eb110e9fd7ba85245de3b2251550839a3e2755fc3",
+      "size_bytes": 24449
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part07.tar.xz",
+      "sha256": "197eee15d29c0b1f55805ee405862294a5193e404cd23b0dca894c93095e08ee",
+      "size_bytes": 43454108
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part08.tar.manifest.csv",
+      "sha256": "4b6f52aeefbff76c705a7c91d00cdc40dcb773f928f2369ca434806d295cbb34",
+      "size_bytes": 24440
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part08.tar.xz",
+      "sha256": "e5e2c863c90e5ae8b3d3e1976eafcd5559a815fe5902965009181390334b0904",
+      "size_bytes": 16204056
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part09.tar.manifest.csv",
+      "sha256": "5c1ebecf7ddf7de3de0d1b67d9562df692773292ca54c06bcb1bbee655654c56",
+      "size_bytes": 23943
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part09.tar.xz",
+      "sha256": "29eace5e53a845788bcca61dfdf7e617d42a6c30a76b16b26a4ff21f98d56405",
+      "size_bytes": 5871372
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part10.tar.manifest.csv",
+      "sha256": "bfeeb25c1c0249bb23cfd49d6a1f8fcd9735846671fd6e03f413bec402108182",
+      "size_bytes": 24611
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part10.tar.xz",
+      "sha256": "e6a9cbded6211976e872a511703faecf6d8877f4d0d46f05ae7619b775680141",
+      "size_bytes": 3313824
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part11.tar.manifest.csv",
+      "sha256": "0ebbf0903f9e42bf6a28568e45d068da3b48bdec59069e758f8ff2ad2c3ae4ae",
+      "size_bytes": 24519
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part11.tar.xz",
+      "sha256": "e7c9c6fad6c1cda814f6ff0c1d9008d752ac6c010c9ede39babb15882e35d72e",
+      "size_bytes": 4260384
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part12.tar.manifest.csv",
+      "sha256": "5138765a7d4c3f0204f565765b2529ac19dfef8ae0c20904f40c50c93d5b24f2",
+      "size_bytes": 23655
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part12.tar.xz",
+      "sha256": "1d63f7ede3593cf5b70aa5f303687667c5ff087c7a4179f7c0ac039a700505a1",
+      "size_bytes": 6172148
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part13.tar.manifest.csv",
+      "sha256": "aedc49431569dbf492bb3a97ceb57befbd7b1ab142f994fa97326c6f1b6843f6",
+      "size_bytes": 24519
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part13.tar.xz",
+      "sha256": "86a7ddf1751c1ad85ce0f99c2da776ed2d55254886919578951c2dc9faa47670",
+      "size_bytes": 6679164
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part14.tar.manifest.csv",
+      "sha256": "4ced59df20c847b041c35db38701320629941cb29bcff2115ba45dd0601e44ac",
+      "size_bytes": 24327
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part14.tar.xz",
+      "sha256": "3e1478d8faee19e6641095234821b5f62b3f912ebbe75132cd00c9e172119712",
+      "size_bytes": 6330640
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part15.tar.manifest.csv",
+      "sha256": "29061a2ac7a5f62d16737823a43affd85daa75ff88d4ce4e6a399c8719f612bb",
+      "size_bytes": 24039
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part15.tar.xz",
+      "sha256": "fc877df18fdb69e05ab7a8d84f34d39f7082b6b9b6488c8268f5847f1a855ee3",
+      "size_bytes": 5687956
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part16.tar.manifest.csv",
+      "sha256": "b4aae55d9282d9b14143f1df4fb1e58c0e3203327b9aae8a4d4061f0fd46de98",
+      "size_bytes": 24999
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part16.tar.xz",
+      "sha256": "73a3f492a4844dd317132089f370e7176191375b45c049b5242293c0ca697266",
+      "size_bytes": 5085664
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part17.tar.manifest.csv",
+      "sha256": "dfeb059dc8b3e1d60aa05d45f251d14ba89d57ff958e45e7ce17718625e2db96",
+      "size_bytes": 24303
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part17.tar.xz",
+      "sha256": "1667915358d80f7ff03cfbd8f321275621d0f564fbd5ce5356e966bf34c1ad00",
+      "size_bytes": 718652
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part18.tar.manifest.csv",
+      "sha256": "ca6d12473366a78eb390d06cf7273b06392d2be6766846f0e6beadbae29855c5",
+      "size_bytes": 24015
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part18.tar.xz",
+      "sha256": "6287e9ddd3afd77407a83a1e40899bf1f3cbb5ee5345c27d8bccbf9735f32ab7",
+      "size_bytes": 839528
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part19.tar.manifest.csv",
+      "sha256": "219f9d2e49eb7d106374e46e3430e3f547185f104b51a6612e01fa39ba344238",
+      "size_bytes": 23925
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part19.tar.xz",
+      "sha256": "a9f7cf0d51ce9d514b039f0313cabcdd32c07b20edd809eea5805d4c56a608d8",
+      "size_bytes": 846816
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part20.tar.manifest.csv",
+      "sha256": "8dd64ada45c6eb0ffd87e36593d9751259b94abf18b8dc0242e72b1f38e8dbcd",
+      "size_bytes": 24015
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part20.tar.xz",
+      "sha256": "b6ff287e35940dfad55d9a42e9137ee91b723cec928f04f56ea15812d10162f4",
+      "size_bytes": 690680
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part21.tar.manifest.csv",
+      "sha256": "142be08cbbdf5e9673239936540a8e30ae81b16abbab3480337b135dead1932c",
+      "size_bytes": 23922
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part21.tar.xz",
+      "sha256": "e95ecebffe864e9ecf2a39a38302c8cdd5c7737235d12250c77eaee5b57868d8",
+      "size_bytes": 731872
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part22.tar.manifest.csv",
+      "sha256": "0fb96de8476fea9b2cc789c8853042124a0fae96bac6a4078aca7dcf9cd10ac7",
+      "size_bytes": 24685
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part22.tar.xz",
+      "sha256": "c4224b0c70ec1679375003b05f34d08c1d9cbb0acae3f7761c1a69e910977965",
+      "size_bytes": 463884
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part23.tar.manifest.csv",
+      "sha256": "28b5ffa1e79fd89eb0b6826161f806f6817b23d460b2d24bd79f96823e2f7b9c",
+      "size_bytes": 24401
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part23.tar.xz",
+      "sha256": "073811177f33739f6bb045df5b4863abda24d5c5aca1c5ec866bdf9d73b02000",
+      "size_bytes": 337576
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part24.tar.manifest.csv",
+      "sha256": "b588baf0507a662114660ec717746c908c3012d62934f1f14d6cdf14234dbe51",
+      "size_bytes": 24405
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/humanitarian-part24.tar.xz",
+      "sha256": "631d118f5c25dd616cc8be5cca4fd7cfc7834bbd6a260b68847e4169fb2275f8",
+      "size_bytes": 726808
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "1308d7003b852535a8b22dcca4a888c1814cc20af8ef2c9aa99905895927867e",
+      "size_bytes": 24197
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part01.tar.xz",
+      "sha256": "5a884ae9e90092f3e9c5deb52ef1239ac18e6f32cc94ec2ed398ff916283a855",
+      "size_bytes": 5126572
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "6bcba37347e618d947ed4b0585def1a4249a1bba1b8492c34680d68b7352da74",
+      "size_bytes": 24975
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part02.tar.xz",
+      "sha256": "6f1e111f2b270daffdf33ce577c25cc24f1e9eebcdc8308326c22a35c1ded145",
+      "size_bytes": 24663180
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "1aa222b6b3a2a0e853b1ebc54732589e7c5b1909aec9969758fe2344255ca59b",
+      "size_bytes": 24879
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part03.tar.xz",
+      "sha256": "3ba6a3dfd1e85f84537c73bb9eb4128b3c3d8e857177f01a0b1ef6b288dee96c",
+      "size_bytes": 22347932
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part04.tar.manifest.csv",
+      "sha256": "48b18174194fa6cf25e61a3e296072733eef8a7ca81f6b4b4630954c703f5b2c",
+      "size_bytes": 23911
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part04.tar.xz",
+      "sha256": "4b914b5f794b9b8ae4e7abe43b260a75e5afd983467566144ecd43e1c61455e9",
+      "size_bytes": 5283896
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part05.tar.manifest.csv",
+      "sha256": "d22616e287fad24a616e237362eca3eea8fc1c387a2234b13db5e6a9903cb7d8",
+      "size_bytes": 24879
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part05.tar.xz",
+      "sha256": "e74a0ae5d7464143f0a2487b966f1789f23f2af95d65052265bb17cb176b98aa",
+      "size_bytes": 22242640
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part06.tar.manifest.csv",
+      "sha256": "ed95b38df0bb591324b926e41c09cbd20af9ea2548d00dfe0655a91522d26246",
+      "size_bytes": 24581
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part06.tar.xz",
+      "sha256": "ecbec7111339f95942215719d10d1ab4ad6769262d7f446994413ed4baebfa79",
+      "size_bytes": 5325552
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part07.tar.manifest.csv",
+      "sha256": "fd14ee152ba633a1a85b0c33497bc72481975637939bb611e5d0fb444a556cca",
+      "size_bytes": 24293
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part07.tar.xz",
+      "sha256": "a14be9df216837f99dabf4883b30ff4351cba82fff8658508817cd19912e3f02",
+      "size_bytes": 4870368
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part08.tar.manifest.csv",
+      "sha256": "dee18a1635c2045d53e38947167c1e732747dfd846ce60a27cee9bc0eb69ccf9",
+      "size_bytes": 25359
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part08.tar.xz",
+      "sha256": "944a750b7653ae07a27efc703ce9019b3ce1ccf8b49b67928446284ea123349d",
+      "size_bytes": 23652556
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part09.tar.manifest.csv",
+      "sha256": "a52ee98541557254e8fa76b603b2ca8c4c45a496eea6934a0cbf56825fbed220",
+      "size_bytes": 24855
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part09.tar.xz",
+      "sha256": "31d5428b509f749071091280a9c5d24532cabe14bf1a52770999456a4709dcd6",
+      "size_bytes": 6076456
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part10.tar.manifest.csv",
+      "sha256": "b81cc2dc7058119959d2f6218f9c4c94f3729d2c01ffe9ba53c38a29d89e5ce0",
+      "size_bytes": 24461
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part10.tar.xz",
+      "sha256": "cfaa6e2f8cd43159c4cf9674895c837ddaf8dc744d491391d817a7bce8799550",
+      "size_bytes": 1117632
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part11.tar.manifest.csv",
+      "sha256": "132021b343cdda2913efad30854cd6fb0fedb56b012a0cd1965b40d908735491",
+      "size_bytes": 24366
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part11.tar.xz",
+      "sha256": "cecdfdb355b3ba482ac509a631a43daeae646b242b29014d25b250a45bdd4d04",
+      "size_bytes": 1165408
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part12.tar.manifest.csv",
+      "sha256": "bafd450576715ffc7f127fec40396c8471a887c5f5a7f7190242c0dedc2aabc4",
+      "size_bytes": 24561
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part12.tar.xz",
+      "sha256": "cf322480bfb5f8fa95b1e21701ea6de0ea305993de7e19178ef0e2d73645251d",
+      "size_bytes": 6020452
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part13.tar.manifest.csv",
+      "sha256": "6e4560ff87ea9f62795ca96ab6fb8ec06c72459b3f393b74fdd0994581700264",
+      "size_bytes": 24365
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part13.tar.xz",
+      "sha256": "6a6f2a5a746efddb67d020ed7c8e6499c2b68b4d9745133081cfa9d2a9e612f6",
+      "size_bytes": 1045076
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part14.tar.manifest.csv",
+      "sha256": "7b998101e7c8fc3d2020b48bbc5d29e2ea382539df5aeeb9b8cda15a92ec0464",
+      "size_bytes": 25239
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part14.tar.xz",
+      "sha256": "5163133a6ac29678df37e0f3503bee054d8f025c3cafdb435b76ad8c72755849",
+      "size_bytes": 5821504
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part15.tar.manifest.csv",
+      "sha256": "01ac32ff57f4e2920c215a22b02f27c84aed4bb242403ae7dbbb673d5c82f873",
+      "size_bytes": 24951
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part15.tar.xz",
+      "sha256": "e44e6d7c2c309bc439c92a54a4c95c88edd70ff48a47e4deda289aefddfa2539",
+      "size_bytes": 5408108
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part16.tar.manifest.csv",
+      "sha256": "423a031f899eed2190d791df59be6cb5ccd2fe719653e7421fd4b84052a2b179",
+      "size_bytes": 24845
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part16.tar.xz",
+      "sha256": "f1e3ad5265e2b6fa89ecadb2eb9f8bea120c71e517f71d0f46e51f113ea070d5",
+      "size_bytes": 1102956
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part17.tar.manifest.csv",
+      "sha256": "bb65d93da915cd5496d303a9dbcd213a2d69d81be52712989cda99e2604fab05",
+      "size_bytes": 24155
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part17.tar.xz",
+      "sha256": "0eb51cdd3120b2edd0547f6e18bacb7581ddf43128c9924f3eb09933192d931a",
+      "size_bytes": 230636
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part18.tar.manifest.csv",
+      "sha256": "0708a2661f0ec49113a8c0034fc7431593e076ecf1de30c3de926882b2f9c774",
+      "size_bytes": 24918
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part18.tar.xz",
+      "sha256": "f3f4e5e9a6b4d7b1c48822c76c373846fc894ffb0f737d3c59bb75e2c73e489f",
+      "size_bytes": 163000
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part19.tar.manifest.csv",
+      "sha256": "8b9cc7834b294f63556043b932a5e06a49efba4da6763c664d64a2bb16be9704",
+      "size_bytes": 24822
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part19.tar.xz",
+      "sha256": "38bbeb25c29a1dc4ff6e05a3200ac4e1bb38d7337ba7ea8129c3c623e7083652",
+      "size_bytes": 156780
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part20.tar.manifest.csv",
+      "sha256": "e0944572388bf62e2755fcedba08b8b899c1703c3c8fa9ff90f07ea3b0cd2f41",
+      "size_bytes": 23866
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part20.tar.xz",
+      "sha256": "c4ed7c3347d149ddde9f6a94a34ddf7169c142de387deadc708f927ef209b748",
+      "size_bytes": 211032
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part21.tar.manifest.csv",
+      "sha256": "17e096c2616de73300fc711759b555fbab0b3949a4014fb5aa8be6b83b25080d",
+      "size_bytes": 24822
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part21.tar.xz",
+      "sha256": "6dad86576bc75aa066e63da1bad345246d5db80033280f05ae476c7a2ecfba11",
+      "size_bytes": 150952
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part22.tar.manifest.csv",
+      "sha256": "5e5c1b2fd60a64aae182fff5b4acaaab351af46066de756d12c8a0b19beef9fb",
+      "size_bytes": 24539
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part22.tar.xz",
+      "sha256": "8fa1ec31004775211e84b316d970f81290c11566273d378c628f7be80d7421b1",
+      "size_bytes": 223800
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part23.tar.manifest.csv",
+      "sha256": "51518249526fb6dbd572c6acbf058c97d80d07ffe93ac35d2b12eb54372ec654",
+      "size_bytes": 24250
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part23.tar.xz",
+      "sha256": "c310fa47decbe4190398534a8b26c37430e9416a7c568bb2db69734f2b91993a",
+      "size_bytes": 196152
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part24.tar.manifest.csv",
+      "sha256": "246723a5c1fa189b5477167196b8ae859a663dfe2ac2478771faa43d46ef827e",
+      "size_bytes": 25301
+    },
+    {
+      "relative_path": "raw/packed/development_final_hysteresis_suppression_invalidated/utility_restoration-part24.tar.xz",
+      "sha256": "d2e28bdd0dde0df5f402a39a2fbd81ba913e516b55b4018331634ae5071708f8",
+      "size_bytes": 140548
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part01.tar.manifest.csv",
+      "sha256": "4f76051fcd1e54e4f724e18d96f4d03917acaddf3ecc58571d98e72174f9653c",
+      "size_bytes": 32539
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part01.tar.xz",
+      "sha256": "101db92420d0d4f37574eb0a7e4e92352c28fb13fca836f4ede1184a13104a92",
+      "size_bytes": 47125084
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part02.tar.manifest.csv",
+      "sha256": "21359d7bd0a70096b1f70416b042c3699666af53290b62c6c16f8664ded53f17",
+      "size_bytes": 31774
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part02.tar.xz",
+      "sha256": "3ffc599f378173b029e9cb544511b96ef3263abdb1df5133665245a8cc0c36d5",
+      "size_bytes": 35267928
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part03.tar.manifest.csv",
+      "sha256": "21b843cf141d6509cc36cc5fb5487e45abdda750e17f8cd30a0514df23b6abae",
+      "size_bytes": 27251
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part03.tar.xz",
+      "sha256": "4117ac34a8fa0fb9d28548b038f5012d51a98e2267210f0b9af7de92649cfc7a",
+      "size_bytes": 49476952
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part04.tar.manifest.csv",
+      "sha256": "39effa77f45985f395759727f7fc4469ceab36ac6b0959a86efbc806a1b3d8fe",
+      "size_bytes": 32416
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part04.tar.xz",
+      "sha256": "6132e264d532209f81e141bcd68f5478a45d78bcad35b1cf0497808ae26d9513",
+      "size_bytes": 20902812
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part05.tar.manifest.csv",
+      "sha256": "ddfcc16c626ef600cb99ed24698cf3014c43b33b559866ce55fea61e20858c23",
+      "size_bytes": 32449
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part05.tar.xz",
+      "sha256": "edec62710df0f96f050505df12d5d2cc7ef2c178b96b0f7d54be45f1a7b04511",
+      "size_bytes": 7106948
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part06.tar.manifest.csv",
+      "sha256": "9054abde09a64ddeca05671f6c262bd0eb75ad1fb8fbb8abab8f1f470156f711",
+      "size_bytes": 32523
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part06.tar.xz",
+      "sha256": "8b35b7946479f7d673c6d62d7633ae0404215baca0cb4b0656cbd74dca02d09f",
+      "size_bytes": 10149204
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part07.tar.manifest.csv",
+      "sha256": "b49a67254abd9dd979b3c1fe643e04e4bdc8d52c865d6ed11571a639df557e3b",
+      "size_bytes": 32113
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part07.tar.xz",
+      "sha256": "ff49f800cf31eee12e7d1d24782fdba6b8f6160ec4fad6d8373e30f2c20bf0a5",
+      "size_bytes": 10841304
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part08.tar.manifest.csv",
+      "sha256": "410f8e0b0567b71915aec410f4337e96fb8c3f5739d204b6ef3917bc15b9b1bb",
+      "size_bytes": 32523
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part08.tar.xz",
+      "sha256": "70dd1bbf074c55d09bb6636d6586440afc196accbcd3debf8cbbf2e1d05f35e7",
+      "size_bytes": 10797688
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part09.tar.manifest.csv",
+      "sha256": "b984c19ba9bed5718dbffebc758a03cff5b7aa9573374e4e0532d57a5c5b2b0b",
+      "size_bytes": 32889
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part09.tar.xz",
+      "sha256": "312ca6ec2d7ed8dc989085e5279b8371d323d2831455aa25bc3a8921d13d702d",
+      "size_bytes": 6546648
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part10.tar.manifest.csv",
+      "sha256": "3e37bb62328100098dffa8ef953d157d4d2e2de5b74099203e4ee65d9554d96c",
+      "size_bytes": 32129
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part10.tar.xz",
+      "sha256": "2df4219291879638d96198d662f2f9d80ae42f0d4a9169193b2ae216ef02bacd",
+      "size_bytes": 1582588
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part11.tar.manifest.csv",
+      "sha256": "540b25c3d197f11e5e3c21f47ab0e5ea754873c04934c9892a9b107d8c14fe0f",
+      "size_bytes": 32208
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part11.tar.xz",
+      "sha256": "b66d051f19d48de73187551974312a068eff075af4af96e8f35d52ba004df078",
+      "size_bytes": 1833696
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part12.tar.manifest.csv",
+      "sha256": "fc6d28b4cc8ee5427a5f99cf203086951f8e84dbb7c55c225a4f8fcb0bd08c04",
+      "size_bytes": 31796
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part12.tar.xz",
+      "sha256": "611172270bebc48a86f3a7bb24a1ab74bc478aae9b9940fdcb07781dd031fc95",
+      "size_bytes": 1432728
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part13.tar.manifest.csv",
+      "sha256": "e7ee5d9b61d1b292bde2b9a7185f25ed6ed977de9c0d8dfc091dcfe530574442",
+      "size_bytes": 33006
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part13.tar.xz",
+      "sha256": "bedef3846b7c39a9c9f5111b1fd7bcbfc91497b9c8491052bd780fb051b0b961",
+      "size_bytes": 780152
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part14.tar.manifest.csv",
+      "sha256": "212c3c5f536c5c215487a63400a3221673c0aa8e60c5ffecd350c4d70ce77cb2",
+      "size_bytes": 24299
+    },
+    {
+      "relative_path": "raw/packed/development_final_pre_hysteresis_invalidated/humanitarian-part14.tar.xz",
+      "sha256": "3e9125273c553746914fc954318935849497130e31893616347a17838cd974ba",
+      "size_bytes": 1091772
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/humanitarian-part01.tar.manifest.csv",
+      "sha256": "c0e89eca0c316e3c2afec39824746afe7087df3f4b2bafff788c7bc324f887d0",
+      "size_bytes": 99442
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/humanitarian-part01.tar.xz",
+      "sha256": "b440559ad8a4f7e641d108b1429a1ec5e68c3272114512b32fb39e3b51fa5d55",
+      "size_bytes": 48824896
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/humanitarian-part02.tar.manifest.csv",
+      "sha256": "5fd97939cf946327a46250a6704e101aba0f50c86b320118530d30c5d348f418",
+      "size_bytes": 24453
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/humanitarian-part02.tar.xz",
+      "sha256": "13e8d4db617b45e175afae8605a1cd292824bea40e4458a83ab443d9c423ded6",
+      "size_bytes": 490668
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "de8dc97d1bb6eea2fc03667dbd18878196d1c0a7c456b79b32a41c244696c631",
+      "size_bytes": 101307
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/utility_restoration-part01.tar.xz",
+      "sha256": "89f600ccf5b95be5c034bf8f61803283708eff731799dea616fdfa7752a230ad",
+      "size_bytes": 26804796
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "2d158fb95da21941d0679dfff2adb339ed63417b47daad199bd6c76dcda970f3",
+      "size_bytes": 24481
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot/utility_restoration-part02.tar.xz",
+      "sha256": "2466a7de615fb26439af9fb0a86527565a0eb869da1edca46fa51e33c117d2fa",
+      "size_bytes": 237472
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part01.tar.manifest.csv",
+      "sha256": "4a347e198d6d0eefe18bb0354b70c39ef7bbbef206d11062f363867d21812f27",
+      "size_bytes": 50267
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part01.tar.xz",
+      "sha256": "cc421ae25beef1c923e5e9ee6514baff0080827e3fb5471b830f552f8a1ad87a",
+      "size_bytes": 51352132
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part02.tar.manifest.csv",
+      "sha256": "14fe39651103aeffa85ef4d4ef69bff62771e0a05d1a779724263fb913f834fc",
+      "size_bytes": 50441
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part02.tar.xz",
+      "sha256": "90f88b99cf8b6c7ea7c5966f4f5aeb4937b0afd11ba8a402cab1664e3f349a36",
+      "size_bytes": 5097112
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part03.tar.manifest.csv",
+      "sha256": "c98f92143fd47f68c26e229ce61eeb09d5e0742e2a9d3d3754a34fcd9a14fdc1",
+      "size_bytes": 24742
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/humanitarian-part03.tar.xz",
+      "sha256": "324ffec8a92a2979d65446b5b77793a61590d6c575db964820a74184b2216d9b",
+      "size_bytes": 633224
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "74f855c263a20240ca88c94e655af3c293801b31e4991815f37589296467243b",
+      "size_bytes": 51209
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part01.tar.xz",
+      "sha256": "53b2018a3eafc3e4feb3320c32481718c45d7efd0e51469e5b7f6f3ac51a4daa",
+      "size_bytes": 25213016
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "2a12a0b972b8cfa95457d811283dd671053dca222956eb3d91bde7a069f6d498",
+      "size_bytes": 51371
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part02.tar.xz",
+      "sha256": "28264282ab5971070bd26497182f95974c9a43b553ad8ded385072fa3bfd3774",
+      "size_bytes": 3406576
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "d225ddb77e82eb58715737ee6328e2cefe1e6c76668bb3896cd610084f7ff7e4",
+      "size_bytes": 24769
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v2/utility_restoration-part03.tar.xz",
+      "sha256": "6faf761cb099ed5614abda63aff34314a00de8091ae400942cb2e6c42cd141cf",
+      "size_bytes": 228756
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part01.tar.manifest.csv",
+      "sha256": "a4aac8d26f9e4e5056346f7b4632f8203013ceb957d2cbd9e69a5c9527f7866b",
+      "size_bytes": 50268
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part01.tar.xz",
+      "sha256": "5c8036699d7a0ac0c4eaf48d6bd7502b1935195a7627ee76f4c9c495d7f08f8d",
+      "size_bytes": 51464716
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part02.tar.manifest.csv",
+      "sha256": "89e90c7f51e63f71a8b099246084e21e8514772b84e178f85f00ef1d2a33cec6",
+      "size_bytes": 50441
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part02.tar.xz",
+      "sha256": "2cef14495f9be5841509ea9c69bdd7a1dee2e39171e057750f2e6fd87dda9ee7",
+      "size_bytes": 7289480
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part03.tar.manifest.csv",
+      "sha256": "df7ae23c4d027d6a8a80f8ee9bb815aad78ba77ff0581f936fe4ca46f62b8d7c",
+      "size_bytes": 24741
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/humanitarian-part03.tar.xz",
+      "sha256": "c6c5196e085645dc5a52a80f40d760ac367a27189a0d9b5f7dc1c95e2ac969a4",
+      "size_bytes": 427476
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "b439329a8f36e8945260b332165b9f5d5885d5746fa64809a2549da123af49db",
+      "size_bytes": 51210
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part01.tar.xz",
+      "sha256": "9f3aebf6e3ffaf4f4f4be6e7f03b2f0bb87dc8ef4f1eb164f2fed9f94a6b7716",
+      "size_bytes": 27192336
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "56e13a4991af9f159b1d535bd776e6a3a27c8f1e662e5f5b261ca9225fc51a05",
+      "size_bytes": 51369
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part02.tar.xz",
+      "sha256": "6438f7a1ab91a18bd8fce6690efeffbe6221dc325440e8be41b08938403470bd",
+      "size_bytes": 4244004
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "5883a1c3d678d3fb756812f3356c58c5b3c6aa8bb89de1596810d97fce32b293",
+      "size_bytes": 24773
+    },
+    {
+      "relative_path": "raw/packed/hysteresis_repair_pilot_v3/utility_restoration-part03.tar.xz",
+      "sha256": "a60e2a77797534cafe92e4946177c351ffadac5118c9f4bb4eca6578817a459d",
+      "size_bytes": 266700
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part01.tar.manifest.csv",
+      "sha256": "48abce5b940d70d8854eb375a622cd7ce60502e3f076059a3130582196564d2e",
+      "size_bytes": 88673
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part01.tar.xz",
+      "sha256": "44b5382554fedee4275ffeca8b19f8a8992e2b33600e3d309310d6e4c16837c0",
+      "size_bytes": 38265628
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part02.tar.manifest.csv",
+      "sha256": "be34276d8d7f01d03030441b1224b7a9c34d4c8d87b2c6ace732c94111e19392",
+      "size_bytes": 86637
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part02.tar.xz",
+      "sha256": "36cc7cf3907865cba950719d1866b25d287d45ab0c2bd756f823c303d1b5dbb2",
+      "size_bytes": 3998616
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part03.tar.manifest.csv",
+      "sha256": "9dfa5e975a99bd6e859c9d048801060b8f272bf1c77973bc42c8c632f300a3a6",
+      "size_bytes": 91637
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part03.tar.xz",
+      "sha256": "9c0dd3e45d7745a1bb82607d54ab48b80160426250680d87076c7d1c28f145ee",
+      "size_bytes": 14017568
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part04.tar.manifest.csv",
+      "sha256": "5488b2d0819bfbc8a90835fb5a413b8ec840d987013357df64e6a690b72a50b0",
+      "size_bytes": 88795
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part04.tar.xz",
+      "sha256": "b777f1296c64c24f298b4445b14db1bbd8c39e85572ac2b1cec1e1be7cc84b1a",
+      "size_bytes": 1915504
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part05.tar.manifest.csv",
+      "sha256": "7751d412cd9404aecd6c96f64fff6998e14f30f8bcd6df543f7ef83836f3e054",
+      "size_bytes": 7575
+    },
+    {
+      "relative_path": "raw/packed/pilots/humanitarian-part05.tar.xz",
+      "sha256": "db9a2084218c271e157e9b26010c1f49fe9612bc084df3e884974657d5127ac8",
+      "size_bytes": 259460
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "f3029359a8c8426220207fad1d95262d9fc79fcc7569f3ab1a37d6188599a1ac",
+      "size_bytes": 92705
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part01.tar.xz",
+      "sha256": "e182ad4c140b9cdc646a62cd452c87b18f04fe1d55fff6bf7f677565eaf9b2d9",
+      "size_bytes": 36166632
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "f18558736525fa908204ba3e9f17c0e79846cefd2c56c43f0f937641706b0a7a",
+      "size_bytes": 90669
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part02.tar.xz",
+      "sha256": "91b993336ad5f1755c3a3a470a39a1734a9fbe7fb0dce67a3c09a132ec1b49b3",
+      "size_bytes": 5282984
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "ec944e16a7e415992d3caa651386fc77c959c6b1f8ce33e0ba6a40ae7e033332",
+      "size_bytes": 93374
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part03.tar.xz",
+      "sha256": "fdd2223a4fb3dc021db4bf71c56ef5e0168aea40e49169edf79277400d8118cf",
+      "size_bytes": 14253072
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part04.tar.manifest.csv",
+      "sha256": "5e264c91dcddaf166a76508907f8e3511d9890c09c11b03a9343d1f700beb1f4",
+      "size_bytes": 90094
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part04.tar.xz",
+      "sha256": "c5426a519272d31e90e0d3d36fd6e401d7f8a04e9af30b91dc18750d14776cd5",
+      "size_bytes": 760080
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part05.tar.manifest.csv",
+      "sha256": "1b3ec908e1409aaf708cedaa7568f8db7e6712ac3ceea8c0292c13e1c9d24f42",
+      "size_bytes": 7683
+    },
+    {
+      "relative_path": "raw/packed/pilots/utility_restoration-part05.tar.xz",
+      "sha256": "6ebb1ad0d3cfc3270485dcf927d0f17d7e1cb86b8c0f77b45176c45695ad52f7",
+      "size_bytes": 129832
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part01.tar.manifest.csv",
+      "sha256": "c1422c1c85e9089732814f34c5c1fb99990133e5b426ef498b29e505ce068501",
+      "size_bytes": 89777
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part01.tar.xz",
+      "sha256": "e81b5c26227a0eb95fb7082f558230960e908729c04e74a5217b94c2cb88470e",
+      "size_bytes": 39423780
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part02.tar.manifest.csv",
+      "sha256": "e9d98545931d60be9fc90260b7a16bb68539fb7e8fde17ef9f1a5bf7a441d6e9",
+      "size_bytes": 87741
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part02.tar.xz",
+      "sha256": "907c7301605550a7b339b85fb155abb3d3ead32c61631d0eb3aeb0470fbe129b",
+      "size_bytes": 2976676
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part03.tar.manifest.csv",
+      "sha256": "39dd3772d05a1218ad2e68d32c686fafce0a64818ad90fb143b3d6a336b88aa7",
+      "size_bytes": 92756
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part03.tar.xz",
+      "sha256": "123201238a48e83f918e08c5334570b2c8d455f5e5ba5bed12735085725ab452",
+      "size_bytes": 16131348
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part04.tar.manifest.csv",
+      "sha256": "bf974b1b0aecc461e48a70b7f794ee824d5b040c60f31ac40ab0c2625caf7ec4",
+      "size_bytes": 89904
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part04.tar.xz",
+      "sha256": "944c55605dd610e392a206a54ae806e5a1d494becf74899c44f694669fe8fca2",
+      "size_bytes": 1772860
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part05.tar.manifest.csv",
+      "sha256": "0ef1ce9297c61f28974cad2b1c825c3ba23712ef0ab4918c0d415051c104d353",
+      "size_bytes": 7667
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/humanitarian-part05.tar.xz",
+      "sha256": "d1bda66186d921fadef91473738451df2899d5669140e7b48e815be714981092",
+      "size_bytes": 253412
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "92636287f51de2ce3f20c02150ddda91b1ad56bc6221b84bfbfd5c41ab12cca6",
+      "size_bytes": 93809
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part01.tar.xz",
+      "sha256": "0f102dd651fea99f2265d4d67f241e3f92a368b2b01d78eb5ed58b928e34f19f",
+      "size_bytes": 36954044
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "11d5a8d010eb8135e6903c3a3dcadc3c8cb021b18977578f76538444a00fe232",
+      "size_bytes": 91773
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part02.tar.xz",
+      "sha256": "e43a30bb3a1b1168265ba52af0102de42d51d1dc379bbb0252585e11c7533e64",
+      "size_bytes": 3465756
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part03.tar.manifest.csv",
+      "sha256": "52cb3f4e7d1b9b0655f7c06142c6fbf00c03b909a31420bd2436e2a2c217dff9",
+      "size_bytes": 94484
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part03.tar.xz",
+      "sha256": "59deafcf9cb5d1893b65be752d8a2c02d0521016a9e3ed2bb3b98c6163262863",
+      "size_bytes": 14450888
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part04.tar.manifest.csv",
+      "sha256": "ae2519bd98904bf71feb64a675f7e87ba9963c459db799c6766c2f498efac1ff",
+      "size_bytes": 91196
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part04.tar.xz",
+      "sha256": "0230665d41a416aeddd7337c7aadced4652cadbb61a00a1d61fa1ddb49ee1abd",
+      "size_bytes": 670508
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part05.tar.manifest.csv",
+      "sha256": "17893f5c269f54f3af88aad62fffda656b804a568d5200082f0d3ab16a39b19d",
+      "size_bytes": 7775
+    },
+    {
+      "relative_path": "raw/packed/pilots_v2/utility_restoration-part05.tar.xz",
+      "sha256": "3f8e86bc2c13ee21e45bbfdd99f52d8486a0c3faad59ea9101d5039b453f5a4d",
+      "size_bytes": 122928
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/humanitarian-part01.tar.manifest.csv",
+      "sha256": "11de2f81a6a6fef230302f633dd59f9c52af50497824d0b235b33e4985f0347e",
+      "size_bytes": 92914
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/humanitarian-part01.tar.xz",
+      "sha256": "d857817992d15f87a772e1684e9a9b94c06914c8b6810e6a0b6d330b80a441bc",
+      "size_bytes": 26625356
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/humanitarian-part02.tar.manifest.csv",
+      "sha256": "2f16d8d0e260b1dcf41811065616cc8675144ef03a162412c8492ca0660f2a25",
+      "size_bytes": 78508
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/humanitarian-part02.tar.xz",
+      "sha256": "571d4a478b363ee416c2627918b94a4381d8a3bdbb969b9d6472d18d19a89339",
+      "size_bytes": 4881228
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "1fbbd41996dc36c391158e388076a84d02b73d41ab28c9ab5f16a71198cc5830",
+      "size_bytes": 96120
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/utility_restoration-part01.tar.xz",
+      "sha256": "785ff800ff281c8334ca8c7a816e6430b2d94c4eef8c284353728528cb8542cf",
+      "size_bytes": 19122044
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/utility_restoration-part02.tar.manifest.csv",
+      "sha256": "c26889cbaa3fcaebcc32e50c58021e64a6a5b8446633cdcb84ffb759f09c5a97",
+      "size_bytes": 81100
+    },
+    {
+      "relative_path": "raw/packed/pilots_v3/utility_restoration-part02.tar.xz",
+      "sha256": "0034450f88aed17782e350598a601a15c97451b1be772a7c949202aa8efef1f4",
+      "size_bytes": 1765780
+    },
+    {
+      "relative_path": "raw/packed/routing_repair_pilot/utility_restoration-part01.tar.manifest.csv",
+      "sha256": "9d1bac71ec9176612a50b7ae039ab7c962767839935f9afbc988a356e2f275f0",
+      "size_bytes": 33053
+    },
+    {
+      "relative_path": "raw/packed/routing_repair_pilot/utility_restoration-part01.tar.xz",
+      "sha256": "6fc654a7d68375175c03c2f25904b5cc50183034c6486a4f20ce7c763718b802",
+      "size_bytes": 12633168
+    },
+    {
+      "relative_path": "reproducibility/compaction/development.json",
+      "sha256": "3e7aadf1fb7fe1edd000bc915d652ee09315adf3f00811049d3240f09555d83c",
+      "size_bytes": 37480
+    },
+    {
+      "relative_path": "reproducibility/compaction/development_final_hysteresis_suppression_invalidated.json",
+      "sha256": "1e9cf4834e448787dac250d78e72b907ca03afb837ac583d835b2edbc4f8416b",
+      "size_bytes": 38543
+    },
+    {
+      "relative_path": "reproducibility/compaction/development_final_pre_hysteresis_invalidated.json",
+      "sha256": "0ce6413b58ad6767a8f585c2a1801f56b53e95a661d9f2c35d41b04f40a65226",
+      "size_bytes": 11119
+    },
+    {
+      "relative_path": "reproducibility/compaction/hysteresis_repair_pilot.json",
+      "sha256": "09349ed4507b249daf363f25d7951a0555cc03e99a67d52b5b0315f08580026f",
+      "size_bytes": 3269
+    },
+    {
+      "relative_path": "reproducibility/compaction/hysteresis_repair_pilot_v2.json",
+      "sha256": "fb0939f964ec0ebfd5e1d88cba7f99f58c7460c83d678673c818a3861b77639d",
+      "size_bytes": 4787
+    },
+    {
+      "relative_path": "reproducibility/compaction/hysteresis_repair_pilot_v3.json",
+      "sha256": "786bb24c61cda362dab6448ef77f2dd186f1b4be5f0cf08be279ce12504359f4",
+      "size_bytes": 4788
+    },
+    {
+      "relative_path": "reproducibility/compaction/pilots.json",
+      "sha256": "cdeb8b7e0f3ea07e4d613d284704b382dbae4b2f8d83019046466b3c606ced66",
+      "size_bytes": 6516
+    },
+    {
+      "relative_path": "reproducibility/compaction/pilots_v2.json",
+      "sha256": "6604ee61066bb432795d2612dccbbad13fcfc431d8c8e43c02bb36c648cbb193",
+      "size_bytes": 6582
+    },
+    {
+      "relative_path": "reproducibility/compaction/pilots_v3.json",
+      "sha256": "c07f76e5327586d645ffe9a57f6369043577589ca5cd6b874f84bcbc69bc3900",
+      "size_bytes": 2807
+    },
+    {
+      "relative_path": "reproducibility/compaction/routing_repair_pilot.json",
+      "sha256": "bec866177173197f9e7868e591365cc464f3bb5cbbee3645cc110f98f50bfc56",
+      "size_bytes": 1050
+    },
+    {
+      "relative_path": "reproducibility/environment/environment_manifest.json",
+      "sha256": "77e643af31ef10a6e17509e88e5d56c93bb6dcf7c1d25f38fa332d2cfb2c7fca",
+      "size_bytes": 922
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/report.json",
+      "sha256": "10ef2db8accb410b3200e022f8fa27247b1c438c711f93c937b547ec5bcc08fa",
+      "size_bytes": 5450
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_application_network_snapshots-render.png",
+      "sha256": "23b65262030b90468ae7cff1224e90e4c63a9536f7e84d2842bf5fae3c626d7f",
+      "size_bytes": 132247
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_application_network_snapshots.fonts.txt",
+      "sha256": "582adfdb6f884d5954ce15791173c5bb2a3b20504bd785dbdb33262e38bdfdef",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_application_network_snapshots.pdfinfo.txt",
+      "sha256": "36fc33d71228022846ebef0b4959da4bf1a256646f2528fd42913992012fa49e",
+      "size_bytes": 406
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_belief_monitoring_architecture-render.png",
+      "sha256": "10336c8da4bc0ed1d2420045a9489cd27c992fa48f25e38d73c453e413c04dca",
+      "size_bytes": 75754
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_belief_monitoring_architecture.fonts.txt",
+      "sha256": "3a2f56c23eb0e09778ca9dac20fbdeed3fff92f7bec4b5ed00addb1d397fb60c",
+      "size_bytes": 376
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_belief_monitoring_architecture.pdfinfo.txt",
+      "sha256": "8ce47c62ea0fbadb79b35549ba6705ebd59b7da0374ff9837b73cf5015231edc",
+      "size_bytes": 404
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_communication_estimation_frontier-render.png",
+      "sha256": "a6f2f7b1421db5fb80fc3abb650b0d7a87ab0b9d1cc3d9bef572db8cf322f5d8",
+      "size_bytes": 76080
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_communication_estimation_frontier.fonts.txt",
+      "sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_communication_estimation_frontier.pdfinfo.txt",
+      "sha256": "d4bb09f2cf2b662a793fce1dc702dd8f0305793373fc938b44be4dfff075d3a0",
+      "size_bytes": 404
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_disruption_partition_trajectory-render.png",
+      "sha256": "c422d3ee023f0f29ddc946b0d3ffdc58772e9968123b21853d4203d374f995d5",
+      "size_bytes": 131204
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_disruption_partition_trajectory.fonts.txt",
+      "sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_disruption_partition_trajectory.pdfinfo.txt",
+      "sha256": "6e5cda18aeec5d9fcd8b5d3f70e2ba15d6bcfe73b3c8524b4a8a3531d86dc2c5",
+      "size_bytes": 406
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_downstream_performance_vs_communication-render.png",
+      "sha256": "d7b6d3e66e203ed3a5434ee6c59c4369cb58487b7ec39707d3119ec9d5955cf6",
+      "size_bytes": 134386
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_downstream_performance_vs_communication.fonts.txt",
+      "sha256": "3a2f56c23eb0e09778ca9dac20fbdeed3fff92f7bec4b5ed00addb1d397fb60c",
+      "size_bytes": 376
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_downstream_performance_vs_communication.pdfinfo.txt",
+      "sha256": "e85fb824b4780591e5b1411f6a23498751aa359d51caa25cd826a8f75c3808ed",
+      "size_bytes": 404
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_primary_effect_forest-render.png",
+      "sha256": "31195ef52bc26d3198f1a049269bc82d9bf5069484328ac8cd06966fda313b9d",
+      "size_bytes": 81986
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_primary_effect_forest.fonts.txt",
+      "sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_primary_effect_forest.pdfinfo.txt",
+      "sha256": "532d76ce5144e87abc904125cd29e10642cb5dd1e9c2f0f9a92470a62663cf21",
+      "size_bytes": 405
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_scaling_topology_robustness-render.png",
+      "sha256": "9b3f0b7acc4f9f2c32a4ef00d5f30f2e495ee73d71bd61187f439c25e3dc48e2",
+      "size_bytes": 94843
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_scaling_topology_robustness.fonts.txt",
+      "sha256": "a17ef2f3701782cd8491273d3582c29cfae6732a611129dbcf7debac840a90d5",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_scaling_topology_robustness.pdfinfo.txt",
+      "sha256": "25df44cb89dc5adc897ac512b095dd3f611c173144a15c1f24914c7e09a71201",
+      "size_bytes": 406
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_trigger_feasibility_no_go-render.png",
+      "sha256": "f69b761e339c49db3c102b1adff0783f50ed74aeb9ff645d79dcf28f2c5a9f8b",
+      "size_bytes": 67183
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_trigger_feasibility_no_go.fonts.txt",
+      "sha256": "2eaf353aa7efa4e0cf11fdb416a5f7987dda5f156c8fab5341234bec038e0d98",
+      "size_bytes": 282
+    },
+    {
+      "relative_path": "reproducibility/pdf_qa/v8_trigger_feasibility_no_go.pdfinfo.txt",
+      "sha256": "fa6c7ee4dcce074df1b91824b87c96746bb11f25b23d60eaa44e1a64e8cc5b34",
+      "size_bytes": 405
+    },
+    {
+      "relative_path": "reproducibility/pytest_full.xml",
+      "sha256": "1fb930972a7a92999a6084ff154e74e60e86b614624c9e7a623ac2a7dff27132",
+      "size_bytes": 54190
+    },
+    {
+      "relative_path": "reproducibility/pytest_v8.xml",
+      "sha256": "45ee3fa0eadd540cdf38f0db61e6ca695d04ada3fbeb51b2aa6491d4f48c014e",
+      "size_bytes": 5622
+    },
+    {
+      "relative_path": "reproducibility/replay/ledger_replay_audit.csv",
+      "sha256": "2629932a4f97197233133bbbcdb7b2034633166681c340777d3f06c5c6ff3062",
+      "size_bytes": 888200
+    },
+    {
+      "relative_path": "reproducibility/replay/replay_summary.json",
+      "sha256": "b171db626c0bb3b12cb9dd15cd6bcadaa24866db85c118e059975a4ca14087e8",
+      "size_bytes": 247
+    },
+    {
+      "relative_path": "reproducibility/report_build_summary.json",
+      "sha256": "1c633b56a7931a101ef09d4051db0fa3f7288e44ca3aad924041a59b25683706",
+      "size_bytes": 2162
+    },
+    {
+      "relative_path": "reproducibility/superseded_figures/v8_trigger_ablation.csv",
+      "sha256": "7a61afc5e45858175ad2e6644605ce58ee8d6eab99e08e7ae9427a1c1276aa18",
+      "size_bytes": 1404
+    },
+    {
+      "relative_path": "reproducibility/superseded_figures/v8_trigger_ablation.pdf",
+      "sha256": "d93615e03e0c2a3b2d152c9dd729af5cf8206ec79a8d75c82039a1f17eb279ae",
+      "size_bytes": 14757
+    },
+    {
+      "relative_path": "reproducibility/superseded_figures/v8_trigger_ablation.png",
+      "sha256": "adcadce3cfc861c65b38a545d1c06517453b2915b4164bd740aa149a0180e098",
+      "size_bytes": 126205
+    },
+    {
+      "relative_path": "routing_repair_pilot/candidate_registry.csv",
+      "sha256": "eb9e3193aceb1451d32780818c92e7a8dcfc71abdb9ec027424f4724bb03267d",
+      "size_bytes": 1079
+    },
+    {
+      "relative_path": "routing_repair_pilot/episode_summary.csv",
+      "sha256": "3a2a672a2003bf4cbdeefdd9c69ad7e27242d96e06191e609293a04a5e9e62e5",
+      "size_bytes": 12001
+    },
+    {
+      "relative_path": "routing_repair_pilot/execution_summary.json",
+      "sha256": "fbc17ede7541636d700d934121267c2a3a0daef7ba71633a8f0d2ed0590bab9a",
+      "size_bytes": 213
+    },
+    {
+      "relative_path": "statistics/v8_pilot_no_go_intervals.csv",
+      "sha256": "348561c6370d50c7b49cf6b641c6c4e5d4bb428fccae6fd608f6a4ca0501bb78",
+      "size_bytes": 3673
+    },
+    {
+      "relative_path": "statistics/v8_pilot_no_go_summary.json",
+      "sha256": "39cef9e6925a6a278e6605926007aa871655df7799b391ba7e29eeb2db3ed525",
+      "size_bytes": 2430
+    },
+    {
+      "relative_path": "tables/autonomous_outcomes.csv",
+      "sha256": "3041d9c9bd07120362618316006cd5e3ef8d0fbf4320244f1c3e1d53e18e0dac",
+      "size_bytes": 16497
+    },
+    {
+      "relative_path": "tables/communication_accounting.csv",
+      "sha256": "7d45a1e5c0e28f91e41a78500ee6ff41f1956f2ac9e247abca62d199fe837bbf",
+      "size_bytes": 20473
+    },
+    {
+      "relative_path": "tables/environment_coverage.csv",
+      "sha256": "da5cb0d52a7d4f314d3fbf8cc114412e50f06de19c32fc0fb45de86580d8e0b7",
+      "size_bytes": 5172
+    },
+    {
+      "relative_path": "tables/gate_outcomes.csv",
+      "sha256": "c67c5f1de7f2420f11e9555617fd8ce8fcf8b32fce164f350a59de78ecdf1024",
+      "size_bytes": 274
+    },
+    {
+      "relative_path": "tables/hypothesis_outcomes.csv",
+      "sha256": "15c8ea76be4d316e6f8f90c5a4f5d666798f5f906ecb20c143f63b3e98634685",
+      "size_bytes": 367
+    },
+    {
+      "relative_path": "tables/pilot_no_go_application_summary.csv",
+      "sha256": "635abc276b59c504b83fc805216ee7a4b53c709b5873992f74801746dd438b7a",
+      "size_bytes": 952
+    },
+    {
+      "relative_path": "tables/stage_compute_accounting.csv",
+      "sha256": "7071244713a4df7736d2bac1096fdb9985a2e890e191fd2b46bb79dcc9d7ce90",
+      "size_bytes": 1012
+    },
+    {
+      "relative_path": "tables/trigger_feasibility.csv",
+      "sha256": "75d5431cf01c75339248b6e60ae748bc32ffd1be6fbb618764fcd4bf6b64d2ea",
+      "size_bytes": 751
+    },
+    {
+      "relative_path": "training/NOT_RUN.md",
+      "sha256": "bab0f0d014ba1753ace5915bb604a27e21bb0fd19c82c129c13b91ffc9948c7b",
+      "size_bytes": 345
+    },
+    {
+      "relative_path": "validation/NOT_RUN.md",
+      "sha256": "5779738654b747ee6c1184735eec80c1db375a2b13f8571e9a2418a12b5b40ba",
+      "size_bytes": 160
+    }
+  ],
+  "crlf_text_files": [],
+  "indexed_artifacts": 506,
+  "namespace": "results/entropy_triggered_belief_monitoring_v8",
+  "oversized_files": [],
+  "status": "pass",
+  "total_indexed_bytes": 1676486916
+}

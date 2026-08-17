@@ -1,0 +1,5 @@
+stage,application,candidate,independent_panels,mean_activation_rate,information_score_fraction,pre_disruption_transmission_rate
+hysteresis_repair_pilot_v3,humanitarian,generalized_0115_u8,6,0.7602716727716728,0.900094696969697,0.8269230769230769
+hysteresis_repair_pilot_v3,utility_restoration,generalized_0115_u8,6,0.7158195970695971,0.8454780361757106,0.7115384615384616
+hysteresis_repair_pilot_v3,humanitarian,generalized_011_u8,6,0.7842872405372406,0.922237380627558,0.8557692307692307
+hysteresis_repair_pilot_v3,utility_restoration,generalized_011_u8,6,0.7468482905982906,0.8834714773281326,0.7596153846153846

@@ -1,0 +1,15 @@
+{
+  "applications": [
+    "humanitarian",
+    "utility_restoration"
+  ],
+  "completed_episodes": 60,
+  "independent_panels": 12,
+  "schedulers": [
+    "always_on",
+    "generalized_information",
+    "kpi_change",
+    "none"
+  ],
+  "stage": "hysteresis_repair_pilot"
+}

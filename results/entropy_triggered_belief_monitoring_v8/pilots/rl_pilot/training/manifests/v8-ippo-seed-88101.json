@@ -1,0 +1,21 @@
+{
+  "algorithm": "role-specific decentralized linear IPPO with per-agent terminal-aware GAE",
+  "checkpoint": "results/entropy_triggered_belief_monitoring_v8/pilots/rl_pilot/training/checkpoints/v8-ippo-seed-88101.json.gz",
+  "checkpoint_bytes": 24105,
+  "checkpoint_sha256": "f5a5872b896a96d599437443031831b0bea9884b851ffb329a3ddc03be948c7e",
+  "collapsed": false,
+  "curve": "results/entropy_triggered_belief_monitoring_v8/pilots/rl_pilot/training/curves/v8-ippo-seed-88101.csv",
+  "delegation_counts": {
+    "abstain": 146,
+    "defer": 859,
+    "escalate_operator": 142,
+    "execute_autonomously": 173
+  },
+  "delegation_diversity": 4,
+  "execution_information": "strictly decentralized local plus delivered messages",
+  "feature_version": "v8-local-distributed-v1",
+  "rl_seed": 88101,
+  "sequential_transitions": 1320,
+  "status": "complete",
+  "training_episodes": 6
+}

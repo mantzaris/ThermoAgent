@@ -188,3 +188,44 @@ Store persistent remote state under `/workspace`:
 - `65_v6_training_and_qwen_qualification.md`: five-seed sequential PPO and substantial real-Qwen evidence.
 - `66_v6_gate_disposition_and_no_go.md`: gate-by-gate disposition and frozen no-go decision.
 - `67_v6_reproduction_compute_and_final_status.md`: final commands, compute, process, and readiness status.
+
+## V7 complexity-entropic-coordination note map
+
+- `68_v6_environment_complexity_audit.md`: preserved V6 low-complexity audit.
+- `69_v7_research_question_and_scope.md`: coupled-system research question.
+- `70_v7_environment_architecture.md`: shared infrastructure and domain boundary.
+- `71_v7_humanitarian_environment.md`: multi-commodity logistics mechanics.
+- `72_v7_utility_environment.md`: defensive utility-restoration mechanics.
+- `73_v7_complexity_ladder.md`: scale, coupling, fragmentation, and topology design.
+- `74_v7_entropy_and_macrostate_definitions.md`: information-measure definitions.
+- `75_v7_agent_and_action_schema.md`: independent-agent and two-level action schema.
+- `76_v7_pilot_findings.md`: retained feasibility evidence.
+- `77_v7_prospective_protocol_candidate.md`: pre-freeze protocol decisions.
+- `78_v7_compute_projection_and_freeze_readiness.md`: resource projection.
+- `79_v7_feasibility_gate_disposition.md`: pre-freeze gate decisions.
+- `80_v7_frozen_protocol_and_execution_log.md`: frozen execution provenance.
+- `81_v7_formal_development.md`: formal development evidence.
+- `82_v7_rl_and_qwen_disposition.md`: learned-agent and Qwen evidence boundary.
+- `83_v7_gate_disposition.md`: prospective no-go decision.
+- `84_v7_final_status.md`: final scientific disposition.
+- `85_v7_reproduction_commands.md`: exact reproduction sequence.
+
+## V8 entropy-triggered belief-monitoring note map
+
+- `86_v7_to_v8_communication_audit.md`: immutable V7 communication audit.
+- `87_v8_research_question_and_scope.md`: monitoring-only V8 estimands.
+- `88_v8_trigger_and_wire_pilot_design.md`: actual wire and trigger candidates.
+- `89_v8_pilot_iteration_1_and_estimand_repair.md`: first retained pilot.
+- `90_v8_pilot_iteration_2_and_final_calibration.md`: encoding/threshold pilot.
+- `91_v8_formal_development_design.md`: intended panel design.
+- `92_v8_development_infrastructure_interruption.md`: retained interruption.
+- `93_v8_formal_development_iteration_1.md`: first development iteration.
+- `94_v8_hysteresis_audit_and_final_development_restart.md`: mechanism audit.
+- `95_v8_pre_freeze_final_selection_rule.md`: pre-outcome selection rule.
+- `96_v8_hysteresis_suppression_invalidation.md`: invalidated age-driven result.
+- `97_v8_hysteresis_repair_pilot_rule.md`: fixed repair-pilot gates.
+- `98_v8_replacement_formal_development_rule.md`: replacement-stage rule.
+- `99_v8_hysteresis_repair_pilot_iteration_2.md`: second repair finding.
+- `100_v8_hysteresis_state_machine_repair.md`: corrected latch semantics.
+- `101_v8_pilot_no_go_disposition.md`: prospective stop decision.
+- `102_v8_reproduction_compute_and_final_status.md`: final verification and handoff.

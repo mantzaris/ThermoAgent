@@ -1,5 +1,50 @@
 # ThermoAgent project status
 
+## Entropy-triggered belief-monitoring study (v8)
+
+Last updated: 2026-08-17 America/New_York
+
+- **Current phase:** Complete prospective pilot-stage no-go. V7 remains
+  immutable at pushed commit `e46b6738231883e92b9b525ab1c3c190e38391e7`.
+  The repaired generalized-information trigger failed the fixed nominal-
+  traffic gate, so replacement formal development, five-seed training,
+  validation, and holdout were never opened.
+- **Branch:** `entropy-triggered-belief-monitoring-v8`, created exactly from the
+  pushed V7 commit.
+- **Engineering completed:** actual deterministic TBV8 binary serialization;
+  FP32/FP16/uint8 round trips; exact header/payload/integrity/wire accounting;
+  generalized trigger, hysteresis, cooldown, maximum silence and partition
+  recovery; delivered-message-only distributed estimates; causal
+  message-to-belief-to-action tests; sequential decentralized-IPPO engineering
+  pilot; panel bootstrap analysis; eight vector figures and source data.
+- **Scientific stop:** the final repaired candidates had information-score
+  transmission fractions of 84.5–92.2%, but pre-disruption noninitial
+  transmission rates of 71.2–86.6%, versus the unchanged 10% maximum. Neither
+  candidate was eligible in both applications.
+- **Development diagnostic only:** at `tau_on=0.115`, exact sketch-wire byte
+  reduction versus always-on was 0.2396 humanitarian and 0.2775 utility, with
+  negligible mean distributed-state error changes. These estimates use only
+  six independent panels/application and do not support H1. No strongest
+  non-entropic comparator froze, and H2/H3 were not formally tested.
+- **Autonomous-agent evidence:** retained scientific pilots use persistent
+  independent V7 agents under a deterministic decentralized rule policy. One
+  six-episode, one-seed sequential-IPPO engineering pilot contains 1,320
+  transitions and all four delegation actions. Formal five-seed evidence and
+  Qwen evidence do not exist in V8.
+- **Integrity:** the final post-compaction audit replayed 1,688 completed ledgers and
+  77,316,070 events exactly, with zero mismatches/privacy failures and maximum
+  conservation residual `1.7337242752546445e-12`. Final test, replay, checksum,
+  and PDF-QA records are under the V8 reproducibility directory.
+- **Compute:** zero GPU hours, LLM calls, prompt/generated tokens, and cloud
+  cost. Local CPU execution was used because the established RunPod SSH
+  endpoint returned connection refused; no replacement Pod was created.
+- **Readiness:** reproducible engineering demonstration and an informative
+  trigger-design boundary result. Insufficient for a positive conference,
+  journal, or Artificial Intelligence submission; no validation or holdout
+  evidence exists.
+
+---
+
 ## Generalized entropic consensus study (v6)
 
 Last updated: 2026-08-16 America/New_York

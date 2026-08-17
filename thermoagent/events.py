@@ -123,6 +123,20 @@ EVENT_KINDS = {
     "v7_conservation_audit",
     "v7_privacy_audit",
     "v7_replay_checkpoint",
+    # V8 entropy-triggered belief monitoring events. V8 reuses the frozen V7
+    # domains but implements a real binary wire frame and a separate scheduler
+    # namespace; these additive names do not change any prior ledger.
+    "v8_trigger_evaluated",
+    "v8_sketch_attempt_blocked",
+    "v8_sketch_transmitted",
+    "v8_sketch_dropped",
+    "v8_sketch_delivered",
+    "v8_distributed_estimate",
+    "v8_estimation_error",
+    "v8_policy_decision",
+    "v8_replay_checkpoint",
+    "v8_conservation_audit",
+    "v8_privacy_audit",
 }
 
 

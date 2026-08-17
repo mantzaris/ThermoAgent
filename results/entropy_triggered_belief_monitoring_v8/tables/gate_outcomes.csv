@@ -1,0 +1,4 @@
+stage,gate,status,evidence
+pilot,information_score_fraction_at_least_0.05,pass,tables/trigger_feasibility.csv
+pilot,pre_disruption_noninitial_rate_at_most_0.10,fail,tables/trigger_feasibility.csv
+pilot,formal_development_unlocked,fail,negative_results/v8_stop_decision.json

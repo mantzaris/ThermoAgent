@@ -1,0 +1,40 @@
+{
+  "bootstrap_replicates": 10000,
+  "development_feasibility": {
+    "byte_reduction_point_at_least_0_25": true,
+    "delivered_information_changed_private_beliefs": true,
+    "detection_delay_upper_interval_at_most_one_epoch": true,
+    "development_progression_feasible": true,
+    "downstream_outcomes_can_change_across_schedulers": true,
+    "message_reduction_point_at_least_0_25": true,
+    "minimum_24_independent_panels_per_application": true,
+    "nondegenerate_activation": true,
+    "p95_error_increase_upper_interval_at_most_0_01": true,
+    "primary_error_upper_interval_at_most_0_02": true,
+    "privacy_and_conservation": true
+  },
+  "eligible_final_candidates": [
+    {
+      "candidate_name": "generalized_0125_u8",
+      "mean_byte_reduction": 0.5884930825553099,
+      "worst_application_primary_error": 0.07241878743918928
+    },
+    {
+      "candidate_name": "generalized_013_u8",
+      "mean_byte_reduction": 0.5884930825553099,
+      "worst_application_primary_error": 0.07241878743918928
+    }
+  ],
+  "encoding": "uint8_simplex",
+  "entropy_specific_h2_supported_in_development": false,
+  "h2_is_extension_not_progression_gate": true,
+  "independent_panels_per_application": {
+    "humanitarian": 24,
+    "utility_restoration": 24
+  },
+  "selected_generalized_trigger": "generalized_0125_u8",
+  "selected_strongest_nonentropic_comparator": "kpi_012_u8",
+  "selection_rule": "all H1 constraints and all-panel integration; then minimum worst-application primary error, byte reduction, stable name",
+  "stage": "formal_development",
+  "validation_or_holdout_evidence": false
+}

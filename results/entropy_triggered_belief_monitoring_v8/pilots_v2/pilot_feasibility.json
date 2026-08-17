@@ -1,0 +1,12 @@
+{
+  "activation_nonzero": false,
+  "always_on_improves_estimation_over_none": true,
+  "beneficial_action_opportunities_present": true,
+  "delivered_sketches_update_private_beliefs": false,
+  "equal_entropy_mode_switch_unit_test_required": true,
+  "harmful_action_opportunities_present": true,
+  "not_always_on": false,
+  "pilot_feasible": false,
+  "selected_trigger_exists": false,
+  "wire_roundtrip_unit_test_required": true
+}

@@ -1,0 +1,13 @@
+application,complexity,topology_family,independent_panels,mean_agent_count,mean_wire_bytes_per_agent,mean_primary_error,mean_recovery_steps
+humanitarian,large,random_geometric,1,52.0,143759.1923076923,0.0603695525134049,52.0
+humanitarian,large,small_world,1,52.0,62138.92307692308,0.0575893693459746,52.0
+humanitarian,medium,random_geometric,1,28.0,23058.071428571428,0.0668694014526183,31.0
+humanitarian,medium,small_world,1,28.0,39523.78571428572,0.0703174254546031,31.0
+humanitarian,small,random_geometric,1,12.0,6967.166666666667,0.0600396183565115,16.0
+humanitarian,small,small_world,1,12.0,15696.666666666666,0.052429573717891,13.0
+utility_restoration,large,grid,1,52.0,14739.653846153846,0.0616377748570393,52.0
+utility_restoration,large,scale_free,1,52.0,80540.76923076923,0.054866722568529,52.0
+utility_restoration,medium,grid,1,28.0,7776.285714285715,0.0630118418980368,31.0
+utility_restoration,medium,scale_free,1,28.0,41693.71428571428,0.0613794373013196,31.0
+utility_restoration,small,grid,1,12.0,3048.6666666666665,0.0734810512355813,16.0
+utility_restoration,small,scale_free,1,12.0,1161.6666666666667,0.0680874084815645,16.0

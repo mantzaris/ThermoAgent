@@ -1,0 +1,30 @@
+{
+  "credentials_recorded": false,
+  "execution_host": "local_cpu_after_existing_runpod_endpoint_refused_connection",
+  "git": {
+    "branch": "entropy-triggered-belief-monitoring-v8",
+    "commit": "e46b6738231883e92b9b525ab1c3c190e38391e7",
+    "dirty": true
+  },
+  "gpu_used_for_v8": false,
+  "implementation": "CPython",
+  "logical_cpu_count": 12,
+  "machine": "x86_64",
+  "packages": {
+    "PyYAML": "6.0.2",
+    "matplotlib": "3.7.5",
+    "networkx": "3.0",
+    "numpy": "1.24.4",
+    "pandas": "2.0.3",
+    "pytest": "8.3.5",
+    "scipy": "1.10.1"
+  },
+  "platform": "Linux-5.4.0-216-generic-x86_64-with-glibc2.29",
+  "processor": "x86_64",
+  "python": "3.8.10",
+  "qwen_reference_model": "Qwen/Qwen2.5-7B-Instruct",
+  "qwen_reference_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "qwen_used_for_v8": false,
+  "replacement_pod_created": false,
+  "runpod_endpoint_status_at_start": "connection_refused"
+}

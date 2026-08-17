@@ -1,0 +1,3 @@
+stage,complete_episodes,reason,outcome_based
+development_final_pre_hysteresis_invalidated,108,"pre-repair trigger implementation; retained, not inferential",False
+development_final_hysteresis_suppression_invalidated,288,mechanism audit found age-driven traffic after suppressed information latch,False

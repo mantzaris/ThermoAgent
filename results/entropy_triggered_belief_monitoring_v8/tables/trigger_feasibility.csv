@@ -1,0 +1,5 @@
+candidate_name,application,independent_panels,activation_rate_mean,information_score_transmissions,noninitial_nonrecovery_transmissions,information_score_fraction,pre_disruption_noninitial_transmission_rate,information_fraction_gate,nominal_transmission_rate_gate,eligible
+generalized_0115_u8,humanitarian,6,0.7602716727716728,1901,2112,0.900094696969697,0.8269230769230769,0.05,0.1,False
+generalized_0115_u8,utility_restoration,6,0.7158195970695971,1636,1935,0.8454780361757106,0.7115384615384616,0.05,0.1,False
+generalized_011_u8,humanitarian,6,0.7842872405372406,2028,2199,0.922237380627558,0.8557692307692307,0.05,0.1,False
+generalized_011_u8,utility_restoration,6,0.7468482905982906,1812,2051,0.8834714773281326,0.7596153846153846,0.05,0.1,False

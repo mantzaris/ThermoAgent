@@ -1,0 +1,33 @@
+{
+  "eligible_generalized_candidates": [
+    {
+      "candidate_name": "generalized_0125_u8",
+      "mean_byte_reduction": 0.28840174498581794,
+      "worst_delay_increase": 0.024038461538461526,
+      "worst_estimation_increase": 0.001145520827491751
+    },
+    {
+      "candidate_name": "generalized_013_u8",
+      "mean_byte_reduction": 0.3027771606724934,
+      "worst_delay_increase": 0.024038461538461526,
+      "worst_estimation_increase": 0.0016317991823369266
+    }
+  ],
+  "feasibility": {
+    "activation_nonzero": true,
+    "always_on_improves_estimation_over_none": true,
+    "beneficial_action_opportunities_present": true,
+    "delivered_sketches_update_private_beliefs": true,
+    "equal_entropy_mode_switch_unit_test_required": true,
+    "harmful_action_opportunities_present": true,
+    "not_always_on": true,
+    "pilot_feasible": true,
+    "selected_trigger_exists": true,
+    "wire_roundtrip_unit_test_required": true
+  },
+  "selected_encoding": "uint8_simplex",
+  "selected_generalized_trigger": "generalized_0125_u8",
+  "selected_strongest_nonentropic_comparator": "kpi_012_u8",
+  "selection_rule_frozen_before_pilot": true,
+  "stage": "development_pilot_only"
+}

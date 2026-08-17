@@ -1,0 +1,23 @@
+{
+  "configuration": "v8_development_final.yaml",
+  "execution": {
+    "applications": [
+      "humanitarian",
+      "utility_restoration"
+    ],
+    "completed_episodes": 288,
+    "independent_panels": 48,
+    "schedulers": [
+      "always_on",
+      "generalized_information",
+      "kpi_change",
+      "none"
+    ],
+    "stage": "development_final"
+  },
+  "stage": "development_final",
+  "status": "complete",
+  "tasks_completed": 288,
+  "tasks_failed": 0,
+  "tasks_total": 288
+}

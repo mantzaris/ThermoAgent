@@ -5,10 +5,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
+from xml.etree import ElementTree
 
 import pandas as pd
 
 from .v5_experiments import atomic_json, write_csv
+from .v7_io import episode_artifacts, read_json_artifact
 
 
 def _json(path: Path, default: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
@@ -17,9 +19,29 @@ def _json(path: Path, default: Optional[Mapping[str, Any]] = None) -> Dict[str, 
     return dict(json.loads(path.read_text(encoding="utf-8")))
 
 
-def _episode_count(results_root: Path, stage: str) -> int:
+def _episode_frame(results_root: Path, stage: str) -> pd.DataFrame:
     path = results_root / stage / "episode_summary.csv"
-    return len(pd.read_csv(path)) if path.exists() else 0
+    if path.exists():
+        return pd.read_csv(path)
+    raw_stage = results_root / "raw" / stage
+    rows = [read_json_artifact(value).get("summary", {}) for value in episode_artifacts(raw_stage)]
+    return pd.DataFrame(rows)
+
+
+def _episode_count(results_root: Path, stage: str) -> int:
+    return len(_episode_frame(results_root, stage))
+
+
+def _test_count(results_root: Path, filename: str) -> Optional[Dict[str, int]]:
+    path = results_root / "reproducibility" / filename
+    if not path.exists():
+        return None
+    root = ElementTree.parse(path).getroot()
+    suites = [root] if root.tag == "testsuite" else list(root.findall("testsuite"))
+    return {
+        field: sum(int(float(suite.attrib.get(field, 0))) for suite in suites)
+        for field in ("tests", "failures", "errors", "skipped")
+    }
 
 
 def _stage_disposition(results_root: Path) -> Dict[str, Any]:
@@ -52,7 +74,7 @@ def _hypothesis_rows(results_root: Path) -> List[Dict[str, Any]]:
         },
         {
             "hypothesis": "H3 communication-efficient distributed monitoring",
-            "status": ("supported" if communication.get("H3_pass") else "unsupported") if communication else "pilot_only",
+            "status": ("supported_development_monitoring_only" if communication.get("H3_pass") else "unsupported") if communication else "pilot_only",
             "evidence": "statistics/communication_primary_analysis.json" if communication else "pilots/analysis/communication_reductions.csv",
         },
     ]
@@ -66,13 +88,81 @@ def _hypothesis_rows(results_root: Path) -> List[Dict[str, Any]]:
     return rows
 
 
+def _publication_tables(results_root: Path) -> Dict[str, Any]:
+    stage_names = (
+        "smoke", "pilots", "pilots_iteration2", "pilots_iteration3",
+        "development_formal_reference", "development_formal_dynamic",
+        "development_formal_communication", "validation", "holdout",
+    )
+    stage_rows: List[Dict[str, Any]] = []
+    formal_episode_frames: List[pd.DataFrame] = []
+    for stage in stage_names:
+        frame = _episode_frame(results_root, stage)
+        if frame.empty:
+            continue
+        started = pd.to_datetime(frame.started_at, utc=True, errors="coerce") if "started_at" in frame else pd.Series(dtype="datetime64[ns, UTC]")
+        completed = pd.to_datetime(frame.completed_at, utc=True, errors="coerce") if "completed_at" in frame else pd.Series(dtype="datetime64[ns, UTC]")
+        span_hours = (
+            float((completed.max() - started.min()).total_seconds() / 3600.0)
+            if len(frame) and started.notna().any() and completed.notna().any() else 0.0
+        )
+        row = {
+            "stage": stage, "episodes": len(frame),
+            "applications": ";".join(sorted(frame.application.dropna().unique())) if "application" in frame else "",
+            "stage_wall_clock_hours": span_hours,
+            "gpu_hours": 0.0, "llm_calls": 0, "prompt_tokens": 0,
+            "generated_tokens": 0, "approximate_incremental_cost_usd": 0.0,
+        }
+        stage_rows.append(row)
+        if stage.startswith("development_formal_"):
+            formal_episode_frames.append(frame.assign(stage=stage))
+    write_csv(results_root / "tables" / "stage_compute_accounting.csv", stage_rows)
+
+    application_rows: List[Dict[str, Any]] = []
+    if formal_episode_frames:
+        formal = pd.concat(formal_episode_frames, ignore_index=True)
+        for (application, complexity), subset in formal.groupby(["application", "complexity"], sort=True):
+            application_rows.append({
+                "application": application, "complexity": complexity,
+                "episodes": len(subset), "agent_count": int(subset.agent_count.max()),
+                "operational_nodes": int(subset.operational_node_count.max()),
+                "horizon_steps": int(subset.horizon.max()),
+                "decision_epochs": int(subset.decision_epochs.max()),
+                "physical_actions": int(subset.physical_actions.sum()),
+                "service_reaching_actions": int(subset.service_reaching_actions.sum()),
+                "cross_community_messages": int(subset.cross_community_messages.sum()),
+                "maximum_causal_chain_depth": int(subset.maximum_cascade_depth.max()),
+                "total_messages": int(subset.total_messages.sum()),
+                "total_bytes": int(subset.total_bytes.sum()),
+            })
+    write_csv(results_root / "tables" / "formal_application_complexity.csv", application_rows)
+    return {
+        "stage_rows": stage_rows, "application_rows": application_rows,
+        "formal_cpu_wall_clock_hours": sum(
+            value["stage_wall_clock_hours"] for value in stage_rows
+            if value["stage"].startswith("development_formal_")
+        ),
+    }
+
+
 def _readme(results_root: Path, disposition: Mapping[str, Any]) -> str:
     replay = _json(results_root / "reproducibility" / "replay" / "replay_summary.json")
-    pilot = _json(results_root / "pilots_iteration3" / "analysis" / "pilot_analysis.json")
     dynamic = _json(results_root / "statistics" / "dynamic_primary_analysis.json")
     communication = _json(results_root / "statistics" / "communication_primary_analysis.json")
     freeze = _json(results_root / "protocol" / "freeze_manifest.json")
-    tests = "378 passed under system Python; a retained isolated-venv attempt had 12 missing-PyTorch failures"
+    accounting = _publication_tables(results_root)
+    full_tests = _test_count(results_root, "pytest_full.xml")
+    v7_tests = _test_count(results_root, "pytest_v7.xml")
+    if full_tests and v7_tests:
+        full_passed = full_tests["tests"] - full_tests["failures"] - full_tests["errors"] - full_tests["skipped"]
+        v7_passed = v7_tests["tests"] - v7_tests["failures"] - v7_tests["errors"] - v7_tests["skipped"]
+        tests = (
+            f"{full_passed}/{full_tests['tests']} full-system tests and "
+            f"{v7_passed}/{v7_tests['tests']} focused V7 tests passed in the final package; "
+            f"skipped={full_tests['skipped']} full-system/{v7_tests['skipped']} focused"
+        )
+    else:
+        tests = "final JUnit results were not yet generated"
     stage_counts = {
         "smoke_and_pilots": sum(_episode_count(results_root, value) for value in ("smoke", "pilots", "pilots_iteration2", "pilots_iteration3")),
         "formal_reference": _episode_count(results_root, "development_formal_reference"),
@@ -81,20 +171,13 @@ def _readme(results_root: Path, disposition: Mapping[str, Any]) -> str:
         "validation": _episode_count(results_root, "validation"),
         "holdout": _episode_count(results_root, "holdout"),
     }
-    if dynamic:
-        finding = (
-            "Formal development %s H1 and %s H2. The coupled interaction was %.4f."
-            % (
-                "supported" if dynamic.get("H1_pass") else "did not support",
-                "supported" if dynamic.get("H2_pass") else "did not support",
-                float(dynamic.get("interaction", {}).get("coupling_fragmentation_interaction", float("nan"))),
-            )
-        )
-    else:
-        finding = (
-            "Only retained feasibility pilots exist. Their coupling-by-fragmentation coefficient was %.4f; this is not a formal estimate."
-            % float(pilot.get("interaction_model", {}).get("coupling_fragmentation_interaction", float("nan")))
-        )
+    interaction = dynamic.get("interaction", {})
+    high = {row["application"]: row for row in dynamic.get("high_complexity", [])}
+    communication_rows = {row["application"]: row for row in communication.get("applications", [])}
+    humanitarian = high.get("humanitarian", {})
+    utility = high.get("utility_restoration", {})
+    humanitarian_communication = communication_rows.get("humanitarian", {})
+    utility_communication = communication_rows.get("utility_restoration", {})
     return f"""# ThermoAgent V7: complexity-dependent generalized-entropic coordination
 
 ## Research question
@@ -151,12 +234,40 @@ actions within a panel are never treated as independent replicates. Models use
 nested grouped folds, matched 60% action coverage, 10,000 panel bootstraps, and
 prespecified same-capacity feature blocks.
 
-## Main findings
+## Main findings: formal development no-go
 
-{finding}
+The coupled dynamic experiment did **not** support H1 or H2. The pooled
+coupling-by-fragmentation interaction was
+`{float(interaction.get('coupling_fragmentation_interaction', float('nan'))):.4f}`
+(95% cluster-bootstrap CI
+`[{float(interaction.get('ci95_low', float('nan'))):.4f}, {float(interaction.get('ci95_high', float('nan'))):.4f}]`),
+below the frozen `0.02` threshold and not distinguishable from zero.
 
-Formal communication H3 status: `{communication.get('H3_pass', 'not formally tested')}`.
+In the prespecified high-coupling/high-fragmentation region, harm-rate
+reduction was `{float(humanitarian.get('harm_reduction', float('nan'))):.4f}`
+for humanitarian logistics (95% CI
+`[{float(humanitarian.get('harm_ci95_low', float('nan'))):.4f}, {float(humanitarian.get('harm_ci95_high', float('nan'))):.4f}]`)
+and `{float(utility.get('harm_reduction', float('nan'))):.4f}`
+for utility restoration (95% CI
+`[{float(utility.get('harm_ci95_low', float('nan'))):.4f}, {float(utility.get('harm_ci95_high', float('nan'))):.4f}]`).
+The utility direction was positive but far below the frozen `0.04` practical
+threshold; its service noninferiority upper bound was `0.0571`, above the
+`0.02` margin. Humanitarian causal utility was significantly worse.
+
+H3 passed as a **monitoring-cost ablation**, not as evidence that entropy
+improved selective safety. Event-triggered sketches reduced all-message
+traffic by `{float(humanitarian_communication.get('message_reduction', float('nan'))) * 100:.1f}%`
+and `{float(utility_communication.get('message_reduction', float('nan'))) * 100:.1f}%`,
+and all bytes by `{float(humanitarian_communication.get('byte_reduction', float('nan'))) * 100:.1f}%`
+and `{float(utility_communication.get('byte_reduction', float('nan'))) * 100:.1f}%`,
+respectively. Maximum distributed-estimation MAE was below `0.05`. The
+communication ablation held the operational controller fixed to always-act,
+so its exact zero harm difference cannot establish a causal safety benefit.
+
 The final prospective disposition is: **{disposition.get('disposition', 'pending')}**.
+RL training, real-Qwen qualification, validation, and locked holdout were
+therefore not run. This stopping decision was made by the frozen gates, not by
+post-hoc preference.
 
 Negative and neutral effects, failed feasibility iterations, environment
 repairs, missing-PyTorch test evidence, and the unavailable RunPod endpoint are
@@ -168,8 +279,12 @@ ran, is one LLM implementation; deterministic pilots are engineering controls.
 - Tests: {tests}.
 - Replay: `{replay.get('episodes_replayed', 0)}` episodes, `{replay.get('replay_mismatches', 0)}` mismatches.
 - Maximum reconstructed conservation residual: `{replay.get('maximum_conservation_residual', 'not available')}`.
-- Primary model: `Qwen/Qwen2.5-7B-Instruct`, revision
-  `a09a35458c702b33eeacc393d103063234e8bc28`, NF4/BF16 (only if gated Qwen ran).
+- Formal CPU execution span across the three stages: approximately
+  `{accounting['formal_cpu_wall_clock_hours']:.2f}` stage-hours.
+- GPU hours, LLM calls, prompt tokens, generated tokens, and incremental GPU
+  cost: all zero; the gated Qwen/RL stages did not run.
+- Planned but unused Qwen configuration: `Qwen/Qwen2.5-7B-Instruct`, revision
+  `a09a35458c702b33eeacc393d103063234e8bc28`, NF4/BF16.
 - Simulated operator only; no human participants.
 
 ## Reproduction order
@@ -192,6 +307,7 @@ ran, is one LLM implementation; deterministic pilots are engineering controls.
 ./scripts/generate-v7-figures.sh
 ./scripts/validate-v7-pdfs.sh
 ./scripts/replay-v7-results.sh
+./scripts/compact-v7-artifacts.sh     # lossless Git-facing compaction
 ./scripts/index-v7-artifacts.sh
 ./scripts/build-v7-report.sh
 ```
@@ -199,7 +315,9 @@ ran, is one LLM implementation; deterministic pilots are engineering controls.
 ## Directory guide
 
 - `protocol/`, `manifests/`: frozen design and seed provenance when unlocked.
-- `pilots*/`, `raw/`: retained feasibility summaries and compressed ledgers.
+- `pilots*/`, `raw/`: retained feasibility summaries, exact compressed episode
+  payloads, and compressed event ledgers. Per-run candidate CSV duplicates were
+  removed only after semantic comparison with the canonical episode payload.
 - `development/`, `statistics/`, `tables/`: formal evidence if run.
 - `training/`, `qwen/`: gated learned-agent evidence only.
 - `figures/pdf/`, `figures/source_data/`: vector figures and exact source tables.
@@ -208,12 +326,14 @@ ran, is one LLM implementation; deterministic pilots are engineering controls.
 
 ## Limitations and publication readiness
 
-All operators are simulated, domain models are abstract, the pilot utility
-action pool remains harm-heavy, graph fidelity is deliberately lower than a
-real disaster or utility system, and external validity is untested. A positive
-AIJ claim requires validation and a single locked holdout; if either is locked,
-this package is an engineering/development study rather than confirmatory
-journal evidence.
+All operators are simulated. Formal controllers were deterministic independent
+agents plus grouped cross-fitted Level-2 models—not learned PPO or LLM agents.
+Domain models are abstract, utility candidates were harm-heavy (90.7%
+prevalence in formal probes), the high-complexity test had 12 panels per
+application, and external validity is untested. V7 supports a coupled-system
+engineering platform, a negative selective-safety boundary, and a positive
+communication-monitoring efficiency result. It does not support a positive
+entropy-control claim or an AIJ submission without validation and holdout.
 """
 
 
@@ -313,23 +433,32 @@ def build_v7_report(repository: Path, results_root: Path) -> Dict[str, Any]:
     (results_root / "README.md").write_text(_readme(results_root, disposition), encoding="utf-8")
     (results_root / "CLAIMS_MATRIX.md").write_text(_claims_matrix(hypotheses), encoding="utf-8")
     (results_root / "PAPER_OUTLINE.md").write_text(_paper_outline(), encoding="utf-8")
-    supported = [value["hypothesis"] for value in hypotheses if value["status"] == "supported"]
+    supported = [value["hypothesis"] for value in hypotheses if value["status"].startswith("supported")]
     unsupported = [value["hypothesis"] for value in hypotheses if value["status"] == "unsupported"]
     summary = f"""# V7 paper summary
 
 **Working title:** Complexity-Dependent Value of Generalized Entropic Consensus in Decentralized Autonomous Coordination
 
-**Evidence level:** {disposition.get('disposition', 'pending')}
+**Evidence level:** formal development no-go; validation and holdout locked
 
-**Verified supported hypotheses:** {supported or ['none']}
+**Verified supported hypotheses:** {supported or ['none']} (H3 is monitoring-cost evidence only)
 
 **Unsupported hypotheses:** {unsupported or ['none formally tested']}
 
 V7 implements two structurally distinct coupled applications and an auditable
-distributed information layer. This package contains simulated-domain and
-autonomous-agent evidence only. It is not real-human evidence. Journal claims
-must be limited to the highest completed stage described in `README.md` and
-`CLAIMS_MATRIX.md`.
+distributed information layer. Formal development found no positive
+coupling-by-fragmentation interaction and no replicated high-complexity safety
+effect. Event-triggered sketches did reduce fully counted communication by
+roughly 38–40% with distributed-estimation MAE below 0.05, but that ablation
+used the same always-act operational policy and does not rescue the failed
+selective-safety claim.
+
+This package contains simulated-domain and deterministic independent-agent
+evidence only. RL and real-Qwen stages were prospectively locked after H1/H2
+failed; no human participants were studied. The strongest defensible paper
+direction is a development-stage boundary report about complexity, residual
+information value, and communication-efficient distributed monitoring—not a
+positive AIJ claim.
 """
     (results_root / "PAPER_SUMMARY.md").write_text(summary, encoding="utf-8")
     report = {

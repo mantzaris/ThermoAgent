@@ -16,6 +16,7 @@ from .events import EventLedger, sha256_file
 from .v5_experiments import atomic_json, source_checksum, write_csv
 from .v7_base import V7CoupledEnvironment
 from .v7_humanitarian import HumanitarianV7Environment
+from .v7_io import compressed_path, episode_artifacts, read_json_artifact
 from .v7_policies import V7SelectiveController, decision_key, risk_score
 from .v7_types import V7RiskContext, V7StructuredDecision
 from .v7_utility import UtilityRestorationV7Environment
@@ -140,8 +141,8 @@ def run_episode(
     )
     if results_root is not None and resume:
         existing = results_root / "raw" / stage / run_id / "episode.json"
-        if existing.exists():
-            return dict(json.loads(existing.read_text(encoding="utf-8")))
+        if existing.exists() or compressed_path(existing).exists():
+            return read_json_artifact(existing)
     started = utc_now()
     candidates: List[Dict[str, Any]] = []
     operator_minutes = 0.0
@@ -357,11 +358,11 @@ def run_episode(
 
 
 def aggregate_stage(results_root: Path, stage: str) -> Dict[str, Any]:
-    episode_paths = sorted((results_root / "raw" / stage).glob("*/episode.json"))
+    episode_paths = episode_artifacts(results_root / "raw" / stage)
     summaries: List[Dict[str, Any]] = []
     candidates: List[Dict[str, Any]] = []
     for path in episode_paths:
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = read_json_artifact(path)
         summaries.append(dict(value["summary"]))
         candidates.extend(value.get("candidates", []))
     destination = results_root / stage

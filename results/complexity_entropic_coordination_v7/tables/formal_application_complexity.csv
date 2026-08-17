@@ -1,0 +1,7 @@
+application,complexity,episodes,agent_count,operational_nodes,horizon_steps,decision_epochs,physical_actions,service_reaching_actions,cross_community_messages,maximum_causal_chain_depth,total_messages,total_bytes
+humanitarian,large,12,52,30,100,20,3170,1410,700952,3,1164468,398529632
+humanitarian,medium,150,28,16,60,15,16966,7719,1135451,3,2151709,731451945
+humanitarian,small,12,12,8,30,10,600,310,16308,3,21084,7098434
+utility_restoration,large,12,52,30,100,20,2648,315,220874,3,517115,179439215
+utility_restoration,medium,150,28,16,60,15,10670,1912,1023693,3,1680199,582046058
+utility_restoration,small,12,12,8,30,10,331,97,5665,3,8609,2887799

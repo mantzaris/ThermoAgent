@@ -1,6 +1,6 @@
 record_type,label,x,y,source,target
 node,"Private observations
-and beliefs",0.08,0.72,,
+and beliefs",0.12,0.72,,
 node,"Independent
 Level-1 policies",0.31,0.72,,
 node,"Distributed entropy

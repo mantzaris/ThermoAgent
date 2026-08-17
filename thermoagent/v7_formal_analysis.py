@@ -16,6 +16,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from .v5_analysis import paired_bootstrap
 from .v5_experiments import atomic_json, write_csv
+from .v7_io import read_csv_artifact
 
 
 BASE_NUMERIC = (
@@ -178,7 +179,7 @@ def analyze_risk_stage(
     stage: str,
     coverage: float = 0.60,
 ) -> Dict[str, Any]:
-    frame = prepare_candidates(pd.read_csv(results_root / stage / "candidate_decisions.csv"))
+    frame = prepare_candidates(read_csv_artifact(results_root / stage / "candidate_decisions.csv"))
     scored_frames: List[pd.DataFrame] = []
     fold_rows: List[Dict[str, Any]] = []
     metric_rows: List[Dict[str, Any]] = []

@@ -1,28 +1,34 @@
 {
   "claims_matrix": "CLAIMS_MATRIX.md",
   "disposition": {
+    "H1_pass": false,
+    "H2_pass": false,
+    "H3_pass": true,
     "Qwen_qualification_unlocked": false,
     "RL_training_unlocked": false,
-    "disposition": "feasibility gates pass; formal protocol may now be frozen",
+    "disposition": "formal-development no-go; training, Qwen, validation, and holdout remain locked",
+    "engineering_integrity_pass": true,
     "formal_development_primary_pass": false,
+    "formal_episode_failures": 0,
     "holdout_unlocked": false,
+    "replay_status_at_evaluation": "pass",
     "validation_unlocked": false
   },
   "hypotheses": [
     {
-      "evidence": "pilots_iteration3/analysis/pilot_analysis.json",
+      "evidence": "statistics/dynamic_primary_analysis.json",
       "hypothesis": "H1 complexity-dependent selective-safety value",
-      "status": "not_tested_formally"
+      "status": "unsupported"
     },
     {
-      "evidence": "pilots_iteration3/analysis/high_complexity_effects.csv",
+      "evidence": "statistics/high_complexity_dynamic_effects.csv",
       "hypothesis": "H2 high-complexity selective-safety value in both applications",
-      "status": "not_tested_formally"
+      "status": "unsupported"
     },
     {
-      "evidence": "pilots/analysis/communication_reductions.csv",
+      "evidence": "statistics/communication_primary_analysis.json",
       "hypothesis": "H3 communication-efficient distributed monitoring",
-      "status": "pilot_only"
+      "status": "supported_development_monitoring_only"
     },
     {
       "evidence": "CLAIMS_MATRIX.md",

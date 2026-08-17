@@ -23,6 +23,7 @@ from .v7_formal_analysis import (
     power_from_pilot, prepare_candidates,
 )
 from .v7_learned_controller import FittedRiskController
+from .v7_io import read_csv_artifact
 from .v7_policies import V7SelectiveController
 
 
@@ -54,7 +55,7 @@ class _StageLock:
 
 
 def _read_csv(path: Path) -> List[Dict[str, Any]]:
-    return pd.read_csv(path).to_dict("records")
+    return read_csv_artifact(path).to_dict("records")
 
 
 def _freeze(results_root: Path) -> Mapping[str, Any]:
@@ -170,7 +171,7 @@ def run_crossfit_dynamic_development(
     repository: Path, results_root: Path,
 ) -> Dict[str, Any]:
     _freeze(results_root)
-    reference = prepare_candidates(pd.read_csv(
+    reference = prepare_candidates(read_csv_artifact(
         results_root / REFERENCE_STAGE / "candidate_decisions.csv"
     ))
     manifest = pd.read_csv(results_root / "manifests" / "development_inputs.csv")
@@ -276,8 +277,8 @@ def _interaction(frame: pd.DataFrame, seed: int) -> Dict[str, Any]:
 
 
 def analyze_dynamic_development(results_root: Path) -> Dict[str, Any]:
-    summaries = pd.read_csv(results_root / DYNAMIC_STAGE / "episode_summary.csv")
-    decisions = pd.read_csv(results_root / DYNAMIC_STAGE / "candidate_decisions.csv")
+    summaries = read_csv_artifact(results_root / DYNAMIC_STAGE / "episode_summary.csv")
+    decisions = read_csv_artifact(results_root / DYNAMIC_STAGE / "candidate_decisions.csv")
     selected = decisions[
         decisions.accepted_physical_action.astype(bool)
         & decisions.delegation_action.eq("execute_autonomously")
@@ -411,7 +412,7 @@ def run_communication_development(
 
 
 def analyze_communication_development(results_root: Path) -> Dict[str, Any]:
-    frame = pd.read_csv(results_root / COMMUNICATION_STAGE / "episode_summary.csv")
+    frame = read_csv_artifact(results_root / COMMUNICATION_STAGE / "episode_summary.csv")
     key = [
         "application", "complexity", "coupling", "fragmentation",
         "network_disruption", "topology_family", "information_condition",

@@ -11,6 +11,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 
 from .v5_analysis import paired_bootstrap
 from .v5_experiments import atomic_json, write_csv
+from .v7_io import read_csv_artifact
 
 
 RISK_COLUMNS = {
@@ -58,8 +59,8 @@ def analyze_pilot(
     stage: str = "pilots",
     coverage: float = 0.60,
 ) -> Dict[str, Any]:
-    summaries = pd.read_csv(results_root / stage / "episode_summary.csv")
-    candidates = pd.read_csv(results_root / stage / "candidate_decisions.csv")
+    summaries = read_csv_artifact(results_root / stage / "episode_summary.csv")
+    candidates = read_csv_artifact(results_root / stage / "candidate_decisions.csv")
     evaluated = candidates[
         candidates.counterfactual_evaluated.astype(bool)
         & ~candidates.proposed_operational_action.eq("no_operational_action")

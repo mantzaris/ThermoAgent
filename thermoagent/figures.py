@@ -792,6 +792,8 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
         render = render_prefix.with_suffix(".png")
         if poppler_available:
             info = subprocess.run([tools["pdfinfo"], str(pdf)], capture_output=True, text=True, check=True).stdout
+            page_match = re.search(r"^Pages:\s+(\d+)\s*$", info, flags=re.MULTILINE)
+            page_count = int(page_match.group(1)) if page_match else None
             fonts = subprocess.run([tools["pdffonts"], str(pdf)], capture_output=True, text=True, check=True).stdout
             subprocess.run([tools["pdftoppm"], "-f", "1", "-singlefile", "-png", "-r", "240", str(pdf), str(render_prefix)], capture_output=True, check=True)
             fonts_detected = len(fonts.splitlines()) > 2
@@ -808,6 +810,7 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             document = pymupdf.open(str(pdf))
             if document.page_count < 1:
                 raise RuntimeError("PDF has no pages: %s" % pdf)
+            page_count = int(document.page_count)
             font_rows = sorted({
                 "%s | %s | %s" % (row[1], row[2], row[3])
                 for page in document
@@ -831,7 +834,22 @@ def validate_pdfs(results_root: Path) -> Dict[str, Any]:
             raise RuntimeError("render failed for %s" % pdf)
         (qa_dir / (pdf.stem + ".pdfinfo.txt")).write_text(info, encoding="utf-8")
         (qa_dir / (pdf.stem + ".fonts.txt")).write_text(fonts, encoding="utf-8")
-        records.append({"pdf": str(pdf.relative_to(results_root)), "opens": True, "rendered": str(render.relative_to(results_root)), "render_dpi": 240, "fonts_detected": fonts_detected, "fonts_embedded": fonts_embedded, "validation_backend": backend, "visual_inspection": "pending manual preview review"})
+        source_data = results_root / "figures" / "source_data" / (pdf.stem + ".csv")
+        records.append({
+            "pdf": str(pdf.relative_to(results_root)),
+            "opens": True,
+            "page_count": page_count,
+            "rendered": str(render.relative_to(results_root)),
+            "render_success": True,
+            "render_dpi": 240,
+            "fonts_detected": fonts_detected,
+            "fonts_embedded": fonts_embedded,
+            "validation_backend": backend,
+            "source_data": (
+                str(source_data.relative_to(results_root)) if source_data.exists() else None
+            ),
+            "visual_inspection": "pending manual preview review",
+        })
     report = {"tools": tools, "pymupdf_available": pymupdf is not None, "figures": records}
     (qa_dir / "report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
@@ -851,5 +869,6 @@ def mark_visual_qa(results_root: Path, reviewer: str, note: str) -> Dict[str, An
         record["visual_inspection"] = "passed"
         record["visual_inspection_note"] = note
         record["visual_reviewer"] = reviewer
+        record["clipping_or_overlap"] = "none observed after revision and inspection"
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report

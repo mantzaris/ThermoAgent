@@ -1,6 +1,6 @@
 {
   "artifacts_over_50_mib": 0,
-  "indexed_artifacts_excluding_index": 356,
-  "maximum_artifact_size_bytes": 7178294,
-  "total_size_bytes": 100088084
+  "indexed_artifacts_excluding_index": 1422,
+  "maximum_artifact_size_bytes": 18346126,
+  "total_size_bytes": 442115304
 }

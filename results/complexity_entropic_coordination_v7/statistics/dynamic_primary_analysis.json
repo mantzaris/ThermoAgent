@@ -1,0 +1,52 @@
+{
+  "H1_pass": false,
+  "H2_pass": false,
+  "application_mean_harm_reduction": {
+    "humanitarian": -0.0037438559230772482,
+    "utility_restoration": 0.006411397788992361
+  },
+  "high_complexity": [
+    {
+      "application": "humanitarian",
+      "causal_utility_gain": -5.080469653958481,
+      "coverage_difference": -0.0015625502444753848,
+      "h2_pass": false,
+      "harm_ci95_high": 0.0030383603503855157,
+      "harm_ci95_low": -0.014668143510280278,
+      "harm_reduction": -0.005820744278857912,
+      "mean_absolute_coverage_difference": 0.005838922502666881,
+      "panels": 12,
+      "relative_service_degradation": -0.0008513616845770254,
+      "service_ci95_high": 0.0078481762565778,
+      "service_ci95_low": -0.00990915009862264,
+      "utility_ci95_high": -0.8484785399234153,
+      "utility_ci95_low": -9.235861776335906
+    },
+    {
+      "application": "utility_restoration",
+      "causal_utility_gain": -0.3327388042109191,
+      "coverage_difference": -0.0005123778552604726,
+      "h2_pass": false,
+      "harm_ci95_high": 0.01683511730786214,
+      "harm_ci95_low": 0.0015978047018826668,
+      "harm_reduction": 0.0086302720928492,
+      "mean_absolute_coverage_difference": 0.0027777933156444834,
+      "panels": 12,
+      "relative_service_degradation": 0.009479889205370512,
+      "service_ci95_high": 0.05708178879176865,
+      "service_ci95_low": -0.025157645468097362,
+      "utility_ci95_high": 0.3439629343607182,
+      "utility_ci95_low": -1.0318974922730915
+    }
+  ],
+  "independent_panels": 100,
+  "interaction": {
+    "bootstrap_replicates_retained": 10000,
+    "ci95_high": 0.04576339504075189,
+    "ci95_low": -0.02646314513363976,
+    "coupling_fragmentation_interaction": 0.006094064081557426,
+    "design_rank": 6,
+    "panels": 100
+  },
+  "matched_dynamic_execution": true
+}

@@ -10,10 +10,11 @@ import numpy as np
 
 from .events import EventLedger, sha256_file
 from .v5_experiments import atomic_json, write_csv
+from .v7_io import episode_artifacts, read_json_artifact
 
 
 def replay_episode(results_root: Path, episode_path: Path) -> Dict[str, Any]:
-    episode = json.loads(episode_path.read_text(encoding="utf-8"))
+    episode = read_json_artifact(episode_path)
     ledger_path = results_root / episode["event_ledger_path"]
     ledger = EventLedger.read_jsonl(ledger_path)
     sha_match = sha256_file(ledger_path) == episode["event_ledger_sha256"]
@@ -83,7 +84,7 @@ def replay_episode(results_root: Path, episode_path: Path) -> Dict[str, Any]:
 
 
 def replay_all(results_root: Path) -> Dict[str, Any]:
-    paths = sorted((results_root / "raw").glob("**/episode.json"))
+    paths = episode_artifacts(results_root / "raw")
     rows = [replay_episode(results_root, path) for path in paths]
     destination = results_root / "reproducibility" / "replay"
     write_csv(destination / "ledger_replay_audit.csv", rows)

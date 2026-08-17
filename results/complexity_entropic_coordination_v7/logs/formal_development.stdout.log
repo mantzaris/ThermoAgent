@@ -1,0 +1,340 @@
+{
+  "completed": 100,
+  "execution": {
+    "applications": [
+      "humanitarian",
+      "utility_restoration"
+    ],
+    "candidate_decisions": 44560,
+    "episodes": 100,
+    "maximum_conservation_residual": 1.3500311979441904e-12,
+    "privacy_failures": 0,
+    "stage": "development_formal_reference"
+  },
+  "failed": 0,
+  "freeze_manifest_sha256": "cf1255840fade615e3f3e810d47aeae9921f013ee5a416ebf61b0924b468993e",
+  "power_plan": [
+    {
+      "application": "humanitarian",
+      "normal_approximation_required_panels": 26,
+      "pilot_effect_sd": 0.07206136018917163,
+      "pilot_panels": 3,
+      "planning_only": true,
+      "practical_absolute_harm_reduction": 0.04,
+      "target_power": 0.8
+    },
+    {
+      "application": "utility_restoration",
+      "normal_approximation_required_panels": 12,
+      "pilot_effect_sd": 0.022106401413397078,
+      "pilot_panels": 7,
+      "planning_only": true,
+      "practical_absolute_harm_reduction": 0.04,
+      "target_power": 0.8
+    }
+  ],
+  "risk_analysis": {
+    "candidate_rows_not_treated_as_independent_replicates": true,
+    "coverage": 0.6,
+    "feature_blocks": {
+      "generalized_entropic": [
+        "severity",
+        "safety_risk",
+        "resource_scarcity",
+        "delay",
+        "predictive_uncertainty",
+        "action_probability",
+        "action_value",
+        "action_value_margin",
+        "communication_reliability",
+        "coupling_numeric",
+        "fragmentation_numeric",
+        "size_normalized",
+        "shannon_local",
+        "pooled_uncertainty",
+        "js_disagreement",
+        "jt_disagreement_0_5",
+        "jt_disagreement_1_5",
+        "jt_disagreement_2",
+        "jt_disagreement_3",
+        "graph_disagreement",
+        "consensus",
+        "consensus_residual",
+        "entropy_slope",
+        "disagreement_slope"
+      ],
+      "shannon_js": [
+        "severity",
+        "safety_risk",
+        "resource_scarcity",
+        "delay",
+        "predictive_uncertainty",
+        "action_probability",
+        "action_value",
+        "action_value_margin",
+        "communication_reliability",
+        "coupling_numeric",
+        "fragmentation_numeric",
+        "size_normalized",
+        "shannon_local",
+        "pooled_uncertainty",
+        "js_disagreement"
+      ],
+      "strongest_nonentropic": [
+        "severity",
+        "safety_risk",
+        "resource_scarcity",
+        "delay",
+        "predictive_uncertainty",
+        "action_probability",
+        "action_value",
+        "action_value_margin",
+        "communication_reliability",
+        "coupling_numeric",
+        "fragmentation_numeric",
+        "size_normalized"
+      ]
+    },
+    "high_complexity": [
+      {
+        "application": "humanitarian",
+        "harm_ci95_high": 0.009441973220361185,
+        "harm_ci95_low": -0.002730259923908369,
+        "harm_reduction": 0.0033003229265468935,
+        "panels": 26,
+        "service_ci95_high": 25.965832699377295,
+        "service_ci95_low": -42.71060246556758,
+        "service_loss_difference": -8.542176118629424
+      },
+      {
+        "application": "utility_restoration",
+        "harm_ci95_high": 0.0036417071300792235,
+        "harm_ci95_low": -0.0030811915915432615,
+        "harm_reduction": 0.0001728182953367271,
+        "panels": 26,
+        "service_ci95_high": 6.874850404696885,
+        "service_ci95_low": -22.53904189519348,
+        "service_loss_difference": -7.3799146788383405
+      }
+    ],
+    "independent_panels": 100,
+    "interactions": [
+      {
+        "application": "humanitarian",
+        "coupling_fragmentation_interaction": -0.021072295490189557,
+        "design_rank": 5,
+        "interaction_ci95_high": 0.011717043096045264,
+        "interaction_ci95_low": -0.05373361493541746,
+        "panels": 50
+      },
+      {
+        "application": "utility_restoration",
+        "coupling_fragmentation_interaction": -0.007354449570338031,
+        "design_rank": 5,
+        "interaction_ci95_high": 0.020200813466319224,
+        "interaction_ci95_low": -0.030361461599958058,
+        "panels": 50
+      }
+    ],
+    "panel_level_inference": true,
+    "ranking": [
+      {
+        "application": "humanitarian",
+        "average_precision": 0.9190025914012094,
+        "brier_score": 0.1510259207479332,
+        "feature_block": "strongest_nonentropic",
+        "harm_prevalence": 0.6563779527559055,
+        "independent_panels": 50,
+        "roc_auc": 0.8474818397251285,
+        "rows": 3175
+      },
+      {
+        "application": "humanitarian",
+        "average_precision": 0.9198975096986262,
+        "brier_score": 0.15081125481214366,
+        "feature_block": "shannon_js",
+        "harm_prevalence": 0.6563779527559055,
+        "independent_panels": 50,
+        "roc_auc": 0.8473578097538577,
+        "rows": 3175
+      },
+      {
+        "application": "humanitarian",
+        "average_precision": 0.9197081932408063,
+        "brier_score": 0.15150525806225176,
+        "feature_block": "generalized_entropic",
+        "harm_prevalence": 0.6563779527559055,
+        "independent_panels": 50,
+        "roc_auc": 0.8456385432371999,
+        "rows": 3175
+      },
+      {
+        "application": "utility_restoration",
+        "average_precision": 0.9761405506912306,
+        "brier_score": 0.07078453978738236,
+        "feature_block": "strongest_nonentropic",
+        "harm_prevalence": 0.9070843716625133,
+        "independent_panels": 50,
+        "roc_auc": 0.8278132650053831,
+        "rows": 2809
+      },
+      {
+        "application": "utility_restoration",
+        "average_precision": 0.9781850689105349,
+        "brier_score": 0.07095251259478338,
+        "feature_block": "shannon_js",
+        "harm_prevalence": 0.9070843716625133,
+        "independent_panels": 50,
+        "roc_auc": 0.8335784357951845,
+        "rows": 2809
+      },
+      {
+        "application": "utility_restoration",
+        "average_precision": 0.9776289942785831,
+        "brier_score": 0.07035629415945688,
+        "feature_block": "generalized_entropic",
+        "harm_prevalence": 0.9070843716625133,
+        "independent_panels": 50,
+        "roc_auc": 0.8352941530281431,
+        "rows": 2809
+      }
+    ],
+    "rows": 5984,
+    "stage": "development_formal_reference"
+  },
+  "source_commit": "39b463ca3607f5e55679c551ce4e5d0034b5b7b8",
+  "stage": "development_formal_reference"
+}
+{
+  "analysis": {
+    "H1_pass": false,
+    "H2_pass": false,
+    "application_mean_harm_reduction": {
+      "humanitarian": -0.0037438559230772482,
+      "utility_restoration": 0.006411397788992361
+    },
+    "high_complexity": [
+      {
+        "application": "humanitarian",
+        "causal_utility_gain": -5.080469653958481,
+        "coverage_difference": -0.0015625502444753848,
+        "h2_pass": false,
+        "harm_ci95_high": 0.0030383603503855157,
+        "harm_ci95_low": -0.014668143510280278,
+        "harm_reduction": -0.005820744278857912,
+        "mean_absolute_coverage_difference": 0.005838922502666881,
+        "panels": 12,
+        "relative_service_degradation": -0.0008513616845770254,
+        "service_ci95_high": 0.0078481762565778,
+        "service_ci95_low": -0.00990915009862264,
+        "utility_ci95_high": -0.8484785399234153,
+        "utility_ci95_low": -9.235861776335906
+      },
+      {
+        "application": "utility_restoration",
+        "causal_utility_gain": -0.3327388042109191,
+        "coverage_difference": -0.0005123778552604726,
+        "h2_pass": false,
+        "harm_ci95_high": 0.01683511730786214,
+        "harm_ci95_low": 0.0015978047018826668,
+        "harm_reduction": 0.0086302720928492,
+        "mean_absolute_coverage_difference": 0.0027777933156444834,
+        "panels": 12,
+        "relative_service_degradation": 0.009479889205370512,
+        "service_ci95_high": 0.05708178879176865,
+        "service_ci95_low": -0.025157645468097362,
+        "utility_ci95_high": 0.3439629343607182,
+        "utility_ci95_low": -1.0318974922730915
+      }
+    ],
+    "independent_panels": 100,
+    "interaction": {
+      "bootstrap_replicates_retained": 10000,
+      "ci95_high": 0.04576339504075189,
+      "ci95_low": -0.02646314513363976,
+      "coupling_fragmentation_interaction": 0.006094064081557426,
+      "design_rank": 6,
+      "panels": 100
+    },
+    "matched_dynamic_execution": true
+  },
+  "completed": 200,
+  "execution": {
+    "applications": [
+      "humanitarian",
+      "utility_restoration"
+    ],
+    "candidate_decisions": 89120,
+    "episodes": 200,
+    "maximum_conservation_residual": 1.3500311979441904e-12,
+    "privacy_failures": 0,
+    "stage": "development_formal_dynamic"
+  },
+  "failed": 0,
+  "stage": "development_formal_dynamic"
+}
+{
+  "analysis": {
+    "H3_pass": true,
+    "applications": [
+      {
+        "application": "humanitarian",
+        "byte_ci95_low": 0.36096880342847104,
+        "byte_reduction": 0.3797380203339153,
+        "h3_pass": true,
+        "harm_ci95_high": 0.0,
+        "harm_degradation": 0.0,
+        "maximum_event_estimation_mae": 0.0456391911719509,
+        "message_ci95_low": 0.358287599350928,
+        "message_reduction": 0.37630574958789853,
+        "panels": 6
+      },
+      {
+        "application": "utility_restoration",
+        "byte_ci95_low": 0.39356405880539413,
+        "byte_reduction": 0.40552827455289014,
+        "h3_pass": true,
+        "harm_ci95_high": 0.0,
+        "harm_degradation": 0.0,
+        "maximum_event_estimation_mae": 0.0496525096497433,
+        "message_ci95_low": 0.3920793793435691,
+        "message_reduction": 0.40398699597800974,
+        "panels": 6
+      }
+    ]
+  },
+  "completed": 48,
+  "execution": {
+    "applications": [
+      "humanitarian",
+      "utility_restoration"
+    ],
+    "candidate_decisions": 20160,
+    "episodes": 48,
+    "maximum_conservation_residual": 2.7000623958883807e-13,
+    "privacy_failures": 0,
+    "stage": "development_formal_communication"
+  },
+  "failed": 0
+}
+{
+  "episodes_replayed": 393,
+  "maximum_conservation_residual": 1.3500311979441904e-12,
+  "privacy_failures": 0,
+  "replay_mismatches": 0,
+  "status": "pass"
+}
+{
+  "H1_pass": false,
+  "H2_pass": false,
+  "H3_pass": true,
+  "Qwen_qualification_unlocked": false,
+  "RL_training_unlocked": false,
+  "disposition": "formal-development no-go; training, Qwen, validation, and holdout remain locked",
+  "engineering_integrity_pass": true,
+  "formal_development_primary_pass": false,
+  "formal_episode_failures": 0,
+  "holdout_unlocked": false,
+  "replay_status_at_evaluation": "pass",
+  "validation_unlocked": false
+}

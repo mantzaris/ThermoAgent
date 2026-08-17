@@ -1,6 +1,6 @@
 Creator:        Matplotlib v3.7.5, https://matplotlib.org
 Producer:       Matplotlib pdf backend v3.7.5
-CreationDate:   Sun Aug 16 10:58:21 2026 EDT
+CreationDate:   Sun Aug 16 21:41:15 2026 EDT
 Tagged:         no
 UserProperties: no
 Suspects:       no
@@ -10,6 +10,6 @@ Pages:          1
 Encrypted:      no
 Page size:      639.818 x 309.785 pts
 Page rot:       0
-File size:      15539 bytes
+File size:      16874 bytes
 Optimized:      no
 PDF version:    1.4

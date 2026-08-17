@@ -2,9 +2,9 @@
 
 | Claim | Status | Evidence | Prohibited extension |
 |---|---|---|---|
-| H1 complexity-dependent selective-safety value | not_tested_formally | `pilots_iteration3/analysis/pilot_analysis.json` | No universal entropy, real-human, or physical-thermodynamics claim |
-| H2 high-complexity selective-safety value in both applications | not_tested_formally | `pilots_iteration3/analysis/high_complexity_effects.csv` | No universal entropy, real-human, or physical-thermodynamics claim |
-| H3 communication-efficient distributed monitoring | pilot_only | `pilots/analysis/communication_reductions.csv` | No universal entropy, real-human, or physical-thermodynamics claim |
+| H1 complexity-dependent selective-safety value | unsupported | `statistics/dynamic_primary_analysis.json` | No universal entropy, real-human, or physical-thermodynamics claim |
+| H2 high-complexity selective-safety value in both applications | unsupported | `statistics/high_complexity_dynamic_effects.csv` | No universal entropy, real-human, or physical-thermodynamics claim |
+| H3 communication-efficient distributed monitoring | supported_development_monitoring_only | `statistics/communication_primary_analysis.json` | No universal entropy, real-human, or physical-thermodynamics claim |
 | H4 entropy value increases with scale | exploratory_or_not_unlocked | `CLAIMS_MATRIX.md` | No universal entropy, real-human, or physical-thermodynamics claim |
 | H5 fragmented exceeds public information | exploratory_or_not_unlocked | `CLAIMS_MATRIX.md` | No universal entropy, real-human, or physical-thermodynamics claim |
 | H6 generalized entropy adds beyond Shannon | exploratory_or_not_unlocked | `CLAIMS_MATRIX.md` | No universal entropy, real-human, or physical-thermodynamics claim |

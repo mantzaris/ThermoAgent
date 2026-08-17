@@ -12,6 +12,7 @@ import yaml
 from sklearn.metrics import roc_auc_score
 
 from .v5_experiments import atomic_json, write_csv
+from .v7_io import read_csv_artifact
 
 
 def _check(
@@ -40,8 +41,8 @@ def evaluate_feasibility_gates(
     if not analysis_path.exists():
         raise FileNotFoundError("pilot analysis is incomplete")
     analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
-    candidates = pd.read_csv(results_root / stage / "candidate_decisions.csv")
-    episodes = pd.read_csv(results_root / stage / "episode_summary.csv")
+    candidates = read_csv_artifact(results_root / stage / "candidate_decisions.csv")
+    episodes = read_csv_artifact(results_root / stage / "episode_summary.csv")
     accepted = candidates[
         candidates.counterfactual_evaluated.astype(bool)
         & candidates.counterfactual_action_accepted.astype(bool)

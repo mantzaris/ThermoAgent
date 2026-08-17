@@ -1,0 +1,17 @@
+{
+  "inspection_date": "2026-08-17",
+  "method": "Each final 300-DPI render was opened and inspected at original rendered resolution after automated PDF, font, and text checks.",
+  "reviewer": "Codex",
+  "files": {
+    "figure_01_agentic_formulation.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_02_equilibrium_validation.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_03_phase_diagram.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_04_binder_cumulants.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_05_response_functions.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_06_entropy_production.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_07_free_energy_and_hysteresis.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_08_relaxation.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_09_application_networks.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"},
+    "figure_10_utility_disruption.pdf": {"visual_inspection": "passed", "clipping_or_overlap": "none observed"}
+  }
+}

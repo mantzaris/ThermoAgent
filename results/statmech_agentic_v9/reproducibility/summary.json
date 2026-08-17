@@ -1,0 +1,61 @@
+{
+  "analysis": {
+    "binder_crossing_candidate_median": 1.4588046754573405,
+    "binder_pair_count": 4,
+    "binder_pairs_with_crossing": 4,
+    "evidence_stage": "frozen numerical evaluation; no external confirmatory holdout",
+    "exact_equilibrium_gate_passed": true,
+    "formal_cell_counts": {
+      "application_conservation_records": 16,
+      "application_time_rows": 2560,
+      "application_trajectories": 16,
+      "directed_exact": 56,
+      "exact_validation": 5,
+      "finite_size": 240,
+      "hysteresis": 132,
+      "phase_grid": 1440,
+      "relaxation": 80
+    },
+    "high_asymmetry_entropy_production": {
+      "ci_high": 0.06313115956360378,
+      "ci_low": 0.04343003398035562,
+      "independent_n": 24,
+      "mean": 0.05306706061408447
+    },
+    "independent_seed_counts": {
+      "applications_per_mapping": 8,
+      "finite_size_per_cell": 6,
+      "phase_grid_per_cell": 4
+    },
+    "maximum_application_conservation_residual": 4.440892098500626e-14,
+    "maximum_detailed_balance_residual": 6.5052130349130266e-18,
+    "maximum_empirical_gibbs_total_variation": 0.021859227970452,
+    "maximum_equilibrium_entropy_production": 1.4213362989577803e-31,
+    "maximum_free_energy_identity_residual": 1.863093013199091e-15,
+    "minimum_generalized_entropy_correlation_with_shannon": 0.9509302668882845,
+    "protocol_version": "v9.1.2",
+    "susceptibility_peak_scaling_exponent": 0.25055303838452647
+  },
+  "branch": "statistical-mechanics-agentic-systems-v9",
+  "current_source_sha256": "253e501d01bfc74381bc50fb258a74824c306a727efbd77914350cbad5133c7a",
+  "external_artifact_root": "/tmp/ThermoAgent-v9-artifacts",
+  "external_artifact_sha256": {
+    "application_conservation.csv": "ec616879dd440bcbe52a9b39363396c9bf6a6351547e97394397374cc006a2c5",
+    "application_edges.csv": "5b357d898c8ad9faf3e01a89fe78d4ec1fae8de5e7628f101723af35f4487203",
+    "application_snapshots.csv": "30979efc49f834539f49ba9ced1e07b35ea78e7f384f265d9418a8f0a32246bd",
+    "applications.csv": "8e58d41a92a30959e20c670d29ad89b6ace3f4d174828a7a14f874cecef0bbff",
+    "exact_entropy_production.csv": "b6e07115fe0545e80d4f35f84551c8891852779b0857d0ede082b14d0da3c264",
+    "exact_free_energy_landscape.csv": "19fa4c7cbc236ae3b36b737b07ae71eda7f66c48eb10725178dd2651e5b3fd50",
+    "exact_probabilities.csv": "69110edafb024ec89af1bb6e34f83d1de2a74fcaa185e423cfa501c6ac755b57",
+    "exact_validation.csv": "51096eb449a182423bbc38f4d0b4f970368e22dc7d6553cd6c26a22f49aa939b",
+    "finite_size.csv": "f8d0a3e3e240a34b3b914468ed5f03924c7a38c0ca0fce890241ed969adf087b",
+    "hysteresis.csv": "12f7702b06a652558fec1cec7f5a7c5a6e415b554718523643df9033c34dcb40",
+    "phase_grid.csv": "f13cf0ed63bfdb693eb2eebad930a155faf8b54efb7a05034f9fd9cccb0823c3",
+    "relaxation.csv": "6a1f736f864b43abf205a7904cbc7a5879ccbdc97789c644e56345f1446e09a5"
+  },
+  "formal_source_sha256": "9845f4d6ef2c9282c696d67468536f1d5d2ae5b0059ce289f0cbdc0fc51f8a00",
+  "parent_v8_commit": "b86f97fa0940f11cb366c809e0e46fa888dfaba1",
+  "protocol_sha256": "8520d841f98722b9759971178bf58d2697d62bf25f9ca36aa5f8c13b59415eab",
+  "raw_artifacts_in_repository": false,
+  "uncommitted_by_requirement": true
+}

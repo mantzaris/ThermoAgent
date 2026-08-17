@@ -1,0 +1,26 @@
+{
+  "date": "2026-08-17",
+  "collected_tests": 449,
+  "passed": 449,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "v9_focused_tests": 27,
+  "execution": "complete monolithic suite plus bounded process-group confirmation",
+  "external_junit_directory": "/tmp/ThermoAgent-v9-artifacts/qa",
+  "full_suite_junit": "pytest_full.xml",
+  "full_suite_seconds": 106.427,
+  "group_junit_files": [
+    "pytest_statmech_v9.xml",
+    "pytest_legacy_core.xml",
+    "pytest_runner.xml",
+    "pytest_smoke.xml",
+    "pytest_v4_v5.xml",
+    "pytest_v6_core.xml",
+    "pytest_v6_learnability.xml",
+    "pytest_v6_remaining.xml",
+    "pytest_v7.xml",
+    "pytest_v8.xml"
+  ],
+  "console_note": "The execution tool yielded partial console output at 42%, but the same process subsequently finalized pytest_full.xml with all 449 tests passing. The listed bounded groups independently confirmed the complete collection."
+}

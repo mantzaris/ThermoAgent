@@ -24,6 +24,28 @@ results/**/*.safetensors
 results/**/*.tmp
 results/.staging/
 
+# V9 statistical-mechanics study: raw and regenerable artifacts stay external.
+results/statmech_agentic_v9/raw/
+results/statmech_agentic_v9/logs/
+results/statmech_agentic_v9/checkpoints/
+results/statmech_agentic_v9/qa_png/
+results/statmech_agentic_v9/**/*.npy
+results/statmech_agentic_v9/**/*.npz
+results/statmech_agentic_v9/**/*.pkl
+results/statmech_agentic_v9/**/*.pickle
+results/statmech_agentic_v9/**/*.parquet
+results/statmech_agentic_v9/**/*.tar
+results/statmech_agentic_v9/**/*.tar.*
+results/statmech_agentic_v9/**/*.zip
+paper/jstat_v9/*.aux
+paper/jstat_v9/*.bbl
+paper/jstat_v9/*.blg
+paper/jstat_v9/*.fdb_latexmk
+paper/jstat_v9/*.fls
+paper/jstat_v9/*.log
+paper/jstat_v9/*.out
+paper/jstat_v9/*.synctex.gz
+
 
 .agents
 .codex

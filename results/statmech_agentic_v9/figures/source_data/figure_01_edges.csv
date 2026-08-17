@@ -1,0 +1,10 @@
+source,target,relation
+agent_1,communication,delivered messages
+agent_2,communication,delivered messages
+agent_3,communication,delivered messages
+agent_1,dependency,local task coupling
+agent_2,dependency,local task coupling
+agent_3,dependency,local task coupling
+communication,scheduler,local view
+dependency,scheduler,local view
+scheduler,evaluator,state transitions

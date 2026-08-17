@@ -1,0 +1,8 @@
+node,kind,x,y,description
+agent_1,agent,0.1,0.75,"private belief, action, memory"
+agent_2,agent,0.1,0.5,"private belief, action, memory"
+agent_3,agent,0.1,0.25,"private belief, action, memory"
+communication,layer,0.39,0.68,communication coupling J_b
+dependency,layer,0.39,0.32,dependency coupling J_a
+scheduler,environment,0.68,0.5,random local update schedule
+evaluator,evaluator,0.91,0.5,global observables only

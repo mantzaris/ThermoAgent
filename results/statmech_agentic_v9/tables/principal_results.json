@@ -1,0 +1,37 @@
+{
+  "binder_crossing_candidate_median": 1.4588046754573405,
+  "binder_pair_count": 4,
+  "binder_pairs_with_crossing": 4,
+  "evidence_stage": "frozen numerical evaluation; no external confirmatory holdout",
+  "exact_equilibrium_gate_passed": true,
+  "formal_cell_counts": {
+    "application_conservation_records": 16,
+    "application_time_rows": 2560,
+    "application_trajectories": 16,
+    "directed_exact": 56,
+    "exact_validation": 5,
+    "finite_size": 240,
+    "hysteresis": 132,
+    "phase_grid": 1440,
+    "relaxation": 80
+  },
+  "high_asymmetry_entropy_production": {
+    "ci_high": 0.06313115956360378,
+    "ci_low": 0.04343003398035562,
+    "independent_n": 24,
+    "mean": 0.05306706061408447
+  },
+  "independent_seed_counts": {
+    "applications_per_mapping": 8,
+    "finite_size_per_cell": 6,
+    "phase_grid_per_cell": 4
+  },
+  "maximum_application_conservation_residual": 4.440892098500626e-14,
+  "maximum_detailed_balance_residual": 6.5052130349130266e-18,
+  "maximum_empirical_gibbs_total_variation": 0.021859227970452,
+  "maximum_equilibrium_entropy_production": 1.4213362989577803e-31,
+  "maximum_free_energy_identity_residual": 1.863093013199091e-15,
+  "minimum_generalized_entropy_correlation_with_shannon": 0.9509302668882845,
+  "protocol_version": "v9.1.2",
+  "susceptibility_peak_scaling_exponent": 0.25055303838452647
+}

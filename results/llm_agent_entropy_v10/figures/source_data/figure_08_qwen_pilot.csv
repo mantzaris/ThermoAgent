@@ -1,0 +1,17 @@
+panel,x,condition,mean_right_choice,wilson_ci_low,wilson_ci_high,independent_decisions
+private_evidence,-1.0,left option first,0.2,0.05668215145437519,0.5098375284633583,10
+private_evidence,-1.0,right option first,0.2,0.05668215145437519,0.5098375284633583,10
+private_evidence,-0.55,left option first,0.4,0.16818032970623614,0.6873262302663417,10
+private_evidence,-0.55,right option first,0.2,0.05668215145437519,0.5098375284633583,10
+private_evidence,-0.15,left option first,0.5,0.236593090512564,0.7634069094874361,10
+private_evidence,-0.15,right option first,0.4,0.16818032970623614,0.6873262302663417,10
+private_evidence,0.15,left option first,0.6,0.31267376973365824,0.8318196702937638,10
+private_evidence,0.15,right option first,0.6,0.31267376973365824,0.8318196702937638,10
+private_evidence,0.55,left option first,0.7,0.39677814746114537,0.8922087325936989,10
+private_evidence,0.55,right option first,0.7,0.39677814746114537,0.8922087325936989,10
+private_evidence,1.0,left option first,0.7,0.39677814746114537,0.8922087325936989,10
+private_evidence,1.0,right option first,0.7,0.39677814746114537,0.8922087325936989,10
+delivered_message,-1.0,prior left,0.0,0.0,0.24249400665524085,12
+delivered_message,1.0,prior left,0.0,0.0,0.24249400665524085,12
+delivered_message,-1.0,prior right,1.0,0.7575059933447592,1.0,12
+delivered_message,1.0,prior right,1.0,0.7575059933447592,1.0,12

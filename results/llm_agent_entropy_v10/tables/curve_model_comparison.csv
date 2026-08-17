@@ -1,0 +1,4 @@
+model,low_alpha_maximum,independent_orientations,held_out_rmse,coefficient_linear,coefficient_quadratic
+linear_zero_intercept,0.02,8,7.51102921317236e-06,0.0019080783202097239,0.0
+quadratic_zero_intercept,0.02,8,3.9399293315712305e-06,0.0,0.1108974439773161
+linear_plus_quadratic_zero_intercept,0.02,8,3.93992934268424e-06,-1.2813119503098983e-07,0.11090430657737044

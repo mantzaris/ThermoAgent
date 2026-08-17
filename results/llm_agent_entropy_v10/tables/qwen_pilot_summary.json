@@ -1,0 +1,41 @@
+{
+  "completed_decisions": 384,
+  "estimated_allocated_gpu_hours_including_five_model_loads": 0.23,
+  "estimated_cost_usd_at_0_34_per_hour": 0.0782,
+  "estimated_cost_usd_at_0_69_per_hour": 0.1587,
+  "final_message_response_difference": 0.0,
+  "final_message_switch_fraction": 0.0,
+  "formal_qwen_decisions": 0,
+  "formal_qwen_unlocked": false,
+  "generated_at": "2026-08-17T22:43:59.644709+00:00",
+  "generated_tokens": 34224,
+  "measured_generation_gpu_hours": 0.18814060273166333,
+  "measured_generation_latency_seconds": 677.306169833988,
+  "model": {
+    "accounting": {
+      "first_pass_valid": 48,
+      "generated_tokens": 4399,
+      "invalid_after_repair": 0,
+      "latency_seconds": 86.88545949012041,
+      "model_calls": 48,
+      "prompt_tokens": 25584,
+      "repaired_valid": 0
+    },
+    "backend": "Transformers AutoModelForCausalLM",
+    "bitsandbytes_version": "0.47.0",
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 4090",
+    "inference_temperature": 0.65,
+    "maximum_new_tokens": 220,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "quantization": "NF4, double quantization, BF16 compute",
+    "top_p": 0.9,
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "4.55.4"
+  },
+  "model_calls_including_repairs": 388,
+  "prompt_tokens": 167031,
+  "required_message_response_difference": 0.2,
+  "status": "pilot qualification stopped prospectively; formal LLM study not run"
+}

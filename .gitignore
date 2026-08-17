@@ -46,6 +46,32 @@ paper/jstat_v9/*.log
 paper/jstat_v9/*.out
 paper/jstat_v9/*.synctex.gz
 
+# V10 nonreciprocal LLM-agent study: all detailed executions stay external.
+results/llm_agent_entropy_v10/raw/
+results/llm_agent_entropy_v10/logs/
+results/llm_agent_entropy_v10/transcripts/
+results/llm_agent_entropy_v10/checkpoints/
+results/llm_agent_entropy_v10/qa_png/
+results/llm_agent_entropy_v10/**/*.jsonl
+results/llm_agent_entropy_v10/**/*.npy
+results/llm_agent_entropy_v10/**/*.npz
+results/llm_agent_entropy_v10/**/*.pkl
+results/llm_agent_entropy_v10/**/*.pickle
+results/llm_agent_entropy_v10/**/*.safetensors
+results/llm_agent_entropy_v10/**/*.pt
+results/llm_agent_entropy_v10/**/*.bin
+results/llm_agent_entropy_v10/**/*.tar
+results/llm_agent_entropy_v10/**/*.tar.*
+results/llm_agent_entropy_v10/**/*.zip
+paper/jstat_v10/*.aux
+paper/jstat_v10/*.bbl
+paper/jstat_v10/*.blg
+paper/jstat_v10/*.fdb_latexmk
+paper/jstat_v10/*.fls
+paper/jstat_v10/*.log
+paper/jstat_v10/*.out
+paper/jstat_v10/*.synctex.gz
+
 
 .agents
 .codex

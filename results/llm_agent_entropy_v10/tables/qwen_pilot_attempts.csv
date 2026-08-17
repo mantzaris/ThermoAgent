@@ -1,0 +1,7 @@
+attempt,status,scientific_disposition,decisions,model_calls,prompt_tokens,generated_tokens,generation_latency_seconds,first_pass_validity,after_repair_validity,gate_passed
+evidence_attempt_1,failed before a model decision,retained technical failure: deterministic cuBLAS workspace variable absent,0,0,0,0,0.0,,,False
+evidence_attempt_2,completed,completed; evidence field aliased with display order; excluded from gate,120,120,48620,10440,207.78834208473563,1.0,1.0,False
+evidence_attempt_3,completed,completed; fully crossed evidence by order; passed under the pre-message-clarification prompt,120,124,49915,10693,209.88037318736315,0.9666666666666667,1.0,True
+message_attempt_1,completed,completed; every prior was plan_left; excluded from gate,48,48,21456,4304,85.4111056663096,1.0,1.0,False
+message_attempt_2,completed,completed; balanced priors; message gate failed,48,48,21456,4388,87.34088940545917,1.0,1.0,False
+message_attempt_3,completed,completed after one prompt clarification; message gate failed,48,48,25584,4399,86.88545949012041,1.0,1.0,False

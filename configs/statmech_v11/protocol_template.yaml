@@ -1,0 +1,21 @@
+protocol: v11-prospective-template
+status: not_frozen
+decision_sequence:
+  - retained engineering pilot
+  - freeze qualification thresholds
+  - run one decisive qualification set
+  - freeze formal network protocol only if qualification passes
+  - run formal network once
+primary_hypotheses:
+  H1: calibrated delivered evidence causes a directionally correct belief-log-odds change
+  H2: evidence response increases with reliability or cumulative independent evidence
+  H3: matched nonreciprocal networks exceed reciprocal networks in coarse pathwise irreversibility
+  H4: weak-nonreciprocity excess contains a positive quadratic component
+  H5: the effect survives matched traffic and weakens under evidence-destroying controls
+independent_units:
+  qualification: matched semantic-frame-option-order-private-signal-inference cluster
+  formal: graph-orientation by environment-seed panel
+raw_artifacts: external_only
+replication_model: none_predeclared_due_primary_model_compute_priority
+formal_stage_unlock: qualification_gate_pass_only
+

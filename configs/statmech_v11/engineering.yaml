@@ -1,0 +1,26 @@
+protocol: v11-engineering-pilot-1
+status: retained_nonconfirmatory
+created_before_pilot_outcomes: true
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+pilot:
+  evidence_reliabilities: [0.55, 0.70, 0.85]
+  private_signal_reliability: 0.65
+  prompt_paraphrases: 2
+  inference_replicates: 1
+  include_extended_conditions: false
+  inference_sampling_temperature: 0.65
+  top_p: 0.90
+  maximum_new_tokens: 300
+  seed_base: 111000
+  purpose:
+    - diagnose strict-schema validity
+    - estimate the scale and variance of signed log-odds response
+    - set practical qualification thresholds before decisive data
+    - detect option-order or prompt-framing failures
+  prohibited_use:
+    - confirmatory evidence-use claim
+    - formal-network unlock without a fresh frozen qualification
+

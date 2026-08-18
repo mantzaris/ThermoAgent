@@ -1,0 +1,20 @@
+{
+  "focused_v10_v11": {
+    "command": "PYTHON_BIN=python3 ./scripts/run-statmech-v11-tests.sh",
+    "passed": 69,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_repository": {
+    "command": "python3 -m pytest -q --import-mode=importlib --junitxml=/tmp/ThermoAgent-v11-artifacts/local/test_reports/full_repository_importlib.xml",
+    "passed": 518,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 124.727,
+    "junit_external_path": "/tmp/ThermoAgent-v11-artifacts/local/test_reports/full_repository_importlib.xml",
+    "junit_sha256": "21446bcb1e7035fbf9fc722659939711c4fa634c7fd9f30622ccdbc6d4448936"
+  },
+  "invocation_note": "Pytest's default prepend import mode produced one collection error because frozen V9 and V10 both contain test_agents.py. The complete suite passed under pytest's importlib mode; no test was removed or skipped."
+}

@@ -72,6 +72,32 @@ paper/jstat_v10/*.log
 paper/jstat_v10/*.out
 paper/jstat_v10/*.synctex.gz
 
+# V11 evidence-grounded LLM study: detailed generations and build products stay external.
+results/llm_agent_entropy_v11/raw/
+results/llm_agent_entropy_v11/logs/
+results/llm_agent_entropy_v11/transcripts/
+results/llm_agent_entropy_v11/checkpoints/
+results/llm_agent_entropy_v11/qa_png/
+results/llm_agent_entropy_v11/**/*.jsonl
+results/llm_agent_entropy_v11/**/*.npy
+results/llm_agent_entropy_v11/**/*.npz
+results/llm_agent_entropy_v11/**/*.pkl
+results/llm_agent_entropy_v11/**/*.pickle
+results/llm_agent_entropy_v11/**/*.safetensors
+results/llm_agent_entropy_v11/**/*.pt
+results/llm_agent_entropy_v11/**/*.bin
+results/llm_agent_entropy_v11/**/*.tar
+results/llm_agent_entropy_v11/**/*.tar.*
+results/llm_agent_entropy_v11/**/*.zip
+paper/jstat_v11/*.aux
+paper/jstat_v11/*.bbl
+paper/jstat_v11/*.blg
+paper/jstat_v11/*.fdb_latexmk
+paper/jstat_v11/*.fls
+paper/jstat_v11/*.log
+paper/jstat_v11/*.out
+paper/jstat_v11/*.synctex.gz
+
 
 .agents
 .codex

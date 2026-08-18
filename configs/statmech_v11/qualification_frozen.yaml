@@ -1,0 +1,76 @@
+protocol: v11-qualification-1.0
+status: frozen_before_decisive_qualification
+frozen_after_retained_engineering_pilot: true
+frozen_before_qualification_outcomes: true
+starting_v10_commit: 4d372f00837bf75f90882392a92feac87dbc84b2
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+  replication_model: none_predeclared
+qualification:
+  evidence_reliabilities: [0.55, 0.65, 0.75, 0.85]
+  private_signal_reliability: 0.65
+  prompt_paraphrases: 3
+  inference_replicates: 2
+  include_extended_conditions: true
+  inference_sampling_temperature: 0.65
+  top_p: 0.90
+  maximum_new_tokens: 300
+  seed_base: 220000
+  independent_clusters: 48
+  expected_decision_requests: 864
+  primary_estimand: >-
+    cluster-mean signed change in logit(probability_right), oriented toward the
+    delivered evidence and paired to the no-message response
+  placebo_estimand: >-
+    cluster-mean directional contrast of right evidence minus placebo and
+    placebo minus left evidence; this removes nondirectional message-presence
+    shifts without discarding their separately reported magnitude
+  empirical_choice_calibration: >-
+    mean reported probability versus repeated right-choice frequency within
+    identical information cells; if poorly calibrated, formal transition
+    inference uses empirical choices rather than treating reports as truth
+  gates:
+    minimum_first_pass_validity: 0.95
+    minimum_after_repair_validity: 0.99
+    minimum_signed_logit_effect: 0.10
+    minimum_placebo_adjusted_effect: 0.10
+    minimum_llr_slope: 0.05
+    monotonic_tolerance: 0.03
+    maximum_absolute_order_effect: 0.15
+    maximum_paraphrase_range: 0.20
+    minimum_probability_sd: 0.05
+    minimum_choice_fraction: 0.10
+    minimum_outgoing_packet_acceptance: 0.80
+  gate_rationale:
+    signed_logit_effect: >-
+      0.10 is an approximately 10.5 percent odds multiplier and is below the
+      retained pilot estimate 0.125 but above a merely numerical perturbation;
+      a positive 95 percent cluster interval is additionally required.
+    placebo_adjustment: >-
+      pilot message presence produced a rightward shift, so direction-balanced
+      placebo contrasts are required rather than comparing to absolute noise.
+    llr_slope: >-
+      at least five percent of the normative likelihood-ratio gradient is a
+      conservative practical response; monotonic means remain separately gated.
+    order_paraphrase: >-
+      bounds are comparable to the smallest evidence effect and prevent format
+      sensitivity from dominating the claimed response.
+    variation: >-
+      both binary choices must occur in at least ten percent of valid responses
+      and the continuous coordinate must have standard deviation at least 0.05.
+  progression_rule: all_gate_components_must_pass
+  failure_rule: stop_before_formal_network_and_package_the_identified_no_go
+inference:
+  bootstrap_replicates: 10000
+  independent_unit: matched_information_cluster
+  no_token_or_decision_pseudoreplication: true
+  multiplicity: Holm_for_secondary_families
+execution:
+  one_bounded_repair: true
+  paired_inference_seed: true
+  exact_option_counterbalancing: true
+  raw_records_external_only: true
+  no_selective_reruns: true
+  package_change_since_pilot: none

@@ -1,0 +1,7 @@
+stage,name,agent_visible
+0,latent theta,0
+1,Bernoulli signal with reliability r,1
+2,typed packet and binary serialization,1
+3,explicit directed delivery,1
+4,local evidence integration,1
+5,offline Bayesian reference,0

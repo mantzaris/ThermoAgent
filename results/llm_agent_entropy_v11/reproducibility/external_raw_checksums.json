@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-08-18T00:59:16.781060+00:00",
+  "root": "/workspace/ThermoAgent-v11-artifacts",
+  "definition": "For each listed directory, SHA-256 was accumulated over sorted relative-path, NUL, file-SHA-256, NUL tuples. The manifests row precedes creation of external_tree_summary_v11.json and therefore covers only the qualification freeze manifest.",
+  "directories": [
+    {
+      "directory": "pilot",
+      "files": 4,
+      "bytes": 43122,
+      "sha256_tree": "d68afac995ec0baf217977b06b3b734aeb849c2a032d8d05f642b9c58dde3642"
+    },
+    {
+      "directory": "qualification",
+      "files": 4,
+      "bytes": 279288,
+      "sha256_tree": "6208fec8349839b7e6f0f2d215b243c0e59996d5c232e37a2f8927ad66a47394"
+    },
+    {
+      "directory": "raw",
+      "files": 992,
+      "bytes": 3753092,
+      "sha256_tree": "8d4116171fdde105bda529465810faf50a9f2a15f1403bdaf2636a3df1f3e4d3"
+    },
+    {
+      "directory": "invalidated",
+      "files": 118,
+      "bytes": 571918,
+      "sha256_tree": "37733b518368beb2e046c2e2e9eedbfe62b8984920acb2908765b286f6e96540"
+    },
+    {
+      "directory": "logs",
+      "files": 9,
+      "bytes": 19534,
+      "sha256_tree": "5e5bef689bb189159de1d0cb0d41cbed4659f834e295a110e4e070c4aa440088"
+    },
+    {
+      "directory": "manifests",
+      "files": 1,
+      "bytes": 410,
+      "sha256_tree": "b64664c8e72c6ae8309327c0d383ac20d5bc58022a40354708ffa759a13735c7"
+    }
+  ]
+}

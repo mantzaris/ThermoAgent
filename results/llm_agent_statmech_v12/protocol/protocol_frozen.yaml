@@ -1,0 +1,395 @@
+protocol: v12-llm-statmech-1.0
+status: frozen_before_formal_outcomes
+title: Collective dynamics and entropy production in nonreciprocal networks of decentralized
+  LLM agents
+provenance:
+  parent_branch: evidence-grounded-llm-entropy-v11
+  parent_commit: 0d73693160c25e251533d6f6720fdd78b349605e
+  v11_role: immutable qualification-stage no-go and developmental message-causality
+    evidence
+  v10_role: exact heat-bath and quadratic-onset reference only
+  execution_source_sha256: 0796286362ec4dde0eb4f2dc88ecea4c3bf53859e618aec1928ba8b9e8b0a154
+scientific_scope:
+  primary_regime: markovized_state_complete_prompt
+  secondary_regime: persistent_bounded_memory
+  update_convention: random_sequential_one_agent_per_attempt
+  sweep_definition: N_attempted_agent_updates
+  independent_unit: matched_graph_trajectory_panel
+  primary_state: categorical_beliefs_actions_commitments_bounded_memory_and_local_workload
+  primary_transition_projection: categorical_belief_action_microstate
+hypotheses:
+  H1: delivered neighbor states change the individual LLM transition law after latent-label
+    counterbalancing
+  H2: reciprocal and nonreciprocal networks have distinguishable probability currents
+    or pathwise irreversibility at matched traffic
+  H3: excess irreversibility increases over at least part of the predeclared nonreciprocity
+    range
+  H4: weak-nonreciprocity excess irreversibility is compatible with a positive quadratic
+    component, with deviation from V10 quantified
+  H5: collective order fluctuations correlations or relaxation vary systematically
+    with coupling decision noise or nonreciprocity
+  H6: the principal nonreciprocity direction replicates across graph orientations
+    and at least two sizes
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+  top_p: 0.9
+  maximum_new_tokens: 144
+  one_bounded_repair: true
+  chain_of_thought_requested: false
+neutralization:
+  labels:
+  - amber
+  - cobalt
+  latent_plus_mapping: exactly_counterbalanced_by_matched_panel
+  option_order: randomized_and_counterbalanced_within_panel
+  private_fields: balanced_within_panel
+  initial_beliefs_actions: balanced_in_disordered_condition
+  symmetric_payoff_and_prompt_length: required
+network:
+  topologies:
+  - ring
+  - modular_fixed_degree
+  nonreciprocity_levels:
+  - 0.0
+  - 0.2
+  - 0.5
+  - 0.8
+  orientations:
+  - forward
+  - transpose
+  construction: symmetric_regular_support_plus_divergence_free_antisymmetric_cycle_flow
+  fixed_support: true
+  matched_weighted_degree: true
+  fixed_message_opportunity_per_valid_update: true
+  primary_endogenous_send_abstain: false
+microscopic_response:
+  private_fields:
+  - -1
+  - 0
+  - 1
+  neighbor_fields:
+  - -1
+  - 0
+  - 1
+  current_beliefs:
+  - -1
+  - 1
+  current_actions:
+  - -1
+  - 1
+  coupling_strengths:
+  - 0.35
+  - 0.8
+  inference_sampling_temperatures:
+  - 0.5
+  - 0.85
+  regimes:
+  - markovized
+  - persistent_memory
+  independent_replicates_per_cell: 2
+  expected_decisions: 576
+small_network:
+  agent_counts:
+  - 3
+  - 4
+  topology: ring
+  graph_environment_replicates: 4
+  sweeps: 60
+  burn_in_sweeps: 9
+  coupling_strength: 0.7
+  inference_sampling_temperature: 0.72
+  regime: markovized
+  initial_condition: disordered
+  expected_decisions: 11760
+collective_network:
+  agent_counts:
+  - 8
+  - 16
+  topologies:
+  - ring
+  - modular
+  graph_environment_replicates: 2
+  sweeps: 8
+  burn_in_sweeps: 2
+  coupling_strengths:
+  - 0.35
+  - 0.8
+  inference_sampling_temperatures:
+  - 0.5
+  - 0.85
+  regime: markovized
+  initial_condition: disordered
+  expected_decisions: 21504
+persistent_memory:
+  agent_counts:
+  - 8
+  - 16
+  topologies:
+  - ring
+  - modular
+  regimes:
+  - markovized
+  - persistent_memory
+  graph_environment_replicates: 2
+  nonreciprocity_levels:
+  - 0.0
+  - 0.8
+  sweeps: 8
+  burn_in_sweeps: 2
+  coupling_strength: 0.7
+  inference_sampling_temperature: 0.72
+  expected_decisions: 4608
+relaxation:
+  agent_counts:
+  - 8
+  - 16
+  topology: ring
+  graph_environment_replicates: 2
+  nonreciprocity_levels:
+  - 0.0
+  - 0.8
+  inference_sampling_temperatures:
+  - 0.5
+  - 0.85
+  initial_conditions:
+  - ordered
+  - disordered
+  sweeps: 8
+  expected_decisions: 4608
+controls:
+  n_agents: 8
+  topology: ring
+  graph_environment_replicates: 3
+  alpha: 0.8
+  orientation: forward
+  sweeps: 6
+  inference_sampling_temperature: 0.72
+  arms:
+  - unaltered
+  - no_message
+  - content_permutation
+  - temporal_permutation
+  - sender_identity_permutation
+  - placebo
+  expected_decisions: 864
+surrogates:
+  exact_heat_bath_reference: immutable_V10_exact_tables
+  fitted_kinetic_ising:
+    fit_source: all_valid_V12_microscopic_response_rows
+    belief_features:
+    - intercept
+    - private_field
+    - weighted_neighbor_field
+    - previous_belief
+    - previous_action
+    action_features:
+    - intercept
+    - updated_belief
+    - previous_action
+    execution: decentralized_random_sequential
+    agent_counts:
+    - 3
+    - 4
+    - 8
+    - 16
+    topologies:
+    - ring
+    - modular
+    trajectory_sweeps: 200
+    burn_in_sweeps: 50
+    independent_seeds_per_cell: 12
+    role: effective_model_comparison_not_LLM_evidence
+hysteresis:
+  n_agents: 8
+  topology: ring
+  graph_environment_replicates: 2
+  nonreciprocity_levels:
+  - 0.0
+  - 0.8
+  orientations:
+  - forward
+  - transpose
+  external_field_sweep:
+  - -1
+  - -1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 0
+  - -1
+  - -1
+  updates_per_field: 8
+  inference_sampling_temperature: 0.72
+  coupling_strength: 0.7
+  expected_decisions: 432
+analysis:
+  primary_strong_alpha: 0.8
+  weak_alpha_range:
+  - 0.0
+  - 0.2
+  - 0.5
+  pseudocounts:
+  - 0.1
+  - 0.5
+  - 1.0
+  primary_pseudocount: 0.5
+  block_lengths:
+  - 2
+  - 3
+  - 4
+  primary_block_length: 3
+  time_shuffle_replicates_per_panel: 200
+  information_permutation_replicates_per_panel: 100
+  cluster_bootstrap_replicates: 10000
+  analysis_seed: 12121987
+  history_orders:
+  - 1
+  - 2
+  - 3
+  macrostate_bin_widths:
+    belief_magnetization: 0.25
+    action_magnetization: 0.25
+    belief_action_overlap: 0.25
+    reference_energy_per_agent: 0.5
+  augmented_state_coarse_graining:
+    confidence_bin_width: 0.2
+    categorical_fraction_bin_width: 0.25
+    workload_mean_bin_width: 0.25
+  coarse_graining_sensitivity_multipliers:
+  - 0.75
+  - 1.5
+  secondary_tsallis_q:
+  - 0.5
+  - 2.0
+  markov_adequacy_interpretation: If first-order closure is not supported, Markov
+    current estimates are projection diagnostics and block KL is reported as coarse-grained
+    pathwise irreversibility, not exact total entropy production.
+  multiplicity: Holm_for_prespecified_secondary_families
+  no_time_step_or_token_pseudoreplication: true
+  primary_normalization:
+  - nats_per_attempted_agent_update
+  - nats_per_sweep
+  reference_energy_parameters:
+    J_b: 1.0
+    J_a: 0.65
+    K: 0.8
+exclusions:
+- no_exclusion_for_unfavorable_valid_trajectory
+- invalid_after_one_repair_remains_a_failed_attempt_without_action_substitution
+- interrupted_panels_resume_only_if_incomplete_and_all_partial_artifacts_are_retained
+- no_seed_or_orientation_removal_after_outcome_inspection
+execution:
+  seed_namespace: thermoagent_v12_12012000_plus
+  external_artifact_root: /workspace/ThermoAgent-v12-artifacts
+  phase_atomic_panel_files: true
+  exclusive_stage_lock: true
+  raw_model_interactions_external_only: true
+  formal_runs_to_completion_after_freeze: true
+  stop_conditions:
+  - data_corruption
+  - systematic_undefined_structured_outputs
+  - privacy_boundary_failure
+  - scheduler_action_substitution
+  - unrecoverable_hardware_failure
+  - compute_ceiling_exhaustion
+compute:
+  expected_primary_decisions: 44352
+  one_repair_reserve_fraction: 0.05
+  projected_model_calls: 46570
+  projected_prompt_tokens: 25300000
+  projected_generated_tokens: 4020000
+  projected_external_storage_gib: 0.6
+  projected_gpu_hours: 21.8
+  hard_single_gpu_hour_cap: 24.0
+  projected_cost_usd_range:
+  - 7.41
+  - 15.04
+reporting:
+  exact_term_reserved_for: fully_specified_heat_bath_reference
+  llm_markov_term: empirical_projected_transition_entropy_production_if_closure_supported
+  llm_nonmarkov_term: coarse_grained_pathwise_irreversibility_lower_bound
+  applications: illustrative_only_not_performance_claims
+  repository_size_limit_mib: 30
+  preferred_repository_size_mib: 20
+  maximum_new_file_mib: 10
+  frozen_main_figures:
+  - agent_microstate_information_boundary_and_random_sequential_update
+  - reciprocal_and_nonreciprocal_network_construction
+  - individual_response_surface
+  - individual_transition_and_persistence
+  - representative_network_trajectories
+  - collective_observable_time_series
+  - collective_regime_summary
+  - correlations_susceptibility_and_relaxation
+  - small_system_probability_currents
+  - irreversibility_versus_nonreciprocity
+  - block_time_reversal_irreversibility
+  - v10_reference_surrogate_and_llm_comparison
+  - size_dependence
+  - memoryless_versus_persistent_memory
+  - controls_and_ablations
+  - directed_network_state_snapshot
+frozen_at_utc: '2026-08-18T05:44:03.375486+00:00'
+pilot_estimability:
+  action_minus_to_plus: 12
+  action_plus_to_minus: 12
+  after_repair_validity: 1.0
+  attempt_id: pilot_attempt4
+  belief_minus_to_plus: 6
+  belief_plus_to_minus: 6
+  decision_requests: 192
+  delivered_messages: 192
+  estimability:
+    checks:
+      action_minus_to_plus: true
+      action_occupancy: true
+      action_plus_to_minus: true
+      after_repair_validity: true
+      belief_minus_to_plus: true
+      belief_occupancy: true
+      belief_plus_to_minus: true
+      delivery: true
+      first_pass_validity: true
+      privacy: true
+    estimability_passed: true
+  first_pass_validity: 0.9947916666666666
+  generated_at: '2026-08-18T05:29:29.360296+00:00'
+  generated_tokens: 15430
+  inspection_boundary: validity_occupancy_transition_counts_runtime_only
+  latency_seconds: 307.64484294876456
+  latent_plus_action_occupancy: 0.484375
+  latent_plus_belief_occupancy: 0.4791666666666667
+  privacy_mutations: 0
+  prohibited_metrics_not_computed:
+  - entropy_production
+  - time_reversal_divergence
+  - nonreciprocity_effect
+  - probability_currents
+  prompt_tokens: 104793
+  provider_environment:
+    accounting:
+      decision_requests: 192
+      first_pass_valid: 191
+      generated_tokens: 15430
+      invalid_after_repair: 0
+      latency_seconds: 307.64484294876456
+      model_calls: 193
+      prompt_tokens: 104793
+      repaired_valid: 1
+    backend: Transformers AutoModelForCausalLM
+    bitsandbytes_version: 0.47.0
+    cuda_version: '12.8'
+    gpu_name: NVIDIA GeForce RTX 4090
+    inference_sampling_temperature: 0.72
+    maximum_new_tokens: 144
+    model_id: Qwen/Qwen2.5-7B-Instruct
+    model_revision: a09a35458c702b33eeacc393d103063234e8bc28
+    quantization: NF4 double quantization; BF16 computation
+    schema_sha256: c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d
+    top_p: 0.9
+    torch_version: 2.8.0+cu128
+    transformers_version: 4.55.4
+  valid_after_repair: 192

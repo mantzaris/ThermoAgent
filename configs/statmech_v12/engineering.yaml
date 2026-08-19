@@ -1,0 +1,47 @@
+protocol: v12-engineering-0.1
+status: pilot_only_no_nonreciprocity_estimand
+parent_v11_commit: 0d73693160c25e251533d6f6720fdd78b349605e
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+  inference_sampling_temperature: 0.72
+  top_p: 0.90
+  maximum_new_tokens: 144
+pilot:
+  attempt_id: pilot_attempt4
+  reciprocal_only: true
+  n_agents: 4
+  topology: ring
+  panels: 6
+  sweeps_per_panel: 8
+  panel_seed_base: 12012000
+  coupling_strength: 0.70
+  initial_condition: disordered
+  regime: markovized
+  allowed_inspection:
+    - structured_output_validity
+    - latent_plus_occupancy
+    - both_belief_transition_directions
+    - both_action_transition_directions
+    - prompt_symmetry
+    - privacy_mutations
+    - message_delivery
+    - runtime_and_tokens
+  prohibited_inspection:
+    - entropy_production
+    - time_reversal_divergence
+    - nonreciprocity_effect
+    - probability_currents
+  estimability_targets:
+    minimum_first_pass_validity: 0.95
+    minimum_after_repair_validity: 0.99
+    latent_plus_occupancy_interval: [0.25, 0.75]
+    minimum_each_belief_transition_direction: 4
+    minimum_each_action_transition_direction: 4
+    maximum_privacy_mutations: 0
+    minimum_delivered_messages: 80
+  permitted_changes: >-
+    Prompt symmetry, label decoding, output length, and sampling temperature may
+    be repaired using only the allowed diagnostics. No primary V12 outcome may
+    be calculated before protocol freeze.

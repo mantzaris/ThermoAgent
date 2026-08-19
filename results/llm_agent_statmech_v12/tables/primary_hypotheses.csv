@@ -1,0 +1,18 @@
+hypothesis,estimand,estimate,ci_low,ci_high,independent_clusters,disposition
+H1,neighbor-field latent-choice response per unit field,0.0833333333,0.0416666667,0.125,96,supported
+H2_small,strong-alpha adjusted block-KL directed-minus-reciprocal,-0.000232701,-0.001441126,0.001013476,8,not_supported
+H2_collective,strong-alpha adjusted block-KL directed-minus-reciprocal,-0.000758931,-0.0111514,0.0097184,32,not_supported
+H3_small,adjusted block-KL nonreciprocity dose slope,0.000706762,-0.000501084,0.00233119,8,not_supported
+H3_collective,adjusted block-KL nonreciprocity dose slope,-0.000053912,-0.0144877,0.01456,32,not_supported
+H4_small,constrained quadratic coefficient,0.006036,0.00007477,0.014041,8,not_supported_by_heldout_model_comparison
+H4_collective,constrained quadratic coefficient,0.005473,-0.03533,0.04807,32,not_supported
+H5_coupling_order,high-minus-low neighbor relevance on mean absolute belief magnetization,0.032979,0.008606,0.059062,64,supported
+H5_coupling_susceptibility,high-minus-low neighbor relevance on belief susceptibility,0.045495,0.022822,0.067688,64,supported
+H5_coupling_correlation_time,high-minus-low neighbor relevance on integrated correlation time,2.31876,0.7809,3.8805,64,supported
+H5_noise_order,high-minus-low decoding noise on mean absolute belief magnetization,-0.053874,-0.083537,-0.024584,64,supported
+H5_noise_susceptibility,high-minus-low decoding noise on belief susceptibility,-0.073555,-0.099227,-0.04658,64,supported
+H5_noise_correlation_time,high-minus-low decoding noise on integrated correlation time,-5.98998,-7.5303,-4.4726,64,supported
+H6_N8_forward,strong-alpha adjusted block-KL forward orientation,0.004444,-0.01002,0.01952,8,not_supported
+H6_N8_transpose,strong-alpha adjusted block-KL transpose orientation,0.007691,-0.00519,0.02088,8,not_supported
+H6_N16_forward,strong-alpha adjusted block-KL forward orientation,-0.007561,-0.02707,0.01298,8,not_supported
+H6_N16_transpose,strong-alpha adjusted block-KL transpose orientation,-0.007611,-0.02968,0.01133,8,not_supported

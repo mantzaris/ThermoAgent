@@ -1,0 +1,37 @@
+{
+  "analysis": {
+    "cpu_seconds": 76.539219417,
+    "wall_seconds": 80.36075765267015
+  },
+  "formal": {
+    "decision_requests": 44352,
+    "generated_tokens": 3543392,
+    "invalid": 0,
+    "latency_seconds": 72301.02818240225,
+    "model_calls": 44354,
+    "prompt_tokens": 24230610,
+    "repair_attempts": 2,
+    "repaired_valid": 2
+  },
+  "pilot": {
+    "decision_requests": 512,
+    "generated_tokens": 42438,
+    "latency_seconds": 844.4938057176769,
+    "model_calls": 528,
+    "prompt_tokens": 279179,
+    "valid_pilot_summaries": 3
+  },
+  "total": {
+    "decision_requests": 44864,
+    "estimated_cost_usd_range_from_generation_time": [
+      6.908188187766883,
+      14.019558381056319
+    ],
+    "generated_tokens": 3585830,
+    "generation_latency_seconds": 73145.52198811993,
+    "gpu_time_scope": "exact summed generation latency; excludes unmetered model-load and shell overhead",
+    "metered_generation_gpu_hours": 20.318200552255536,
+    "model_calls": 44882,
+    "prompt_tokens": 24509789
+  }
+}

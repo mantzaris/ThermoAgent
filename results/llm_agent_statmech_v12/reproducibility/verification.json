@@ -1,0 +1,22 @@
+{
+  "all_passed": true,
+  "checks": {
+    "checksums": true,
+    "deterministic_replay": true,
+    "empty_git_index": true,
+    "forbidden_artifacts": true,
+    "formal_complete": true,
+    "individual_file_size": true,
+    "pdf_automated": true,
+    "pdf_manual": true,
+    "privacy": true,
+    "repository_size": true,
+    "row_accounting": true,
+    "source_frozen": true
+  },
+  "checksum_failures": [],
+  "forbidden_files": [],
+  "oversized_files": [],
+  "repository_facing_v12_bytes": 2938972,
+  "verified_at": "2026-08-19T04:04:44.306144+00:00"
+}

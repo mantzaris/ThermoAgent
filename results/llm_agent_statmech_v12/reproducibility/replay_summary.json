@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-08-19T02:37:26.038482+00:00",
+  "method": "content-addressed recorded-decision deterministic transition regeneration",
+  "mismatch_details": [],
+  "raw_transcripts_copied_into_repository": false,
+  "rows_checked": 44352,
+  "status": "passed",
+  "units_checked": 401,
+  "units_with_mismatches": 0
+}

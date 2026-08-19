@@ -1,0 +1,7 @@
+panel_id,cluster_id,alpha,orientation,belief_hysteresis_area,action_hysteresis_area
+hysteresis_g0_a0.00_reciprocal,hysteresis_g0,0.0,reciprocal,2.625,2.71875
+hysteresis_g0_a0.80_forward,hysteresis_g0,0.8,forward,2.96875,2.96875
+hysteresis_g0_a0.80_transpose,hysteresis_g0,0.8,transpose,2.96875,2.96875
+hysteresis_g1_a0.00_reciprocal,hysteresis_g1,0.0,reciprocal,2.875,2.875
+hysteresis_g1_a0.80_forward,hysteresis_g1,0.8,forward,2.875,2.875
+hysteresis_g1_a0.80_transpose,hysteresis_g1,0.8,transpose,2.875,2.875

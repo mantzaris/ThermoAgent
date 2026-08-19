@@ -1,0 +1,49 @@
+{
+  "completed_at": "2026-08-19T02:16:16.978080+00:00",
+  "completed_units": 401,
+  "dynamic_panel_count": 394,
+  "execution_source_sha256": "0796286362ec4dde0eb4f2dc88ecea4c3bf53859e618aec1928ba8b9e8b0a154",
+  "generation_gpu_hours": 20.08361893955618,
+  "generation_plus_current_model_load_gpu_hours": 20.092283671042985,
+  "observed_decision_rows": 44352,
+  "planned_decisions": 44352,
+  "protocol_sha256": "cee49ca7111b81ae9544a8d32a754ce4c9f15bff16333e98588147a7f7f665b6",
+  "provider_environment": {
+    "accounting": {
+      "decision_requests": 44352,
+      "first_pass_valid": 44350,
+      "generated_tokens": 3543392,
+      "invalid_after_repair": 0,
+      "latency_seconds": 72301.02818240225,
+      "model_calls": 44354,
+      "model_loading_seconds": 31.19303335249424,
+      "prompt_tokens": 24230610,
+      "repaired_valid": 2
+    },
+    "backend": "Transformers AutoModelForCausalLM",
+    "bitsandbytes_version": "0.47.0",
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 4090",
+    "inference_sampling_temperature": 0.72,
+    "maximum_new_tokens": 144,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "quantization": "NF4 double quantization; BF16 computation",
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "top_p": 0.9,
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "4.55.4"
+  },
+  "started_at": "2026-08-18T05:45:23.383105+00:00",
+  "status": "complete",
+  "tokens_and_latency": {
+    "decision_requests": 44352,
+    "generated_tokens": 3543392,
+    "invalid": 0,
+    "latency_seconds": 72301.02818240225,
+    "model_calls": 44354,
+    "prompt_tokens": 24230610,
+    "repair_attempts": 2,
+    "repaired_valid": 2
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "claims": {
+    "H1": "supported",
+    "H2": "not supported",
+    "H3": "not supported",
+    "H4": "not supported",
+    "H5": "supported",
+    "H6": "not supported"
+  },
+  "analysis_repair_1_sha256": "9072c6380c02eef00b1d25e23bd5da4e266aff4a6a9b8dc2b36185520d6c073c",
+  "decision_rows": 44352,
+  "execution_source_sha256": "0796286362ec4dde0eb4f2dc88ecea4c3bf53859e618aec1928ba8b9e8b0a154",
+  "external_stage_tree_count": 8,
+  "frozen_execution_source_sha256": "0796286362ec4dde0eb4f2dc88ecea4c3bf53859e618aec1928ba8b9e8b0a154",
+  "generated_at": "2026-08-19T02:59:27.818137+00:00",
+  "model": {
+    "accounting": {
+      "decision_requests": 44352,
+      "first_pass_valid": 44350,
+      "generated_tokens": 3543392,
+      "invalid_after_repair": 0,
+      "latency_seconds": 72301.02818240225,
+      "model_calls": 44354,
+      "model_loading_seconds": 31.19303335249424,
+      "prompt_tokens": 24230610,
+      "repaired_valid": 2
+    },
+    "backend": "Transformers AutoModelForCausalLM",
+    "bitsandbytes_version": "0.47.0",
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 4090",
+    "inference_sampling_temperature": 0.72,
+    "maximum_new_tokens": 144,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "quantization": "NF4 double quantization; BF16 computation",
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "top_p": 0.9,
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "4.55.4"
+  },
+  "parent_v11_commit": "0d73693160c25e251533d6f6720fdd78b349605e",
+  "paper": {
+    "automated_pdf_qa_passed": true,
+    "manual_pdf_qa_passed": true,
+    "manuscript_pages": 18,
+    "paper_facing_pdf_count": 17
+  },
+  "protocol_sha256": "cee49ca7111b81ae9544a8d32a754ce4c9f15bff16333e98588147a7f7f665b6",
+  "raw_artifact_root": "/workspace/ThermoAgent-v12-artifacts",
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "total": 102,
+    "v10": 36,
+    "v11": 33,
+    "v12": 33
+  },
+  "verification": {
+    "all_passed": true,
+    "repository_facing_core_bytes": 2938972
+  }
+}

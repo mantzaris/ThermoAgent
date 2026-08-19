@@ -1,0 +1,29 @@
+{
+  "action_coefficients": [
+    -0.3737178429331749,
+    6.744900606504881,
+    5.2119419156207
+  ],
+  "action_feature_order": [
+    "intercept",
+    "updated_belief",
+    "previous_action"
+  ],
+  "action_penalized_log_loss_sum": 187.91432802166594,
+  "belief_coefficients": [
+    -1.5597161590640394e-08,
+    6.048985134321498,
+    2.220015698727155,
+    6.385996372719285,
+    -4.785225456622112
+  ],
+  "belief_feature_order": [
+    "intercept",
+    "private_field",
+    "weighted_neighbor_field",
+    "previous_belief",
+    "previous_action"
+  ],
+  "belief_penalized_log_loss_sum": 56.48775716616289,
+  "valid_fit_rows": 576
+}

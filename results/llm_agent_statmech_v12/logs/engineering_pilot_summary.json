@@ -1,0 +1,66 @@
+{
+  "action_minus_to_plus": 12,
+  "action_plus_to_minus": 12,
+  "after_repair_validity": 1.0,
+  "attempt_id": "pilot_attempt4",
+  "belief_minus_to_plus": 6,
+  "belief_plus_to_minus": 6,
+  "decision_requests": 192,
+  "delivered_messages": 192,
+  "estimability": {
+    "checks": {
+      "action_minus_to_plus": true,
+      "action_occupancy": true,
+      "action_plus_to_minus": true,
+      "after_repair_validity": true,
+      "belief_minus_to_plus": true,
+      "belief_occupancy": true,
+      "belief_plus_to_minus": true,
+      "delivery": true,
+      "first_pass_validity": true,
+      "privacy": true
+    },
+    "estimability_passed": true
+  },
+  "first_pass_validity": 0.9947916666666666,
+  "generated_at": "2026-08-18T05:29:29.360296+00:00",
+  "generated_tokens": 15430,
+  "inspection_boundary": "validity_occupancy_transition_counts_runtime_only",
+  "latency_seconds": 307.64484294876456,
+  "latent_plus_action_occupancy": 0.484375,
+  "latent_plus_belief_occupancy": 0.4791666666666667,
+  "privacy_mutations": 0,
+  "prohibited_metrics_not_computed": [
+    "entropy_production",
+    "time_reversal_divergence",
+    "nonreciprocity_effect",
+    "probability_currents"
+  ],
+  "prompt_tokens": 104793,
+  "provider_environment": {
+    "accounting": {
+      "decision_requests": 192,
+      "first_pass_valid": 191,
+      "generated_tokens": 15430,
+      "invalid_after_repair": 0,
+      "latency_seconds": 307.64484294876456,
+      "model_calls": 193,
+      "prompt_tokens": 104793,
+      "repaired_valid": 1
+    },
+    "backend": "Transformers AutoModelForCausalLM",
+    "bitsandbytes_version": "0.47.0",
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 4090",
+    "inference_sampling_temperature": 0.72,
+    "maximum_new_tokens": 144,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "quantization": "NF4 double quantization; BF16 computation",
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "top_p": 0.9,
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "4.55.4"
+  },
+  "valid_after_repair": 192
+}

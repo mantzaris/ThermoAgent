@@ -98,6 +98,31 @@ paper/jstat_v11/*.log
 paper/jstat_v11/*.out
 paper/jstat_v11/*.synctex.gz
 
+# V12 LLM-agent stochastic thermodynamics: raw generations and build products stay external.
+results/llm_agent_statmech_v12/raw/
+results/llm_agent_statmech_v12/transcripts/
+results/llm_agent_statmech_v12/checkpoints/
+results/llm_agent_statmech_v12/qa_png/
+results/llm_agent_statmech_v12/**/*.jsonl
+results/llm_agent_statmech_v12/**/*.npy
+results/llm_agent_statmech_v12/**/*.npz
+results/llm_agent_statmech_v12/**/*.pkl
+results/llm_agent_statmech_v12/**/*.pickle
+results/llm_agent_statmech_v12/**/*.safetensors
+results/llm_agent_statmech_v12/**/*.pt
+results/llm_agent_statmech_v12/**/*.bin
+results/llm_agent_statmech_v12/**/*.tar
+results/llm_agent_statmech_v12/**/*.tar.*
+results/llm_agent_statmech_v12/**/*.zip
+paper/jstat_v12/*.aux
+paper/jstat_v12/*.bbl
+paper/jstat_v12/*.blg
+paper/jstat_v12/*.fdb_latexmk
+paper/jstat_v12/*.fls
+paper/jstat_v12/*.log
+paper/jstat_v12/*.out
+paper/jstat_v12/*.synctex.gz
+
 
 .agents
 .codex

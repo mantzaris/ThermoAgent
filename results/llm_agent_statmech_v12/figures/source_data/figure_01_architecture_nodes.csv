@@ -1,0 +1,10 @@
+label,x,y,kind,record_type
+private observation,0.1,0.77,local,node
+private memory,0.1,0.48,local,node
+delivered inbox,0.1,0.19,local,node
+"LLM agent i
+belief, action, c, m",0.43,0.48,agent,node
+typed action,0.72,0.7,output,node
+model-chosen signal,0.72,0.3,output,node
+delivery graph,0.91,0.3,network,node
+local workload,0.91,0.7,environment,node

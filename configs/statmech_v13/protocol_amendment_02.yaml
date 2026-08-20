@@ -1,0 +1,12 @@
+amendment: v13-amendment-02-total-token-ceiling
+parent_protocol: v13-collective-agent-statmech-1.1
+parent_protocol_sha256: e21bf4eefad193c4004394c05daa907c6fd86f82ad69caf1d79de4be9bbd8512
+detected_at_stage: before_amended_formal_restart
+formal_network_panels_completed: 0
+formal_scientific_outcomes_inspected: false
+reason: total project token ceiling must count pilot and retained interrupted decisions
+pilot_prompt_tokens: 104455
+total_project_prompt_token_ceiling: 18000000
+executable_formal_raw_prompt_token_ceiling: 17895545
+scientific_design_changed: false
+disposition: incorporated_into_v13_collective_agent_statmech_1.2

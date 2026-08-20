@@ -123,6 +123,31 @@ paper/jstat_v12/*.log
 paper/jstat_v12/*.out
 paper/jstat_v12/*.synctex.gz
 
+# V13 collective LLM-agent statistical mechanics: heavy records stay external.
+results/collective_agent_statmech_v13/raw/
+results/collective_agent_statmech_v13/transcripts/
+results/collective_agent_statmech_v13/checkpoints/
+results/collective_agent_statmech_v13/qa_png/
+results/collective_agent_statmech_v13/**/*.jsonl
+results/collective_agent_statmech_v13/**/*.npy
+results/collective_agent_statmech_v13/**/*.npz
+results/collective_agent_statmech_v13/**/*.pkl
+results/collective_agent_statmech_v13/**/*.pickle
+results/collective_agent_statmech_v13/**/*.safetensors
+results/collective_agent_statmech_v13/**/*.pt
+results/collective_agent_statmech_v13/**/*.bin
+results/collective_agent_statmech_v13/**/*.tar
+results/collective_agent_statmech_v13/**/*.tar.*
+results/collective_agent_statmech_v13/**/*.zip
+paper/jstat_v13/*.aux
+paper/jstat_v13/*.bbl
+paper/jstat_v13/*.blg
+paper/jstat_v13/*.fdb_latexmk
+paper/jstat_v13/*.fls
+paper/jstat_v13/*.log
+paper/jstat_v13/*.out
+paper/jstat_v13/*.synctex.gz
+
 
 .agents
 .codex

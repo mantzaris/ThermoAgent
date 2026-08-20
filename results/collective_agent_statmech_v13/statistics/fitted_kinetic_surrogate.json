@@ -1,0 +1,66 @@
+{
+  "action_feature_order": [
+    "intercept",
+    "updated_belief",
+    "previous_action"
+  ],
+  "belief_feature_order": [
+    "intercept",
+    "private_field",
+    "weighted_neighbor_field",
+    "previous_belief",
+    "previous_action"
+  ],
+  "fits_by_decoding_noise": {
+    "0.50": {
+      "action_belief_coupling": 5.160895640248375,
+      "action_coefficients": [
+        -3.718012015481849e-08,
+        5.160895640248375,
+        4.008247696581938
+      ],
+      "action_log_loss": 0.3828745005413766,
+      "action_persistence": 4.008247696581938,
+      "belief_action_coupling": -8.961081768468013,
+      "belief_coefficients": [
+        7.72395533631038e-07,
+        11.207886092001484,
+        3.9034571589631524,
+        11.575087003756153,
+        -8.961081768468013
+      ],
+      "belief_log_loss": 0.050469746807309535,
+      "belief_persistence": 11.575087003756153,
+      "effective_neighbor_susceptibility_at_origin": 1.9517285794815762,
+      "effective_private_susceptibility_at_origin": 5.603943046000742,
+      "rows": 144,
+      "temperature": 0.5
+    },
+    "0.85": {
+      "action_belief_coupling": 5.478458458074474,
+      "action_coefficients": [
+        0.15475283844214657,
+        5.478458458074474,
+        3.5964943459729963
+      ],
+      "action_log_loss": 0.28550520895405396,
+      "action_persistence": 3.5964943459729963,
+      "belief_action_coupling": -7.006941867127003,
+      "belief_coefficients": [
+        -0.19748553278058,
+        4.806330208481173,
+        4.053634300359657,
+        7.59797006534698,
+        -7.006941867127003
+      ],
+      "belief_log_loss": 0.11393204483142348,
+      "belief_persistence": 7.59797006534698,
+      "effective_neighbor_susceptibility_at_origin": 2.0268171501798284,
+      "effective_private_susceptibility_at_origin": 2.4031651042405864,
+      "rows": 144,
+      "temperature": 0.85
+    }
+  },
+  "interpretation": "empirical kinetic response; decoding noise is not thermodynamic temperature",
+  "valid_rows": 288
+}

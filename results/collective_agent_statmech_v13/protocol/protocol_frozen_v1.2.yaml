@@ -1,0 +1,341 @@
+protocol: v13-collective-agent-statmech-1.2
+status: frozen_before_formal_outcomes
+title: Statistical-mechanical characterization of collective dynamics in decentralized
+  LLM-agent networks
+provenance:
+  parent_branch: llm-agent-stochastic-thermodynamics-v12
+  parent_commit: 457f6d635b60292623c8d97aa3b0c60d8d0aac4e
+  v12_role: immutable discovery study
+  v12_protocol_sha256: cee49ca7111b81ae9544a8d32a754ce4c9f15bff16333e98588147a7f7f665b6
+  runpod_snapshot_note: older uncommitted execution snapshot preserved without synchronization
+  supersedes_protocol_sha256: 0d17d12d046c6dd424b5bdb2db6c9d4d82b6f72e095ceb726234afc689a65885
+  execution_source_sha256: 72c76946020e6ff7137848de25f384dd9cb25b5c3999754cac0b1b65ae7a4cc9
+protocol_amendment:
+  identifier: amendment-01-pre-network-outcome
+  reason: four paired clusters make a one-sided sign-flip p-value below 0.05 mathematically
+    unattainable
+  detection_stage: interrupted microscopic-response generation before any network
+    panel completed
+  retained_partial_model_records: 163
+  scientific_outcomes_inspected: false
+  repair: increase memory clusters to six and offset compute with narrower secondary
+    ring and ordered-relaxation subsets
+compute_accounting_amendment:
+  identifier: amendment-02-total-token-ceiling
+  detection_stage: before amended formal restart
+  scientific_outcomes_inspected: false
+  reason: total project ceiling must include pilot and retained interrupted calls
+  pilot_prompt_tokens: 104455
+  total_project_prompt_token_ceiling: 18000000
+  executable_formal_raw_prompt_token_ceiling: 17895545
+scientific_scope:
+  primary_model: actual independent Qwen agents
+  primary_update: random_sequential
+  sweep_definition: N attempted agent updates
+  independent_unit: matched graph_environment trajectory cluster
+  primary_state: realized categorical belief and action with confidence commitment
+    bounded memory workload inbox and outbox
+  thermodynamic_interpretation: finite-size descriptive statistical mechanics
+hypotheses:
+  H1: increasing coupling increases finite-size order susceptibility and relaxation
+    time in the V12 direction
+  H2: increasing decoding noise decreases finite-size order susceptibility and relaxation
+    time in the V12 direction
+  H3: persistent bounded memory increases adjusted coarse-grained pathwise irreversibility
+    relative to matched Markovized agents
+  H4: controlled disruptions depart from the nominal energy-entropy-order manifold
+  H5: disruption classes have distinguishable transient and recovery trajectories
+    in the frozen macrostate space
+  H6: the full statistical-mechanical representation improves trajectory-level regime
+    characterization over simple and order-only representations
+  H7: the fitted kinetic surrogate captures principal coupling and noise trends but
+    leaves residual LLM structure
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+  top_p: 0.9
+  maximum_new_tokens: 96
+  one_bounded_repair: true
+  chain_of_thought_requested: false
+network:
+  reciprocal_delivery: true
+  primary_topology: modular
+  replication_topology: ring
+  fixed_message_opportunity_per_valid_update: true
+  latent_labels:
+  - amber
+  - cobalt
+  displayed_order_and_plus_mapping: exactly counterbalanced within matched panels
+microscopic_response:
+  private_fields:
+  - -1
+  - 0
+  - 1
+  neighbor_fields:
+  - -1
+  - 0
+  - 1
+  current_beliefs:
+  - -1
+  - 1
+  current_actions:
+  - -1
+  - 1
+  coupling_strengths:
+  - 0.35
+  - 0.8
+  inference_sampling_temperatures:
+  - 0.5
+  - 0.85
+  regime: markovized
+  independent_replicates_per_cell: 2
+  expected_decisions: 288
+work_package_a:
+  modular_primary:
+    agent_counts:
+    - 8
+    - 16
+    coupling_strengths:
+    - 0.35
+    - 0.8
+    inference_sampling_temperatures:
+    - 0.5
+    - 0.85
+    graph_environment_clusters: 3
+    sweeps: 30
+    burn_in_sweeps: 8
+    initial_condition: disordered
+    expected_decisions: 8640
+  ring_replication:
+    agent_counts:
+    - 8
+    - 16
+    coupling_strengths:
+    - 0.35
+    - 0.8
+    inference_sampling_temperatures:
+    - 0.5
+    - 0.85
+    graph_environment_clusters: 2
+    sweeps: 15
+    burn_in_sweeps: 4
+    initial_condition: disordered
+    expected_decisions: 2880
+  ordered_relaxation:
+    agent_count: 16
+    topology: modular
+    coupling_strengths:
+    - 0.35
+    - 0.8
+    inference_sampling_temperatures:
+    - 0.5
+    - 0.85
+    graph_environment_clusters: 1
+    sweeps: 20
+    initial_condition: ordered
+    expected_decisions: 1280
+work_package_b:
+  agent_count: 16
+  topology: modular
+  regimes:
+  - markovized
+  - persistent_memory
+  coupling_strength: 0.8
+  inference_sampling_temperature: 0.5
+  graph_environment_clusters: 6
+  sweeps: 42
+  periods_sweeps:
+  - 14
+  - 14
+  - 14
+  disruption: field_reversal
+  initial_condition: disordered
+  expected_decisions: 8064
+work_package_c:
+  agent_count: 16
+  topology: modular
+  conditions:
+  - nominal
+  - field_reversal
+  - network_partition
+  - message_corruption
+  coupling_strength: 0.8
+  inference_sampling_temperature: 0.5
+  graph_environment_clusters: 4
+  periods_sweeps:
+  - 15
+  - 15
+  - 15
+  sweeps: 45
+  message_corruption_probability: 0.5
+  initial_condition: disordered
+  expected_decisions: 11520
+analysis:
+  primary_window_sweeps: 5
+  time_shuffle_replicates_per_panel: 200
+  trajectory_bootstrap_replicates: 10000
+  permutation_replicates: 10000
+  primary_block_length: 3
+  block_lengths:
+  - 2
+  - 3
+  - 4
+  pseudocounts:
+  - 0.1
+  - 0.5
+  - 1.0
+  primary_pseudocount: 0.5
+  entropy_coarse_graining:
+    magnetization_width: 0.25
+    overlap_width: 0.25
+    energy_per_agent_width: 0.25
+    disagreement_width: 0.125
+  nominal_distance:
+    estimator: shrinkage_mahalanobis
+    ridge_fraction: 0.1
+    training_source: nominal trajectories only
+  representation_models:
+    classifier: multinomial_logistic_regression
+    regressor: ridge_regression
+    cross_validation: leave_one_graph_cluster_out
+    fixed_representations:
+    - simple
+    - order_only
+    - full_statmech
+  primary_family_holm:
+  - H1
+  - H2
+  - H3
+  discovery_confirmation_synthesis: descriptive_random_effects_only
+surrogate:
+  fit_source: V13 microscopic response only
+  belief_features:
+  - intercept
+  - private_field
+  - weighted_neighbor_field
+  - previous_belief
+  - previous_action
+  action_features:
+  - intercept
+  - updated_belief
+  - previous_action
+  coupling_grid:
+  - 0.2
+  - 0.3
+  - 0.35
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.8
+  - 0.9
+  decision_noise_grid:
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.85
+  - 1.0
+  agent_counts:
+  - 8
+  - 16
+  - 32
+  - 64
+  topologies:
+  - ring
+  - modular
+  seeds_per_cell: 16
+  sweeps: 240
+  burn_in_sweeps: 60
+compute:
+  expected_formal_decisions: 32672
+  maximum_formal_decisions: 36000
+  target_generation_gpu_hours:
+  - 12.0
+  - 16.0
+  hard_generation_gpu_hours: 18.0
+  maximum_prompt_tokens: 18000000
+  maximum_formal_raw_prompt_tokens: 17895545
+  maximum_generated_tokens_per_decision: 96
+  estimated_incremental_cost_usd_upper: 15.0
+  no_outcome_dependent_stopping: true
+exclusions:
+  allowed:
+  - externally interrupted incomplete panel retained then resumed from its atomic
+    boundary
+  - invalid structured output remaining after one bounded repair retained as invalid
+    attempted update
+  prohibited:
+  - unfavorable scientific outcome
+  - seed-level performance
+  - entropy-production sign
+  - disruption separability
+figures:
+  frozen_candidate_count: 22
+  canonical_format: vector_pdf
+  minimum_effective_font_points: 9
+  qa_render_dpi: 300
+frozen_at_utc: '2026-08-19T12:07:13.619189+00:00'
+engineering_pilot:
+  belief_minus_to_plus: 13
+  belief_plus_to_minus: 12
+  checks:
+    after_repair_valid: true
+    corruption_schedule: true
+    decision_limit: true
+    delivery: true
+    field_schedule: true
+    first_pass_valid: true
+    minus_to_plus: true
+    occupancy: true
+    partition_schedule: true
+    plus_to_minus: true
+    privacy: true
+    projected_gpu_hours: true
+    projected_prompt_tokens: true
+  decision_requests: 192
+  engineering_passed: true
+  first_pass_valid_fraction: 1.0
+  generated_at: '2026-08-19T11:42:04.853631+00:00'
+  inspection_boundary:
+  - output validity
+  - latent state occupancy
+  - transition counts
+  - disruption onset and restoration
+  - message delivery
+  - privacy mutations
+  - runtime and token accounting
+  - projected formal resource use
+  latent_plus_occupancy: 0.578125
+  mean_generated_tokens: 79.74479166666667
+  mean_latency_seconds_per_decision: 1.6069978985081737
+  mean_prompt_tokens: 544.0364583333334
+  projected_formal_gpu_hours: 14.384416744868718
+  projected_formal_prompt_tokens: 17531031
+  provider_environment:
+    accounting:
+      decision_requests: 192
+      first_pass_valid: 192
+      generated_tokens: 15311
+      invalid_after_repair: 0
+      latency_seconds: 308.54359651356936
+      model_calls: 192
+      model_loading_seconds: 30.77336384728551
+      prompt_tokens: 104455
+      repaired_valid: 0
+    backend: Transformers AutoModelForCausalLM
+    bitsandbytes_version: 0.47.0
+    cuda_version: '12.8'
+    gpu_name: NVIDIA GeForce RTX 4090
+    inference_sampling_temperature: 0.5
+    maximum_new_tokens: 96
+    model_id: Qwen/Qwen2.5-7B-Instruct
+    model_revision: a09a35458c702b33eeacc393d103063234e8bc28
+    quantization: NF4 double quantization; BF16 computation
+    schema_sha256: c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d
+    top_p: 0.9
+    torch_version: 2.8.0+cu128
+    transformers_version: 4.55.4
+  scientific_outcomes_inspected: false
+  valid_after_repair_fraction: 1.0

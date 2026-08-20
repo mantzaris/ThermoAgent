@@ -1,0 +1,31 @@
+amendment: v13-amendment-01-pre-network-outcome
+parent_protocol: v13-collective-agent-statmech-1.0
+parent_protocol_sha256: 0d17d12d046c6dd424b5bdb2db6c9d4d82b6f72e095ceb726234afc689a65885
+detected_at_stage: incomplete_microscopic_response_generation
+formal_network_panels_completed: 0
+formal_scientific_outcomes_inspected: false
+retained_incomplete_raw_decision_records: 163
+defect:
+  description: four paired memory clusters give minimum attainable one-sided sign-flip p equal to 1/16
+  minimum_attainable_p: 0.0625
+  consequence: H3 could not meet its prospectively declared 0.05 hypothesis criterion
+  classification: mathematical_inconsistency
+repair:
+  memory_clusters_before: 4
+  memory_clusters_after: 6
+  minimum_attainable_p_after: 0.015625
+  ring_sweeps_before: 20
+  ring_sweeps_after: 15
+  ordered_relaxation_clusters_before: 2
+  ordered_relaxation_clusters_after: 1
+  modular_primary_changed: false
+  disruption_work_package_changed: false
+  hypotheses_or_effect_directions_changed: false
+accounting:
+  analyzed_decisions_before: 32224
+  analyzed_decisions_after: 32672
+  dynamic_trajectories_after: 72
+  prompt_token_projection_after: 17774759
+  generation_gpu_hour_projection_after: 14.584398705571958
+  projection_basis: 544.0364583333334 pilot prompt tokens per decision
+disposition: incorporated_into_v13_collective_agent_statmech_1.2

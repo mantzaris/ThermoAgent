@@ -1,0 +1,13 @@
+representation,held_out_cluster,accuracy,multiclass_log_loss,test_panels,chance_accuracy
+simple,C_quench_n16_g0,0.25,1.590707750871096,4,0.25
+simple,C_quench_n16_g1,0.25,1.504277339752512,4,0.25
+simple,C_quench_n16_g2,0.5,1.1969771085107177,4,0.25
+simple,C_quench_n16_g3,0.25,3.658861657234315,4,0.25
+order_only,C_quench_n16_g0,0.25,1.4847481634238673,4,0.25
+order_only,C_quench_n16_g1,0.25,2.1387544733234747,4,0.25
+order_only,C_quench_n16_g2,0.25,1.3678967056317572,4,0.25
+order_only,C_quench_n16_g3,0.25,5.900031369923564,4,0.25
+full_statmech,C_quench_n16_g0,0.5,0.9588411790784019,4,0.25
+full_statmech,C_quench_n16_g1,0.5,0.9913580044723094,4,0.25
+full_statmech,C_quench_n16_g2,0.5,0.8630647266633864,4,0.25
+full_statmech,C_quench_n16_g3,0.5,1.1775167190339606,4,0.25

@@ -1,0 +1,106 @@
+{
+  "checks": {
+    "figure_sources": true,
+    "forbidden_artifacts": true,
+    "formal_complete": true,
+    "index_empty": true,
+    "individual_file_size": true,
+    "pdf_automation": true,
+    "pdf_manual": true,
+    "privacy": true,
+    "replay": true,
+    "repository_size": true,
+    "secrets": true,
+    "source_frozen": true,
+    "v12_immutable": true
+  },
+  "frozen_parent_changes": [],
+  "generated_at": "2026-08-20T05:52:19.242193+00:00",
+  "largest_files": [
+    {
+      "bytes": 805378,
+      "path": "results/collective_agent_statmech_v13/tables/macrostate_trajectories.csv"
+    },
+    {
+      "bytes": 551183,
+      "path": "paper/jstat_v13/main.pdf"
+    },
+    {
+      "bytes": 269258,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_12_magnetization_entropy.csv"
+    },
+    {
+      "bytes": 269258,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_14_disruption_response.csv"
+    },
+    {
+      "bytes": 192869,
+      "path": "results/collective_agent_statmech_v13/tables/surrogate_phase_map.csv"
+    },
+    {
+      "bytes": 69715,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_09_energy_entropy_field_reversal.csv"
+    },
+    {
+      "bytes": 68120,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_10_energy_entropy_partition.csv"
+    },
+    {
+      "bytes": 67592,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_11_energy_entropy_corruption.csv"
+    },
+    {
+      "bytes": 65589,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_08_energy_entropy_nominal.csv"
+    },
+    {
+      "bytes": 45465,
+      "path": "results/collective_agent_statmech_v13/tables/panel_statistics.csv"
+    },
+    {
+      "bytes": 42343,
+      "path": "paper/jstat_v13/main.tex"
+    },
+    {
+      "bytes": 38346,
+      "path": "results/collective_agent_statmech_v13/tables/network_snapshot_edges.csv"
+    },
+    {
+      "bytes": 35669,
+      "path": "thermoagent/statmech_llm_v13/analysis.py"
+    },
+    {
+      "bytes": 30719,
+      "path": "results/collective_agent_statmech_v13/figures/pdf/figure_13_network_partition_snapshots.pdf"
+    },
+    {
+      "bytes": 28388,
+      "path": "thermoagent/statmech_llm_v13/experiment.py"
+    },
+    {
+      "bytes": 26564,
+      "path": "thermoagent/statmech_llm_v13/reporting.py"
+    },
+    {
+      "bytes": 25636,
+      "path": "thermoagent/statmech_llm_v13/figures.py"
+    },
+    {
+      "bytes": 24641,
+      "path": "results/collective_agent_statmech_v13/figures/source_data/figure_03_surrogate_stability.csv"
+    },
+    {
+      "bytes": 20669,
+      "path": "results/collective_agent_statmech_v13/figures/pdf/figure_01_micro_to_macro_architecture.pdf"
+    },
+    {
+      "bytes": 20295,
+      "path": "results/collective_agent_statmech_v13/figures/pdf/figure_07_energy_fluctuations.pdf"
+    }
+  ],
+  "passed": true,
+  "repository_facing_bytes": 3377819,
+  "repository_facing_files": 118,
+  "secret_hits": [],
+  "staged_files": []
+}

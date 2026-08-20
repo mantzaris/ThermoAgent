@@ -1,0 +1,104 @@
+{
+  "H7_surrogate": {
+    "coupling_direction_captured": false,
+    "direct_coupling_effect": -0.0005918560606060606,
+    "direct_noise_effect": 0.007753314393939393,
+    "noise_direction_captured": true,
+    "supported": false,
+    "surrogate_coupling_effect": 0.014967176649305556,
+    "surrogate_noise_effect": 0.02954779730902778
+  },
+  "analysis_cpu_seconds": 1060.108318483,
+  "analysis_wall_seconds": 1060.3437271788716,
+  "disruption_hypotheses": {
+    "H4": {
+      "criterion": "paired cluster-bootstrap lower 95% bound above zero",
+      "supported": true
+    },
+    "H5": {
+      "criterion": "paired cluster-bootstrap lower 95% bound above zero",
+      "supported": true
+    },
+    "H6": {
+      "criterion": "paired cluster-bootstrap lower 95% bound above zero",
+      "supported": true
+    }
+  },
+  "formal_accounting": {
+    "all_formal_attempted_decisions_including_invalidated": 32835,
+    "all_formal_generated_tokens_including_invalidated": 2637602,
+    "all_formal_generation_gpu_hours_including_invalidated": 14.649346224113057,
+    "all_formal_generation_latency_seconds_including_invalidated": 52737.646406807005,
+    "all_formal_model_calls_including_invalidated": 32835,
+    "all_formal_prompt_tokens_including_invalidated": 18283425,
+    "completed_at": "2026-08-20T04:33:09.163500+00:00",
+    "current_invocation_wall_seconds": 59061.05990419164,
+    "dynamic_trajectories": 72,
+    "execution_source_sha256": "72c76946020e6ff7137848de25f384dd9cb25b5c3999754cac0b1b65ae7a4cc9",
+    "formal_units": 73,
+    "generated_tokens": 2625155,
+    "generation_gpu_hours": 14.579263006812996,
+    "generation_latency_seconds": 52485.34682452679,
+    "invalid_after_repair": 0,
+    "model_calls": 32672,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "observed_decision_rows": 32672,
+    "planned_decisions": 32672,
+    "prompt_tokens": 18187616,
+    "protocol_sha256": "a5259bbfd49da20b23a79646c248e0723a7fc382fa37b6165e3e936b4b669e3a",
+    "provider_environment_current_invocation": {
+      "accounting": {
+        "decision_requests": 32672,
+        "first_pass_valid": 32672,
+        "generated_tokens": 2625155,
+        "invalid_after_repair": 0,
+        "latency_seconds": 52485.34682452679,
+        "model_calls": 32672,
+        "model_loading_seconds": 29.843558609485626,
+        "prompt_tokens": 18187616,
+        "repaired_valid": 0
+      },
+      "backend": "Transformers AutoModelForCausalLM",
+      "bitsandbytes_version": "0.47.0",
+      "cuda_version": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "inference_sampling_temperature": 0.5,
+      "maximum_new_tokens": 96,
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "quantization": "NF4 double quantization; BF16 computation",
+      "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+      "top_p": 0.9,
+      "torch_version": "2.8.0+cu128",
+      "transformers_version": "4.55.4"
+    },
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "status": "complete"
+  },
+  "generated_at": "2026-08-20T05:05:30.637373+00:00",
+  "macrostate_rows": 2264,
+  "panel_count": 72,
+  "primary_confirmatory": {
+    "H1": {
+      "all_directional_intervals_pass": false,
+      "holm_adjusted_p": 1.0,
+      "intersection_union_raw_p": 0.9657034296570343,
+      "supported": false
+    },
+    "H2": {
+      "all_directional_intervals_pass": false,
+      "holm_adjusted_p": 1.0,
+      "intersection_union_raw_p": 0.9714028597140286,
+      "supported": false
+    },
+    "H3": {
+      "all_directional_intervals_pass": true,
+      "holm_adjusted_p": 0.047995200479952004,
+      "intersection_union_raw_p": 0.015998400159984,
+      "supported": true
+    }
+  },
+  "privacy_mutations": 0,
+  "protocol_sha256": "a5259bbfd49da20b23a79646c248e0723a7fc382fa37b6165e3e936b4b669e3a"
+}

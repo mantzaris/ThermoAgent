@@ -1,0 +1,23 @@
+{
+  "analysis": {
+    "bytes": 3499273,
+    "file_count": 1,
+    "tree_sha256": "e63765b5f1a32072f172412e3d1694327282b95fdf15b8f960d3daaae978e45f"
+  },
+  "artifact_root": "/workspace/ThermoAgent-v13-artifacts",
+  "formal": {
+    "bytes": 43836761,
+    "file_count": 76,
+    "tree_sha256": "21366e1b465d1d81905af59ee271988799f63a0e188bf629354efc7608b30e7f"
+  },
+  "pilot": {
+    "bytes": 203891,
+    "file_count": 2,
+    "tree_sha256": "ada4818ede78d0e109e5e2a5103390cb6ff190aaec47b70ea62c44ae761bef2c"
+  },
+  "raw": {
+    "bytes": 117231215,
+    "file_count": 33027,
+    "tree_sha256": "f773868a998938edcf28593d88cd596259a9feeb8dae91f2946b01fd6a2652ee"
+  }
+}

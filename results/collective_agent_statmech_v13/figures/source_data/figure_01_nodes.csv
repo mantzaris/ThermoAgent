@@ -1,0 +1,9 @@
+node,x,y,boundary
+private observation,0.08,0.74,local
+bounded memory,0.08,0.36,local
+LLM agent i,0.36,0.55,agent
+inbox/outbox,0.62,0.74,network
+local action,0.62,0.36,action
+agent j,0.88,0.74,agent
+environment,0.88,0.36,environment
+evaluator Z(t),0.5,0.1,evaluator

@@ -1,0 +1,34 @@
+pilot:
+  attempt_id: pilot_attempt1
+  decision_limit: 192
+  n_agents: 8
+  sweeps_per_condition: 4
+  coupling_strength: 0.60
+  sampling_temperatures: [0.50, 0.85]
+  regimes: [markovized, persistent_memory]
+  disruptions: [nominal, field_reversal, network_partition, message_corruption]
+  disruption_window_sweeps: [1, 3]
+  message_corruption_probability: 0.50
+  first_pass_valid_minimum: 0.95
+  after_repair_valid_minimum: 0.99
+  latent_plus_occupancy_interval: [0.25, 0.75]
+  minimum_transitions_each_direction: 2
+  maximum_projected_formal_gpu_hours: 16.0
+  maximum_projected_prompt_tokens: 18000000
+  absolute_compute_ceiling_gpu_hours: 18.0
+  inspection_boundary:
+    - output validity
+    - latent state occupancy
+    - transition counts
+    - disruption onset and restoration
+    - message delivery
+    - privacy mutations
+    - runtime and token accounting
+    - projected formal resource use
+  prohibited_pilot_inspection:
+    - H1 through H7 effects
+    - coupling contrasts
+    - noise contrasts
+    - memory irreversibility contrasts
+    - disruption separability
+    - surrogate agreement

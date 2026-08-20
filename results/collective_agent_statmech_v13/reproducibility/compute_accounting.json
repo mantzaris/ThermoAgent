@@ -1,0 +1,13 @@
+{
+  "analysis_cpu_seconds": 1060.108318483,
+  "analysis_wall_seconds": 1060.3437271788716,
+  "analyzed_formal_decision_rows": 32672,
+  "estimated_cost_usd_high": 10.16718641730311,
+  "estimated_cost_usd_low": 5.009917944758055,
+  "formal_attempted_decisions_including_invalidated": 32835,
+  "pilot_decisions": 192,
+  "total_generated_tokens": 2652913,
+  "total_generation_gpu_hours": 14.73505277870016,
+  "total_model_calls": 33027,
+  "total_prompt_tokens": 18387880
+}

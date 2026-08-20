@@ -1,0 +1,11 @@
+V13 final focused regression test summary
+Date: 2026-08-20
+Command: scripts/run-statmech-v13-tests.sh
+Scope: tests/statmech_v10, tests/statmech_v11, tests/statmech_v12, tests/statmech_v13
+Passed: 125
+Failed: 0
+Errors: 0
+Skipped: 0
+
+The test process exited successfully. Raw transient pytest caches and verbose
+runner output are intentionally excluded from the repository-facing package.

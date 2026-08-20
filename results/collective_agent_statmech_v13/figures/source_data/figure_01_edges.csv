@@ -1,0 +1,11 @@
+source,target,relation
+private observation,LLM agent i,private
+bounded memory,LLM agent i,private
+LLM agent i,inbox/outbox,chosen message
+inbox/outbox,agent j,delivered only
+LLM agent i,local action,chosen action
+local action,environment,typed effect
+environment,private observation,local field
+LLM agent i,evaluator Z(t),recorded
+agent j,evaluator Z(t),recorded
+environment,evaluator Z(t),offline only

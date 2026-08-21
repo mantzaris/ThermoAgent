@@ -1,0 +1,57 @@
+label,x,y,kind,source,target,relation
+private observation,0.05,0.72,local,private observation,LLM agent i,local evidence
+private observation,0.05,0.72,local,private memory,LLM agent i,bounded state
+private observation,0.05,0.72,local,inbox,LLM agent i,delivered only
+private observation,0.05,0.72,local,LLM agent i,outbox,agent-selected
+private observation,0.05,0.72,local,LLM agent i,typed action,agent-selected
+private observation,0.05,0.72,local,typed action,environment,consequence
+private observation,0.05,0.72,local,scheduler,LLM agent i,update opportunity
+private memory,0.05,0.28,local,private observation,LLM agent i,local evidence
+private memory,0.05,0.28,local,private memory,LLM agent i,bounded state
+private memory,0.05,0.28,local,inbox,LLM agent i,delivered only
+private memory,0.05,0.28,local,LLM agent i,outbox,agent-selected
+private memory,0.05,0.28,local,LLM agent i,typed action,agent-selected
+private memory,0.05,0.28,local,typed action,environment,consequence
+private memory,0.05,0.28,local,scheduler,LLM agent i,update opportunity
+LLM agent i,0.38,0.5,agent,private observation,LLM agent i,local evidence
+LLM agent i,0.38,0.5,agent,private memory,LLM agent i,bounded state
+LLM agent i,0.38,0.5,agent,inbox,LLM agent i,delivered only
+LLM agent i,0.38,0.5,agent,LLM agent i,outbox,agent-selected
+LLM agent i,0.38,0.5,agent,LLM agent i,typed action,agent-selected
+LLM agent i,0.38,0.5,agent,typed action,environment,consequence
+LLM agent i,0.38,0.5,agent,scheduler,LLM agent i,update opportunity
+inbox,0.38,0.82,message,private observation,LLM agent i,local evidence
+inbox,0.38,0.82,message,private memory,LLM agent i,bounded state
+inbox,0.38,0.82,message,inbox,LLM agent i,delivered only
+inbox,0.38,0.82,message,LLM agent i,outbox,agent-selected
+inbox,0.38,0.82,message,LLM agent i,typed action,agent-selected
+inbox,0.38,0.82,message,typed action,environment,consequence
+inbox,0.38,0.82,message,scheduler,LLM agent i,update opportunity
+outbox,0.68,0.82,message,private observation,LLM agent i,local evidence
+outbox,0.68,0.82,message,private memory,LLM agent i,bounded state
+outbox,0.68,0.82,message,inbox,LLM agent i,delivered only
+outbox,0.68,0.82,message,LLM agent i,outbox,agent-selected
+outbox,0.68,0.82,message,LLM agent i,typed action,agent-selected
+outbox,0.68,0.82,message,typed action,environment,consequence
+outbox,0.68,0.82,message,scheduler,LLM agent i,update opportunity
+typed action,0.68,0.25,action,private observation,LLM agent i,local evidence
+typed action,0.68,0.25,action,private memory,LLM agent i,bounded state
+typed action,0.68,0.25,action,inbox,LLM agent i,delivered only
+typed action,0.68,0.25,action,LLM agent i,outbox,agent-selected
+typed action,0.68,0.25,action,LLM agent i,typed action,agent-selected
+typed action,0.68,0.25,action,typed action,environment,consequence
+typed action,0.68,0.25,action,scheduler,LLM agent i,update opportunity
+environment,0.92,0.25,environment,private observation,LLM agent i,local evidence
+environment,0.92,0.25,environment,private memory,LLM agent i,bounded state
+environment,0.92,0.25,environment,inbox,LLM agent i,delivered only
+environment,0.92,0.25,environment,LLM agent i,outbox,agent-selected
+environment,0.92,0.25,environment,LLM agent i,typed action,agent-selected
+environment,0.92,0.25,environment,typed action,environment,consequence
+environment,0.92,0.25,environment,scheduler,LLM agent i,update opportunity
+scheduler,0.38,0.08,scheduler,private observation,LLM agent i,local evidence
+scheduler,0.38,0.08,scheduler,private memory,LLM agent i,bounded state
+scheduler,0.38,0.08,scheduler,inbox,LLM agent i,delivered only
+scheduler,0.38,0.08,scheduler,LLM agent i,outbox,agent-selected
+scheduler,0.38,0.08,scheduler,LLM agent i,typed action,agent-selected
+scheduler,0.38,0.08,scheduler,typed action,environment,consequence
+scheduler,0.38,0.08,scheduler,scheduler,LLM agent i,update opportunity

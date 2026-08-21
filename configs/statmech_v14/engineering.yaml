@@ -1,0 +1,30 @@
+version: v14-engineering-1.0
+status: engineering_only
+pilot:
+  attempt_id: symmetry_and_schedule_smoke_01
+  inspection_boundary:
+    - structured_output_validity
+    - latent_state_occupancy
+    - transition_direction_counts
+    - perturbation_timing_and_restoration
+    - privacy_and_message_delivery
+    - runtime_and_token_projection
+  n_agents: 16
+  topology: modular
+  coupling_strength: 0.8
+  inference_sampling_temperature: 0.5
+  conditions:
+    - nominal
+    - field_reversal
+    - network_partition
+    - message_corruption
+  sweeps_per_condition: 4
+  periods_sweeps: [1, 1, 2]
+  decision_limit: 300
+  expected_decisions: 256
+  first_pass_valid_minimum: 0.95
+  after_repair_valid_minimum: 0.99
+  latent_plus_occupancy_interval: [0.20, 0.80]
+  minimum_transitions_each_direction: 1
+  maximum_projected_formal_gpu_hours: 10.0
+  maximum_projected_formal_prompt_tokens: 10000000

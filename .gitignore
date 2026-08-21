@@ -148,6 +148,30 @@ paper/jstat_v13/*.log
 paper/jstat_v13/*.out
 paper/jstat_v13/*.synctex.gz
 
+# V14 memory/quench LLM-agent study: raw generations and build products stay external.
+results/collective_agent_statmech_v14/raw/
+results/collective_agent_statmech_v14/transcripts/
+results/collective_agent_statmech_v14/checkpoints/
+results/collective_agent_statmech_v14/qa_png/
+results/collective_agent_statmech_v14/**/*.jsonl
+results/collective_agent_statmech_v14/**/*.npy
+results/collective_agent_statmech_v14/**/*.npz
+results/collective_agent_statmech_v14/**/*.pkl
+results/collective_agent_statmech_v14/**/*.pickle
+results/collective_agent_statmech_v14/**/*.safetensors
+results/collective_agent_statmech_v14/**/*.pt
+results/collective_agent_statmech_v14/**/*.bin
+results/collective_agent_statmech_v14/**/*.tar
+results/collective_agent_statmech_v14/**/*.tar.*
+results/collective_agent_statmech_v14/**/*.zip
+paper/jstat_v14/*.aux
+paper/jstat_v14/*.blg
+paper/jstat_v14/*.fdb_latexmk
+paper/jstat_v14/*.fls
+paper/jstat_v14/*.log
+paper/jstat_v14/*.out
+paper/jstat_v14/*.synctex.gz
+
 
 .agents
 .codex

@@ -1,0 +1,9 @@
+level,symbol,interpretation
+micro,belief b_i,realized categorical choice
+micro,action a_i,committed typed action
+micro,confidence c_i,bounded report
+micro,memory m_i,bounded private state
+macro,"m_b, m_a",directional order
+macro,"S, h",state diversity and entropy rate
+macro,"e_ref, Var(e)",reference compatibility and fluctuation
+macro,"I, T, tau","dependence, total correlation, persistence"

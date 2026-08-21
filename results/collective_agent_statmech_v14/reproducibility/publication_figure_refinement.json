@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure05_memory_cluster_effects.pdf",
+      "sha256": "b89a649af5e8a5ffad11c8c552620ab04ae044db72954533b8be1022e512445e"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure06_block_length_sensitivity.pdf",
+      "sha256": "e1d3021fd2ec99d95e81adf5f418c8e818aadc40a0a9d6478bb9e4977e603b5e"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure07_bias_floor.pdf",
+      "sha256": "a6e2ef4cff2e547bb038eb4041b2f336ee5dc8b9a13257e332466603bb5974a3"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure09_entropy_decomposition.pdf",
+      "sha256": "7787969697ff8bbd5624547568790ecfb2e2394e77d8cdb08f38357a89e70d53"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure11_energy_entropy_phase_space.pdf",
+      "sha256": "72e769daf728101d583759d2ee10577f6ed76740c1ee224eb5b7b51d03457449"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure12_belief_action_phase_space.pdf",
+      "sha256": "9801fd7887e6caefec4e6f81ad0ddef70aa026db3f3513122cbded7061a8f376"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure14_quench_counterquench.pdf",
+      "sha256": "1a2a0ce4f79f42e0b1182c6c872f4bd194302530e1e866269c18ee16a1da0a65"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure15_peak_integrated_recovery.pdf",
+      "sha256": "ac852a25766c6e833bfcf8091c71fdd2314ecbcd7a5f1358545620bbe1bc7f2d"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure18_observable_family_contribution.pdf",
+      "sha256": "280f27f7352ac16598bd7eba43237b46cc2d8454fb98d0e8196eef03317f6992"
+    },
+    {
+      "path": "results/collective_agent_statmech_v14/figures/pdf/figure19_leave_family_out.pdf",
+      "sha256": "0f108abcc19eaef821e6e5782955405ba302f4c85bc5ce5e5dbbf3d2ae0f2417"
+    }
+  ],
+  "generated_at": "2026-08-21T00:18:11.024713+00:00",
+  "scope": "publication layout only; frozen source CSV values unchanged"
+}

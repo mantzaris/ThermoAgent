@@ -1,0 +1,20 @@
+{
+  "inspection": {
+    "all_candidate_figure_pdfs": true,
+    "all_manuscript_pages": true,
+    "original_size_checked": true,
+    "render_dpi": 300,
+    "render_root_external": "/tmp/ThermoAgent-v14-artifacts-local/pdf_qa/rendered_300dpi"
+  },
+  "inspected_at": "2026-08-21T00:22:00+00:00",
+  "manuscript_pages": 17,
+  "notes": [
+    "All 26 candidate figures and all 17 manuscript pages were opened and visually inspected.",
+    "Ten presentation-only figure refinements were regenerated from the frozen source CSVs and re-inspected.",
+    "No material clipping, overlap, missing glyph, unreadable legend, or incorrect panel lettering remained.",
+    "Temporary 300-DPI PNG renders are external and are not repository-facing artifacts."
+  ],
+  "pdf_count": 27,
+  "reviewer": "Codex",
+  "status": "passed"
+}

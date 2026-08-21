@@ -1,0 +1,185 @@
+protocol: v14-memory-quench-agent-statmech-1.0
+status: template_not_frozen
+title: Statistical-mechanical characterization of memory and quench response in decentralized LLM-agent networks
+provenance:
+  parent_branch: collective-agent-statmech-v13
+  parent_commit: 20a9ca66041b1636bed15d5916aabcb605e6a063
+  v12_role: immutable discovery study
+  v13_role: immutable prospective replication and discovery study
+  v14_role: prospective independent quench replication and representation analysis
+scientific_scope:
+  primary_model: actual independent Qwen agents
+  primary_update: random_sequential
+  sweep_definition: N attempted agent updates
+  independent_unit: matched graph_environment trajectory cluster
+  primary_state: realized categorical belief and action with confidence commitment workload inbox outbox and bounded local memory
+  interpretation: finite-size descriptive statistical mechanics; reference energy and pathwise irreversibility are effective coarse-grained quantities
+hypotheses:
+  H1:
+    statement: persistent memory increases bias-adjusted pathwise irreversibility
+    status: V12 discovery plus V13 prospective replication; no new V14 memory trajectories
+    primary_block_length: 3
+    synthesis: V12 and V13 reported separately plus descriptive inverse-variance fixed-effect synthesis
+  H2:
+    statement: field reversal produces larger maximum post-quench macrostate departure than matched nominal evolution in independent V14 clusters
+    primary_estimand: paired cluster difference in maximum macrostate distance over disruption and recovery
+    direction: greater_than_zero
+  H3:
+    statement: field-reversal trajectories relax toward the restored nominal macrostate after restoration
+    primary_estimand: paired within-cluster early-recovery maximum minus final-five-sweep mean macrostate distance
+    direction: greater_than_zero
+  H4:
+    statement: the full statistical-mechanics representation improves cluster-held-out discrimination over order-only representation
+    primary_estimand: leave-one-cluster-out balanced-accuracy difference
+    direction: greater_than_zero
+  secondary:
+    - partition and message-corruption trajectory responses
+    - quench and counter-quench route asymmetry and hysteresis
+    - block-length and covariance-estimator robustness
+    - observable-family contribution and redundancy
+    - effective-surrogate limitations
+model:
+  identifier: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  quantization: NF4_double_quantization_BF16_compute
+  inference_sampling_temperature: 0.5
+  top_p: 0.9
+  maximum_new_tokens: 96
+  one_bounded_repair: true
+  chain_of_thought_requested: false
+  prompt_and_parser: immutable V13 implementation inherited from V12
+network:
+  agent_count: 16
+  topology: modular
+  reciprocal_delivery: true
+  coupling_strength: 0.8
+  graph_environment_clusters: 6
+  cluster_ids: [V14Q_g0, V14Q_g1, V14Q_g2, V14Q_g3, V14Q_g4, V14Q_g5]
+  new_seed_namespace: 14140000
+  fixed_message_opportunity_per_valid_update: true
+  latent_labels: [amber, cobalt]
+  displayed_order_and_plus_mapping: exactly counterbalanced within each matched cluster
+quench:
+  conditions: [nominal, field_reversal, network_partition, message_corruption]
+  periods_sweeps: [15, 15, 15]
+  sweeps: 45
+  message_corruption_probability: 0.5
+  initial_condition: disordered
+  expected_trajectories: 24
+  expected_decisions: 17280
+analysis:
+  primary_window_sweeps: 5
+  alternative_window_sweeps: [3, 7]
+  nominal_fit_windows: [all_nominal, baseline_15, baseline_last_10, baseline_last_5]
+  entropy_coarse_graining:
+    magnetization_width: 0.25
+    overlap_width: 0.25
+    energy_per_agent_width: 0.25
+    disagreement_width: 0.125
+  irreversibility:
+    primary_block_length: 3
+    block_lengths: [2, 3, 4]
+    primary_pseudocount: 0.5
+    pseudocounts: [0.1, 0.5, 1.0]
+    time_shuffle_replicates_per_panel: 200
+  memory_depths: [1, 2, 3]
+  nominal_distance:
+    primary_estimator: shrinkage
+    primary_ridge_fraction: 0.1
+    estimators: [euclidean, diagonal, shrinkage, robust]
+    ridge_fractions: [0.05, 0.1, 0.25, 0.5]
+    standardization: training_clusters_only
+    training_source: nominal trajectories only
+    nominal_threshold_quantile: 0.95
+  macrostate_features:
+    order:
+      - belief_magnetization
+      - action_magnetization
+      - belief_action_overlap
+    uncertainty:
+      - mean_confidence
+      - mean_individual_uncertainty
+      - belief_disagreement
+    energy:
+      - reference_energy_per_agent
+      - energy_variance
+    entropy:
+      - configuration_entropy
+      - entropy_rate
+      - total_correlation
+      - pairwise_mutual_information
+      - edge_mutual_information
+    response:
+      - belief_susceptibility
+      - binder_cumulant
+      - spatial_belief_correlation
+    temporal:
+      - integrated_correlation_time
+      - path_reversal_divergence
+      - belief_action_lag
+  representations:
+    order_only: [belief_magnetization, action_magnetization, belief_action_overlap]
+    simple_uncertainty: [mean_confidence, mean_individual_uncertainty, belief_disagreement]
+    full_statmech:
+      - belief_magnetization
+      - action_magnetization
+      - belief_action_overlap
+      - reference_energy_per_agent
+      - energy_variance
+      - configuration_entropy
+      - entropy_rate
+      - total_correlation
+      - pairwise_mutual_information
+      - edge_mutual_information
+      - belief_susceptibility
+      - spatial_belief_correlation
+      - belief_disagreement
+      - integrated_correlation_time
+      - path_reversal_divergence
+      - belief_action_lag
+  representation_model:
+    classifier: multinomial_logistic_regression
+    regularization_C: 0.5
+    cross_validation: leave_one_graph_environment_cluster_out
+    preprocessing: fit_training_clusters_only
+    primary_target: four_way_condition
+  inference:
+    exact_cluster_sign_flip: primary
+    sign_flip_enumeration: exhaustive
+    cluster_bootstrap_replicates: 10000
+    permutation_replicates: 10000
+    familywise_correction: Holm_H2_H3_H4
+    alpha: 0.05
+  recovery:
+    final_window_sweeps: 5
+    consecutive_sweeps_within_threshold: 2
+    nominal_threshold_quantile: 0.95
+figures:
+  candidate_count: 26
+  canonical_format: vector_pdf
+  minimum_effective_font_points: 9
+  qa_render_dpi: 300
+compute:
+  expected_formal_trajectories: 24
+  expected_formal_decisions: 17280
+  maximum_formal_decisions: 17280
+  projected_generation_gpu_hours: 7.7
+  hard_generation_gpu_hours: 10.0
+  maximum_formal_prompt_tokens: 10000000
+  maximum_generated_tokens_per_decision: 96
+  external_artifact_root: /workspace/ThermoAgent-v14-artifacts
+exclusions:
+  - systematic invalid structured output making transitions undefined
+  - privacy-boundary failure
+  - scheduler action substitution
+  - corrupt or incomplete atomic trajectory
+  - unrecoverable hardware failure
+  - hard compute ceiling reached before next atomic trajectory
+prohibited_changes_after_freeze:
+  - hypotheses
+  - prompt_or_parser
+  - graph_or_seed_manifest
+  - intervention_timing
+  - estimators_or_primary_windows
+  - representation_feature_groups
+  - exclusion_rules

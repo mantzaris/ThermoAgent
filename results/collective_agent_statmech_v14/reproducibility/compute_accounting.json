@@ -1,0 +1,82 @@
+{
+  "cpu_analysis_seconds": 49.027961418000004,
+  "estimated_cost_usd_range": [
+    2.6874024251286768,
+    5.453846098055255
+  ],
+  "formal": {
+    "all_formal_attempted_decisions_including_invalidated": 17280,
+    "all_formal_generated_tokens_including_invalidated": 1391607,
+    "all_formal_generation_gpu_hours_including_invalidated": 7.789953446033307,
+    "all_formal_generation_latency_seconds_including_invalidated": 28043.832405719906,
+    "all_formal_model_calls_including_invalidated": 17280,
+    "all_formal_prompt_tokens_including_invalidated": 9510001,
+    "completed_at": "2026-08-20T23:37:45.482494+00:00",
+    "current_invocation_wall_seconds": 29953.990509796888,
+    "dynamic_trajectories": 24,
+    "execution_source_sha256": "2b4276dd323bb048d8c98834ed0e9f8bfe5a0ed46e8735db3b471a6dc97e91ad",
+    "generated_tokens": 1391607,
+    "generation_gpu_hours": 7.789953446033307,
+    "generation_latency_seconds": 28043.832405719906,
+    "invalid_after_repair": 0,
+    "model_calls": 17280,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "observed_decision_rows": 17280,
+    "planned_decisions": 17280,
+    "prompt_tokens": 9510001,
+    "protocol_sha256": "5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf",
+    "provider_environment_current_invocation": {
+      "accounting": {
+        "decision_requests": 17280,
+        "first_pass_valid": 17280,
+        "generated_tokens": 1391607,
+        "invalid_after_repair": 0,
+        "latency_seconds": 28043.832405719906,
+        "model_calls": 17280,
+        "model_loading_seconds": 29.345500621944666,
+        "prompt_tokens": 9510001,
+        "repaired_valid": 0
+      },
+      "backend": "Transformers AutoModelForCausalLM",
+      "bitsandbytes_version": "0.47.0",
+      "cuda_version": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "inference_sampling_temperature": 0.5,
+      "maximum_new_tokens": 96,
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "quantization": "NF4 double quantization; BF16 computation",
+      "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+      "top_p": 0.9,
+      "torch_version": "2.8.0+cu128",
+      "transformers_version": "4.55.4"
+    },
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "status": "complete"
+  },
+  "generated_at": "2026-08-20T23:48:53.238733+00:00",
+  "model": {
+    "chain_of_thought_requested": false,
+    "identifier": "Qwen/Qwen2.5-7B-Instruct",
+    "inference_sampling_temperature": 0.5,
+    "maximum_new_tokens": 96,
+    "one_bounded_repair": true,
+    "prompt_and_parser": "immutable V13 implementation inherited from V12",
+    "quantization": "NF4_double_quantization_BF16_compute",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "top_p": 0.9
+  },
+  "pilot_accounting": {
+    "decision_requests": 256,
+    "first_pass_valid": 256,
+    "generated_tokens": 20340,
+    "invalid_after_repair": 0,
+    "latency_seconds": 411.01680152490735,
+    "model_calls": 256,
+    "model_loading_seconds": null,
+    "prompt_tokens": 138700,
+    "repaired_valid": 0
+  },
+  "total_metered_generation_gpu_hours": 7.904124779790226
+}

@@ -1,0 +1,163 @@
+\begin{thebibliography}{24}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Glauber(1963)]{glauber1963}
+Roy~J. Glauber.
+\newblock Time-dependent statistics of the ising model.
+\newblock \emph{Journal of Mathematical Physics}, 4:\penalty0 294--307, 1963.
+\newblock \doi{10.1063/1.1703954}.
+
+\bibitem[Blume(1993)]{blume1993}
+Lawrence~E. Blume.
+\newblock The statistical mechanics of strategic interaction.
+\newblock \emph{Games and Economic Behavior}, 5:\penalty0 387--424, 1993.
+\newblock \doi{10.1006/game.1993.1023}.
+
+\bibitem[Schnakenberg(1976)]{schnakenberg1976}
+J.~Schnakenberg.
+\newblock Network theory of microscopic and macroscopic behavior of master
+  equation systems.
+\newblock \emph{Reviews of Modern Physics}, 48:\penalty0 571--585, 1976.
+\newblock \doi{10.1103/RevModPhys.48.571}.
+
+\bibitem[Seifert(2005)]{seifert2005}
+Udo Seifert.
+\newblock Entropy production along a stochastic trajectory and an integral
+  fluctuation theorem.
+\newblock \emph{Physical Review Letters}, 95:\penalty0 040602, 2005.
+\newblock \doi{10.1103/PhysRevLett.95.040602}.
+
+\bibitem[Seifert(2012)]{seifert2012}
+Udo Seifert.
+\newblock Stochastic thermodynamics, fluctuation theorems and molecular
+  machines.
+\newblock \emph{Reports on Progress in Physics}, 75:\penalty0 126001, 2012.
+\newblock \doi{10.1088/0034-4885/75/12/126001}.
+
+\bibitem[Han et~al.(2026)Han, Tan, Yu, Zheng, and Tang]{han2026}
+Chen Han, Jin Tan, Bohan Yu, Wenzhen Zheng, and Xijin Tang.
+\newblock Conformity dynamics in llm multi-agent systems: The roles of topology
+  and self-social weighting, 2026.
+\newblock arXiv:2601.05606.
+
+\bibitem[De~Nobili(2026)]{denobili2026}
+Cristiano De~Nobili.
+\newblock Collective alignment in llm multi-agent systems: Disentangling bias
+  from cooperation via statistical physics, 2026.
+\newblock arXiv:2605.10528.
+
+\bibitem[Okawa(2026)]{okawa2026}
+Maya Okawa.
+\newblock Emergence of biased consensus in multi-agent llm debates, 2026.
+\newblock arXiv:2608.02827.
+
+\bibitem[Flint et~al.(2025)Flint, Aiello, Pastor-Satorras, and
+  Baronchelli]{flint2025}
+Ariel Flint, Luca~Maria Aiello, Romualdo Pastor-Satorras, and Andrea
+  Baronchelli.
+\newblock Group size effects and collective misalignment in llm multi-agent
+  systems, 2025.
+\newblock arXiv:2510.22422.
+
+\bibitem[El et~al.(2026)El, Paeng, Dinc, Su, Erdogan, Pappu, Ye, Zhao, Ganguli,
+  and Zou]{el2026}
+Batu El, Jinhee Paeng, Fatih Dinc, Shiye Su, Mete Erdogan, Aneesh Pappu,
+  Haotian Ye, Wanjia Zhao, Surya Ganguli, and James Zou.
+\newblock Physics of agents: Statistical mechanics predicts collective behavior
+  of ai agents, 2026.
+\newblock arXiv:2608.16578.
+
+\bibitem[Shannon(1948)]{shannon1948}
+Claude~E. Shannon.
+\newblock A mathematical theory of communication.
+\newblock \emph{Bell System Technical Journal}, 27:\penalty0 379--423, 1948.
+\newblock \doi{10.1002/j.1538-7305.1948.tb01338.x}.
+
+\bibitem[Watanabe(1960)]{watanabe1960}
+Satosi Watanabe.
+\newblock Information theoretical analysis of multivariate correlation.
+\newblock \emph{IBM Journal of Research and Development}, 4:\penalty0 66--82,
+  1960.
+\newblock \doi{10.1147/rd.41.0066}.
+
+\bibitem[Schreiber(2000)]{schreiber2000}
+Thomas Schreiber.
+\newblock Measuring information transfer.
+\newblock \emph{Physical Review Letters}, 85:\penalty0 461--464, 2000.
+\newblock \doi{10.1103/PhysRevLett.85.461}.
+
+\bibitem[Rold\'an and Parrondo(2012)]{roldan2012}
+\'Edgar Rold\'an and Juan M.~R. Parrondo.
+\newblock Entropy production and kullback--leibler divergence between
+  stationary trajectories of discrete systems.
+\newblock \emph{Physical Review E}, 85:\penalty0 031129, 2012.
+\newblock \doi{10.1103/PhysRevE.85.031129}.
+
+\bibitem[Kawaguchi and Nakayama(2013)]{kawaguchi2013}
+Kyogo Kawaguchi and Yohei Nakayama.
+\newblock Fluctuation theorem for hidden entropy production.
+\newblock \emph{Physical Review E}, 88:\penalty0 022147, 2013.
+\newblock \doi{10.1103/PhysRevE.88.022147}.
+
+\bibitem[Busiello et~al.(2019)Busiello, Hidalgo, and Maritan]{busiello2019}
+Daniel~Maria Busiello, Jorge Hidalgo, and Amos Maritan.
+\newblock Entropy production for coarse-grained dynamics.
+\newblock \emph{New Journal of Physics}, 21:\penalty0 073004, 2019.
+\newblock \doi{10.1088/1367-2630/ab29c0}.
+
+\bibitem[Kutvonen et~al.(2015)Kutvonen, Ala-Nissila, and Pekola]{kutvonen2015}
+Aki Kutvonen, Tapio Ala-Nissila, and Jukka Pekola.
+\newblock Entropy production in a non-markovian environment.
+\newblock \emph{Physical Review E}, 92:\penalty0 012107, 2015.
+\newblock \doi{10.1103/PhysRevE.92.012107}.
+
+\bibitem[Liang and Pigolotti(2023)]{liang2023}
+Shiling Liang and Simone Pigolotti.
+\newblock Thermodynamic bounds on time-reversal asymmetry.
+\newblock \emph{Physical Review E}, 108:\penalty0 L062101, 2023.
+\newblock \doi{10.1103/PhysRevE.108.L062101}.
+
+\bibitem[Paninski(2003)]{paninski2003}
+Liam Paninski.
+\newblock Estimation of entropy and mutual information.
+\newblock \emph{Neural Computation}, 15:\penalty0 1191--1253, 2003.
+\newblock \doi{10.1162/089976603321780272}.
+
+\bibitem[Aguilera et~al.(2021)Aguilera, Moosavi, and Shimazaki]{aguilera2021}
+Miguel Aguilera, S.~Amin Moosavi, and Hideaki Shimazaki.
+\newblock A unifying framework for mean-field theories of asymmetric kinetic
+  ising systems.
+\newblock \emph{Nature Communications}, 12:\penalty0 1197, 2021.
+\newblock \doi{10.1038/s41467-021-20890-5}.
+
+\bibitem[Fruchart et~al.(2021)Fruchart, Hanai, Littlewood, and
+  Vitelli]{fruchart2021}
+Michel Fruchart, Ryo Hanai, Peter~B. Littlewood, and Vincenzo Vitelli.
+\newblock Non-reciprocal phase transitions.
+\newblock \emph{Nature}, 592:\penalty0 363--369, 2021.
+\newblock \doi{10.1038/s41586-021-03375-9}.
+
+\bibitem[Zhang and Garcia-Millan(2023)]{zhang2023}
+Ziluo Zhang and Rosalba Garcia-Millan.
+\newblock Entropy production of nonreciprocal interactions.
+\newblock \emph{Physical Review Research}, 5:\penalty0 L022033, 2023.
+\newblock \doi{10.1103/PhysRevResearch.5.L022033}.
+
+\bibitem[Calabrese and Cardy(2006)]{calabrese2006}
+Pasquale Calabrese and John Cardy.
+\newblock Time dependence of correlation functions following a quantum quench.
+\newblock \emph{Physical Review Letters}, 96:\penalty0 136801, 2006.
+\newblock \doi{10.1103/PhysRevLett.96.136801}.
+
+\bibitem[Yang et~al.(2024)Yang, Yang, Zhang, Hui, Zheng, Yu, Li, Liu, Huang,
+  Wei, et~al.]{qwen2024}
+An~Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo~Zheng, Bowen Yu,
+  Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, et~al.
+\newblock Qwen2.5 technical report, 2024.
+\newblock arXiv:2412.15115.
+
+\end{thebibliography}

@@ -1,0 +1,9 @@
+source,coupling,noise,order
+Direct LLM,0.35,0.5,0.00763494318181815
+Direct LLM,0.35,0.85,0.018288352272727217
+Direct LLM,0.8,0.5,0.009943181818181766
+Direct LLM,0.8,0.85,0.014796401515151466
+Kinetic surrogate,0.35,0.5,0.0
+Kinetic surrogate,0.35,0.85,0.0163628472222222
+Kinetic surrogate,0.8,0.5,0.0
+Kinetic surrogate,0.8,0.85,0.0495659722222222

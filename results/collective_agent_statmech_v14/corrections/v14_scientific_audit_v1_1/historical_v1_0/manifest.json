@@ -1,0 +1,36 @@
+{
+  "archive_role": "immutable copy of committed V14 derived reporting before audit correction",
+  "files": [
+    {
+      "bytes": 3885,
+      "file": "primary_results.json",
+      "sha256": "87a51bc11367ca919a5ce63992ca25dd915729662da1f3bcecae7b062364f9b2"
+    },
+    {
+      "bytes": 1151,
+      "file": "hypothesis_effects.csv",
+      "sha256": "23cd8eb10524b07e347311e3dafce54ef60a6617bc6fd7c32d31d6b3678247e7"
+    },
+    {
+      "bytes": 7290,
+      "file": "quench_recovery.csv",
+      "sha256": "84de8d7ec379b7cc028c847ad462ec5249ee77ea38e069b980c1a335d4171d65"
+    },
+    {
+      "bytes": 7771,
+      "file": "README.md",
+      "sha256": "e00d56145dd5dcb62cb67b14e84f01c8ce4d1cec3734f412f53fc3bb511a5f53"
+    },
+    {
+      "bytes": 2189,
+      "file": "CLAIMS_MATRIX.md",
+      "sha256": "3d0f6d5571d132298d71597e66c8de5e2b8b61317f11b7bd0c4e2aaef4dd8427"
+    },
+    {
+      "bytes": 621,
+      "file": "results_macros.tex",
+      "sha256": "a8ef88c8187301ce7dfaa79aeefc468e464d2218c17713fa6fbfb2c6fa19ee0f"
+    }
+  ],
+  "historical_commit": "103e4c4598ecc26a98c37a8d03ee3663f9be1070"
+}

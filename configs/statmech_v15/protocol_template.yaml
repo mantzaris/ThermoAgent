@@ -1,0 +1,221 @@
+protocol: v15-cross-model-memory-quench-1.0
+status: template_before_engineering_pilot
+title: Statistical-mechanical characterization of memory and quench response in state-separated LLM-agent networks
+provenance:
+  parent_branch: memory-quench-agent-statmech-v14
+  parent_commit: 103e4c4598ecc26a98c37a8d03ee3663f9be1070
+  v14_protocol_sha256: 5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf
+  v14_execution_source_sha256: 2b4276dd323bb048d8c98834ed0e9f8bfe5a0ed46e8735db3b471a6dc97e91ad
+  execution_source_sha256: UNFROZEN
+scientific_scope:
+  process: state-separated locally informed LLM-agent instances with random-sequential updates
+  independent_unit: complete graph_environment trajectory cluster
+  sweep: N attempted local updates
+  primary_intervention: private-field reversal followed by restoration
+  primary_memory_control: deterministic length-and-format-matched scrambled-history placebo
+  interpretation: finite-size reduced statistical mechanics; no literal energy or exact LLM entropy-production claim
+models:
+  qwen:
+    identifier: Qwen/Qwen2.5-7B-Instruct
+    revision: a09a35458c702b33eeacc393d103063234e8bc28
+    role: original_model_replication
+  granite:
+    identifier: ibm-granite/granite-3.3-8b-instruct
+    revision: 51dd4bc2ade4059a6bd87649d68aa11e4fb2529b
+    role: independent_model_family_replication
+engineering_rejected_models:
+  mistral:
+    identifier: mistralai/Mistral-7B-Instruct-v0.3
+    revision: c170c708c41dac9275d15a8fff4eca08d52bab71
+    rejected_before_freeze: true
+    reason: 0.3671875 valid-after-repair fraction and no observed plus-to-minus transition in the engineering-only pilot
+    scientific_network_outcomes_inspected: false
+inference:
+  quantization: NF4_double_quantization
+  double_quantization: true
+  compute_dtype: BF16
+  decoding_temperature: 0.5
+  top_p: 0.9
+  maximum_new_tokens: 96
+  one_bounded_greedy_repair: true
+  chain_of_thought_requested: false
+environment:
+  transformers: 4.55.4
+  pytorch: 2.8.0+cu128
+  cuda: '12.8'
+  bitsandbytes: 0.47.0
+  sentencepiece: 0.2.0
+  protobuf: 5.29.5
+  package_change_reason: installed for the retained, rejected Mistral engineering attempt; exact recovered environment retained for provenance
+network:
+  n_agents: 16
+  topology: modular
+  reciprocal_delivery: true
+  coupling_strength: 0.8
+  clusters_per_model: 6
+  cluster_seed_namespaces:
+    qwen: 15151000
+    granite: 15161000
+  initial_condition: disordered
+  fixed_message_opportunity_per_valid_update: true
+  latent_label_counterbalancing: true
+conditions:
+  - nominal_markovized
+  - field_markovized
+  - field_persistent
+  - field_scrambled
+trajectory:
+  sweeps: 45
+  periods_sweeps:
+    - 15
+    - 15
+    - 15
+  expected_trajectories_per_model: 24
+  expected_decisions_per_model: 17280
+  expected_total_trajectories: 48
+  expected_total_decisions: 34560
+memory_control:
+  history_depth: 3
+  construction: own-agent past opportunity timestamps with deterministically randomized state content
+  future_information: prohibited
+  peer_private_state: prohibited
+  genuine_trajectory_content: prohibited
+  entry_format: t={time} belief={label} action={label} memory={bounded_state}
+  matching_target: same section, entry count, field names, and approximately matched token distribution
+engineering_pilot:
+  decisions_per_model: 128
+  conditions:
+    - field_persistent
+    - field_scrambled
+  maximum_persistent_scrambled_mean_prompt_token_difference_fraction: 0.10
+  inspection_boundary:
+    - model_loading
+    - structured_output_validity
+    - occupancy
+    - both_transition_directions
+    - perturbation_timing
+    - privacy
+    - message_delivery
+    - prompt_and_generated_tokens
+    - latency_and_compute_projection
+  prohibited_inspection:
+    - nonreciprocity_or_memory_effect
+    - pathwise_irreversibility_contrast
+    - macrostate_departure_contrast
+hypotheses:
+  H1:
+    statement: field reversal produces greater maximum macrostate departure than nominal evolution in Granite
+    estimand: paired Granite cluster difference in maximum post-quench distance
+    direction: greater_than_zero
+    alpha_allocation: 0.02
+  H2:
+    statement: genuine persistent memory increases bias-adjusted pathwise irreversibility relative to Markovized state
+    estimand: pooled model-stratified paired cluster difference
+    direction: greater_than_zero
+  H3:
+    statement: genuine persistent memory increases bias-adjusted pathwise irreversibility relative to scrambled history
+    estimand: pooled model-stratified paired cluster difference
+    direction: greater_than_zero
+  H4:
+    statement: restoration produces an early-versus-late reduction in macrostate distance
+    estimand: mean recovery sweeps 31-35 minus mean recovery sweeps 41-45 in field-Markovized trajectories, pooled across models
+    direction: greater_than_zero
+multiplicity:
+  familywise_alpha: 0.05
+  H1_alpha: 0.02
+  H2_H3_H4_family_alpha: 0.03
+  H2_H3_H4_correction: Holm
+  rationale: allocation preserves exact-sign-flip resolution with six independent Granite clusters
+analysis:
+  primary_window_sweeps: 5
+  alternative_window_sweeps:
+    - 3
+    - 7
+  nominal_fit: leave_one_cluster_out_within_model
+  nominal_estimator: shrinkage
+  nominal_ridge_fraction: 0.1
+  nominal_threshold_quantile: 0.95
+  entropy_coarse_graining:
+    magnetization_width: 0.25
+    overlap_width: 0.25
+    energy_per_agent_width: 0.25
+    disagreement_width: 0.125
+  information_null:
+    method: independent_circular_shift_per_variable
+    replicates_per_window: 200
+    truncate_negative_adjusted_values: false
+  irreversibility:
+    primary_block_length: 3
+    sensitivity_block_lengths:
+      - 2
+      - 3
+      - 4
+    primary_pseudocount: 0.5
+    sensitivity_pseudocounts:
+      - 0.1
+      - 0.5
+      - 1.0
+    time_shuffle_replicates_per_panel: 500
+  inference:
+    exact_cluster_sign_flips: true
+    cluster_bootstrap_replicates: 10000
+    bootstrap_seed: 15159901
+    alpha: 0.05
+  recovery:
+    early_sweeps:
+      - 31
+      - 35
+    late_sweeps:
+      - 41
+      - 45
+    consecutive_sweeps_within_threshold: 2
+figures:
+  frozen_candidates:
+    - augmented_state_architecture
+    - memory_discovery_replication
+    - v14_quench_time_series
+    - v14_cluster_recovery
+    - v14_delayed_audit
+    - cross_model_quench
+    - v15_memory_controls
+    - path_reversal_sensitivity
+    - confirmatory_effects_separate_units
+    - direct_surrogate_quench
+    - surrogate_size_sensitivity
+    - memory_prompt_balance
+  numerical_values_must_come_from_saved_source_tables: true
+surrogate:
+  coefficient_source: immutable V13 microscopic response table
+  refit_to_v14_or_v15_quench: false
+  direct_sizes:
+    - 16
+  cpu_sizes:
+    - 8
+    - 16
+    - 32
+    - 64
+  replicates_per_size: 32
+compute:
+  external_artifact_root: /workspace/ThermoAgent-v15-artifacts
+  hard_generation_gpu_hours: 25.0
+  maximum_total_decisions: 34560
+  maximum_prompt_tokens: 22000000
+  maximum_generated_tokens_per_decision: 96
+  maximum_invalid_after_repair_fraction: 0.01
+  projected_generation_gpu_hours: UNFROZEN
+exclusions:
+  - systematic invalid structured output making transitions undefined
+  - privacy_boundary_failure
+  - scheduler_action_substitution
+  - corrupt_or_incomplete_atomic_trajectory
+  - unrecoverable_hardware_failure
+  - hard_compute_ceiling_before_next_atomic_trajectory
+prohibited_changes_after_freeze:
+  - model_or_revision
+  - prompt_or_parser
+  - graph_or_seed_manifest
+  - memory_control_algorithm_or_tapes
+  - hypotheses_or_multiplicity
+  - intervention_timing
+  - estimators_or_windows
+  - exclusion_rules

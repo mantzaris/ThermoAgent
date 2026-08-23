@@ -1,5 +1,5 @@
 {
-  "cpu_analysis_seconds": 49.027961418000004,
+  "cpu_analysis_seconds": 545.3779107160001,
   "estimated_cost_usd_range": [
     2.6874024251286768,
     5.453846098055255
@@ -55,7 +55,7 @@
     "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
     "status": "complete"
   },
-  "generated_at": "2026-08-20T23:48:53.238733+00:00",
+  "generated_at": "2026-08-21T23:29:26.585853+00:00",
   "model": {
     "chain_of_thought_requested": false,
     "identifier": "Qwen/Qwen2.5-7B-Instruct",

@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "V14_invalid_H3_not_supported": true,
+    "completion_protocol_matches_freeze": true,
+    "completion_source_matches_freeze": true,
+    "execution_source_matches_freeze": false,
+    "index_checksums_match": true,
+    "index_complete": true,
+    "no_crlf": true,
+    "no_forbidden_artifacts": true,
+    "no_oversized_files": true,
+    "package_below_25_mib": true,
+    "privacy_passed": true,
+    "replay_passed": true,
+    "schema_matches_freeze": true
+  },
+  "checksum_mismatches": [],
+  "forbidden_files": [],
+  "generated_at": "2026-08-22T21:26:56.462328+00:00",
+  "largest_files": [
+    {
+      "bytes": 3805755,
+      "relative_path": "results/collective_agent_statmech_v15/tables/macrostate_trajectories_all_windows.csv"
+    },
+    {
+      "bytes": 1261989,
+      "relative_path": "results/collective_agent_statmech_v15/tables/macrostate_trajectories.csv"
+    },
+    {
+      "bytes": 388880,
+      "relative_path": "results/collective_agent_statmech_v15/tables/v14_direct_surrogate_quench_trajectories.csv"
+    },
+    {
+      "bytes": 388531,
+      "relative_path": "results/collective_agent_statmech_v15/figures/source_data/figure10_direct_surrogate_quench.csv"
+    },
+    {
+      "bytes": 346910,
+      "relative_path": "paper/jstat_v15/main.pdf"
+    },
+    {
+      "bytes": 96375,
+      "relative_path": "results/collective_agent_statmech_v15/figures/source_data/figure06_cross_model_quench.csv"
+    },
+    {
+      "bytes": 60245,
+      "relative_path": "thermoagent/statmech_llm_v14/analysis.py"
+    },
+    {
+      "bytes": 53881,
+      "relative_path": "results/collective_agent_statmech_v15/tables/irreversibility_sensitivity.csv"
+    },
+    {
+      "bytes": 52218,
+      "relative_path": "results/collective_agent_statmech_v15/figures/source_data/figure08_path_reversal_sensitivity.csv"
+    },
+    {
+      "bytes": 39025,
+      "relative_path": "results/collective_agent_statmech_v15/figures/source_data/figure03_v14_quench_time_series.csv"
+    },
+    {
+      "bytes": 37908,
+      "relative_path": "thermoagent/statmech_llm_v14/figures.py"
+    },
+    {
+      "bytes": 37500,
+      "relative_path": "paper/jstat_v15/main.tex"
+    },
+    {
+      "bytes": 30750,
+      "relative_path": "results/collective_agent_statmech_v15/tables/surrogate_size_quench.csv"
+    },
+    {
+      "bytes": 29618,
+      "relative_path": "thermoagent/statmech_llm_v15/reporting.py"
+    },
+    {
+      "bytes": 29321,
+      "relative_path": "results/collective_agent_statmech_v15/figures/source_data/figure11_surrogate_size_sensitivity.csv"
+    },
+    {
+      "bytes": 26901,
+      "relative_path": "thermoagent/statmech_llm_v14/reporting.py"
+    },
+    {
+      "bytes": 25563,
+      "relative_path": "thermoagent/statmech_llm_v15/experiment.py"
+    },
+    {
+      "bytes": 24648,
+      "relative_path": "results/collective_agent_statmech_v15/figures/pdf/figure01_augmented_state_architecture.pdf"
+    },
+    {
+      "bytes": 23466,
+      "relative_path": "results/collective_agent_statmech_v15/tables/nominal_distance_diagnostics.csv"
+    },
+    {
+      "bytes": 23308,
+      "relative_path": "thermoagent/statmech_llm_v15/figures.py"
+    }
+  ],
+  "missing_indexed_files": [],
+  "oversized_files": [],
+  "package_bytes": 7337652,
+  "package_files": 110,
+  "replay": {
+    "generated_at": "2026-08-22T19:46:11.750011+00:00",
+    "method": "content-addressed state-separated-agent decision regeneration",
+    "mismatch_details": [],
+    "raw_transcripts_copied_into_repository": false,
+    "rows_checked": 34560,
+    "status": "passed",
+    "units_checked": 48,
+    "units_with_mismatches": 0
+  },
+  "status": "failed"
+}

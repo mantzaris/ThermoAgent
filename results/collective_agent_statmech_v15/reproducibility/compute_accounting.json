@@ -1,0 +1,356 @@
+{
+  "analysis_cpu_seconds": 0.7149670979999998,
+  "estimated_cost_usd_range": [
+    6.5256008028130355,
+    13.243131041002924
+  ],
+  "formal": {
+    "completed_at": "2026-08-22T19:39:22.961990+00:00",
+    "dynamic_trajectories": 48,
+    "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+    "generated_tokens": 2893967,
+    "generation_gpu_hours": 18.936582134485036,
+    "model_calls": 34565,
+    "models": [
+      {
+        "completed_at": "2026-08-22T08:20:14.877230+00:00",
+        "completed_trajectories": 24,
+        "current_invocation_wall_seconds": 28715.336075790226,
+        "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+        "generated_tokens": 1385868,
+        "generation_gpu_hours": 7.807736675328472,
+        "invalid_after_repair": 0,
+        "invalid_after_repair_fraction": 0.0,
+        "latency_seconds": 28107.852031182498,
+        "model_calls": 17280,
+        "model_id": "Qwen/Qwen2.5-7B-Instruct",
+        "model_key": "qwen",
+        "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "observed_decision_rows": 17280,
+        "planned_decisions": 17280,
+        "planned_trajectories": 24,
+        "prompt_tokens": 9964681,
+        "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+        "provider_environment_current_invocation": {
+          "accounting": {
+            "decision_requests": 17280,
+            "first_pass_valid": 17280,
+            "generated_tokens": 1385868,
+            "invalid_after_repair": 0,
+            "latency_seconds": 28107.852031182498,
+            "model_calls": 17280,
+            "model_loading_seconds": 29.47495587915182,
+            "prompt_tokens": 9964681,
+            "repaired_valid": 0
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "model_key": "qwen",
+          "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "status": "complete"
+      },
+      {
+        "completed_at": "2026-08-22T19:39:22.795802+00:00",
+        "completed_trajectories": 24,
+        "current_invocation_wall_seconds": 40724.31370206922,
+        "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+        "generated_tokens": 1508099,
+        "generation_gpu_hours": 11.128845459156565,
+        "invalid_after_repair": 2,
+        "invalid_after_repair_fraction": 0.00011574074074074075,
+        "latency_seconds": 40063.84365296364,
+        "model_calls": 17285,
+        "model_id": "ibm-granite/granite-3.3-8b-instruct",
+        "model_key": "granite",
+        "model_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+        "observed_decision_rows": 17280,
+        "planned_decisions": 17280,
+        "planned_trajectories": 24,
+        "prompt_tokens": 10943513,
+        "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+        "provider_environment_current_invocation": {
+          "accounting": {
+            "decision_requests": 17280,
+            "first_pass_valid": 17275,
+            "generated_tokens": 1508099,
+            "invalid_after_repair": 2,
+            "latency_seconds": 40063.84365296364,
+            "model_calls": 17285,
+            "model_loading_seconds": 34.34212909266353,
+            "prompt_tokens": 10943513,
+            "repaired_valid": 3
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "ibm-granite/granite-3.3-8b-instruct",
+          "model_key": "granite",
+          "model_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "status": "complete"
+      }
+    ],
+    "observed_decision_rows": 34560,
+    "prompt_tokens": 20908194,
+    "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+    "status": "complete"
+  },
+  "generated_at": "2026-08-22T19:57:19.180054+00:00",
+  "model_specs": {
+    "granite": {
+      "identifier": "ibm-granite/granite-3.3-8b-instruct",
+      "revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b"
+    },
+    "qwen": {
+      "identifier": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  },
+  "pilot": {
+    "calls": 256,
+    "decisions": 256,
+    "generated_tokens": 21304,
+    "latency_seconds": 506.8258074335754,
+    "models": [
+      {
+        "belief_minus_to_plus": 29,
+        "belief_plus_to_minus": 29,
+        "checks": {
+          "declared_decision_count": true,
+          "field_schedule": true,
+          "memory_control_exercised": true,
+          "memory_prompt_token_distribution_matched": true,
+          "message_delivery": true,
+          "minus_to_plus": true,
+          "nondegenerate_occupancy": true,
+          "plus_to_minus": true,
+          "privacy": true,
+          "valid_after_repair": true
+        },
+        "decision_requests": 128,
+        "engineering_passed": true,
+        "generated_at": "2026-08-21T23:40:55.672588+00:00",
+        "inspection_boundary": [
+          "model_loading",
+          "structured_output_validity",
+          "occupancy",
+          "both_transition_directions",
+          "perturbation_timing",
+          "privacy",
+          "message_delivery",
+          "prompt_and_generated_tokens",
+          "latency_and_compute_projection"
+        ],
+        "latent_plus_occupancy": 0.4921875,
+        "mean_generated_tokens": 79.375,
+        "mean_latency_seconds_per_decision": 1.6148534140083939,
+        "mean_prompt_tokens": 568.671875,
+        "mean_prompt_tokens_by_condition": {
+          "field_persistent": 569.296875,
+          "field_scrambled": 568.046875
+        },
+        "model_key": "qwen",
+        "persistent_scrambled_mean_prompt_token_difference_fraction": 0.002195690956497873,
+        "projected_model_formal_generation_hours": 7.7512963872402905,
+        "projected_model_formal_prompt_tokens": 9826650,
+        "provider_environment": {
+          "accounting": {
+            "decision_requests": 128,
+            "first_pass_valid": 128,
+            "generated_tokens": 10160,
+            "invalid_after_repair": 0,
+            "latency_seconds": 206.70123699307442,
+            "model_calls": 128,
+            "model_loading_seconds": 31.432101268321276,
+            "prompt_tokens": 72790,
+            "repaired_valid": 0
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "model_key": "qwen",
+          "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "scientific_contrasts_inspected": false,
+        "stage": "engineering_pilot",
+        "valid_after_repair_fraction": 1.0
+      },
+      {
+        "belief_minus_to_plus": 8,
+        "belief_plus_to_minus": 2,
+        "checks": {
+          "declared_decision_count": true,
+          "field_schedule": true,
+          "memory_control_exercised": true,
+          "memory_prompt_token_distribution_matched": true,
+          "message_delivery": true,
+          "minus_to_plus": true,
+          "nondegenerate_occupancy": true,
+          "plus_to_minus": true,
+          "privacy": true,
+          "valid_after_repair": true
+        },
+        "decision_requests": 128,
+        "engineering_passed": true,
+        "generated_at": "2026-08-22T00:14:49.894716+00:00",
+        "inspection_boundary": [
+          "model_loading",
+          "structured_output_validity",
+          "occupancy",
+          "both_transition_directions",
+          "perturbation_timing",
+          "privacy",
+          "message_delivery",
+          "prompt_and_generated_tokens",
+          "latency_and_compute_projection"
+        ],
+        "latent_plus_occupancy": 0.65625,
+        "mean_generated_tokens": 87.0625,
+        "mean_latency_seconds_per_decision": 2.344723206566414,
+        "mean_prompt_tokens": 630.09375,
+        "mean_prompt_tokens_by_condition": {
+          "field_persistent": 630.46875,
+          "field_scrambled": 629.71875
+        },
+        "model_key": "granite",
+        "persistent_scrambled_mean_prompt_token_difference_fraction": 0.0011895910780669145,
+        "projected_model_formal_generation_hours": 11.254671391518787,
+        "projected_model_formal_prompt_tokens": 10888020,
+        "provider_environment": {
+          "accounting": {
+            "decision_requests": 128,
+            "first_pass_valid": 128,
+            "generated_tokens": 11144,
+            "invalid_after_repair": 0,
+            "latency_seconds": 300.124570440501,
+            "model_calls": 128,
+            "model_loading_seconds": 26.492053892463446,
+            "prompt_tokens": 80652,
+            "repaired_valid": 0
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "ibm-granite/granite-3.3-8b-instruct",
+          "model_key": "granite",
+          "model_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "scientific_contrasts_inspected": false,
+        "stage": "engineering_pilot",
+        "valid_after_repair_fraction": 1.0
+      }
+    ],
+    "prompt_tokens": 153442,
+    "qualified_model_failure_totals": {
+      "calls": 0,
+      "decisions": 1,
+      "generated_tokens": 0,
+      "latency_seconds": 0.0,
+      "prompt_tokens": 0
+    },
+    "qualified_model_infrastructure_failures": [
+      {
+        "attempt": 1,
+        "classification": "engineering_pilot_exception",
+        "decision_requests": 1,
+        "exception_type": "OSError",
+        "generated_tokens": 0,
+        "latency_seconds": 0.0,
+        "message": "persistent cache quota exceeded during initial Granite model download; zero generations",
+        "model_calls": 0,
+        "model_key": "granite",
+        "prompt_tokens": 0,
+        "recorded_at": "2026-08-22T00:18:11.911595+00:00",
+        "scientific_contrasts_inspected": false,
+        "stage": "engineering_pilot"
+      }
+    ],
+    "rejected_attempts": [
+      {
+        "classification": "engineering_rejected_before_freeze",
+        "decision_requests": 128,
+        "generated_tokens": 19586,
+        "latency_seconds": 416.0752440877259,
+        "model_calls": 222,
+        "model_key": "mistral",
+        "prompt_tokens": 124882,
+        "scientific_contrasts_inspected": false,
+        "valid_after_repair_fraction": 0.3671875
+      },
+      {
+        "attempt": 1,
+        "classification": "missing_optional_huggingface_transfer_backend",
+        "decision_requests": 0,
+        "exception_type": "ValueError",
+        "generated_tokens": 0,
+        "latency_seconds": 0.0,
+        "message": "hf_transfer optional backend unavailable before any decision",
+        "model_calls": 0,
+        "model_key": "mistral",
+        "prompt_tokens": 0,
+        "recorded_at": "2026-08-21T23:43:23.276687+00:00",
+        "scientific_contrasts_inspected": false,
+        "stage": "engineering_pilot"
+      },
+      {
+        "attempt": 2,
+        "classification": "engineering_pilot_exception",
+        "decision_requests": 1,
+        "exception_type": "ImportError",
+        "generated_tokens": 0,
+        "latency_seconds": 0.0,
+        "message": "\n requires the protobuf library but it was not found in your environment. Check out the instructions on the\ninstallation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones\nthat match your environment. Please note that you may need to restart your runtime after installation.\n",
+        "model_calls": 0,
+        "model_key": "mistral",
+        "prompt_tokens": 0,
+        "recorded_at": "2026-08-21T23:44:26.082824+00:00",
+        "scientific_contrasts_inspected": false,
+        "stage": "engineering_pilot"
+      }
+    ],
+    "rejected_totals": {
+      "calls": 222,
+      "decisions": 129,
+      "generated_tokens": 19586,
+      "latency_seconds": 416.0752440877259,
+      "prompt_tokens": 124882
+    }
+  },
+  "total_metered_generation_gpu_hours": 19.192943537685398
+}

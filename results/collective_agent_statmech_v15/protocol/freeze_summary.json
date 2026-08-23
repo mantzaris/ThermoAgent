@@ -1,0 +1,10 @@
+{
+  "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+  "memory_control_manifest_sha256": "24bae40fbc4026b66eef87768dd9ae4edbcc3e7b7a9b1f6a850aede21b32a9f4",
+  "projected_generation_gpu_hours": 19.00596777875908,
+  "projected_prompt_tokens": 20714670,
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+  "seed_manifest_sha256": "d9850e5854af307364cd5504d75d0df449412817f3026b1149e8d7de6e8fdaf4",
+  "status": "frozen"
+}

@@ -39,6 +39,12 @@ def test_cpu_surrogate_end_to_end_analysis_and_all_candidate_figures(tmp_path, m
     import yaml
 
     frozen.write_text(yaml.safe_dump(protocol, sort_keys=False), encoding="utf-8")
+    audit_path = repository / "configs/statmech_v14/scientific_audit_v1.1.yaml"
+    audit = yaml.safe_load(audit_path.read_text(encoding="utf-8"))
+    audit["permutation_analysis"]["replicates"] = 4
+    audit["information_bias_audit"]["null_replicates_per_window"] = 3
+    audit_path.write_text(yaml.safe_dump(audit, sort_keys=False), encoding="utf-8")
+    monkeypatch.setenv("THERMO_V14_PERMUTATION_WORKERS", "1")
     panel_root = artifacts / "formal/panels"
     panel_root.mkdir(parents=True)
     for panel in formal_panel_design(protocol):
@@ -68,9 +74,32 @@ def test_cpu_surrogate_end_to_end_analysis_and_all_candidate_figures(tmp_path, m
     (artifacts / "formal/completion.json").write_text(json.dumps(completion), encoding="utf-8")
     primary = analyze_formal(repository)
     assert primary["formal_trajectories"] == 24
+    assert primary["all_rolling_window_rows"] == 3 * primary["macrostate_rows"]
+    assert not primary["confirmatory_dispositions"]["H3"]["inferential_support"]
+    robustness = pd.read_csv(
+        repository / "results/collective_agent_statmech_v14/tables/macrostate_distance_robustness.csv"
+    )
+    assert set(robustness["rolling_window_sweeps"]) == {3, 5, 7}
+    assert set(
+        robustness.loc[robustness["deleted_observable"] != "none", "deleted_observable"]
+    ) == set(primary_feature for primary_feature in (
+        "belief_magnetization",
+        "action_magnetization",
+        "belief_action_overlap",
+        "reference_energy_per_agent",
+        "energy_variance",
+        "configuration_entropy",
+        "entropy_rate",
+        "total_correlation",
+        "pairwise_mutual_information",
+        "edge_mutual_information",
+        "belief_susceptibility",
+        "spatial_belief_correlation",
+        "belief_disagreement",
+    ))
     figures = generate_figures(repository)
-    assert figures["figure_count"] == 26
-    assert figures["pdf_count"] == 26
+    assert figures["figure_count"] == 28
+    assert figures["pdf_count"] == 28
     report = build_results(repository)
     assert report["repository_files"] > 26
     assert (repository / "results/collective_agent_statmech_v14/README.md").exists()

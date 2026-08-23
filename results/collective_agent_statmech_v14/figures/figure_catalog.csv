@@ -1,5 +1,5 @@
 figure,filename,purpose,source_table,estimand,recommendation,supported_claim,limitation
-1,figure01_agent_architecture.pdf,Independent-agent boundaries,figure01_agent_architecture.csv,Agents own state and decisions,main,Agents own state and decisions,"Finite-size, one pinned model"
+1,figure01_agent_architecture.pdf,State-separated agent-instance boundaries,figure01_agent_architecture.csv,Agents own state and decisions,main,Agents own state and decisions,"Finite-size, one pinned model"
 2,figure02_micro_macro_mapping.pdf,Micro-to-macro formulation,figure02_micro_macro_mapping.csv,Observable reduced state,main,Observable reduced state,"Finite-size, one pinned model"
 3,figure03_network_states.pdf,Network state snapshots,network_snapshot_nodes/edges.csv,Explicit directed communication,supplementary,Explicit directed communication,"Finite-size, one pinned model"
 4,figure04_memory_discovery_replication.pdf,V12 discovery and V13 replication,memory_discovery_replication.csv,Memory-associated irreversibility,main,Memory-associated irreversibility,"Finite-size, one pinned model"
@@ -25,3 +25,5 @@ figure,filename,purpose,source_table,estimand,recommendation,supported_claim,lim
 24,figure24_topology_context.pdf,V13 topology context,immutable V13 panel statistics,Topology boundary,supplementary,Topology boundary,"Finite-size, one pinned model"
 25,figure25_surrogate_vs_llm.pdf,Reference surrogate comparison,immutable V13 direct/surrogate aggregates,Effective-model limit,main,Effective-model limit,"Finite-size, one pinned model"
 26,figure26_claims_forest.pdf,Compatible replication and V14 effects,hypothesis_effects and memory tables,Claim disposition,main,Claim disposition,"Finite-size, one pinned model"
+27,figure27_representation_permutation.pdf,Cluster-preserving representation permutation audit,representation_permutation_null.csv,Representation robustness,supplementary,Representation robustness,"Finite-size, one pinned model"
+28,figure28_information_bias.pdf,Finite-sample dependence audit,information_estimator_cluster_contrasts.csv,Raw versus bias-adjusted dependence,supplementary,Raw versus bias-adjusted dependence,"Finite-size, one pinned model"

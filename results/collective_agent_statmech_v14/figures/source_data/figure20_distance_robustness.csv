@@ -1,241 +1,241 @@
-cluster_id,disruption,estimator,ridge_fraction,nominal_fit_window,rolling_window_sweeps,ablation,feature_count,maximum_distance,mean_distance,nominal_threshold_95,failure
-V14Q_g0,field_reversal,euclidean,0.0,all_nominal,5,all,13,87.68407457645279,14.728305101697472,7.089486279391889,nan
-V14Q_g0,message_corruption,euclidean,0.0,all_nominal,5,all,13,8.338802732228178,2.685637285101577,7.089486279391889,nan
-V14Q_g0,network_partition,euclidean,0.0,all_nominal,5,all,13,8.338802732228178,2.6758749231070142,7.089486279391889,nan
-V14Q_g0,nominal,euclidean,0.0,all_nominal,5,all,13,8.338802732228178,2.65500838501717,7.089486279391889,nan
-V14Q_g1,field_reversal,euclidean,0.0,all_nominal,5,all,13,85.72444107341838,14.706275224325507,7.260876237259445,nan
-V14Q_g1,message_corruption,euclidean,0.0,all_nominal,5,all,13,12.229610731283056,2.8784897114713157,7.260876237259445,nan
-V14Q_g1,network_partition,euclidean,0.0,all_nominal,5,all,13,12.229610731283056,2.837734012838322,7.260876237259445,nan
-V14Q_g1,nominal,euclidean,0.0,all_nominal,5,all,13,12.229610731283056,2.837734012838322,7.260876237259445,nan
-V14Q_g2,field_reversal,euclidean,0.0,all_nominal,5,all,13,87.17134162931609,14.761855591687125,7.2036045300685005,nan
-V14Q_g2,message_corruption,euclidean,0.0,all_nominal,5,all,13,7.136927969150482,3.512173151878138,7.2036045300685005,nan
-V14Q_g2,network_partition,euclidean,0.0,all_nominal,5,all,13,7.136927969150482,3.564916785518574,7.2036045300685005,nan
-V14Q_g2,nominal,euclidean,0.0,all_nominal,5,all,13,7.136927969150482,3.590625125630985,7.2036045300685005,nan
-V14Q_g3,field_reversal,euclidean,0.0,all_nominal,5,all,13,88.5922869504407,15.7656278405605,6.991278419360114,nan
-V14Q_g3,message_corruption,euclidean,0.0,all_nominal,5,all,13,7.254346378458715,3.580163087342624,6.991278419360114,nan
-V14Q_g3,network_partition,euclidean,0.0,all_nominal,5,all,13,7.254346378458715,3.558490692583072,6.991278419360114,nan
-V14Q_g3,nominal,euclidean,0.0,all_nominal,5,all,13,7.254346378458715,3.551062957934677,6.991278419360114,nan
-V14Q_g4,field_reversal,euclidean,0.0,all_nominal,5,all,13,90.742399859267,14.855795240775256,6.819066975593654,nan
-V14Q_g4,message_corruption,euclidean,0.0,all_nominal,5,all,13,8.810695758651416,2.145198804046688,6.819066975593654,nan
-V14Q_g4,network_partition,euclidean,0.0,all_nominal,5,all,13,8.810695758651416,2.1039509690698392,6.819066975593654,nan
-V14Q_g4,nominal,euclidean,0.0,all_nominal,5,all,13,8.810695758651416,2.415012821675124,6.819066975593654,nan
-V14Q_g5,field_reversal,euclidean,0.0,all_nominal,5,all,13,196.31874652943844,32.97522652865316,8.029659636391525,nan
-V14Q_g5,message_corruption,euclidean,0.0,all_nominal,5,all,13,31.331132723292423,4.809542672695895,8.029659636391525,nan
-V14Q_g5,network_partition,euclidean,0.0,all_nominal,5,all,13,31.331132723292423,4.91971697697457,8.029659636391525,nan
-V14Q_g5,nominal,euclidean,0.0,all_nominal,5,all,13,31.331132723292423,4.705831184955005,8.029659636391525,nan
-V14Q_g0,field_reversal,diagonal,0.0,all_nominal,5,all,13,87.68407457645273,14.728305101697464,7.089486279391894,nan
-V14Q_g0,message_corruption,diagonal,0.0,all_nominal,5,all,13,8.338802732228176,2.685637285101578,7.089486279391894,nan
-V14Q_g0,network_partition,diagonal,0.0,all_nominal,5,all,13,8.338802732228176,2.675874923107016,7.089486279391894,nan
-V14Q_g0,nominal,diagonal,0.0,all_nominal,5,all,13,8.338802732228176,2.655008385017172,7.089486279391894,nan
-V14Q_g1,field_reversal,diagonal,0.0,all_nominal,5,all,13,85.72444107341828,14.706275224325491,7.260876237259449,nan
-V14Q_g1,message_corruption,diagonal,0.0,all_nominal,5,all,13,12.229610731283053,2.878489711471317,7.260876237259449,nan
-V14Q_g1,network_partition,diagonal,0.0,all_nominal,5,all,13,12.229610731283053,2.8377340128383235,7.260876237259449,nan
-V14Q_g1,nominal,diagonal,0.0,all_nominal,5,all,13,12.229610731283053,2.8377340128383235,7.260876237259449,nan
-V14Q_g2,field_reversal,diagonal,0.0,all_nominal,5,all,13,87.1713416293162,14.761855591687135,7.203604530068498,nan
-V14Q_g2,message_corruption,diagonal,0.0,all_nominal,5,all,13,7.136927969150477,3.5121731518781383,7.203604530068498,nan
-V14Q_g2,network_partition,diagonal,0.0,all_nominal,5,all,13,7.136927969150477,3.5649167855185744,7.203604530068498,nan
-V14Q_g2,nominal,diagonal,0.0,all_nominal,5,all,13,7.136927969150477,3.590625125630985,7.203604530068498,nan
-V14Q_g3,field_reversal,diagonal,0.0,all_nominal,5,all,13,88.59228695044078,15.765627840560503,6.991278419360111,nan
-V14Q_g3,message_corruption,diagonal,0.0,all_nominal,5,all,13,7.254346378458708,3.5801630873426222,6.991278419360111,nan
-V14Q_g3,network_partition,diagonal,0.0,all_nominal,5,all,13,7.254346378458708,3.558490692583069,6.991278419360111,nan
-V14Q_g3,nominal,diagonal,0.0,all_nominal,5,all,13,7.254346378458708,3.5510629579346755,6.991278419360111,nan
-V14Q_g4,field_reversal,diagonal,0.0,all_nominal,5,all,13,90.74239985926695,14.85579524077525,6.819066975593648,nan
-V14Q_g4,message_corruption,diagonal,0.0,all_nominal,5,all,13,8.810695758651418,2.1451988040466863,6.819066975593648,nan
-V14Q_g4,network_partition,diagonal,0.0,all_nominal,5,all,13,8.810695758651418,2.103950969069838,6.819066975593648,nan
-V14Q_g4,nominal,diagonal,0.0,all_nominal,5,all,13,8.810695758651418,2.415012821675124,6.819066975593648,nan
-V14Q_g5,field_reversal,diagonal,0.0,all_nominal,5,all,13,196.31874652943856,32.97522652865318,8.029659636391527,nan
-V14Q_g5,message_corruption,diagonal,0.0,all_nominal,5,all,13,31.331132723292427,4.809542672695897,8.029659636391527,nan
-V14Q_g5,network_partition,diagonal,0.0,all_nominal,5,all,13,31.331132723292427,4.91971697697457,8.029659636391527,nan
-V14Q_g5,nominal,diagonal,0.0,all_nominal,5,all,13,31.331132723292427,4.705831184955005,8.029659636391527,nan
-V14Q_g0,field_reversal,shrinkage,0.05,all_nominal,5,all,13,125.20243581375044,19.59838078202176,6.12263635735249,nan
-V14Q_g0,message_corruption,shrinkage,0.05,all_nominal,5,all,13,9.270862262955369,2.2984636111795878,6.12263635735249,nan
-V14Q_g0,network_partition,shrinkage,0.05,all_nominal,5,all,13,9.270862262955369,2.3226783147511307,6.12263635735249,nan
-V14Q_g0,nominal,shrinkage,0.05,all_nominal,5,all,13,9.270862262955369,2.43275304696892,6.12263635735249,nan
-V14Q_g1,field_reversal,shrinkage,0.05,all_nominal,5,all,13,128.7702620276321,21.18010934068301,6.698393318150182,nan
-V14Q_g1,message_corruption,shrinkage,0.05,all_nominal,5,all,13,27.26110670426298,3.35065739067806,6.698393318150182,nan
-V14Q_g1,network_partition,shrinkage,0.05,all_nominal,5,all,13,27.26110670426298,3.286352399933348,6.698393318150182,nan
-V14Q_g1,nominal,shrinkage,0.05,all_nominal,5,all,13,27.26110670426298,3.286352399933348,6.698393318150182,nan
-V14Q_g2,field_reversal,shrinkage,0.05,all_nominal,5,all,13,126.24381300327052,19.26105920394236,6.6935528289566975,nan
-V14Q_g2,message_corruption,shrinkage,0.05,all_nominal,5,all,13,7.2160005422011775,3.103163471299002,6.6935528289566975,nan
-V14Q_g2,network_partition,shrinkage,0.05,all_nominal,5,all,13,7.2160005422011775,3.1873859934879585,6.6935528289566975,nan
-V14Q_g2,nominal,shrinkage,0.05,all_nominal,5,all,13,7.2160005422011775,3.187320139696727,6.6935528289566975,nan
-V14Q_g3,field_reversal,shrinkage,0.05,all_nominal,5,all,13,127.5476809517853,20.676596201684625,6.708876576983795,nan
-V14Q_g3,message_corruption,shrinkage,0.05,all_nominal,5,all,13,7.318910891941235,2.868411352039914,6.708876576983795,nan
-V14Q_g3,network_partition,shrinkage,0.05,all_nominal,5,all,13,7.318910891941235,2.852031343004441,6.708876576983795,nan
-V14Q_g3,nominal,shrinkage,0.05,all_nominal,5,all,13,7.318910891941235,2.8586164322626595,6.708876576983795,nan
-V14Q_g4,field_reversal,shrinkage,0.05,all_nominal,5,all,13,126.55310463944087,19.737104175936697,6.146078577096462,nan
-V14Q_g4,message_corruption,shrinkage,0.05,all_nominal,5,all,13,9.31565030222369,1.7087634555677846,6.146078577096462,nan
-V14Q_g4,network_partition,shrinkage,0.05,all_nominal,5,all,13,9.31565030222369,1.7614288972456296,6.146078577096462,nan
-V14Q_g4,nominal,shrinkage,0.05,all_nominal,5,all,13,9.31565030222369,2.1552431676443318,6.146078577096462,nan
-V14Q_g5,field_reversal,shrinkage,0.05,all_nominal,5,all,13,288.050729793503,45.49701792669177,6.440292760786682,nan
-V14Q_g5,message_corruption,shrinkage,0.05,all_nominal,5,all,13,30.18650357346266,4.455154716230026,6.440292760786682,nan
-V14Q_g5,network_partition,shrinkage,0.05,all_nominal,5,all,13,30.18650357346266,4.44452819796559,6.440292760786682,nan
-V14Q_g5,nominal,shrinkage,0.05,all_nominal,5,all,13,30.18650357346266,4.2074034954969335,6.440292760786682,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,all,13,111.23173812064744,17.45128729728532,5.7488559988785966,nan
-V14Q_g0,message_corruption,shrinkage,0.1,all_nominal,5,all,13,7.982955450224763,2.154250585873242,5.7488559988785966,nan
-V14Q_g0,network_partition,shrinkage,0.1,all_nominal,5,all,13,7.982955450224763,2.175364407487678,5.7488559988785966,nan
-V14Q_g0,nominal,shrinkage,0.1,all_nominal,5,all,13,7.982955450224763,2.2626910000971754,5.7488559988785966,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,all,13,112.78284910880676,18.654945374091376,6.2542439343643546,nan
-V14Q_g1,message_corruption,shrinkage,0.1,all_nominal,5,all,13,22.878661749881942,3.016639846081697,6.2542439343643546,nan
-V14Q_g1,network_partition,shrinkage,0.1,all_nominal,5,all,13,22.878661749881942,2.960842329744211,6.2542439343643546,nan
-V14Q_g1,nominal,shrinkage,0.1,all_nominal,5,all,13,22.878661749881942,2.960842329744211,6.2542439343643546,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,all,13,113.05226001318525,17.38478723376216,6.331888323126388,nan
-V14Q_g2,message_corruption,shrinkage,0.1,all_nominal,5,all,13,6.771268263314759,2.9736681305747767,6.331888323126388,nan
-V14Q_g2,network_partition,shrinkage,0.1,all_nominal,5,all,13,6.771268263314759,3.054502735136713,6.331888323126388,nan
-V14Q_g2,nominal,shrinkage,0.1,all_nominal,5,all,13,6.771268263314759,3.0609793050882668,6.331888323126388,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,all,13,114.03302182867812,18.661970523040985,6.4097501190086525,nan
-V14Q_g3,message_corruption,shrinkage,0.1,all_nominal,5,all,13,6.517361402011976,2.7816114973684183,6.4097501190086525,nan
-V14Q_g3,network_partition,shrinkage,0.1,all_nominal,5,all,13,6.517361402011976,2.764195092666825,6.4097501190086525,nan
-V14Q_g3,nominal,shrinkage,0.1,all_nominal,5,all,13,6.517361402011976,2.7709395179672973,6.4097501190086525,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,all,13,112.9961606904565,17.65791729377446,5.937726323782896,nan
-V14Q_g4,message_corruption,shrinkage,0.1,all_nominal,5,all,13,8.543481108484126,1.6283663532546828,5.937726323782896,nan
-V14Q_g4,network_partition,shrinkage,0.1,all_nominal,5,all,13,8.543481108484126,1.6673210846916555,5.937726323782896,nan
-V14Q_g4,nominal,shrinkage,0.1,all_nominal,5,all,13,8.543481108484126,2.033211062183125,5.937726323782896,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,all,13,262.2569541656519,41.65798147454742,6.023345118287734,nan
-V14Q_g5,message_corruption,shrinkage,0.1,all_nominal,5,all,13,29.12537961185274,4.268753459161369,6.023345118287734,nan
-V14Q_g5,network_partition,shrinkage,0.1,all_nominal,5,all,13,29.12537961185274,4.253180894930466,6.023345118287734,nan
-V14Q_g5,nominal,shrinkage,0.1,all_nominal,5,all,13,29.12537961185274,4.039158759958295,6.023345118287734,nan
-V14Q_g0,field_reversal,shrinkage,0.25,all_nominal,5,all,13,94.75777753842804,15.015792717228116,5.529838776039498,nan
-V14Q_g0,message_corruption,shrinkage,0.25,all_nominal,5,all,13,7.118338279856871,2.046252353444523,5.529838776039498,nan
-V14Q_g0,network_partition,shrinkage,0.25,all_nominal,5,all,13,7.118338279856871,2.06286047945353,5.529838776039498,nan
-V14Q_g0,nominal,shrinkage,0.25,all_nominal,5,all,13,7.118338279856871,2.1205526181722334,5.529838776039498,nan
-V14Q_g1,field_reversal,shrinkage,0.25,all_nominal,5,all,13,94.30408337300528,15.666145593009809,5.76317227088741,nan
-V14Q_g1,message_corruption,shrinkage,0.25,all_nominal,5,all,13,17.253410822334875,2.637292796159939,5.76317227088741,nan
-V14Q_g1,network_partition,shrinkage,0.25,all_nominal,5,all,13,17.253410822334875,2.5902685575739577,5.76317227088741,nan
-V14Q_g1,nominal,shrinkage,0.25,all_nominal,5,all,13,17.253410822334875,2.5902685575739577,5.76317227088741,nan
-V14Q_g2,field_reversal,shrinkage,0.25,all_nominal,5,all,13,96.26944441932228,15.084137249050336,5.975068753709895,nan
-V14Q_g2,message_corruption,shrinkage,0.25,all_nominal,5,all,13,6.239338177912923,2.865493267586426,5.975068753709895,nan
-V14Q_g2,network_partition,shrinkage,0.25,all_nominal,5,all,13,6.239338177912923,2.943327686652004,5.975068753709895,nan
-V14Q_g2,nominal,shrinkage,0.25,all_nominal,5,all,13,6.239338177912923,2.9592302487333155,5.975068753709895,nan
-V14Q_g3,field_reversal,shrinkage,0.25,all_nominal,5,all,13,96.99065232495884,16.14587705164655,5.9556301423371885,nan
-V14Q_g3,message_corruption,shrinkage,0.25,all_nominal,5,all,13,5.706430362123088,2.7158649782717106,5.9556301423371885,nan
-V14Q_g3,network_partition,shrinkage,0.25,all_nominal,5,all,13,5.706430362123088,2.6975215060584103,5.9556301423371885,nan
-V14Q_g3,nominal,shrinkage,0.25,all_nominal,5,all,13,5.706430362123088,2.699102554393894,5.9556301423371885,nan
-V14Q_g4,field_reversal,shrinkage,0.25,all_nominal,5,all,13,97.06694579719532,15.228954747719976,5.716835892980148,nan
-V14Q_g4,message_corruption,shrinkage,0.25,all_nominal,5,all,13,7.756015429906556,1.557471457303571,5.716835892980148,nan
-V14Q_g4,network_partition,shrinkage,0.25,all_nominal,5,all,13,7.756015429906556,1.5835421320491634,5.716835892980148,nan
-V14Q_g4,nominal,shrinkage,0.25,all_nominal,5,all,13,7.756015429906556,1.9090440267401243,5.716835892980148,nan
-V14Q_g5,field_reversal,shrinkage,0.25,all_nominal,5,all,13,225.91713593843335,36.28571869466467,5.899468073611206,nan
-V14Q_g5,message_corruption,shrinkage,0.25,all_nominal,5,all,13,27.422604279408024,4.057422675480951,5.899468073611206,nan
-V14Q_g5,network_partition,shrinkage,0.25,all_nominal,5,all,13,27.422604279408024,4.043925616161203,5.899468073611206,nan
-V14Q_g5,nominal,shrinkage,0.25,all_nominal,5,all,13,27.422604279408024,3.849875403020162,5.899468073611206,nan
-V14Q_g0,field_reversal,shrinkage,0.5,all_nominal,5,all,13,85.13241690776323,13.723636112761543,5.667512449323106,nan
-V14Q_g0,message_corruption,shrinkage,0.5,all_nominal,5,all,13,7.019911649141847,2.0964326273167035,5.667512449323106,nan
-V14Q_g0,network_partition,shrinkage,0.5,all_nominal,5,all,13,7.019911649141847,2.10803903205746,5.667512449323106,nan
-V14Q_g0,nominal,shrinkage,0.5,all_nominal,5,all,13,7.019911649141847,2.1397518584355897,5.667512449323106,nan
-V14Q_g1,field_reversal,shrinkage,0.5,all_nominal,5,all,13,83.65650886906525,14.000415602253014,5.680937520535933,nan
-V14Q_g1,message_corruption,shrinkage,0.5,all_nominal,5,all,13,13.85895795654208,2.491410961806569,5.680937520535933,nan
-V14Q_g1,network_partition,shrinkage,0.5,all_nominal,5,all,13,13.85895795654208,2.4484368966997265,5.680937520535933,nan
-V14Q_g1,nominal,shrinkage,0.5,all_nominal,5,all,13,13.85895795654208,2.4484368966997265,5.680937520535933,nan
-V14Q_g2,field_reversal,shrinkage,0.5,all_nominal,5,all,13,85.7989145953404,13.782579599349202,5.938262726666182,nan
-V14Q_g2,message_corruption,shrinkage,0.5,all_nominal,5,all,13,6.018897183080975,2.906523395774846,5.938262726666182,nan
-V14Q_g2,network_partition,shrinkage,0.5,all_nominal,5,all,13,6.018897183080975,2.9824422684499927,5.938262726666182,nan
-V14Q_g2,nominal,shrinkage,0.5,all_nominal,5,all,13,6.018897183080975,3.005329781357982,5.938262726666182,nan
-V14Q_g3,field_reversal,shrinkage,0.5,all_nominal,5,all,13,86.45751412964186,14.705971940829045,5.778416783049343,nan
-V14Q_g3,message_corruption,shrinkage,0.5,all_nominal,5,all,13,5.557796211340991,2.791933397620308,5.778416783049343,nan
-V14Q_g3,network_partition,shrinkage,0.5,all_nominal,5,all,13,5.557796211340991,2.7725074023899867,5.778416783049343,nan
-V14Q_g3,nominal,shrinkage,0.5,all_nominal,5,all,13,5.557796211340991,2.765033815837315,5.778416783049343,nan
-V14Q_g4,field_reversal,shrinkage,0.5,all_nominal,5,all,13,87.67814044654071,13.888399887213376,5.576788290886763,nan
-V14Q_g4,message_corruption,shrinkage,0.5,all_nominal,5,all,13,7.508072851392093,1.574641659179116,5.576788290886763,nan
-V14Q_g4,network_partition,shrinkage,0.5,all_nominal,5,all,13,7.508072851392093,1.5934196674093477,5.576788290886763,nan
-V14Q_g4,nominal,shrinkage,0.5,all_nominal,5,all,13,7.508072851392093,1.8870439660418796,5.576788290886763,nan
-V14Q_g5,field_reversal,shrinkage,0.5,all_nominal,5,all,13,200.86545609124863,32.68539528949072,5.99446747218115,nan
-V14Q_g5,message_corruption,shrinkage,0.5,all_nominal,5,all,13,26.46400880931993,4.018523192333241,5.99446747218115,nan
-V14Q_g5,network_partition,shrinkage,0.5,all_nominal,5,all,13,26.46400880931993,4.021313948139663,5.99446747218115,nan
-V14Q_g5,nominal,shrinkage,0.5,all_nominal,5,all,13,26.46400880931993,3.832281964030588,5.99446747218115,nan
-V14Q_g0,field_reversal,robust,0.05,all_nominal,5,all,13,863.3969653225258,135.14778378050173,60.51699132614355,nan
-V14Q_g0,message_corruption,robust,0.05,all_nominal,5,all,13,77.46539382344415,13.473590079905865,60.51699132614355,nan
-V14Q_g0,network_partition,robust,0.05,all_nominal,5,all,13,77.46539382344415,13.89465798927123,60.51699132614355,nan
-V14Q_g0,nominal,robust,0.05,all_nominal,5,all,13,77.46539382344415,14.406529341947346,60.51699132614355,nan
-V14Q_g1,field_reversal,robust,0.05,all_nominal,5,all,13,845.8510090256921,136.18163847833134,62.12050221700596,nan
-V14Q_g1,message_corruption,robust,0.05,all_nominal,5,all,13,116.22431517687002,17.428971324845374,62.12050221700596,nan
-V14Q_g1,network_partition,robust,0.05,all_nominal,5,all,13,116.22431517687002,16.861674637059803,62.12050221700596,nan
-V14Q_g1,nominal,robust,0.05,all_nominal,5,all,13,116.22431517687002,16.861674637059803,62.12050221700596,nan
-V14Q_g2,field_reversal,robust,0.05,all_nominal,5,all,13,847.9758042584061,129.9412296288539,64.16517266124828,nan
-V14Q_g2,message_corruption,robust,0.05,all_nominal,5,all,13,58.642158732879146,17.197932064310493,64.16517266124828,nan
-V14Q_g2,network_partition,robust,0.05,all_nominal,5,all,13,58.642158732879146,18.005278562395592,64.16517266124828,nan
-V14Q_g2,nominal,robust,0.05,all_nominal,5,all,13,58.642158732879146,17.93052507436897,64.16517266124828,nan
-V14Q_g3,field_reversal,robust,0.05,all_nominal,5,all,13,888.9625638175252,141.98645313523338,61.07261015884356,nan
-V14Q_g3,message_corruption,robust,0.05,all_nominal,5,all,13,64.77676204582883,15.218732547005484,61.07261015884356,nan
-V14Q_g3,network_partition,robust,0.05,all_nominal,5,all,13,64.77676204582883,14.798232521269354,61.07261015884356,nan
-V14Q_g3,nominal,robust,0.05,all_nominal,5,all,13,64.77676204582883,14.409351657628996,61.07261015884356,nan
-V14Q_g4,field_reversal,robust,0.05,all_nominal,5,all,13,865.7563156925253,138.6220327472382,56.4952980635792,nan
-V14Q_g4,message_corruption,robust,0.05,all_nominal,5,all,13,79.086119081271,15.038791189266256,56.4952980635792,nan
-V14Q_g4,network_partition,robust,0.05,all_nominal,5,all,13,79.086119081271,15.84286532162465,56.4952980635792,nan
-V14Q_g4,nominal,robust,0.05,all_nominal,5,all,13,79.086119081271,17.1566536767633,56.4952980635792,nan
-V14Q_g5,field_reversal,robust,0.05,all_nominal,5,all,13,1895.446369532014,308.90516119691523,66.81886601660314,nan
-V14Q_g5,message_corruption,robust,0.05,all_nominal,5,all,13,290.9116814027073,36.258412201382,66.81886601660314,nan
-V14Q_g5,network_partition,robust,0.05,all_nominal,5,all,13,290.9116814027073,35.11740745881922,66.81886601660314,nan
-V14Q_g5,nominal,robust,0.05,all_nominal,5,all,13,290.9116814027073,33.66529227887334,66.81886601660314,nan
-V14Q_g0,field_reversal,robust,0.1,all_nominal,5,all,13,610.5934201718425,95.85764575599008,42.88801784434276,nan
-V14Q_g0,message_corruption,robust,0.1,all_nominal,5,all,13,54.94976876556625,9.90050349087934,42.88801784434276,nan
-V14Q_g0,network_partition,robust,0.1,all_nominal,5,all,13,54.94976876556625,10.163659521232832,42.88801784434276,nan
-V14Q_g0,nominal,robust,0.1,all_nominal,5,all,13,54.94976876556625,10.503405717317976,42.88801784434276,nan
-V14Q_g1,field_reversal,robust,0.1,all_nominal,5,all,13,598.1816215415403,96.54968751117116,44.18423394117522,nan
-V14Q_g1,message_corruption,robust,0.1,all_nominal,5,all,13,82.30060961163144,12.625468622681792,44.18423394117522,nan
-V14Q_g1,network_partition,robust,0.1,all_nominal,5,all,13,82.30060961163144,12.226969420581709,44.18423394117522,nan
-V14Q_g1,nominal,robust,0.1,all_nominal,5,all,13,82.30060961163144,12.226969420581709,44.18423394117522,nan
-V14Q_g2,field_reversal,robust,0.1,all_nominal,5,all,13,599.7347724349204,92.52224636755338,45.898187528068185,nan
-V14Q_g2,message_corruption,robust,0.1,all_nominal,5,all,13,41.75551373908574,12.799200050077012,45.898187528068185,nan
-V14Q_g2,network_partition,robust,0.1,all_nominal,5,all,13,41.75551373908574,13.302349860210295,45.898187528068185,nan
-V14Q_g2,nominal,robust,0.1,all_nominal,5,all,13,41.75551373908574,13.194395577397112,45.898187528068185,nan
-V14Q_g3,field_reversal,robust,0.1,all_nominal,5,all,13,628.6354824290469,100.82655915568002,43.63154815716706,nan
-V14Q_g3,message_corruption,robust,0.1,all_nominal,5,all,13,46.27822671641627,11.266762327332144,43.63154815716706,nan
-V14Q_g3,network_partition,robust,0.1,all_nominal,5,all,13,46.27822671641627,10.975121619940134,43.63154815716706,nan
-V14Q_g3,nominal,robust,0.1,all_nominal,5,all,13,46.27822671641627,10.757781237333983,43.63154815716706,nan
-V14Q_g4,field_reversal,robust,0.1,all_nominal,5,all,13,612.2379657739336,98.1991742776719,40.35923371568017,nan
-V14Q_g4,message_corruption,robust,0.1,all_nominal,5,all,13,56.198951774216354,10.970648629420966,40.35923371568017,nan
-V14Q_g4,network_partition,robust,0.1,all_nominal,5,all,13,56.198951774216354,11.445497148851382,40.35923371568017,nan
-V14Q_g4,nominal,robust,0.1,all_nominal,5,all,13,56.198951774216354,12.493279963145556,40.35923371568017,nan
-V14Q_g5,field_reversal,robust,0.1,all_nominal,5,all,13,1340.3190314681897,218.6862298883405,47.83485279288121,nan
-V14Q_g5,message_corruption,robust,0.1,all_nominal,5,all,13,206.1911182137352,25.87012476501235,47.83485279288121,nan
-V14Q_g5,network_partition,robust,0.1,all_nominal,5,all,13,206.1911182137352,25.17661162301388,47.83485279288121,nan
-V14Q_g5,nominal,robust,0.1,all_nominal,5,all,13,206.1911182137352,24.09503880988414,47.83485279288121,nan
-V14Q_g0,field_reversal,robust,0.25,all_nominal,5,all,13,386.3153175397004,61.127046061893374,27.49735004122701,nan
-V14Q_g0,message_corruption,robust,0.25,all_nominal,5,all,13,35.04487522030188,6.891447319562824,27.49735004122701,nan
-V14Q_g0,network_partition,robust,0.25,all_nominal,5,all,13,35.04487522030188,7.003175327199862,27.49735004122701,nan
-V14Q_g0,nominal,robust,0.25,all_nominal,5,all,13,35.04487522030188,7.180685371775535,27.49735004122701,nan
-V14Q_g1,field_reversal,robust,0.25,all_nominal,5,all,13,378.4584266366036,61.50278146782766,28.44918512568353,nan
-V14Q_g1,message_corruption,robust,0.25,all_nominal,5,all,13,52.252158280702425,8.501498843078405,28.44918512568353,nan
-V14Q_g1,network_partition,robust,0.25,all_nominal,5,all,13,52.252158280702425,8.252916976701064,28.44918512568353,nan
-V14Q_g1,nominal,robust,0.25,all_nominal,5,all,13,52.252158280702425,8.252916976701064,28.44918512568353,nan
-V14Q_g2,field_reversal,robust,0.25,all_nominal,5,all,13,379.4547458533193,59.2572169883148,29.67169007918328,nan
-V14Q_g2,message_corruption,robust,0.25,all_nominal,5,all,13,26.7821065886208,8.850460727004709,29.67169007918328,nan
-V14Q_g2,network_partition,robust,0.25,all_nominal,5,all,13,26.7821065886208,9.104292798495992,29.67169007918328,nan
-V14Q_g2,nominal,robust,0.25,all_nominal,5,all,13,26.7821065886208,8.988492978803789,29.67169007918328,nan
-V14Q_g3,field_reversal,robust,0.25,all_nominal,5,all,13,397.6597295168099,64.46249142528175,28.345238641375296,nan
-V14Q_g3,message_corruption,robust,0.25,all_nominal,5,all,13,29.860547760382072,7.960966867789555,28.345238641375296,nan
-V14Q_g3,network_partition,robust,0.25,all_nominal,5,all,13,29.860547760382072,7.784384856993369,28.345238641375296,nan
-V14Q_g3,nominal,robust,0.25,all_nominal,5,all,13,29.860547760382072,7.732830121469892,28.345238641375296,nan
-V14Q_g4,field_reversal,robust,0.25,all_nominal,5,all,13,387.3042526450556,62.38591977348302,26.12550846736142,nan
-V14Q_g4,message_corruption,robust,0.25,all_nominal,5,all,13,35.99122378740921,7.455780138580864,26.12550846736142,nan
-V14Q_g4,network_partition,robust,0.25,all_nominal,5,all,13,35.99122378740921,7.614926228449704,26.12550846736142,nan
-V14Q_g4,nominal,robust,0.25,all_nominal,5,all,13,35.99122378740921,8.459849614315658,26.12550846736142,nan
-V14Q_g5,field_reversal,robust,0.25,all_nominal,5,all,13,847.7534660267494,138.75520622650205,31.15103680272237,nan
-V14Q_g5,message_corruption,robust,0.25,all_nominal,5,all,13,131.30055704576415,16.76597055500597,31.15103680272237,nan
-V14Q_g5,network_partition,robust,0.25,all_nominal,5,all,13,131.30055704576415,16.51762721945401,31.15103680272237,nan
-V14Q_g5,nominal,robust,0.25,all_nominal,5,all,13,131.30055704576415,15.743414268195703,31.15103680272237,nan
-V14Q_g0,field_reversal,robust,0.5,all_nominal,5,all,13,273.31776074842065,43.75648527098015,20.10940917926616,nan
-V14Q_g0,message_corruption,robust,0.5,all_nominal,5,all,13,25.0943873086052,5.534461562610797,20.10940917926616,nan
-V14Q_g0,network_partition,robust,0.5,all_nominal,5,all,13,25.0943873086052,5.566010546664196,20.10940917926616,nan
-V14Q_g0,nominal,robust,0.5,all_nominal,5,all,13,25.0943873086052,5.653150078875702,20.10940917926616,nan
-V14Q_g1,field_reversal,robust,0.5,all_nominal,5,all,13,267.75913030832385,43.96883583144905,20.62031258073381,nan
-V14Q_g1,message_corruption,robust,0.5,all_nominal,5,all,13,37.18044656778124,6.571046982288984,20.62031258073381,nan
-V14Q_g1,network_partition,robust,0.5,all_nominal,5,all,13,37.18044656778124,6.399443002810343,20.62031258073381,nan
-V14Q_g1,nominal,robust,0.5,all_nominal,5,all,13,37.18044656778124,6.399443002810343,20.62031258073381,nan
-V14Q_g2,field_reversal,robust,0.5,all_nominal,5,all,13,268.4049437249181,42.44796943751128,21.44003335199404,nan
-V14Q_g2,message_corruption,robust,0.5,all_nominal,5,all,13,19.25029727198045,6.867940504604091,21.44003335199404,nan
-V14Q_g2,network_partition,robust,0.5,all_nominal,5,all,13,19.25029727198045,7.02289656487065,21.44003335199404,nan
-V14Q_g2,nominal,robust,0.5,all_nominal,5,all,13,19.25029727198045,6.937264233933592,21.44003335199404,nan
-V14Q_g3,field_reversal,robust,0.5,all_nominal,5,all,13,281.2807131086017,46.36031568658963,20.73658057383449,nan
-V14Q_g3,message_corruption,robust,0.5,all_nominal,5,all,13,21.73696048754003,6.57935915988123,20.73658057383449,nan
-V14Q_g3,network_partition,robust,0.5,all_nominal,5,all,13,21.73696048754003,6.463504431319336,20.73658057383449,nan
-V14Q_g3,nominal,robust,0.5,all_nominal,5,all,13,21.73696048754003,6.493037144362508,20.73658057383449,nan
-V14Q_g4,field_reversal,robust,0.5,all_nominal,5,all,13,273.95632308224697,44.370376501577496,19.031237978942656,nan
-V14Q_g4,message_corruption,robust,0.5,all_nominal,5,all,13,25.891005255656303,5.725976915451551,19.031237978942656,nan
-V14Q_g4,network_partition,robust,0.5,all_nominal,5,all,13,25.891005255656303,5.721817067315561,19.031237978942656,nan
-V14Q_g4,nominal,robust,0.5,all_nominal,5,all,13,25.891005255656303,6.476363605697894,19.031237978942656,nan
-V14Q_g5,field_reversal,robust,0.5,all_nominal,5,all,13,599.5205588795378,98.6182077587042,22.80393372625019,nan
-V14Q_g5,message_corruption,robust,0.5,all_nominal,5,all,13,93.84783181353976,12.33047925668657,22.80393372625019,nan
-V14Q_g5,network_partition,robust,0.5,all_nominal,5,all,13,93.84783181353976,12.33884421414544,22.80393372625019,nan
-V14Q_g5,nominal,robust,0.5,all_nominal,5,all,13,93.84783181353976,11.70934727800111,22.80393372625019,nan
+cluster_id,disruption,estimator,ridge_fraction,nominal_fit_window,rolling_window_sweeps,ablation,deleted_family,deleted_observable,feature_count,training_clusters,held_out_cluster_excluded,maximum_distance,mean_distance,nominal_threshold_95,failure
+V14Q_g0,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,87.68407457645277,14.728305101697472,7.089486279391889,nan
+V14Q_g0,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228178,2.685637285101577,7.089486279391889,nan
+V14Q_g0,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228178,2.6758749231070142,7.089486279391889,nan
+V14Q_g0,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228178,2.65500838501717,7.089486279391889,nan
+V14Q_g1,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,85.72444107341838,14.706275224325507,7.260876237259445,nan
+V14Q_g1,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283056,2.8784897114713157,7.260876237259445,nan
+V14Q_g1,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283056,2.8377340128383217,7.260876237259445,nan
+V14Q_g1,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283056,2.8377340128383217,7.260876237259445,nan
+V14Q_g2,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,87.17134162931609,14.761855591687125,7.2036045300685005,nan
+V14Q_g2,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150482,3.512173151878138,7.2036045300685005,nan
+V14Q_g2,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150482,3.564916785518574,7.2036045300685005,nan
+V14Q_g2,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150482,3.590625125630984,7.2036045300685005,nan
+V14Q_g3,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,88.59228695044071,15.7656278405605,6.991278419360114,nan
+V14Q_g3,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458715,3.580163087342624,6.991278419360114,nan
+V14Q_g3,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458715,3.558490692583072,6.991278419360114,nan
+V14Q_g3,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458715,3.551062957934677,6.991278419360114,nan
+V14Q_g4,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,90.742399859267,14.855795240775258,6.819066975593654,nan
+V14Q_g4,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651416,2.145198804046688,6.819066975593654,nan
+V14Q_g4,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651416,2.1039509690698392,6.819066975593654,nan
+V14Q_g4,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651416,2.415012821675124,6.819066975593654,nan
+V14Q_g5,field_reversal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,196.3187465294384,32.97522652865315,8.029659636391525,nan
+V14Q_g5,message_corruption,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.331132723292413,4.809542672695894,8.029659636391525,nan
+V14Q_g5,network_partition,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.331132723292413,4.919716976974569,8.029659636391525,nan
+V14Q_g5,nominal,euclidean,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.331132723292413,4.705831184955004,8.029659636391525,nan
+V14Q_g0,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,87.68407457645272,14.728305101697469,7.089486279391895,nan
+V14Q_g0,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228176,2.6856372851015786,7.089486279391895,nan
+V14Q_g0,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228176,2.675874923107016,7.089486279391895,nan
+V14Q_g0,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,8.338802732228176,2.655008385017172,7.089486279391895,nan
+V14Q_g1,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,85.72444107341829,14.706275224325491,7.260876237259449,nan
+V14Q_g1,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283053,2.878489711471317,7.260876237259449,nan
+V14Q_g1,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283053,2.8377340128383235,7.260876237259449,nan
+V14Q_g1,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,12.229610731283053,2.8377340128383235,7.260876237259449,nan
+V14Q_g2,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,87.1713416293162,14.761855591687135,7.203604530068498,nan
+V14Q_g2,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150477,3.5121731518781383,7.203604530068498,nan
+V14Q_g2,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150477,3.5649167855185744,7.203604530068498,nan
+V14Q_g2,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.136927969150477,3.590625125630985,7.203604530068498,nan
+V14Q_g3,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,88.5922869504408,15.765627840560503,6.991278419360111,nan
+V14Q_g3,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458708,3.5801630873426222,6.991278419360111,nan
+V14Q_g3,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458708,3.558490692583069,6.991278419360111,nan
+V14Q_g3,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.254346378458708,3.5510629579346755,6.991278419360111,nan
+V14Q_g4,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,90.74239985926695,14.855795240775253,6.819066975593649,nan
+V14Q_g4,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651418,2.1451988040466863,6.819066975593649,nan
+V14Q_g4,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651418,2.103950969069838,6.819066975593649,nan
+V14Q_g4,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.810695758651418,2.415012821675124,6.819066975593649,nan
+V14Q_g5,field_reversal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,196.31874652943856,32.975226528653174,8.029659636391525,nan
+V14Q_g5,message_corruption,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.33113272329242,4.809542672695896,8.029659636391525,nan
+V14Q_g5,network_partition,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.33113272329242,4.919716976974569,8.029659636391525,nan
+V14Q_g5,nominal,diagonal,0.0,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,31.33113272329242,4.705831184955005,8.029659636391525,nan
+V14Q_g0,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,125.2024358137504,19.598380782021756,6.12263635735249,nan
+V14Q_g0,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,9.270862262955363,2.298463611179587,6.12263635735249,nan
+V14Q_g0,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,9.270862262955363,2.3226783147511307,6.12263635735249,nan
+V14Q_g0,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,9.270862262955363,2.432753046968919,6.12263635735249,nan
+V14Q_g1,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,128.77026202763216,21.18010934068302,6.6983933181501865,nan
+V14Q_g1,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,27.26110670426298,3.350657390678061,6.6983933181501865,nan
+V14Q_g1,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,27.26110670426298,3.286352399933348,6.6983933181501865,nan
+V14Q_g1,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,27.26110670426298,3.286352399933348,6.6983933181501865,nan
+V14Q_g2,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,126.2438130032706,19.261059203942366,6.693552828956698,nan
+V14Q_g2,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.216000542201174,3.103163471299002,6.693552828956698,nan
+V14Q_g2,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.216000542201174,3.18738599348796,6.693552828956698,nan
+V14Q_g2,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.216000542201174,3.187320139696727,6.693552828956698,nan
+V14Q_g3,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,127.5476809517853,20.676596201684628,6.708876576983798,nan
+V14Q_g3,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.318910891941233,2.868411352039915,6.708876576983798,nan
+V14Q_g3,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.318910891941233,2.852031343004441,6.708876576983798,nan
+V14Q_g3,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,7.318910891941233,2.85861643226266,6.708876576983798,nan
+V14Q_g4,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,126.55310463944116,19.73710417593673,6.146078577096464,nan
+V14Q_g4,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,9.315650302223682,1.7087634555677846,6.146078577096464,nan
+V14Q_g4,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,9.315650302223682,1.761428897245629,6.146078577096464,nan
+V14Q_g4,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,9.315650302223682,2.155243167644332,6.146078577096464,nan
+V14Q_g5,field_reversal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,288.05072979350285,45.49701792669176,6.440292760786688,nan
+V14Q_g5,message_corruption,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,30.18650357346264,4.455154716230025,6.440292760786688,nan
+V14Q_g5,network_partition,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,30.18650357346264,4.444528197965591,6.440292760786688,nan
+V14Q_g5,nominal,shrinkage,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,30.18650357346264,4.2074034954969335,6.440292760786688,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,111.23173812064744,17.451287297285322,5.7488559988786,nan
+V14Q_g0,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.982955450224765,2.1542505858732417,5.7488559988786,nan
+V14Q_g0,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.982955450224765,2.175364407487677,5.7488559988786,nan
+V14Q_g0,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.982955450224765,2.262691000097175,5.7488559988786,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,112.7828491088068,18.65494537409138,6.254243934364358,nan
+V14Q_g1,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,22.878661749881942,3.016639846081697,6.254243934364358,nan
+V14Q_g1,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,22.878661749881942,2.960842329744211,6.254243934364358,nan
+V14Q_g1,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,22.878661749881942,2.960842329744211,6.254243934364358,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,113.05226001318532,17.384787233762175,6.33188832312639,nan
+V14Q_g2,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.771268263314761,2.9736681305747754,6.33188832312639,nan
+V14Q_g2,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.771268263314761,3.054502735136714,6.33188832312639,nan
+V14Q_g2,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.771268263314761,3.0609793050882668,6.33188832312639,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,114.03302182867814,18.66197052304099,6.409750119008652,nan
+V14Q_g3,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,6.517361402011977,2.7816114973684187,6.409750119008652,nan
+V14Q_g3,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,6.517361402011977,2.7641950926668257,6.409750119008652,nan
+V14Q_g3,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,6.517361402011977,2.7709395179672978,6.409750119008652,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,112.99616069045663,17.657917293774474,5.9377263237829006,nan
+V14Q_g4,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.54348110848413,1.6283663532546837,5.9377263237829006,nan
+V14Q_g4,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.54348110848413,1.6673210846916566,5.9377263237829006,nan
+V14Q_g4,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.54348110848413,2.0332110621831263,5.9377263237829006,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,262.25695416565173,41.6579814745474,6.023345118287734,nan
+V14Q_g5,message_corruption,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,29.125379611852715,4.268753459161367,6.023345118287734,nan
+V14Q_g5,network_partition,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,29.125379611852715,4.253180894930465,6.023345118287734,nan
+V14Q_g5,nominal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,29.125379611852715,4.039158759958294,6.023345118287734,nan
+V14Q_g0,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,94.75777753842802,15.015792717228118,5.529838776039501,nan
+V14Q_g0,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.118338279856869,2.046252353444524,5.529838776039501,nan
+V14Q_g0,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.118338279856869,2.0628604794535312,5.529838776039501,nan
+V14Q_g0,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.118338279856869,2.120552618172235,5.529838776039501,nan
+V14Q_g1,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,94.3040833730053,15.666145593009809,5.76317227088741,nan
+V14Q_g1,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,17.253410822334867,2.637292796159939,5.76317227088741,nan
+V14Q_g1,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,17.253410822334867,2.5902685575739577,5.76317227088741,nan
+V14Q_g1,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,17.253410822334867,2.5902685575739577,5.76317227088741,nan
+V14Q_g2,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,96.26944441932228,15.08413724905034,5.975068753709893,nan
+V14Q_g2,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.239338177912919,2.865493267586426,5.975068753709893,nan
+V14Q_g2,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.239338177912919,2.943327686652004,5.975068753709893,nan
+V14Q_g2,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.239338177912919,2.9592302487333155,5.975068753709893,nan
+V14Q_g3,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,96.99065232495886,16.145877051646558,5.955630142337188,nan
+V14Q_g3,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.706430362123087,2.7158649782717106,5.955630142337188,nan
+V14Q_g3,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.706430362123087,2.6975215060584103,5.955630142337188,nan
+V14Q_g3,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.706430362123087,2.699102554393894,5.955630142337188,nan
+V14Q_g4,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,97.0669457971954,15.228954747719987,5.716835892980151,nan
+V14Q_g4,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.756015429906558,1.5574714573035715,5.716835892980151,nan
+V14Q_g4,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.756015429906558,1.583542132049164,5.716835892980151,nan
+V14Q_g4,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.756015429906558,1.909044026740125,5.716835892980151,nan
+V14Q_g5,field_reversal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,225.9171359384333,36.285718694664666,5.899468073611204,nan
+V14Q_g5,message_corruption,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,27.42260427940801,4.057422675480948,5.899468073611204,nan
+V14Q_g5,network_partition,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,27.42260427940801,4.0439256161612,5.899468073611204,nan
+V14Q_g5,nominal,shrinkage,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,27.42260427940801,3.849875403020161,5.899468073611204,nan
+V14Q_g0,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,85.13241690776323,13.723636112761543,5.667512449323106,nan
+V14Q_g0,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.019911649141849,2.096432627316703,5.667512449323106,nan
+V14Q_g0,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.019911649141849,2.10803903205746,5.667512449323106,nan
+V14Q_g0,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.019911649141849,2.1397518584355897,5.667512449323106,nan
+V14Q_g1,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,83.65650886906526,14.00041560225302,5.680937520535932,nan
+V14Q_g1,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,13.85895795654208,2.491410961806569,5.680937520535932,nan
+V14Q_g1,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,13.85895795654208,2.448436896699727,5.680937520535932,nan
+V14Q_g1,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,13.85895795654208,2.448436896699727,5.680937520535932,nan
+V14Q_g2,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,85.79891459534042,13.782579599349202,5.9382627266661805,nan
+V14Q_g2,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.0188971830809725,2.9065233957748458,5.9382627266661805,nan
+V14Q_g2,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.0188971830809725,2.9824422684499927,5.9382627266661805,nan
+V14Q_g2,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.0188971830809725,3.005329781357982,5.9382627266661805,nan
+V14Q_g3,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,86.4575141296419,14.705971940829045,5.778416783049341,nan
+V14Q_g3,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.557796211340987,2.791933397620308,5.778416783049341,nan
+V14Q_g3,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.557796211340987,2.7725074023899867,5.778416783049341,nan
+V14Q_g3,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.557796211340987,2.765033815837316,5.778416783049341,nan
+V14Q_g4,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,87.67814044654078,13.888399887213389,5.576788290886765,nan
+V14Q_g4,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.508072851392098,1.5746416591791164,5.576788290886765,nan
+V14Q_g4,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.508072851392098,1.5934196674093477,5.576788290886765,nan
+V14Q_g4,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,7.508072851392098,1.88704396604188,5.576788290886765,nan
+V14Q_g5,field_reversal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,200.86545609124863,32.68539528949071,5.99446747218115,nan
+V14Q_g5,message_corruption,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,26.464008809319925,4.01852319233324,5.99446747218115,nan
+V14Q_g5,network_partition,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,26.464008809319925,4.021313948139663,5.99446747218115,nan
+V14Q_g5,nominal,shrinkage,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,26.464008809319925,3.832281964030587,5.99446747218115,nan
+V14Q_g0,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,856.1409606394373,133.97047837464632,59.97809667864027,nan
+V14Q_g0,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,76.75897340843146,13.301906626503476,59.97809667864027,nan
+V14Q_g0,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,76.75897340843146,13.724744030407548,59.97809667864027,nan
+V14Q_g0,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,76.75897340843146,14.23917260064201,59.97809667864027,nan
+V14Q_g1,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,845.8510090256923,136.18163847833137,62.120502217006006,nan
+V14Q_g1,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,116.2243151768702,17.428971324845385,62.120502217006006,nan
+V14Q_g1,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,116.2243151768702,16.861674637059814,62.120502217006006,nan
+V14Q_g1,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,116.2243151768702,16.861674637059814,62.120502217006006,nan
+V14Q_g2,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,847.975804258406,129.94122962885388,64.16517266124819,nan
+V14Q_g2,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,58.64215873287906,17.19793206431049,64.16517266124819,nan
+V14Q_g2,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,58.64215873287906,18.00527856239559,64.16517266124819,nan
+V14Q_g2,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,58.64215873287906,17.930525074368962,64.16517266124819,nan
+V14Q_g3,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,888.9625638175252,141.98645313523338,61.0726101588436,nan
+V14Q_g3,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,64.7767620458289,15.21873254700549,61.0726101588436,nan
+V14Q_g3,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,64.7767620458289,14.798232521269364,61.0726101588436,nan
+V14Q_g3,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,64.7767620458289,14.409351657629006,61.0726101588436,nan
+V14Q_g4,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,865.7563156925257,138.62203274723825,56.49529806357917,nan
+V14Q_g4,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,79.08611908127108,15.038791189266266,56.49529806357917,nan
+V14Q_g4,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,79.08611908127108,15.842865321624656,56.49529806357917,nan
+V14Q_g4,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,79.08611908127108,17.156653676763312,56.49529806357917,nan
+V14Q_g5,field_reversal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,1895.4463695320133,308.90516119691506,66.81886601660314,nan
+V14Q_g5,message_corruption,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,290.91168140270725,36.258412201382,66.81886601660314,nan
+V14Q_g5,network_partition,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,290.91168140270725,35.117407458819216,66.81886601660314,nan
+V14Q_g5,nominal,robust,0.05,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,290.91168140270725,33.66529227887334,66.81886601660314,nan
+V14Q_g0,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,605.4624769681475,95.01957549427362,42.51112761066218,nan
+V14Q_g0,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,54.46052286874219,9.76952135614297,42.51112761066218,nan
+V14Q_g0,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,54.46052286874219,10.035321442424827,42.51112761066218,nan
+V14Q_g0,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,54.46052286874219,10.379291633436972,42.51112761066218,nan
+V14Q_g1,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,598.1816215415403,96.54968751117116,44.18423394117521,nan
+V14Q_g1,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,82.3006096116314,12.625468622681788,44.18423394117521,nan
+V14Q_g1,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,82.3006096116314,12.226969420581703,44.18423394117521,nan
+V14Q_g1,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,82.3006096116314,12.226969420581703,44.18423394117521,nan
+V14Q_g2,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,599.7347724349205,92.5222463675534,45.89818752806821,nan
+V14Q_g2,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,41.75551373908576,12.799200050077015,45.89818752806821,nan
+V14Q_g2,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,41.75551373908576,13.302349860210311,45.89818752806821,nan
+V14Q_g2,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,41.75551373908576,13.194395577397124,45.89818752806821,nan
+V14Q_g3,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,628.635482429047,100.82655915568004,43.63154815716704,nan
+V14Q_g3,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,46.27822671641624,11.266762327332144,43.63154815716704,nan
+V14Q_g3,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,46.27822671641624,10.975121619940133,43.63154815716704,nan
+V14Q_g3,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,46.27822671641624,10.757781237333983,43.63154815716704,nan
+V14Q_g4,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,612.2379657739335,98.19917427767189,40.35923371568017,nan
+V14Q_g4,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,56.1989517742163,10.97064862942096,40.35923371568017,nan
+V14Q_g4,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,56.1989517742163,11.445497148851375,40.35923371568017,nan
+V14Q_g4,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,56.1989517742163,12.49327996314554,40.35923371568017,nan
+V14Q_g5,field_reversal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,1340.3190314681897,218.6862298883404,47.83485279288119,nan
+V14Q_g5,message_corruption,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,206.19111821373517,25.870124765012346,47.83485279288119,nan
+V14Q_g5,network_partition,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,206.19111821373517,25.176611623013876,47.83485279288119,nan
+V14Q_g5,nominal,robust,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,206.19111821373517,24.095038809884137,47.83485279288119,nan
+V14Q_g0,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,383.06953853294215,60.58722304927575,27.235130190398294,nan
+V14Q_g0,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,34.742655803300885,6.79293456532928,27.235130190398294,nan
+V14Q_g0,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,34.742655803300885,6.908265263114417,27.235130190398294,nan
+V14Q_g0,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,34.742655803300885,7.091917768991062,27.235130190398294,nan
+V14Q_g1,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,378.4584266366036,61.50278146782766,28.449185125683528,nan
+V14Q_g1,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,52.2521582807024,8.501498843078405,28.449185125683528,nan
+V14Q_g1,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,52.2521582807024,8.252916976701064,28.449185125683528,nan
+V14Q_g1,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,52.2521582807024,8.252916976701064,28.449185125683528,nan
+V14Q_g2,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,379.4547458533193,59.2572169883148,29.6716900791833,nan
+V14Q_g2,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,26.782106588620813,8.85046072700471,29.6716900791833,nan
+V14Q_g2,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,26.782106588620813,9.104292798495996,29.6716900791833,nan
+V14Q_g2,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,26.782106588620813,8.988492978803793,29.6716900791833,nan
+V14Q_g3,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,397.6597295168101,64.46249142528178,28.34523864137532,nan
+V14Q_g3,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,29.86054776038208,7.960966867789553,28.34523864137532,nan
+V14Q_g3,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,29.86054776038208,7.784384856993367,28.34523864137532,nan
+V14Q_g3,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,29.86054776038208,7.732830121469889,28.34523864137532,nan
+V14Q_g4,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,387.30425264505567,62.38591977348303,26.125508467361414,nan
+V14Q_g4,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,35.99122378740922,7.455780138580865,26.125508467361414,nan
+V14Q_g4,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,35.99122378740922,7.614926228449704,26.125508467361414,nan
+V14Q_g4,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,35.99122378740922,8.45984961431566,26.125508467361414,nan
+V14Q_g5,field_reversal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,847.7534660267492,138.75520622650205,31.151036802722366,nan
+V14Q_g5,message_corruption,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,131.3005570457641,16.765970555005964,31.151036802722366,nan
+V14Q_g5,network_partition,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,131.3005570457641,16.51762721945401,31.151036802722366,nan
+V14Q_g5,nominal,robust,0.25,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,131.3005570457641,15.7434142681957,31.151036802722366,nan
+V14Q_g0,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,271.02247597618685,43.368513342565954,19.92922291847181,nan
+V14Q_g0,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,24.88645841528857,5.454649243781315,19.92922291847181,nan
+V14Q_g0,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,24.88645841528857,5.48986098981306,19.92922291847181,nan
+V14Q_g0,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,24.88645841528857,5.583688287674194,19.92922291847181,nan
+V14Q_g1,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,267.75913030832385,43.968835831449056,20.620312580733817,nan
+V14Q_g1,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,37.180446567781225,6.571046982288984,20.620312580733817,nan
+V14Q_g1,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,37.180446567781225,6.399443002810343,20.620312580733817,nan
+V14Q_g1,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,37.180446567781225,6.399443002810343,20.620312580733817,nan
+V14Q_g2,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,268.40494372491816,42.4479694375113,21.44003335199404,nan
+V14Q_g2,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,19.250297271980447,6.867940504604091,21.44003335199404,nan
+V14Q_g2,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,19.250297271980447,7.02289656487065,21.44003335199404,nan
+V14Q_g2,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,19.250297271980447,6.937264233933592,21.44003335199404,nan
+V14Q_g3,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,281.2807131086017,46.36031568658963,20.736580573834487,nan
+V14Q_g3,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,21.73696048754003,6.579359159881231,20.736580573834487,nan
+V14Q_g3,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,21.73696048754003,6.463504431319336,20.736580573834487,nan
+V14Q_g3,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,21.73696048754003,6.493037144362508,20.736580573834487,nan
+V14Q_g4,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,273.95632308224697,44.370376501577496,19.03123797894265,nan
+V14Q_g4,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,25.891005255656303,5.725976915451551,19.03123797894265,nan
+V14Q_g4,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,25.891005255656303,5.721817067315561,19.03123797894265,nan
+V14Q_g4,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,25.891005255656303,6.476363605697894,19.03123797894265,nan
+V14Q_g5,field_reversal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,599.5205588795376,98.61820775870416,22.803933726250182,nan
+V14Q_g5,message_corruption,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,93.84783181353971,12.330479256686568,22.803933726250182,nan
+V14Q_g5,network_partition,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,93.84783181353971,12.33884421414544,22.803933726250182,nan
+V14Q_g5,nominal,robust,0.5,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,93.84783181353971,11.70934727800111,22.803933726250182,nan

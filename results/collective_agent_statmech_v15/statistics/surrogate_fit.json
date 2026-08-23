@@ -1,0 +1,73 @@
+{
+  "coefficient_source": "immutable V13 microscopic_response.csv",
+  "direct_clusters": 6,
+  "fit": {
+    "action_feature_order": [
+      "intercept",
+      "updated_belief",
+      "previous_action"
+    ],
+    "belief_feature_order": [
+      "intercept",
+      "private_field",
+      "weighted_neighbor_field",
+      "previous_belief",
+      "previous_action"
+    ],
+    "fits_by_decoding_noise": {
+      "0.50": {
+        "action_belief_coupling": 5.160895635064452,
+        "action_coefficients": [
+          -3.81563134659643e-08,
+          5.160895635064452,
+          4.00824769092592
+        ],
+        "action_log_loss": 0.3828745005413766,
+        "action_persistence": 4.00824769092592,
+        "belief_action_coupling": -8.961059954623813,
+        "belief_coefficients": [
+          -1.2210221488547656e-06,
+          11.207889472255104,
+          3.9034497080835426,
+          11.57506033945292,
+          -8.961059954623813
+        ],
+        "belief_log_loss": 0.05046974680693282,
+        "belief_persistence": 11.57506033945292,
+        "effective_neighbor_susceptibility_at_origin": 1.9517248540417713,
+        "effective_private_susceptibility_at_origin": 5.603944736127552,
+        "rows": 144,
+        "temperature": 0.5
+      },
+      "0.85": {
+        "action_belief_coupling": 5.478458458074466,
+        "action_coefficients": [
+          0.15475283844214713,
+          5.478458458074466,
+          3.5964943459729874
+        ],
+        "action_log_loss": 0.28550520895405396,
+        "action_persistence": 3.5964943459729874,
+        "belief_action_coupling": -7.0069418671269945,
+        "belief_coefficients": [
+          -0.1974855327805799,
+          4.806330208481173,
+          4.053634300359657,
+          7.5979700653469715,
+          -7.0069418671269945
+        ],
+        "belief_log_loss": 0.11393204483142348,
+        "belief_persistence": 7.5979700653469715,
+        "effective_neighbor_susceptibility_at_origin": 2.0268171501798284,
+        "effective_private_susceptibility_at_origin": 2.4031651042405864,
+        "rows": 144,
+        "temperature": 0.85
+      }
+    },
+    "interpretation": "empirical kinetic response; decoding noise is not thermodynamic temperature",
+    "valid_rows": 288
+  },
+  "generated_at": "2026-08-22T00:41:47.372517+00:00",
+  "interpretation": "exploratory out-of-sample effective-model comparison",
+  "refit_to_quench": false
+}

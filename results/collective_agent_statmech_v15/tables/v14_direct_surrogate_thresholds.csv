@@ -1,0 +1,13 @@
+source,cluster_id,nominal_threshold_95
+Direct Qwen,V14Q_g0,4.326815415170426
+Direct Qwen,V14Q_g1,4.551644505336467
+Direct Qwen,V14Q_g2,4.696269688324893
+Direct Qwen,V14Q_g3,4.237768352893387
+Direct Qwen,V14Q_g4,4.213458683254862
+Direct Qwen,V14Q_g5,4.284092378213315
+Kinetic surrogate,V14Q_g0,5.311756382285122
+Kinetic surrogate,V14Q_g1,5.150762845069419
+Kinetic surrogate,V14Q_g2,5.383373242925371
+Kinetic surrogate,V14Q_g3,5.189081799236829
+Kinetic surrogate,V14Q_g4,5.333290599102595
+Kinetic surrogate,V14Q_g5,5.229512292598507

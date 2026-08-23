@@ -1,0 +1,13 @@
+{
+  "coefficient_source": "immutable V13 Qwen microscopic response",
+  "direct_llm_interpretation": false,
+  "generated_at": "2026-08-22T00:50:46.962465+00:00",
+  "replicates_per_size": 32,
+  "sizes": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "trajectories": 256
+}

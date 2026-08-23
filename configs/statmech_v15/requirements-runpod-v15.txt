@@ -1,0 +1,4 @@
+# Pinned packages installed during the retained, rejected Mistral engineering attempt.
+# The base CUDA/Transformers environment remains pinned by requirements-runpod.txt.
+sentencepiece==0.2.0
+protobuf==5.29.5

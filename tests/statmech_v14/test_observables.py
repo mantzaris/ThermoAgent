@@ -5,6 +5,7 @@ from thermoagent.statmech_llm_v14.observables import (
     binary_entropy,
     binder_cumulant,
     conditional_memory_depths,
+    dependence_bias_audit,
     discrete_mutual_information,
     mean_reported_uncertainty,
     pairwise_information_summary,
@@ -63,3 +64,33 @@ def test_conditional_memory_depth_output_is_defined():
     assert set(values) == {1, 2, 3}
     assert all(np.isfinite(value) for value in values.values())
 
+
+def test_circular_shift_adjusted_dependence_is_near_zero_for_independent_processes():
+    rng = np.random.default_rng(1493)
+    independent = rng.choice((-1, 1), size=(4000, 6))
+    adjacency = np.ones((3, 3), dtype=int) - np.eye(3, dtype=int)
+    result = dependence_bias_audit(independent, adjacency, 200, 1494)
+    assert abs(result["total_correlation_bias_adjusted"]) < 0.03
+    assert abs(result["pairwise_mutual_information_bias_adjusted"]) < 0.01
+
+
+def test_circular_shift_adjusted_dependence_is_positive_for_locked_processes():
+    rng = np.random.default_rng(1495)
+    latent = rng.choice((-1, 1), size=2000)
+    dependent = np.column_stack([latent, latent, -latent, latent, -latent, latent])
+    adjacency = np.ones((3, 3), dtype=int) - np.eye(3, dtype=int)
+    result = dependence_bias_audit(dependent, adjacency, 100, 1496)
+    assert result["total_correlation_bias_adjusted"] > 2.0
+    assert result["pairwise_mutual_information_bias_adjusted"] > 0.5
+
+
+def test_adjusted_information_is_not_truncated():
+    rng = np.random.default_rng(2)
+    values = rng.choice((-1, 1), size=(12, 6))
+    adjacency = np.ones((3, 3), dtype=int) - np.eye(3, dtype=int)
+    result = dependence_bias_audit(values, adjacency, 100, 42)
+    assert result["total_correlation_bias_adjusted"] < 0.0
+    assert np.isclose(
+        result["total_correlation_bias_adjusted"],
+        result["total_correlation_raw"] - result["total_correlation_null_mean"],
+    )

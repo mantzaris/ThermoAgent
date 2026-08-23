@@ -1,6 +1,6 @@
-label,hypothesis,estimate,ci_low,ci_high
-H2: field_reversal_minus_nominal_maximum_post_quench_distance,H2,133.80477019797726,107.9494364656719,184.07462982457469
-H3: early_recovery_peak_minus_final_five_sweep_mean_distance,H3,134.1103235256311,106.65373035346892,184.19621638252104
-H4: full_minus_order_only_balanced_accuracy,H4,0.3333333333333333,0.1666666666666666,0.4583333333333333
-V12_discovery,H1,0.0178992009949608,0.0035703699742585,0.033992228638198
-V13_replication,H1,0.0402976960726365,0.0288250603151216,0.0585560178061282
+label,hypothesis,estimate,ci_low,ci_high,role
+H2: field_reversal_minus_nominal_maximum_post_quench_distance,H2,133.80477019797726,107.94943646567197,184.0746298245746,confirmatory
+H3: early_recovery_peak_minus_final_five_sweep_mean_distance,H3,134.1103235256311,106.653730353469,184.1962163825209,historical_invalid_directional_test
+H4: full_minus_order_only_balanced_accuracy,H4,0.3333333333333333,0.1666666666666666,0.4583333333333333,confirmatory
+V12_discovery,H1,0.0178992009949608,0.0035703699742585,0.033992228638198,discovery_or_replication
+V13_replication,H1,0.0402976960726365,0.0288250603151216,0.0585560178061282,discovery_or_replication

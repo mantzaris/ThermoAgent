@@ -1,104 +1,107 @@
 {
   "checks": {
+    "audit_source_change_versioned": true,
+    "formal_execution_source_matches_freeze": true,
+    "formal_protocol_matches_freeze": true,
     "index_checksums_match": true,
     "index_complete": true,
+    "invalid_H3_not_supported": true,
     "no_crlf": true,
     "no_forbidden_artifacts": true,
     "no_oversized_files": true,
     "package_below_25_mib": true,
     "privacy_passed": true,
-    "replay_passed": true,
-    "source_matches_freeze": true
+    "replay_passed": true
   },
   "checksum_mismatches": [],
   "forbidden_files": [],
-  "generated_at": "2026-08-21T00:34:15.344480+00:00",
+  "generated_at": "2026-08-22T21:12:51.003858+00:00",
   "largest_files": [
     {
-      "bytes": 744066,
+      "bytes": 3692692,
       "relative_path": "paper/jstat_v14/main.pdf"
     },
     {
-      "bytes": 728294,
+      "bytes": 1649394,
+      "relative_path": "results/collective_agent_statmech_v14/tables/macrostate_trajectories_all_windows.csv"
+    },
+    {
+      "bytes": 1455202,
+      "relative_path": "results/collective_agent_statmech_v14/figures/source_data/figure27_representation_permutation.csv"
+    },
+    {
+      "bytes": 1106689,
       "relative_path": "results/collective_agent_statmech_v14/tables/macrostate_trajectories_alternative_windows.csv"
     },
     {
-      "bytes": 388355,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure09_entropy_decomposition.pdf"
+      "bytes": 1093829,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure02_micro_macro_mapping.pdf"
     },
     {
-      "bytes": 386665,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure11_energy_entropy_phase_space.pdf"
-    },
-    {
-      "bytes": 386074,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure12_belief_action_phase_space.pdf"
-    },
-    {
-      "bytes": 384604,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure14_quench_counterquench.pdf"
-    },
-    {
-      "bytes": 384254,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure15_peak_integrated_recovery.pdf"
-    },
-    {
-      "bytes": 384201,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure06_block_length_sensitivity.pdf"
-    },
-    {
-      "bytes": 384161,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure05_memory_cluster_effects.pdf"
-    },
-    {
-      "bytes": 384090,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure07_bias_floor.pdf"
-    },
-    {
-      "bytes": 383166,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure19_leave_family_out.pdf"
-    },
-    {
-      "bytes": 383108,
-      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure18_observable_family_contribution.pdf"
-    },
-    {
-      "bytes": 381070,
-      "relative_path": "results/collective_agent_statmech_v14/tables/macrostate_trajectories.csv"
-    },
-    {
-      "bytes": 174895,
-      "relative_path": "results/collective_agent_statmech_v14/figures/source_data/figure09_entropy_decomposition.csv"
-    },
-    {
-      "bytes": 137015,
-      "relative_path": "results/collective_agent_statmech_v14/tables/representation_coefficients.csv"
-    },
-    {
-      "bytes": 128912,
+      "bytes": 900233,
       "relative_path": "results/collective_agent_statmech_v14/tables/macrostate_distance_robustness.csv"
     },
     {
-      "bytes": 83360,
-      "relative_path": "results/collective_agent_statmech_v14/figures/source_data/figure13_macrostate_distance.csv"
+      "bytes": 821823,
+      "relative_path": "results/collective_agent_statmech_v14/tables/representation_permutation_null.csv"
     },
     {
-      "bytes": 83360,
-      "relative_path": "results/collective_agent_statmech_v14/figures/source_data/figure23_condition_trajectories.csv"
+      "bytes": 735396,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure01_agent_architecture.pdf"
     },
     {
-      "bytes": 44079,
-      "relative_path": "paper/jstat_v14/main.tex"
+      "bytes": 623933,
+      "relative_path": "results/collective_agent_statmech_v14/tables/information_estimator_audit.csv"
     },
     {
-      "bytes": 40564,
-      "relative_path": "thermoagent/statmech_llm_v14/analysis.py"
+      "bytes": 543809,
+      "relative_path": "results/collective_agent_statmech_v14/tables/macrostate_trajectories.csv"
+    },
+    {
+      "bytes": 401393,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure03_network_states.pdf"
+    },
+    {
+      "bytes": 388777,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure28_information_bias.pdf"
+    },
+    {
+      "bytes": 388553,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure13_macrostate_distance.pdf"
+    },
+    {
+      "bytes": 388553,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure23_condition_trajectories.pdf"
+    },
+    {
+      "bytes": 388423,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure09_entropy_decomposition.pdf"
+    },
+    {
+      "bytes": 386385,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure22_cluster_confusion.pdf"
+    },
+    {
+      "bytes": 386152,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure11_energy_entropy_phase_space.pdf"
+    },
+    {
+      "bytes": 385638,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure14_quench_counterquench.pdf"
+    },
+    {
+      "bytes": 385592,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure17_susceptibility_correlation.pdf"
+    },
+    {
+      "bytes": 385591,
+      "relative_path": "results/collective_agent_statmech_v14/figures/pdf/figure27_representation_permutation.pdf"
     }
   ],
   "missing_indexed_files": [],
   "oversized_files": [],
-  "package_bytes": 7387526,
-  "package_files": 130,
+  "package_bytes": 24051456,
+  "package_files": 144,
   "replay": {
     "generated_at": "2026-08-20T23:41:41.442593+00:00",
     "method": "content-addressed autonomous-decision transition regeneration",

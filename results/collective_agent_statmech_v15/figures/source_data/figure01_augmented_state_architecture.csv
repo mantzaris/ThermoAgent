@@ -1,0 +1,11 @@
+component,x,y,boundary
+private_observation,0.08,0.76,local
+bounded_memory,0.08,0.48,local
+delivered_inbox,0.08,0.2,local
+LLM_local_transition,0.39,0.48,agent
+belief_action_packet,0.69,0.68,observable
+typed_local_action,0.69,0.28,observable
+delivery_graph,0.91,0.68,network
+environment,0.91,0.28,network
+observable_projection_Y,0.39,0.08,evaluator
+rolling_macrostate_Z,0.69,0.08,evaluator

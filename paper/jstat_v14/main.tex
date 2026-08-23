@@ -27,7 +27,8 @@
 
 \begin{abstract}
 We study a finite interacting system whose microscopic variables are realized
-choices made by independent large-language-model agents. Agent $i$ owns a
+choices made by state-separated, locally informed large-language-model agent
+instances. Agent $i$ owns a
 categorical belief $b_i\in\{-1,+1\}$, a committed action
 $a_i\in\{-1,+1\}$, confidence, commitment, bounded private memory, a local
 field, workload, inbox, outbox, and typed authority. A pinned instruction
@@ -41,13 +42,15 @@ prospectively frozen field-quench and restoration study comprising
 \VFourteenDecisions{} decisions in \VFourteenTrajectories{} trajectories over
 \VFourteenClusters{} new matched graph clusters. Field reversal changes maximum
 post-quench macrostate departure relative to nominal evolution by
-\VFourteenHtwo{} (95\% interval \VFourteenHtwoCI), while restoration changes
-early-to-late departure by \VFourteenHthree{} (\VFourteenHthreeCI). The full
+\VFourteenHtwo{} (95\% interval \VFourteenHtwoCI). The historical frozen
+maximum-minus-final restoration coordinate is \VFourteenHthree{}
+(\VFourteenHthreeCI), but its structurally nonnegative sign cannot provide a
+valid directional test. The full
 statistical-mechanical representation changes cluster-held-out balanced
 accuracy relative to order-only variables by \VFourteenHfour{}
 (\VFourteenHfourCI), although the simple-uncertainty representation attains the
 same mean balanced accuracy as the full representation. All six field-reversal
-clusters recover below their held-out nominal thresholds six sweeps after
+clusters recover below their held-out-cluster-excluded training-nominal thresholds six sweeps after
 restoration; the frozen peak-minus-late H3 sign statistic is structurally
 nonnegative and is interpreted only with the full recovery path. These
 finite-size, single-model results show what is and is not retained by a reduced
@@ -105,7 +108,7 @@ or uncertainty summaries alone. No observable is required to improve task
 reward, and no human or field-system inference is made.
 
 \resultfigure{figure01_agent_architecture.pdf}{0.96\textwidth}{%
-Independent-agent information and authority boundary. The scheduler offers an
+State-separated agent-instance information and authority boundary. The scheduler offers an
 update and transports the model-selected packet; it cannot inspect peer-private
 state or substitute a belief, action, commitment, memory, signal, or tool. The
 reduced state $Z_t$ is evaluator-only.}{fig:architecture}
@@ -159,7 +162,7 @@ finite classical stochastic trajectories; quantum-quench results
 \cite{calabrese2006} supply terminology about relaxation but not a claimed
 mapping of microscopic dynamics.
 
-\section{Independent LLM-agent microdynamics}
+\section{State-separated, locally informed LLM-agent microdynamics}
 
 \subsection{Observable state and autonomy}
 
@@ -303,9 +306,14 @@ field-reversal interval, mean absolute belief magnetization remains only
 $0.0042$, close to the nominal value $0.0097$, because the counterbalanced
 private fields cancel at the population mean. Nevertheless, rolling
 configuration entropy rises from $0.223$ to $0.387$ nats, entropy rate from
-$0.070$ to $0.356$ nats per sweep, total correlation from $0.274$ to $4.909$
-nats, and the energy-fluctuation observable from $0.010$ to $1.162$. A count or
-mean-spin representation therefore misses a reorganized but globally balanced
+$0.070$ to $0.356$ nats per sweep, raw total correlation from $0.274$ to $4.909$
+nats, and the energy-fluctuation observable from $0.010$ to $1.162$. The raw
+total-correlation contrast is strongly finite-window dependent: at the primary
+five-sweep window its field-minus-nominal value is $4.635$ nats, the
+marginal-preserving circular-shift null floor is $4.058$ nats, and the
+untruncated adjusted contrast is $0.576$ nats. Its normalized contrast is
+$-0.043$, so no absolute dependence scale is inferred. A count or mean-spin
+representation nevertheless misses a reorganized but globally balanced
 collective configuration.
 
 \section{Prospective design and inference}
@@ -422,12 +430,13 @@ Every field-reversal cluster has a positive H2 paired contrast. Mean maximum
 post-quench departure is $137.73$ for field reversal and $3.92$ for nominal
 evolution (exact one-sided sign-flip $p=0.015625$; Holm-adjusted $p=0.046875$).
 Restoration generates a second departure pulse before all six
-trajectories return below their held-out nominal thresholds exactly six sweeps
+trajectories return below their held-out-cluster-excluded training-nominal thresholds exactly six sweeps
 later; the mean final-five-sweep distance is $1.56$. The frozen H3 contrast is
 $134.11$ (nominal exact $p=0.015625$; Holm-adjusted $p=0.046875$), but because
 peak-minus-final distance is nonnegative by construction, that sign-flip
 probability is not standalone evidence. The threshold crossing, small residual,
-and full time-resolved counter-quench path establish the reported relaxation.
+and full time-resolved counter-quench path are consistent with finite-time
+return toward the restored nominal regime.
 Partition and corruption remain near nominal in this design, so the result is
 specific to a private-field quench rather than an omnibus disruption detector.
 
@@ -466,7 +475,11 @@ also reaches $0.458$. The full-versus-order paired difference is
 $p=0.03125$; Holm-adjusted $p=0.046875$). Cluster predictions,
 confusion matrices, feature-family deletions, coefficient stability, and
 cluster-preserving permutations determine whether any increment is robust or
-driven by one family. This is not a claim that entropy outperforms a controller;
+driven by one family. The delayed, full-pipeline 10,000-replicate permutation
+audit gives $p=0.0030$ for full minus order-only accuracy, but $p=0.5963$ for
+full minus simple uncertainty; the full representation therefore separates
+conditions beyond order-only summaries without outperforming the much smaller
+uncertainty representation. This is not a claim that entropy outperforms a controller;
 it asks whether jointly measured fluctuation, dependence, compatibility, and
 temporal coordinates retain trajectory structure absent from order averages.
 
@@ -480,9 +493,14 @@ contrast ($0.056$ distance units), whereas removing energy, order, response,
 uncertainty, or temporal families preserves a large contrast in the primary
 shrinkage geometry. This identifies dependence and entropy as important to the
 distance construction, while the accuracy tie prevents a claim that the full
-state dominates the much smaller uncertainty representation. The frozen audit
-did not implement every single-observable deletion or alternative rolling
-window, and those missing analyses are not reconstructed post hoc.
+state dominates the much smaller uncertainty representation. Prespecified
+three- and seven-sweep refits and every single-observable deletion were omitted
+from the original implementation and completed after formal outcomes in a
+versioned audit. They do not replace the five-sweep primary estimator. The
+field-minus-nominal ordering remains positive for three-, five-, and
+seven-sweep geometries and after every single-coordinate deletion; deleting
+pairwise mutual information yields the smallest single-deletion mean contrast,
+$89.71$ metric units.
 
 \resultfigure{figure21_representation_ablation.pdf}{0.75\textwidth}{%
 Leave-one-graph-cluster-out disruption classification for simple, order-only,
@@ -556,8 +574,9 @@ thermodynamic-limit claims.
 
 \section{Conclusion}
 
-Independent LLM agents with private state and explicit message delivery form a
-measurable stochastic many-agent process. The V12 coupling and decoding-noise
+State-separated, locally informed LLM-agent instances with private state and
+explicit message delivery form a measurable stochastic many-agent process. The
+V12 coupling and decoding-noise
 directions did not replicate: V13 estimates were null or reversed, and the
 fitted kinetic surrogate captured only the noise direction. Bounded memory did
 replicate, increasing adjusted pathwise irreversibility by $0.04030$ nats per
@@ -705,8 +724,8 @@ The V14 engineering pilot was limited to parser validity, latent occupancy,
 transition-direction counts, perturbation timing, privacy, delivery, runtime,
 and token projection. It comprised 256 decisions and was prohibited from
 inspecting quench effects. H2 uses one maximum-departure contrast per matched
-cluster; H3 uses one within-field-reversal early-minus-late restoration
-contrast per cluster; H4 uses one full-minus-order-only held-out accuracy
+cluster; historical H3 uses one within-field-reversal maximum-minus-final
+restoration contrast per cluster; H4 uses one full-minus-order-only held-out accuracy
 contrast per cluster. Exhaustive sign flips enumerate all $2^6$ paired null
 assignments. Ten thousand cluster-bootstrap draws provide intervals, and Holm
 correction controls the H2--H4 family.
@@ -721,13 +740,18 @@ seed, and sampling temperature. No prompt, scientific threshold, perturbation,
 estimator, or formal seed changed. The frozen protocol records both the pilot
 summary and the execution-source checksum.
 
-An outcome-blind source audit after the freeze identified two limitations that
-were not repaired post hoc. Although three- and seven-sweep macrostate series
-are saved, nominal-distance sensitivity was implemented only for the primary
-five-sweep series. Observable-family deletion was implemented, but deletion of
-each single observable was not. These omissions do not change the frozen H2 or
-H4 primary calculations; the absent sensitivities are reported as missing
-rather than reconstructed after observing formal outcomes.
+A source audit after the freeze identified implementation omissions and a
+recovery-threshold mismatch. The original code saved three- and seven-sweep
+macrostate series but fitted nominal distance only for the primary five-sweep
+series; it implemented observable-family rather than every single-coordinate
+deletion; and its recovery threshold used the held-out field trajectory's own
+baseline rather than the protocol-declared training-cluster nominal ensemble.
+A versioned delayed audit preserves the committed historical outputs, then
+refits every rolling window and covariance fold without held-out data, performs
+all single-coordinate deletions, and applies the training-only threshold to
+recovery. No frozen trajectory, primary H2/H4 estimator, seed, or historical
+Holm value changes. These sensitivities are explicitly post-outcome completions
+of prespecified analyses, not new prospective evidence.
 
 \section{Nominal manifold and trajectory geometry}
 
@@ -762,9 +786,18 @@ occupancy while destroying temporal order; their mean reversal divergence is
 subtracted as the primary bias floor. These corrections can yield a slightly
 negative adjusted value, which is retained rather than truncated.
 
+The dependence audit independently circular-shifts each belief/action variable
+within a trajectory. This preserves each variable's marginal occupancy and
+within-variable temporal structure while breaking synchronous cross-variable
+dependence. Raw total correlation, its mean null floor, their untruncated
+difference, and a normalized coordinate are all retained for three-, five-, and
+seven-sweep windows. Pairwise and graph-edge mutual information receive the
+same treatment. Synthetic independent processes return adjusted estimates near
+zero, while coupled processes remain positive.
+
 \section{Additional candidate figures}
 
-The paper package contains 26 candidate vector figures with exact source CSVs.
+The paper package contains 28 candidate vector figures with exact source CSVs.
 Supplemental candidates include micro-to-macro mappings, condition-specific
 phase portraits, network snapshots, memory block sensitivities, bias floors,
 conditional-memory depth, recovery summaries, cluster confusion matrices,

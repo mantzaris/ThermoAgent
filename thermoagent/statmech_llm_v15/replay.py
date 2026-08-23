@@ -1,0 +1,82 @@
+"""Content-addressed deterministic regeneration of every V15 trajectory."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Dict, List
+
+import pandas as pd
+
+from thermoagent.statmech_llm_v12.core import LatentMapping
+from thermoagent.statmech_llm_v12.replay import RecordedDecisionProvider, RecordedDecisionStore, compare_frames
+
+from .experiment import formal_panel_design, graph_for_panel
+from .simulation import run_v15_trajectory
+from .workflow import artifact_root, atomic_json, load_yaml, utc_now
+
+
+def _digests(frame: pd.DataFrame) -> List[str]:
+    values = frame["raw_artifact_sha256"].fillna("").astype(str).tolist()
+    if any(len(value) != 64 for value in values):
+        raise RuntimeError("V15 transition row lacks a full external record digest")
+    return values
+
+
+def replay_formal(repository: Path) -> Dict[str, object]:
+    repository = Path(repository).resolve()
+    protocol = load_yaml(repository / "configs/statmech_v15/protocol_frozen.yaml")
+    stores = {
+        model: RecordedDecisionStore(artifact_root() / "raw/formal" / model)
+        for model in ("qwen", "granite")
+    }
+    failures: List[Dict[str, object]] = []
+    units: List[Dict[str, object]] = []
+    for panel in formal_panel_design(protocol):
+        path = artifact_root() / "formal/panels" / (str(panel["panel_id"]) + ".csv")
+        recorded = pd.read_csv(path)
+        provider = RecordedDecisionProvider(stores[str(panel["model_key"])], _digests(recorded))
+        metadata = {
+            "stage": "formal",
+            "model_key": panel["model_key"],
+            "model_id": panel["model_id"],
+            "model_revision": panel["model_revision"],
+            "cluster_id": panel["cluster_id"],
+            "panel_id": panel["panel_id"],
+            "protocol_sha256": recorded["protocol_sha256"].iloc[0],
+            "execution_source_sha256": recorded["execution_source_sha256"].iloc[0],
+        }
+        regenerated = run_v15_trajectory(
+            provider,
+            graph_for_panel(panel),
+            int(panel["panel_seed"]),
+            int(panel["sweeps"]),
+            str(panel["condition"]),
+            float(panel["coupling_strength"]),
+            float(panel["sampling_temperature"]),
+            panel["periods_sweeps"],
+            metadata=metadata,
+            mapping_override=LatentMapping.balanced(int(panel["panel_seed"]) + 17011),
+            control_seed=int(panel["control_seed"]),
+        )
+        provider.assert_consumed()
+        mismatches = compare_frames(recorded, regenerated)
+        units.append(
+            {"unit": panel["panel_id"], "rows": len(recorded), "mismatches": len(mismatches)}
+        )
+        if mismatches:
+            failures.append({"unit": panel["panel_id"], "details": mismatches[:20]})
+    summary: Dict[str, object] = {
+        "generated_at": utc_now(),
+        "method": "content-addressed state-separated-agent decision regeneration",
+        "units_checked": len(units),
+        "rows_checked": int(sum(int(item["rows"]) for item in units)),
+        "units_with_mismatches": len(failures),
+        "mismatch_details": failures,
+        "raw_transcripts_copied_into_repository": False,
+        "status": "passed" if not failures else "failed",
+    }
+    atomic_json(summary, artifact_root() / "reproducibility/replay_summary.json")
+    return summary
+
+
+__all__ = ["replay_formal"]

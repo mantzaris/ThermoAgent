@@ -1,0 +1,5 @@
+study,model,contrast,estimate,ci_low,ci_high,role
+V12_discovery,Qwen,persistent-Markovized,0.0178992009949608,0.0035703699742585,0.033992228638198,discovery
+V13_replication,Qwen,persistent-Markovized,0.0402976960726365,0.0288250603151216,0.0585560178061282,prospective_replication
+V15_granite,Granite,persistent-Markovized,0.07834505563294883,0.0508227357106461,0.10189815815760306,prospective_cross_model
+V15_qwen,Qwen,persistent-Markovized,0.0304134950151151,0.014081369655940833,0.04657140343847488,prospective_cross_model

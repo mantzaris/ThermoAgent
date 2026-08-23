@@ -58,17 +58,148 @@ def pairwise_information_summary(
     support = np.asarray(adjacency, dtype=bool)
     if values.ndim != 2 or support.shape != (values.shape[1], values.shape[1]):
         raise ValueError("pairwise-information inputs do not align")
-    all_values = []
-    edge_values = []
-    for first in range(values.shape[1]):
-        for second in range(first + 1, values.shape[1]):
-            information = discrete_mutual_information(values[:, first], values[:, second])
-            all_values.append(information)
-            if support[first, second] or support[second, first]:
-                edge_values.append(information)
+    if values.shape[0] < 2 or not np.all(np.isin(values, (-1, 1))):
+        raise ValueError("pairwise-information configurations must be binary")
+    binary = (values > 0).astype(np.int64)
+    count = float(values.shape[0])
+    plus = binary.sum(axis=0).astype(float)
+    count_11 = binary.T.dot(binary).astype(float)
+    count_10 = plus[:, None] - count_11
+    count_01 = plus[None, :] - count_11
+    count_00 = count - plus[:, None] - plus[None, :] + count_11
+    p_one = plus / count
+    p_zero = 1.0 - p_one
+    information_matrix = np.zeros_like(count_11, dtype=float)
+    for joint_count, left_probability, right_probability in (
+        (count_11, p_one[:, None], p_one[None, :]),
+        (count_10, p_one[:, None], p_zero[None, :]),
+        (count_01, p_zero[:, None], p_one[None, :]),
+        (count_00, p_zero[:, None], p_zero[None, :]),
+    ):
+        probability = joint_count / count
+        denominator = left_probability * right_probability
+        valid = (joint_count > 0.0) & (denominator > 0.0)
+        information_matrix[valid] += probability[valid] * np.log(
+            probability[valid] / denominator[valid]
+        )
+    upper = np.triu(np.ones_like(support, dtype=bool), 1)
+    edge_mask = upper & (support | support.T)
+    all_values = information_matrix[upper]
+    edge_values = information_matrix[edge_mask]
     return {
-        "mean_pairwise_belief_mutual_information": float(np.mean(all_values)) if all_values else 0.0,
-        "mean_edge_belief_mutual_information": float(np.mean(edge_values)) if edge_values else 0.0,
+        "mean_pairwise_belief_mutual_information": float(np.mean(all_values)) if all_values.size else 0.0,
+        "mean_edge_belief_mutual_information": float(np.mean(edge_values)) if edge_values.size else 0.0,
+    }
+
+
+def total_correlation_raw(configurations: np.ndarray) -> float:
+    """Return the unadjusted plug-in total correlation in nats.
+
+    This deliberately does not clip the result.  The historical V14 primary
+    coordinate remains :func:`total_correlation`; this companion function is
+    used by the versioned finite-sample audit so that raw, null, and adjusted
+    quantities are all retained.
+    """
+
+    values = np.asarray(configurations, dtype=int)
+    if values.ndim != 2 or values.shape[0] < 2 or values.shape[1] < 1:
+        raise ValueError("total correlation requires a two-dimensional sample")
+    marginal = float(sum(plugin_entropy(values[:, column].tolist()) for column in range(values.shape[1])))
+    joint = plugin_entropy([tuple(row) for row in values.tolist()])
+    return float(marginal - joint)
+
+
+def independently_circular_shifted(
+    configurations: np.ndarray,
+    rng: np.random.Generator,
+) -> np.ndarray:
+    """Break synchronous dependence while preserving each variable's series.
+
+    Every column is circularly shifted independently.  Marginal occupancy and
+    each column's complete temporal ordering are therefore preserved, while
+    zero-lag cross-variable alignment is destroyed.  The transformation never
+    truncates or substitutes observations.
+    """
+
+    values = np.asarray(configurations, dtype=int)
+    if values.ndim != 2 or values.shape[0] < 3:
+        raise ValueError("circular-shift null requires at least three observations")
+    shifts = rng.integers(0, values.shape[0], size=values.shape[1])
+    if np.all(shifts == 0):
+        shifts[0] = 1
+    return np.column_stack(
+        [np.roll(values[:, column], int(shifts[column])) for column in range(values.shape[1])]
+    )
+
+
+def dependence_bias_audit(
+    configurations: np.ndarray,
+    adjacency: np.ndarray,
+    null_replicates: int,
+    seed: int,
+) -> Dict[str, float]:
+    """Audit plug-in dependence measures against a circular-shift null.
+
+    ``configurations`` contains belief columns first and action columns second;
+    ``adjacency`` defines the number and support of the belief columns.  The
+    normalized denominator is the sum of all single-variable marginal
+    entropies.  Adjusted values are intentionally allowed to be negative.
+    """
+
+    values = np.asarray(configurations, dtype=int)
+    support = np.asarray(adjacency, dtype=int)
+    if values.ndim != 2 or support.ndim != 2 or support.shape[0] != support.shape[1]:
+        raise ValueError("dependence-audit inputs do not align")
+    belief_columns = int(support.shape[0])
+    if values.shape[1] < belief_columns:
+        raise ValueError("configuration has fewer columns than the belief graph")
+    replicates = int(null_replicates)
+    if replicates < 1:
+        raise ValueError("at least one null replicate is required")
+
+    raw_total = total_correlation_raw(values)
+    raw_pairwise = pairwise_information_summary(values[:, :belief_columns], support)
+    denominator = float(
+        sum(plugin_entropy(values[:, column].tolist()) for column in range(values.shape[1]))
+    )
+    rng = np.random.default_rng(int(seed))
+    null_total = np.empty(replicates, dtype=float)
+    null_pairwise = np.empty(replicates, dtype=float)
+    null_edge = np.empty(replicates, dtype=float)
+    for replicate in range(replicates):
+        shifted = independently_circular_shifted(values, rng)
+        null_total[replicate] = total_correlation_raw(shifted)
+        information = pairwise_information_summary(shifted[:, :belief_columns], support)
+        null_pairwise[replicate] = information["mean_pairwise_belief_mutual_information"]
+        null_edge[replicate] = information["mean_edge_belief_mutual_information"]
+
+    total_floor = float(np.mean(null_total))
+    pairwise_floor = float(np.mean(null_pairwise))
+    edge_floor = float(np.mean(null_edge))
+    adjusted_total = float(raw_total - total_floor)
+    normalizer = denominator if denominator > 1e-12 else 1.0
+    return {
+        "total_correlation_raw": float(raw_total),
+        "total_correlation_null_mean": total_floor,
+        "total_correlation_bias_adjusted": adjusted_total,
+        "total_correlation_normalized_raw": float(raw_total / normalizer),
+        "total_correlation_normalized_adjusted": float(adjusted_total / normalizer),
+        "pairwise_mutual_information_raw": float(
+            raw_pairwise["mean_pairwise_belief_mutual_information"]
+        ),
+        "pairwise_mutual_information_null_mean": pairwise_floor,
+        "pairwise_mutual_information_bias_adjusted": float(
+            raw_pairwise["mean_pairwise_belief_mutual_information"] - pairwise_floor
+        ),
+        "edge_mutual_information_raw": float(
+            raw_pairwise["mean_edge_belief_mutual_information"]
+        ),
+        "edge_mutual_information_null_mean": edge_floor,
+        "edge_mutual_information_bias_adjusted": float(
+            raw_pairwise["mean_edge_belief_mutual_information"] - edge_floor
+        ),
+        "marginal_entropy_sum": denominator,
+        "null_replicates": float(replicates),
     }
 
 
@@ -225,9 +356,11 @@ __all__ = [
     "binder_cumulant",
     "conditional_entropy_rate",
     "conditional_memory_depths",
+    "dependence_bias_audit",
     "discrete_mutual_information",
     "disagreement_density",
     "integrated_correlation_time",
+    "independently_circular_shifted",
     "irreversibility_sensitivity",
     "local_configuration_entropy",
     "macrostate_code",
@@ -243,4 +376,5 @@ __all__ = [
     "standardized_nominal_distance",
     "standardized_nominal_fit",
     "total_correlation",
+    "total_correlation_raw",
 ]

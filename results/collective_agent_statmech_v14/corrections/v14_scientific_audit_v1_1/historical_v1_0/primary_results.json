@@ -1,0 +1,98 @@
+{
+  "analysis_cpu_seconds": 49.027961418000004,
+  "analysis_wall_seconds": 49.045915342867374,
+  "confirmatory_dispositions": {
+    "H2": {
+      "ci_high": 184.07462982457469,
+      "ci_low": 107.9494364656719,
+      "estimate": 133.80477019797726,
+      "exact_one_sided_sign_flip_p": 0.015625,
+      "holm_adjusted_p": 0.046875,
+      "supported": true
+    },
+    "H3": {
+      "ci_high": 184.19621638252102,
+      "ci_low": 106.65373035346893,
+      "estimate": 134.1103235256311,
+      "exact_one_sided_sign_flip_p": 0.015625,
+      "holm_adjusted_p": 0.046875,
+      "supported": true
+    },
+    "H4": {
+      "ci_high": 0.4583333333333333,
+      "ci_low": 0.16666666666666666,
+      "estimate": 0.3333333333333333,
+      "exact_one_sided_sign_flip_p": 0.03125,
+      "holm_adjusted_p": 0.046875,
+      "supported": true
+    }
+  },
+  "formal_accounting": {
+    "all_formal_attempted_decisions_including_invalidated": 17280,
+    "all_formal_generated_tokens_including_invalidated": 1391607,
+    "all_formal_generation_gpu_hours_including_invalidated": 7.789953446033307,
+    "all_formal_generation_latency_seconds_including_invalidated": 28043.832405719906,
+    "all_formal_model_calls_including_invalidated": 17280,
+    "all_formal_prompt_tokens_including_invalidated": 9510001,
+    "completed_at": "2026-08-20T23:37:45.482494+00:00",
+    "current_invocation_wall_seconds": 29953.990509796888,
+    "dynamic_trajectories": 24,
+    "execution_source_sha256": "2b4276dd323bb048d8c98834ed0e9f8bfe5a0ed46e8735db3b471a6dc97e91ad",
+    "generated_tokens": 1391607,
+    "generation_gpu_hours": 7.789953446033307,
+    "generation_latency_seconds": 28043.832405719906,
+    "invalid_after_repair": 0,
+    "model_calls": 17280,
+    "model_id": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "observed_decision_rows": 17280,
+    "planned_decisions": 17280,
+    "prompt_tokens": 9510001,
+    "protocol_sha256": "5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf",
+    "provider_environment_current_invocation": {
+      "accounting": {
+        "decision_requests": 17280,
+        "first_pass_valid": 17280,
+        "generated_tokens": 1391607,
+        "invalid_after_repair": 0,
+        "latency_seconds": 28043.832405719906,
+        "model_calls": 17280,
+        "model_loading_seconds": 29.345500621944666,
+        "prompt_tokens": 9510001,
+        "repaired_valid": 0
+      },
+      "backend": "Transformers AutoModelForCausalLM",
+      "bitsandbytes_version": "0.47.0",
+      "cuda_version": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 4090",
+      "inference_sampling_temperature": 0.5,
+      "maximum_new_tokens": 96,
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "quantization": "NF4 double quantization; BF16 computation",
+      "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+      "top_p": 0.9,
+      "torch_version": "2.8.0+cu128",
+      "transformers_version": "4.55.4"
+    },
+    "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+    "status": "complete"
+  },
+  "formal_trajectories": 24,
+  "generated_at": "2026-08-20T23:43:29.416677+00:00",
+  "independent_clusters": 6,
+  "macrostate_rows": 1080,
+  "memory_discovery_replication": {
+    "descriptive_fixed_effect_ci": [
+      0.018724166483760782,
+      0.03998719046300624
+    ],
+    "descriptive_fixed_effect_estimate": 0.029355678473383513,
+    "v12_discovery_estimate": 0.017899200994960836,
+    "v13_replication_estimate": 0.0402976960726365,
+    "warning": "V12 discovery and V13 replication are reported separately; synthesis is descriptive."
+  },
+  "nonfinite_primary_macrostate_values": 0,
+  "privacy_mutations": 0,
+  "protocol_sha256": "5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf"
+}

@@ -1,43 +1,43 @@
-cluster_id,disruption,estimator,ridge_fraction,nominal_fit_window,rolling_window_sweeps,ablation,feature_count,maximum_distance,mean_distance,nominal_threshold_95,failure
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,all,13,111.23173812064744,17.45128729728532,5.7488559988785966,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,all,13,112.78284910880676,18.654945374091376,6.2542439343643546,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,all,13,113.05226001318525,17.38478723376216,6.331888323126388,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,all,13,114.03302182867812,18.661970523040985,6.4097501190086525,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,all,13,112.9961606904565,17.65791729377446,5.937726323782896,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,all,13,262.2569541656519,41.65798147454742,6.023345118287734,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,109.93980004278365,17.124249597358382,4.835049564985441,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,109.86631099298845,17.26486532860909,4.938282328177218,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,111.86331867491052,16.90375344626215,5.117951698086343,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,112.24644387770934,18.310004151113738,5.093906459304433,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,111.79826900391949,17.172173459803595,5.522315129096977,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_order,10,256.5170229380631,40.615221746982265,5.411368685866602,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,110.58959117368784,17.30168720872819,5.588022375072631,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,111.4555779174495,18.394854246033784,6.018957224721623,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,112.52494100878565,17.24947550691193,6.173349301205138,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,113.04361825542102,18.47181217054844,6.249770145213939,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,112.2459664157682,17.545247705500643,5.9020211444631645,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_uncertainty,12,261.1388595625642,41.45917635388807,5.970518349552946,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,100.71870157749564,15.898907373032074,5.644057124874614,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,101.11503869589436,17.048328209255992,5.764429306068575,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,102.30084355154966,15.971396945544736,5.6960775339176655,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,102.30134647164272,17.028432906085758,5.630259465612926,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,103.16736142380806,16.308644875710762,5.68062684163201,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_energy,11,232.37487761094064,37.33818401728615,5.88671264108553,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,7.425929270503835,2.326941147442433,5.249066488009528,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,22.710334679895933,3.1145286382994755,5.375317351796191,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,6.478302713950848,3.124338625421136,5.690449822277393,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,5.365287410313852,2.941723464071564,5.201411138937423,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,8.332305185179449,2.237934758664855,5.232672899679487,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_entropy,8,11.056403037747703,2.991862459258584,5.3092976826348215,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,107.47482217532855,16.866945450857152,5.549067421621039,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,108.79956780063486,18.04659911842848,6.1369374405528925,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,106.7460028708991,16.433734373514614,6.061602387414374,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,109.58357832212424,17.79335607212988,5.902329494366768,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,106.97692732405774,16.76669100065089,5.345137931868829,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_response,11,254.56839589945616,40.45471165977463,5.796003492297091,nan
-V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,111.23173812064744,17.45128729728532,5.7488559988785966,nan
-V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,112.78284910880676,18.654945374091376,6.2542439343643546,nan
-V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,113.05226001318525,17.38478723376216,6.331888323126388,nan
-V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,114.03302182867812,18.661970523040985,6.4097501190086525,nan
-V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,112.9961606904565,17.65791729377446,5.937726323782896,nan
-V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_temporal,13,262.2569541656519,41.65798147454742,6.023345118287734,nan
+cluster_id,disruption,estimator,ridge_fraction,nominal_fit_window,rolling_window_sweeps,ablation,deleted_family,deleted_observable,feature_count,training_clusters,held_out_cluster_excluded,maximum_distance,mean_distance,nominal_threshold_95,failure
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,111.23173812064744,17.451287297285322,5.7488559988786,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,112.7828491088068,18.65494537409138,6.254243934364358,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,113.05226001318532,17.384787233762175,6.33188832312639,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,114.03302182867814,18.66197052304099,6.409750119008652,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,112.99616069045663,17.657917293774474,5.9377263237829006,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,all,none,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,262.25695416565173,41.6579814745474,6.023345118287734,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,109.93980004278366,17.124249597358375,4.83504956498544,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,109.86631099298846,17.264865328609094,4.93828232817722,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,111.86331867491054,16.903753446262158,5.117951698086342,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,112.24644387770935,18.310004151113738,5.093906459304433,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,111.79826900391949,17.172173459803595,5.522315129096979,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_order,order,none,10,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,256.51702293806267,40.61522174698221,5.411368685866601,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,110.58959117368784,17.3016872087282,5.588022375072629,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,111.45557791744952,18.394854246033788,6.018957224721622,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,112.52494100878572,17.249475506911942,6.173349301205139,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,113.04361825542104,18.47181217054844,6.249770145213943,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,112.2459664157683,17.545247705500653,5.902021144463168,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_uncertainty,uncertainty,none,12,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,261.1388595625641,41.45917635388805,5.970518349552946,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,100.71870157749557,15.89890737303207,5.644057124874614,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,101.11503869589438,17.048328209256,5.7644293060685765,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,102.30084355154962,15.97139694554473,5.696077533917662,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,102.30134647164265,17.02843290608574,5.630259465612924,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,103.16736142380805,16.308644875710762,5.680626841632007,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_energy,energy,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,232.37487761094056,37.33818401728614,5.886712641085532,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,7.425929270503835,2.326941147442433,5.249066488009528,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,22.710334679895933,3.1145286382994755,5.375317351796191,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,6.478302713950848,3.124338625421136,5.690449822277393,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,5.365287410313852,2.941723464071564,5.201411138937423,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,8.332305185179449,2.237934758664855,5.232672899679487,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_entropy,entropy,none,8,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,11.056403037747703,2.991862459258584,5.3092976826348215,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,107.47482217532853,16.866945450857152,5.549067421621042,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,108.79956780063482,18.046599118428475,6.136937440552895,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,106.74600287089912,16.433734373514614,6.061602387414374,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,109.58357832212424,17.793356072129882,5.902329494366769,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,106.97692732405775,16.76669100065089,5.345137931868833,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_response,response,none,11,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,254.568395899456,40.4547116597746,5.7960034922970864,nan
+V14Q_g0,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,111.23173812064744,17.451287297285322,5.7488559988786,nan
+V14Q_g1,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g0"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,112.7828491088068,18.65494537409138,6.254243934364358,nan
+V14Q_g2,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g3"", ""V14Q_g4"", ""V14Q_g5""]",True,113.05226001318532,17.384787233762175,6.33188832312639,nan
+V14Q_g3,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g4"", ""V14Q_g5""]",True,114.03302182867814,18.66197052304099,6.409750119008652,nan
+V14Q_g4,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g5""]",True,112.99616069045663,17.657917293774474,5.9377263237829006,nan
+V14Q_g5,field_reversal,shrinkage,0.1,all_nominal,5,without_family_temporal,temporal,none,13,"[""V14Q_g0"", ""V14Q_g1"", ""V14Q_g2"", ""V14Q_g3"", ""V14Q_g4""]",True,262.25695416565173,41.6579814745474,6.023345118287734,nan

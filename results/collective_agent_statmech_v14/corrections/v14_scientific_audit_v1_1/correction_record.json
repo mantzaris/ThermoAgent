@@ -1,0 +1,186 @@
+{
+  "H3": {
+    "ci_high": 184.1962163825209,
+    "ci_low": 106.65373035346899,
+    "estimate": 134.1103235256311,
+    "exact_one_sided_sign_flip_p": 0.015625,
+    "frozen_numerical_criterion_met": true,
+    "holm_adjusted_p": 0.046875,
+    "inferential_support": false,
+    "supported": false,
+    "trajectory_evidence_consistent_with_recovery": true,
+    "valid_directional_test": false
+  },
+  "audit": "v14-scientific-audit-1.1",
+  "audit_execution_source_sha256": "06b8c707e0bbc755825e27cd208ca3abe2c56e0a302718f1149432ebf0df1294",
+  "initial_audit_execution_source_sha256": "c8f3744c4e94b378cf84e900d746a01998c588a4833e4afaa70cd05dc13385b0",
+  "source_finalization_note": "The final audit checksum includes post-analysis reporting, figure, and regression-test corrections; no V14 raw outcome or primary estimator was changed.",
+  "generated_at": "2026-08-21T23:26:03.115366+00:00",
+  "historical_archive": {
+    "files": [
+      {
+        "bytes": 3885,
+        "file": "primary_results.json",
+        "sha256": "87a51bc11367ca919a5ce63992ca25dd915729662da1f3bcecae7b062364f9b2"
+      },
+      {
+        "bytes": 1151,
+        "file": "hypothesis_effects.csv",
+        "sha256": "23cd8eb10524b07e347311e3dafce54ef60a6617bc6fd7c32d31d6b3678247e7"
+      },
+      {
+        "bytes": 7290,
+        "file": "quench_recovery.csv",
+        "sha256": "84de8d7ec379b7cc028c847ad462ec5249ee77ea38e069b980c1a335d4171d65"
+      },
+      {
+        "bytes": 7771,
+        "file": "README.md",
+        "sha256": "e00d56145dd5dcb62cb67b14e84f01c8ce4d1cec3734f412f53fc3bb511a5f53"
+      },
+      {
+        "bytes": 2189,
+        "file": "CLAIMS_MATRIX.md",
+        "sha256": "3d0f6d5571d132298d71597e66c8de5e2b8b61317f11b7bd0c4e2aaef4dd8427"
+      },
+      {
+        "bytes": 621,
+        "file": "results_macros.tex",
+        "sha256": "a8ef88c8187301ce7dfaa79aeefc468e464d2218c17713fa6fbfb2c6fa19ee0f"
+      }
+    ],
+    "path": "/workspace/ThermoAgent/results/collective_agent_statmech_v14/corrections/v14_scientific_audit_v1_1/historical_v1_0"
+  },
+  "historical_execution_source_sha256": "2b4276dd323bb048d8c98834ed0e9f8bfe5a0ed46e8735db3b471a6dc97e91ad",
+  "historical_formal_tree_before_analysis": {
+    "bytes": 24566919,
+    "file_count": 27,
+    "tree_sha256": "053321dfea9072cdc9f5982d3cc13a04657e3ae49b5d0a539622379d0324939a"
+  },
+  "historical_holm_values_retained": {
+    "H2": {
+      "holm": 0.046875,
+      "raw": 0.015625
+    },
+    "H3": {
+      "holm": 0.046875,
+      "raw": 0.015625
+    },
+    "H4": {
+      "holm": 0.046875,
+      "raw": 0.03125
+    }
+  },
+  "historical_protocol_sha256": "5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf",
+  "permutation_analysis": [
+    {
+      "metric": "full_statmech_balanced_accuracy",
+      "null_mean": 0.2505625,
+      "null_q025": 0.08333333333333333,
+      "null_q975": 0.4177083333333182,
+      "null_standard_deviation": 0.08933567945987146,
+      "observed": 0.4583333333333333,
+      "permutation_unit": "condition_labels_within_graph_environment_cluster",
+      "pipeline_refit_per_permutation": true,
+      "replicates": 10000,
+      "seed": 14149991,
+      "upper_tail_empirical_p": 0.025097490250974904
+    },
+    {
+      "metric": "order_only_balanced_accuracy",
+      "null_mean": 0.250525,
+      "null_q025": 0.08333333333333333,
+      "null_q975": 0.4166666666666667,
+      "null_standard_deviation": 0.08923770466577244,
+      "observed": 0.125,
+      "permutation_unit": "condition_labels_within_graph_environment_cluster",
+      "pipeline_refit_per_permutation": true,
+      "replicates": 10000,
+      "seed": 14149991,
+      "upper_tail_empirical_p": 0.9593040695930407
+    },
+    {
+      "metric": "simple_uncertainty_balanced_accuracy",
+      "null_mean": 0.2505041666666667,
+      "null_q025": 0.08333333333333333,
+      "null_q975": 0.4166666666666667,
+      "null_standard_deviation": 0.08222748598806494,
+      "observed": 0.4583333333333333,
+      "permutation_unit": "condition_labels_within_graph_environment_cluster",
+      "pipeline_refit_per_permutation": true,
+      "replicates": 10000,
+      "seed": 14149991,
+      "upper_tail_empirical_p": 0.0096990300969903
+    },
+    {
+      "metric": "full_minus_order_only_balanced_accuracy",
+      "null_mean": 3.7499999999999956e-05,
+      "null_q025": -0.20833333333333331,
+      "null_q975": 0.20833333333333334,
+      "null_standard_deviation": 0.10476272266889852,
+      "observed": 0.3333333333333333,
+      "permutation_unit": "condition_labels_within_graph_environment_cluster",
+      "pipeline_refit_per_permutation": true,
+      "replicates": 10000,
+      "seed": 14149991,
+      "upper_tail_empirical_p": 0.0029997000299970002
+    },
+    {
+      "metric": "full_minus_simple_uncertainty_balanced_accuracy",
+      "null_mean": 5.833333333333325e-05,
+      "null_q025": -0.16666666666666669,
+      "null_q975": 0.16666666666666669,
+      "null_standard_deviation": 0.08920614785623356,
+      "observed": 0.0,
+      "permutation_unit": "condition_labels_within_graph_environment_cluster",
+      "pipeline_refit_per_permutation": true,
+      "replicates": 10000,
+      "seed": 14149991,
+      "upper_tail_empirical_p": 0.5963403659634037
+    }
+  ],
+  "raw_outcomes_changed": false,
+  "sensitivity_completion": {
+    "information_null_replicates_per_window": 200,
+    "robustness_rows": 4248,
+    "rolling_windows": [
+      3,
+      5,
+      7
+    ],
+    "single_observable_deletions": [
+      "belief_magnetization",
+      "action_magnetization",
+      "belief_action_overlap",
+      "reference_energy_per_agent",
+      "energy_variance",
+      "configuration_entropy",
+      "entropy_rate",
+      "total_correlation",
+      "pairwise_mutual_information",
+      "edge_mutual_information",
+      "belief_susceptibility",
+      "spatial_belief_correlation",
+      "belief_disagreement"
+    ]
+  },
+  "threshold_correction": {
+    "field_reversal_recovery_times_sweeps": {
+      "V14Q_g0": 6.0,
+      "V14Q_g1": 6.0,
+      "V14Q_g2": 6.0,
+      "V14Q_g3": 6.0,
+      "V14Q_g4": 6.0,
+      "V14Q_g5": 6.0
+    },
+    "source": "leave_one_cluster_out_training_nominal",
+    "thresholds_by_held_out_cluster": {
+      "V14Q_g0": 5.7488559988786,
+      "V14Q_g1": 6.254243934364358,
+      "V14Q_g2": 6.33188832312639,
+      "V14Q_g3": 6.409750119008652,
+      "V14Q_g4": 5.9377263237829006,
+      "V14Q_g5": 6.023345118287734
+    }
+  }
+}

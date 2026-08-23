@@ -1,0 +1,20 @@
+{
+  "audit_version": "v15-source-checksum-audit-1.0",
+  "detected_at": "2026-08-22",
+  "disposition": "passed_with_documented_legacy_cache_dependency",
+  "formal_outcomes_changed": false,
+  "protocol_changed": false,
+  "legacy_execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+  "semantic_source_sha256": "f8d4fa546ba46a42cd4234dd8af6ad60309c231f2997e10d0d25830f6dddb2f2",
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "legacy_cache_entry": {
+    "relative_path": "thermoagent/statmech_llm_v15/__init__.pyc",
+    "bytes": 224,
+    "sha256": "ab2d053b6168ee0b1e4766e84c276d52217aef11ee21330ed83277d26cf574fc",
+    "tracked": false,
+    "ignored": true
+  },
+  "cause": "The frozen V15 source-file enumerator excluded __pycache__ directories but did not exclude a root-level ignored .pyc file. The legacy checksum therefore included its path and digest even though it was not scientific source and was never intended for Git.",
+  "verification": "The legacy checksum is exactly reconstructed by inserting the recorded cache path and digest into the clean semantic-source manifest. The semantic checksum excludes all .pyc, .pyo, and __pycache__ entries and is reproducible from the repository-facing source alone.",
+  "handoff": "Do not stage the cache. Use verify_source_checksum.py to verify both hashes from a clean checkout."
+}

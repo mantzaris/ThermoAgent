@@ -1,0 +1,34 @@
+audit: v14-scientific-audit-1.1
+role: delayed_completion_of_prespecified_sensitivities_and_reporting_correction
+historical_protocol_sha256: 5d8440dedbf389c02f3b448f38abfd1a370b8f9c4fafdba4760afc706e0bcfdf
+historical_execution_source_sha256: 2b4276dd323bb048d8c98834ed0e9f8bfe5a0ed46e8735db3b471a6dc97e91ad
+raw_outcomes_changed: false
+corrections:
+  recovery_threshold_source: leave_one_cluster_out_training_nominal
+  h3_directional_test_valid: false
+  h3_historical_p_values_retained: true
+  alternative_rolling_windows_recomputed:
+    - 3
+    - 5
+    - 7
+  single_observable_deletion: all_primary_coordinates
+permutation_analysis:
+  replicates: 10000
+  seed: 14149991
+  seed_rationale: fixed V14 namespace plus 9991, recorded before delayed permutation outcomes
+  unit: condition_labels_within_graph_environment_cluster
+  refit_complete_pipeline: true
+information_bias_audit:
+  null: independent_circular_shift_per_variable
+  null_replicates_per_window: 200
+  preserve_marginal_occupancy: true
+  preserve_within_variable_temporal_order: true
+  truncate_negative_adjusted_values: false
+historical_holm_family:
+  - H2
+  - H3
+  - H4
+interpretation:
+  - The audit does not constitute a new prospective experiment.
+  - Frozen raw Qwen decisions and transition trajectories remain unchanged.
+  - H3 numerical values are historical diagnostics, not valid directional inference.

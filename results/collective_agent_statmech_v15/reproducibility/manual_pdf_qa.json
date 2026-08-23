@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-08-22",
+  "clipping_or_overlap": false,
+  "manual_visual_status": "passed",
+  "missing_glyphs": false,
+  "notes": "All 12 paper-facing vector figures and all 16 manuscript pages were inspected at original 300-DPI rendered resolution after the final publication-render pass. After adding the source-checksum provenance paragraph, manuscript pages 12 through 16 were re-rendered and re-inspected at original resolution. Labels, legends, line styles, uncertainty bands, panel organization, references, and time-boundary annotations were readable. No clipping, overlap, missing glyph, empty scientific panel, or misleading rasterized text was observed.",
+  "pages_inspected": 28,
+  "pdfs_inspected": 13,
+  "render_dpi": 300,
+  "reviewer": "Codex visual inspection",
+  "text_readable": true
+}

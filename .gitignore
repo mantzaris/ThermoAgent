@@ -172,6 +172,31 @@ paper/jstat_v14/*.log
 paper/jstat_v14/*.out
 paper/jstat_v14/*.synctex.gz
 
+# V15 cross-model memory/quench study: raw generations and build products stay external.
+results/collective_agent_statmech_v15/raw/
+results/collective_agent_statmech_v15/transcripts/
+results/collective_agent_statmech_v15/checkpoints/
+results/collective_agent_statmech_v15/qa_png/
+results/collective_agent_statmech_v15/**/*.jsonl
+results/collective_agent_statmech_v15/**/*.npy
+results/collective_agent_statmech_v15/**/*.npz
+results/collective_agent_statmech_v15/**/*.pkl
+results/collective_agent_statmech_v15/**/*.pickle
+results/collective_agent_statmech_v15/**/*.safetensors
+results/collective_agent_statmech_v15/**/*.pt
+results/collective_agent_statmech_v15/**/*.bin
+results/collective_agent_statmech_v15/**/*.tar
+results/collective_agent_statmech_v15/**/*.tar.*
+results/collective_agent_statmech_v15/**/*.zip
+paper/jstat_v15/*.aux
+paper/jstat_v15/*.bbl
+paper/jstat_v15/*.blg
+paper/jstat_v15/*.fdb_latexmk
+paper/jstat_v15/*.fls
+paper/jstat_v15/*.log
+paper/jstat_v15/*.out
+paper/jstat_v15/*.synctex.gz
+
 
 .agents
 .codex

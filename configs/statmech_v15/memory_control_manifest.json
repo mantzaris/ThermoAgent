@@ -1,0 +1,126 @@
+{
+  "aggregate_sha256": "f1c42ab789cf6b711ea771e019d63481a0a66be6e9071bbed50f5b37305002ed",
+  "algorithm": "own-agent past opportunity timestamps plus deterministic state placebo",
+  "entries": [
+    {
+      "cluster_id": "V15Q_g0",
+      "control_seed": 15151501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15151017,
+      "peer_private_state": false,
+      "tape_sha256": "980f197d51311c9bc80c181d32805f9d14f10b9dea9a98275d5a35dffcaf92ba",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15Q_g1",
+      "control_seed": 15152501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15152017,
+      "peer_private_state": false,
+      "tape_sha256": "a670a0b17ad0fb203bd9a7d93e9875da1da77b777ac202d43c87373af7e33ecb",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15Q_g2",
+      "control_seed": 15153501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15153017,
+      "peer_private_state": false,
+      "tape_sha256": "89cbf2db493b18675ce7f509dced7613d26fe24396dc2f09d01088b99235fde6",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15Q_g3",
+      "control_seed": 15154501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15154017,
+      "peer_private_state": false,
+      "tape_sha256": "1da0c8651ac1ca9d75154558fef9879568ac8f44eabb6e993a44a3cc0f025c7f",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15Q_g4",
+      "control_seed": 15155501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15155017,
+      "peer_private_state": false,
+      "tape_sha256": "028e860e9aeecc6957be8bee97a471b5200bfdca205a33d6a3604e39e7f5d606",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15Q_g5",
+      "control_seed": 15156501,
+      "future_information": false,
+      "model_key": "qwen",
+      "panel_seed": 15156017,
+      "peer_private_state": false,
+      "tape_sha256": "1d8f4adf9bc447c1c5f98e54003b17c25f145ec06a760f2d24834da7410434bc",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g0",
+      "control_seed": 15161501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15161017,
+      "peer_private_state": false,
+      "tape_sha256": "373c459ff1f9e3fed2d836e8a7d0b0a74e5a4fad48e88673afc197a05e85ec9a",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g1",
+      "control_seed": 15162501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15162017,
+      "peer_private_state": false,
+      "tape_sha256": "f97015e032f0a34557836d655873d56c927bf4fc62bb7dc240adc7cc9aa31666",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g2",
+      "control_seed": 15163501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15163017,
+      "peer_private_state": false,
+      "tape_sha256": "4831a32357eec70a73a9ce860a71c2a14a36fe9afa53f9ed203bb0ff56deaeed",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g3",
+      "control_seed": 15164501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15164017,
+      "peer_private_state": false,
+      "tape_sha256": "0a09c3604c940bbb39711984daa954ed4d8c6686d2df14eb86d9bca4b3b5e00d",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g4",
+      "control_seed": 15165501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15165017,
+      "peer_private_state": false,
+      "tape_sha256": "430d5a948459672f2dda706cbdbfe59acf79f2242552005544c8cfab5075ae8e",
+      "updates": 720
+    },
+    {
+      "cluster_id": "V15G_g5",
+      "control_seed": 15166501,
+      "future_information": false,
+      "model_key": "granite",
+      "panel_seed": 15166017,
+      "peer_private_state": false,
+      "tape_sha256": "9fe6c3d9fa507a9f3541f2afdbb09598fbfd22e619383c385db49bb1dc488afe",
+      "updates": 720
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "analysis_cpu_seconds": 0.7149670979999998,
+  "analysis_wall_seconds": 98.72080435603857,
+  "confirmatory_dispositions": {
+    "H1": {
+      "allocated_alpha": 0.02,
+      "ci_high": 59.30340290034406,
+      "ci_low": 24.316438814744046,
+      "estimate": 42.263339300992335,
+      "exact_one_sided_sign_flip_p": 0.015625,
+      "independent_clusters": 6,
+      "multiplicity_adjusted_p": 0.015625,
+      "supported": true
+    },
+    "H2": {
+      "allocated_alpha": 0.03,
+      "ci_high": 0.07548424613005493,
+      "ci_low": 0.0345859059341388,
+      "estimate": 0.05437927532403202,
+      "exact_one_sided_sign_flip_p": 0.00048828125,
+      "independent_clusters": 12,
+      "multiplicity_adjusted_p": 0.0009765625,
+      "supported": true
+    },
+    "H3": {
+      "allocated_alpha": 0.03,
+      "ci_high": 0.07526010255745233,
+      "ci_low": 0.021904873579838512,
+      "estimate": 0.048449385686028225,
+      "exact_one_sided_sign_flip_p": 0.00341796875,
+      "independent_clusters": 12,
+      "multiplicity_adjusted_p": 0.00341796875,
+      "supported": true
+    },
+    "H4": {
+      "allocated_alpha": 0.03,
+      "ci_high": 68.67315774930576,
+      "ci_low": 35.40627273334396,
+      "estimate": 52.54059654394698,
+      "exact_one_sided_sign_flip_p": 0.000244140625,
+      "independent_clusters": 12,
+      "multiplicity_adjusted_p": 0.000732421875,
+      "supported": true
+    }
+  },
+  "external_formal_tree": {
+    "bytes": 57514139,
+    "file_count": 99,
+    "tree_sha256": "8cd2af6e3de48357427b869e4db7d445bfb305101c999ecee158c22368b0aa51"
+  },
+  "external_raw_tree": {
+    "bytes": 125893817,
+    "file_count": 34560,
+    "tree_sha256": "dfc2961b85c79ee9a4bf24f46e314c81a56497a7a40749825b44abc8d29082be"
+  },
+  "formal_completion": {
+    "completed_at": "2026-08-22T19:39:22.961990+00:00",
+    "dynamic_trajectories": 48,
+    "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+    "generated_tokens": 2893967,
+    "generation_gpu_hours": 18.936582134485036,
+    "model_calls": 34565,
+    "models": [
+      {
+        "completed_at": "2026-08-22T08:20:14.877230+00:00",
+        "completed_trajectories": 24,
+        "current_invocation_wall_seconds": 28715.336075790226,
+        "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+        "generated_tokens": 1385868,
+        "generation_gpu_hours": 7.807736675328472,
+        "invalid_after_repair": 0,
+        "invalid_after_repair_fraction": 0.0,
+        "latency_seconds": 28107.852031182498,
+        "model_calls": 17280,
+        "model_id": "Qwen/Qwen2.5-7B-Instruct",
+        "model_key": "qwen",
+        "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+        "observed_decision_rows": 17280,
+        "planned_decisions": 17280,
+        "planned_trajectories": 24,
+        "prompt_tokens": 9964681,
+        "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+        "provider_environment_current_invocation": {
+          "accounting": {
+            "decision_requests": 17280,
+            "first_pass_valid": 17280,
+            "generated_tokens": 1385868,
+            "invalid_after_repair": 0,
+            "latency_seconds": 28107.852031182498,
+            "model_calls": 17280,
+            "model_loading_seconds": 29.47495587915182,
+            "prompt_tokens": 9964681,
+            "repaired_valid": 0
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "model_key": "qwen",
+          "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "status": "complete"
+      },
+      {
+        "completed_at": "2026-08-22T19:39:22.795802+00:00",
+        "completed_trajectories": 24,
+        "current_invocation_wall_seconds": 40724.31370206922,
+        "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+        "generated_tokens": 1508099,
+        "generation_gpu_hours": 11.128845459156565,
+        "invalid_after_repair": 2,
+        "invalid_after_repair_fraction": 0.00011574074074074075,
+        "latency_seconds": 40063.84365296364,
+        "model_calls": 17285,
+        "model_id": "ibm-granite/granite-3.3-8b-instruct",
+        "model_key": "granite",
+        "model_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+        "observed_decision_rows": 17280,
+        "planned_decisions": 17280,
+        "planned_trajectories": 24,
+        "prompt_tokens": 10943513,
+        "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+        "provider_environment_current_invocation": {
+          "accounting": {
+            "decision_requests": 17280,
+            "first_pass_valid": 17275,
+            "generated_tokens": 1508099,
+            "invalid_after_repair": 2,
+            "latency_seconds": 40063.84365296364,
+            "model_calls": 17285,
+            "model_loading_seconds": 34.34212909266353,
+            "prompt_tokens": 10943513,
+            "repaired_valid": 3
+          },
+          "backend": "Transformers AutoModelForCausalLM",
+          "bitsandbytes_version": "0.47.0",
+          "cuda_version": "12.8",
+          "gpu_name": "NVIDIA GeForce RTX 4090",
+          "inference_sampling_temperature": 0.5,
+          "maximum_new_tokens": 96,
+          "model_id": "ibm-granite/granite-3.3-8b-instruct",
+          "model_key": "granite",
+          "model_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+          "quantization": "NF4 double quantization; BF16 computation",
+          "schema_sha256": "c0382247001c9c586190b81ad4a83535ceb71b03dadfd81e80cac220e9580f0d",
+          "top_p": 0.9,
+          "torch_version": "2.8.0+cu128",
+          "transformers_version": "4.55.4"
+        },
+        "status": "complete"
+      }
+    ],
+    "observed_decision_rows": 34560,
+    "prompt_tokens": 20908194,
+    "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+    "status": "complete"
+  },
+  "formal_trajectories": 48,
+  "generated_at": "2026-08-22T19:48:02.053236+00:00",
+  "independent_clusters_per_model": 6,
+  "model_keys": [
+    "granite",
+    "qwen"
+  ],
+  "nonfinite_primary_features": 0,
+  "privacy_mutations": 0,
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9"
+}

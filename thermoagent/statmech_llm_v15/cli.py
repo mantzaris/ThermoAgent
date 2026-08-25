@@ -24,10 +24,13 @@ def main() -> None:
             "figures",
             "report",
             "pdf-qa",
+            "pdf-qa-record",
             "verify",
         ),
     )
     parser.add_argument("--model", choices=("qwen", "granite"))
+    parser.add_argument("--manual-status", choices=("passed", "failed"))
+    parser.add_argument("--manual-notes", default="")
     args = parser.parse_args()
     repository = repository_root()
     if args.command == "pilot":
@@ -73,6 +76,14 @@ def main() -> None:
         from .reporting import validate_pdfs
 
         result = validate_pdfs(repository)
+    elif args.command == "pdf-qa-record":
+        if args.manual_status is None:
+            raise SystemExit("pdf-qa-record requires --manual-status passed or failed")
+        from .reporting import record_manual_pdf_qa
+
+        result = record_manual_pdf_qa(
+            repository, args.manual_status, args.manual_notes
+        )
     else:
         from .reporting import verify_package
 
@@ -82,4 +93,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

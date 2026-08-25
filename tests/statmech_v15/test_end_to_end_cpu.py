@@ -1,18 +1,162 @@
 import json
 import shutil
+import subprocess
 from pathlib import Path
 
 import pandas as pd
+import pytest
 import yaml
 
 from thermoagent.statmech_llm_v12.provider import KineticIsingProvider
 from thermoagent.statmech_llm_v15.analysis import analyze_formal
 from thermoagent.statmech_llm_v15.experiment import formal_panel_design, graph_for_panel
+from thermoagent.statmech_llm_v15.reporting import (
+    _manifest,
+    _pdf_fonts_embedded,
+    _repository_files,
+    record_manual_pdf_qa,
+)
 from thermoagent.statmech_llm_v15.simulation import run_v15_trajectory
-from thermoagent.statmech_llm_v15.workflow import load_yaml
+from thermoagent.statmech_llm_v15.workflow import load_yaml, sha256_file
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_repository_inventory_excludes_latex_intermediates(tmp_path):
+    paper = tmp_path / "paper/jstat_v15"
+    paper.mkdir(parents=True)
+    (paper / "main.tex").write_text("paper source", encoding="utf-8")
+    (paper / "main.pdf").write_bytes(b"paper")
+    (paper / "main.bbl").write_text("generated bibliography", encoding="utf-8")
+    (paper / "main.aux").write_text("generated auxiliary", encoding="utf-8")
+    names = {path.name for path in _repository_files(tmp_path)}
+    assert {"main.tex", "main.pdf"} <= names
+    assert "main.bbl" not in names
+    assert "main.aux" not in names
+
+
+def test_repository_inventory_includes_pinned_runpod_requirements(tmp_path):
+    requirements = tmp_path / "requirements-runpod.txt"
+    requirements.write_text("transformers==4.55.4\n", encoding="utf-8")
+    paths = {path.relative_to(tmp_path).as_posix() for path in _repository_files(tmp_path)}
+    assert "requirements-runpod.txt" in paths
+
+
+def test_final_verifier_refreshes_external_manifest_after_pdf_rendering():
+    script = (ROOT / "scripts/verify-statmech-v15.sh").read_text(encoding="utf-8")
+    manual = script.index("cli pdf-qa-record")
+    refresh = script.index("cli report", manual)
+    verify = script.index("cli verify", refresh)
+    assert manual < refresh < verify
+
+
+def test_verifier_reports_post_analysis_source_difference_without_claiming_equality():
+    source = (ROOT / "thermoagent/statmech_llm_v15/reporting.py").read_text(
+        encoding="utf-8"
+    )
+    assert '"analysis_source_recorded": analysis_source_is_sha256' in source
+    assert (
+        '"analysis_source_matches_current_tree": recorded_analysis_source'
+        in source
+    )
+    status_expression = '"status": "passed" if all(checks.values()) else "failed"'
+    assert status_expression in source
+
+
+def test_pdf_font_parser_reads_embedding_not_subset_or_unicode_columns():
+    header = (
+        "name type encoding emb sub uni object ID\n"
+        "------------------------------------------\n"
+    )
+    embedded_not_subset = "ABCDEE+Font Type 1 Builtin yes no no 10 0\n"
+    assert _pdf_fonts_embedded(header + embedded_not_subset)
+    not_embedded = "Font TrueType WinAnsi no no yes 11 0\n"
+    assert not _pdf_fonts_embedded(header + not_embedded)
+
+
+def test_repository_manifest_excludes_only_self_referential_outputs(tmp_path):
+    result = tmp_path / "results/collective_agent_statmech_v15"
+    reproducibility = result / "reproducibility"
+    reproducibility.mkdir(parents=True)
+    (reproducibility / "pdf_qa.csv").write_text("opens\nTrue\n", encoding="utf-8")
+    (reproducibility / "pdf_qa_summary.json").write_text("{}\n", encoding="utf-8")
+    (reproducibility / "verification.json").write_text("{}\n", encoding="utf-8")
+    (result / "INDEX.csv").write_text("relative_path,bytes,sha256\n", encoding="utf-8")
+    paths = set(_manifest(tmp_path)["relative_path"])
+    assert "results/collective_agent_statmech_v15/reproducibility/pdf_qa.csv" in paths
+    assert (
+        "results/collective_agent_statmech_v15/reproducibility/pdf_qa_summary.json"
+        in paths
+    )
+    assert "results/collective_agent_statmech_v15/reproducibility/verification.json" not in paths
+    assert "results/collective_agent_statmech_v15/INDEX.csv" not in paths
+
+
+def test_manual_pdf_qa_rechecks_digest_and_records_review(tmp_path):
+    result = tmp_path / "results/collective_agent_statmech_v15"
+    reproducibility = result / "reproducibility"
+    figure = result / "figures/pdf/figure.pdf"
+    reproducibility.mkdir(parents=True)
+    figure.parent.mkdir(parents=True)
+    figure.write_bytes(b"fixed vector fixture")
+    pd.DataFrame(
+        [
+            {
+                "relative_path": figure.relative_to(tmp_path).as_posix(),
+                "pages": 1,
+                "opens": True,
+                "fonts_embedded": True,
+                "text_extractable": True,
+                "rendered_pages": 1,
+                "render_dpi": 300,
+                "manual_visual_status": "pending",
+                "sha256": sha256_file(figure),
+            }
+        ]
+    ).to_csv(reproducibility / "pdf_qa.csv", index=False)
+    (reproducibility / "pdf_qa_summary.json").write_text(
+        json.dumps({"automated_passed": True, "manual_visual_status": "pending"}),
+        encoding="utf-8",
+    )
+    summary = record_manual_pdf_qa(tmp_path, "passed", "fixture inspected")
+    assert summary["manual_visual_status"] == "passed"
+    recorded = pd.read_csv(reproducibility / "pdf_qa.csv")
+    assert set(recorded["manual_visual_status"]) == {"passed"}
+    assert set(recorded["manual_review_notes"]) == {"fixture inspected"}
+    assert (result / "INDEX.csv").is_file()
+
+
+@pytest.mark.skipif(
+    not all(shutil.which(name) for name in ("latexmk", "pdffonts", "pdftotext")),
+    reason="LaTeX and Poppler are required for manuscript QA",
+)
+def test_manuscript_compiles_in_disposable_tree_with_embedded_fonts(tmp_path):
+    paper = tmp_path / "paper/jstat_v15"
+    figures = tmp_path / "results/collective_agent_statmech_v15/figures/pdf"
+    shutil.copytree(ROOT / "paper/jstat_v15", paper)
+    shutil.copytree(
+        ROOT / "results/collective_agent_statmech_v15/figures/pdf", figures
+    )
+    for source in ("main.tex", "supplement.tex"):
+        subprocess.run(
+            [
+                "latexmk",
+                "-pdf",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                source,
+            ],
+            cwd=paper,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        pdf = paper / source.replace(".tex", ".pdf")
+        assert pdf.read_bytes().startswith(b"%PDF")
+        assert subprocess.check_output(["pdftotext", str(pdf), "-"], text=True).strip()
+        fonts = subprocess.check_output(["pdffonts", str(pdf)], text=True)
+        assert _pdf_fonts_embedded(fonts)
 
 
 def test_small_cpu_formal_analysis_is_complete_and_leakage_free(tmp_path, monkeypatch):
@@ -69,7 +213,7 @@ def test_small_cpu_formal_analysis_is_complete_and_leakage_free(tmp_path, monkey
         "protocol_sha256": "test",
     }
     (artifacts / "formal/completion.json").write_text(json.dumps(completion), encoding="utf-8")
-    primary = analyze_formal(repository)
+    primary = analyze_formal(repository, allow_synthetic_raw_records=True)
     assert primary["formal_trajectories"] == 24
     assert primary["independent_clusters_per_model"] == 3
     assert primary["privacy_mutations"] == 0
@@ -83,4 +227,63 @@ def test_small_cpu_formal_analysis_is_complete_and_leakage_free(tmp_path, monkey
         repository / "results/collective_agent_statmech_v15/tables/hypothesis_effects.csv"
     )
     assert set(effects["hypothesis"]) == {"H1", "H2", "H3", "H4"}
-
+    extension_tables = (
+        "connected_correlation_profiles.csv",
+        "connected_correlation_matrix_means.csv",
+        "autocorrelation_curves.csv",
+        "integrated_autocorrelation.csv",
+        "binder_cumulants.csv",
+        "binder_cumulant_sensitivity.csv",
+        "binder_cumulant_pooling_sensitivity.csv",
+        "magnetization_distributions.csv",
+        "collective_extension_contrasts.csv",
+        "raw_generation_accounting.csv",
+    )
+    for name in extension_tables:
+        path = repository / "results/collective_agent_statmech_v15/tables" / name
+        assert path.is_file()
+        assert len(pd.read_csv(path)) > 0
+    contrasts = pd.read_csv(
+        repository
+        / "results/collective_agent_statmech_v15/tables/collective_extension_contrasts.csv"
+    )
+    assert len(contrasts) == 10
+    assert set(contrasts["role"]) == {"secondary_descriptive_extension"}
+    binder_sensitivity = pd.read_csv(
+        repository
+        / "results/collective_agent_statmech_v15/tables/binder_cumulant_sensitivity.csv"
+    )
+    assert len(binder_sensitivity) == 24 * 3 * 3
+    assert set(binder_sensitivity["temporal_window"]) == {
+        "full_phase",
+        "early_half",
+        "late_half",
+    }
+    binder_pooling = pd.read_csv(
+        repository
+        / "results/collective_agent_statmech_v15/tables/binder_cumulant_pooling_sensitivity.csv"
+    )
+    assert len(binder_pooling) == 2 * 4 * 3 * 3 * 2
+    assert set(binder_pooling["pooling_rule"]) == {
+        "mean_of_cluster_cumulants",
+        "pooled_moments_across_clusters",
+    }
+    control_audit = pd.read_csv(
+        repository
+        / "results/collective_agent_statmech_v15/tables/memory_control_panel_audit.csv"
+    )
+    assert len(control_audit) == 24
+    assert set(control_audit["all_entries_reconstructed"]) == {True}
+    assert int(control_audit["future_information_violations"].sum()) == 0
+    control_balance = pd.read_csv(
+        repository
+        / "results/collective_agent_statmech_v15/tables/memory_control_balance_audit.csv"
+    )
+    assert len(control_balance) == 6
+    assert set(control_balance["both_controls_fully_reconstructed"]) == {True}
+    assert primary["memory_control_audit"]["panels_fully_reconstructed"] == 24
+    seed_audit = pd.read_csv(
+        repository / "results/collective_agent_statmech_v15/tables/cluster_seed_audit.csv"
+    )
+    assert len(seed_audit) == 6
+    assert seed_audit["model_seed_namespaces_disjoint"].all()

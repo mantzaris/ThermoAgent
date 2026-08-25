@@ -104,7 +104,10 @@ def source_files(repository: Path) -> Sequence[Path]:
         for root in roots
         if root.exists()
         for path in root.rglob("*")
-        if path.is_file() and "__pycache__" not in path.parts and path.name != "protocol_frozen.yaml"
+        if path.is_file()
+        and "__pycache__" not in path.parts
+        and path.suffix.lower() not in {".pyc", ".pyo"}
+        and path.name != "protocol_frozen.yaml"
     ]
     files.extend(sorted((repository / "scripts").glob("*statmech-v15*")))
     return tuple(sorted(set(files)))

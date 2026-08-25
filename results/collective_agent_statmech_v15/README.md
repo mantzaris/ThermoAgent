@@ -9,8 +9,7 @@ The complete augmented simulator state $\Xi_t$ includes all private agent state,
 ## Prospective design
 
 - Frozen protocol: `v15-cross-model-memory-quench-1.0`; SHA-256 `863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9`.
-- Frozen legacy execution source: `ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78`.
-- Clean semantic-source checksum: `f8d4fa546ba46a42cd4234dd8af6ad60309c231f2997e10d0d25830f6dddb2f2`.
+- Frozen execution source: `ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78`.
 - Parent V14 commit: `103e4c4598ecc26a98c37a8d03ee3663f9be1070`.
 - Models: Qwen `a09a35458c702b33eeacc393d103063234e8bc28` and Granite `51dd4bc2ade4059a6bd87649d68aa11e4fb2529b`.
 - Inference: NF4 double quantization, BF16 computation, decoding temperature 0.5, top-p 0.9, maximum 96 generated tokens, and one bounded greedy structured-output repair.
@@ -18,7 +17,33 @@ The complete augmented simulator state $\Xi_t$ includes all private agent state,
 - Matched arms: nominal Markovized, field-reversal Markovized, field-reversal genuine persistent memory, and field-reversal deterministic scrambled-history placebo.
 - Independent unit: complete graph/environment trajectory cluster. Agents, updates, messages, windows, calls, and tokens are not independent replicates.
 
-The formal study ran 48 trajectories and 34,560 attempted decisions. Formal generation used 34,565 calls, 20,908,194 prompt tokens, 2,893,967 generated tokens, and 18.937 metered GPU-hours. Successful Qwen/Granite engineering pilots added 256 decisions and 0.141 GPU-hours. Their retained infrastructure failures added 1 decision requests and 0.000 GPU-hours. The retained, engineering-rejected Mistral attempts used 129 decision requests, 222 model calls, and 0.116 GPU-hours; no network contrast was computed from them. Total measured generation was 19.193 hours, with an approximate RTX 4090 cost range of USD 6.53-13.24.
+Each arm constructs a fresh agent-network object from its frozen panel seeds.
+The loaded model weights and tokenizer are shared read-only for throughput, but
+no conversational history, key/value cache, mutable agent object, or unseeded
+scientific RNG state crosses an arm boundary. Every generation receives its
+frozen per-decision seed; provider accounting and raw-record indices have no
+causal input to the prompt or transition law.
+
+The formal study ran 48 trajectories and 34,560 attempted decisions. Formal generation used 34,565 calls, 20,908,194 prompt tokens, 2,893,967 generated tokens, and 48.737 metered GPU-hours. The content-addressed raw-record audit additionally found 197 interrupted-panel decision records (197 calls, 128193 prompt tokens, 17121 generated tokens, 0.328 GPU-hours) that do not enter a completed trajectory. The incident audit counts 1 additional post-generation, pre-record infrastructure model call; its prompt tokens, generated tokens, and latency were not durably recorded, so measured token and GPU-hour totals are lower bounds. Successful Qwen/Granite engineering pilots added 256 decisions and 0.349 GPU-hours. Their retained infrastructure failures added 0 decision requests and 0.000 GPU-hours. Any rejected-model attempts made during this fresh reconstruction used 0 decision requests, 0 model calls, and 0.000 GPU-hours; no network contrast was computed from them. Total fresh measured generation was at least 49.415 hours, with an approximate measured RTX 4090 cost range of at least USD 16.80-34.10.
+
+The fresh reconstruction does not rerun the engineering-rejected Mistral
+pilot. Its original pre-freeze boundary is retained from the committed
+reference accounting (historical requests:
+129; historical calls:
+222) and is not added to the fresh
+reconstruction compute total. The original sealed execution used
+19.193 measured generation GPU-hours in total; the fresh
+reconstruction accounted for at least 49.415 measured generation GPU-hours. The
+runtime difference is reported as an environment-dependent reproducibility
+cost, not a scientific effect.
+
+The original external raw tree was unavailable after the Pod replacement.
+Fresh records are replayed at decision resolution, and the frozen reconstructed
+package is compared with the committed aggregate reference before extended
+reporting is authorized. The machine-readable comparison status is
+`passed`. This verifies the
+declared aggregate science and accounting scope; it cannot establish digest
+identity with deleted historical call files.
 
 ## Frozen hypotheses
 
@@ -29,9 +54,54 @@ The formal study ran 48 trajectories and 34,560 attempted decisions. Formal gene
 
 The exact direction and model-specific heterogeneity are retained in `tables/hypothesis_effects.csv` and `tables/panel_statistics.csv`; the README does not reinterpret null or adverse signs. Qwen mean adjusted divergence was -0.02592, 0.00449, and -0.00239 nats/update for Markovized, persistent, and scrambled arms. The corresponding Granite means were -0.18622, -0.10788, and -0.19789. Mean persistent-minus-scrambled prompt length was 3.13 tokens.
 
-The pooled memory result is heterogeneous. Persistent-minus-Markovized means were 0.03041 nats/update for Qwen (5/6 positive clusters) and 0.07835 for Granite (6/6). Persistent-minus-scrambled means were 0.00689 for Qwen (4/6; model-specific exact sign-flip `p=0.21875`) and 0.09001 for Granite (6/6; `p=0.015625`). These decompositions were not a second multiplicity family and do not replace the frozen pooled tests. Prespecified block-length and pseudocount sensitivities retain mostly positive directions but show substantial scale dependence; the block-4, pseudocount-1 pooled H3 contrast is 0.00024 nats/update.
+`tables/hypothesis_model_stratified.csv` is a descriptive sensitivity, not a
+replacement confirmatory analysis. It makes explicit that Qwen's
+persistent-minus-scrambled mean is 0.00689 nats/update with 4
+of six positive clusters and an unadjusted within-model exact sign-flip
+`p=0.21875`, whereas Granite's mean is 0.09001 with 6 of six
+positive clusters. The pooled H3 result is therefore not independent
+confirmation within both families. Arm-level adjusted estimates may be
+negative because the raw block divergence can lie below its shuffled floor;
+positive paired contrasts do not establish positive absolute entropy
+production.
 
-H4 is a fixed-window decline, not proof of complete return. All six Qwen field-Markovized trajectories re-entered their training-nominal thresholds six sweeps after restoration. Only one of six Granite trajectories re-entered by sweep 45; five retained final-five means above their model-specific training thresholds. The result therefore supports movement toward the restored nominal regime while preserving slower or incomplete Granite recovery as a boundary finding.
+The primary floor still uses the frozen 500 time permutations.  The extended
+`tables/irreversibility_sensitivity.csv` retains the empirical permutation-null
+interval, its standard deviation, and the Monte Carlo standard error and
+normal-approximation interval for the floor mean.  These audit columns
+reproduce the frozen raw divergence, mean floor, and adjusted value exactly;
+they do not redefine H2 or H3.
+
+## Secondary collective-observable extension
+
+The frozen protocol and H1-H4 are unchanged. A versioned descriptive extension
+(`v15-collective-observables-1.1`, SHA-256 `470ea8a1fccf013290f8a672abd980840c2297ca08f413442267503074ae95b5`) computes,
+within each complete trajectory and phase, connected belief correlation by
+actual shortest-path distance, magnetization autocorrelation with a primary
+two-sweep lag truncation, and the Binder cumulant. One- and three-sweep lag
+truncations are sensitivities. Binder window and pooling sensitivities compare
+full versus early/late half-phases and cluster-first versus moment-pooled
+estimates. Pair, node, and update counts are not used as
+replicates. Undefined zero-variance or zero-second-moment cases remain missing.
+
+| Model | Descriptive contrast | Estimate | 95% cluster-bootstrap interval | Independent clusters |
+|---|---|---:|---:|---:|
+| Qwen | disruption minus baseline at graph distance 1 | 0.00238 | -0.01750 to 0.02277 | 6 |
+| Qwen | recovery minus baseline at graph distance 1 | 0.00080 | -0.01254 to 0.01453 | 6 |
+| Qwen | persistent minus markovized during recovery | -2.46995 | -5.79214 to 0.17724 | 6 |
+| Qwen | disruption minus baseline field markovized | -4.80504 | -7.42824 to -2.20832 | 6 |
+| Qwen | recovery minus baseline field markovized | -3.99611 | -6.95969 to -1.88680 | 6 |
+| Granite | disruption minus baseline at graph distance 1 | -0.02032 | -0.05486 to 0.00947 | 6 |
+| Granite | recovery minus baseline at graph distance 1 | -0.02748 | -0.05776 to -0.00346 | 6 |
+| Granite | persistent minus markovized during recovery | -4.14109 | -19.88286 to 11.60067 | 2 |
+| Granite | disruption minus baseline field markovized | 0.16643 | -0.09447 to 0.52063 | 6 |
+| Granite | recovery minus baseline field markovized | 0.13129 | -0.13195 to 0.50873 | 6 |
+
+These are finite-window descriptive contrasts. Connected correlation exposes
+spatial organization beyond mean order; truncated autocorrelation summarizes
+persistence; Binder $U_4$ summarizes order-parameter shape. They do not imply
+a correlation length, critical slowing down, a Binder crossing, or a phase
+transition.
 
 ## V14 scientific correction
 
@@ -44,31 +114,24 @@ Results are finite-size and model-specific. Neither model is a human participant
 ## Reproduction order
 
 ```bash
-PYTHON_BIN=/workspace/ThermoAgent/.venv/bin/python scripts/run-statmech-v15-tests.sh
-THERMO_V14_ARTIFACT_ROOT=/workspace/ThermoAgent-v14-artifacts scripts/audit-statmech-v14.sh
-THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-pilot.sh qwen
-THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-pilot.sh granite
-scripts/freeze-statmech-v15-protocol.sh
-THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-formal.sh qwen
-THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-formal.sh granite
-scripts/replay-statmech-v15.sh
-scripts/analyze-statmech-v15.sh
+export THERMO_V15_ARTIFACT_ROOT=/workspace/ThermoAgent-v15-reconstruction-b309f0ab
+scripts/setup-statmech-v15-runpod.sh
+.venv/bin/python scripts/prefetch-statmech-v15-models.py
+PYTHON_BIN=.venv/bin/python scripts/run-statmech-v15-tests.sh
+THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-reconstruction-pilot.sh qwen
+THERMO_V15_ENABLE_LLM=1 scripts/run-statmech-v15-reconstruction-pilot.sh granite
+# Run the next commands against a clean checkout at the committed V15
+# reference through audited reconstruction wrappers.  The 50-hour value is
+# the explicitly authorized operational reconstruction guard; it does not
+# alter the frozen protocol's scientific design or its historical 25-hour cap.
+THERMO_V15_ENABLE_LLM=1 THERMO_V15_AUTHORIZED_GPU_HOURS=50 scripts/run-statmech-v15-reconstruction-formal.sh qwen
+THERMO_V15_ENABLE_LLM=1 THERMO_V15_AUTHORIZED_GPU_HOURS=50 scripts/run-statmech-v15-reconstruction-formal.sh granite
+scripts/run-statmech-v15-reconstruction-analysis.sh
 scripts/run-statmech-v15-surrogate.sh
 scripts/generate-statmech-v15-figures.sh
-.venv/bin/python paper/jstat_v15/render_publication_figures.py
 scripts/build-statmech-v15-results.sh
 scripts/build-statmech-v15-paper.sh
 scripts/verify-statmech-v15.sh
 ```
 
-Raw prompts, completions, and trajectory tables are external at `/workspace/ThermoAgent-v15-artifacts`. Compact aggregate tables, checksums, vector figures, and manuscript sources are repository-facing.
-
-### Source-checksum audit
-
-The frozen checksum enumerator unintentionally included one ignored 224-byte root-level Python bytecode cache. It did not affect source semantics or any outcome, and it is not committed. `reproducibility/source_checksum_audit.json` records its path and digest, the exact reconstruction of the legacy frozen checksum, and the cache-free semantic-source checksum. A clean checkout should run:
-
-```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python results/collective_agent_statmech_v15/reproducibility/verify_source_checksum.py
-```
-
-The command also writes `reproducibility/verification_clean.json`, which requires every non-source package check from the legacy verifier to pass and substitutes only the documented reconstruction for the absent ignored cache. The legacy `scripts/verify-statmech-v15.sh` source-equality check applies to the retained exact execution tree; all other package checks and the cache-free provenance audit are reproducible from the repository-facing package and external manifests.
+Raw prompts, completions, and trajectory tables are external at `/workspace/ThermoAgent-v15-reconstruction-b309f0ab`. Compact aggregate tables, checksums, vector figures, and manuscript sources are repository-facing.

@@ -1,8 +1,11 @@
 {
   "automated_passed": true,
-  "generated_at": "2026-08-22T21:20:36.764781+00:00",
+  "generated_at": "2026-08-25T09:39:55.354330+00:00",
+  "manual_review_notes": "Original vector PDFs and external 300-DPI renderings inspected; no clipping, overlap, missing glyphs, or unreadable legends observed.",
+  "manual_review_scope": "original_vector_and_external_300_dpi_render",
+  "manual_reviewed_at": "2026-08-25T09:40:05.363966+00:00",
   "manual_visual_status": "passed",
-  "pages": 28,
-  "pdf_count": 13,
-  "render_root_external": "/tmp/ThermoAgent-v15-qa-artifacts/pdf_qa/rendered_300dpi"
+  "pages": 37,
+  "pdf_count": 16,
+  "render_root_external": "/workspace/ThermoAgent-v15-reconstruction-b309f0ab/pdf_qa/rendered_300dpi"
 }

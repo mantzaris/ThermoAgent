@@ -85,3 +85,33 @@
 ## 2026-08-22: final RunPod reachability recheck
 
 - A read-only SSH recheck after all scientific work returned `connection refused`. The last successful remote audit had shown zero CUDA compute processes, zero V15 workers, and zero tmux sessions. The completed external-tree checksums and replay evidence remain valid, but current live Pod state could not be refreshed and is reported as unreachable rather than inferred.
+
+## 2026-08-23 to 2026-08-25: fresh RunPod reconstruction
+
+- Rebuilt the pinned CUDA/Python environment and fetched exact Qwen and Granite
+  snapshots after the previous external RunPod data was deleted. No historical
+  call file was assumed to survive, and no committed aggregate was treated as
+  proof of the reconstruction.
+- Re-executed the unchanged frozen two-model protocol from atomic panel seeds.
+  All 48 trajectories and 34,560 retained decisions completed, replayed with
+  zero mismatches, and reproduced the committed V15 aggregate results within a
+  documented binary64 cross-platform tolerance. The newly measured formal
+  runtime was 48.737223 GPU-hours; the difference from the historical run is
+  retained as environment-dependent reconstruction cost.
+- Preserved all infrastructure evidence: 197 durably recorded interrupted
+  calls and one post-generation call whose atomic record could not be written.
+  Token, time, and cost accounting is therefore reported as a lower bound.
+- Added connected graph-distance correlation, truncated magnetization
+  autocorrelation, integrated autocorrelation time, and Binder-cumulant
+  diagnostics as post-reconstruction descriptive analyses. Their weak,
+  heterogeneous, undefined, and estimator-sensitive results remain visible;
+  none is promoted to a new confirmatory claim or phase-transition claim.
+- Replaced the two-anchor surrogate display with an out-of-sample,
+  time-resolved direct-versus-kinetic comparison using coefficients fit only
+  from designated V13 microscopic-response data. The surrogate substantially
+  overstates the direct response and shifts peak timing, establishing a useful
+  closure boundary.
+- Expanded the manuscript to 21 main pages plus a two-page supplement and 14
+  source-data-complete vector figures. Final automated and manual QA covers 16
+  PDFs and 37 pages. The complete available regression inventory passes
+  656/656 tests.

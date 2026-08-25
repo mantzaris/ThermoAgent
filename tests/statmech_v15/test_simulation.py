@@ -2,11 +2,16 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 
 from thermoagent.statmech_llm_v12.core import LatentMapping
 from thermoagent.statmech_llm_v12.provider import FunctionalProvider, KineticIsingProvider
 from thermoagent.statmech_llm_v13.simulation import build_reciprocal_graph
 from thermoagent.statmech_llm_v15.experiment import formal_panel_design
+from thermoagent.statmech_llm_v15.analysis import (
+    memory_control_balance_audit,
+    memory_control_panel_audit,
+)
 from thermoagent.statmech_llm_v15.simulation import (
     V15MemoryNetwork,
     memory_control_tape,
@@ -119,3 +124,74 @@ def test_agent_memory_inbox_and_outbox_are_separate_objects():
     assert network.agents[1].private_fingerprint() == peer
     assert network.agents[0]._inbox is not network.agents[1]._inbox
     assert network.agents[0]._outbox is not network.agents[1]._outbox
+
+
+def test_memory_control_audit_reconstructs_histories_without_future_state():
+    graph = build_reciprocal_graph(8, "modular", 15015)
+    panel_seed = 15016
+    control_seed = 15017
+    audits = []
+    for condition, mode in (
+        ("field_persistent", "persistent_memory"),
+        ("field_scrambled", "scrambled_memory"),
+    ):
+        rows = run_v15_trajectory(
+            KineticIsingProvider(),
+            graph,
+            panel_seed,
+            5,
+            condition,
+            0.8,
+            0.5,
+            [1, 1, 3],
+            control_seed=control_seed,
+        )
+        panel = {
+            "model_key": "synthetic",
+            "cluster_id": "synthetic_c0",
+            "panel_id": condition,
+            "condition": condition,
+            "memory_mode": mode,
+            "panel_seed": panel_seed,
+            "control_seed": control_seed,
+            "n_agents": 8,
+        }
+        audit = memory_control_panel_audit(pd.DataFrame(rows), panel)
+        assert audit["all_entries_reconstructed"]
+        assert audit["future_information_violations"] == 0
+        assert not audit["donor_agent_state_used_by_construction"]
+        assert not audit["peer_private_state_used_by_construction"]
+        audits.append(audit)
+    balance = memory_control_balance_audit(pd.DataFrame(audits))
+    assert len(balance) == 1
+    assert bool(balance["both_controls_fully_reconstructed"].iloc[0])
+    assert int(balance["future_information_violations"].iloc[0]) == 0
+
+
+def test_trajectory_state_is_fresh_and_invariant_to_prior_arm_execution():
+    graph = build_reciprocal_graph(8, "modular", 15018)
+    arguments = dict(
+        graph=graph,
+        panel_seed=15019,
+        sweeps=3,
+        condition="field_markovized",
+        coupling_strength=0.8,
+        sampling_temperature=0.5,
+        periods_sweeps=[1, 1, 1],
+        control_seed=15020,
+    )
+    first = pd.DataFrame(run_v15_trajectory(KineticIsingProvider(), **arguments))
+    shared_provider = KineticIsingProvider()
+    run_v15_trajectory(
+        shared_provider,
+        graph,
+        15019,
+        3,
+        "field_persistent",
+        0.8,
+        0.5,
+        [1, 1, 1],
+        control_seed=15020,
+    )
+    second = pd.DataFrame(run_v15_trajectory(shared_provider, **arguments))
+    pd.testing.assert_frame_equal(first, second, check_exact=True)

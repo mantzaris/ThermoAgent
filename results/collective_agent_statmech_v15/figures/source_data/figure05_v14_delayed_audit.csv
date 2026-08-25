@@ -1,4 +1,13 @@
 window_sweeps,metric,estimate,ci_low,ci_high,independent_clusters,bootstrap_replicates,independent_unit,panel,observed,null_mean,null_standard_deviation,null_q025,null_q975,upper_tail_empirical_p,replicates,seed,permutation_unit,pipeline_refit_per_permutation
+3.0,total_correlation_bias_adjusted,0.2423782415945952,0.1748727357050734,0.3094731017558394,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+3.0,total_correlation_null_mean,2.421275939759546,2.362488933846996,2.4759112368955414,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+3.0,total_correlation_raw,2.663654181354141,2.5437369820719096,2.7811724861488245,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+5.0,total_correlation_bias_adjusted,0.5763186478958581,0.4265769835130431,0.7035820979539614,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+5.0,total_correlation_null_mean,4.0582687799171895,4.001217678266968,4.1122331066162925,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+5.0,total_correlation_raw,4.634587427813048,4.463613437936575,4.798369464415369,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+7.0,total_correlation_bias_adjusted,0.910349362734017,0.688882837944056,1.0993775846600675,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+7.0,total_correlation_null_mean,5.705198171920512,5.655478403176248,5.752053419265699,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
+7.0,total_correlation_raw,6.615547534654529,6.370410071694162,6.839577162831535,6.0,10000.0,graph_environment_cluster,dependence,,,,,,,,,,
 ,full_statmech_balanced_accuracy,,,,,,,permutation,0.4583333333333333,0.2505625,0.0893356794598714,0.0833333333333333,0.4177083333333182,0.0250974902509749,10000.0,14149991.0,condition_labels_within_graph_environment_cluster,True
 ,order_only_balanced_accuracy,,,,,,,permutation,0.125,0.250525,0.0892377046657724,0.0833333333333333,0.4166666666666667,0.9593040695930408,10000.0,14149991.0,condition_labels_within_graph_environment_cluster,True
 ,simple_uncertainty_balanced_accuracy,,,,,,,permutation,0.4583333333333333,0.2505041666666667,0.0822274859880649,0.0833333333333333,0.4166666666666667,0.0096990300969903,10000.0,14149991.0,condition_labels_within_graph_environment_cluster,True

@@ -1,0 +1,49 @@
+version: v15-collective-observables-1.1
+status: secondary_descriptive_extension
+frozen_protocol_modified: false
+data_scope: reconstructed_frozen_v15_trajectories_only
+state_coordinate: post_update_belief_vector
+averaging:
+  phases:
+    - baseline
+    - disruption
+    - recovery
+  independent_unit: complete_model_graph_environment_trajectory
+  graph_pairs: unordered_distinct_agent_pairs
+connected_graph_correlation:
+  graph: actual_reciprocal_modular_delivery_support
+  distance: unweighted_shortest_path
+  matrix_centering: per_agent_phase_time_mean
+  heatmap_cluster_selection: arithmetic_mean_across_all_six_clusters
+autocorrelation:
+  series: post_update_belief_magnetization
+  temporal_resolution: attempted_agent_updates
+  primary_lag_truncation_sweeps: 2
+  sensitivity_lag_truncation_sweeps:
+    - 1
+    - 3
+  zero_variance_behavior: undefined
+binder_cumulant:
+  series: post_update_belief_magnetization
+  denominator_epsilon: 1.0e-12
+  zero_second_moment_behavior: undefined
+  temporal_window_sensitivity:
+    - full_phase
+    - early_half
+    - late_half
+  pooling_rule_sensitivity:
+    - mean_of_cluster_cumulants
+    - pooled_moments_across_clusters
+uncertainty:
+  method: cluster_bootstrap
+  replicates: 10000
+  seed: 15170301
+interpretation:
+  connected_correlation: finite-window spatial organization beyond mean order
+  integrated_autocorrelation_time: truncated finite-window persistence diagnostic
+  binder_cumulant: finite-size order-parameter-shape diagnostic
+prohibited_claims:
+  - thermodynamic_limit_phase_transition
+  - critical_slowing_down
+  - universal_critical_point
+  - exact_thermodynamic_entropy_production

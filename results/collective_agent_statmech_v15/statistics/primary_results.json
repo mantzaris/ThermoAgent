@@ -1,12 +1,37 @@
 {
-  "analysis_cpu_seconds": 0.7149670979999998,
-  "analysis_wall_seconds": 98.72080435603857,
+  "analysis_cpu_seconds": 35.262582504,
+  "analysis_source_sha256": "659534aa81dc66d172e208b2cf8900f0b25b723b5aed45353af3b69d35b0e5b7",
+  "analysis_wall_seconds": 1478.0335944329854,
+  "cluster_seed_audit_passed": true,
+  "collective_extension": {
+    "frozen_protocol_modified": false,
+    "output_tables": {
+      "autocorrelation_curve_summary": 792,
+      "autocorrelation_curves": 4752,
+      "binder_cumulant_pooling_sensitivity": 144,
+      "binder_cumulant_sensitivity": 432,
+      "binder_cumulant_summary": 24,
+      "binder_cumulants": 144,
+      "collective_extension_contrasts": 10,
+      "connected_correlation_matrices": 36864,
+      "connected_correlation_matrix_means": 6144,
+      "connected_correlation_profile_summary": 96,
+      "connected_correlation_profiles": 576,
+      "integrated_autocorrelation": 432,
+      "integrated_autocorrelation_summary": 72,
+      "magnetization_distribution_summary": 408,
+      "magnetization_distributions": 2448
+    },
+    "status": "secondary_descriptive_extension",
+    "version": "v15-collective-observables-1.1"
+  },
+  "collective_extension_sha256": "470ea8a1fccf013290f8a672abd980840c2297ca08f413442267503074ae95b5",
   "confirmatory_dispositions": {
     "H1": {
       "allocated_alpha": 0.02,
-      "ci_high": 59.30340290034406,
-      "ci_low": 24.316438814744046,
-      "estimate": 42.263339300992335,
+      "ci_high": 59.30340290034343,
+      "ci_low": 24.316438814744036,
+      "estimate": 42.26333930099211,
       "exact_one_sided_sign_flip_p": 0.015625,
       "independent_clusters": 6,
       "multiplicity_adjusted_p": 0.015625,
@@ -34,9 +59,9 @@
     },
     "H4": {
       "allocated_alpha": 0.03,
-      "ci_high": 68.67315774930576,
-      "ci_low": 35.40627273334396,
-      "estimate": 52.54059654394698,
+      "ci_high": 68.67315774930562,
+      "ci_low": 35.406272733343826,
+      "estimate": 52.540596543946855,
       "exact_one_sided_sign_flip_p": 0.000244140625,
       "independent_clusters": 12,
       "multiplicity_adjusted_p": 0.000732421875,
@@ -44,33 +69,33 @@
     }
   },
   "external_formal_tree": {
-    "bytes": 57514139,
+    "bytes": 57501968,
     "file_count": 99,
-    "tree_sha256": "8cd2af6e3de48357427b869e4db7d445bfb305101c999ecee158c22368b0aa51"
+    "tree_sha256": "b884e693fa764183ca36d1220a55237bb9e52e24cd7db382af80a93ebed94444"
   },
   "external_raw_tree": {
-    "bytes": 125893817,
-    "file_count": 34560,
-    "tree_sha256": "dfc2961b85c79ee9a4bf24f46e314c81a56497a7a40749825b44abc8d29082be"
+    "bytes": 126606201,
+    "file_count": 34757,
+    "tree_sha256": "215151ff3b38c25f399df01e0e327c9fc08471a959f92e0284af4bde6d13fa55"
   },
   "formal_completion": {
-    "completed_at": "2026-08-22T19:39:22.961990+00:00",
+    "completed_at": "2026-08-25T06:58:00.266379+00:00",
     "dynamic_trajectories": 48,
     "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
     "generated_tokens": 2893967,
-    "generation_gpu_hours": 18.936582134485036,
+    "generation_gpu_hours": 48.7372227463447,
     "model_calls": 34565,
     "models": [
       {
-        "completed_at": "2026-08-22T08:20:14.877230+00:00",
+        "completed_at": "2026-08-24T00:52:41.223049+00:00",
         "completed_trajectories": 24,
-        "current_invocation_wall_seconds": 28715.336075790226,
+        "current_invocation_wall_seconds": 71668.15674294997,
         "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
         "generated_tokens": 1385868,
-        "generation_gpu_hours": 7.807736675328472,
+        "generation_gpu_hours": 19.542721004993783,
         "invalid_after_repair": 0,
         "invalid_after_repair_fraction": 0.0,
-        "latency_seconds": 28107.852031182498,
+        "latency_seconds": 70353.79561797762,
         "model_calls": 17280,
         "model_id": "Qwen/Qwen2.5-7B-Instruct",
         "model_key": "qwen",
@@ -86,9 +111,9 @@
             "first_pass_valid": 17280,
             "generated_tokens": 1385868,
             "invalid_after_repair": 0,
-            "latency_seconds": 28107.852031182498,
+            "latency_seconds": 70353.79561797762,
             "model_calls": 17280,
-            "model_loading_seconds": 29.47495587915182,
+            "model_loading_seconds": 56.642047811998054,
             "prompt_tokens": 9964681,
             "repaired_valid": 0
           },
@@ -110,15 +135,15 @@
         "status": "complete"
       },
       {
-        "completed_at": "2026-08-22T19:39:22.795802+00:00",
+        "completed_at": "2026-08-25T06:57:59.891976+00:00",
         "completed_trajectories": 24,
-        "current_invocation_wall_seconds": 40724.31370206922,
+        "current_invocation_wall_seconds": 75768.87607462704,
         "execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
         "generated_tokens": 1508099,
-        "generation_gpu_hours": 11.128845459156565,
+        "generation_gpu_hours": 29.194501741350912,
         "invalid_after_repair": 2,
         "invalid_after_repair_fraction": 0.00011574074074074075,
-        "latency_seconds": 40063.84365296364,
+        "latency_seconds": 105100.20626886329,
         "model_calls": 17285,
         "model_id": "ibm-granite/granite-3.3-8b-instruct",
         "model_key": "granite",
@@ -130,15 +155,15 @@
         "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
         "provider_environment_current_invocation": {
           "accounting": {
-            "decision_requests": 17280,
-            "first_pass_valid": 17275,
-            "generated_tokens": 1508099,
-            "invalid_after_repair": 2,
-            "latency_seconds": 40063.84365296364,
-            "model_calls": 17285,
-            "model_loading_seconds": 34.34212909266353,
-            "prompt_tokens": 10943513,
-            "repaired_valid": 3
+            "decision_requests": 12240,
+            "first_pass_valid": 12239,
+            "generated_tokens": 1067609,
+            "invalid_after_repair": 0,
+            "latency_seconds": 74648.38298393553,
+            "model_calls": 12241,
+            "model_loading_seconds": 61.0076076220721,
+            "prompt_tokens": 7770399,
+            "repaired_valid": 1
           },
           "backend": "Transformers AutoModelForCausalLM",
           "bitsandbytes_version": "0.47.0",
@@ -164,13 +189,26 @@
     "status": "complete"
   },
   "formal_trajectories": 48,
-  "generated_at": "2026-08-22T19:48:02.053236+00:00",
+  "generated_at": "2026-08-25T08:14:51.843551+00:00",
   "independent_clusters_per_model": 6,
+  "memory_control_audit": {
+    "donor_agent_state_used": false,
+    "future_information_violations": 0,
+    "panels_fully_reconstructed": 48,
+    "panels_total": 48,
+    "peer_private_state_used": false
+  },
   "model_keys": [
     "granite",
     "qwen"
   ],
   "nonfinite_primary_features": 0,
   "privacy_mutations": 0,
-  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9"
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "raw_generation_accounting_audit": {
+    "missing_referenced_records": 0,
+    "orphan_interrupted_records": 197,
+    "referenced_records": 34560,
+    "status": "passed"
+  }
 }

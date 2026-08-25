@@ -1,0 +1,24 @@
+{
+  "model_weights_in_repository": false,
+  "models": [
+    {
+      "bytes": 15242807270,
+      "file_count": 14,
+      "identifier": "Qwen/Qwen2.5-7B-Instruct",
+      "model_key": "qwen",
+      "requested_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "resolved_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "snapshot_directory_name": "a09a35458c702b33eeacc393d103063234e8bc28"
+    },
+    {
+      "bytes": 16346537590,
+      "file_count": 15,
+      "identifier": "ibm-granite/granite-3.3-8b-instruct",
+      "model_key": "granite",
+      "requested_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "resolved_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "snapshot_directory_name": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b"
+    }
+  ],
+  "verified_at_utc": "2026-08-25T08:52:51.855875+00:00"
+}

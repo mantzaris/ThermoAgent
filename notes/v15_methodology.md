@@ -65,6 +65,11 @@ The scrambled tape uses only an agent's own past update-opportunity times. Each 
 
 H1 receives one-sided alpha 0.02. H2-H4 form a one-sided Holm family with total alpha 0.03. Exhaustive sign flips are the primary paired test; deterministic 10,000 cluster bootstraps summarize uncertainty. H1 has six Granite clusters. H2-H4 use 12 model-qualified graph/environment units with model identity retained. No hypothesis, estimand, window, prompt, graph count, or exclusion changes after freeze.
 
+The sign-flip enumeration is exact conditional on the observed paired
+magnitudes under a sign-symmetry null. It is not a treatment-label
+randomization test, because the prompt conditions were prospectively assigned
+rather than randomly exchanged within a completed cluster.
+
 The H4 statistic is prospectively fixed and can be positive, zero, or negative. It replaces the structurally invalid V14 H3 maximum-minus-final form.
 
 ## Information and temporal-asymmetry estimators
@@ -90,6 +95,53 @@ The formal freeze records protocol SHA-256 `863f54a05dbbe9f23a0d3fe6d4344b714097
 ## Post-formal reporting boundary
 
 After all 48 formal trajectories, replay, and frozen analyses completed, reporting was synchronized to the sealed aggregate outputs. No formal source, protocol, seed, prompt, estimator, multiplicity rule, or trajectory was changed. Model-specific decompositions and estimator sensitivities are reported as boundary analyses: the pooled tests retain their prospective status, while per-model sign counts and sensitivity cells describe heterogeneity rather than creating new confirmatory families.
+
+## Fresh reconstruction and comparison boundary
+
+The original external call records and trajectory files were unavailable after
+the RunPod was replaced.  The committed aggregate package is retained as the
+historical reference, but it cannot by itself establish decision-by-decision
+identity.  A fresh reconstruction therefore uses the same frozen protocol,
+semantic execution tree, model revisions, prompt schema, seed manifests, and
+panel order in a clean checkout.  Its own 48 trajectories must first replay
+against their content-addressed call records.  The reconstructed frozen
+tables, dispositions, calls, and token counts are then compared with the
+committed package before the review working tree can regenerate a result.
+Wall-clock latency, timestamps, and external-tree digests are deliberately not
+expected to match a run on newly provisioned storage.
+
+The fresh engineering benchmark projected more generation time than the
+original environment.  On explicit user instruction to complete both model
+families, an external operational next-panel guard was raised from 25 to 50
+measured generation hours.  This does not modify the frozen scientific
+protocol, decision or token ceilings, prompts, seeds, estimands, invalid-output
+policy, or analysis.  Original and reconstruction compute accounting remain
+separate.
+
+## Secondary finite-system extension
+
+Before inspecting fresh formal outcomes, extension configuration
+`v15-collective-observables-1.1` fixes three trajectory-level descriptive
+analyses.  The original V15 aggregate outcomes were already known, so this is
+a post-formal descriptive extension rather than a prospective hypothesis
+family.  Connected belief covariance is calculated per phase and averaged
+over unordered node pairs at each unweighted shortest-path distance on the
+actual reciprocal modular support.  Magnetization autocorrelation is measured
+at attempted-update resolution; its primary truncated sum uses two sweeps
+(32 updates), with one- and three-sweep sensitivities.  Binder `U4` is
+calculated separately per phase, with near-zero second moments left undefined.
+Its estimator audit compares each full phase with deterministic early and late
+halves and compares a mean of cluster cumulants with moments pooled across
+clusters; both intervals resample complete graph/environment clusters.
+Every quantity is calculated within a complete model--graph--environment
+trajectory before cluster bootstrapping.  Agent pairs, nodes, and updates do
+not increase the inferential sample size.
+
+These additions are secondary and descriptive.  They do not modify H1--H4,
+establish a correlation length, provide a stationary integrated-autocorrelation
+estimate, identify a Binder crossing, or support a phase-transition claim.
+Their purpose is to expose spatial organization, finite-window persistence,
+and order-parameter shape that a mean magnetization cannot distinguish.
 
 ## Journal format and literature provenance
 

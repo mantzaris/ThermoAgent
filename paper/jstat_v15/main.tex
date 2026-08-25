@@ -28,7 +28,7 @@
 
 \title{Statistical-mechanical characterization of memory and quench response in state-separated LLM-agent networks}
 \author{Anonymous working manuscript}
-\date{21 August 2026}
+\date{23 August 2026}
 
 \begin{document}
 \maketitle
@@ -185,7 +185,8 @@ length.  It uses only the same agent's past opportunity times, while belief,
 action, and memory content are deterministically randomized from a frozen
 control seed.  No donor agent, future time, or hidden environmental outcome is
 used.  Genuine and scrambled entries have the same section, count, field
-names, and format.  Exact token equality is measured rather than assumed.
+names, and format.  Token counts and their paired differences are measured;
+turn-by-turn equality is not assumed.
 
 \section{Collective observables}
 
@@ -218,9 +219,58 @@ normalization,
 \begin{equation}
 \chi_b=N\operatorname{Var}(m_b),
 \end{equation}
-within a prescribed rolling window.  We also estimate spatial correlation
-along graph edges and integrated correlation time from the observable
-magnetization sequence.  These are finite-trajectory quantities.
+within a prescribed rolling window.  Three secondary observables resolve
+spatial organization, temporal persistence, and the shape of the finite-size
+order-parameter distribution.  First, for a phase window $W$ we define the
+connected belief correlation at graph distance $d$,
+\begin{equation}
+C_b(d;W)=\frac{1}{|{\cal P}_d|}\sum_{(i,j)\in{\cal P}_d}
+\left[\langle b_i b_j\rangle_W-\langle b_i\rangle_W
+\,\langle b_j\rangle_W\right],\qquad
+{\cal P}_d=\{(i,j):i<j,\ d_G(i,j)=d\}.
+\label{eq:connected-correlation}
+\end{equation}
+Shortest paths use the actual reciprocal modular delivery support.  The
+bracket averages post-update observations at attempted-update resolution
+within one phase of one
+trajectory; node pairs are averaged inside that trajectory and never counted
+as independent replicates.
+
+Second, the normalized magnetization autocorrelation and its fixed truncation
+are
+\begin{align}
+\rho_m(\ell)&=\frac{\langle[m_b(t)-\bar m_b]
+\,[m_b(t+\ell)-\bar m_b]\rangle}
+{\langle[m_b(t)-\bar m_b]^2\rangle},\nonumber\\
+\tau_{\mathrm{int}}^{(\ell_{\max})}&=\frac{1}{2}+
+\sum_{\ell=1}^{\ell_{\max}}\rho_m(\ell).
+\label{eq:autocorrelation}
+\end{align}
+The primary descriptive truncation is $\ell_{\max}=2N=32$ attempted updates;
+$N$ and $3N$ are fixed sensitivities.  Zero-variance phase series are left
+undefined rather than assigned artificial persistence.  The quantity is a
+finite-window correlation sum reported in attempted-update units, not evidence
+of critical slowing down or an effective sample-size estimate.  Its absolute
+short-lag scale includes persistence induced by changing at most one agent on
+each random-sequential update; matched arms share that update convention.
+Quench and restoration windows can also be nonstationary, so their sums are
+finite-window persistence diagnostics rather than equilibrium integrated
+correlation times.
+
+Third, we calculate the Binder cumulant
+\begin{equation}
+U_4=1-\frac{\langle m_b^4\rangle}
+{3\langle m_b^2\rangle^2}
+\label{eq:binder}
+\end{equation}
+separately for each phase and trajectory \cite{binder1981}.  Near-zero second moments are
+reported as undefined.  With only $N=16$, equation (\ref{eq:binder}) is a
+finite-size distribution-shape diagnostic; no crossing, critical point, or
+thermodynamic-limit transition is inferred.  A post-reconstruction estimator
+sensitivity repeats the calculation over each full phase and its early and
+late halves.  It compares the mean of the six trajectory-level cumulants with
+a pooled-moment construction; both uncertainty calculations resample complete
+graph--environment clusters, never updates.
 
 \subsection{Entropy and dependence}
 
@@ -275,7 +325,12 @@ in nats per attempted update.  The primary $L=3$ estimator uses pseudocount
 0.5.  Values at $L\in\{2,4\}$ and pseudocounts 0.1 and 1.0 are sensitivities.
 Five hundred time permutations provide a panel-specific finite-length floor,
 and the adjusted statistic is observed (\ref{eq:pathkl}) minus its mean floor.
-Matched arms share the same shuffle tape.
+Matched arms share the same shuffle tape.  The machine-readable sensitivity
+table retains both the empirical permutation-null interval and the Monte Carlo
+standard error of its mean.  These quantify different objects: dispersion of
+the null statistic and numerical uncertainty in the estimated bias floor,
+respectively.  The added uncertainty columns reproduce, rather than replace,
+the frozen floor mean and adjusted contrast.
 
 For a fully observed stationary Markov chain with transition kernel $P$ and
 stationary law $\pi$, the current
@@ -289,7 +344,7 @@ first-order closure.  Equation (\ref{eq:pathkl}) is instead a coarse-grained
 time-reversal diagnostic and, under additional assumptions, may be a lower
 bound on hidden irreversibility \cite{roldan2012,busiello2019,liang2023}.
 
-\resultfigure{figure02_memory_discovery_replication.pdf}{0.82\textwidth}{%
+\resultfigure{figure02_memory_discovery_replication.pdf}{0.94\textwidth}{%
 Discovery, prospective replication, and V15 cross-model memory contrasts are
 shown separately.  Points are graph/environment-cluster effects; intervals
 resample complete clusters.  V12 and V13 are not retroactively pooled into the
@@ -302,7 +357,7 @@ restoration sweeps.  In the field-quench arm the vector of balanced private
 fields changes sign at the first boundary and returns to its initial value at
 the second.  Nominal trajectories retain the initial field.  This follows the
 logic of a finite-system quench protocol, while making no quantum or
-thermodynamic-limit analogy \cite{calabrese2006}.  The initial
+thermodynamic-limit analogy.  The initial
 change is the quench; restoration is the counter-quench.
 
 For each held-out graph/environment cluster and model, the nominal manifold is
@@ -322,13 +377,13 @@ and threshold re-entry.  The prospective V15 recovery contrast is
 which can be positive, zero, or negative.  It replaces a historical maximum
 minus final-window quantity whose sign was structurally constrained.
 
-\resultfigure{figure03_v14_quench_time_series.pdf}{0.84\textwidth}{%
+\resultfigure{figure03_v14_quench_time_series.pdf}{0.94\textwidth}{%
 Corrected V14 time series for nominal and field-reversal trajectories.  The
 yellow interval marks the quench; the dotted boundary marks restoration.
 Reference energy is effective, entropy is configuration diversity, and
 distance is measured in the cluster-excluded nominal geometry.}{fig:v14series}
 
-\resultfigure{figure04_v14_cluster_recovery.pdf}{0.83\textwidth}{%
+\resultfigure{figure04_v14_cluster_recovery.pdf}{0.94\textwidth}{%
 All V14 field-reversal cluster trajectories, including the high-response
 cluster.  The derived audit replaces the held-out-panel threshold with the
 training-cluster nominal threshold.  The historical H3 sign statistic is not
@@ -368,8 +423,10 @@ compares persistent with Markovized adjusted reversal divergence.  H3 compares
 persistent with scrambled history.  H4 tests the fixed recovery contrast.
 H2--H4 form a one-sided Holm family with total $\alpha=0.03$.  Exact cluster
 sign flips are the primary tests; deterministic 10,000 cluster bootstraps give
-intervals.  Agent and time-point counts do not increase the inferential sample
-size.
+intervals.  The sign-flip enumeration is exact conditional on the observed
+paired magnitudes under a sign-symmetry null; it is not described as treatment-
+label randomization.  Agent and time-point counts do not increase the
+inferential sample size.
 
 \section{V14 correction and audit}
 
@@ -413,7 +470,7 @@ contrast is also positive in all six clusters, with a mean field-minus-nominal
 peak of 112.691 units.  These absolute values are not compared across models:
 each leave-one-cluster-out geometry is standardized and fitted within model.
 
-\resultfigure{figure06_cross_model_quench.pdf}{0.91\textwidth}{%
+\resultfigure{figure06_cross_model_quench.pdf}{0.94\textwidth}{%
 Model-specific field-quench and nominal trajectories.  Curves are means over
 six graph/environment clusters and bands show between-cluster dispersion.
 Nominal fits, scaling, covariance, and thresholds exclude the displayed
@@ -450,6 +507,12 @@ explicit current-state prompt.  H3 is more stringent: it asks whether the
 temporally related content matters beyond adding a similarly shaped prompt
 section.
 
+Several arm-level adjusted values are negative because their observed block
+divergence lies below the corresponding finite-sample shuffle-floor mean.  H2
+and H3 are paired differences between these untruncated adjusted statistics;
+their positive contrasts do not establish positive absolute entropy production
+in either arm.
+
 The prospectively pooled contrast retains substantial model heterogeneity.
 For persistent minus Markovized state, model-specific means are 0.03041 for
 Qwen (five of six cluster effects positive) and 0.07835 for Granite (six of
@@ -461,7 +524,7 @@ model-stratified cluster pairs were the prespecified units.  This decomposition
 supports cross-family direction for the Markovized contrast but not a claim
 that content-specific memory effects are uniform across model families.
 
-\resultfigure{figure07_v15_memory_controls.pdf}{0.80\textwidth}{%
+\resultfigure{figure07_v15_memory_controls.pdf}{0.94\textwidth}{%
 Per-cluster genuine-memory contrasts for both pinned model families.  Short
 horizontal segments indicate model means.  The scrambled-history arm controls
 prompt section and approximate length while destroying temporal relation to
@@ -485,6 +548,65 @@ Accordingly, the robust statement concerns the frozen coarse graining, its
 bias floor, and paired controls rather than an estimator-independent entropy-
 production rate.
 
+\section{Spatial correlation and finite-window persistence}
+
+Equations (\ref{eq:connected-correlation})--(\ref{eq:binder}) are secondary
+descriptive analyses of the same frozen trajectories; they neither modify the
+confirmatory estimands nor introduce additional simulation arms.  They were
+specified during reconstruction after the original V15 aggregate results were
+known and are therefore not a new prospective hypothesis family.  Connected
+correlation matrices are first calculated within every complete
+model--graph--environment trajectory and phase.  Their graph-distance profiles
+are then summarized over the six independent clusters.  Figure
+\ref{fig:correlations} shows cluster-averaged matrices for the persistent-
+history quench window and phase-resolved distance profiles.  Community
+boundaries are fixed by the graph construction rather than selected from the
+observed correlations.
+
+At graph distance one, the persistent-history quench-minus-baseline connected
+correlation changes are \csname V15QwenCorrQuench\endcsname{}
+(\csname V15QwenCorrQuenchCI\endcsname) for Qwen and
+\csname V15GraniteCorrQuench\endcsname{}
+(\csname V15GraniteCorrQuenchCI\endcsname) for Granite.  These cluster-level
+descriptive intervals quantify finite-window reorganization; their signs are
+not assigned a confirmatory disposition.
+
+\resultfigure{figure13_graph_distance_correlations.pdf}{0.94\textwidth}{%
+Connected belief correlations in the persistent-history arm.  The upper
+panels average complete $16\times16$ connected-correlation matrices over all
+six clusters in each model; black rules mark the two predefined communities.
+Agent indices align across graph realizations only through those community
+memberships, so fine node-level texture in an averaged matrix has no
+cross-realization identity interpretation.
+The lower panels show equation (\ref{eq:connected-correlation}) by graph
+distance, with 95\% complete-cluster bootstrap intervals.  Individual pairs
+and updates do not enter the inferential sample size.}{fig:correlations}
+
+Supplementary figure S1 combines the full autocorrelation curve with the
+fixed-lag integral in equation (\ref{eq:autocorrelation}), the Binder statistic
+in equation (\ref{eq:binder}), and empirical magnetization occupancy.  This
+combination prevents a Binder value from being interpreted without its
+underlying finite-window distribution.  It also separates persistence of the
+projected collective coordinate from the block-reversal statistic: the former
+is time-symmetric two-point dependence, whereas the latter compares forward
+and reversed path words.
+The accompanying source table also retains full-, early-half-, and late-half
+Binder estimates under cluster-first and pooled-moment rules.  Their
+differences diagnose finite-window and aggregation sensitivity rather than
+selecting whichever construction yields the larger separation.
+
+At the fixed two-sweep truncation, persistent-minus-Markovized recovery
+$\tau_{\mathrm{int}}$ changes are \csname V15QwenTauMemory\endcsname{}
+(\csname V15QwenTauMemoryCI\endcsname) updates for Qwen and
+\csname V15GraniteTauMemory\endcsname{}
+(\csname V15GraniteTauMemoryCI\endcsname) updates for Granite.  The
+field-Markovized quench-minus-baseline Binder changes are
+\csname V15QwenBinderQuench\endcsname{}
+(\csname V15QwenBinderQuenchCI\endcsname) and
+\csname V15GraniteBinderQuench\endcsname{}
+(\csname V15GraniteBinderQuenchCI\endcsname), respectively.  These estimates
+are reported whether positive, negative, or interval-compatible with zero.
+
 \section{Out-of-sample kinetic closure}
 
 We fit logistic belief and action responses only to the immutable V13
@@ -493,9 +615,11 @@ neighbor field times controlled coupling, previous belief, and previous action;
 the action model includes updated belief and previous action.  No coefficient
 is refitted to a V14 or V15 quench trajectory.  The surrogate is run on the
 same graph generator, initial-state generator, asynchronous update tape, field
-schedule, and intervention times.
+schedule, and intervention times.  It is a deliberately low-dimensional
+kinetic-Ising comparison rather than a fitted description of every asymmetric
+or history-dependent response \cite{aguilera2021}.
 
-\resultfigure{figure10_direct_surrogate_quench.pdf}{0.92\textwidth}{%
+\resultfigure{figure10_direct_surrogate_quench.pdf}{0.94\textwidth}{%
 Out-of-sample V14 field-quench comparison between direct Qwen trajectories and
 the V13-fitted kinetic surrogate.  Matching direction, peak timing, normalized
 amplitude, recovery, and route area are assessed separately.  Surrogate
@@ -549,7 +673,7 @@ information discarded by a reduced representation.  The field-quench
 trajectory supplies a mechanistic example: energy, dependence, entropy rate,
 and fluctuation can change while mean magnetization remains balanced.
 
-\resultfigure{figure09_confirmatory_effects.pdf}{0.87\textwidth}{%
+\resultfigure{figure09_confirmatory_effects.pdf}{0.94\textwidth}{%
 V15 frozen effects and 95\% cluster-bootstrap intervals.  Distance and
 information units occupy separate panels; no claims forest places incompatible
 quantities on one numerical axis.  Dispositions use exact cluster sign flips
@@ -615,10 +739,36 @@ analysis configuration, aggregate tables, figure source data, vector PDFs, and
 content-addressed manifests.  Raw prompts, completions, and full trajectories
 remain outside Git because they are large and potentially sensitive; their
 tree hashes and replay results are repository-facing.  Every trajectory can be
-regenerated through content-addressed model decisions.  The complete V15
-experiment used \csname V15GPUHours\endcsname{} measured generation GPU-hours.
+regenerated through content-addressed model decisions.  The original sealed
+V15 execution used \csname V15OriginalGPUHours\endcsname{} measured generation
+GPU-hours; the fresh from-scratch reconstruction accounted for at least
+\csname V15ReconstructionGPUHours\endcsname{} measured generation GPU-hours
+under the same scientific protocol.  This runtime difference is an
+environment-dependent reproducibility cost rather than a scientific outcome.
+The original external raw tree did not survive a later Pod replacement.  The
+fresh call records replay internally at decision resolution and their frozen
+aggregate tables, calls, and token counts are compared with the committed
+reference package; historical call-file digest identity cannot be checked
+without the deleted original raw tree.
+The content-addressed accounting audit separately identified
+\csname V15OrphanFormalDecisions\endcsname{} decision records
+(\csname V15OrphanFormalGPUHours\endcsname{} generation GPU-hours) from any
+interrupted atomic panels; these records contribute to compute accounting but
+not to a scientific trajectory.
+One additional model generation failed after inference but before its atomic
+raw record could be written.  It is counted as
+\csname V15UnrecordedInfrastructureCalls\endcsname{} infrastructure call, but
+its tokens and latency are unavailable; fresh reconstruction token, GPU-hour,
+and cost totals are therefore measured lower bounds.
 No chain of
 thought was requested or retained.
+
+Every experimental arm instantiates a fresh agent-network state from its
+frozen panel seeds.  Model weights and the tokenizer are shared read-only for
+throughput, but conversational history, generation key/value caches, mutable
+agent objects, and scientific random-number state are not carried between
+arms.  Each generation resets the frozen per-decision seed; record counters
+and provider accounting do not enter prompts or transition probabilities.
 
 The frozen execution-source digest inadvertently enumerated one ignored
 224-byte Python bytecode cache outside a conventional \texttt{\_\_pycache\_\_}

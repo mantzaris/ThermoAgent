@@ -1,0 +1,53 @@
+{
+  "artifact_root": "/workspace/ThermoAgent-v15-reconstruction-b309f0ab",
+  "cuda_available": true,
+  "disk_free_bytes": 366183429898240,
+  "disk_total_bytes": 2352452913332224,
+  "gpu_capability": [
+    8,
+    9
+  ],
+  "gpu_count": 1,
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "huggingface_cache_root": "/workspace/ThermoAgent-v15-model-cache/huggingface",
+  "nvcc_version_output": null,
+  "nvidia_smi_gpu_status_rows": [
+    "NVIDIA GeForce RTX 4090, 580.178.04, 24564, 24078, 0"
+  ],
+  "packages": {
+    "PyMuPDF": "1.28.2",
+    "PyYAML": "6.0.2",
+    "accelerate": "1.10.1",
+    "bitsandbytes": "0.47.0",
+    "huggingface-hub": "0.34.4",
+    "joblib": "1.5.3",
+    "matplotlib": "3.10.5",
+    "networkx": "3.5",
+    "numpy": "2.1.2",
+    "pandas": "2.3.1",
+    "protobuf": "5.29.5",
+    "pydantic": "2.11.7",
+    "pytest": "8.4.1",
+    "safetensors": "0.6.2",
+    "scikit-learn": "1.5.2",
+    "scipy": "1.16.1",
+    "sentencepiece": "0.2.0",
+    "threadpoolctl": "3.6.0",
+    "tokenizers": "0.21.4",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.55.4"
+  },
+  "physical_ram_bytes": 270097924096,
+  "python": "3.12.3",
+  "reconstruction_identity": {
+    "granite_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+    "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+    "qwen_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "reconstruction_label": "fresh-v15-b309f0ab",
+    "repository_commit": "b309f0ab76cb24377de5872eebc811582af1f43f"
+  },
+  "recorded_at_utc": "2026-08-25T08:52:32.188071+00:00",
+  "repository_filesystem_free_bytes": 21348069376,
+  "repository_filesystem_total_bytes": 53687091200,
+  "torch_cuda": "12.8"
+}

@@ -1,26 +1,26 @@
 {
-  "artifact_root": "/workspace/ThermoAgent-v15-artifacts",
+  "artifact_root": "/workspace/ThermoAgent-v15-reconstruction-b309f0ab",
   "formal": {
-    "bytes": 57514139,
+    "bytes": 57501968,
     "file_count": 99,
-    "tree_sha256": "8cd2af6e3de48357427b869e4db7d445bfb305101c999ecee158c22368b0aa51"
+    "tree_sha256": "b884e693fa764183ca36d1220a55237bb9e52e24cd7db382af80a93ebed94444"
   },
-  "generated_at": "2026-08-22T19:52:11.731057+00:00",
+  "generated_at": "2026-08-25T10:15:43.388578+00:00",
   "pilot": {
-    "bytes": 581235,
-    "file_count": 8,
-    "tree_sha256": "6d575ef376bc2e738934f7695b45d15807358589240caa80538a7dcbe5b7321b"
+    "bytes": 387021,
+    "file_count": 4,
+    "tree_sha256": "3be258974bb1088d0e550d743cca80f8a6d7257dd4511d820497da2bcd66b1d8"
   },
   "raw_artifacts_committed": false,
   "raw_formal": {
-    "bytes": 125893817,
-    "file_count": 34560,
-    "tree_sha256": "dfc2961b85c79ee9a4bf24f46e314c81a56497a7a40749825b44abc8d29082be"
+    "bytes": 126606201,
+    "file_count": 34757,
+    "tree_sha256": "215151ff3b38c25f399df01e0e327c9fc08471a959f92e0284af4bde6d13fa55"
   },
   "tree": {
-    "bytes": 185550119,
-    "file_count": 35057,
-    "tree_sha256": "928a7441d3f243d1e8f498e6932a1af7dae579babbd6de95e0317989af835090"
+    "bytes": 208149915,
+    "file_count": 35246,
+    "tree_sha256": "c9fc7857daa9672b4d255a2ebeb3d2a7f24ed63df8fb6996d0455d768217ea2e"
   },
   "v14_raw_outcomes_modified": false
 }

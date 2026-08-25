@@ -1,4 +1,5 @@
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -17,6 +18,38 @@ from thermoagent.statmech_llm_v15.workflow import artifact_root, execution_sourc
 
 
 ROOT = Path(__file__).resolve().parents[2]
+RECONSTRUCTION_BASE = "b309f0ab76cb24377de5872eebc811582af1f43f"
+
+
+def test_reconstruction_changes_no_pre_v15_namespace():
+    tracked = subprocess.check_output(
+        ["git", "diff", "--name-only", RECONSTRUCTION_BASE, "--"],
+        cwd=ROOT,
+        text=True,
+    ).splitlines()
+    untracked = subprocess.check_output(
+        ["git", "ls-files", "--others", "--exclude-standard"],
+        cwd=ROOT,
+        text=True,
+    ).splitlines()
+    paths = sorted(set(path for path in tracked + untracked if path))
+    allowed_prefixes = (
+        "configs/statmech_v15/",
+        "thermoagent/statmech_llm_v15/",
+        "tests/statmech_v15/",
+        "results/collective_agent_statmech_v15/",
+        "paper/jstat_v15/",
+        "notes/v15_",
+    )
+    allowed_exact = {"requirements-runpod.txt"}
+    forbidden = [
+        path
+        for path in paths
+        if path not in allowed_exact
+        and not path.startswith(allowed_prefixes)
+        and not (path.startswith("scripts/") and "statmech-v15" in path)
+    ]
+    assert forbidden == []
 
 
 def test_model_families_and_revisions_are_exactly_pinned():
@@ -57,6 +90,26 @@ def test_source_checksum_is_deterministic_and_excludes_frozen_protocol():
     second = execution_source_checksum(ROOT)
     assert first == second
     assert len(first) == 64
+
+
+def test_source_checksum_excludes_root_level_bytecode(tmp_path):
+    source = tmp_path / "thermoagent/statmech_llm_v15/model.py"
+    source.parent.mkdir(parents=True)
+    source.write_text("VALUE = 1\n", encoding="utf-8")
+    config = tmp_path / "configs/statmech_v15/settings.yaml"
+    config.parent.mkdir(parents=True)
+    config.write_text("version: test\n", encoding="utf-8")
+    tests = tmp_path / "tests/statmech_v15/test_model.py"
+    tests.parent.mkdir(parents=True)
+    tests.write_text("def test_value(): pass\n", encoding="utf-8")
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    (scripts / "run-statmech-v15-test.sh").write_text("#!/bin/sh\n", encoding="utf-8")
+    first = execution_source_checksum(tmp_path)
+    (source.parent / "model.pyc").write_bytes(b"ignored bytecode")
+    assert execution_source_checksum(tmp_path) == first
+    source.write_text("VALUE = 2\n", encoding="utf-8")
+    assert execution_source_checksum(tmp_path) != first
 
 
 def test_external_artifact_root_rejects_repository(monkeypatch):

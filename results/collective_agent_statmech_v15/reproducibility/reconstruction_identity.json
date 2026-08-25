@@ -1,0 +1,7 @@
+{
+  "granite_revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "qwen_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "reconstruction_label": "fresh-v15-b309f0ab",
+  "repository_commit": "b309f0ab76cb24377de5872eebc811582af1f43f"
+}

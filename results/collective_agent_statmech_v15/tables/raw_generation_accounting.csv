@@ -1,0 +1,5 @@
+model_key,accounting_scope,status,record_count,decision_requests,model_calls,prompt_tokens,generated_tokens,latency_seconds,first_pass_valid,repair_attempted,valid_after_repair,raw_record_bytes,referenced_decisions_expected,missing_referenced_records,duplicate_reference_count,raw_record_count_total,orphan_record_count_total
+qwen,retained_panel,passed,17280,17280,17280,9964681,1385868,70353.79561797762,17280,0,17280,62950838,34560,0,0,34757,197
+qwen,orphan_interrupted_attempt,passed,0,0,0,0,0,0.0,0,0,0,0,34560,0,0,34757,197
+granite,retained_panel,passed,17280,17280,17285,10943513,1508099,105100.20626886329,17275,5,17278,62924906,34560,0,0,34757,197
+granite,orphan_interrupted_attempt,passed,197,197,197,128193,17121,1182.5047910334542,197,0,197,730457,34560,0,0,34757,197

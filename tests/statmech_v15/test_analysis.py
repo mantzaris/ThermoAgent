@@ -1,20 +1,147 @@
+import hashlib
 import json
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from thermoagent.statmech_llm_v14.observables import irreversibility_sensitivity
 from thermoagent.statmech_llm_v15.analysis import (
+    _cluster_bootstrap_summary,
+    _strict_cluster_values,
     V15_Z_FEATURES,
+    cluster_seed_audit,
     fit_nominal_distances,
+    irreversibility_sensitivity_with_floor_uncertainty,
     memory_prompt_balance,
+    model_stratified_sensitivity,
     primary_hypotheses,
     quench_summaries,
+    raw_generation_accounting_audit,
 )
+from thermoagent.statmech_llm_v15.experiment import formal_panel_design
 from thermoagent.statmech_llm_v15.workflow import load_yaml
+from thermoagent.statmech_llm_v15.reporting import (
+    _unrecorded_infrastructure_accounting,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_shuffle_floor_uncertainty_audit_preserves_frozen_adjusted_estimator():
+    states = np.asarray([0, 1, 3, 2, 0, 1, 2, 3] * 12, dtype=int)
+    frozen = irreversibility_sensitivity(states, [2, 3], [0.1, 0.5], 40, 15159901)
+    audited = irreversibility_sensitivity_with_floor_uncertainty(
+        states, [2, 3], [0.1, 0.5], 40, 15159901
+    )
+    for old, new in zip(frozen, audited):
+        for key in (
+            "raw_block_divergence_nats_per_update",
+            "shuffle_floor_nats_per_update",
+            "adjusted_irreversibility_nats_per_update",
+        ):
+            assert np.isclose(old[key], new[key], rtol=0.0, atol=1.0e-15)
+        assert new["shuffle_replicates"] == 40
+        assert new["shuffle_floor_monte_carlo_se"] >= 0.0
+        assert (
+            new["shuffle_floor_mean_mc_ci_low"]
+            <= new["shuffle_floor_nats_per_update"]
+            <= new["shuffle_floor_mean_mc_ci_high"]
+        )
+
+
+def test_descriptive_cluster_summary_retains_undefined_units_as_json_null():
+    summary = _cluster_bootstrap_summary(
+        [1.0, float("nan"), 3.0], seed=15159999, replicates=100
+    )
+    assert summary["estimate"] == 2.0
+    assert summary["independent_clusters"] == 2.0
+    assert summary["clusters_total"] == 3.0
+    assert summary["undefined_clusters"] == 1.0
+    encoded = _strict_cluster_values(
+        {"cluster_a": 1.0, "cluster_b": float("nan")}
+    )
+    assert json.loads(encoded) == {"cluster_a": 1.0, "cluster_b": None}
+    assert "NaN" not in encoded
+
+
+def _raw_record(path: Path, model: str, call_index: int) -> str:
+    payload = {
+        "call_index": call_index,
+        "model_key": model,
+        "model_calls": 2 if call_index == 2 else 1,
+        "prompt_tokens": 100 + call_index,
+        "generated_tokens": 10 + call_index,
+        "latency_seconds": 0.5 + call_index,
+        "first_pass_valid": call_index != 2,
+        "repaired": call_index == 2,
+        "valid": True,
+    }
+    serialized = (json.dumps(payload, sort_keys=True) + "\n").encode("utf-8")
+    digest = hashlib.sha256(serialized).hexdigest()
+    destination = path / ("call_%08d_%s.json" % (call_index, digest[:12]))
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(serialized)
+    return digest
+
+
+def test_raw_generation_accounting_separates_interrupted_orphans(tmp_path):
+    panel_root = tmp_path / "formal/panels"
+    raw_root = tmp_path / "raw/formal"
+    panel_root.mkdir(parents=True)
+    retained = _raw_record(raw_root / "qwen", "qwen", 1)
+    _raw_record(raw_root / "qwen", "qwen", 2)
+    pd.DataFrame(
+        [{"model_key": "qwen", "raw_artifact_sha256": retained}]
+    ).to_csv(panel_root / "panel.csv", index=False)
+    audit = raw_generation_accounting_audit(panel_root, raw_root)
+    retained_row = audit[
+        (audit["model_key"] == "qwen")
+        & (audit["accounting_scope"] == "retained_panel")
+    ].iloc[0]
+    orphan_row = audit[
+        (audit["model_key"] == "qwen")
+        & (audit["accounting_scope"] == "orphan_interrupted_attempt")
+    ].iloc[0]
+    assert int(retained_row.record_count) == 1
+    assert int(retained_row.model_calls) == 1
+    assert int(orphan_row.record_count) == 1
+    assert int(orphan_row.model_calls) == 2
+    assert int(orphan_row.repair_attempted) == 1
+    assert set(audit["status"]) == {"passed"}
+
+
+def test_unrecorded_quota_failure_makes_measured_accounting_a_lower_bound(
+    tmp_path, monkeypatch
+):
+    artifacts = tmp_path / "artifacts"
+    incident = artifacts / "invalidated/quota_failure/accounting.json"
+    incident.parent.mkdir(parents=True)
+    incident.write_text(
+        json.dumps(
+            {
+                "classification": (
+                    "external_artifact_disk_quota_exceeded_during_atomic_raw_record"
+                ),
+                "model_key": "granite",
+                "panel_id": "test_panel",
+                "scientific_panel_completed": False,
+                "generated_call_tokens_and_latency": (
+                    "unavailable_because_atomic_record_was_not_written"
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("THERMO_V15_ARTIFACT_ROOT", str(artifacts))
+    accounting = _unrecorded_infrastructure_accounting()
+    assert accounting["decision_requests"] == 1
+    assert accounting["model_calls"] == 1
+    assert accounting["calls_with_unknown_prompt_tokens"] == 1
+    assert accounting["calls_with_unknown_generated_tokens"] == 1
+    assert accounting["calls_with_unknown_latency"] == 1
+    assert accounting["measured_generation_accounting_is_lower_bound"] is True
 
 
 def _protocol():
@@ -149,3 +276,27 @@ def test_prompt_balance_pairs_only_within_model_cluster():
     assert len(balance) == 12
     assert set(balance["persistent_minus_scrambled_mean_prompt_tokens"]) == {5.0}
 
+
+def test_model_stratified_sensitivity_does_not_relabel_confirmation():
+    panels, quench = _panel_and_quench_effect_fixtures()
+    sensitivity = model_stratified_sensitivity(panels, quench)
+    assert len(sensitivity) == 8
+    assert set(sensitivity["model_key"]) == {"qwen", "granite"}
+    assert set(sensitivity["independent_clusters"]) == {6}
+    assert set(sensitivity["confirmatory_disposition_assigned"]) == {False}
+    assert set(sensitivity["positive_clusters"]) == {6}
+
+
+def test_model_cluster_seed_namespaces_are_disjoint_and_arms_are_matched():
+    audit = cluster_seed_audit(formal_panel_design(_protocol()))
+    assert len(audit) == 12
+    assert set(audit["model_key"]) == {"qwen", "granite"}
+    boolean_columns = [
+        "matched_seed_within_cluster",
+        "complete_four_arm_panel",
+        "panel_seed_globally_unique",
+        "graph_seed_globally_unique",
+        "control_seed_globally_unique",
+        "model_seed_namespaces_disjoint",
+    ]
+    assert audit[boolean_columns].to_numpy(bool).all()

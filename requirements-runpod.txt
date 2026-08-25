@@ -1,13 +1,15 @@
-# Pinned additions for the isolated RunPod environment. PyTorch 2.8.0+cu128
-# is inherited into the venv with --system-site-packages to preserve the tested
-# CUDA stack.
+# Pinned additions for the isolated RunPod environment. The setup script first
+# accepts the tested inherited PyTorch 2.8.0+cu128 build when present and
+# otherwise installs that exact build from the official CUDA 12.8 wheel index.
 transformers==4.55.4
+tokenizers==0.21.4
 accelerate==1.10.1
 bitsandbytes==0.47.0
 huggingface-hub==0.34.4
 safetensors==0.6.2
 pydantic==2.11.7
 pytest==8.4.1
+numpy==2.1.2
 scipy==1.16.1
 pandas==2.3.1
 matplotlib==3.10.5
@@ -15,3 +17,5 @@ networkx==3.5
 PyYAML==6.0.2
 PyMuPDF==1.28.2
 scikit-learn==1.5.2
+joblib==1.5.3
+threadpoolctl==3.6.0

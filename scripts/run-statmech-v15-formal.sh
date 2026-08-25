@@ -13,6 +13,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-/workspace/ThermoAgent/.venv/bin/python}"
 export THERMO_V15_ARTIFACT_ROOT="${THERMO_V15_ARTIFACT_ROOT:-/workspace/ThermoAgent-v15-artifacts}"
 export CUBLAS_WORKSPACE_CONFIG="${CUBLAS_WORKSPACE_CONFIG:-:4096:8}"
+export HF_HOME="${HF_HOME:-/workspace/ThermoAgent-v15-model-cache/huggingface}"
 export HF_HUB_ENABLE_HF_TRANSFER=0
 cd "$ROOT"
 "$PYTHON_BIN" -m thermoagent.statmech_llm_v15.cli formal --model "$1"

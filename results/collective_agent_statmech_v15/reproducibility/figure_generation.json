@@ -1,8 +1,7 @@
 {
-  "catalog_sha256": "3fa59e62af14b244707c46380ad9f688c477662016e3a71e6b85c1476cf1b4d3",
-  "figure_count": 12,
-  "pdf_count": 12,
-  "postformal_publication_renderer_sha256": "cfc6f55c492918f88a7bc939b438f3ceceb255d2711bdce43163f119aafd140d",
-  "presentation_only": true,
-  "source_data_count": 12
+  "catalog_sha256": "86d2f58cfc4eb3617aec2f6bd24c8a73a453e212b7d48aaa05f6f5daba6b66c3",
+  "figure_count": 14,
+  "generated_at": "2026-08-25T09:38:56.127147+00:00",
+  "pdf_count": 14,
+  "source_data_count": 14
 }

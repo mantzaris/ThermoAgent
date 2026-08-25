@@ -1,0 +1,14 @@
+{
+  "audited_legacy_execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+  "authorized_reconstruction_gpu_hour_ceiling": 50.0,
+  "clean_semantic_source_sha256": "f8d4fa546ba46a42cd4234dd8af6ad60309c231f2997e10d0d25830f6dddb2f2",
+  "commit": "b309f0ab76cb24377de5872eebc811582af1f43f",
+  "compatibility_scope": "in_process_checksum_lookup_and_authorized_budget_guard_only",
+  "decision_prompt_token_and_invalidity_ceilings_modified": false,
+  "frozen_generation_gpu_hour_ceiling": 25.0,
+  "ignored_bytecode_recreated": false,
+  "operational_ceiling_override_scope": "external reconstruction budget guard only",
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "recorded_at_utc": "2026-08-24T09:55:10.784455+00:00",
+  "scientific_source_or_protocol_modified": false
+}

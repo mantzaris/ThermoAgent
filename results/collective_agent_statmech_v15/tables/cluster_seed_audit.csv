@@ -1,0 +1,13 @@
+model_key,cluster_id,panel_seed,graph_seed,control_seed,conditions,matched_seed_within_cluster,complete_four_arm_panel,panel_seed_globally_unique,graph_seed_globally_unique,control_seed_globally_unique,model_seed_namespaces_disjoint
+granite,V15G_g0,15161017,15161101,15161501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+granite,V15G_g1,15162017,15162101,15162501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+granite,V15G_g2,15163017,15163101,15163501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+granite,V15G_g3,15164017,15164101,15164501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+granite,V15G_g4,15165017,15165101,15165501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+granite,V15G_g5,15166017,15166101,15166501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g0,15151017,15151101,15151501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g1,15152017,15152101,15152501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g2,15153017,15153101,15153501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g3,15154017,15154101,15154501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g4,15155017,15155101,15155501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True
+qwen,V15Q_g5,15156017,15156101,15156501,"[""field_markovized"", ""field_persistent"", ""field_scrambled"", ""nominal_markovized""]",True,True,True,True,True,True

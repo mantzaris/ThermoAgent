@@ -500,7 +500,20 @@ not an active submission/build target.
 
 ## 16. Commit and push
 
-Pending final diff review. The exact implementation commit and normal push
-status will be recorded here after verification. Because a Git commit cannot
-contain its own hash, the hash of the commit containing the finalized version
-of this report will also be stated in the author handoff.
+The verified structure implementation was committed locally as
+`9d4a01a6eac66abd4a71061749af398ef0b8b409` with message
+`Reorganize JSTAT manuscript structure`.
+
+Immediately before the push, `git fetch origin` confirmed that the remote tip
+remained the starting commit
+`534efc0e83770757bcb1cd41183de25ac5f3fe85`; the branch had not advanced or
+diverged. The normal HTTPS push could not authenticate in this shell and
+stopped with `fatal: could not read Username for 'https://github.com': No such
+device or address`. GitHub CLI authentication was absent, the configured Git
+credential cache contained no repository credential, and the loaded SSH key
+was not accepted by GitHub. No force push, rebase, merge, reset, credential
+change, or remote-URL change was attempted.
+
+This status paragraph is a documentation-only follow-up to the structural
+commit. Because a Git commit cannot contain its own hash, the exact local tip
+containing this finalized report is stated in the author handoff.

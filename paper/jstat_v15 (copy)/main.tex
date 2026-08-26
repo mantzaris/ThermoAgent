@@ -1,0 +1,836 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+% The generated result macros retain the historical V15 names. TeX normally
+% terminates a control word before a digit, so temporarily classify 1 and 5 as
+% letters while reading the generated file and access the names through
+% \csname below. This keeps the frozen reporting output reproducible.
+\def\restoreVfifteendigitcatcodes{\catcode`1=12\catcode`5=12}
+\catcode`5=11
+\catcode`1=11
+\input{results_macros.tex}
+\restoreVfifteendigitcatcodes
+\newcommand{\E}{\mathbb E}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\figroot}{../../results/collective_agent_statmech_v15/figures/pdf}
+\newcommand{\resultfigure}[4]{%
+\begin{figure}[t]\centering
+\IfFileExists{\figroot/#1}{\includegraphics[width=#2]{\figroot/#1}}{\fbox{\parbox[c][45mm][c]{0.88\textwidth}{\centering Figure generated after formal analysis:\\[2mm]\texttt{\detokenize{#1}}}}}
+\caption{#3}\label{#4}\end{figure}}
+
+\title{Statistical-mechanical characterization of memory and quench response in state-separated LLM-agent networks}
+\author{Anonymous working manuscript}
+\date{23 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We treat a network of state-separated, locally informed large-language-model
+(LLM) agent instances as a finite interacting stochastic system.  Each
+persistent identity owns a categorical belief, a committed action, bounded
+private memory, a local field, an inbox and outbox, and typed local authority;
+a random-sequential scheduler offers update opportunities but does not choose
+the resulting state.  We distinguish the complete augmented simulator state,
+its observable belief--action projection, and a rolling macroscopic
+representation.  This separation exposes how omitted private memory can act
+as a hidden historical coordinate.  We report collective order, uncertainty,
+dependence, an effective symmetric-layer energy, fluctuations, and
+coarse-grained path-reversal divergence.  We first correct a derived-analysis
+error in an earlier frozen Qwen quench study without changing any trajectory.
+We then conduct a prospectively frozen two-family experiment with
+\csname V15Trajectories\endcsname{} trajectories,
+\csname V15Decisions\endcsname{} local decisions, and six
+independent graph/environment clusters per model.  A field reversal and
+restoration is paired with nominal evolution, genuine persistent memory, and a
+format-matched scrambled-history control.  The independent-family quench
+effect is \csname V15HOne\endcsname{} (95\% interval
+\csname V15HOneCI\endcsname) within-model distance units.  Genuine
+memory changes bias-adjusted reversal divergence relative to Markovized and
+scrambled-history controls by \csname V15HTwo\endcsname{}
+(\csname V15HTwoCI\endcsname) and \csname V15HThree\endcsname{}
+(\csname V15HThreeCI\endcsname) nats per attempted update.  The fixed
+early-to-late restoration contrast is \csname V15HFour\endcsname{}
+(\csname V15HFourCI\endcsname) distance units.  All four effects meet their
+frozen criteria, although the memory contrasts are larger and more uniform in
+Granite than in Qwen.  An out-of-sample kinetic
+surrogate identifies which response components admit a simple local closure
+and which remain model- and history-dependent.  These finite-size results
+support a reduced statistical-mechanical description without interpreting
+decoding temperature as physical temperature, reference energy as literal
+energy, or projected path divergence as exact thermodynamic entropy
+production.
+\end{abstract}
+
+\noindent\textbf{Keywords:} statistical mechanics of agents; language-model
+agents; quench dynamics; entropy rate; multi-information; temporal asymmetry.
+
+\section{Introduction}
+
+Networks of language-model agent instances are interacting many-component
+systems with unusually complicated local transition rules.  A component can
+retain private history, condition on a natural-language observation, receive
+only selected messages, and execute a typed local action.  Even when model
+weights are fixed, the collective trajectory depends on graph structure,
+asynchronous scheduling, message content, bounded memory, and decoding
+randomness.  Population averages alone can hide this organization.  The
+statistical-mechanics question is whether carefully defined reduced variables
+can connect local response to collective order, fluctuation, persistence, and
+driven reorganization.
+
+The kinetic Ising model provides the canonical example in which stochastic
+local updates generate collective relaxation \cite{glauber1963}.  Related
+logit dynamics has an equilibrium stationary law when interactions derive
+from a potential \cite{blume1993}.  Nonreciprocal interactions can instead
+produce collective structures and responses unavailable to reciprocal
+potential systems \cite{fruchart2021,zhang2023}.  State-space currents and trajectory
+reversal quantify time asymmetry in Markov processes
+\cite{schnakenberg1976,seifert2005,seifert2012,roldan2012}.  Those exact
+constructions are references rather than assumptions here.  An observable
+LLM belief--action process may fail first-order closure because a prompt can
+contain persistent private history and semantically structured packets.
+Coarse-graining can hide entropy production or generate estimator-dependent
+lower bounds \cite{kawaguchi2013,busiello2019,kutvonen2015}.  We therefore use
+the more precise term \emph{coarse-grained pathwise irreversibility} for our
+empirical block-reversal statistic.
+
+Recent studies have begun to apply statistical physics to interacting LLM
+populations.  Group size can change basins and collective misalignment
+\cite{flint2025}; topology and self/social weighting alter conformity
+\cite{han2026}; intrinsic bias can dominate fitted neighbor coupling
+\cite{denobili2026}; debate noise produces finite-size ordering crossovers
+\cite{okawa2026}; and large populations can be summarized by a small family
+of fitted dynamical regimes \cite{el2026}.  Our contribution is complementary.
+We retain separate belief and committed-action layers, explicit local
+authority, inbox and outbox boundaries, random-sequential updates, persistent
+private memory, a Markovized comparison, and a controlled quench followed by
+a counter-quench.  We place direct Qwen \cite{qwen2024} and Granite
+\cite{granite33model} trajectories beside an out-of-sample kinetic closure.
+
+The central claim is descriptive and explanatory, not performance-oriented.
+Statistical-mechanical variables provide a compact language for uncertainty,
+dependence, compatibility, fluctuation, and temporal response that is not
+contained in a single magnetization.  No task reward, controller improvement,
+human response, or operational benefit is evaluated.  Nor do two pinned
+models establish universality.
+
+\resultfigure{figure01_augmented_state_architecture.pdf}{0.96\textwidth}{%
+Agent information boundaries and the augmented-to-macroscopic map.  The
+complete state $\Xi_t$ includes private memory, graph and schedule state; the
+evaluator observes $Y_t=\phi(\Xi_t)$ and constructs rolling
+$Z_t=\psi(Y_{t-w+1:t})$.  The scheduler offers a turn and delivers a packet but
+does not supply the model's belief, action, memory, or signal.}{fig:architecture}
+
+\section{Stochastic process and information boundaries}
+
+\subsection{Local agent state}
+
+For agent $i$ at attempted update $t$, the primary categorical coordinates are
+belief $b_i(t)\in\{-1,+1\}$ and committed action
+$a_i(t)\in\{-1,+1\}$.  Its bounded local state also includes confidence,
+commitment status, workload, a memory code, at most three private history
+entries, an inbox, and an outbox.  Display labels are counterbalanced and
+decoded back to latent spins.  The microscopic projection is
+\begin{equation}
+Y_t=(\bm b_t,\bm a_t,\bm c_t,\bm m_t),
+\end{equation}
+but this is not the complete simulator state.
+
+Let
+\begin{equation}
+\Xi_t=(S_{1,t},\ldots,S_{N,t},G_t,{\cal D}_t,q_t,R_t)
+\end{equation}
+denote all agent-private states $S_{i,t}$, graph state $G_t$, delivery operator
+${\cal D}_t$, quench phase $q_t$, and the explicitly specified randomness
+state $R_t$.  With fixed model weights and tokenizer, reconstructed local
+prompts, and a defined scheduler, $\Xi_t$ induces a time-inhomogeneous
+transition kernel under the external quench protocol.  The evaluator's map
+$Y_t=\phi(\Xi_t)$ deliberately omits some prompt history and randomness.
+Consequently $Y_t$ and any rolling macrostate need not be Markov.
+
+At each attempted update, a random permutation gives every agent exactly one
+opportunity per sweep.  Only the scheduled instance receives its private
+observation, current local state, currently delivered inbox, and, in a memory
+condition, its own bounded history.  It returns a validated typed object
+containing belief, action, confidence, commitment, memory state, outgoing
+signal, and tool action.  One bounded repair may correct syntax; an invalid
+result causes no centrally selected scientific action.  A serialized packet
+is sent on one graph edge.  Fingerprints of nonrecipient peer-private states
+are compared around every transition.
+
+\subsection{Markovized, persistent, and scrambled history}
+
+The Markovized prompt is reconstructed from the explicitly recorded current
+state and does not carry free conversational history.  The persistent prompt
+adds the instance's last three own entries in the fixed format
+\texttt{time, belief, action, memory}.  Thus two trajectories with identical
+visible $(\bm b_t,\bm a_t)$ can have distinct conditional future laws:
+\begin{equation}
+P(Y_{t+1}\mid Y_t,M_t)\ne P(Y_{t+1}\mid Y_t,M'_t).
+\end{equation}
+If $M_t$ is projected out, conditional dependence on older visible states can
+remain.  This is a concrete mechanism for increased block reversal divergence,
+not a proof of physical dissipation.
+
+The V15 scrambled-history control isolates prompt presence and approximate
+length.  It uses only the same agent's past opportunity times, while belief,
+action, and memory content are deterministically randomized from a frozen
+control seed.  No donor agent, future time, or hidden environmental outcome is
+used.  Genuine and scrambled entries have the same section, count, field
+names, and format.  Token counts and their paired differences are measured;
+turn-by-turn equality is not assumed.
+
+\section{Collective observables}
+
+\subsection{Order and effective compatibility}
+
+Belief and action order and their overlap are
+\begin{equation}
+m_b=\frac{1}{N}\sum_i b_i,\qquad
+m_a=\frac{1}{N}\sum_i a_i,\qquad
+q_{ba}=\frac{1}{N}\sum_i b_i a_i.
+\end{equation}
+Disagreement is the fraction of connected pairs with unequal states.  For a
+symmetric comparison layer $W_s=(W+W^\top)/2$, we define
+\begin{equation}
+H_{\mathrm{ref}}=-\frac{J_b}{2}\bm b^\top W_s\bm b
+-\frac{J_a}{2}\bm a^\top D_s\bm a
+-K\bm a^\top\bm b-\bm h^\top\bm b-\bm g^\top\bm a .
+\label{eq:href}
+\end{equation}
+We report $e_{\mathrm{ref}}=H_{\mathrm{ref}}/N$.  Equation
+(\ref{eq:href}) is an effective compatibility coordinate anchored in a
+symmetric reference model.  We do not infer a Gibbs law for the LLM process
+and do not call this literal energy.  Likewise
+$N\operatorname{Var}(e_{\mathrm{ref}})$ is an energy-fluctuation observable,
+not heat capacity unless an independently justified effective temperature
+exists.
+
+The belief susceptibility is reported without physical-temperature
+normalization,
+\begin{equation}
+\chi_b=N\operatorname{Var}(m_b),
+\end{equation}
+within a prescribed rolling window.  Three secondary observables resolve
+spatial organization, temporal persistence, and the shape of the finite-size
+order-parameter distribution.  First, for a phase window $W$ we define the
+connected belief correlation at graph distance $d$,
+\begin{equation}
+C_b(d;W)=\frac{1}{|{\cal P}_d|}\sum_{(i,j)\in{\cal P}_d}
+\left[\langle b_i b_j\rangle_W-\langle b_i\rangle_W
+\,\langle b_j\rangle_W\right],\qquad
+{\cal P}_d=\{(i,j):i<j,\ d_G(i,j)=d\}.
+\label{eq:connected-correlation}
+\end{equation}
+Shortest paths use the actual reciprocal modular delivery support.  The
+bracket averages post-update observations at attempted-update resolution
+within one phase of one
+trajectory; node pairs are averaged inside that trajectory and never counted
+as independent replicates.
+
+Second, the normalized magnetization autocorrelation and its fixed truncation
+are
+\begin{align}
+\rho_m(\ell)&=\frac{\langle[m_b(t)-\bar m_b]
+\,[m_b(t+\ell)-\bar m_b]\rangle}
+{\langle[m_b(t)-\bar m_b]^2\rangle},\nonumber\\
+\tau_{\mathrm{int}}^{(\ell_{\max})}&=\frac{1}{2}+
+\sum_{\ell=1}^{\ell_{\max}}\rho_m(\ell).
+\label{eq:autocorrelation}
+\end{align}
+The primary descriptive truncation is $\ell_{\max}=2N=32$ attempted updates;
+$N$ and $3N$ are fixed sensitivities.  Zero-variance phase series are left
+undefined rather than assigned artificial persistence.  The quantity is a
+finite-window correlation sum reported in attempted-update units, not evidence
+of critical slowing down or an effective sample-size estimate.  Its absolute
+short-lag scale includes persistence induced by changing at most one agent on
+each random-sequential update; matched arms share that update convention.
+Quench and restoration windows can also be nonstationary, so their sums are
+finite-window persistence diagnostics rather than equilibrium integrated
+correlation times.
+
+Third, we calculate the Binder cumulant
+\begin{equation}
+U_4=1-\frac{\langle m_b^4\rangle}
+{3\langle m_b^2\rangle^2}
+\label{eq:binder}
+\end{equation}
+separately for each phase and trajectory \cite{binder1981}.  Near-zero second moments are
+reported as undefined.  With only $N=16$, equation (\ref{eq:binder}) is a
+finite-size distribution-shape diagnostic; no crossing, critical point, or
+thermodynamic-limit transition is inferred.  A post-reconstruction estimator
+sensitivity repeats the calculation over each full phase and its early and
+late halves.  It compares the mean of the six trajectory-level cumulants with
+a pooled-moment construction; both uncertainty calculations resample complete
+graph--environment clusters, never updates.
+
+\subsection{Entropy and dependence}
+
+For discretized collective words $x$ in a rolling window, Shannon
+configuration
+entropy is
+\begin{equation}
+S_{\mathrm{config}}=-\sum_x \hat p(x)\log\hat p(x).
+\end{equation}
+This is the usual plug-in Shannon functional \cite{shannon1948}.
+The entropy rate is a bounded-history plug-in estimate of next-word
+unpredictability.  Single-variable marginal entropy measures local occupancy;
+pairwise mutual information measures dependence between variables.  Total
+correlation \cite{watanabe1960},
+\begin{equation}
+{\cal T}=\sum_{k=1}^{2N}H(X_k)-H(X_1,\ldots,X_{2N}),
+\end{equation}
+separates marginal uncertainty from synchronous joint dependence.
+
+The plug-in joint entropy of 32 binary variables in a short window has a large
+finite-sample floor \cite{paninski2003}.  We therefore retain the raw estimate
+but independently circular-shift each variable 200 times.  Shifts preserve
+each marginal occupancy and within-variable temporal ordering while breaking
+synchronous cross-variable relations.  We report raw, null mean, their
+untruncated difference, and a normalized difference divided by the sum of
+marginal entropies.  The same audit is applied to pairwise and edge mutual
+information.  A negative adjusted estimate remains negative.
+
+\subsection{Rolling macrostate}
+
+The primary five-sweep representation is
+\begin{align}
+Z_t=(&m_b,m_a,q_{ba},e_{\mathrm{ref}},v_E,S_{\mathrm{config}},h_{\mathrm{rate}},
+{\cal T}_{\mathrm{adj}},I_{\mathrm{pair,adj}},I_{\mathrm{edge,adj}},\nonumber\\
+&\chi_b,\rho_b,D_b)_t .
+\end{align}
+Three- and seven-sweep windows are frozen sensitivities.  This is an
+observable reduced representation, not a complete thermodynamic state.
+
+\section{Pathwise temporal asymmetry}
+
+For a discrete observed word sequence and block length $L$, let
+$\hat P_L(x_0,\ldots,x_L)$ be the regularized empirical forward block law.
+We compute
+\begin{equation}
+{\cal I}_L=\frac{1}{L}
+\KL\left[\hat P_L(x_0,\ldots,x_L)\parallel
+\hat P_L(x_L,\ldots,x_0)\right]
+\label{eq:pathkl}
+\end{equation}
+in nats per attempted update.  The primary $L=3$ estimator uses pseudocount
+0.5.  Values at $L\in\{2,4\}$ and pseudocounts 0.1 and 1.0 are sensitivities.
+Five hundred time permutations provide a panel-specific finite-length floor,
+and the adjusted statistic is observed (\ref{eq:pathkl}) minus its mean floor.
+Matched arms share the same shuffle tape.  The machine-readable sensitivity
+table retains both the empirical permutation-null interval and the Monte Carlo
+standard error of its mean.  These quantify different objects: dispersion of
+the null statistic and numerical uncertainty in the estimated bias floor,
+respectively.  The added uncertainty columns reproduce, rather than replace,
+the frozen floor mean and adjusted contrast.
+
+For a fully observed stationary Markov chain with transition kernel $P$ and
+stationary law $\pi$, the current
+\begin{equation}
+J_{xy}=\pi_xP_{xy}-\pi_yP_{yx}
+\end{equation}
+can define an exact Markov entropy-production rate under the usual support
+conditions.  We do not apply that interpretation to projected LLM trajectories.
+Persistent histories, semantic content, and bounded observations can violate
+first-order closure.  Equation (\ref{eq:pathkl}) is instead a coarse-grained
+time-reversal diagnostic and, under additional assumptions, may be a lower
+bound on hidden irreversibility \cite{roldan2012,busiello2019,liang2023}.
+
+\resultfigure{figure02_memory_discovery_replication.pdf}{0.94\textwidth}{%
+Discovery, prospective replication, and V15 cross-model memory contrasts are
+shown separately.  Points are graph/environment-cluster effects; intervals
+resample complete clusters.  V12 and V13 are not retroactively pooled into the
+V15 confirmatory interval.}{fig:memory}
+
+\section{Quench protocol and nominal geometry}
+
+Each trajectory has 15 baseline sweeps, 15 intervention sweeps, and 15
+restoration sweeps.  In the field-quench arm the vector of balanced private
+fields changes sign at the first boundary and returns to its initial value at
+the second.  Nominal trajectories retain the initial field.  This follows the
+logic of a finite-system quench protocol, while making no quantum or
+thermodynamic-limit analogy.  The initial
+change is the quench; restoration is the counter-quench.
+
+For each held-out graph/environment cluster and model, the nominal manifold is
+fitted only from nominal trajectories in the other five clusters.  Training
+medians impute nonfinite coordinates; training means and scales standardize
+features; shrinkage covariance with frozen ridge fraction defines a
+Mahalanobis-like distance.  The nominal 95th-percentile threshold is computed
+from those training distances.  The held-out cluster contributes neither a
+scale nor a threshold.
+
+We summarize peak departure, integrated response, path length, final residual,
+and threshold re-entry.  The prospective V15 recovery contrast is
+\begin{equation}
+\Delta d_{\mathrm{rec}}=
+\overline d_{31:35}-\overline d_{41:45},
+\end{equation}
+which can be positive, zero, or negative.  It replaces a historical maximum
+minus final-window quantity whose sign was structurally constrained.
+
+\resultfigure{figure03_v14_quench_time_series.pdf}{0.94\textwidth}{%
+Corrected V14 time series for nominal and field-reversal trajectories.  The
+yellow interval marks the quench; the dotted boundary marks restoration.
+Reference energy is effective, entropy is configuration diversity, and
+distance is measured in the cluster-excluded nominal geometry.}{fig:v14series}
+
+\resultfigure{figure04_v14_cluster_recovery.pdf}{0.94\textwidth}{%
+All V14 field-reversal cluster trajectories, including the high-response
+cluster.  The derived audit replaces the held-out-panel threshold with the
+training-cluster nominal threshold.  The historical H3 sign statistic is not
+used as directional evidence.}{fig:v14recovery}
+
+\section{Prospective V15 design}
+
+The original model is Qwen/Qwen2.5-7B-Instruct at immutable revision
+{\footnotesize\texttt{a09a3545\allowbreak 8c702b33\allowbreak eeacc393\allowbreak d1030632\allowbreak 34e8bc28}}.  The independent family is
+IBM Granite-3.3-8B-Instruct at revision
+{\footnotesize\texttt{51dd4bc2\allowbreak ade4059a\allowbreak 6bd87649\allowbreak d68aa11e\allowbreak 4fb2529b}}.  Both run with Transformers
+4.55.4, PyTorch 2.8.0+cu128, bitsandbytes 0.47.0, NF4 double quantization, BF16
+computation, decoding temperature 0.5, top-$p=0.9$, and at most 96 generated
+tokens.  The model's decoding temperature is not an inferred thermodynamic
+temperature.
+
+Each family contributes six new graph/environment clusters.  Each cluster has
+$N=16$, a reciprocal modular fixed-degree graph, coupling $J=0.8$, balanced
+disordered initialization, and four matched trajectories: nominal Markovized,
+field-quench Markovized, field-quench persistent memory, and field-quench
+scrambled history.  Graphs, fields, initial states, label maps, update orders,
+recipient variates, and inference seeds are paired where technically
+meaningful.  A complete graph/environment trajectory cluster is the
+inferential unit.
+
+The engineering pilot is restricted to loading, schema validity, occupancy,
+both transition directions, timing, privacy, delivery, prompt-token balance,
+latency, and projected compute.  It does not calculate a quench, memory, or
+irreversibility contrast.  The formal design contains
+\csname V15Trajectories\endcsname{} trajectories and
+\csname V15Decisions\endcsname{} attempted local decisions.  Complete
+unfavorable trajectories are retained.
+
+The hypotheses are frozen as follows.  H1 compares Granite field-quench peak
+departure with matched nominal evolution at one-sided $\alpha=0.02$.  H2
+compares persistent with Markovized adjusted reversal divergence.  H3 compares
+persistent with scrambled history.  H4 tests the fixed recovery contrast.
+H2--H4 form a one-sided Holm family with total $\alpha=0.03$.  Exact cluster
+sign flips are the primary tests; deterministic 10,000 cluster bootstraps give
+intervals.  The sign-flip enumeration is exact conditional on the observed
+paired magnitudes under a sign-symmetry null; it is not described as treatment-
+label randomization.  Agent and time-point counts do not increase the
+inferential sample size.
+
+\section{V14 correction and audit}
+
+The V14 audit preserves every frozen prompt, completion, categorical choice,
+and trajectory.  The original source computed a field panel's recovery
+threshold from its own baseline, despite protocol text specifying a
+training-only threshold.  Audit version 1.1 passes an explicit cluster-to-
+training-threshold map from leave-one-cluster-out fitting into recovery
+summaries.  A versioned archive retains the committed historical JSON, tables,
+README, claims matrix, and macros.
+
+The frozen H3 number was the maximum recovery distance minus the final-five
+mean.  It remains numerically reproducible, but this construction is
+nonnegative for nearly every nonconstant trajectory.  Its raw and Holm-adjusted
+sign-flip probabilities are retained as historical audit values and removed
+from inferential support.  The corrected machine-readable fields distinguish
+whether the numerical criterion was met, whether a directional test is valid,
+and whether the time-resolved path is consistent with return.
+
+The audit also executes the omitted 10,000 cluster-preserving label
+permutations.  All four panels stay together within each cluster, and every
+replicate refits imputation, scaling, logistic regression, and leave-one-
+cluster-out predictions.  Three-, five-, and seven-sweep nominal geometries
+are fitted independently.  Each coordinate and observable family is deleted
+in turn.  Dependence estimates receive circular-shift null floors.  These are
+delayed prespecified sensitivities, not a prospective V14 experiment.
+
+\section{Results: field-quench replication}
+
+The Granite-family H1 contrast is \csname V15HOne\endcsname{} distance units
+(95\% interval \csname V15HOneCI\endcsname); its frozen disposition is
+\csname V15HOneDisposition\endcsname{}.  Figure
+\ref{fig:crossquench} displays model-specific distances rather than pooling
+their absolute scales.  A positive contrast indicates a field-driven
+departure beyond nominal variation; a nonpositive or uncertain contrast
+would delimit cross-family replication.  The complete cluster table is
+retained regardless of direction.
+
+All six Granite cluster effects are positive.  The separately retained Qwen
+contrast is also positive in all six clusters, with a mean field-minus-nominal
+peak of 112.691 units.  These absolute values are not compared across models:
+each leave-one-cluster-out geometry is standardized and fitted within model.
+
+\resultfigure{figure06_cross_model_quench.pdf}{0.94\textwidth}{%
+Model-specific field-quench and nominal trajectories.  Curves are means over
+six graph/environment clusters and bands show between-cluster dispersion.
+Nominal fits, scaling, covariance, and thresholds exclude the displayed
+cluster.}{fig:crossquench}
+
+Restoration H4 is \csname V15HFour\endcsname{} distance units (95\% interval
+\csname V15HFourCI\endcsname), with frozen disposition
+\csname V15HFourDisposition\endcsname{}.  Unlike the historical V14 H3
+statistic, this fixed-window quantity permits either sign.  Recovery time and
+threshold crossing remain trajectory descriptors, not an equilibrium
+relaxation theorem.  The quench and counter-quench paths need not retrace one
+another because messages, actions, and history alter the state reached at
+restoration.
+
+The fixed-window decline occurs in every model--cluster pair, but it does not
+imply complete return within the observation horizon.  Every Qwen trajectory
+re-enters its training-nominal threshold six sweeps after restoration.  Only
+one of six Granite trajectories re-enters by sweep 45; the other five retain
+final-five means above their own thresholds.  Thus H4 supports motion toward
+the restored nominal regime, while Granite exhibits slower or incomplete
+finite-horizon recovery.
+
+\section{Results: memory and temporal asymmetry}
+
+Relative to Markovized state, genuine memory changes adjusted block divergence
+by \csname V15HTwo\endcsname{} nats per attempted update (95\% interval
+\csname V15HTwoCI\endcsname); the frozen disposition is
+\csname V15HTwoDisposition\endcsname{}.  Relative to the scrambled-history
+placebo, the change is \csname V15HThree\endcsname{}
+(\csname V15HThreeCI\endcsname), disposition
+\csname V15HThreeDisposition\endcsname{}.  H2 asks whether history matters
+relative to an
+explicit current-state prompt.  H3 is more stringent: it asks whether the
+temporally related content matters beyond adding a similarly shaped prompt
+section.
+
+Several arm-level adjusted values are negative because their observed block
+divergence lies below the corresponding finite-sample shuffle-floor mean.  H2
+and H3 are paired differences between these untruncated adjusted statistics;
+their positive contrasts do not establish positive absolute entropy production
+in either arm.
+
+The prospectively pooled contrast retains substantial model heterogeneity.
+For persistent minus Markovized state, model-specific means are 0.03041 for
+Qwen (five of six cluster effects positive) and 0.07835 for Granite (six of
+six positive).  For persistent minus scrambled history they are 0.00689 for
+Qwen (four of six positive) and 0.09001 for Granite (six of six positive).
+The model-specific Qwen scrambled-control sign-flip value is 0.21875 and is
+not separately confirmatory; the frozen pooled H3 remains supported because
+model-stratified cluster pairs were the prespecified units.  This decomposition
+supports cross-family direction for the Markovized contrast but not a claim
+that content-specific memory effects are uniform across model families.
+
+\resultfigure{figure07_v15_memory_controls.pdf}{0.94\textwidth}{%
+Per-cluster genuine-memory contrasts for both pinned model families.  Short
+horizontal segments indicate model means.  The scrambled-history arm controls
+prompt section and approximate length while destroying temporal relation to
+the current trajectory.}{fig:v15memory}
+
+No exact thermodynamic interpretation follows from a positive result.  The
+observed block words omit natural-language content and some private state.
+Conversely, a null H3 would be informative: prompt presence, bounded memory
+depth, model-specific history use, or estimator power could explain the V12
+and V13 contrast without a reproducible content-specific effect.  Block-length,
+pseudocount, conditional-memory-depth, occupancy, and token-balance tables
+support this distinction.
+
+Estimator sensitivity further limits the scale claim.  The pooled memory
+contrasts remain positive over most prespecified block-length and pseudocount
+combinations, but their magnitude varies substantially; at block length four
+and pseudocount one, persistent-minus-scrambled is only 0.00024 nats per
+update and the Granite component is slightly negative.  Conditional-memory
+information is likewise not monotonically larger in the persistent arm.
+Accordingly, the robust statement concerns the frozen coarse graining, its
+bias floor, and paired controls rather than an estimator-independent entropy-
+production rate.
+
+\section{Spatial correlation and finite-window persistence}
+
+Equations (\ref{eq:connected-correlation})--(\ref{eq:binder}) are secondary
+descriptive analyses of the same frozen trajectories; they neither modify the
+confirmatory estimands nor introduce additional simulation arms.  They were
+specified during reconstruction after the original V15 aggregate results were
+known and are therefore not a new prospective hypothesis family.  Connected
+correlation matrices are first calculated within every complete
+model--graph--environment trajectory and phase.  Their graph-distance profiles
+are then summarized over the six independent clusters.  Figure
+\ref{fig:correlations} shows cluster-averaged matrices for the persistent-
+history quench window and phase-resolved distance profiles.  Community
+boundaries are fixed by the graph construction rather than selected from the
+observed correlations.
+
+At graph distance one, the persistent-history quench-minus-baseline connected
+correlation changes are \csname V15QwenCorrQuench\endcsname{}
+(\csname V15QwenCorrQuenchCI\endcsname) for Qwen and
+\csname V15GraniteCorrQuench\endcsname{}
+(\csname V15GraniteCorrQuenchCI\endcsname) for Granite.  These cluster-level
+descriptive intervals quantify finite-window reorganization; their signs are
+not assigned a confirmatory disposition.
+
+\resultfigure{figure13_graph_distance_correlations.pdf}{0.94\textwidth}{%
+Connected belief correlations in the persistent-history arm.  The upper
+panels average complete $16\times16$ connected-correlation matrices over all
+six clusters in each model; black rules mark the two predefined communities.
+Agent indices align across graph realizations only through those community
+memberships, so fine node-level texture in an averaged matrix has no
+cross-realization identity interpretation.
+The lower panels show equation (\ref{eq:connected-correlation}) by graph
+distance, with 95\% complete-cluster bootstrap intervals.  Individual pairs
+and updates do not enter the inferential sample size.}{fig:correlations}
+
+Supplementary figure S1 combines the full autocorrelation curve with the
+fixed-lag integral in equation (\ref{eq:autocorrelation}), the Binder statistic
+in equation (\ref{eq:binder}), and empirical magnetization occupancy.  This
+combination prevents a Binder value from being interpreted without its
+underlying finite-window distribution.  It also separates persistence of the
+projected collective coordinate from the block-reversal statistic: the former
+is time-symmetric two-point dependence, whereas the latter compares forward
+and reversed path words.
+The accompanying source table also retains full-, early-half-, and late-half
+Binder estimates under cluster-first and pooled-moment rules.  Their
+differences diagnose finite-window and aggregation sensitivity rather than
+selecting whichever construction yields the larger separation.
+
+At the fixed two-sweep truncation, persistent-minus-Markovized recovery
+$\tau_{\mathrm{int}}$ changes are \csname V15QwenTauMemory\endcsname{}
+(\csname V15QwenTauMemoryCI\endcsname) updates for Qwen and
+\csname V15GraniteTauMemory\endcsname{}
+(\csname V15GraniteTauMemoryCI\endcsname) updates for Granite.  The
+field-Markovized quench-minus-baseline Binder changes are
+\csname V15QwenBinderQuench\endcsname{}
+(\csname V15QwenBinderQuenchCI\endcsname) and
+\csname V15GraniteBinderQuench\endcsname{}
+(\csname V15GraniteBinderQuenchCI\endcsname), respectively.  These estimates
+are reported whether positive, negative, or interval-compatible with zero.
+
+\section{Out-of-sample kinetic closure}
+
+We fit logistic belief and action responses only to the immutable V13
+microscopic-response table.  The belief model includes private field, delivered
+neighbor field times controlled coupling, previous belief, and previous action;
+the action model includes updated belief and previous action.  No coefficient
+is refitted to a V14 or V15 quench trajectory.  The surrogate is run on the
+same graph generator, initial-state generator, asynchronous update tape, field
+schedule, and intervention times.  It is a deliberately low-dimensional
+kinetic-Ising comparison rather than a fitted description of every asymmetric
+or history-dependent response \cite{aguilera2021}.
+
+\resultfigure{figure10_direct_surrogate_quench.pdf}{0.94\textwidth}{%
+Out-of-sample V14 field-quench comparison between direct Qwen trajectories and
+the V13-fitted kinetic surrogate.  Matching direction, peak timing, normalized
+amplitude, recovery, and route area are assessed separately.  Surrogate
+failure is evidence about the limits of the closure, not a failed LLM
+experiment.}{fig:surrogate}
+
+In the five-coordinate comparison geometry, the direct field-minus-nominal
+peak-response difference is only 0.142 units on average and is nonzero in one
+of six clusters, whereas the surrogate difference is 1.467 units and is
+positive in four clusters.  The corresponding field-minus-nominal
+energy--entropy route-area differences are 0.043 and 0.695.  The direct shared
+response peaks at the quench boundary in one cluster and is otherwise dominated
+by initial relaxation; the surrogate places its peak at the quench or
+counter-quench boundary in four clusters.  Both descriptions return close to
+their own final shared-response baseline, but the surrogate neither reproduces
+the direct amplitude nor its timing.  This also explains why the richer V14
+macrostate distance can show a large quench pulse that a short kinetic closure
+over a small shared coordinate set misses.
+
+This comparison identifies three possible failure modes.  First, a homogeneous
+logistic neighbor coefficient cannot capture state-dependent semantic use.
+Second, action and belief persistence can introduce lags not represented by a
+single synchronous mean field.  Third, hidden memory and workload can produce
+different future laws at the same projected spin configuration.  Adding
+unconstrained parameters after observing quench trajectories would obscure
+these limits, so the closure remains low-dimensional and out of sample.
+
+CPU trajectories at $N\in\{8,16,32,64\}$ supply a dense effective-model size
+context.  They are not direct LLM finite-size scaling and cannot establish a
+critical exponent or thermodynamic-limit phase transition.  The direct
+$N=16$ paths remain empirical anchors.
+
+\section{What the reduced representation contributes}
+
+Magnetization records directional order but can remain near zero when half the
+population reorganizes in opposing communities.  Configuration entropy then
+records collective state diversity; marginal entropy records local occupancy;
+total correlation distinguishes independent uncertainty from coordinated
+dependence; effective energy records compatibility with the symmetric
+reference; susceptibility and energy variance record fluctuations; correlation
+time records persistence; and path reversal records temporal ordering.  These
+quantities are complementary only when their estimators and scales are kept
+distinct.
+
+The V14 representation experiment uses transparent multinomial logistic
+regression with leave-one-cluster-out preprocessing.  The delayed permutation
+audit tests both absolute balanced accuracy and the increment over order-only
+features.  This is not a claim that entropy outperforms all ordinary summaries.
+It tests whether a predefined collective representation retains condition
+information discarded by a reduced representation.  The field-quench
+trajectory supplies a mechanistic example: energy, dependence, entropy rate,
+and fluctuation can change while mean magnetization remains balanced.
+
+\resultfigure{figure09_confirmatory_effects.pdf}{0.94\textwidth}{%
+V15 frozen effects and 95\% cluster-bootstrap intervals.  Distance and
+information units occupy separate panels; no claims forest places incompatible
+quantities on one numerical axis.  Dispositions use exact cluster sign flips
+and the frozen multiplicity allocation.}{fig:effects}
+
+\section{Interpretation and limitations}
+
+The formulation has a literal stochastic-process component and an effective
+statistical-mechanics component.  Agent instances, local prompts, packet
+delivery, update schedules, and categorical state changes are implemented
+objects.  Magnetization, Shannon entropy, mutual information, total
+correlation, and path KL are mathematical observables of recorded data.
+Reference energy is effective because the LLM transition rule is not derived
+from its Hamiltonian.  Decoding temperature is a model-generation setting.
+No free-energy-like coordinate is emphasized because an independently
+identified effective temperature is unavailable.
+
+Several limitations bound the claim.  First, two 7B instruction-model families
+do not establish universality.  Second, $N=16$ direct systems are finite; no
+thermodynamic-limit transition is claimed.  Third, the binary projection
+compresses semantic messages and private state, so temporal asymmetry is a
+coarse-grained diagnostic.  Fourth, only a reciprocal modular topology and one
+coupling/noise anchor are used in V15.  Fifth, a scrambled-history placebo
+matches format and approximate token distribution but cannot make semantic
+content exchangeable.  Sixth, short-window entropy and dependence estimates
+remain coarse-graining dependent even after a null-floor audit.
+
+The study also preserves negative boundaries.  V12 found no reliable increase
+in irreversibility from degree- and traffic-matched nonreciprocity.  V14
+partition and message-corruption trajectories remained close to nominal under
+their tested construction.  A simple kinetic closure missed parts of the
+direct coupling response.  These limits prevent the broad assertion that any
+directed graph, entropy statistic, or Ising analogy is automatically useful.
+
+\section{Conclusion}
+
+State-separated LLM-agent instances form a measurable interacting stochastic
+system whose collective trajectories admit a disciplined reduced description.
+The distinction between complete augmented state, observable projection, and
+rolling macrostate explains why private memory can generate projected history
+dependence.  Controlled field quench and restoration create a common test of
+order, uncertainty, dependence, effective compatibility, fluctuation, and
+temporal response.  V15 adds an independent model family and a format-matched
+history control to the V12--V14 evidence.  The pooled prospective memory
+effects are positive, while the weaker Qwen scrambled-control decomposition,
+Granite's incomplete threshold re-entry, and estimator sensitivity remain
+explicit boundary results.
+
+The statistical-mechanical contribution is therefore not that entropy makes
+agents perform better.  It is a formulation and measurement framework that
+connects local language-conditioned transitions to collective finite-size
+dynamics, exposes what population averages discard, and makes failures of
+simple closures explicit.  Further work requires more model families, direct
+sizes and topologies, longer stationary trajectories, and observable-state
+augmentation before thermodynamic-limit or exact stochastic-thermodynamic
+claims would be warranted.
+
+\section*{Reproducibility and data availability}
+
+The repository records immutable model revisions, package versions, prompt and
+schema hashes, graph and seed manifests, control-tape hashes, frozen protocol,
+analysis configuration, aggregate tables, figure source data, vector PDFs, and
+content-addressed manifests.  Raw prompts, completions, and full trajectories
+remain outside Git because they are large and potentially sensitive; their
+tree hashes and replay results are repository-facing.  Every trajectory can be
+regenerated through content-addressed model decisions.  The original sealed
+V15 execution used \csname V15OriginalGPUHours\endcsname{} measured generation
+GPU-hours; the fresh from-scratch reconstruction accounted for at least
+\csname V15ReconstructionGPUHours\endcsname{} measured generation GPU-hours
+under the same scientific protocol.  This runtime difference is an
+environment-dependent reproducibility cost rather than a scientific outcome.
+The original external raw tree did not survive a later Pod replacement.  The
+fresh call records replay internally at decision resolution and their frozen
+aggregate tables, calls, and token counts are compared with the committed
+reference package; historical call-file digest identity cannot be checked
+without the deleted original raw tree.
+The content-addressed accounting audit separately identified
+\csname V15OrphanFormalDecisions\endcsname{} decision records
+(\csname V15OrphanFormalGPUHours\endcsname{} generation GPU-hours) from any
+interrupted atomic panels; these records contribute to compute accounting but
+not to a scientific trajectory.
+One additional model generation failed after inference but before its atomic
+raw record could be written.  It is counted as
+\csname V15UnrecordedInfrastructureCalls\endcsname{} infrastructure call, but
+its tokens and latency are unavailable; fresh reconstruction token, GPU-hour,
+and cost totals are therefore measured lower bounds.
+No chain of
+thought was requested or retained.
+
+Every experimental arm instantiates a fresh agent-network state from its
+frozen panel seeds.  Model weights and the tokenizer are shared read-only for
+throughput, but conversational history, generation key/value caches, mutable
+agent objects, and scientific random-number state are not carried between
+arms.  Each generation resets the frozen per-decision seed; record counters
+and provider accounting do not enter prompts or transition probabilities.
+
+The frozen execution-source digest inadvertently enumerated one ignored
+224-byte Python bytecode cache outside a conventional \texttt{\_\_pycache\_\_}
+directory.  The cache was not scientific source and is not distributed as a
+repository artifact.  A versioned provenance audit reconstructs the legacy
+digest from its recorded path and hash and additionally reports a reproducible
+cache-free semantic-source digest.  This correction changes neither the
+protocol nor any formal trajectory or result.
+
+The manuscript uses standard 12-point LaTeX, which current IOP guidance accepts
+alongside the optional \texttt{iopjournal} class.  Figures are embedded vector
+PDFs with source CSVs and are rendered at 300 DPI for inspection.
+
+\section*{AI-assisted preparation declaration}
+
+AI-assisted software and text preparation was used under human-directed
+protocol constraints.  All scientific estimands, code paths, numerical tables,
+citations, figures, and claims remain subject to author verification.  No
+language-model output is treated as human evidence.
+
+\appendix
+\section{Frozen inferential details}
+
+For $n\leq20$ paired clusters, the one-sided sign-flip probability enumerates
+all $2^n$ sign assignments of the observed cluster effects.  The cluster
+bootstrap samples complete graph/environment clusters with replacement and
+never resamples time points as independent observations.  H1 receives alpha
+0.02; H2--H4 receive a Holm-adjusted family alpha 0.03.  The allocation was
+fixed before formal outcomes.  Intervals are uncertainty summaries and do not
+replace the exact paired tests.
+
+The V14 representation permutation retains the four condition panels in every
+cluster and permutes labels only within cluster.  For each of 10,000
+replicates, every leave-one-cluster-out fold refits imputation, scaling, and the
+multinomial logistic model.  Test-cluster features do not enter preprocessing.
+
+\section{Estimator sensitivity}
+
+Total-correlation nulls independently circular-shift each coordinate by a
+nonzero offset where possible.  This retains marginal occupancy and each
+coordinate's internal temporal ordering while breaking synchronous dependence.
+The adjusted estimate is not truncated.  Alternative rolling windows rebuild
+the words, covariance, training threshold, and held-out distance rather than
+subsampling a five-sweep output.
+
+For block reversal, time-shuffled floors quantify finite-length occupancy
+bias.  They do not prove stationarity.  Results at block lengths two, three,
+and four expose finite-history sensitivity; conditional mutual information at
+history depths one through three provides a separate diagnostic of incomplete
+first-order closure.
+
+\section{Authority and privacy checks}
+
+An agent's response is causally consequential: it changes the scheduled
+instance's recorded belief, action, commitment, memory code, signal, and typed
+tool consequence.  The scheduler validates but does not replace those fields.
+Every transition records the scheduled identity, recipient, packet bytes,
+prompt hash, output-record hash, and fingerprints of unrelated peer-private
+state.  Tests perturb one instance's memory or decision provider while
+confirming that peer-private stores remain unchanged.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

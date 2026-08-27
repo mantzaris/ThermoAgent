@@ -130,7 +130,7 @@ scripts/run-statmech-v15-reconstruction-analysis.sh
 scripts/run-statmech-v15-surrogate.sh
 scripts/generate-statmech-v15-figures.sh
 scripts/build-statmech-v15-results.sh
-scripts/build-statmech-v15-paper.sh
+scripts/build-jstat-paper.sh
 scripts/verify-statmech-v15.sh
 ```
 

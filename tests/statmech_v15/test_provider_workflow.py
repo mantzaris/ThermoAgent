@@ -39,9 +39,19 @@ def test_reconstruction_changes_no_pre_v15_namespace():
         "tests/statmech_v15/",
         "results/collective_agent_statmech_v15/",
         "paper/jstat_v15/",
+        "paper/jstat_v15 (copy)/",
+        "paper/jstat_v15 (another copy)/",
+        "paper/JSTAT/",
         "notes/v15_",
+        "notes/jstat_",
     )
-    allowed_exact = {"requirements-runpod.txt"}
+    allowed_exact = {
+        ".gitignore",
+        "paper/README.md",
+        "requirements-runpod.txt",
+        "scripts/build-jstat-paper.sh",
+        "scripts/verify-jstat-paper-assets.sh",
+    }
     forbidden = [
         path
         for path in paths

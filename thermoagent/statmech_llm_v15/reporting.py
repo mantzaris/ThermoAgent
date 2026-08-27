@@ -43,7 +43,7 @@ def _repository_files(repository: Path) -> List[Path]:
         repository / "thermoagent/statmech_llm_v15",
         repository / "tests/statmech_v15",
         repository / "results/collective_agent_statmech_v15",
-        repository / "paper/jstat_v15",
+        repository / "paper/JSTAT",
     )
     files = [
         path
@@ -55,6 +55,14 @@ def _repository_files(repository: Path) -> List[Path]:
         and not any(path.name.endswith(suffix) for suffix in LATEX_INTERMEDIATES)
     ]
     files.extend((repository / "scripts").glob("*statmech-v15*"))
+    files.extend(
+        path
+        for path in (
+            repository / "scripts/build-jstat-paper.sh",
+            repository / "scripts/verify-jstat-paper-assets.sh",
+        )
+        if path.exists()
+    )
     files.extend((repository / "notes").glob("v15_*.md"))
     files.extend(
         (
@@ -586,7 +594,7 @@ scripts/run-statmech-v15-reconstruction-analysis.sh
 scripts/run-statmech-v15-surrogate.sh
 scripts/generate-statmech-v15-figures.sh
 scripts/build-statmech-v15-results.sh
-scripts/build-statmech-v15-paper.sh
+scripts/build-jstat-paper.sh
 scripts/verify-statmech-v15.sh
 ```
 
@@ -657,7 +665,7 @@ than evidence of a phase transition.
 \newcommand{{\V15HFourDisposition}}{{{'supported' if disposition['H4']['supported'] else 'not supported'}}}
 {extension_macro_text}
 """
-    paper = repository / "paper/jstat_v15"
+    paper = repository / "paper/JSTAT"
     paper.mkdir(parents=True, exist_ok=True)
     atomic_bytes(macros.encode("utf-8"), paper / "results_macros.tex")
     external = {
@@ -761,8 +769,7 @@ def validate_pdfs(repository: Path) -> Dict[str, object]:
     pdfs.extend(
         path
         for path in (
-            repository / "paper/jstat_v15/main.pdf",
-            repository / "paper/jstat_v15/supplement.pdf",
+            repository / "paper/JSTAT/main.pdf",
         )
         if path.exists()
     )

@@ -12,6 +12,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+from matplotlib.path import Path as MatplotlibPath
 import numpy as np
 import pandas as pd
 
@@ -168,6 +169,7 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
     }
     patches: Dict[str, FancyBboxPatch] = {}
     positions: Dict[str, Tuple[float, float]] = {}
+    dimensions: Dict[str, Tuple[float, float]] = {}
     labeled_boxes: List[Tuple[str, FancyBboxPatch, plt.Text]] = []
     for row in rows.itertuples():
         patch = FancyBboxPatch(
@@ -193,6 +195,7 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
         )
         patches[row.component] = patch
         positions[row.component] = (row.x, row.y)
+        dimensions[row.component] = (row.width, row.height)
         labeled_boxes.append((row.component, patch, label))
 
     def arrow(source: str, target: str, rad: float = 0.0) -> None:
@@ -212,6 +215,57 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
         )
         ax.add_patch(connection)
 
+    def box_edge(
+        component: str,
+        horizontal_offset: float,
+        vertical_side: str,
+    ) -> Tuple[float, float]:
+        """Return a calculated anchor just outside a component's box edge."""
+
+        x, y = positions[component]
+        _, height = dimensions[component]
+        if vertical_side == "top":
+            edge_y = y + height / 2.0 + 0.009
+        elif vertical_side == "bottom":
+            edge_y = y - height / 2.0 - 0.009
+        else:
+            raise ValueError("vertical_side must be 'top' or 'bottom'")
+        return x + horizontal_offset, edge_y
+
+    def routed_projection_arrow(
+        source: str,
+        source_offset: float,
+        target_offset: float,
+        control_1: Tuple[float, float],
+        control_2: Tuple[float, float],
+    ) -> None:
+        """Route an observable arrow around boxes to a distinct target anchor."""
+
+        path = MatplotlibPath(
+            [
+                box_edge(source, source_offset, "bottom"),
+                control_1,
+                control_2,
+                box_edge("observable_projection_Y", target_offset, "top"),
+            ],
+            [
+                MatplotlibPath.MOVETO,
+                MatplotlibPath.CURVE4,
+                MatplotlibPath.CURVE4,
+                MatplotlibPath.CURVE4,
+            ],
+        )
+        ax.add_patch(
+            FancyArrowPatch(
+                path=path,
+                arrowstyle="-|>",
+                mutation_scale=11.5,
+                linewidth=1.2,
+                color="#444444",
+                zorder=3,
+            )
+        )
+
     arrow("private_observation", "LLM_local_transition")
     arrow("bounded_memory", "LLM_local_transition")
     arrow("delivered_inbox", "LLM_local_transition")
@@ -219,8 +273,22 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
     arrow("LLM_local_transition", "typed_local_action")
     arrow("belief_action_packet", "delivery_graph")
     arrow("typed_local_action", "environment")
-    arrow("belief_action_packet", "observable_projection_Y", -0.08)
-    arrow("typed_local_action", "observable_projection_Y", 0.08)
+    # Use separate target anchors.  The left-hand route bends around the
+    # typed-action box; the right-hand route remains short and direct.
+    routed_projection_arrow(
+        "belief_action_packet",
+        source_offset=-0.055,
+        target_offset=-0.055,
+        control_1=(0.455, 0.565),
+        control_2=(0.430, 0.315),
+    )
+    routed_projection_arrow(
+        "typed_local_action",
+        source_offset=-0.035,
+        target_offset=0.055,
+        control_1=(0.555, 0.290),
+        control_2=(0.495, 0.235),
+    )
     arrow("observable_projection_Y", "rolling_macrostate_Z")
     ax.text(
         0.02,
@@ -267,7 +335,17 @@ def _memory_replication(repository: Path, result: Path, catalog: List[Dict[str, 
         color = PALETTE["granite"] if str(row.model).lower() == "granite" else PALETTE["qwen"]
         ax.errorbar(row.estimate, y[index], xerr=[[row.estimate-row.ci_low], [row.ci_high-row.estimate]], fmt="o", color=color, capsize=3)
     ax.axvline(0, color="#555555", lw=1, ls="--")
-    ax.set_yticks(y, [str(value).replace("_", " ") for value in source["study"]])
+    publication_labels = {
+        "V12_discovery": "Exploratory discovery",
+        "V13_replication": "Prospective replication",
+        "V15_granite": "Cross-model Granite",
+        "V15_qwen": "Cross-model Qwen",
+    }
+    unknown_studies = sorted(set(source["study"]) - set(publication_labels))
+    if unknown_studies:
+        raise ValueError("unmapped publication study labels: %s" % unknown_studies)
+    ax.set_yticks(y)
+    ax.set_yticklabels([publication_labels[value] for value in source["study"]])
     ax.set_xlabel("Bias-adjusted path-reversal difference (nats/update)")
     ax.grid(axis="x", alpha=0.2)
     _save(fig, "figure02_memory_discovery_replication", source, result, catalog, "Separate memory discovery, replication, and cross-model extension", "persistent minus Markovized adjusted block divergence", "main", "Memory-associated temporal asymmetry is evaluated across distinct study roles", "V12/V13 are not prospectively pooled with V15")
@@ -300,8 +378,22 @@ def _v14_recovery(repository: Path, result: Path, catalog: List[Dict[str, object
     recovery = pd.read_csv(repository / "results/collective_agent_statmech_v14/tables/quench_recovery.csv")
     selected = macro[macro["disruption"] == "field_reversal"][["cluster_id", "sweep", "phase", "macrostate_distance", "training_nominal_threshold_95"]].copy()
     fig, ax = plt.subplots(figsize=(7.0, 4.0))
+    expected_clusters = ["V14Q_g%d" % index for index in range(6)]
+    observed_clusters = sorted(selected["cluster_id"].unique())
+    if observed_clusters != expected_clusters:
+        raise ValueError("unexpected cluster identifiers: %s" % observed_clusters)
+    publication_labels = {
+        cluster: "Cluster %d" % (index + 1)
+        for index, cluster in enumerate(expected_clusters)
+    }
     for cluster, group in selected.groupby("cluster_id"):
-        ax.plot(group["sweep"], group["macrostate_distance"], lw=1.3, alpha=0.75, label=cluster)
+        ax.plot(
+            group["sweep"],
+            group["macrostate_distance"],
+            lw=1.3,
+            alpha=0.75,
+            label=publication_labels[cluster],
+        )
     _phase_background(ax)
     ax.set_xlabel("Sweep")
     ax.set_ylabel("LOCO macrostate distance")
@@ -986,8 +1078,10 @@ def generate_figures(repository: Path) -> Dict[str, object]:
     return summary
 
 
-def generate_figure1(repository: Path) -> Dict[str, object]:
-    """Regenerate the architecture figure without touching quantitative figures."""
+def generate_selected_figures(
+    repository: Path, figure_numbers: Sequence[int]
+) -> Dict[str, object]:
+    """Regenerate selected canonical figures and update their catalog rows."""
 
     _style()
     repository = Path(repository).resolve()
@@ -995,22 +1089,33 @@ def generate_figure1(repository: Path) -> Dict[str, object]:
     for directory in (result / "figures/pdf", result / "figures/source_data"):
         directory.mkdir(parents=True, exist_ok=True)
 
+    selected = tuple(dict.fromkeys(int(value) for value in figure_numbers))
+    allowed = {1, 2, 4}
+    if not selected or not set(selected).issubset(allowed):
+        raise ValueError("targeted generation supports canonical figures 1, 2, and 4")
+
     generated: List[Dict[str, object]] = []
-    _architecture(result, generated)
-    if len(generated) != 1:
-        raise AssertionError("targeted architecture generation produced an unexpected catalog")
+    generators: Mapping[int, Callable[[], None]] = {
+        1: lambda: _architecture(result, generated),
+        2: lambda: _memory_replication(repository, result, generated),
+        4: lambda: _v14_recovery(repository, result, generated),
+    }
+    for figure_number in selected:
+        generators[figure_number]()
+    if len(generated) != len(selected):
+        raise AssertionError("targeted generation produced an unexpected catalog")
 
     catalog_path = result / "figures/figure_catalog.csv"
     catalog = pd.read_csv(catalog_path)
-    filename = generated[0]["filename"]
-    matches = catalog["filename"] == filename
-    if int(matches.sum()) != 1:
-        raise ValueError("expected exactly one architecture row in %s" % catalog_path)
-    replacement = generated[0]
-    if set(replacement) != set(catalog.columns):
-        raise ValueError("architecture catalog fields do not match the existing catalog")
-    for column in catalog.columns:
-        catalog.loc[matches, column] = replacement[column]
+    for replacement in generated:
+        filename = replacement["filename"]
+        matches = catalog["filename"] == filename
+        if int(matches.sum()) != 1:
+            raise ValueError("expected exactly one %s row in %s" % (filename, catalog_path))
+        if set(replacement) != set(catalog.columns):
+            raise ValueError("targeted catalog fields do not match the existing catalog")
+        for column in catalog.columns:
+            catalog.loc[matches, column] = replacement[column]
     atomic_csv(catalog, catalog_path)
 
     summary = {
@@ -1024,4 +1129,10 @@ def generate_figure1(repository: Path) -> Dict[str, object]:
     return summary
 
 
-__all__ = ["generate_figure1", "generate_figures"]
+def generate_figure1(repository: Path) -> Dict[str, object]:
+    """Regenerate the architecture figure without touching other figures."""
+
+    return generate_selected_figures(repository, (1,))
+
+
+__all__ = ["generate_figure1", "generate_figures", "generate_selected_figures"]

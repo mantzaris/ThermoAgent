@@ -20,7 +20,7 @@
 \restoreVfifteendigitcatcodes
 \newcommand{\E}{\mathbb E}
 \newcommand{\KL}{D_{\mathrm{KL}}}
-\newcommand{\figroot}{../../results/collective_agent_statmech_v15/figures/pdf}
+\newcommand{\figroot}{figures}
 \newcommand{\resultfigure}[4]{%
 \begin{figure}[htbp]\centering
 \IfFileExists{\figroot/#1}{\includegraphics[width=#2]{\figroot/#1}}{\fbox{\parbox[c][45mm][c]{0.88\textwidth}{\centering Figure generated after formal analysis:\\[2mm]\texttt{\detokenize{#1}}}}}
@@ -263,7 +263,7 @@ Consequently $Y_t$ and any rolling macrostate need not be Markov.
 
 Figure~\ref{fig:architecture} summarizes the information boundaries and the augmented-to-macroscopic map.
 
-\resultfigure{figure01_augmented_state_architecture.pdf}{0.96\textwidth}{%
+\resultfigure{figure01_architecture.pdf}{0.96\textwidth}{%
 Agent information boundaries and the augmented-to-macroscopic map.  The
 complete state $\Xi_t$ includes private memory, graph and schedule state; the
 evaluator observes $Y_t=\phi(\Xi_t)$ and constructs rolling
@@ -533,7 +533,7 @@ an additional history control.  Figure~\ref{fig:memory} displays these stages
 separately so that the earlier estimates are not retroactively pooled into the
 cross-model confirmatory interval.
 
-\resultfigure{figure02_memory_discovery_replication.pdf}{0.94\textwidth}{%
+\resultfigure{figure02_memory_evidence_stages.pdf}{0.94\textwidth}{%
 Exploratory discovery, prospective replication, and cross-model memory contrasts are
 shown separately.  Points are graph/environment-cluster effects; intervals
 resample complete clusters.  The exploratory and replication-stage estimates
@@ -558,7 +558,7 @@ and whether the time-resolved path is consistent with return.
 
 Figure~\ref{fig:v14series} displays the corrected time series from the earlier quench experiment.
 
-\resultfigure{figure03_v14_quench_time_series.pdf}{0.94\textwidth}{%
+\resultfigure{figure03_corrected_quench_time_series.pdf}{0.94\textwidth}{%
 Corrected time series from the earlier experiment for nominal and field-reversal trajectories.  The
 yellow interval marks the quench; the dotted boundary marks restoration.
 Reference energy is effective, entropy is configuration diversity, and
@@ -606,7 +606,7 @@ contrast is also positive in all six clusters, with a mean field-minus-nominal
 peak of 112.691 units.  These absolute values are not compared across models:
 each leave-one-cluster-out geometry is standardized and fitted within model.
 
-\resultfigure{figure06_cross_model_quench.pdf}{0.94\textwidth}{%
+\resultfigure{figure04_cross_model_quench.pdf}{0.94\textwidth}{%
 Model-specific field-quench and nominal trajectories.  Curves are means over
 six graph/environment clusters and bands show between-cluster dispersion.
 Nominal fits, scaling, covariance, and thresholds exclude the displayed
@@ -653,7 +653,7 @@ correlation changes are \csname V15QwenCorrQuench\endcsname{}
 descriptive intervals quantify finite-window reorganization; their signs are
 not assigned a confirmatory disposition.
 
-\resultfigure{figure13_graph_distance_correlations.pdf}{0.94\textwidth}{%
+\resultfigure{figure05_graph_distance_correlations.pdf}{0.94\textwidth}{%
 Connected belief correlations in the persistent-history arm.  The upper
 panels average complete $16\times16$ connected-correlation matrices over all
 six clusters in each model; black rules mark the two predefined communities.
@@ -731,7 +731,7 @@ The prompt-balance diagnostic in figure~\ref{fig:prompt-balance} of
 Appendix~\ref{app:sensitivities} records the scope of the format and
 approximate-length control.
 
-\resultfigure{figure07_v15_memory_controls.pdf}{0.94\textwidth}{%
+\resultfigure{figure06_memory_controls.pdf}{0.94\textwidth}{%
 Per-cluster genuine-memory contrasts for both pinned model families.  Short
 horizontal segments indicate model means.  The scrambled-history arm controls
 prompt section and approximate length while destroying temporal relation to
@@ -774,7 +774,7 @@ separate.  Under the prespecified tests and multiplicity allocation, all four
 criteria are met; the model-specific and estimator boundaries above remain
 part of that interpretation.
 
-\resultfigure{figure09_confirmatory_effects.pdf}{0.94\textwidth}{%
+\resultfigure{figure07_confirmatory_effects.pdf}{0.94\textwidth}{%
 Prespecified effects and 95\% cluster-bootstrap intervals.  Distance and
 information units occupy separate panels; no claims forest places incompatible
 quantities on one numerical axis.  Dispositions use exact cluster sign flips
@@ -819,7 +819,7 @@ or history-dependent response \cite{aguilera2021}.
 Figure~\ref{fig:surrogate} compares the direct trajectories from the earlier
 quench experiment with the out-of-sample kinetic surrogate.
 
-\resultfigure{figure10_direct_surrogate_quench.pdf}{0.94\textwidth}{%
+\resultfigure{figure08_direct_surrogate_quench.pdf}{0.94\textwidth}{%
 Out-of-sample field-quench comparison between direct Qwen trajectories and
 the replication-stage kinetic surrogate.  Matching direction, peak timing, normalized
 amplitude, recovery, and route area are assessed separately.  Surrogate
@@ -1000,7 +1000,7 @@ historical maximum-minus-final recovery statistic remains numerically
 reproducible but is not used as directional evidence because its construction
 is nonnegative for nearly every nonconstant trajectory.
 
-\resultfigure{figure04_v14_cluster_recovery.pdf}{0.94\textwidth}{%
+\resultfigure{figure09_cluster_recovery.pdf}{0.94\textwidth}{%
 All field-reversal cluster trajectories from the earlier experiment,
 including the high-response cluster.  The corrected audit replaces the
 held-out-panel threshold with the training-cluster nominal threshold.  The
@@ -1023,7 +1023,7 @@ multinomial logistic model; test-cluster features do not enter preprocessing.
 Figure~\ref{fig:v14audit} records the delayed dependence and full-pipeline
 permutation audit.
 
-\resultfigure{figure05_v14_delayed_audit.pdf}{0.94\textwidth}{%
+\resultfigure{figure10_delayed_audit.pdf}{0.94\textwidth}{%
 Delayed prespecified dependence and permutation audits.  Raw and
 bias-adjusted dependence, window sensitivity, and cluster-preserving nulls are
 shown explicitly.  These audits were completed after the primary outcomes
@@ -1055,7 +1055,7 @@ information at history depths one through three provides a separate diagnostic
 of incomplete first-order closure.  Figure~\ref{fig:path-sensitivity} displays
 the prespecified estimator-sensitivity grid.
 
-\resultfigure{figure08_path_reversal_sensitivity.pdf}{0.94\textwidth}{%
+\resultfigure{figure11_path_reversal_sensitivity.pdf}{0.94\textwidth}{%
 Block-length, pseudocount, and shuffled-bias-floor sensitivity for
 bias-adjusted block reversal divergence.  Memory contrasts can be checked
 against estimator choices; observable coarse-graining and finite length remain
@@ -1067,7 +1067,7 @@ trajectory.  Figure~\ref{fig:prompt-balance} records the token-count diagnostic
 for that comparison.  It supports approximate prompt-length and format balance
 but does not establish turn-by-turn token identity or semantic exchangeability.
 
-\resultfigure{figure12_memory_prompt_balance.pdf}{0.94\textwidth}{%
+\resultfigure{figure12_prompt_balance.pdf}{0.94\textwidth}{%
 Scrambled-history prompt-length control.  Per-cluster mean token counts verify
 that prompt length and format are approximately matched; semantic content
 cannot be exactly token-matched turn by turn.}{fig:prompt-balance}
@@ -1077,7 +1077,7 @@ kinetic model.  Figure~\ref{fig:surrogate-size} places the direct-system anchor
 beside that effective-model size comparison.  These calculations are not
 direct-LLM finite-size scaling and do not support a thermodynamic-limit claim.
 
-\resultfigure{figure11_surrogate_size_sensitivity.pdf}{0.94\textwidth}{%
+\resultfigure{figure13_surrogate_size_context.pdf}{0.94\textwidth}{%
 Direct $N=16$ anchors in a denser inexpensive effective-model size context.
 These are CPU kinetic-surrogate quench responses, not direct-LLM finite-size
 scaling.}{fig:surrogate-size}
@@ -1110,7 +1110,7 @@ critical point or phase transition.  Figure~\ref{fig:persistence-binder}
 therefore presents persistence, Binder, and occupancy together rather than as
 an additional confirmatory hypothesis family.
 
-\resultfigure{figure14_persistence_and_binder.pdf}{0.98\textwidth}{%
+\resultfigure{figure14_persistence_binder.pdf}{0.98\textwidth}{%
 Finite-window persistence and order-parameter shape.  Autocorrelation curves
 and their 95\% intervals compare the nominal late window with the three field
 arms using complete clusters; integrated correlation sums show all cluster

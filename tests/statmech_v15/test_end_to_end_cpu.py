@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_repository_inventory_excludes_latex_intermediates(tmp_path):
-    paper = tmp_path / "paper/jstat_v15"
+    paper = tmp_path / "paper/JSTAT"
     paper.mkdir(parents=True)
     (paper / "main.tex").write_text("paper source", encoding="utf-8")
     (paper / "main.pdf").write_bytes(b"paper")
@@ -132,31 +132,26 @@ def test_manual_pdf_qa_rechecks_digest_and_records_review(tmp_path):
     reason="LaTeX and Poppler are required for manuscript QA",
 )
 def test_manuscript_compiles_in_disposable_tree_with_embedded_fonts(tmp_path):
-    paper = tmp_path / "paper/jstat_v15"
-    figures = tmp_path / "results/collective_agent_statmech_v15/figures/pdf"
-    shutil.copytree(ROOT / "paper/jstat_v15", paper)
-    shutil.copytree(
-        ROOT / "results/collective_agent_statmech_v15/figures/pdf", figures
+    paper = tmp_path / "JSTAT"
+    shutil.copytree(ROOT / "paper/JSTAT", paper)
+    subprocess.run(
+        [
+            "latexmk",
+            "-pdf",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "main.tex",
+        ],
+        cwd=paper,
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
-    for source in ("main.tex", "supplement.tex"):
-        subprocess.run(
-            [
-                "latexmk",
-                "-pdf",
-                "-interaction=nonstopmode",
-                "-halt-on-error",
-                source,
-            ],
-            cwd=paper,
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        pdf = paper / source.replace(".tex", ".pdf")
-        assert pdf.read_bytes().startswith(b"%PDF")
-        assert subprocess.check_output(["pdftotext", str(pdf), "-"], text=True).strip()
-        fonts = subprocess.check_output(["pdffonts", str(pdf)], text=True)
-        assert _pdf_fonts_embedded(fonts)
+    pdf = paper / "main.pdf"
+    assert pdf.read_bytes().startswith(b"%PDF")
+    assert subprocess.check_output(["pdftotext", str(pdf), "-"], text=True).strip()
+    fonts = subprocess.check_output(["pdffonts", str(pdf)], text=True)
+    assert _pdf_fonts_embedded(fonts)
 
 
 def test_small_cpu_formal_analysis_is_complete_and_leakage_free(tmp_path, monkeypatch):

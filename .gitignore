@@ -188,14 +188,14 @@ results/collective_agent_statmech_v15/**/*.bin
 results/collective_agent_statmech_v15/**/*.tar
 results/collective_agent_statmech_v15/**/*.tar.*
 results/collective_agent_statmech_v15/**/*.zip
-paper/jstat_v15/*.aux
-paper/jstat_v15/*.bbl
-paper/jstat_v15/*.blg
-paper/jstat_v15/*.fdb_latexmk
-paper/jstat_v15/*.fls
-paper/jstat_v15/*.log
-paper/jstat_v15/*.out
-paper/jstat_v15/*.synctex.gz
+paper/JSTAT/*.aux
+paper/JSTAT/*.bbl
+paper/JSTAT/*.blg
+paper/JSTAT/*.fdb_latexmk
+paper/JSTAT/*.fls
+paper/JSTAT/*.log
+paper/JSTAT/*.out
+paper/JSTAT/*.synctex.gz
 
 
 .agents

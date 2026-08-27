@@ -77,160 +77,137 @@ agents; quench dynamics; entropy rate; multi-information; temporal asymmetry.
 \section{Introduction}
 \label{sec:introduction}
 
-Large-language models are increasingly studied not only as isolated
-prompt--response systems but as components of interacting agent populations
-\cite{wang2024agents,guo2024multiagents}.  Once agents exchange messages,
-retain histories, and act through a network, an output from one local decision
-can become part of another agent's next input.  This feedback permits
-amplification, cascades, coordination, fragmentation, lock-in, delayed
-response, and incomplete recovery even when every component uses fixed model
-weights.  The capability of one model instance therefore does not determine
-the trajectory of the group, because repeated circulation can create modes of
-organization that no single generation exhibits.  The scientific question
-becomes what dynamical organization emerges when many stochastic
-language-model instances interact
-over time, a question that matters for the analysis, design, reliability, and
-control of multi-agent AI systems.
+Large-language-model (LLM) agents place a generative model inside a recurrent
+loop of observation, decision, action, and environmental feedback.  This
+changes the scientific object from a response to one prompt into a stochastic
+process whose future inputs depend on its earlier outputs.  Agent surveys
+identify planning, memory, tool use, and interaction with an environment as
+recurring architectural components \cite{wang2024agents}; multi-agent systems
+add communication protocols, role assignments, and collective task structures
+\cite{guo2024multiagents}.  When many such instances interact, even fixed
+model weights can generate population trajectories that depend on message
+content, network position, update order, retained context, and decoding
+randomness.  These dependencies make interacting agents scientifically
+important beyond conventional single-prompt evaluation: the system can carry
+history, mediate influence through a graph, and develop organization that is
+not visible in any isolated response.
 
-At the component level, an LLM agent places a generative model inside a
-recurrent loop of observation, decision, action, and environmental feedback.
-Its future inputs can contain its own earlier outputs, received messages, and
-changes caused by earlier actions.  Population trajectories can consequently
-depend on message content, network position, update order, retained context,
-and decoding randomness.  Conventional benchmarks can characterize useful
-local capabilities, but they do not reveal whether network feedback produces
-stable organization, amplifies a perturbation, stores hidden history, or
-returns the population to its earlier regime.  Those are properties of the
-interacting process rather than of any response considered alone.
+Recent agent architectures demonstrate both the opportunity and the source of
+that complexity.  Role-playing agents can cooperate through natural-language
+exchange \cite{li2023camel}, while generative agents combine observation,
+planning, reflection, and a persistent natural-language memory to produce
+coordinated social behavior in a simulated environment
+\cite{park2023generative}.  Such studies establish that an LLM can be embedded
+in an autonomous or socially interactive loop and that retrieved history can
+materially condition later actions.  Much of this literature is organized
+around task completion, application architecture, or the plausibility of
+individual and social behavior.  Those objectives are valuable, but they do
+not by themselves identify a controlled stochastic process or determine which
+population-level coordinates retain information about its dynamics.
 
-Recent agent architectures establish both the feasibility of such processes
-and the source of their complexity.  Role-playing agents cooperate through
-natural-language exchange \cite{li2023camel}, while generative agents combine
-observation, planning, reflection, and persistent natural-language memory in a
-simulated social environment \cite{park2023generative}.  These systems show
-that retrieved history and communication can materially condition later
-actions.  Yet architecture and application studies are commonly evaluated by
-task completion or behavioral plausibility.  Those objectives do not by
-themselves specify a controlled stochastic process, distinguish private state
-from observed state, or identify which population coordinates retain
-dynamical information.
+LLM agents are also being used in computational social simulation.  Conditioned
+models can reproduce portions of survey-response distributions
+\cite{argyle2023}, and simulated samples have replicated several established
+behavioral experiments while also revealing model-specific distortions
+\cite{aher2023}.  A broader review documents applications of LLM-empowered
+agent-based simulation across social, physical, cyber, and hybrid settings
+\cite{gao2024abm}.  Networked LLM agents have been used more specifically to
+study opinion evolution, where an intrinsic preference for scientifically
+accurate answers can favor consensus and prompt-induced confirmation bias can
+produce fragmentation \cite{chuang2024}.  This body of work shows that
+language-conditioned agents can support controlled in-silico experiments, but
+it also cautions against assuming that their trajectories are faithful proxies
+for human populations or that semantic plausibility supplies a dynamical
+explanation.
 
-Computational social simulation and population experiments make the same
-measurement problem visible from another direction.  Conditioned language
-models reproduce portions of survey-response distributions
-\cite{argyle2023}, and simulated samples replicate some established behavioral
-experiments while exhibiting model-specific distortions \cite{aher2023}; the
-broader opportunities and validity limits of LLM-empowered agent-based
-simulation are reviewed in \cite{gao2024abm}.  Networked agents have generated
-consensus and fragmentation in opinion experiments \cite{chuang2024}, shared
-naming conventions and collective bias \cite{flintashery2025}, and
-model-dependent cooperation and coordination in repeated games
-\cite{akata2025}.  Together, these studies establish that interaction can
-produce reproducible group-level outcomes, while cautioning against treating
-semantic plausibility as a dynamical explanation or an LLM population as a
-faithful proxy for human behavior.
-
-The interaction graph makes collective organization irreducibly networked.
-Who can influence whom determines the paths along which information and
-perturbations propagate, while topology, local versus collective information,
-and community structure can alter the resulting dynamics.  Statistical
-mechanics and network science provide tools for connecting such interaction
-structure to collective behavior \cite{albert2002,boccaletti2006}; studies of
-cooperative processes on networks also emphasize that topology and finite
-size can qualitatively affect observed regimes \cite{dorogovtsev2008}.  A
-population mean suppresses this organization: identical mean order can
-coexist with different fluctuations, graph-distance correlations, community
-patterns, and routes of influence.  Graph distance supplies a natural
-coordinate for asking whether local perturbations remain localized or become
-collectively organized.  Network-aware observables are therefore
-needed even when the scientific target is a population-level response.
-
-More broadly, statistical mechanics supplies a disciplined micro-to-macro
-measurement framework.  Agent-based models ask how local rules and
-heterogeneous interactions generate system-level behavior
-\cite{bonabeau2002}, and statistical physics has developed quantitative
-accounts of opinion, cultural, language, and consensus dynamics
-\cite{castellano2009,baronchelli2018}.  Canonical stochastic models show how
-local updates generate collective relaxation \cite{glauber1963}, how a
-potential can constrain stationary interaction dynamics \cite{blume1993}, and
-how nonreciprocity can support different collective structures
-\cite{fruchart2021}.  Local language-conditioned transitions are much more
-complicated than spin updates, but population order, dependence, correlation,
-response, and distributions can still be measured.  For a finite population
-observed over finite windows, fluctuations and variation across independent
-realizations carry information that a mean trajectory discards.  This use of
-statistical mechanics does not require literal particles, a thermodynamic
-limit, or a phase transition.
-
-Controlled perturbation is important because nominal or steady observations
-underdetermine dynamics.  Similar baseline averages could describe a robustly
-organized system, a fragile one, a system that responds strongly and
-recovers, or one with delayed or incomplete recovery.  Reversing an external
-field and then restoring it probes finite-horizon sensitivity, response,
-relaxation, and recovery directly.  Comparing that trajectory with a matched
-nominal arm also separates intervention-associated change from ordinary
-evolution over the same observation window.  A quench is used here as a
-dynamical intervention, not as evidence that the network is an equilibrium
-material.
-
-Persistent history creates a distinct coarse-graining problem.  The complete
-agent process may include private textual state that is absent from a measured
-belief--action projection, so the observed population trajectory need not be
-Markov even when the augmented simulator state is.  Comparing persistent and
-Markovized prompts tests the effect of retaining history; comparing genuine
-history with a scrambled, format-matched control helps separate temporally
-related information from the mere presence of additional prompt material.
-Temporal correlation then measures persistence, while path reversal tests
-ordering in the projected trajectory.  State-space currents and trajectory
-reversal have exact thermodynamic interpretations in appropriate fully
-observed Markov systems \cite{seifert2012,roldan2012}, but coarse-graining can
-hide dissipation and make inferred bounds estimator-dependent
-\cite{kawaguchi2013,busiello2019}.  The path statistic used here is therefore
-projected temporal asymmetry, not literal entropy production.
-
-Recent LLM-population studies increasingly approach these questions with
-statistical-physics concepts: group size can alter collective misalignment
-\cite{flint2025}, topology and self--social weighting can change conformity
-\cite{han2026}, intrinsic fields can outweigh fitted neighbor coupling
+Population experiments have begun to target collective behavior directly.
+Decentralized LLM populations can form shared naming conventions, amplify
+otherwise weak individual preferences, and respond to committed minorities
+\cite{flintashery2025}; repeated-game experiments reveal distinct cooperation
+and coordination signatures across models and prompts \cite{akata2025}.
+Recent statistical-physics studies further show that group size can change
+basins of collective misalignment \cite{flint2025}, network topology and the
+balance of self and social information can alter conformity
+\cite{han2026}, fitted intrinsic fields can dominate neighbor coupling
 \cite{denobili2026}, debate noise can produce model-dependent finite-size
-crossovers \cite{okawa2026}, and high-dimensional interaction data can admit
-compact dynamical regimes \cite{el2026}.  This progress narrows the gap, but
-the joint problem remains insufficiently resolved: controlled state and
-information boundaries, field reversal and restoration, genuine and placebo
-history interventions, spatial and temporal diagnostics, cluster-level
-inference, and an out-of-sample closure test are rarely examined together.
-A task score or single consensus coordinate cannot answer all of these
-questions.
+ordering crossovers \cite{okawa2026}, and high-dimensional interaction data can
+sometimes be summarized by a small family of dynamical regimes
+\cite{el2026}.  Together these results establish that collective outcomes are
+measurable and strongly protocol- and model-dependent.  They also make clear
+that a consensus or coordination score alone does not resolve response,
+fluctuation, memory, spatial organization, and temporal ordering.
 
-The present design combines measurements because each resolves a different
-ambiguity.  Belief and action order, overlap, effective compatibility,
-fluctuations, entropy, and dependence characterize alignment and synchronous
-organization.  Connected graph-distance correlation detects spatial
-reorganization that mean order can miss; finite-window autocorrelation and
-Binder statistics describe persistence and order-parameter shape without
-establishing equilibrium correlation times, critical slowing down, or a phase
-transition.  Coarse-grained block reversal compares temporal ordering across
-Markovized, persistent, and scrambled-history conditions.  Matched quench
-controls and exact inference over independent graph--environment clusters
-define the evidential unit.  Finally, an out-of-sample kinetic surrogate asks
-whether a small set of macroscopic coordinates can reproduce aspects of the
-full response and, equally importantly, where that reduced closure fails.
+This setting connects naturally, but not literally, to established
+interacting-agent and statistical-physics research.  Agent-based models study
+how local rules and heterogeneous interactions generate system-level behavior
+\cite{bonabeau2002}; statistical physics has supplied quantitative accounts of
+opinion, cultural, language, and consensus dynamics on networks
+\cite{castellano2009,baronchelli2018}.  The kinetic Ising model is a canonical
+example in which stochastic local updates generate collective relaxation
+\cite{glauber1963}, and logit dynamics has an equilibrium stationary law when
+interactions derive from a potential \cite{blume1993}.  Nonreciprocal
+interactions can instead support structures and responses unavailable to
+reciprocal potential systems \cite{fruchart2021}.  These precedents
+motivate measurements of order, correlations, fluctuations, response, and
+relaxation; they do not imply that an LLM network is a physical material or
+that its decoding parameter is a thermodynamic temperature.
 
-The contribution is not a general-purpose agent framework, a performance
-benchmark, or a model of human society.  It is a controlled finite-size study
-that treats interacting LLM instances as measurable stochastic components and
-examines their collective response to external fields, retained and control
-histories, network organization, and coarse-graining.  The direct experiments
-use two pinned instruction-model families, $N=16$ reciprocal modular networks,
-and finite observation windows; the interpretation is effective and
-model-specific, with no thermodynamic-limit, exact physical
-entropy-production, or universality claim.  Section~\ref{sec:system-protocol}
-defines the network and interventions, Section~\ref{sec:observables-inference}
-defines measurement and inference, and Section~\ref{sec:evidence-hierarchy}
-sets out the study roles.  Sections~\ref{sec:quench-results}--\ref{sec:memory-results}
-present the quench and memory evidence, Section~\ref{sec:closure} tests reduced
-closure, and Sections~\ref{sec:discussion}--\ref{sec:conclusions} give the
-interpretation and conclusions.
+Nonequilibrium methods provide a second relevant distinction.  State-space
+currents and trajectory reversal can quantify time asymmetry in fully observed
+Markov processes \cite{seifert2012,roldan2012}.
+An observed LLM belief--action process need not satisfy that closure: prompts
+can contain bounded private history and semantically structured packets that
+are absent from the measured projection.  Coarse-graining can hide entropy
+production and can make inferred lower bounds estimator-dependent
+\cite{kawaguchi2013,busiello2019}.  Path reversal is therefore
+useful here as a projected temporal-asymmetry diagnostic, not as an assertion
+of exact thermodynamic entropy production.  The same caution applies to
+finite-window autocorrelation and Binder statistics, which describe
+persistence and distribution shape without establishing equilibrium
+correlation times, critical slowing down, or a phase transition.
+
+The closest LLM-population studies thus provide important evidence for
+conventions, conformity, finite-size ordering, and reduced dynamical laws.
+Less resolved is how a controlled network responds when an external field is
+reversed and restored, how persistent private history changes the observed
+path law relative both to a current-state prompt and to a format-matched
+history placebo, and whether a low-dimensional kinetic description closes
+those responses out of sample.  Addressing this narrower gap requires a design
+that distinguishes the complete simulator state from its measured projection,
+enforces local information boundaries, pairs intervention and control
+trajectories, and treats independent graph--environment realizations rather
+than individual updates as the inferential units.
+
+We therefore combine complementary measurements rather than treating mean
+order as a sufficient summary.  Belief and action order, overlap, an effective
+compatibility coordinate, and fluctuations describe collective alignment;
+entropy and dependence distinguish local uncertainty from synchronous
+organization.  Connected graph-distance correlation records spatial
+reorganization, while autocorrelation and Binder diagnostics describe
+finite-window persistence and order-parameter shape.  Coarse-grained block
+reversal probes temporal ordering under Markovized, persistent, and
+scrambled-history conditions.  A field quench and restoration supplies a
+controlled perturbation; matched controls and exact cluster inference separate
+that perturbation from nominal evolution.  Finally, an out-of-sample kinetic
+surrogate tests which components admit a simple local closure and which remain
+history- or model-dependent.
+
+The contribution is not a general-purpose agent architecture or a performance
+benchmark.  It is a controlled finite-size study that treats interacting LLM
+instances as measurable stochastic components and asks how collective
+observables respond to external fields, retained history, control histories,
+and coarse-graining.  The direct experiments use two pinned instruction-model
+families, $N=16$ reciprocal modular networks, and finite observation windows.
+The interpretation is correspondingly effective and model-specific: no
+thermodynamic-limit criticality, exact physical entropy-production law,
+universality, task benefit, or claim about human social behavior is inferred.
+Section~\ref{sec:system-protocol} defines the network and interventions,
+Section~\ref{sec:observables-inference} introduces the observables and
+inference, and Section~\ref{sec:evidence-hierarchy} distinguishes exploratory,
+corrected earlier, and prospective cross-model evidence.  Sections~\ref{sec:quench-results}--\ref{sec:memory-results}
+present the quench and memory results, Section~\ref{sec:closure} tests reduced
+closure, and Sections~\ref{sec:discussion}--\ref{sec:conclusions} discuss the
+scope and conclusions.
 
 \section{State-separated LLM-agent networks and quench protocols}
 \label{sec:system-protocol}

@@ -11,7 +11,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 import pandas as pd
 
@@ -101,21 +101,50 @@ def _phase_background(axis: plt.Axes) -> None:
     axis.axvline(30.5, color="#666666", ls=":", lw=1.0)
 
 
+def _validate_text_containment(
+    figure: plt.Figure,
+    labeled_boxes: Sequence[Tuple[str, FancyBboxPatch, plt.Text]],
+    padding_points: float = 2.5,
+) -> None:
+    """Fail figure generation when a rendered label exceeds its box interior."""
+
+    figure.canvas.draw()
+    renderer = figure.canvas.get_renderer()
+    padding_pixels = padding_points * figure.dpi / 72.0
+    violations: List[str] = []
+    for component, patch, label in labeled_boxes:
+        box_bounds = patch.get_window_extent(renderer=renderer)
+        text_bounds = label.get_window_extent(renderer=renderer)
+        contained = (
+            text_bounds.x0 >= box_bounds.x0 + padding_pixels
+            and text_bounds.x1 <= box_bounds.x1 - padding_pixels
+            and text_bounds.y0 >= box_bounds.y0 + padding_pixels
+            and text_bounds.y1 <= box_bounds.y1 - padding_pixels
+        )
+        if not contained:
+            violations.append(component)
+    if violations:
+        raise AssertionError(
+            "architecture labels exceed padded box interiors: %s"
+            % ", ".join(violations)
+        )
+
+
 def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
     rows = pd.DataFrame(
         [
-            ("private_observation", 0.115, 0.750, "local"),
-            ("bounded_memory", 0.115, 0.550, "local"),
-            ("delivered_inbox", 0.115, 0.350, "local"),
-            ("LLM_local_transition", 0.375, 0.550, "agent"),
-            ("belief_action_packet", 0.625, 0.700, "observable"),
-            ("typed_local_action", 0.625, 0.410, "observable"),
-            ("delivery_graph", 0.855, 0.700, "network"),
-            ("environment", 0.855, 0.410, "network"),
-            ("observable_projection_Y", 0.405, 0.135, "evaluator"),
-            ("rolling_macrostate_Z", 0.715, 0.135, "evaluator"),
+            ("private_observation", 0.120, 0.720, "local", 0.190, 0.105),
+            ("bounded_memory", 0.120, 0.540, "local", 0.190, 0.105),
+            ("delivered_inbox", 0.120, 0.360, "local", 0.190, 0.105),
+            ("LLM_local_transition", 0.360, 0.540, "agent", 0.200, 0.140),
+            ("belief_action_packet", 0.600, 0.680, "observable", 0.180, 0.120),
+            ("typed_local_action", 0.600, 0.400, "observable", 0.180, 0.120),
+            ("delivery_graph", 0.860, 0.680, "network", 0.165, 0.120),
+            ("environment", 0.860, 0.400, "network", 0.165, 0.120),
+            ("observable_projection_Y", 0.390, 0.130, "evaluator", 0.245, 0.135),
+            ("rolling_macrostate_Z", 0.730, 0.130, "evaluator", 0.235, 0.135),
         ],
-        columns=("component", "x", "y", "boundary"),
+        columns=("component", "x", "y", "boundary", "width", "height"),
     )
     fig, ax = plt.subplots(figsize=(7.1, 4.45))
     colors = {
@@ -125,72 +154,74 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
         "network": "#F3DDEB",
         "evaluator": "#E7E7E7",
     }
-    dimensions = {
-        "local": (0.18, 0.115),
-        "agent": (0.20, 0.145),
-        "observable": (0.18, 0.125),
-        "network": (0.16, 0.125),
-        "evaluator": (0.22, 0.125),
-    }
     labels = {
-        "private_observation": "Private observation",
-        "bounded_memory": "Bounded memory",
-        "delivered_inbox": "Delivered inbox",
-        "LLM_local_transition": "Local Qwen\ntransition",
+        "private_observation": "Private\nobservation",
+        "bounded_memory": "Bounded\nmemory",
+        "delivered_inbox": "Delivered\ninbox",
+        "LLM_local_transition": "Local LLM\ntransition",
         "belief_action_packet": "Belief/action\npacket",
         "typed_local_action": "Typed local\naction",
-        "delivery_graph": "Delivery graph",
+        "delivery_graph": "Delivery\ngraph",
         "environment": "Environment",
-        "observable_projection_Y": "Observable projection $Y_t$",
-        "rolling_macrostate_Z": "Rolling macrostate $Z_t$",
+        "observable_projection_Y": "Observable\nprojection $Y_t$",
+        "rolling_macrostate_Z": "Rolling\nmacrostate $Z_t$",
     }
+    patches: Dict[str, FancyBboxPatch] = {}
+    positions: Dict[str, Tuple[float, float]] = {}
+    labeled_boxes: List[Tuple[str, FancyBboxPatch, plt.Text]] = []
     for row in rows.itertuples():
-        width, height = dimensions[row.boundary]
         patch = FancyBboxPatch(
-            (row.x - width / 2.0, row.y - height / 2.0),
-            width,
-            height,
-            boxstyle="round,pad=0.012,rounding_size=0.008",
+            (row.x - row.width / 2.0, row.y - row.height / 2.0),
+            row.width,
+            row.height,
+            boxstyle="round,pad=0.008,rounding_size=0.008",
             facecolor=colors[row.boundary],
             edgecolor="#777777",
             linewidth=1.0,
             zorder=2,
         )
         ax.add_patch(patch)
-        ax.text(
+        label = ax.text(
             row.x,
             row.y,
             labels[row.component],
             ha="center",
             va="center",
-            fontsize=8.6,
+            fontsize=9.0,
+            linespacing=1.12,
+            zorder=4,
+        )
+        patches[row.component] = patch
+        positions[row.component] = (row.x, row.y)
+        labeled_boxes.append((row.component, patch, label))
+
+    def arrow(source: str, target: str, rad: float = 0.0) -> None:
+        connection = FancyArrowPatch(
+            posA=positions[source],
+            posB=positions[target],
+            patchA=patches[source],
+            patchB=patches[target],
+            arrowstyle="-|>",
+            mutation_scale=11.5,
+            linewidth=1.2,
+            color="#444444",
+            connectionstyle="arc3,rad=%s" % rad,
+            shrinkA=2.0,
+            shrinkB=1.5,
             zorder=3,
         )
+        ax.add_patch(connection)
 
-    def arrow(start: Tuple[float, float], end: Tuple[float, float], rad: float = 0.0) -> None:
-        ax.annotate(
-            "",
-            xy=end,
-            xytext=start,
-            arrowprops={
-                "arrowstyle": "->",
-                "lw": 1.2,
-                "color": "#444444",
-                "connectionstyle": "arc3,rad=%s" % rad,
-            },
-            zorder=1,
-        )
-
-    arrow((0.205, 0.750), (0.275, 0.595))
-    arrow((0.205, 0.550), (0.275, 0.550))
-    arrow((0.205, 0.350), (0.275, 0.505))
-    arrow((0.475, 0.590), (0.535, 0.675))
-    arrow((0.475, 0.510), (0.535, 0.435))
-    arrow((0.715, 0.700), (0.775, 0.700))
-    arrow((0.715, 0.410), (0.775, 0.410))
-    arrow((0.605, 0.635), (0.455, 0.205), -0.06)
-    arrow((0.605, 0.345), (0.475, 0.205), 0.06)
-    arrow((0.515, 0.135), (0.605, 0.135))
+    arrow("private_observation", "LLM_local_transition")
+    arrow("bounded_memory", "LLM_local_transition")
+    arrow("delivered_inbox", "LLM_local_transition")
+    arrow("LLM_local_transition", "belief_action_packet")
+    arrow("LLM_local_transition", "typed_local_action")
+    arrow("belief_action_packet", "delivery_graph")
+    arrow("typed_local_action", "environment")
+    arrow("belief_action_packet", "observable_projection_Y", -0.08)
+    arrow("typed_local_action", "observable_projection_Y", 0.08)
+    arrow("observable_projection_Y", "rolling_macrostate_Z")
     ax.text(
         0.02,
         0.965,
@@ -209,6 +240,7 @@ def _architecture(result: Path, catalog: List[Dict[str, object]]) -> None:
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
+    _validate_text_containment(fig, labeled_boxes)
     _save(fig, "figure01_augmented_state_architecture", rows, result, catalog, "Define agent boundaries and the augmented-to-macrostate projection", "state and information-flow definitions", "main", "LLM decisions are local while macroscopic analysis is evaluator-side", "The projection need not be Markov")
 
 
@@ -954,4 +986,42 @@ def generate_figures(repository: Path) -> Dict[str, object]:
     return summary
 
 
-__all__ = ["generate_figures"]
+def generate_figure1(repository: Path) -> Dict[str, object]:
+    """Regenerate the architecture figure without touching quantitative figures."""
+
+    _style()
+    repository = Path(repository).resolve()
+    result = repository / "results/collective_agent_statmech_v15"
+    for directory in (result / "figures/pdf", result / "figures/source_data"):
+        directory.mkdir(parents=True, exist_ok=True)
+
+    generated: List[Dict[str, object]] = []
+    _architecture(result, generated)
+    if len(generated) != 1:
+        raise AssertionError("targeted architecture generation produced an unexpected catalog")
+
+    catalog_path = result / "figures/figure_catalog.csv"
+    catalog = pd.read_csv(catalog_path)
+    filename = generated[0]["filename"]
+    matches = catalog["filename"] == filename
+    if int(matches.sum()) != 1:
+        raise ValueError("expected exactly one architecture row in %s" % catalog_path)
+    replacement = generated[0]
+    if set(replacement) != set(catalog.columns):
+        raise ValueError("architecture catalog fields do not match the existing catalog")
+    for column in catalog.columns:
+        catalog.loc[matches, column] = replacement[column]
+    atomic_csv(catalog, catalog_path)
+
+    summary = {
+        "generated_at": utc_now(),
+        "figure_count": len(catalog),
+        "pdf_count": len(list((result / "figures/pdf").glob("*.pdf"))),
+        "source_data_count": len(list((result / "figures/source_data").glob("*.csv"))),
+        "catalog_sha256": sha256_file(catalog_path),
+    }
+    atomic_json(summary, result / "reproducibility/figure_generation.json")
+    return summary
+
+
+__all__ = ["generate_figure1", "generate_figures"]

@@ -1,3 +1,0 @@
-application,comparison,delta_average_precision,delta_roc_auc,delta_brier_score,gate_threshold,rank_gate_passed
-commercial,same_information_local_KPI_plus_thermodynamics_minus_local_KPI,-0.004047970121630495,-0.00021434400404929388,-0.0005564306090793218,0.05,False
-humanitarian,same_information_local_KPI_plus_thermodynamics_minus_local_KPI,-0.01125012160750627,-0.00038938492063489427,-0.0006898207391500136,0.05,False

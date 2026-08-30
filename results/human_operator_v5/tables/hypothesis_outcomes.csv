@@ -1,9 +1,0 @@
-hypothesis,statement,outcome,supporting_gate,gate_passed,evidence_stage
-H1,Coordination is consequential in fragmented primary applications,supported in development,gate_3_coordination_necessity,True,development
-H2,Bounded simulated-operator intervention causally improves outcomes,supported in development,gate_4_human_causal_usefulness,True,development
-H3,KPI plus entropy/disagreement beats KPI-only in both primary applications,unsupported,gate_5_thermodynamic_incremental_value,False,development
-H4,Benefit increases under private fragmentation,unsupported,gate_7_mechanism_specificity,False,development
-H5,Thermodynamic triage reduces harm without service degradation,mixed; abstention helps but primary triage does not,gate_8_safety_and_abstention,True,development
-H6,Distributed estimates support useful bounded-cost monitoring,"mixed; compression passes, causal value fails",gate_9_communication_cost_feasibility,False,development
-H7,Complete causal chains occur,supported for bounded-oracle development control,gate_4_human_causal_usefulness,True,development
-H8,Commercial is a KPI-sufficient boundary,consistent but not confirmatory,gate_5_thermodynamic_incremental_value,False,development

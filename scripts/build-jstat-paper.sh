@@ -33,5 +33,9 @@ done
 
 cd "$PAPER_DIR"
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+if grep -Eiq 'undefined citations|undefined references|Citation .* undefined|Reference .* undefined' main.log; then
+  echo "The JSTAT build contains unresolved citations or references" >&2
+  exit 1
+fi
 latexmk -c main.tex
 rm -f main.bbl

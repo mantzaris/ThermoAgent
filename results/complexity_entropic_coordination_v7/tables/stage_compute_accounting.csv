@@ -1,8 +1,0 @@
-stage,episodes,applications,stage_wall_clock_hours,gpu_hours,llm_calls,prompt_tokens,generated_tokens,approximate_incremental_cost_usd
-smoke,2,humanitarian;utility_restoration,0.001121003888888889,0.0,0,0,0,0.0
-pilots,24,humanitarian;utility_restoration,0.13288562888888888,0.0,0,0,0,0.0
-pilots_iteration2,9,humanitarian;utility_restoration,0.2134009488888889,0.0,0,0,0,0.0
-pilots_iteration3,10,humanitarian;utility_restoration,0.25974520916666666,0.0,0,0,0,0.0
-development_formal_reference,100,humanitarian;utility_restoration,5.152816586111111,0.0,0,0,0,0.0
-development_formal_dynamic,200,humanitarian;utility_restoration,4.034864874166667,0.0,0,0,0,0.0
-development_formal_communication,48,humanitarian;utility_restoration,0.5444260877777778,0.0,0,0,0,0.0

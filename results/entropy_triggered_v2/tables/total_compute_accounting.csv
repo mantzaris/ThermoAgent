@@ -1,7 +1,0 @@
-stage,manifest,episodes_planned,episodes_complete,episodes_failed,single_gpu_hours_including_model_load,llm_calls,prompt_tokens,generated_tokens
-profile_v2,manifests/profile_v2_sweep.json,8,8,0,0.1983606909763896,480,934041,35378
-validation,manifests/validation_sweep.json,144,144,0,4.305378192733559,13031,26706959,974801
-holdout_locked,manifests/holdout_locked_sweep.json,696,696,0,14.969017973023778,56653,100908718,3745964
-ablations,manifests/ablations_sweep.json,96,96,0,2.4974706450363415,9046,16043512,580029
-training,training/training_manifest.json,15,15,0,0.07052200430900686,0,0,0
-model_smoke,logs/setup/model_smoke.json,1,1,0,0.021553346844803957,2,2255,131

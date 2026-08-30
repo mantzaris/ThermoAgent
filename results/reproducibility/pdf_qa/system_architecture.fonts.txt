@@ -1,3 +1,0 @@
-ttf | Type0 | BMQQDV+DejaVuSans
-ttf | Type0 | EVICAO+DejaVuSans-Bold
-ttf | Type0 | GCWXDV+DejaVuSans-Oblique

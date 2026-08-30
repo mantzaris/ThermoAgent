@@ -1,6 +1,0 @@
-finding_id,verified,code_or_artifact,evidence,design_correction
-V7-A1,True,thermoagent/v7_base.py,"Event send iff first reference or absolute Shannon change >= 0.045","Add JS drift, entropy spectrum, confidence, age, hysteresis, cooldown, and maximum silence"
-V7-A2,True,thermoagent/v7_base.py,"Payload includes the complete belief_distribution","Use the precise term entropy-triggered belief sketch"
-V7-A3,True,thermoagent/v7_entropy.py;thermoagent/v7_base.py,"FP16 formula exists but executed accounting serializes JSON and adds 40 bytes","Implement deterministic binary serializer/decoder and count exact bytes"
-V7-A4,True,results/complexity_entropic_coordination_v7/statistics/communication_paired_panels.csv,"Six medium private-fragmented panels per application","Use powered development validation and holdout panel sets"
-V7-A5,True,results/complexity_entropic_coordination_v7/statistics/communication_paired_panels.csv,"always_act event_triggered versus always_on only","Evaluate matched-budget schedulers and identical frozen learned policies"

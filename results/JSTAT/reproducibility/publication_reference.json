@@ -1,0 +1,32 @@
+{
+  "starting_commit": "d9747d257b6daf31c7166a3f6e66150251aba6a7",
+  "main_pdf_sha256": "47570da4853eb20a087d8eb2f5cc18e5951d60cdaaa3fb0327f2a40aed277108",
+  "main_pdf_extracted_text_sha256": "cab04b0f0c2710852b7906e7de7d260e26bc594e01e56bcfac8883dc1437c31a",
+  "references_bib_sha256": "91cd7835e6c7a6b272ec60935797b0efa6912df6dcbf2d7fc25f127c0202767c",
+  "publication_figure_count": 14,
+  "publication_source_csv_count": 14,
+  "displayed_equation_count": 15,
+  "displayed_equations": [
+    {"index": 1, "environment": "equation", "labels": [], "sha256": "ee7f7acf9032cc434771605b522c463c1b9b7db7a24dc18c46a3bddc1b1374dd"},
+    {"index": 2, "environment": "equation", "labels": [], "sha256": "abc6696bb97a5bcdd6aee727b95bc0e6378c6e3f99e64c75c06426e02658b535"},
+    {"index": 3, "environment": "equation", "labels": [], "sha256": "ebccd3c12e31e00646f2c5686b6f956e1eab7d89b87c1358ecfb4ca9d454af0b"},
+    {"index": 4, "environment": "equation", "labels": [], "sha256": "24b7473976a49a9232ef54601bb93b25270c9bc14b290b91c613f9b7ad9b8abe"},
+    {"index": 5, "environment": "equation", "labels": ["eq:href"], "sha256": "805e02b2b3603e9446f59e85ce5d883066cad57922f676dd6f7fd7af22e8b124"},
+    {"index": 6, "environment": "equation", "labels": [], "sha256": "249ce6533a4198de2dc1cdf78a60a43446d3cbbb9899edb82e5bf0ded5b4652f"},
+    {"index": 7, "environment": "equation", "labels": [], "sha256": "b8dac22f1d47c21d755f25efa1232583484f4384123923eb0e3aac85664405be"},
+    {"index": 8, "environment": "equation", "labels": [], "sha256": "5eb75886fe291750ce66878180cee922fb8e129ac7cc21c92e6695ec995955b8"},
+    {"index": 9, "environment": "align", "labels": [], "sha256": "0e310e3157436a78d08a2e2678a4aa8797967ee82049d5da07187531aed31471"},
+    {"index": 10, "environment": "equation", "labels": ["eq:pathkl"], "sha256": "51223df70346de0d96352a60a8f0467e2455624f1bf9ef1de7dd50714425ef97"},
+    {"index": 11, "environment": "equation", "labels": [], "sha256": "ff42461385c7f283622ec0f3f4626f41fe6aaf77beddff3c3089f9eddd727b7c"},
+    {"index": 12, "environment": "equation", "labels": ["eq:connected-correlation"], "sha256": "fd0cf256631a326a31dd1cac1bac67cad7e57dcbedf20d2efad9a342dcdbe472"},
+    {"index": 13, "environment": "align", "labels": ["eq:autocorrelation"], "sha256": "642846070e3f751230ecc4eaa56d0bb44bd1a26e55fe5bd53045c7b44e788829"},
+    {"index": 14, "environment": "equation", "labels": ["eq:binder"], "sha256": "94c0a9eae55746a7686e780ef5e2659ce3a5190f65f378629a645b3fd2931afe"},
+    {"index": 15, "environment": "equation", "labels": [], "sha256": "9aa8cf5897e097a08f435056b7b1286eece2dd16c9061759b0d8f734ae8d7a5d"}
+  ],
+  "primary_results": {
+    "H1": {"estimate": 42.26333930099211, "ci_low": 24.316438814744036, "ci_high": 59.30340290034343, "supported": true},
+    "H2": {"estimate": 0.05437927532403202, "ci_low": 0.0345859059341388, "ci_high": 0.07548424613005493, "supported": true},
+    "H3": {"estimate": 0.048449385686028225, "ci_low": 0.021904873579838512, "ci_high": 0.07526010255745233, "supported": true},
+    "H4": {"estimate": 52.540596543946855, "ci_low": 35.406272733343826, "ci_high": 68.67315774930562, "supported": true}
+  }
+}

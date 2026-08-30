@@ -1,9 +1,0 @@
-hypothesis,statement,evidence_stage,status,supporting_files,confirmatory
-H1,Generalized-entropic control reduces harm at matched coverage in both primary applications,development,unsupported_or_mixed,development/gate_status.json;development/dynamic/paired_dynamic_effects.csv,False
-H2,Selective abstention preserves utility and service under a fixed operator budget,development,unsupported_or_mixed,development/gate_status.json;development/dynamic/paired_dynamic_effects.csv,False
-H3,Incremental value is greater under fragmented than public information,development,unsupported_or_mixed,development/gate_status.json;development/dynamic/fragmentation_interaction.csv,False
-H4,Event-triggered sketches preserve safety with lower complete communication cost,development,supported_in_development,development/gate_status.json;development/communication/communication_analysis.json,False
-H5,A prespecified generalized entropy family adds value beyond Shannon,development,supported_in_development,development/permutation/refit_permutation_family_test.csv;development/entropy_family/entropy_family_analysis.json,False
-H6,Distributed estimates remain bounded and degrade predictably under partitions,development,supported_in_development,development/communication/distributed_estimation_error.csv;development/sketch_reference/distributed_consensus.csv,False
-H7,The selective-safety effect replicates in humanitarian and utility restoration,development,unsupported_or_mixed,development/gate_status.json;development/dynamic/paired_dynamic_effects.csv,False
-H8,RL and real-Qwen agents satisfy decentralized agentic validity,development,unsupported_or_mixed,development/gate_status.json;qwen/qualification_summary.json;training/training_summary.json,False

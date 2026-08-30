@@ -1,9 +1,0 @@
-{
-  "command": "pytest -q",
-  "completed_at": "2026-08-14T22:18:15Z",
-  "passed": true,
-  "tests_collected": 183,
-  "tests_failed": 0,
-  "warnings": 15,
-  "scope": "complete frozen-v1, frozen-v2, and additive-v3 repository suite"
-}

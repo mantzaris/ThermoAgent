@@ -1,7 +1,0 @@
-evidence_type,application,episodes,structured_attempts,first_pass_validity,validity_after_one_repair,material_actions_accepted,accepted_to_next_stage_rate,accepted_to_service_rate,confirmatory
-deterministic_mock_agent,commercial,120,192,1.0,1.0,192,1.0,0.9895833333333334,False
-deterministic_mock_agent,humanitarian,120,192,1.0,1.0,192,1.0,0.7291666666666666,False
-deterministic_mock_agent,utility_restoration,120,192,1.0,1.0,192,1.0,0.7395833333333334,False
-real_qwen_agent,commercial,2,2,1.0,1.0,2,1.0,1.0,False
-real_qwen_agent,humanitarian,2,2,1.0,1.0,2,1.0,1.0,False
-real_qwen_agent,utility_restoration,2,2,1.0,1.0,2,1.0,1.0,False

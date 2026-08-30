@@ -1,6 +1,0 @@
-fold,training_rows,test_rows,environment_seed_disjoint,topology_family_disjoint,scenario_family_disjoint
-1,38595,9641,False,True,True
-2,38574,9662,False,True,True
-3,38592,9644,False,True,True
-4,38584,9652,False,True,True
-5,38599,9637,False,True,True

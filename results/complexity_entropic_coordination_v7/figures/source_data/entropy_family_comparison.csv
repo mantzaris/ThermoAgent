@@ -1,7 +1,0 @@
-application,method,roc_auc
-humanitarian,generalized_entropic,0.8456385432371999
-humanitarian,shannon_js,0.8473578097538577
-humanitarian,strongest_nonentropic,0.8474818397251285
-utility_restoration,generalized_entropic,0.8352941530281431
-utility_restoration,shannon_js,0.8335784357951845
-utility_restoration,strongest_nonentropic,0.8278132650053831

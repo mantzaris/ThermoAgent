@@ -1,8 +1,0 @@
-{
-  "starting_v10_commit": "4d372f00837bf75f90882392a92feac87dbc84b2",
-  "frozen_protocol_sha256": "7bd4082f9d085222e22d195e3ff603f0f76e27c36b347bfc4132fbb164a3d03f",
-  "qualification_execution_source_tree_sha256": "1f7bcd164e4f07f033def27a8236ed0995413b4c12dcd6203549ca08d48d395e",
-  "final_review_source_tree_sha256": "980026993242795fdd37e11fcf58364ec58da10deab07d06ef482d866b568630",
-  "scope": "thermoagent/statmech_llm_v11, configs/statmech_v11, V11 scripts, and tests/statmech_v11; interpreter bytecode excluded",
-  "interpretation": "The execution checksum is authoritative for the decisive qualification. The final-review checksum additionally includes post-gate reporting, figure, PDF-QA, and manuscript-test code that did not alter qualification outcomes."
-}

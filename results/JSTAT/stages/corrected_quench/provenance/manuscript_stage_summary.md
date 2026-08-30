@@ -1,0 +1,9 @@
+> Historical pre-consolidation record. Paths, commands, and internal study identifiers below describe the original execution layout and are not active repository interfaces.
+
+# Paper summary and V14 scientific audit
+
+V14 studies collective memory and controlled quench response in networks of state-separated, locally informed Qwen-agent instances. The microscopic process preserves separate contexts, private state, typed authority, explicit message delivery, and random-sequential local updates. Statistical-mechanical observables form a finite-size reduced state rather than a claim of literal thermodynamics.
+
+The immutable V12 discovery memory effect was 0.01790 (95% CI 0.00357 to 0.03399) and the V13 prospective replication was 0.04030 (95% CI 0.02883 to 0.05856) nats/update. V14 adds six new matched quench clusters. Field reversal changed maximum post-quench macrostate departure relative to nominal by 133.805 (95% CI 107.949 to 184.075). All 6 field-reversal paths re-entered their cluster-excluded training-nominal threshold after exactly 6 sweeps; their mean fixed early-five-minus-late-five change was 86.605. The historical H3 peak-minus-final number, 134.110 (95% CI 106.654 to 184.196), is retained but its directional test is invalid because the estimand is structurally nonnegative. The full representation's LOCO balanced-accuracy increment over order-only features was 0.333 (95% CI 0.167 to 0.458), with cluster-preserving permutation `p=0.00300`.
+
+The contribution is the integrated augmented-state-to-observable-projection formulation, bias-aware temporal-asymmetry analysis, field quench/counter-quench paths, leakage-free nominal-manifold robustness audit, finite-sample dependence audit, and transparent representation ablation. Results are finite-size and model-specific; reference energy and reversal divergence remain effective coarse-grained observables.

@@ -1,4 +1,0 @@
-stage,status,reason,failed_gate,failed_application,observed_aggregate_relative_loss_reduction,required_aggregate_relative_loss_reduction,outcomes_observed,fabricated_rows
-validation,prospectively_not_run,Required development Gate 3 (coordination necessity) failed.,gate_3_coordination_necessity,utility_restoration,0.04431717249899478,0.05,False,0
-training,prospectively_not_run,Required development Gate 3 (coordination necessity) failed.,gate_3_coordination_necessity,utility_restoration,0.04431717249899478,0.05,False,0
-holdout,prospectively_not_run,Required development Gate 3 (coordination necessity) failed.,gate_3_coordination_necessity,utility_restoration,0.04431717249899478,0.05,False,0

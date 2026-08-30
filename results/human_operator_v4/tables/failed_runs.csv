@@ -1,5 +1,0 @@
-stage,count,type,reason,included_in_formal_analysis,disposition
-implementation_pilot_v1_coordination,3,development implementation failure,multi-scope agent incident mismatch (KeyError: communications_zone),False,retained; mechanics corrected before formal development
-real_qwen_qualification_attempt,1,infrastructure/pre-execution,interrupted provenance metadata command before episode output,False,retained in setup log; no outcome was generated
-real_qwen_qualification_attempt,1,infrastructure/pre-execution,configured cache path did not contain the already cached model,False,"retained in setup log; corrected cache path, no package change"
-formal_development,0,episode failure,none,True,"all 1,584 deterministic episodes completed"

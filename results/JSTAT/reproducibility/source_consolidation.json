@@ -1,0 +1,9 @@
+{
+  "consolidated_source_sha256": "55b31459f4717715b1d38bbf1c5cefa3e5c93d74f836ebf16c4294752711ac6c",
+  "frozen_execution_source_sha256": "ec9f26223a335558b2789ebd59ee3c3fa0f9e7d1b815fd9b09a1e1960af55e78",
+  "manifest_version": "publication-consolidation-1.0",
+  "preconsolidation_semantic_source_sha256": "f8d4fa546ba46a42cd4234dd8af6ad60309c231f2997e10d0d25830f6dddb2f2",
+  "protocol_sha256": "863f54a05dbbe9f23a0d3fe6d4344b71409796340c6659c51247d9e8949f89c9",
+  "source_file_count": 106,
+  "statement": "Publication consolidation mechanically relocates the complete retained implementation, configuration, test, and script closure under semantic paths. It does not rewrite the frozen protocol, scientific algorithms, trajectories, aggregate results, figure source data, or numerical claims."
+}

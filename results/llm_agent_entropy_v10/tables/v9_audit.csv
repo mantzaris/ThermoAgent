@@ -1,8 +1,0 @@
-item,finding,evidence,v10_treatment
-remote provenance,8e8315d25684a1c582c6a7b46fbb5786bc3f0557,verified origin/statistical-mechanics-agentic-systems-v9 before branching,record correct committed/pushed provenance only in V10
-exact update convention,one of 2N belief/action variables chosen uniformly; self transitions retained,thermoagent/statmech/exact.py:exact_transition_matrix,report EPR per attempted variable update and explicit sweep conversions
-exact EPR normalization,Schnakenberg discrete-time stationary EPR per attempted variable update,thermoagent/statmech/exact.py:entropy_production_rate,"separate per-update, per-agent-sweep, and per-sweep units"
-large-system statistic,stationary mean local log-rate ratio; not a dense exact current calculation,thermoagent/statmech/simulate.py:simulate_stationary,call pathwise stationary irreversibility and validate against exact kernels
-nonreciprocity family,pair weights 1+alpha and 1-alpha; support and pairwise total weight fixed,thermoagent/statmech/simulate.py:directed_communication,express explicitly as A_s + alpha A_a and report spectral diagnostics
-V9 quadratic evidence,descriptive exact N=3 pattern; no perturbative coefficient was derived,results/statmech_agentic_v9/tables/entropy_production_summary.csv,derive C from the stationary response and compare pointwise
-LLM realization,absent from V9 primary model,thermoagent/statmech and paper/jstat_v9,new independent-context Qwen architecture; do not relabel stochastic spins as LLMs

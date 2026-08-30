@@ -1,8 +1,0 @@
-{
-  "candidate_decisions": 4320,
-  "completed_actions": 3010,
-  "delegation_decisions": 4320,
-  "episodes": 216,
-  "failed_episodes": 0,
-  "stage": "pilot_v1"
-}

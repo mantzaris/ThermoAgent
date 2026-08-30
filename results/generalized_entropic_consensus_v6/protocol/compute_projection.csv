@@ -1,8 +1,0 @@
-component,gpu_hours,llm_calls,prompt_tokens,generated_tokens,storage_gib
-model_load_and_smoke,0.35,30,30000,3000,0.1
-five_method_x_five_seed_sequential_PPO,8.0,0,0,0,0.5
-150_episode_real_Qwen_qualification,1.25,2700,2700000,250000,0.4
-validation_if_unlocked,0.0,0,0,0,1.2
-sealed_holdout_if_unlocked,0.0,0,0,0,1.4
-profiling_analysis_rendering,0.4,0,0,0,0.3
-15_percent_safety_reserve,1.5,0,0,0,0.4

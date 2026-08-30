@@ -1,9 +1,0 @@
-{
-  "branch": "entropy-triggered-communication",
-  "captured_at": "2026-08-13T23:07:11.847717+00:00",
-  "commit": "09ac91b72dd7fb5151fc6af2c28da9855653b2dc",
-  "deployment": "filtered rsync; Git metadata and credentials excluded",
-  "dirty": false,
-  "security_note": "No environment variables, remotes, credentials, SSH configuration, or tokens were read.",
-  "source_checksum": "655cb19264b51a33b47273c28c990f07eb85a0f9caa54da2b8ab4d96509e06c9"
-}

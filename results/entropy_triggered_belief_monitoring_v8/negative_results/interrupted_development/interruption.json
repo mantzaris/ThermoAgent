@@ -1,9 +1,0 @@
-{
-  "completed_episodes_retained": 261,
-  "disposition": "incomplete attempts retained; identical run IDs resumed from scratch",
-  "interrupted_inflight_attempts": 6,
-  "scientific_configuration_changed": false,
-  "selective_rerun": false,
-  "stage": "development",
-  "storage_change": "XZ ledger preset 9 to preset 3; workers 8 to 4"
-}

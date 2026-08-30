@@ -1,5 +1,0 @@
-{
-  "conditional_figures_omitted_when_stage_not_run": true,
-  "evidence_label": "Formal development (not validation or holdout)",
-  "figures_generated": 18
-}

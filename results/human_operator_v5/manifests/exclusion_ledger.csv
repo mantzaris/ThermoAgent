@@ -1,7 +1,0 @@
-artifact_or_stage,excluded_from,reason,prespecified_or_detected_before_analysis,retained
-development_primary,formal_inference,concurrent writer race invalidated aggregate namespace,true,true
-superseded/refit_permutation_humanitarian_non_nominal_fit_invalid.json,mechanism_inference,fit boundary differed from primary grouped cross-fitting,true,true
-superseded/refit_permutation_utility_restoration_non_nominal_fit_invalid.json,mechanism_inference,fit boundary differed from primary grouped cross-fitting,true,true
-pilot;pilot_iteration_2;pilot_iteration_3;pilot_iteration_4,formal_inference,development calibration iterations,true,true
-real_qwen_qualification,primary_causal_effect,qualification set rather than matched outcome evaluation,true,true
-multiseed_decentralized_rl,validation_or_holdout_inference,development-only because progression gates failed,true,true

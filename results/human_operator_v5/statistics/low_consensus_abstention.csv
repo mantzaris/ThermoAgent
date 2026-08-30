@@ -1,4 +1,0 @@
-application,clusters,low_confidence_panel_fraction,forced_harmful_interventions,safe_harmful_interventions,harmful_relative_reduction,safe_minus_forced_utility,relative_service_loss_degradation
-commercial,80,0.2375,23,12,0.4782608695652174,-0.0046541856213045425,0.0013697409126184757
-humanitarian,80,0.2375,35,19,0.45714285714285713,0.02240524482031236,-0.006470511008035271
-utility_restoration,80,0.25,29,9,0.6896551724137931,0.024484265327871606,-0.007208477913233458

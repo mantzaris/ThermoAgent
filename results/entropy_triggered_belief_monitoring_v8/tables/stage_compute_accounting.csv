@@ -1,9 +1,0 @@
-stage,episodes,independent_panels,applications,action_policy_ids,episode_cpu_hours_sum,gpu_hours,llm_calls,prompt_tokens,generated_tokens,incremental_cloud_cost_usd
-pilots,196,8,humanitarian;utility_restoration,frozen_local_rule,0.2727690636111111,0.0,0,0,0,0.0
-pilots_v2,196,8,humanitarian;utility_restoration,frozen_local_rule,0.2938455172222223,0.0,0,0,0,0.0
-pilots_v3,88,8,humanitarian;utility_restoration,frozen_local_rule,0.13753244583333332,0.0,0,0,0,0.0
-routing_repair_pilot,8,4,utility_restoration,frozen_local_rule,0.03082491972222222,0.0,0,0,0,0.0
-hysteresis_repair_pilot,60,12,humanitarian;utility_restoration,frozen_local_rule,0.2053799466666667,0.0,0,0,0,0.0
-hysteresis_repair_pilot_v2,60,12,humanitarian;utility_restoration,frozen_local_rule,0.22925997694444444,0.0,0,0,0,0.0
-hysteresis_repair_pilot_v3,60,12,humanitarian;utility_restoration,frozen_local_rule,0.23592225194444444,0.0,0,0,0,0.0
-development,624,48,humanitarian;utility_restoration,frozen_local_rule,1.4791796055555555,0.0,0,0,0,0.0

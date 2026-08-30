@@ -1,9 +1,0 @@
-{
-  "candidate_decisions": 60480,
-  "completed_actions": 27763,
-  "consensus_estimates": 60480,
-  "delegation_decisions": 60480,
-  "episodes": 2520,
-  "failed_episodes": 0,
-  "stage": "development_dynamic"
-}

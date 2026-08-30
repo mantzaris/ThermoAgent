@@ -1,9 +1,0 @@
-{
-  "candidate_rows": 23544,
-  "completed_now": 519,
-  "episodes": 654,
-  "failures": 186,
-  "finished_at": "2026-08-15T07:21:56.665520+00:00",
-  "resumed_existing": 135,
-  "stage": "development_primary"
-}

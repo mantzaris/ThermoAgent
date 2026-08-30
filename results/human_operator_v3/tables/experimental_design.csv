@@ -1,7 +1,0 @@
-stage,status,unit,count,purpose
-antecedent diagnosis,complete,v2 event ledger,952,diagnose action validation and material arrival
-v3 deterministic development,complete,episode,809,"mechanics, causal probes, and six prospective gates"
-real-Qwen actionability,qualified if artifacts present,episode,see actionability table,first-pass and one-repair structured validity
-validation,not run,episode,0,blocked by Gate 5
-multi-seed training,not run,independent RL seed,0,blocked by Gate 5
-locked holdout,not run,episode,0,blocked by Gate 5

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "thermoagent"
 version = "0.1.0"
-description = "Free-energy-guided coordination of independent logistics agents"
+description = "Statistical mechanics of memory and quench response in LLM-agent networks"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -32,7 +32,7 @@ research = [
 ]
 
 [project.scripts]
-thermoagent = "thermoagent.cli:main"
+thermoagent = "thermoagent.statmech_llm.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["thermoagent*"]

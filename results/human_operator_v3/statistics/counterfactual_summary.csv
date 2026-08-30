@@ -1,5 +1,0 @@
-evidence_stage,application,method,paired_interventions,beneficial,harmful,no_primary_effect,mean_intervention_effect,median_intervention_effect,commitment_or_agent_action_changed,accepted_material_action_changed,material_reached_demand,primary_outcome_changed,complete_causal_chain,confirmatory
-development,commercial,local_kpi_trigger,103,36,0,67,0.023378982585430887,0.0,36,36,36,36,36,False
-development,commercial,thermohitl_rule,128,98,0,30,0.04716962181250208,0.02485602384239982,102,100,98,98,98,False
-development,humanitarian,local_kpi_trigger,168,32,0,136,4.793602873051161,0.0,40,33,32,32,32,False
-development,humanitarian,thermohitl_rule,232,80,5,147,6.933279843045263,0.0,119,86,80,85,80,False

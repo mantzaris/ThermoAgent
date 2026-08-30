@@ -1,9 +1,0 @@
-record,name,information_class
-node,private signal,agent-private
-node,continuous belief,agent-private
-node,binary belief,derived local
-node,typed action,agent-selected
-node,commitment,agent-private
-node,inbox/outbox,delivered only
-node,scheduler,update opportunity only
-node,evaluator,offline global

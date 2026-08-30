@@ -1,8 +1,0 @@
-{
-  "development": "complete",
-  "development_gates_all_passed": false,
-  "holdout": "prospectively_not_run",
-  "holdout_unlocked": false,
-  "validation": "prospectively_not_run",
-  "validation_unlocked": false
-}

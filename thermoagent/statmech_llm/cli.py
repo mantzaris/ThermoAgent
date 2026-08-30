@@ -1,62 +1,95 @@
-"""Command-line entry points for V10."""
+"""Command-line interface for the final JSTAT study workflow."""
 
 from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 
-from .figures import generate_figures, validate_pdfs
-from .llm_analysis import analyze_qwen_formal
-from .llm_experiments import freeze_qwen_protocol, run_qwen_formal, run_qwen_message_pilot, run_qwen_pilot
-from .reporting import build_clean_export, build_summary, record_test_summary
-from .workflow import analyze, audit_v9, freeze, run_development, run_formal
+from .workflow import repository_root
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="ThermoAgent cross-model memory and quench study"
+    )
     parser.add_argument(
         "command",
-        choices=("audit", "development", "freeze", "formal", "qwen-pilot", "qwen-message-pilot", "qwen-freeze", "qwen-formal", "qwen-analyze", "analyze", "figures", "qa", "qa-reviewed", "summary", "export", "test-summary"),
+        choices=(
+            "pilot",
+            "freeze",
+            "formal",
+            "replay",
+            "analyze",
+            "surrogate",
+            "figures",
+            "report",
+            "pdf-qa",
+            "pdf-qa-record",
+            "verify",
+        ),
     )
-    parser.add_argument("--repository", type=Path, default=Path.cwd())
-    parser.add_argument("--junit", type=Path)
+    parser.add_argument("--model", choices=("qwen", "granite"))
+    parser.add_argument("--manual-status", choices=("passed", "failed"))
+    parser.add_argument("--manual-notes", default="")
     args = parser.parse_args()
-    repository = args.repository.resolve()
-    if args.command == "audit":
-        result = {"rows": len(audit_v9(repository))}
-    elif args.command == "development":
-        result = run_development(repository)
+    repository = repository_root()
+    if args.command == "pilot":
+        if args.model is None:
+            raise SystemExit("pilot requires --model qwen or --model granite")
+        from .experiment import run_engineering_pilot
+
+        result = run_engineering_pilot(repository, args.model)
     elif args.command == "freeze":
-        result = freeze(repository)
+        from .experiment import freeze_protocol
+
+        result = freeze_protocol(repository)
     elif args.command == "formal":
-        result = run_formal(repository)
-    elif args.command == "qwen-pilot":
-        result = run_qwen_pilot(repository)
-    elif args.command == "qwen-message-pilot":
-        result = run_qwen_message_pilot(repository)
-    elif args.command == "qwen-freeze":
-        result = freeze_qwen_protocol(repository)
-    elif args.command == "qwen-formal":
-        result = run_qwen_formal(repository)
-    elif args.command == "qwen-analyze":
-        result = analyze_qwen_formal(repository)
+        if args.model is None:
+            raise SystemExit("formal requires --model qwen or --model granite")
+        from .experiment import run_formal_model
+
+        result = run_formal_model(repository, args.model)
+    elif args.command == "replay":
+        from .replay import replay_formal
+
+        result = replay_formal(repository)
     elif args.command == "analyze":
-        result = analyze(repository)
+        from .analysis import analyze_formal
+
+        result = analyze_formal(repository)
+    elif args.command == "surrogate":
+        from .surrogate import dense_surrogate_size_quench, corrected_quench_out_of_sample_comparison
+
+        result = {
+            "corrected_quench_out_of_sample": corrected_quench_out_of_sample_comparison(
+                repository
+            ),
+            "size_sensitivity": dense_surrogate_size_quench(repository),
+        }
     elif args.command == "figures":
-        result = {"figures": generate_figures(repository)}
-    elif args.command == "qa":
-        result = validate_pdfs(repository, manual_reviewed=False)
-    elif args.command == "qa-reviewed":
-        result = validate_pdfs(repository, manual_reviewed=True)
-    elif args.command == "summary":
-        result = build_summary(repository)
-    elif args.command == "export":
-        result = build_clean_export(repository)
+        from .figures import generate_figures
+
+        result = generate_figures(repository)
+    elif args.command == "report":
+        from .reporting import build_results
+
+        result = build_results(repository)
+    elif args.command == "pdf-qa":
+        from .reporting import validate_pdfs
+
+        result = validate_pdfs(repository)
+    elif args.command == "pdf-qa-record":
+        if args.manual_status is None:
+            raise SystemExit("pdf-qa-record requires --manual-status passed or failed")
+        from .reporting import record_manual_pdf_qa
+
+        result = record_manual_pdf_qa(
+            repository, args.manual_status, args.manual_notes
+        )
     else:
-        if args.junit is None:
-            parser.error("--junit is required for test-summary")
-        result = record_test_summary(args.junit)
+        from .reporting import verify_package
+
+        result = verify_package(repository)
     print(json.dumps(result, indent=2, sort_keys=True))
 
 

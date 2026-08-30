@@ -1,3 +1,0 @@
-version: v8-hysteresis-repair-pilot-3.0
-base_configuration: v8_hysteresis_repair_pilot_v2.yaml
-panel_seed_offset: 400

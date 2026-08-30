@@ -1,0 +1,15 @@
+{
+  "canonical_paper_figures": 14,
+  "figure_artifacts": 153,
+  "figure_classifications": {
+    "1 canonical-paper byte-identical duplicate": 14,
+    "2 retained-result byte-identical duplicate": 10,
+    "3 unique scientific or provenance artifact": 129
+  },
+  "inventory_version": "publication-consolidation-1.0",
+  "scripts_examined": 261,
+  "scripts_retained": 12,
+  "scripts_safe_to_delete_after_reference_check": 249,
+  "stage_figures_deleted": 0,
+  "unsafe_script_candidates": 0
+}

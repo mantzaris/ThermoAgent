@@ -1,9 +1,0 @@
-stage,application,treatment,comparator,n_planned_pairs,n_both_complete,thermoagent_only_failures,comparator_only_failures,both_failed,failure_aware_win_rate,complete_case_mean_improvement,complete_case_ci95_low,complete_case_ci95_high
-holdout,commercial,thermoagent,learned_no_entropy,8,8,0,0,0,0.5,0.0,0.0,0.0
-holdout,commercial,thermoagent,autonomous_fixed_comm,8,8,0,0,0,0.4375,-0.166670989435866,-0.500012968307598,0.0
-holdout,commercial,thermoagent,scripted_independent,8,8,0,0,0,0.5,0.0,0.0,0.0
-holdout,commercial,thermoagent,centralized_lookahead,8,8,0,0,0,0.0,-10.702920532581246,-11.37727677609145,-10.057098814526753
-holdout,humanitarian,thermoagent,learned_no_entropy,8,8,0,0,0,0.5,0.0,0.0,0.0
-holdout,humanitarian,thermoagent,autonomous_fixed_comm,8,8,0,0,0,0.5,0.0,0.0,0.0
-holdout,humanitarian,thermoagent,scripted_independent,8,8,0,0,0,0.5,0.0,0.0,0.0
-holdout,humanitarian,thermoagent,centralized_lookahead,8,8,0,0,0,0.0,-3418.713781361397,-4081.5891238002123,-2781.3279943927605

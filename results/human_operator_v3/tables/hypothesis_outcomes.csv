@@ -1,9 +1,0 @@
-hypothesis,status,evidence_stage,reason
-H1,not_tested,none,validation and holdout blocked before ThermoHITL-versus-KPI outcome comparison
-H2,not_tested,none,always-on non-inferiority comparison not run
-H3,not_tested,none,no confirmatory performance-effort frontier
-H4,development_supported,development,"Gate 6 passed, but no out-of-sample confirmation"
-H5,development_supported,development,paired branches contain complete causal chains in both applications
-H6,unsupported_cross_application,held-out development seeds,commercial same-information incremental value failed; humanitarian passed
-H7,not_tested,none,partition robustness was not promoted beyond development
-H8,unsupported_or_not_tested,development,required information value did not replicate across applications

@@ -1,8 +1,0 @@
-work,closest_feature,persistent_agents,belief_action_coupling,directed_messages,entropy_production,actual_llm_agents,v10_difference
-Glauber (1963),single-spin stochastic Ising dynamics,no,no,no,no,no,two coupled local variables and a controlled nonreciprocal extension
-Schnakenberg (1976),network currents and entropy production,no,no,generic transitions,yes,no,applies current theory to a decentralized belief-action kernel
-Aguilera et al. (2021),asymmetric kinetic Ising networks,binary units,no separate layers,asymmetric couplings,yes,no,near-reciprocal coefficient and empirical LLM-agent mapping
-Fruchart et al. (2021),nonreciprocal collective dynamics,generic fields/robots,no,nonreciprocal interactions,not primary,no,finite Markov currents near a reversible reference
-Di Carlo (2025),quadratic near-reciprocal EPR in a metric kinetic Ising model,binary spins,no separate layers,nonreciprocal nearest-neighbor coupling,yes,no,general finite-kernel coefficient with stationary-response and layer decomposition
-Roldan and Parrondo (2012),time-reversal KL from partial stationary trajectories,no,no,no,coarse-grained lower bound,no,applies qualified coarse irreversibility estimators to LLM belief-action sequences
-De Nobili (2026 preprint),LLM population with neighbor-conditioned binary choices,limited,no distinct committed action,neighbor states in prompts,no,yes,"private memory, separate belief/action, typed actions, and time-reversal analysis"

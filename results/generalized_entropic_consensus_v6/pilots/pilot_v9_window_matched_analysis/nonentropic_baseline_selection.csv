@@ -1,4 +1,0 @@
-feature_block,risk_coverage_area,mean_brier
-kpi_confidence,0.29513888888888895,0.1752669265191763
-predictive_uncertainty,0.2990277777777778,0.17230462731712654
-conformal_risk_control,0.3298611111111111,0.37036241663725117

@@ -1,0 +1,24 @@
+{
+  "automated_checks": {
+    "all_fonts_embedded": true,
+    "all_pdfs_open": true,
+    "all_text_extractable": true,
+    "canonical_figure_hashes_match": true,
+    "manuscript_extracted_text_matches_preconsolidation": true
+  },
+  "canonical_figure_pdfs": 14,
+  "inspection_date": "2026-08-30",
+  "manuscript_pages": 33,
+  "manual_300_dpi_checks": {
+    "all_pages_and_figures_inspected": true,
+    "correct_legends_and_panel_letters": true,
+    "missing_glyphs": false,
+    "overlapping_labels": false,
+    "page_or_axis_clipping": false,
+    "readable_at_intended_size": true
+  },
+  "manual_rendered_items": 47,
+  "qa_render_root": "/tmp/thermoagent-pdf-qa.RDFAMv",
+  "repository_pngs_created": false,
+  "status": "passed"
+}

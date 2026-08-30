@@ -13,7 +13,7 @@
 \def\restoreVfifteendigitcatcodes{\catcode`1=12\catcode`5=12}
 \catcode`5=11
 \catcode`1=11
-\input{results_macros.tex}
+\input{study_results.tex}
 \restoreVfifteendigitcatcodes
 \newcommand{\E}{\mathbb E}
 \newcommand{\KL}{D_{\mathrm{KL}}}
@@ -741,7 +741,7 @@ from inferential support.  The corrected report distinguishes
 whether the numerical criterion was met, whether a directional test is valid,
 and whether the time-resolved path is consistent with return.
 
-Figure~\ref{fig:v14series} displays the corrected time series from the earlier
+Figure~\ref{fig:corrected-quench-series} displays the corrected time series from the earlier
 quench experiment and places the nominal and field-reversal trajectories on a
 common time axis. This comparison distinguishes changes associated with the
 reversed private fields from background evolution that also occurs without an
@@ -756,13 +756,13 @@ produces a coordinated departure during the quench and whether that departure
 contracts, persists, or changes form after restoration. The correction applies
 to the derived analysis used to construct these summaries; the underlying
 agent trajectories are unchanged.
-Cluster-level recovery and delayed-audit material is retained in Appendix~\ref{app:study-inference}, including Figures~\ref{fig:v14recovery} and~\ref{fig:v14audit}.
+Cluster-level recovery and delayed-audit material is retained in Appendix~\ref{app:study-inference}, including Figures~\ref{fig:cluster-recovery} and~\ref{fig:delayed-audit}.
 
 \resultfigure{figure03_corrected_quench_time_series.pdf}{0.94\textwidth}{%
 Corrected time series from the earlier experiment for nominal and field-reversal trajectories.  The
 yellow interval marks the quench; the dotted boundary marks restoration.
 Reference energy is effective, entropy is configuration diversity, and
-distance is measured in the cluster-excluded nominal geometry.}{fig:v14series}
+distance is measured in the cluster-excluded nominal geometry.}{fig:corrected-quench-series}
 
 
 
@@ -982,7 +982,7 @@ contrasts. The positive contrasts show a difference between history
 conditions, not that either arm has positive absolute thermodynamic entropy
 production.
 
-Figure~\ref{fig:v15memory} displays the paired cluster-level contrasts for the
+Figure~\ref{fig:memory-controls} displays the paired cluster-level contrasts for the
 two model families. Each point represents one independent
 graph/environment-cluster comparison, so its position relative to zero shows
 whether genuine history increased or decreased adjusted block-reversal
@@ -994,7 +994,7 @@ Granite.
 Per-cluster genuine-memory contrasts for both pinned model families.  Short
 horizontal segments indicate model means.  The scrambled-history arm controls
 prompt section and approximate length while destroying temporal relation to
-the current trajectory.}{fig:v15memory}
+the current trajectory.}{fig:memory-controls}
 
 No exact thermodynamic interpretation follows from these results. The block
 words summarize selected categorical coordinates and omit the natural-language
@@ -1377,7 +1377,7 @@ threshold from that panel's own baseline, although the protocol called for a
 threshold fitted only to the training clusters.  The corrected analysis maps
 the leave-one-cluster-out training threshold into the held-out recovery
 summary without changing any recorded trajectory.  Figure
-\ref{fig:v14recovery} retains every cluster-level recovery path, including the
+\ref{fig:cluster-recovery} retains every cluster-level recovery path, including the
 high-response cluster, under the corrected training-only construction.  The
 historical maximum-minus-final recovery statistic remains numerically
 reproducible but is not used as directional evidence because its construction
@@ -1387,7 +1387,7 @@ is nonnegative for nearly every nonconstant trajectory.
 All field-reversal cluster trajectories from the earlier experiment,
 including the high-response cluster.  The corrected audit replaces the
 held-out-panel threshold with the training-cluster nominal threshold.  The
-historical recovery sign statistic is not used as directional evidence.}{fig:v14recovery}
+historical recovery sign statistic is not used as directional evidence.}{fig:cluster-recovery}
 
 The delayed audit executes the omitted 10,000 cluster-preserving label
 permutations.  All four panels stay together within each cluster, and every
@@ -1403,14 +1403,14 @@ The representation permutation retains the four condition panels in every
 cluster and permutes labels only within cluster.  For each of 10,000
 replicates, every leave-one-cluster-out fold refits imputation, scaling, and the
 multinomial logistic model; test-cluster features do not enter preprocessing.
-Figure~\ref{fig:v14audit} records the delayed dependence and full-pipeline
+Figure~\ref{fig:delayed-audit} records the delayed dependence and full-pipeline
 permutation audit.
 
 \resultfigure{figure10_delayed_audit.pdf}{0.94\textwidth}{%
 Delayed prespecified dependence and permutation audits.  Raw and
 bias-adjusted dependence, window sensitivity, and cluster-preserving nulls are
 shown explicitly.  These audits were completed after the primary outcomes
-because of implementation omissions.}{fig:v14audit}
+because of implementation omissions.}{fig:delayed-audit}
 
 For the prospective cross-model tests, the one-sided sign-flip probability
 enumerates all $2^n$ sign assignments of the observed cluster effects for

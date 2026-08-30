@@ -1,3 +1,0 @@
-application,information_condition,true_paired_utility_gain,replicates,seed,mean_permuted_gain,median_permuted_gain,permuted_gain_ci95_low,permuted_gain_ci95_high,probability_permuted_at_least_true,mean_gain_fraction_of_true
-humanitarian,private_fragmented,0.15885071999999997,2000,44143,0.012521174400000027,0.01124760000000006,-0.04400407199999993,0.07130978399999993,0.0,0.07882352941176489
-utility_restoration,private_fragmented,0.17867616000000008,2000,44243,0.012577717280000008,0.010398880000000022,-0.0342784,0.06862272000000003,0.0,0.07039393100903893

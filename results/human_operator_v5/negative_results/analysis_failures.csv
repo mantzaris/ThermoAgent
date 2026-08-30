@@ -1,2 +1,0 @@
-attempt,stage,failure_type,reason,outcomes_inspected,retained
-1,development_analysis,interrupted_non_outcome_runtime_attempt,Initial non-vectorized budget selection was stopped after profiling showed impractical runtime,false,true

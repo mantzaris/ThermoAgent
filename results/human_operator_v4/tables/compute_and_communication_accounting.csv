@@ -1,6 +1,0 @@
-evidence_stage,workflow,episodes,single_gpu_hours,estimated_gpu_cost_usd_at_0_34_per_hour,agent_messages,agent_message_bytes,thermodynamic_sketch_messages,thermodynamic_sketch_bytes,tool_calls,llm_calls,prompt_tokens,generated_tokens,llm_latency_seconds,wall_clock_seconds,operator_interventions,operator_minutes,operator_workload_auc
-development_deterministic,development_gate_coordination,360,0.0,0.0,84.0,18792.0,97920.0,21566358.0,576.0,0.0,0.0,0.0,0.0,61.01342957664746,0.0,0.0,0.0
-development_deterministic,development_gate_human,360,0.0,0.0,168.0,37584.0,195840.0,43128404.0,576.0,0.0,0.0,0.0,0.0,75.0948715840932,180.0,1440.0,136.8
-development_deterministic,development_gate_monitoring,432,0.0,0.0,168.0,37584.0,239040.0,52565406.0,576.0,0.0,0.0,0.0,0.0,111.99866228253813,0.0,0.0,0.0
-development_deterministic,development_gate_trigger,432,0.0,0.0,168.0,37584.0,239040.0,52561094.0,576.0,0.0,0.0,0.0,0.0,83.62457408820046,360.0,2880.0,273.59999999999997
-development_real_qwen_qualification,real_qwen_qualification,6,0.010088578046237428,0.0034301165357207256,0.0,0.0,0.0,0.0,6.0,6.0,3942.0,328.0,6.878880966454744,36.31888096645474,0.0,0.0,0.0

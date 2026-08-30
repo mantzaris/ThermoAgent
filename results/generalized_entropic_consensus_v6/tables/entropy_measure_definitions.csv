@@ -1,9 +1,0 @@
-measure,symbol,status,interpretation
-Shannon entropy,H_1,prespecified reference,normalized uncertainty within one belief
-Tsallis entropy,H_q,"q in {0.5,1,1.5,2,3}",tail-sensitive generalized uncertainty
-Gini-Simpson impurity,G,primary Gini-family measure,normalized q=2 Tsallis equivalent
-Jensen-Shannon disagreement,D_1,prespecified reference,epistemic disagreement among agents
-Jensen-Tsallis disagreement,D_q,prespecified family,generalized pooled-minus-local uncertainty
-Graph-weighted disagreement,D_graph,distributed measure,edge-available pairwise disagreement
-Operational energy,E,secondary KPI-derived ablation,normalized operational stress
-Free-energy-style diagnostic,F,exploratory only,not literal physical free energy

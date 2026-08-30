@@ -1,3 +1,0 @@
-application,comparison,test_environment_seeds,positive_prevalence,delta_average_precision,delta_roc_auc,delta_brier_score,kpi_mean_budgeted_utility,thermodynamic_mean_budgeted_utility,relative_budgeted_utility_gain,rank_threshold,utility_threshold,gate_passed
-commercial,paired_causal_effect_KPI_plus_thermodynamics_minus_same_information_KPI,12405;12406,0.3675213675213675,-0.0146719123648191,-0.0066389063482087,-0.0033875305912023,0.096527186094074,0.0992919385474138,0.0286422153717948,0.05,0.05,False
-humanitarian,paired_causal_effect_KPI_plus_thermodynamics_minus_same_information_KPI,12405;12406,0.2514619883040935,0.0648573906925045,0.0249364098837208,-0.0681832667376164,22.568766150893204,70.37893952507785,2.118422117298268,0.05,0.05,True

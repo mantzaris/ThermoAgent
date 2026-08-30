@@ -1,127 +1,95 @@
-# ThermoAgent
+# ThermoAgent: JSTAT publication repository
 
-Free-Energy-Guided Coordination of Independent Autonomous Logistics Agents
+This repository contains the paper **Statistical-mechanical characterization of
+memory and quench response in state-separated LLM-agent networks**, its compact
+evidence package, and the code needed to validate or deliberately reproduce the
+study.
 
-Local operators and future development sessions should consult
-[`notes/README.md`](notes/README.md) for the research record and
-[`results/README.md`](results/README.md) for the experiment-facing account of
-the evidence. Both are Git-facing; credentials, local agent configuration,
-virtual environments, model weights, and caches are excluded.
+The study treats locally informed, state-separated language-model agent
+instances as an interacting finite stochastic system. It measures collective
+order, effective reference energy, entropy, dependence, correlation, response
+to a field quench, finite-horizon recovery, and coarse-grained path-reversal
+asymmetry. Effective energy is not physical energy, decoding temperature is not
+thermodynamic temperature, and path-reversal divergence is not claimed to be
+exact thermodynamic entropy production.
 
-The latest additive study is
-[`results/human_operator_v4/README.md`](results/human_operator_v4/README.md):
-ThermoHITL v4 adds an abstract utility-restoration application and tests
-distributed thermodynamic observability for scarce simulated-operator
-attention. It stopped prospectively at development Gate 3; no v4 validation,
-RL training, holdout, or real-human evidence exists.
+## Repository map
 
-ThermoAgent is a reproducible research system for asking when genuinely
-independent, tool-using organizational agents are justified relative to strong
-centralized and scripted logistics controls. It provides two abstract,
-material-conserving applications (commercial supply chain and humanitarian
-coalition), private per-agent state and memory, validated role-specific tools,
-explicit message and commitment ledgers, a frozen open-weight LLM planner, a
-decentralized PPO coordination metapolicy, statistical-mechanics-inspired
-operational monitoring, time-varying distributed gossip, event-sourced replay,
-paired experiment matrices, statistical analysis, and vector figure generation.
+- `paper/JSTAT/`: self-contained LaTeX manuscript, bibliography, 14 vector PDF
+  figures, generated result macros, and the built paper.
+- `thermoagent/statmech_llm/`: final implementation. Semantic subpackages retain
+  the discovery, replication, and corrected-quench dependency closure.
+- `configs/statmech_llm/`: immutable scientific configurations arranged by
+  study role.
+- `tests/statmech_llm/`: scientific, replay, reporting, and integrity tests.
+- `results/JSTAT/`: compact aggregate tables, figure source data, correction
+  records, protocol records, and reproducibility manifests.
+- `docs/`: methodology, reproducibility, validation, and data dictionary.
+- `scripts/`: the small supported workflow surface.
 
-The current primary planner is `Qwen/Qwen2.5-7B-Instruct` at immutable revision
-`a09a35458c702b33eeacc393d103063234e8bc28`, served in-process with Transformers
-4.55.4 and bitsandbytes NF4 on one RTX 4090. Model weights are never part of the
-repository.
+## Environment
 
-## Result in brief
-
-The complete frozen design contains 944 main, 72 ablation, and 80 locked-
-holdout episodes; all 1,096 replay exactly. Operational entropy detects
-disruption well, but the calibrated free-energy gap does not. ThermoAgent has
-small in-distribution advantages over its matched no-entropy actor that miss
-Holm correction and disappear on holdout. Fixed, scripted, and legal
-centralized controls generally match or beat it, and every privacy/misalignment
-necessity-map cell is negative. The current evidence therefore supports the
-engineering architecture and distributed monitor, not a claim that autonomous
-agents improve logistics. See [`results/README.md`](results/README.md) for all
-effects, uncertainty, negative findings, figures, tables, and limitations.
-
-## Reproducing the study
-
-Inside the RunPod execution copy at `/workspace/ThermoAgent`:
+For analysis-only use, create a Python environment and install the research
+dependencies from `pyproject.toml`. The exact generation environment can be
+created on a CUDA 12.8 system with:
 
 ```bash
-./scripts/setup-runpod.sh
-./scripts/capture-reproducibility.sh
-./scripts/run-tests.sh -q
-./scripts/run-calibration.sh
-./scripts/train-policies.sh
-./scripts/run-agentic-smoke.sh
-./scripts/run-pilot.sh
-./scripts/freeze-protocol.sh
-./scripts/run-main.sh
-./scripts/run-ablations.sh
-./scripts/run-holdout.sh
-./scripts/replay-results.sh
-./scripts/analyze-results.sh
-./scripts/generate-figures.sh
-./results/reproducibility/tools/polish-figures.sh
-./scripts/validate-pdfs.sh
+scripts/setup-study-environment.sh
 ```
 
-To rebuild all derived artifacts from the retained event ledgers without
-rerunning LLM episodes, use
-`./results/reproducibility/tools/rebuild-final-results.sh`. Manual PDF
-preview inspection is deliberately recorded as a separate step; the exact
-command is in the results README.
+The pinned generation stack uses Python 3.12.3, PyTorch 2.8.0+cu128,
+Transformers 4.55.4, bitsandbytes 0.47.0, NF4 double quantization, and BF16
+computation. Model weights are not included. The two pinned models are
+`Qwen/Qwen2.5-7B-Instruct` at revision
+`a09a35458c702b33eeacc393d103063234e8bc28` and
+`ibm-granite/granite-3.3-8b-instruct` at revision
+`51dd4bc2ade4059a6bd87649d68aa11e4fb2529b`.
 
-The frozen evaluation scripts verify
-[`results/reproducibility/protocol_freeze.json`](results/reproducibility/protocol_freeze.json)
-before executing. Run IDs are deterministic, completed rows resume safely, and
-failed/timed-out rows are retained rather than silently rerun.
+## Safe validation and paper build
 
-## RunPod execution environment
-
-Development control, Git operations, Codex/OpenAI authentication, and SSH keys
-remain on the local computer. The RunPod host is an execution target only; do
-not install Codex there and do not copy local `.env`, credential, key, `.codex`,
-or `.agents` files to it.
-
-The default target is the SSH alias `runpod-thermo`, with an execution copy at
-`/workspace/ThermoAgent`. Override these non-secret settings when necessary:
+These commands do not call an LLM:
 
 ```bash
-export THERMO_REMOTE_HOST=runpod-thermo
-export THERMO_REMOTE_DIR=/workspace/ThermoAgent
-# Direct mappings can also set THERMO_REMOTE_PORT, THERMO_REMOTE_IDENTITY, and
-# optionally THERMO_REMOTE_KNOWN_HOSTS for an operator-managed host-key file.
+scripts/run-tests.sh
+scripts/generate-figures.sh
+scripts/build-jstat-paper.sh
+scripts/verify-jstat-paper-assets.sh
+scripts/verify-source-checksum.py
 ```
 
-### Operator workflow
+`scripts/generate-figures.sh` rebuilds into an external temporary directory by
+default and requires all 14 regenerated source-data CSVs to match the retained
+tables byte for byte. It does not overwrite the canonical PDFs. A deliberate
+toolchain-specific PDF rebuild requires the explicit `--in-place` argument.
+
+Replay and primary analysis require the non-distributed external trajectory
+records:
 
 ```bash
-# Deploy source without deleting remote files or uploading runtime results.
-./scripts/runpod-sync.sh
-
-# Verify SSH, the execution copy, CUDA-enabled PyTorch, and a GPU matrix multiply.
-./scripts/runpod-smoke-test.sh
-
-# Run any repository command on the RunPod.
-./scripts/runpod-exec.sh python3 path/to/simulation.py
-
-# Inspect GPU use, compute processes, and recent run artifacts.
-./scripts/runpod-monitor.sh
-
-# Copy all run artifacts back, or fetch one run by ID.
-./scripts/runpod-fetch.sh
-./scripts/runpod-fetch.sh RUN_ID
-
-# Fetch Git-facing research artifacts generated remotely.
-./scripts/runpod-fetch-results.sh
+export THERMOAGENT_ARTIFACT_ROOT=/workspace/ThermoAgent-JSTAT-artifacts
+scripts/replay-results.sh
+scripts/analyze-results.sh
 ```
 
-Research artifacts are written under `results/`; generic operator artifacts may
-use `runs/<run-id>/`. The current implementation loads one in-process frozen
-model and keeps every organization's planner context, private state, memories,
-inbox, commitments, utility, and decision loop separate. Model weights, Python
-environments, and caches belong under `/workspace` outside Git tracking so they
-survive container-layer replacement. The isolated project environment is
-`/workspace/ThermoAgent/.venv`, and Hugging Face caches live under
-`/workspace/.cache`.
+The formal experiment is intentionally guarded and is never run by validation:
+
+```bash
+export THERMOAGENT_ENABLE_LLM=1
+scripts/run-formal-experiment.sh qwen
+scripts/run-formal-experiment.sh granite
+```
+
+## Data and compute
+
+The repository distributes aggregate numerical tables and one source CSV for
+each publication figure. It does not distribute raw prompts, model completions,
+or complete trajectories, matching the manuscript's data-availability
+statement. The original paper experiment used an NVIDIA GeForce RTX 4090 and
+19.19 measured generation GPU-hours. A later from-scratch reconstruction used
+at least 49.415 measured generation GPU-hours; its accounting and the original
+accounting are retained separately. See [reproducibility.md](docs/reproducibility.md)
+for the exact distinction.
+
+The independent inferential unit is a complete graph/environment trajectory
+cluster—not an agent, update, message, token, rolling window, or classifier
+prediction.

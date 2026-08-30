@@ -1,9 +1,0 @@
-{
-  "candidate_decisions": 2880,
-  "completed_actions": 0,
-  "consensus_estimates": 2880,
-  "delegation_decisions": 2880,
-  "episodes": 120,
-  "failed_episodes": 0,
-  "stage": "pilot_v11_timing_final"
-}

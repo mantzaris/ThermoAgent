@@ -1,5 +1,0 @@
-workflow,episodes,rl_decision_epochs,llm_calls,prompt_tokens,generated_tokens,operational_messages,operational_bytes,thermodynamic_sketch_messages,thermodynamic_sketch_bytes,gpu_hours,estimated_gpu_cost_usd_at_0_34_per_hour
-formal_development_deterministic,840,0,0,0,0,10080,1218510,19545,3521543,0.0,0.0
-sketch_ablation_deterministic,768,0,0,0,0,9216,1118280,20579,3696538,0.0,0.0
-real_qwen_qualification,36,0,108,104836,6116,0,0,0,0,0.03037273081536922,0.010326728477225535
-multiseed_rl_cpu,10,323680,0,0,0,0,0,0,0,0.0,0.0

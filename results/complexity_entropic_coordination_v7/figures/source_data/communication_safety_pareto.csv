@@ -1,3 +1,0 @@
-application,panels,message_reduction,message_ci95_low,byte_reduction,byte_ci95_low,harm_degradation,harm_ci95_high,maximum_event_estimation_mae,h3_pass
-humanitarian,6,0.3763057495878985,0.358287599350928,0.3797380203339153,0.360968803428471,0.0,0.0,0.0456391911719509,True
-utility_restoration,6,0.4039869959780097,0.3920793793435691,0.4055282745528901,0.3935640588053941,0.0,0.0,0.0496525096497433,True
